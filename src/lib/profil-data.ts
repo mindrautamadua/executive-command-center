@@ -816,8 +816,7 @@ export const peopleMathDimensi = [
     label: "Leadership",
     skor: 91,
     ikon: "users",
-    bg: "#e8f7ef",
-    warna: "#16a34a",
+    tone: "green",
     rincian: [
       { label: "Nagih", skor: 92 },
       { label: "Nata", skor: 89 },
@@ -828,8 +827,7 @@ export const peopleMathDimensi = [
     label: "Character",
     skor: 89,
     ikon: "heart",
-    bg: "#fdeef0",
-    warna: "#e0435c",
+    tone: "rose",
     rincian: [
       { label: "Integritas", skor: 91 },
       { label: "Tanggung Jawab", skor: 90 },
@@ -840,8 +838,7 @@ export const peopleMathDimensi = [
     label: "Motivation",
     skor: 86,
     ikon: "flame",
-    bg: "#fef4e3",
-    warna: "#d97706",
+    tone: "amber",
     rincian: [
       { label: "Dorongan Berprestasi", skor: 88 },
       { label: "Komitmen", skor: 85 },
@@ -852,8 +849,7 @@ export const peopleMathDimensi = [
     label: "Skill",
     skor: 87,
     ikon: "wrench",
-    bg: "#e8f0fe",
-    warna: "#3b7ded",
+    tone: "blue",
     rincian: [
       { label: "Teknis", skor: 88 },
       { label: "Manajerial", skor: 86 },
@@ -864,8 +860,7 @@ export const peopleMathDimensi = [
     label: "Knowledge",
     skor: 85,
     ikon: "book",
-    bg: "#f2ecfe",
-    warna: "#8b5cf6",
+    tone: "purple",
     rincian: [
       { label: "Pengetahuan Pekerjaan", skor: 86 },
       { label: "Pengetahuan Industri", skor: 84 },
@@ -876,8 +871,7 @@ export const peopleMathDimensi = [
     label: "Learning Agility",
     skor: 85,
     ikon: "bookOpen",
-    bg: "#e8f0fe",
-    warna: "#3b7ded",
+    tone: "blue",
     rincian: [
       { label: "Belajar Cepat", skor: 86 },
       { label: "Adaptif", skor: 85 },
@@ -888,8 +882,7 @@ export const peopleMathDimensi = [
     label: "Job Fit",
     skor: 88,
     ikon: "userCheck",
-    bg: "#fdeef0",
-    warna: "#e0435c",
+    tone: "rose",
     rincian: [
       { label: "Kesesuaian Peran", skor: 89 },
       { label: "Kompleksitas Pekerjaan", skor: 87 },
@@ -899,8 +892,7 @@ export const peopleMathDimensi = [
     label: "Environment Fit",
     skor: 84,
     ikon: "leaf",
-    bg: "#e8f7ef",
-    warna: "#16a34a",
+    tone: "green",
     rincian: [
       { label: "Budaya Organisasi", skor: 85 },
       { label: "Tim & Kolaborasi", skor: 83 },
@@ -911,8 +903,7 @@ export const peopleMathDimensi = [
     skor: 85,
     skorLabel: "Avg 85/100",
     ikon: "circle",
-    bg: "#f1f4f8",
-    warna: "#64748b",
+    tone: "slate",
     deskripsi:
       "Disiplin, Komunikasi, Analitis, Problem Solving, Kreativitas, Resiliensi",
     rincian: [],
@@ -1004,7 +995,7 @@ export const hpiBemDiagnostic = {
       skor: 88,
       status: "Good",
       warna: "#16a34a",
-      bg: "#e8f7ef",
+      tone: "green",
       rincian: [
         { label: "Disiplin & Konsistensi", skor: 90 },
         { label: "Kolaborasi", skor: 88 },
@@ -1020,7 +1011,7 @@ export const hpiBemDiagnostic = {
       skor: 76,
       status: "Needs Attention",
       warna: "#3b7ded",
-      bg: "#e8f0fe",
+      tone: "blue",
       rincian: [
         { label: "Proses & Sistem", skor: 72 },
         { label: "Tools & Teknologi", skor: 70 },
@@ -1036,7 +1027,7 @@ export const hpiBemDiagnostic = {
       skor: 84,
       status: "Good",
       warna: "#8b5cf6",
-      bg: "#f2ecfe",
+      tone: "purple",
       rincian: [
         { label: "Growth Mindset", skor: 86 },
         { label: "Ownership", skor: 85 },
@@ -1124,10 +1115,11 @@ export const hpiBemIntervensi = {
   catatan: "Implementasi intervensi yang konsisten akan membantu menutup performance gap.",
 };
 
-export const HPI_BEM_KATEGORI_STYLE: Record<string, { warna: string; bg: string }> = {
-  Behavior: { warna: "#16a34a", bg: "#e8f7ef" },
-  Environment: { warna: "#3b7ded", bg: "#e8f0fe" },
-  Mindset: { warna: "#8b5cf6", bg: "#f2ecfe" },
+/* Kelas tone (globals.css) — punya pasangan gelap. */
+export const HPI_BEM_KATEGORI_STYLE: Record<string, string> = {
+  Behavior: "tone-green",
+  Environment: "tone-blue",
+  Mindset: "tone-purple",
 };
 
 export const hpiBemProyeksi = {

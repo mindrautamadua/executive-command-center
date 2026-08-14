@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { ServiceWorkerRegister } from "@/components/ServiceWorkerRegister";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -12,6 +13,27 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Executive Command Center — PTPN Group",
   description: "BOD Dashboard PTPN Group",
+  applicationName: "ECC PTPN",
+  manifest: "/manifest.webmanifest",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "ECC PTPN",
+  },
+  icons: {
+    icon: [
+      { url: "/icons/favicon-16.png", sizes: "16x16", type: "image/png" },
+      { url: "/icons/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0e1420",
+  width: "device-width",
+  initialScale: 1,
 };
 
 // Dijalankan sebelum paint pertama supaya tema tidak berkedip saat reload.
@@ -43,6 +65,7 @@ export default function RootLayout({
       </head>
       <body className="font-sans">
         <ThemeProvider>{children}</ThemeProvider>
+        <ServiceWorkerRegister />
       </body>
     </html>
   );

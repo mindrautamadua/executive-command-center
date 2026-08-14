@@ -9,6 +9,13 @@ import {
   hpiBemRootCause,
 } from "@/lib/profil-data";
 
+/* Kelas chip/teks per tone dimensi B/E/M (pasangan gelap di globals.css). */
+const DIMENSI_TONE: Record<string, { chip: string; text: string }> = {
+  green: { chip: "tone-green", text: "text-[#16a34a]" },
+  blue: { chip: "tone-blue", text: "text-[#3b7ded]" },
+  purple: { chip: "tone-purple", text: "text-[#8b5cf6]" },
+};
+
 /* ── Ringkasan Performance Gap ──────────────────────────── */
 
 function BarSkor({
@@ -50,12 +57,12 @@ function RingkasanGapCard() {
         <BarSkor {...hpiBemGap.potensial} />
       </div>
       <div className="mt-4 rounded-xl border border-[#fde9d2] bg-[#fef8f0] px-3 py-3">
-        <div className="text-[9px] font-semibold text-[#d97706]">Performance Gap</div>
+        <div className="text-[9px] font-semibold text-[#b45309]">Performance Gap</div>
         <div className="mt-1 flex items-baseline gap-1.5">
           <span className="text-[22px] font-extrabold leading-none text-[#d97706]">
             {hpiBemGap.gap.pct}
           </span>
-          <span className="text-[9px] font-semibold text-[#d97706]">{hpiBemGap.gap.level}</span>
+          <span className="text-[9px] font-semibold text-[#b45309]">{hpiBemGap.gap.level}</span>
         </div>
         <p className="mt-1.5 text-[8.5px] leading-snug text-ink-500">{hpiBemGap.gap.catatan}</p>
       </div>
@@ -97,12 +104,12 @@ function DonutSkor() {
 }
 
 function DimensiKolom({ d }: { d: (typeof hpiBemDiagnostic.dimensi)[number] }) {
+  const tone = DIMENSI_TONE[d.tone] ?? DIMENSI_TONE.green;
   return (
     <div className="min-w-0 flex-1 border-l border-[#f1f4f8] pl-4 first:border-l-0 first:pl-0">
       <div className="flex items-center gap-2">
         <span
-          className="flex h-[26px] w-[26px] shrink-0 items-center justify-center rounded-lg text-[11px] font-extrabold"
-          style={{ background: d.bg, color: d.warna }}
+          className={`flex h-[26px] w-[26px] shrink-0 items-center justify-center rounded-lg text-[11px] font-extrabold ${tone.chip}`}
         >
           {d.inisial}
         </span>
@@ -112,14 +119,12 @@ function DimensiKolom({ d }: { d: (typeof hpiBemDiagnostic.dimensi)[number] }) {
         </div>
       </div>
       <div className="mt-2 flex items-baseline gap-1">
-        <span className="text-[24px] font-extrabold leading-none" style={{ color: d.warna }}>
-          {d.skor}
-        </span>
+        <span className={`text-[24px] font-extrabold leading-none ${tone.text}`}>{d.skor}</span>
         <span className="text-[9px] text-ink-400">/100</span>
       </div>
       <span
         className={`mt-1.5 inline-block rounded-md px-2 py-[3px] text-[8px] font-bold ${
-          d.status === "Good" ? "bg-ptpn-greenLight text-ptpn-green" : "bg-[#fef4e3] text-[#d97706]"
+          d.status === "Good" ? "bg-ptpn-greenLight text-ptpn-greenDark" : "bg-[#fef4e3] text-[#b45309]"
         }`}
       >
         {d.status}
@@ -160,7 +165,7 @@ function InterpretasiPanel() {
         <div className="mt-1.5 space-y-1.5">
           {hpiBemDiagnostic.fokus.map((f, i) => (
             <div key={f} className="flex items-center gap-2">
-              <span className="flex h-[15px] w-[15px] shrink-0 items-center justify-center rounded-full bg-[#fef4e3] text-[8px] font-bold text-[#d97706]">
+              <span className="flex h-[15px] w-[15px] shrink-0 items-center justify-center rounded-full bg-[#fef4e3] text-[8px] font-bold text-[#b45309]">
                 {i + 1}
               </span>
               <span className="text-[8.5px] font-medium text-ink-700">{f}</span>
@@ -181,7 +186,7 @@ function DiagnosticCard() {
       <div className="flex items-start gap-4 pt-3">
         <div className="flex shrink-0 flex-col items-center">
           <DonutSkor />
-          <span className="mt-2 rounded-md bg-ptpn-greenLight px-2.5 py-[3px] text-[8.5px] font-bold text-ptpn-green">
+          <span className="mt-2 rounded-md bg-ptpn-greenLight px-2.5 py-[3px] text-[8.5px] font-bold text-ptpn-greenDark">
             {hpiBemDiagnostic.status}
           </span>
           <div className="mt-3 text-center leading-tight">
@@ -236,7 +241,7 @@ function RootCauseCard() {
                   <div className="text-[8px] text-ink-400">Dampak</div>
                   <div
                     className={`mt-[2px] text-[8.5px] font-bold ${
-                      item.dampak === "High" ? "text-[#dc2626]" : "text-[#d97706]"
+                      item.dampak === "High" ? "text-[#dc2626]" : "text-[#b45309]"
                     }`}
                   >
                     {item.dampak}
@@ -250,10 +255,10 @@ function RootCauseCard() {
         </div>
       </div>
       <div className="mt-2.5 flex items-center justify-between rounded-xl border border-[#fde9d2] bg-[#fef8f0] px-3 py-2.5">
-        <span className="text-[9px] font-bold text-[#d97706]">
+        <span className="text-[9px] font-bold text-[#b45309]">
           Total Estimated Performance Opportunity
         </span>
-        <span className="text-[12px] font-extrabold text-[#d97706]">
+        <span className="text-[12px] font-extrabold text-[#b45309]">
           {hpiBemRootCause.total}
         </span>
       </div>
@@ -270,7 +275,7 @@ function IntervensiCard() {
   return (
     <div className="card flex flex-col px-4 pb-4 pt-3.5">
       <h3 className="text-[11px] font-bold text-ink-900">3. INTERVENSI &amp; ACTION PLAN</h3>
-      <div className="mt-2.5 grid grid-cols-[minmax(0,1fr)_86px_86px_58px_78px] gap-2 border-b border-[#f1f4f8] pb-1.5 text-[8px] font-semibold text-ink-400">
+      <div className="mt-2.5 grid grid-cols-[minmax(0,1fr)_86px_86px_58px_78px] gap-2 border-b border-[#f1f4f8] pb-1.5 text-[8px] font-semibold text-ink-500">
         <span>Intervensi yang Direkomendasikan</span>
         <span>Kategori BEM</span>
         <span>Owner</span>
@@ -279,7 +284,7 @@ function IntervensiCard() {
       </div>
       <div className="min-h-0 flex-1 divide-y divide-[#f6f8fa]">
         {hpiBemIntervensi.items.map((item) => {
-          const style = HPI_BEM_KATEGORI_STYLE[item.kategori];
+          const tone = HPI_BEM_KATEGORI_STYLE[item.kategori];
           return (
             <div
               key={item.judul}
@@ -290,14 +295,13 @@ function IntervensiCard() {
                 <p className="mt-[2px] text-[8px] leading-snug text-ink-500">{item.deskripsi}</p>
               </div>
               <span
-                className="justify-self-start rounded-md px-2 py-[3px] text-[8px] font-bold"
-                style={{ background: style?.bg, color: style?.warna }}
+                className={`justify-self-start rounded-md px-2 py-[3px] text-[8px] font-bold ${tone ?? "tone-slate"}`}
               >
                 {item.kategori}
               </span>
               <span className="text-[8.5px] text-ink-700">{item.owner}</span>
               <span className="text-[8.5px] text-ink-700">{item.target}</span>
-              <span className="text-right text-[8.5px] font-bold text-ptpn-green">
+              <span className="text-right text-[8.5px] font-bold text-ptpn-greenDark">
                 {item.impact}
               </span>
             </div>
@@ -306,7 +310,7 @@ function IntervensiCard() {
       </div>
       <div className="flex items-center justify-end gap-3 border-t border-[#f1f4f8] pt-2">
         <span className="text-[9px] font-bold text-ink-900">Total Est. Impact</span>
-        <span className="text-[12px] font-extrabold text-ptpn-green">
+        <span className="text-[12px] font-extrabold text-ptpn-greenDark">
           {hpiBemIntervensi.total}
         </span>
       </div>
@@ -456,7 +460,7 @@ export function TabHpiBem() {
       <div className="card flex items-center gap-2 px-4 py-2.5">
         <Recycle size={13} className="shrink-0 text-ptpn-green" />
         <p className="text-[8.5px] text-ink-700">
-          <span className="font-bold text-ptpn-green">HPI BEM</span> {hpiBemFooter}
+          <span className="font-bold text-ptpn-greenDark">HPI BEM</span> {hpiBemFooter}
         </p>
       </div>
     </div>

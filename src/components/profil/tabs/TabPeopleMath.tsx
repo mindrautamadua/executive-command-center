@@ -38,6 +38,16 @@ const DIMENSI_IKON: Record<string, typeof Users> = {
   circle: MoreHorizontal,
 };
 
+/* Kelas kartu/chip/teks per tone dimensi (pasangan gelap di globals.css). */
+const DIMENSI_TONE: Record<string, { card: string; chip: string; text: string }> = {
+  green: { card: "career-green", chip: "tone-green", text: "text-[#16a34a]" },
+  rose: { card: "career-rose", chip: "tone-rose", text: "text-[#be3450]" },
+  amber: { card: "career-amber", chip: "tone-amber", text: "text-[#d97706]" },
+  blue: { card: "career-blue", chip: "tone-blue", text: "text-[#3b7ded]" },
+  purple: { card: "career-purple", chip: "tone-purple", text: "text-[#8b5cf6]" },
+  slate: { card: "career-slate", chip: "tone-slate", text: "text-[#64748b]" },
+};
+
 /* ── People Math Score (Overall) ────────────────────────── */
 
 function DonutOverall() {
@@ -84,7 +94,7 @@ function ScoreOverallCard() {
             >
               <span className="text-[9px] font-medium text-ink-500">{r.label}</span>
               <span
-                className={`text-[9px] font-bold ${r.badge ? "text-ptpn-green" : "text-ink-900"}`}
+                className={`text-[9px] font-bold ${r.badge ? "text-ptpn-greenDark" : "text-ink-900"}`}
               >
                 {r.value}
               </span>
@@ -146,7 +156,8 @@ function PositioningChart() {
           d="M0,-6 L1.8,-1.8 L6,-1.4 L2.8,1.4 L3.7,6 L0,3.4 L-3.7,6 L-2.8,1.4 L-6,-1.4 L-1.8,-1.8 Z"
           fill="#1a9c5b"
         />
-        <text x={9} y={3} fontSize={7.5} fontWeight={700} fill="#1a9c5b">
+        {/* Titik dekat sudut kanan-atas — label ditaruh di kiri agar tidak terpotong. */}
+        <text x={-9} y={3} fontSize={7.5} fontWeight={700} fill="#1a9c5b" textAnchor="end">
           {peopleMathPosisi.nama}
         </text>
       </g>
@@ -257,8 +268,8 @@ function RadarChart() {
           </g>
         );
       })}
-      <text x={cx} y={cy - 1} textAnchor="middle" fontSize={22} fontWeight={800} fill="#0f7a43">
-        87
+      <text x={cx} y={cy - 1} textAnchor="middle" fontSize={22} fontWeight={800} fill="#0f7a44">
+        {peopleMathOverall.skor}
       </text>
       <text x={cx} y={cy + 12} textAnchor="middle" fontSize={7.5} fill="#6b7280">
         /100
@@ -269,18 +280,18 @@ function RadarChart() {
 
 function DimensiCard({ d }: { d: (typeof peopleMathDimensi)[number] }) {
   const Ikon = DIMENSI_IKON[d.ikon] ?? MoreHorizontal;
+  const tone = DIMENSI_TONE[d.tone] ?? DIMENSI_TONE.slate;
   return (
-    <div className="rounded-xl border border-[#eef2f6] p-2.5" style={{ background: `${d.bg}55` }}>
+    <div className={`rounded-xl border p-2.5 ${tone.card}`}>
       <div className="flex items-center gap-2">
         <span
-          className="flex h-[24px] w-[24px] shrink-0 items-center justify-center rounded-lg"
-          style={{ background: d.bg, color: d.warna }}
+          className={`flex h-[24px] w-[24px] shrink-0 items-center justify-center rounded-lg ${tone.chip}`}
         >
           <Ikon size={12} />
         </span>
         <div className="leading-tight">
           <div className="text-[9px] font-bold text-ink-900">{d.label}</div>
-          <div className="text-[8.5px] font-bold" style={{ color: d.warna }}>
+          <div className={`text-[8.5px] font-bold ${tone.text}`}>
             {d.skorLabel ?? `${d.skor}/100`}
           </div>
         </div>
@@ -334,7 +345,7 @@ function InsightCard() {
     <div className="card flex flex-col px-4 pb-4 pt-3.5">
       <h3 className="text-[11px] font-bold text-ink-900">3. PEOPLE MATH INSIGHT</h3>
       <div className="mt-2.5 rounded-xl bg-ptpn-greenLight p-3">
-        <div className="flex items-center gap-1.5 text-[9.5px] font-bold text-ptpn-green">
+        <div className="flex items-center gap-1.5 text-[9.5px] font-bold text-ptpn-greenDark">
           <Bot size={13} /> AI Insight
         </div>
         <p className="mt-1.5 text-[9px] leading-relaxed text-ink-700">
@@ -482,7 +493,7 @@ function TalentDecisionCard() {
                 >
                   <div
                     className={`text-[8.5px] font-bold ${
-                      j.highlight ? "text-[#8b5cf6]" : j.aktif ? "text-ptpn-green" : "text-ink-900"
+                      j.highlight ? "text-[#8b5cf6]" : j.aktif ? "text-ptpn-greenDark" : "text-ink-900"
                     }`}
                   >
                     {j.jabatan}

@@ -186,6 +186,7 @@ body {
 }
 
 [data-theme="dark"] .border-\[\#eef2f6\],
+[data-theme="dark"] .border-\[\#f1f4f8\],
 [data-theme="dark"] .border-\[\#f4f7fa\],
 [data-theme="dark"] .border-\[\#f0f3f6\],
 [data-theme="dark"] .border-\[\#f2f5f8\],
@@ -244,6 +245,13 @@ body {
 [data-theme="dark"] .text-\[\#8b5cf6\] {
   color: #a78bfa;
 }
+[data-theme="dark"] .text-\[\#be3450\],
+[data-theme="dark"] .text-\[\#e0435c\] {
+  color: #fb7185;
+}
+[data-theme="dark"] .text-\[\#64748b\] {
+  color: var(--text-3);
+}
 [data-theme="dark"] .text-\[\#16a34a\],
 [data-theme="dark"] .text-\[\#0f7a44\],
 [data-theme="dark"] .text-\[\#3f8f68\] {
@@ -285,11 +293,27 @@ body {
 [data-theme="dark"] .bg-\[\#fde8bd\] {
   background-color: rgba(245, 165, 36, 0.16);
 }
-[data-theme="dark"] .bg-\[\#efeaff\] {
+/* Panel wash krem lebar — tint amber lebih tipis dari badge. */
+[data-theme="dark"] .bg-\[\#fef8f0\],
+[data-theme="dark"] .bg-\[\#fdf9f1\] {
+  background-color: rgba(245, 165, 36, 0.1);
+}
+[data-theme="dark"] .border-\[\#fde9d2\] {
+  border-color: rgba(245, 165, 36, 0.3);
+}
+[data-theme="dark"] .bg-\[\#efeaff\],
+[data-theme="dark"] .bg-\[\#f2ecfe\] {
   background-color: rgba(167, 139, 250, 0.16);
+}
+[data-theme="dark"] .border-\[\#e6ddfc\] {
+  border-color: rgba(167, 139, 250, 0.3);
 }
 [data-theme="dark"] .border-\[\#f5c76f\] {
   border-color: rgba(245, 165, 36, 0.4);
+}
+/* bg-white/60 (opacity varian) tidak kena selector .bg-white biasa. */
+[data-theme="dark"] .bg-white\/60 {
+  background-color: rgba(22, 29, 41, 0.6);
 }
 [data-theme="dark"] .bg-\[\#e3f7f6\] {
   background-color: rgba(45, 212, 191, 0.14);
@@ -304,6 +328,7 @@ body {
 }
 [data-theme="dark"] .border-\[\#dcefe3\],
 [data-theme="dark"] .border-\[\#9ad9b8\],
+[data-theme="dark"] .border-\[\#cdeeda\],
 [data-theme="dark"] .border-\[\#c3e4cd\] {
   border-color: rgba(62, 207, 131, 0.3);
 }
@@ -419,13 +444,22 @@ body {
 [data-theme="dark"] svg [stroke="#eef2f6"],
 [data-theme="dark"] svg [stroke="#f0f3f6"],
 [data-theme="dark"] svg [stroke="#e9ebfa"],
+[data-theme="dark"] svg [stroke="#d7dee6"],
 [data-theme="dark"] svg [stroke="#e6ecf2"] {
   stroke: var(--chart-grid);
 }
 /* Label chart SVG manual yang fill-nya hex gelap/abu literal. */
 [data-theme="dark"] svg text[fill="#1f2937"],
+[data-theme="dark"] svg text[fill="#111827"],
 [data-theme="dark"] svg text[fill="#374151"] {
   fill: var(--text-1);
+}
+[data-theme="dark"] svg text[fill="#16a34a"],
+[data-theme="dark"] svg text[fill="#0f7a44"] {
+  fill: #4ade80;
+}
+[data-theme="dark"] svg text[fill="#dc2626"] {
+  fill: #f87171;
 }
 [data-theme="dark"] svg text[fill="#6b7280"] {
   fill: var(--text-3);
@@ -507,11 +541,15 @@ body {
 .career-green  { background-color: #f2fbf6; border-color: #c9ecd8; }
 .career-amber  { background-color: #fefaf1; border-color: #f3e3bd; }
 .career-purple { background-color: #faf8fe; border-color: #e2d8f8; }
+.career-rose   { background-color: #fdf1f3; border-color: #f8d3da; }
+.career-slate  { background-color: #f4f7fa; border-color: #e3e9ef; }
 
 [data-theme="dark"] .career-blue   { background-color: rgba(111, 164, 247, 0.14); border-color: rgba(111, 164, 247, 0.3); }
 [data-theme="dark"] .career-green  { background-color: rgba(62, 207, 131, 0.12); border-color: rgba(62, 207, 131, 0.28); }
 [data-theme="dark"] .career-amber  { background-color: rgba(245, 165, 36, 0.12); border-color: rgba(245, 165, 36, 0.28); }
 [data-theme="dark"] .career-purple { background-color: rgba(167, 139, 250, 0.12); border-color: rgba(167, 139, 250, 0.28); }
+[data-theme="dark"] .career-rose   { background-color: rgba(251, 113, 133, 0.12); border-color: rgba(251, 113, 133, 0.28); }
+[data-theme="dark"] .career-slate  { background-color: rgba(148, 163, 184, 0.1); border-color: rgba(148, 163, 184, 0.24); }
 
 /* ==========================================================================
    TONE CHIP — pengganti inline style pastel (icon KPI, badge, insight).
@@ -519,6 +557,7 @@ body {
    ========================================================================== */
 .tone-green  { background-color: #e8f7ef; color: #0f7a44; }
 .tone-lime   { background-color: #f3f8e3; color: #4d7c0f; }
+.tone-rose   { background-color: #fdeef0; color: #be3450; }
 .tone-blue   { background-color: #e3edfd; color: #2563c9; }
 .tone-teal   { background-color: #e0f5f3; color: #0d9488; }
 .tone-amber  { background-color: #fdf3dd; color: #b45309; }
@@ -529,6 +568,7 @@ body {
 
 [data-theme="dark"] .tone-green  { background-color: rgba(62, 207, 131, 0.14); color: #4ade80; }
 [data-theme="dark"] .tone-lime   { background-color: rgba(163, 230, 53, 0.14); color: #a3e635; }
+[data-theme="dark"] .tone-rose   { background-color: rgba(251, 113, 133, 0.16); color: #fb7185; }
 [data-theme="dark"] .tone-blue   { background-color: rgba(111, 164, 247, 0.16); color: #6fa4f7; }
 [data-theme="dark"] .tone-teal   { background-color: rgba(45, 212, 191, 0.14); color: #2dd4bf; }
 [data-theme="dark"] .tone-amber  { background-color: rgba(245, 165, 36, 0.16); color: #fbbf24; }
