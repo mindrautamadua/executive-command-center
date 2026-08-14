@@ -18,6 +18,7 @@ export default function OrganisasiJabatanPage() {
   return (
     <div className="flex h-screen min-w-[1360px] overflow-hidden bg-[var(--bg-app)]">
       <SdmSidebar
+        active="Organisasi & Jabatan"
         assistantPlaceholder="Tanya tentang struktur organisasi, span of control, atau analisis jabatan..."
       />
 

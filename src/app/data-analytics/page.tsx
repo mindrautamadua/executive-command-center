@@ -17,6 +17,7 @@ export default function DataAnalyticsPage() {
   return (
     <div className="flex h-screen min-w-[1360px] overflow-hidden bg-[var(--bg-app)]">
       <SdmSidebar
+        active="Data & Analytics"
         assistantCard="coach"
         assistantTitle="AI Data Assistant"
         assistantText="Tanya, analisa, dan dapatkan insight dari data SDM Anda dengan mudah."

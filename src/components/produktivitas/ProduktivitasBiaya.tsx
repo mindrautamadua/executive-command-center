@@ -1,0 +1,114 @@
+"use client";
+
+import {
+  CartesianGrid,
+  Cell,
+  LabelList,
+  ReferenceLine,
+  ResponsiveContainer,
+  Scatter,
+  ScatterChart,
+  Tooltip,
+  XAxis,
+  YAxis,
+  ZAxis,
+} from "recharts";
+import { Lightbulb } from "lucide-react";
+import { biayaVsIndex } from "@/lib/produktivitas-data";
+import { CATEGORICAL, CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
+
+const ribuan = (v: number) => v.toLocaleString("id-ID");
+
+export function ProduktivitasBiaya() {
+  return (
+    <div
+      className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
+      style={{ "--d": "240ms" } as React.CSSProperties}
+    >
+      <h3 className="card-title-navy">4. Hubungan Produktivitas dengan Biaya</h3>
+      <p className="mt-[3px] text-[9.5px] text-ink-500">
+        Labor Cost per Ton vs Productivity Index
+      </p>
+
+      <div className="mt-1 min-h-0 w-full flex-1">
+        <ResponsiveContainer width="100%" height="100%">
+          <ScatterChart margin={{ top: 14, right: 20, bottom: 14, left: -14 }}>
+            <CartesianGrid stroke={CHART_AXIS.grid} />
+            <XAxis
+              type="number"
+              dataKey="laborCostPerTon"
+              domain={[1500, 3500]}
+              ticks={[1500, 2000, 2500, 3000, 3500]}
+              tickLine={false}
+              axisLine={{ stroke: CHART_AXIS.axis }}
+              tick={{ fontSize: 9, fill: CHART_AXIS.tick }}
+              tickFormatter={ribuan}
+              label={{
+                value: "Labor Cost per Ton (Rp)",
+                position: "insideBottom",
+                offset: -10,
+                style: { fontSize: 9, fill: "var(--chart-tick)" },
+              }}
+            />
+            <YAxis
+              type="number"
+              dataKey="index"
+              domain={[80, 140]}
+              ticks={[80, 90, 100, 110, 120, 130, 140]}
+              tickLine={false}
+              axisLine={false}
+              tick={{ fontSize: 9, fill: CHART_AXIS.tick }}
+              label={{
+                value: "Productivity Index (Base 100)",
+                angle: -90,
+                position: "insideLeft",
+                offset: 24,
+                style: { fontSize: 9, fill: "var(--chart-tick)", textAnchor: "middle" },
+              }}
+            />
+            <ZAxis type="number" dataKey="headcount" range={[120, 420]} />
+            <ReferenceLine
+              segment={[
+                { x: 1600, y: 130 },
+                { x: 3400, y: 90 },
+              ]}
+              stroke={PALETTE.slate}
+              strokeDasharray="4 4"
+            />
+            <Tooltip
+              contentStyle={CHART_TOOLTIP_STYLE}
+              cursor={{ strokeDasharray: "3 3" }}
+              formatter={(v: number, name: string) =>
+                name === "laborCostPerTon"
+                  ? [`Rp ${ribuan(v)}`, "Labor Cost / Ton"]
+                  : name === "index"
+                    ? [v, "Productivity Index"]
+                    : [ribuan(v), "Headcount"]
+              }
+              labelFormatter={() => ""}
+            />
+            <Scatter data={biayaVsIndex} fillOpacity={0.85}>
+              {biayaVsIndex.map((d, i) => (
+                <Cell key={d.unit} fill={CATEGORICAL[i % CATEGORICAL.length]} />
+              ))}
+              <LabelList
+                dataKey="unit"
+                position="right"
+                offset={8}
+                style={{ fontSize: 8.5, fill: "var(--text-2)", fontWeight: 700 }}
+              />
+            </Scatter>
+          </ScatterChart>
+        </ResponsiveContainer>
+      </div>
+
+      <div className="mt-1.5 flex items-start gap-2 rounded-lg bg-[#f2faf5] px-3 py-2">
+        <Lightbulb size={13} className="mt-[1px] shrink-0 text-ptpn-green" />
+        <p className="text-[9px] leading-[1.45] text-ink-700">
+          Semakin tinggi Productivity Index dengan Labor Cost per Ton yang rendah menunjukkan
+          efisiensi yang lebih baik.
+        </p>
+      </div>
+    </div>
+  );
+}

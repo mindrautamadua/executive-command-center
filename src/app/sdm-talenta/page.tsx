@@ -1,54 +1,61 @@
+import { Download } from "lucide-react";
 import { SdmSidebar } from "@/components/sdm/SdmSidebar";
 import { SdmHeader } from "@/components/sdm/SdmHeader";
-import { SdmKpiStrip } from "@/components/sdm/SdmKpiStrip";
-import { DistribusiKaryawan } from "@/components/sdm/DistribusiKaryawan";
-import { HeadcountTrend } from "@/components/sdm/HeadcountTrend";
-import { KomposisiGenerasi } from "@/components/sdm/KomposisiGenerasi";
-import { TalentaUtama } from "@/components/sdm/TalentaUtama";
-import { KinerjaKaryawan } from "@/components/sdm/KinerjaKaryawan";
-import { Rekrutmen } from "@/components/sdm/Rekrutmen";
-import { LearningDevelopment } from "@/components/sdm/LearningDevelopment";
-import { EmployeeEngagement } from "@/components/sdm/EmployeeEngagement";
-import { RasioGender } from "@/components/sdm/RasioGender";
-import { SuksesiPosisi } from "@/components/sdm/SuksesiPosisi";
-import { WorkforcePlanning } from "@/components/sdm/WorkforcePlanning";
-import { SdmAlertPanel } from "@/components/sdm/SdmAlertPanel";
-import { QuoteCard } from "@/components/sdm/QuoteCard";
+import { HcKpiStrip } from "@/components/hc/HcKpiStrip";
+import { StrategicAlignment } from "@/components/hc/StrategicAlignment";
+import { PeopleRiskRadar } from "@/components/hc/PeopleRiskRadar";
+import { PeopleMathHpi } from "@/components/hc/PeopleMathHpi";
+import { BodDecisionCenter } from "@/components/hc/BodDecisionCenter";
+import { PeopleProductivity } from "@/components/hc/PeopleProductivity";
+import { ScenarioSimulation } from "@/components/hc/ScenarioSimulation";
+import { TalentPortfolio } from "@/components/hc/TalentPortfolio";
+import { AlertsNotifications } from "@/components/hc/AlertsNotifications";
+import { AiHrAssistant } from "@/components/hc/AiHrAssistant";
 
-export const metadata = { title: "SDM & Talenta — PTPN Group" };
+export const metadata = { title: "HC Executive Command Center — PTPN Group" };
 
 export default function SdmTalentaPage() {
   return (
-    <div className="flex h-screen min-w-[1360px] overflow-hidden bg-[var(--bg-app)]">
-      <SdmSidebar />
+    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+      <SdmSidebar active="Executive Overview" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
         <SdmHeader />
-        <SdmKpiStrip />
 
-        {/* baris 2 */}
-        <div className="mx-5 mb-3 grid h-[273px] grid-cols-[minmax(0,337fr)_minmax(0,344fr)_minmax(0,290fr)_minmax(0,307fr)] grid-rows-[minmax(0,1fr)] gap-3">
-          <DistribusiKaryawan />
-          <HeadcountTrend />
-          <KomposisiGenerasi />
-          <TalentaUtama />
-        </div>
+        <div className="px-5 pb-5">
+          <div className="mb-2 flex items-center justify-between">
+            <h2 className="text-[10px] font-extrabold uppercase tracking-[0.05em] text-ink-900">
+              1. Key Strategic KPI
+            </h2>
+            <button className="flex items-center gap-1.5 rounded-lg bg-ptpn-green px-3 py-[7px] text-[10px] font-semibold text-white shadow-pill transition-opacity hover:opacity-90">
+              <Download size={12} />
+              Export Dashboard
+            </button>
+          </div>
 
-        {/* baris 3 */}
-        <div className="mx-5 mb-3 grid h-[240px] grid-cols-[minmax(0,270fr)_minmax(0,208fr)_minmax(0,250fr)_minmax(0,228fr)_minmax(0,307fr)] grid-rows-[minmax(0,1fr)] gap-3">
-          <KinerjaKaryawan />
-          <Rekrutmen />
-          <LearningDevelopment />
-          <EmployeeEngagement />
-          <RasioGender />
-        </div>
+          <div className="grid grid-cols-[minmax(0,1fr)_330px] items-start gap-3">
+            {/* kolom utama */}
+            <div className="flex min-w-0 flex-col gap-3">
+              <HcKpiStrip />
+              <div className="grid grid-cols-[minmax(0,52fr)_minmax(0,48fr)] items-stretch gap-3">
+                <PeopleRiskRadar />
+                <PeopleMathHpi />
+              </div>
+              <div className="grid grid-cols-[minmax(0,46fr)_minmax(0,54fr)] items-stretch gap-3">
+                <PeopleProductivity />
+                <ScenarioSimulation />
+              </div>
+              <AlertsNotifications />
+            </div>
 
-        {/* baris 4 */}
-        <div className="mx-5 mb-4 grid h-[232px] grid-cols-[minmax(0,442fr)_minmax(0,288fr)_minmax(0,238fr)_minmax(0,307fr)] grid-rows-[minmax(0,1fr)] gap-3">
-          <SuksesiPosisi />
-          <WorkforcePlanning />
-          <SdmAlertPanel />
-          <QuoteCard />
+            {/* rail kanan */}
+            <div className="flex min-w-0 flex-col gap-3">
+              <StrategicAlignment />
+              <BodDecisionCenter />
+              <TalentPortfolio />
+              <AiHrAssistant />
+            </div>
+          </div>
         </div>
       </main>
     </div>

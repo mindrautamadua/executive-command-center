@@ -18,6 +18,7 @@ export default function AbsensiKehadiranPage() {
   return (
     <div className="flex h-screen min-w-[1360px] overflow-hidden bg-[var(--bg-app)]">
       <SdmSidebar
+        active="Absensi & Kehadiran"
         assistantCard="coach"
         assistantTitle="AI Attendance Assistant"
         assistantText="Butuh insight kehadiran atau rekomendasi peningkatan disiplin? Tanya AI Assistant sekarang."
