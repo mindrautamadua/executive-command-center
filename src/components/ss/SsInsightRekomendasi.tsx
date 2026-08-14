@@ -22,7 +22,7 @@ export function SsInsightRekomendasi() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead no="7" title="Insight & Rekomendasi" />
+      <SectionHead title="Insight & Rekomendasi" />
       <p className="mt-[3px] text-[9px] text-ink-500">Insight utama dari hasil simulasi</p>
 
       <ul className="scroll-thin mt-2 flex min-h-0 flex-1 flex-col justify-between gap-1.5 overflow-y-auto">

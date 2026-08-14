@@ -6,7 +6,7 @@ import { SectionHead } from "./SectionHead";
 export function TalentActionIntelligence() {
   return (
     <div className="card anim-rise px-4 pb-3.5 pt-3" style={{ "--d": "200ms" } as React.CSSProperties}>
-      <SectionHead no="11" title="Talent Action Intelligence" action="Lihat Semua" />
+      <SectionHead title="Talent Action Intelligence" action="Lihat Semua" />
 
       <div className="mt-3 rounded-xl border border-[#f6d5d5] bg-[#fdf5f5] px-3 py-2.5">
         <div className="flex items-center gap-2">

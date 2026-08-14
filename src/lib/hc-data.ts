@@ -28,11 +28,12 @@ export const orgNodes: OrgNode[] = [
 /* ── 0b. Data Trust ───────────────────────────────────────────────── */
 
 export const dataTrust = {
-  freshness: "Diperbarui 14 menit lalu",
+  /** Periode bisnis yang direpresentasikan angka dashboard. */
   asOf: "31 Mei 2026",
+  /** Waktu sinkronisasi sistem terakhir (terpisah dari periode data). */
+  lastRefresh: "14 Agu 2026 · 22:14 WIB",
   coverage: "97,8%",
   quality: "96,4%",
-  lastSync: "Sync terakhir 22:14 WIB",
   sources: ["SAP HCM", "IHCMS", "Payroll", "LMS", "e-Rekrutmen"],
 };
 
@@ -219,6 +220,8 @@ export interface TopRisk {
   /** Skor risiko 0-100. */
   score: number;
   drivers: RiskDriver[];
+  /** Aksi yang direkomendasikan untuk menurunkan risiko. */
+  recommendation: string;
 }
 
 export const topRisks: TopRisk[] = [
@@ -231,6 +234,7 @@ export const topRisks: TopRisk[] = [
       { label: "Pipeline internal Ready Now tipis", weight: 34 },
       { label: "Pensiun BOD-2 dalam 12 bulan", weight: 28 },
     ],
+    recommendation: "Prioritaskan internal mobility untuk 8 posisi + fast-track hiring 4 posisi.",
   },
   {
     label: "Succession Risk",
@@ -241,6 +245,7 @@ export const topRisks: TopRisk[] = [
       { label: "Readiness suksesor rata-rata 1-2 tahun", weight: 33 },
       { label: "Konsentrasi suksesor di 3 regional", weight: 25 },
     ],
+    recommendation: "Akselerasi 8 suksesor via accelerated leadership program (readiness < 12 bulan).",
   },
   {
     label: "Turnover Risk",
@@ -251,6 +256,7 @@ export const topRisks: TopRisk[] = [
       { label: "Compensation percentile < P50 pasar", weight: 35 },
       { label: "Manager effectiveness rendah di 8 unit", weight: 25 },
     ],
+    recommendation: "Retention plan tenure 2-4 tahun: adjust kompensasi ke P50 + coaching manager 8 unit.",
   },
   {
     label: "Leadership Gap",
@@ -261,6 +267,7 @@ export const topRisks: TopRisk[] = [
       { label: "Span of control melebar pasca-restrukturisasi", weight: 30 },
       { label: "Coverage program leadership 58%", weight: 25 },
     ],
+    recommendation: "Perluas coverage program leadership ke 75% + review span of control pasca-restrukturisasi.",
   },
   {
     label: "Critical Skill Gap",
@@ -271,6 +278,7 @@ export const topRisks: TopRisk[] = [
       { label: "Adopsi digital agriculture masih 31%", weight: 31 },
       { label: "Reskilling rate 6%/tahun (target 12%)", weight: 25 },
     ],
+    recommendation: "Naikkan reskilling rate ke 12%/tahun + strategic hiring AI & Data mulai 2026.",
   },
 ];
 
@@ -303,6 +311,8 @@ export interface BodDecision {
   due: string;
   /** Deadline sudah lewat relatif periode data (Mei 2026). */
   overdue?: boolean;
+  /** Jumlah hari lewat deadline, dihitung terhadap tanggal data as-of. */
+  overdueDays?: number;
 }
 
 export const bodTabs = [
@@ -333,6 +343,7 @@ export const bodDecisions: BodDecision[] = [
     text: "127 karyawan high potential dapat mengisi projected vacancies. Potensi saving: Rp 12,6 M.",
     due: "Q1 2026",
     overdue: true,
+    overdueDays: 61,
   },
 ];
 
@@ -530,10 +541,12 @@ export const hcAlerts: HcAlert[] = [
 export const copilotGreeting =
   "Good morning, Pak Direktur Utama 👋 Tanyakan apa saja tentang People, Talent & Workforce.";
 
-export const copilotChips = [
-  "Mengapa turnover naik?",
-  "Siapa critical talent kita?",
-  "Simulasi pengurangan 5% workforce",
-  "Cari peluang produktivitas",
-  "Rekomendasikan tindakan",
+/** Quick command bergaya decision copilot: verb intelijen + pertanyaan konkret. */
+export const copilotCommands = [
+  { cmd: "WHY", label: "Mengapa turnover naik?" },
+  { cmd: "PREDICT", label: "Proyeksi workforce cost 2027?" },
+  { cmd: "SIMULATE", label: "Simulasi pengurangan 5% workforce" },
+  { cmd: "FIND", label: "Critical talent berisiko flight" },
+  { cmd: "EXPLAIN", label: "Kenapa produktivitas Regional 2 turun?" },
+  { cmd: "RECOMMEND", label: "Aksi BOD untuk succession risk" },
 ];

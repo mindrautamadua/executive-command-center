@@ -33,7 +33,7 @@ export function HeadcountByJobLevel() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead no="7" title="Headcount by Job Level" action="Lihat Detail" />
+      <SectionHead title="Headcount by Job Level" action="Lihat Detail" />
       <p className="mt-[3px] text-[9px] text-ink-500">Distribusi berdasarkan Level Jabatan</p>
 
       <div className="mt-2 flex min-h-0 flex-1 items-center gap-4">

@@ -8,7 +8,7 @@ export function ImpactComparison() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead no="2" title="Perbandingan Dampak Utama" />
+      <SectionHead title="Perbandingan Dampak Utama" />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Perbandingan baseline dengan skenario terpilih
       </p>

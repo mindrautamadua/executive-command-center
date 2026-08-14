@@ -57,7 +57,7 @@ export const produktivitasKpi: ProduktivitasKpi[] = [
     periode: "YTD Mei 2026",
     delta: "-3,4%",
     trend: "down",
-    deltaTone: "bad",
+    deltaTone: "good",
     compare: "vs Mei 2025",
     icon: "database",
     tone: "purple",
@@ -68,7 +68,7 @@ export const produktivitasKpi: ProduktivitasKpi[] = [
     periode: "YTD Mei 2026",
     delta: "-4,2%",
     trend: "down",
-    deltaTone: "bad",
+    deltaTone: "good",
     compare: "vs Mei 2025",
     icon: "droplet",
     tone: "amber",
@@ -85,10 +85,10 @@ export const produktivitasKpi: ProduktivitasKpi[] = [
     tone: "teal",
   },
   {
-    label: "Productivity Index (Base 100)",
+    label: "Productivity Index (Base 2024 = 100)",
     value: "112",
     periode: "YTD Mei 2026",
-    delta: "5,2%",
+    delta: "5,7%",
     trend: "up",
     deltaTone: "good",
     compare: "vs Mei 2025",
@@ -108,13 +108,13 @@ export interface TrenProduktivitas {
 }
 
 export const trenProduktivitas: TrenProduktivitas[] = [
-  { name: "Jun '25", revenue: 100, produksi: 100, laborCost: 100, index: 100 },
-  { name: "Jul '25", revenue: 103, produksi: 101, laborCost: 100, index: 102 },
-  { name: "Agu '25", revenue: 105, produksi: 103, laborCost: 99, index: 104 },
-  { name: "Sep '25", revenue: 104, produksi: 102, laborCost: 101, index: 103 },
-  { name: "Okt '25", revenue: 108, produksi: 104, laborCost: 98, index: 106 },
-  { name: "Nov '25", revenue: 111, produksi: 106, laborCost: 97, index: 108 },
-  { name: "Des '25", revenue: 110, produksi: 105, laborCost: 98, index: 107 },
+  { name: "Jun '25", revenue: 100, produksi: 100, laborCost: 100, index: 106 },
+  { name: "Jul '25", revenue: 103, produksi: 101, laborCost: 100, index: 106 },
+  { name: "Agu '25", revenue: 105, produksi: 103, laborCost: 99, index: 107 },
+  { name: "Sep '25", revenue: 104, produksi: 102, laborCost: 101, index: 107 },
+  { name: "Okt '25", revenue: 108, produksi: 104, laborCost: 98, index: 108 },
+  { name: "Nov '25", revenue: 111, produksi: 106, laborCost: 97, index: 109 },
+  { name: "Des '25", revenue: 110, produksi: 105, laborCost: 98, index: 108 },
   { name: "Jan '26", revenue: 114, produksi: 107, laborCost: 96, index: 109 },
   { name: "Feb '26", revenue: 116, produksi: 108, laborCost: 95, index: 110 },
   { name: "Mar '26", revenue: 118, produksi: 110, laborCost: 96, index: 111 },
@@ -230,7 +230,7 @@ export interface InsightProduktivitas {
 export const insightProduktivitas: InsightProduktivitas[] = [
   {
     judul: "Produktivitas Meningkat",
-    isi: "Productivity Index naik 5,2% dibanding Mei 2025, didorong oleh peningkatan produksi dan efisiensi proses.",
+    isi: "Productivity Index naik 5,7% (106 → 112) dibanding Mei 2025, didorong oleh peningkatan produksi dan efisiensi proses.",
     tone: "green",
   },
   {
@@ -239,8 +239,8 @@ export const insightProduktivitas: InsightProduktivitas[] = [
     tone: "amber",
   },
   {
-    judul: "Gap antar Unit Kerja",
-    isi: "Terdapat gap 26 poin antara unit terbaik (PTPN III) vs terendah (PTPN VI).",
+    judul: "Peluang Ekonomi dari Gap",
+    isi: "Gap 26 poin (PTPN III 118 vs PTPN VI 92). Menutup 50% gap PTPN II & VI ke rata-rata Group ≈ potensi +Rp 2,9 T revenue per tahun.",
     tone: "blue",
   },
   {
@@ -265,3 +265,55 @@ export const benchmarkEksternal: BenchmarkBar[] = [
 ];
 
 export const BENCHMARK_MAX = 130;
+
+/** Governance metrik & benchmark (definisi, baseline, sumber). */
+export const benchmarkMeta = {
+  definisi:
+    "Productivity Index = komposit tertimbang Revenue/FTE, Production/FTE & Labor Cost/Ton · Base 2024 = 100.",
+  sumber:
+    "Benchmark 2025 · Peer: 24 perusahaan perkebunan & agroindustri nasional · dinormalisasi per model bisnis.",
+};
+
+/* ── 10. Productivity Intelligence (sintesis eksekutif) ───────────── */
+
+export interface IntelTile {
+  label: string;
+  value: string;
+  sub: string;
+  tone: "green" | "blue" | "amber" | "purple";
+}
+
+export const produktivitasIntel = {
+  headline: {
+    delta: "+5,7%",
+    detail: "Productivity Index YoY · 106 → 112 (Base 2024 = 100)",
+  },
+  tiles: [
+    {
+      label: "Primary Driver",
+      value: "Peningkatan Produksi +3,2 pts",
+      sub: "53% dari total kenaikan +6,0 pts; disusul efisiensi proses +2,4 pts.",
+      tone: "green",
+    },
+    {
+      label: "Cost Efficiency",
+      value: "Labor Cost/Ton −4,2%",
+      sub: "Efisiensi tenaga kerja & optimalisasi jam kerja menahan laju biaya.",
+      tone: "blue",
+    },
+    {
+      label: "Productivity Risk",
+      value: "Terkonsentrasi di 3 unit",
+      sub: "Kenaikan didominasi PTPN III, IV & Regional 7; gap terbawah 26 pts.",
+      tone: "amber",
+    },
+    {
+      label: "Economic Opportunity",
+      value: "≈ Rp 2,9 T / tahun",
+      sub: "Menutup 50% gap PTPN II & VI ke rata-rata Group (~Rp 0,8 T EBITDA).",
+      tone: "purple",
+    },
+  ] satisfies IntelTile[],
+  rekomendasi:
+    "Luncurkan program cross-unit productivity transfer — replikasi operating model PTPN III ke PTPN VI & II, target Productivity Index PTPN VI 92 → 105 dalam 12 bulan.",
+};

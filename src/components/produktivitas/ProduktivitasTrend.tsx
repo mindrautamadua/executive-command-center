@@ -13,10 +13,10 @@ import { trenProduktivitas } from "@/lib/produktivitas-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 
 const SERIES = [
-  { key: "revenue", label: "Revenue per Employee (Index)", color: PALETTE.green },
-  { key: "produksi", label: "Production per Employee (Index)", color: PALETTE.blue },
-  { key: "index", label: "Productivity Index (Index)", color: PALETTE.purple },
-  { key: "laborCost", label: "Labor Cost per Ton (Index)", color: PALETTE.amber },
+  { key: "revenue", label: "Revenue per Employee (Jun '25 = 100)", color: PALETTE.green },
+  { key: "produksi", label: "Production per Employee (Jun '25 = 100)", color: PALETTE.blue },
+  { key: "index", label: "Productivity Index (Base 2024 = 100)", color: PALETTE.purple },
+  { key: "laborCost", label: "Labor Cost per Ton (Jun '25 = 100)", color: PALETTE.amber },
 ] as const;
 
 export function ProduktivitasTrend() {
@@ -26,7 +26,9 @@ export function ProduktivitasTrend() {
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
       <h3 className="card-title-navy">1. Produktivitas Utama (Trend)</h3>
-      <p className="mt-[3px] text-[9.5px] text-ink-500">Perkembangan 12 Bulan Terakhir</p>
+      <p className="mt-[3px] text-[9.5px] text-ink-500">
+        Perkembangan 12 Bulan Terakhir · seri operasional di-rebase Jun &apos;25 = 100
+      </p>
 
       <div className="mt-1.5 min-h-0 w-full flex-1">
         <ResponsiveContainer width="100%" height="100%">

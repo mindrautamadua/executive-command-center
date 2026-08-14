@@ -18,7 +18,7 @@ export function IrCompliance() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead no="5" title="Kepatuhan Hubungan Industrial" />
+      <SectionHead title="Kepatuhan Hubungan Industrial" />
 
       <ul className="flex min-h-0 flex-1 flex-col justify-around py-1">
         {complianceRows.map((c) => {

@@ -40,7 +40,7 @@ export function HpiBemOverviewCard() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "80ms" } as React.CSSProperties}
     >
-      <SectionHead no="2" title="HPI BEM Score Overview" />
+      <SectionHead title="PTPN HPI-BEM Score Overview" />
 
       <div className="flex min-h-0 flex-1 items-center gap-5 px-1">
         <GaugeRing />

@@ -1,5 +1,4 @@
-import { HelpCircle, Lightbulb, SlidersHorizontal, TrendingUp, Users } from "lucide-react";
-import { copilotChips, copilotGreeting } from "@/lib/hc-data";
+import { copilotCommands, copilotGreeting } from "@/lib/hc-data";
 
 function RobotHead() {
   return (
@@ -31,15 +30,13 @@ function RobotHead() {
   );
 }
 
-const CHIP_ICONS = [HelpCircle, Users, SlidersHorizontal, TrendingUp, Lightbulb];
-
-/** Copilot keputusan HC: quick action bergaya Why / Simulate / Recommend. */
+/** Copilot keputusan HC: quick command bergaya Why / Predict / Simulate / Recommend. */
 export function HcCopilot() {
   return (
     <div className="card anim-rise px-4 pb-4 pt-3" style={{ "--d": "220ms" } as React.CSSProperties}>
       <div className="flex items-center justify-between gap-2">
         <h3 className="flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-[0.05em] text-ink-900">
-          13. HC Intelligence Copilot
+          HC Intelligence Copilot
           <span className="rounded bg-ptpn-greenLight px-1 py-[1px] text-[8px] font-bold normal-case tracking-normal text-ptpn-green">
             AI
           </span>
@@ -60,21 +57,26 @@ export function HcCopilot() {
         </p>
       </div>
 
-      <div className="mt-3 flex flex-wrap gap-1.5">
-        {copilotChips.map((chip, i) => {
-          const Icon = CHIP_ICONS[i % CHIP_ICONS.length];
-          const solid = i === copilotChips.length - 1;
+      <div className="mt-3 flex flex-col gap-1.5">
+        {copilotCommands.map((c) => {
+          const solid = c.cmd === "RECOMMEND";
           return (
             <button
-              key={chip}
-              className={`flex items-center gap-1 rounded-lg px-2 py-[5px] text-[9px] font-semibold transition-colors ${
+              key={c.cmd}
+              className={`flex items-center gap-2 rounded-lg px-2.5 py-[6px] text-left text-[9px] font-medium transition-colors ${
                 solid
                   ? "bg-ptpn-green text-white hover:bg-ptpn-greenDark"
                   : "border border-[#e3e9ef] bg-white text-ink-700 hover:bg-[#f5f8fa]"
               }`}
             >
-              <Icon size={10} className={solid ? "text-white" : "text-ptpn-green"} />
-              {chip}
+              <span
+                className={`w-[58px] shrink-0 rounded px-1.5 py-[2px] text-center text-[7.5px] font-extrabold tracking-[0.04em] ${
+                  solid ? "bg-white/20 text-white" : "bg-ptpn-greenLight text-ptpn-green"
+                }`}
+              >
+                {c.cmd}
+              </span>
+              <span className="min-w-0 truncate">{c.label}</span>
             </button>
           );
         })}

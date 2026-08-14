@@ -105,9 +105,172 @@ export const waKpi: WaKpi[] = [
   },
 ];
 
-/* ── 1. Headcount Trend (12 bulan) ────────────────────────────────── */
+/* ── 0. Data Trust ────────────────────────────────────────────────── */
+
+export const waDataTrust = {
+  asOf: "31 Mei 2026",
+  lastRefresh: "14 Agu 2026 · 22:14 WIB",
+  coverage: "97,8%",
+  quality: "92,0%",
+  sources: ["SAP HCM", "IHCMS", "Payroll", "LMS", "e-Rekrutmen", "Attendance"],
+};
+
+/* ── 0b. Workforce Intelligence (sintesis) ────────────────────────── */
+
+export interface WaIntelSignal {
+  no: string;
+  title: string;
+  text: string;
+  impactLabel: string;
+  impactValue: string;
+  tone: "red" | "amber";
+}
+
+export const waIntelCounts = [
+  { label: "Critical", value: 2, tone: "red" },
+  { label: "Warning", value: 2, tone: "amber" },
+  { label: "Horizon", value: "2028", tone: "green" },
+] as { label: string; value: number | string; tone: "red" | "green" | "amber" }[];
+
+export const waIntelSignals: WaIntelSignal[] = [
+  {
+    no: "01",
+    title: "Future Workforce Gap",
+    text: "Proyeksi shortage 5.600 FTE pada 2028 (demand business plan 76.800 vs supply 71.200).",
+    impactLabel: "Business Impact",
+    impactValue: "High",
+    tone: "red",
+  },
+  {
+    no: "02",
+    title: "Productivity Gap",
+    text: "Labor cost +8,2% sementara productivity hanya +2,1% di Palm Oil Operations.",
+    impactLabel: "Potential Impact",
+    impactValue: "Rp 48 M",
+    tone: "amber",
+  },
+  {
+    no: "03",
+    title: "Critical Skill Shortage",
+    text: "Proyeksi shortage 830 kapabilitas AI & Data pada 2028; reskilling rate 6% vs target 12%.",
+    impactLabel: "Risk Horizon",
+    impactValue: "12 bulan",
+    tone: "red",
+  },
+  {
+    no: "04",
+    title: "Aging Workforce",
+    text: "18,7% workforce (13.121 orang) berusia > 45 tahun; puncak pensiun teknis 2029-2031.",
+    impactLabel: "Exposure",
+    impactValue: "13.121 Orang",
+    tone: "amber",
+  },
+];
+
+export const waIntelPriority =
+  "Prioritaskan reskilling + internal mobility sebelum external hiring — tutup ±60% gap 2028 dari internal. Potensi saving Rp 12,6 M.";
+
+/* ── 0c. Workforce Demand vs Supply ───────────────────────────────── */
+
+export interface DemandSupplyRow {
+  year: string;
+  supply: number;
+  demand: number;
+  /** Negatif = shortage. */
+  gap: number;
+}
+
+/** Demand 2026 = Workforce Requirement RKAP (konsisten Strategic Alignment /sdm-talenta). */
+export const demandSupply: DemandSupplyRow[] = [
+  { year: "2026", supply: 70142, demand: 72318, gap: -2176 },
+  { year: "2027", supply: 70700, demand: 74400, gap: -3700 },
+  { year: "2028", supply: 71200, demand: 76800, gap: -5600 },
+];
+
+export const demandSupplyHeadline = {
+  value: "-5.600 FTE",
+  label: "Proyeksi Workforce Gap 2028",
+  note: "Tanpa intervensi reskilling, mobility, dan automation.",
+};
+
+/** Rantai penurunan demand dari strategi bisnis (business-driver based). */
+export const businessDriverChain = [
+  { label: "Target Produksi 2026 (RKAP)", value: "+8%", sub: "Ton TBS & Olahan" },
+  { label: "Required Capacity", value: "+6,2%", sub: "Jam kerja efektif" },
+  { label: "Required Workforce", value: "72.318", sub: "FTE" },
+  { label: "Current Supply", value: "70.142", sub: "Headcount aktif" },
+];
+
+export const gapClosurePlan = [
+  { label: "Targeted Hiring", value: "1.200" },
+  { label: "Reskilling & Mobility", value: "600" },
+  { label: "Automation Offset", value: "376" },
+];
+
+/* ── 0d. Workforce Capacity ───────────────────────────────────────── */
+
+export const workforceCapacity = {
+  /** Kapasitas efektif vs FTE teoritis. */
+  effectivePct: 82.0,
+  effectiveFte: "56.515",
+  theoreticalFte: "68.921",
+  factors: [
+    { label: "Productivity loss (below proficiency)", pct: 6.2 },
+    { label: "Seasonal idle / utilization", pct: 4.5 },
+    { label: "Absenteeism", pct: 3.1 },
+    { label: "Vacancy posisi kritikal", pct: 2.4 },
+    { label: "Training & development time", pct: 1.8 },
+  ],
+  note: "Definisi FTE & konversi BHL/seasonal tersedia di Data Dictionary.",
+};
+
+/* ── 0e. Workforce Risk (ringkas) ─────────────────────────────────── */
+
+export interface WaRiskItem {
+  label: string;
+  value: string;
+  sub: string;
+  tone: "red" | "amber" | "yellow";
+}
+
+export const waRisks: WaRiskItem[] = [
+  { label: "Aging Risk", value: "13.121", sub: "Karyawan > 45 tahun (18,7%)", tone: "red" },
+  { label: "Critical Skill Risk", value: "830", sub: "Shortage AI & Data 2028", tone: "red" },
+  { label: "Attrition Risk", value: "6,8%", sub: "YTD; critical role +2,1 pts di atas rata-rata", tone: "amber" },
+  { label: "Succession Risk", value: "12", sub: "Posisi kritikal tanpa suksesor Ready Now", tone: "amber" },
+  { label: "Productivity Risk", value: "3", sub: "Unit bisnis di bawah threshold produktivitas", tone: "yellow" },
+  { label: "Workforce Cost Risk", value: "9,7%", sub: "HC cost/revenue mendekati threshold 10%", tone: "yellow" },
+];
+
+export const waRiskScore = { value: 64, kategori: "Elevated" };
+
+/* ── 1. Headcount Trend (36 bulan) ────────────────────────────────── */
 
 export const headcountTrend = [
+  { name: "Jun 2023", value: 60120 },
+  { name: "Jul 2023", value: 60340 },
+  { name: "Agu 2023", value: 60512 },
+  { name: "Sep 2023", value: 60780 },
+  { name: "Okt 2023", value: 61020 },
+  { name: "Nov 2023", value: 61240 },
+  { name: "Des 2023", value: 61980 },
+  { name: "Jan 2024", value: 62110 },
+  { name: "Feb 2024", value: 62240 },
+  { name: "Mar 2024", value: 62180 },
+  { name: "Apr 2024", value: 62320 },
+  { name: "Mei 2024", value: 62450 },
+  { name: "Jun 2024", value: 62610 },
+  { name: "Jul 2024", value: 62780 },
+  { name: "Agu 2024", value: 62940 },
+  { name: "Sep 2024", value: 63020 },
+  { name: "Okt 2024", value: 63180 },
+  { name: "Nov 2024", value: 63310 },
+  { name: "Des 2024", value: 63820 },
+  { name: "Jan 2025", value: 63710 },
+  { name: "Feb 2025", value: 63520 },
+  { name: "Mar 2025", value: 63380 },
+  { name: "Apr 2025", value: 63290 },
+  { name: "Mei 2025", value: 63410 },
   { name: "Jun 2025", value: 63452 },
   { name: "Jul 2025", value: 63998 },
   { name: "Agu 2025", value: 64321 },
@@ -242,9 +405,33 @@ export const headcountByJobLevel = [
 
 export const jobLevelTotal = { value: "70.142", pct: "100%" };
 
-/* ── 8. Turnover Rate Trend (12 bulan) ────────────────────────────── */
+/* ── 8. Turnover Rate Trend (36 bulan) ────────────────────────────── */
 
 export const turnoverTrend = [
+  { name: "Jun 2023", value: 9.6 },
+  { name: "Jul 2023", value: 9.5 },
+  { name: "Agu 2023", value: 9.5 },
+  { name: "Sep 2023", value: 9.4 },
+  { name: "Okt 2023", value: 9.3 },
+  { name: "Nov 2023", value: 9.2 },
+  { name: "Des 2023", value: 9.0 },
+  { name: "Jan 2024", value: 8.9 },
+  { name: "Feb 2024", value: 8.9 },
+  { name: "Mar 2024", value: 8.8 },
+  { name: "Apr 2024", value: 8.8 },
+  { name: "Mei 2024", value: 8.7 },
+  { name: "Jun 2024", value: 8.7 },
+  { name: "Jul 2024", value: 8.6 },
+  { name: "Agu 2024", value: 8.6 },
+  { name: "Sep 2024", value: 8.5 },
+  { name: "Okt 2024", value: 8.4 },
+  { name: "Nov 2024", value: 8.4 },
+  { name: "Des 2024", value: 8.3 },
+  { name: "Jan 2025", value: 8.3 },
+  { name: "Feb 2025", value: 8.2 },
+  { name: "Mar 2025", value: 8.2 },
+  { name: "Apr 2025", value: 8.2 },
+  { name: "Mei 2025", value: 8.3 },
   { name: "Jun 2025", value: 8.2 },
   { name: "Jul 2025", value: 8.0 },
   { name: "Agu 2025", value: 7.9 },
@@ -288,40 +475,48 @@ export const headcountMovement: MovementStep[] = [
 
 export interface WaInsight {
   title: string;
+  /** Insight: apa yang terjadi + driver utamanya. */
   text: string;
-  icon: "growth" | "turnover" | "generation" | "retention" | "diversity";
+  /** Rekomendasi aksi spesifik (decision-grade). */
+  rec: string;
+  icon: "growth" | "turnover" | "generation" | "skills" | "productivity";
   tone: "green" | "amber" | "blue" | "pink" | "teal";
 }
 
 export const waInsights: WaInsight[] = [
   {
-    title: "Pertumbuhan Headcount Sehat",
-    text: "Headcount tumbuh 2,4% dibanding Des 2025, sejalan dengan kebutuhan bisnis.",
+    title: "Headcount di Bawah Requirement",
+    text: "Headcount +2,4% vs Des 2025, namun masih -2.176 FTE di bawah requirement RKAP 72.318.",
+    rec: "Tutup via internal mobility 600 + targeted hiring 1.200 + automation offset.",
     icon: "growth",
-    tone: "green",
+    tone: "blue",
   },
   {
-    title: "Turnover Menurun",
-    text: "Turnover rate turun -1,3 pts dibanding Mei 2025. Pertahankan momentum ini.",
+    title: "Turnover Turun, Critical Role Rentan",
+    text: "Turnover -1,3 pts, didorong turunnya attrition tenure 5-10 tahun. Attrition critical role masih +2,1 pts di atas rata-rata.",
+    rec: "Retention intervention 32 critical talent: review kompensasi ke P50 pasar.",
     icon: "turnover",
     tone: "amber",
   },
   {
-    title: "Komposisi Generasi Produktif",
-    text: "44,5% workforce adalah generasi Milenial, usia produktif (25-40 tahun).",
+    title: "Aging di Posisi Teknis",
+    text: "18,7% workforce > 45 tahun; puncak pensiun teknis PKS diproyeksikan 2029-2031.",
+    rec: "Mulai knowledge transfer + succession pipeline teknis pada 2026.",
     icon: "generation",
-    tone: "blue",
-  },
-  {
-    title: "Fokus Retensi Talenta Kunci",
-    text: "Perhatikan retention pada karyawan dengan masa kerja 3-5 tahun.",
-    icon: "retention",
     tone: "pink",
   },
   {
-    title: "Diversity Terus Meningkat",
-    text: "Persentase perempuan meningkat 1,2 pts. Pertahankan dan tingkatkan.",
-    icon: "diversity",
+    title: "Critical Skill Shortage",
+    text: "Proyeksi shortage 830 kapabilitas AI & Data pada 2028; reskilling rate 6% vs target 12%.",
+    rec: "Naikkan reskilling ke 12%/tahun (±400 karyawan) + strategic hiring 3 skill teratas.",
+    icon: "skills",
     tone: "teal",
+  },
+  {
+    title: "Productivity Gap Palm Oil Ops",
+    text: "Labor cost +8,2% sementara productivity hanya +2,1% di Palm Oil Operations.",
+    rec: "Review workforce productivity model — agenda BOD Q3 2026 (exposure Rp 48 M).",
+    icon: "productivity",
+    tone: "green",
   },
 ];

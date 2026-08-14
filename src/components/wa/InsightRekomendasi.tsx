@@ -1,8 +1,9 @@
 import {
+  Activity,
   ArrowRight,
-  HeartHandshake,
+  BrainCircuit,
   RefreshCw,
-  Sprout,
+  Sparkles,
   TrendingUp,
   UsersRound,
 } from "lucide-react";
@@ -12,8 +13,8 @@ const ICONS = {
   growth: TrendingUp,
   turnover: RefreshCw,
   generation: UsersRound,
-  retention: HeartHandshake,
-  diversity: Sprout,
+  skills: BrainCircuit,
+  productivity: Activity,
 };
 
 const TONES: Record<string, { bg: string; icon: string; title: string }> = {
@@ -32,7 +33,10 @@ export function InsightRekomendasi() {
     >
       <div className="flex items-center justify-between gap-2">
         <h3 className="text-[10px] font-extrabold uppercase tracking-[0.05em] text-ink-900">
-          10. Insight &amp; Rekomendasi
+          Insight &amp; Rekomendasi{" "}
+          <span className="font-semibold normal-case tracking-normal text-ink-400">
+            (Decision-grade)
+          </span>
         </h3>
         <button className="flex shrink-0 items-center gap-1.5 rounded-lg border border-[#e3e9ef] bg-white px-3 py-[6px] text-[9.5px] font-semibold text-ink-700 transition-colors hover:border-ptpn-green hover:text-ptpn-green">
           Lihat Semua Insight <ArrowRight size={11} />
@@ -55,6 +59,12 @@ export function InsightRekomendasi() {
                   {ins.title}
                 </div>
                 <p className="mt-[3px] text-[8.5px] leading-snug text-ink-500">{ins.text}</p>
+                <p className="mt-[4px] flex items-start gap-1 text-[8.5px] leading-snug text-ink-700">
+                  <Sparkles size={9} className="mt-[1px] shrink-0 text-ptpn-green" />
+                  <span>
+                    <span className="font-bold text-ptpn-green">Rekomendasi:</span> {ins.rec}
+                  </span>
+                </p>
               </div>
             </div>
           );

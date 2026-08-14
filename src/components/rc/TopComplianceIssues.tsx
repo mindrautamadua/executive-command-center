@@ -13,7 +13,7 @@ export function TopComplianceIssues() {
     >
       <div className="flex items-start justify-between gap-2">
         <div>
-          <SectionHead no="3" title="Top 5 Compliance Issues" />
+          <SectionHead title="Top 5 Compliance Issues" />
           <p className="mt-[3px] text-[9px] text-ink-500">
             Isu Kepatuhan Prioritas yang Memerlukan Tindakan
           </p>

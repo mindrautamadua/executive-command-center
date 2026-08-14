@@ -26,7 +26,7 @@ export function TopRiskDrivers() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "180ms" } as React.CSSProperties}
     >
-      <SectionHead no="6" title="Top Risk Drivers" />
+      <SectionHead title="Top Risk Drivers" />
       <p className="mt-[3px] text-[9px] text-ink-500">Faktor Utama yang Mendorong Risiko</p>
 
       <div className="mt-2.5 flex items-center justify-between border-b border-[#eef2f6] pb-1.5 text-[8px] font-semibold uppercase tracking-[0.04em] text-ink-400">

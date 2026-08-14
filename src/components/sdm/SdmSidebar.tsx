@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { PtpnLogo } from "../PtpnLogo";
 import { SDM_MENU_SECTIONS, type SdmMenuItem } from "@/lib/sdm-menu";
+import { dataTrust } from "@/lib/hc-data";
 
 interface Props {
   /** Override label menu aktif. Default: dicocokkan dari URL. */
@@ -100,15 +101,21 @@ export function SdmSidebar({ active }: Props) {
       </nav>
 
       <div className="shrink-0 border-t border-[#f0f3f6] px-3.5 pb-3 pt-2.5">
-        <div className="text-[8.5px] font-semibold text-ink-400">Last Data Update</div>
-        <div className="mt-1 flex items-center gap-1.5">
-          <span className="h-[6px] w-[6px] rounded-full bg-ptpn-green" />
-          <span className="text-[9px] font-semibold text-ink-700">21 Mei 2026 07:30 WIB</span>
+        <div className="flex items-center justify-between">
+          <span className="text-[8.5px] font-semibold text-ink-400">Data as-of</span>
+          <span className="text-[9px] font-semibold text-ink-700">{dataTrust.asOf}</span>
+        </div>
+        <div className="mt-1.5 flex items-center justify-between">
+          <span className="text-[8.5px] font-semibold text-ink-400">Last Refresh</span>
+          <span className="flex items-center gap-1.5">
+            <span className="h-[6px] w-[6px] rounded-full bg-ptpn-green" />
+            <span className="text-[9px] font-semibold text-ink-700">{dataTrust.lastRefresh}</span>
+          </span>
         </div>
         <div className="mt-2 flex items-center justify-between">
           <span className="text-[9px] text-ink-500">Data Quality Score</span>
           <span className="rounded-md bg-ptpn-green px-1.5 py-[2px] text-[9px] font-bold text-white">
-            92%
+            {dataTrust.quality}
           </span>
         </div>
       </div>

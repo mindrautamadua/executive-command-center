@@ -14,7 +14,7 @@ export function ProfileClusterCard() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead no="4" title="People Math Profile Cluster" />
+      <SectionHead title="People Math Profile Cluster" />
       <p className="mt-[3px] text-[9px] text-ink-500">Distribusi Klaster Pola Individu</p>
 
       <div className="flex min-h-0 flex-1 items-center gap-3">

@@ -14,7 +14,7 @@ export function NextBestAction() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead no="8" title="Next Best Action" />
+      <SectionHead title="Next Best Action" />
       <p className="mt-[3px] text-[9px] text-ink-500">Langkah selanjutnya yang direkomendasikan</p>
 
       <div className="mt-2 grid min-h-0 flex-1 grid-cols-3 gap-2.5">

@@ -74,7 +74,7 @@ export function ScenarioPlanning() {
     >
       <div className="flex items-start justify-between gap-2">
         <div>
-          <SectionHead no="7" title="Scenario Planning Overview" />
+          <SectionHead title="Scenario Planning Overview" />
           <p className="mt-[3px] text-[9px] text-ink-500">
             Simulasi dampak berbagai skenario terhadap kebutuhan tenaga kerja dan biaya
           </p>

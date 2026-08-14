@@ -65,7 +65,7 @@ export function ComplianceRadarChart() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead no="1" title="Compliance Radar" />
+      <SectionHead title="Compliance Radar" />
       <p className="mt-[3px] text-[9px] text-ink-500">Skor Kepatuhan per Area</p>
 
       <div className="min-h-0 w-full flex-1">

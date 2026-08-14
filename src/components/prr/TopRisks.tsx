@@ -13,7 +13,7 @@ export function TopRisks() {
     >
       <div className="flex items-start justify-between gap-2">
         <div>
-          <SectionHead no="3" title="Top 5 Risks Requiring Attention" />
+          <SectionHead title="Top 5 Risks Requiring Attention" />
           <p className="mt-[3px] text-[9px] text-ink-500">
             Risiko Prioritas yang Memerlukan Tindakan
           </p>

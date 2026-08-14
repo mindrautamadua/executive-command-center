@@ -9,7 +9,7 @@ export function HeadcountByGeneration() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead no="4" title="Headcount by Generation" action="Lihat Detail" />
+      <SectionHead title="Headcount by Generation" action="Lihat Detail" />
       <p className="mt-[3px] text-[9px] text-ink-500">Komposisi berdasarkan Generasi</p>
 
       <div className="mt-2.5 flex min-h-0 flex-1 flex-col justify-center">

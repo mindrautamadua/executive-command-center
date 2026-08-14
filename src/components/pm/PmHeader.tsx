@@ -2,6 +2,7 @@
 
 import { Bell, ChevronDown, Download } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { MethodologyInfo } from "./MethodologyInfo";
 
 function SelectBox({ label, value, width }: { label: string; value: string; width: string }) {
   return (
@@ -23,9 +24,12 @@ export function PmHeader() {
     <>
       <header className="flex items-center gap-4 border-b border-[#eef2f6] px-5 pb-3.5 pt-3.5">
         <div className="min-w-0 shrink-0">
-          <h1 className="text-[20px] font-extrabold leading-none tracking-[-0.01em] text-[#1b3a6b]">
-            People Math &amp; HPI Overview
-          </h1>
+          <div className="flex items-center gap-2">
+            <h1 className="text-[20px] font-extrabold leading-none tracking-[-0.01em] text-[#1b3a6b]">
+              People Math &amp; HPI Overview
+            </h1>
+            <MethodologyInfo />
+          </div>
           <p className="mt-[5px] text-[10.5px] font-semibold text-ink-500">
             Memahami Pola Individu dan Pengungkit Performance untuk Intervensi yang Tepat
           </p>

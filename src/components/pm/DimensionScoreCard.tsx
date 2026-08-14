@@ -81,7 +81,7 @@ function RadarChart() {
 export function DimensionScoreCard() {
   return (
     <div className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3">
-      <SectionHead no="1" title="People Math Dimension Score" />
+      <SectionHead title="People Math Dimension Score" />
       <div className="flex min-h-0 flex-1 items-center">
         <RadarChart />
       </div>

@@ -15,7 +15,7 @@ export function UnionComposition() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "180ms" } as React.CSSProperties}
     >
-      <SectionHead no="6" title="Komposisi Serikat Pekerja" />
+      <SectionHead title="Komposisi Serikat Pekerja" />
 
       <div className="flex min-h-0 flex-1 items-center gap-3">
         <div className="flex w-[124px] shrink-0 flex-col gap-3">

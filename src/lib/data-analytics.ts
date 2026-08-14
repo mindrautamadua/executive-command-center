@@ -21,8 +21,8 @@ export interface DataKpi {
 export const dataKpi: DataKpi[] = [
   {
     label: "Total Data Employee",
-    value: "70.482",
-    delta: "3,2%",
+    value: "70.142",
+    delta: "2,7%",
     trend: "up",
     compare: "vs Q1 2025: 68.295",
     icon: "employee",

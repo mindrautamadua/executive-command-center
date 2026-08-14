@@ -92,11 +92,15 @@ export const nineBox: number[] = [145, 501, 412, 244, 800, 302, 155, 337, 246];
 
 /* ── Tren jumlah talenta ─────────────────────────────────── */
 
-const BULAN = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agt", "Sep", "Okt", "Nov", "Des"];
+/**
+ * Tren Total Talenta Aktif, 12 bulan berjalan (Jun 2025 – Mei 2026).
+ * Titik akhir = KPI Total Talenta Aktif (3.742); titik awal 3.504 (+6,8% YoY).
+ */
+const BULAN_ROLLING = ["Jun", "Jul", "Agt", "Sep", "Okt", "Nov", "Des", "Jan", "Feb", "Mar", "Apr", "Mei"];
 
 export const trenTalenta = [
-  2345, 2410, 2480, 2590, 2720, 2815, 2890, 2950, 3010, 3085, 3120, 3142,
-].map((v, i) => ({ name: BULAN[i], value: v }));
+  3504, 3521, 3548, 3562, 3590, 3612, 3630, 3655, 3678, 3701, 3724, 3742,
+].map((v, i) => ({ name: BULAN_ROLLING[i], value: v }));
 
 /* ── Pipeline ────────────────────────────────────────────── */
 
@@ -122,12 +126,13 @@ export const clusterGenerasi = [
 /* ── Heatmap unit kerja ──────────────────────────────────── */
 
 /** level per region peta: 1 Sumatra, 2 Kalimantan, 3 Jawa/Nusa, 4 Sulawesi, 5 Papua/Maluku */
+/** Level heat mengikuti Talent Density (HiPo/workforce): tinggi ≥3,5%, sedang 2,5–3,5%, rendah <2,5%. */
 export const heatLevelByRegion: Record<number, "tinggi" | "sedang" | "rendah"> = {
   1: "tinggi",
   2: "tinggi",
   3: "sedang",
   4: "rendah",
-  5: "sedang",
+  5: "tinggi",
 };
 
 export const HEAT_COLOR = {
@@ -136,19 +141,23 @@ export const HEAT_COLOR = {
   rendah: SEMANTIC.bad,
 };
 
-/** Nama & jumlah talenta per region + posisi chip (persen area peta). */
+/**
+ * Talent Density Map per region + posisi chip (persen area peta).
+ * Invariant: jumlah `hipo` seluruh region = KPI HiPo (1.068).
+ * density = hipo / workforce; coverage & flightRisk selaras KPI grup (68% / 5,0%).
+ */
 export const heatRegions = [
-  { region: 1, name: "Sumatra", jumlah: 486, x: 13, y: 34 },
-  { region: 2, name: "Kalimantan", jumlah: 312, x: 40, y: 36 },
-  { region: 3, name: "Jawa & Nusa Tenggara", jumlah: 176, x: 32, y: 80 },
-  { region: 4, name: "Sulawesi", jumlah: 86, x: 58, y: 47 },
-  { region: 5, name: "Papua & Maluku", jumlah: 124, x: 86, y: 58 },
+  { region: 1, name: "Sumatra", hipo: 446, workforce: 11400, density: "3,9%", coverage: "72%", flightRisk: "4,2%", x: 13, y: 34 },
+  { region: 2, name: "Kalimantan", hipo: 268, workforce: 7200, density: "3,7%", coverage: "70%", flightRisk: "4,8%", x: 40, y: 36 },
+  { region: 3, name: "Jawa & Nusa Tenggara", hipo: 158, workforce: 5800, density: "2,7%", coverage: "64%", flightRisk: "5,4%", x: 32, y: 80 },
+  { region: 4, name: "Sulawesi", hipo: 78, workforce: 3400, density: "2,3%", coverage: "58%", flightRisk: "6,1%", x: 58, y: 47 },
+  { region: 5, name: "Papua & Maluku", hipo: 118, workforce: 3100, density: "3,8%", coverage: "66%", flightRisk: "5,0%", x: 86, y: 58 },
 ];
 
 export const heatLegend = [
-  { label: "Tinggi (> 200)", level: "tinggi" as const },
-  { label: "Sedang (101 - 200)", level: "sedang" as const },
-  { label: "Rendah (≤ 100)", level: "rendah" as const },
+  { label: "Density Tinggi (≥ 3,5%)", level: "tinggi" as const },
+  { label: "Density Sedang (2,5 – 3,5%)", level: "sedang" as const },
+  { label: "Density Rendah (< 2,5%)", level: "rendah" as const },
 ];
 
 /* ── Capability distribution ─────────────────────────────── */

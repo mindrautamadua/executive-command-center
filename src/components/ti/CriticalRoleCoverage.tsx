@@ -7,7 +7,7 @@ import { DonutChart } from "../ui/DonutChart";
 export function CriticalRoleCoverage() {
   return (
     <section className="card anim-rise flex flex-col p-3.5" style={{ "--d": "120ms" } as React.CSSProperties}>
-      <SectionHead no="6" title="Critical Role Coverage" action="Lihat Detail" />
+      <SectionHead title="Critical Role Coverage" action="Lihat Detail" />
       <p className="mt-[3px] text-[9px] text-ink-500">Coverage Succession Posisi Kritis</p>
 
       <div className="mt-2 flex flex-1 items-center gap-3">

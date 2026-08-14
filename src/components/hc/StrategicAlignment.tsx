@@ -12,7 +12,7 @@ const FLOW_ICONS = {
 export function StrategicAlignment() {
   return (
     <div className="card anim-rise px-4 pb-4 pt-3" style={{ "--d": "60ms" } as React.CSSProperties}>
-      <SectionHead no="3" title="Strategic Alignment" action="Lihat Detail" />
+      <SectionHead title="Strategic Alignment" action="Lihat Detail" />
 
       <button className="mt-3 flex w-full items-center justify-between rounded-lg border border-[#e3e9ef] bg-[#f8fafc] px-3 py-2 text-left">
         <span className="leading-tight">

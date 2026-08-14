@@ -20,15 +20,24 @@ export function HeatmapUnitKerja() {
     >
       <div className="flex items-start justify-between gap-2">
         <div>
-          <h3 className="card-title-navy">Heatmap Talenta per Unit Kerja</h3>
-          <p className="mt-[3px] text-[9.5px] text-ink-500">Jumlah Talenta (High Potential)</p>
+          <h3 className="card-title-navy">Talent Density Map</h3>
+          <p className="mt-[3px] text-[9.5px] text-ink-500">
+            HiPo relatif terhadap workforce &amp; posisi kritikal per region
+          </p>
         </div>
         {/* tooltip region — muncul saat hover pulau/chip */}
         {hovered && (
-          <span className="anim-fade shrink-0 whitespace-nowrap rounded-md border border-[#e3e9ef] bg-white px-2 py-1 text-[9px] text-ink-700 shadow-cardHover">
-            <strong className="font-bold text-ink-900">{hovered.name}</strong>:{" "}
-            {hovered.jumlah} talenta
-          </span>
+          <div className="anim-fade shrink-0 whitespace-nowrap rounded-md border border-[#e3e9ef] bg-white px-2.5 py-1.5 text-[8.5px] leading-[1.5] text-ink-700 shadow-cardHover">
+            <strong className="block text-[9px] font-bold text-ink-900">{hovered.name}</strong>
+            HiPo <strong className="font-bold text-ink-900">{hovered.hipo}</strong> / Workforce{" "}
+            <strong className="font-bold text-ink-900">
+              {hovered.workforce.toLocaleString("id-ID")}
+            </strong>
+            <br />
+            Density <strong className="font-bold text-ptpn-green">{hovered.density}</strong> · Coverage{" "}
+            <strong className="font-bold text-ink-900">{hovered.coverage}</strong> · Flight Risk{" "}
+            <strong className="font-bold text-[#ef4444]">{hovered.flightRisk}</strong>
+          </div>
         )}
       </div>
 
@@ -68,7 +77,7 @@ export function HeatmapUnitKerja() {
           ))}
         </svg>
 
-        {/* chip jumlah talenta per region */}
+        {/* chip density per region */}
         {heatRegions.map((r) => {
           const rendah = heatLevelByRegion[r.region] === "rendah";
           return (
@@ -84,7 +93,7 @@ export function HeatmapUnitKerja() {
               {rendah && (
                 <span className="animate-pulseDot h-[6px] w-[6px] rounded-full bg-[#ef4444]" />
               )}
-              {r.jumlah}
+              {r.density}
             </span>
           );
         })}

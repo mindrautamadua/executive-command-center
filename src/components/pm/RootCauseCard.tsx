@@ -14,7 +14,7 @@ export function RootCauseCard() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead no="5" title="HPI Root Cause Analysis (Berdasarkan Gap Tertinggi)" />
+      <SectionHead title="HPI Root Cause Analysis (Berdasarkan Gap Tertinggi)" />
       <div className="mt-2.5 rounded-lg border border-[#f8e3bd] bg-[#fdf3e0] px-3 py-2 text-[9.5px] font-bold text-[#b97407]">
         {rootCause.header}
       </div>
@@ -48,11 +48,15 @@ export function RootCauseCard() {
         </div>
       </div>
 
-      <div className="flex items-center gap-2 rounded-lg border border-[#eef2f6] bg-[#f8fafb] px-3 py-2">
+      <div
+        className="flex items-center gap-2 rounded-lg border border-[#eef2f6] bg-[#f8fafb] px-3 py-2"
+        title={rootCause.metodologi}
+      >
         <Wrench size={12} className="shrink-0 text-ink-500" />
         <span className="text-[9px] font-medium text-ink-700">
           {rootCause.catatan}{" "}
           <span className="font-bold text-ptpn-greenDark">{rootCause.catatanHighlight}</span>
+          <span className="ml-1 text-[8px] text-ink-400">(estimasi model — belum tervalidasi)</span>
         </span>
       </div>
     </div>

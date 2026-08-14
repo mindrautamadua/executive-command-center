@@ -24,7 +24,7 @@ export function ScenarioManager() {
     >
       <div className="flex items-start justify-between gap-2">
         <div>
-          <SectionHead no="1" title="Pilih & Kelola Skenario" />
+          <SectionHead title="Pilih & Kelola Skenario" />
           <p className="mt-[3px] text-[9px] text-ink-500">
             Buat, kelola dan bandingkan berbagai skenario strategi
           </p>

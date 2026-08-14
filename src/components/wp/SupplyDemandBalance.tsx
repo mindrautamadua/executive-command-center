@@ -61,7 +61,7 @@ export function SupplyDemandBalance() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "180ms" } as React.CSSProperties}
     >
-      <SectionHead no="6" title="Workforce Supply & Demand Balance" />
+      <SectionHead title="Workforce Supply & Demand Balance" />
       <LegendRow />
 
       <div className="mt-1 min-h-0 w-full flex-1">

@@ -10,8 +10,11 @@ import { TalentAttributesInsight } from "@/components/ti/TalentAttributesInsight
 import { CriticalRoleCoverage } from "@/components/ti/CriticalRoleCoverage";
 import { TalentDevelopmentFocus } from "@/components/ti/TalentDevelopmentFocus";
 import { TalentMobilityOverview } from "@/components/ti/TalentMobilityOverview";
+import { ExecutiveTalentIntelligence } from "@/components/ti/ExecutiveTalentIntelligence";
+import { RoleTalentMatch } from "@/components/ti/RoleTalentMatch";
+import { TalentDecisions } from "@/components/ti/TalentDecisions";
+import { TalentIntelligenceIndex } from "@/components/ti/TalentIntelligenceIndex";
 import { TrenTalenta } from "@/components/talent/TrenTalenta";
-import { ClusterGenerasi } from "@/components/talent/ClusterGenerasi";
 import { HeatmapUnitKerja } from "@/components/talent/HeatmapUnitKerja";
 
 export const metadata = { title: "Talent Intelligence — PTPN Group" };
@@ -39,6 +42,8 @@ export default function TalentIntelligencePage() {
           <div className="flex flex-col gap-3">
             <TiKpiStrip />
 
+            <ExecutiveTalentIntelligence />
+
             <div className="grid grid-cols-[minmax(0,35fr)_minmax(0,30fr)_minmax(0,35fr)] items-stretch gap-3">
               <TalentPortfolioBox />
               <TalentPipelineReadiness />
@@ -52,13 +57,18 @@ export default function TalentIntelligencePage() {
             </div>
 
             <div className="grid grid-cols-[minmax(0,60fr)_minmax(0,40fr)] items-stretch gap-3">
+              <RoleTalentMatch />
+              <TalentDecisions />
+            </div>
+
+            <div className="grid grid-cols-[minmax(0,60fr)_minmax(0,40fr)] items-stretch gap-3">
               <TalentDevelopmentFocus />
               <TalentMobilityOverview />
             </div>
 
-            <div className="grid h-[260px] grid-cols-[minmax(0,36fr)_minmax(0,32fr)_minmax(0,32fr)] grid-rows-[minmax(0,1fr)] gap-3">
+            <div className="grid h-[260px] grid-cols-[minmax(0,34fr)_minmax(0,32fr)_minmax(0,34fr)] grid-rows-[minmax(0,1fr)] gap-3">
               <TrenTalenta />
-              <ClusterGenerasi />
+              <TalentIntelligenceIndex />
               <HeatmapUnitKerja />
             </div>
           </div>

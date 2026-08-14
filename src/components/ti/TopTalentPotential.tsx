@@ -5,13 +5,13 @@ import { SectionHead } from "../hc/SectionHead";
 const READINESS_TONES: Record<Readiness, string> = {
   "Ready Now": "bg-[#d2ecd9] text-[#0f7a44]",
   "Ready in 1-2 Yrs": "bg-ptpn-greenLight text-ptpn-green",
-  "Ready in 2-3 Yrs": "bg-[#fdf3e0] text-[#d98b06]",
+  "Ready in 3-5 Yrs": "bg-[#fdf3e0] text-[#d98b06]",
 };
 
 export function TopTalentPotential() {
   return (
     <section className="card anim-rise flex flex-col p-3.5" style={{ "--d": "120ms" } as React.CSSProperties}>
-      <SectionHead no="3" title="Top Talent by Potential" action="Lihat Semua" />
+      <SectionHead title="Top Talent by Potential" action="Lihat Semua" />
       <p className="mt-[3px] text-[9px] text-ink-500">10 Talenta dengan Potential Tertinggi</p>
 
       <div className="mt-2 min-h-0 flex-1 overflow-hidden">

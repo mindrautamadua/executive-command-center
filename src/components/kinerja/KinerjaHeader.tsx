@@ -41,7 +41,7 @@ export function KinerjaHeader() {
         </div>
 
         <div className="flex shrink-0 items-center gap-3">
-          <SelectField label="Periode Penilaian" value="Q2 2025 (Apr - Jun)" width={168} />
+          <SelectField label="Periode Penilaian" value="Q2 2026 (Apr - Jun)" width={168} />
           <SelectField label="Unit Organisasi" value="Semua Unit" width={158} />
           <SelectField value="PTPN Group" width={152} />
 

@@ -1,12 +1,16 @@
 import { SdmSidebar } from "@/components/sdm/SdmSidebar";
 import { PmHeader } from "@/components/pm/PmHeader";
 import { PmKpiStrip } from "@/components/pm/PmKpiStrip";
+import { PmCoverageStrip } from "@/components/pm/PmCoverageStrip";
 import { DimensionScoreCard } from "@/components/pm/DimensionScoreCard";
 import { HpiBemOverviewCard } from "@/components/pm/HpiBemOverviewCard";
 import { PerformanceGapCard } from "@/components/pm/PerformanceGapCard";
 import { ProfileClusterCard } from "@/components/pm/ProfileClusterCard";
 import { RootCauseCard } from "@/components/pm/RootCauseCard";
-import { InterventionPriorityCard } from "@/components/pm/InterventionPriorityCard";
+import { PmIntelligence } from "@/components/pm/PmIntelligence";
+import { InterventionPortfolioCard } from "@/components/pm/InterventionPortfolioCard";
+import { ClusterIntelligenceCard } from "@/components/pm/ClusterIntelligenceCard";
+import { OutcomeTrackingCard } from "@/components/pm/OutcomeTrackingCard";
 import { EmployeeHpiProfileCard } from "@/components/pm/EmployeeHpiProfileCard";
 import { PmFootnote } from "@/components/pm/PmFootnote";
 
@@ -23,17 +27,26 @@ export default function PeopleMathHpiPage() {
         <div className="flex flex-col gap-3 px-5 pb-5">
           <PmKpiStrip />
 
+          <PmCoverageStrip />
+
+          <PmIntelligence />
+
           <div className="grid grid-cols-[minmax(0,30fr)_minmax(0,36fr)_minmax(0,34fr)] gap-3">
             <DimensionScoreCard />
             <HpiBemOverviewCard />
             <PerformanceGapCard />
           </div>
 
-          <div className="grid grid-cols-[minmax(0,30fr)_minmax(0,36fr)_minmax(0,34fr)] gap-3">
+          <div className="grid grid-cols-[minmax(0,38fr)_minmax(0,62fr)] gap-3">
             <ProfileClusterCard />
             <RootCauseCard />
-            <InterventionPriorityCard />
           </div>
+
+          <InterventionPortfolioCard />
+
+          <OutcomeTrackingCard />
+
+          <ClusterIntelligenceCard />
 
           <EmployeeHpiProfileCard />
 

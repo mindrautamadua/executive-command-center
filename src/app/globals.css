@@ -477,6 +477,17 @@ body {
   background-color: rgba(45, 212, 191, 0.14);
 }
 
+/* tint kuning (performance risk radar) */
+[data-theme="dark"] .bg-\[\#fefce8\] {
+  background-color: rgba(234, 179, 8, 0.12);
+}
+[data-theme="dark"] .border-\[\#f0ead0\] {
+  border-color: rgba(234, 179, 8, 0.3);
+}
+[data-theme="dark"] .text-\[\#a16207\] {
+  color: #facc15;
+}
+
 /* tint ungu */
 [data-theme="dark"] .bg-\[\#f1ecfd\],
 [data-theme="dark"] .bg-\[\#f2ecfb\],
@@ -528,7 +539,8 @@ body {
 [data-theme="dark"] .text-\[\#5468d4\] {
   color: #a78bfa;
 }
-[data-theme="dark"] .text-\[\#4a8ef0\] {
+[data-theme="dark"] .text-\[\#4a8ef0\],
+[data-theme="dark"] .text-\[\#3b82f6\] {
   color: #6fa4f7;
 }
 

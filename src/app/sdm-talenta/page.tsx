@@ -30,7 +30,7 @@ export default function SdmTalentaPage() {
           <DataTrustStrip />
           <div className="mb-2 flex items-center justify-between">
             <h2 className="text-[10px] font-extrabold uppercase tracking-[0.05em] text-ink-900">
-              1. Key Strategic KPI
+              Key Strategic KPI
             </h2>
             <button className="flex items-center gap-1.5 rounded-lg bg-ptpn-green px-3 py-[7px] text-[10px] font-semibold text-white shadow-pill transition-opacity hover:opacity-90">
               <Download size={12} />

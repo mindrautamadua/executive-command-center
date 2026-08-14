@@ -26,7 +26,7 @@ export function RiskHeatmapOrg() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead no="5" title="Risk Heatmap by Organization" />
+      <SectionHead title="Risk Heatmap by Organization" />
       <p className="mt-[3px] text-[9px] text-ink-500">Peta Risiko per Sub Holding / Regional</p>
 
       <div className="mt-2.5 grid grid-cols-[minmax(0,1fr)_34px_44px_30px_34px] items-center gap-x-1 border-b border-[#eef2f6] pb-1.5 text-[8px] font-semibold uppercase tracking-[0.04em] text-ink-400">

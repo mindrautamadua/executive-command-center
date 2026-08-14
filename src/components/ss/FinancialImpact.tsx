@@ -30,7 +30,7 @@ export function FinancialImpact() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead no="5" title="Dampak Finansial (2026 - 2028)" />
+      <SectionHead title="Dampak Finansial (2026 - 2028)" />
       <p className="mt-[3px] text-[9px] text-ink-500">Proyeksi dampak finansial kumulatif</p>
 
       <div className="mt-1 flex items-center justify-between text-[8px] font-semibold text-ink-400">

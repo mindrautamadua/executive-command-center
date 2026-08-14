@@ -48,7 +48,7 @@ export function HeadcountProjection() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "180ms" } as React.CSSProperties}
     >
-      <SectionHead no="3" title="Proyeksi Headcount (2026 - 2028)" />
+      <SectionHead title="Proyeksi Headcount (2026 - 2028)" />
 
       <div className="mt-1.5 grid grid-cols-2 gap-x-3 gap-y-[3px]">
         {projectionSeries.map((s) => (

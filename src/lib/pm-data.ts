@@ -69,9 +69,9 @@ export const pmKpi: PmKpi[] = [
     tone: "blue",
   },
   {
-    label: "Performance Gap (Rata-rata)",
+    label: "Performance Opportunity Gap",
     value: "11,8%",
-    sub: "Opportunity Improvement",
+    sub: "Rata-rata Ruang Perbaikan",
     delta: "-1,9 pts",
     trend: "down",
     deltaTone: "good",
@@ -93,7 +93,7 @@ export const pmKpi: PmKpi[] = [
   {
     label: "People Math – HPI Alignment",
     value: "0,72",
-    sub: "(0–1 Index)",
+    sub: "Strong · Benchmark grup 0,68 · Top quartile 0,81",
     delta: "0,05",
     trend: "up",
     deltaTone: "good",
@@ -168,13 +168,14 @@ export interface ClusterRow {
   color: string;
 }
 
+/** Jumlah seluruh klaster harus = 38.642 (KPI People Math Profiled & center donut). */
 export const pmCluster: ClusterRow[] = [
   { name: "The Driver", pct: "31%", jumlah: "11.981", value: 11981, color: PALETTE.blue },
   { name: "The Inspirer", pct: "22%", jumlah: "8.512", value: 8512, color: PALETTE.slate },
   { name: "The Analyst", pct: "18%", jumlah: "6.883", value: 6883, color: PALETTE.teal },
   { name: "The Collaborator", pct: "15%", jumlah: "5.792", value: 5792, color: PALETTE.purple },
   { name: "The Stabilizer", pct: "8%", jumlah: "3.094", value: 3094, color: PALETTE.green },
-  { name: "The Pioneer", pct: "6%", jumlah: "2.400", value: 2400, color: PALETTE.amber },
+  { name: "The Pioneer", pct: "6%", jumlah: "2.380", value: 2380, color: PALETTE.amber },
 ];
 
 export const pmClusterTotal = { value: "38.642", caption: "Orang" };
@@ -193,11 +194,13 @@ export const rootCause = {
     { faktor: "Akses data & informasi terbatas", impact: "Medium", populasi: "6.311 (22%)" },
     { faktor: "Beban kerja tidak seimbang", impact: "Low", populasi: "4.008 (14%)" },
   ] as { faktor: string; impact: "High" | "Medium" | "Low"; populasi: string }[],
-  catatan: "Perbaikan faktor di atas berpotensi meningkatkan performance hingga",
-  catatanHighlight: "+8–12%.",
+  catatan: "Estimated Improvement Potential:",
+  catatanHighlight: "+8–12%",
+  metodologi:
+    "Estimasi berbasis model — dari driver ter-asesmen & pola intervensi historis, belum tervalidasi eksperimen terkontrol.",
 };
 
-/* ── 6. HPI Intervention Priority ─────────────────────────────────── */
+/* ── 6. Intervention Portfolio ────────────────────────────────────── */
 
 export interface IntervensiRow {
   prioritas: number;
@@ -205,15 +208,23 @@ export interface IntervensiRow {
   dimensi: "B" | "E" | "M";
   impact: string;
   populasi: string;
+  /** Estimasi biaya program (ilustratif — final di business case). */
+  cost: string;
+  confidence: "High" | "Medium" | "Low";
+  status: "Berjalan" | "Pilot" | "Perencanaan";
+  valueCost: "Sangat Tinggi" | "Tinggi" | "Sedang";
 }
 
 export const intervensiPriority: IntervensiRow[] = [
-  { prioritas: 1, intervensi: "Perbaikan Proses & SOP", dimensi: "E", impact: "+4,2%", populasi: "12.842" },
-  { prioritas: 2, intervensi: "Digitalisasi Tools & Sistem", dimensi: "E", impact: "+3,1%", populasi: "10.231" },
-  { prioritas: 3, intervensi: "Leadership Coaching", dimensi: "M", impact: "+2,8%", populasi: "7.421" },
-  { prioritas: 4, intervensi: "Workload Management", dimensi: "E", impact: "+1,9%", populasi: "6.311" },
-  { prioritas: 5, intervensi: "Komunikasi & Feedback Loop", dimensi: "B", impact: "+1,5%", populasi: "5.927" },
+  { prioritas: 1, intervensi: "Perbaikan Proses & SOP", dimensi: "E", impact: "+4,2%", populasi: "12.842", cost: "Rp 12,5 M", confidence: "High", status: "Berjalan", valueCost: "Sangat Tinggi" },
+  { prioritas: 2, intervensi: "Digitalisasi Tools & Sistem", dimensi: "E", impact: "+3,1%", populasi: "10.231", cost: "Rp 28,0 M", confidence: "Medium", status: "Pilot", valueCost: "Tinggi" },
+  { prioritas: 3, intervensi: "Leadership Coaching", dimensi: "M", impact: "+2,8%", populasi: "7.421", cost: "Rp 9,8 M", confidence: "Medium", status: "Berjalan", valueCost: "Tinggi" },
+  { prioritas: 4, intervensi: "Workload Management", dimensi: "E", impact: "+1,9%", populasi: "6.311", cost: "Rp 4,2 M", confidence: "Medium", status: "Perencanaan", valueCost: "Sedang" },
+  { prioritas: 5, intervensi: "Komunikasi & Feedback Loop", dimensi: "B", impact: "+1,5%", populasi: "5.927", cost: "Rp 2,6 M", confidence: "High", status: "Berjalan", valueCost: "Sedang" },
 ];
+
+export const intervensiPortfolioCatatan =
+  "Cost & expected impact adalah estimasi perencanaan (ilustratif); angka final mengikuti business case masing-masing intervensi.";
 
 /* ── 7. Employee HPI Profile (contoh) ─────────────────────────────── */
 
@@ -232,6 +243,8 @@ export const contohProfil = {
     judul: "Environment – Sistem & Tools",
     poin: ["Reporting masih manual", "Data tidak real-time", "Akses analytical tools terbatas"],
     estimasi: "+8 – 12% Performance",
+    estimasiTooltip:
+      "Estimasi berbasis model — dari driver ter-asesmen & pola intervensi historis, belum tervalidasi eksperimen terkontrol.",
   },
   rekomendasi: [
     { aksi: "Digitalisasi Reporting Kebun", impact: "High Impact", periode: "Q3 2026" },
@@ -248,6 +261,171 @@ export const pmFootnote = {
     { text: "WHY", bold: true },
     { text: " performance belum optimal dan " },
     { text: "HOW", bold: true },
-    { text: " memperbaikinya." },
+    { text: " memperbaikinya. Metodologi: " },
+    { text: "PTPN HPI-BEM v1.0", bold: true },
+    { text: " (governed) — skor grup merepresentasikan populasi ter-asesmen." },
   ],
+};
+
+/* ── People Performance Intelligence ──────────────────────────────── */
+
+export interface PmIntelSignal {
+  no: string;
+  tone: "red" | "amber" | "green";
+  title: string;
+  text: string;
+  impactLabel: string;
+  impactValue: string;
+}
+
+export const pmIntelSignals: PmIntelSignal[] = [
+  {
+    no: "S1",
+    tone: "red",
+    title: "High Improvement Opportunity",
+    text: "6.412 karyawan (23,0% populasi ter-asesmen) memiliki ruang perbaikan performance tinggi.",
+    impactLabel: "Populasi",
+    impactValue: "6.412 orang",
+  },
+  {
+    no: "S2",
+    tone: "red",
+    title: "Environment Dominan",
+    text: "Environment menyumbang 43% dari total performance opportunity gap (5,1% dari 11,8%).",
+    impactLabel: "Kontribusi gap",
+    impactValue: "43%",
+  },
+  {
+    no: "S3",
+    tone: "amber",
+    title: "Proses Belum Standar",
+    text: "12.842 karyawan terdampak proses kerja belum terstandarisasi — driver Environment terbesar.",
+    impactLabel: "Populasi",
+    impactValue: "12.842 orang",
+  },
+  {
+    no: "S4",
+    tone: "green",
+    title: "HPI Membaik",
+    text: "Rata-rata HPI-BEM naik 3,1 pts vs April 2026, seiring turunnya gap Environment.",
+    impactLabel: "Tren",
+    impactValue: "+3,1 pts MoM",
+  },
+];
+
+export const pmIntelCounts = [
+  { label: "Kritis", value: 2, tone: "red" },
+  { label: "Perhatian", value: 1, tone: "amber" },
+  { label: "Positif", value: 1, tone: "green" },
+] as { label: string; value: number; tone: "red" | "amber" | "green" }[];
+
+export const pmIntelRecommendation =
+  "Prioritaskan standardisasi proses kerja & digitalisasi tools (dimensi Environment) sebelum menambah training individual — 43% gap berasal dari sistem kerja, bukan kapabilitas orang.";
+
+/* ── Cluster Intelligence (Role Fit & Productivity Linkage) ───────── */
+
+export interface ClusterIntelRow {
+  name: string;
+  pct: string;
+  color: string;
+  bestFit: string[];
+  /** Index produktivitas relatif; 100 = rata-rata grup. */
+  produktivitas: number;
+  performance: string;
+  flightRisk: string;
+  flightTone: "red" | "amber" | "green";
+  fokusDev: string;
+}
+
+export const clusterIntel: ClusterIntelRow[] = [
+  { name: "The Driver", pct: "31%", color: PALETTE.blue, bestFit: ["Operations", "Commercial", "Transformation"], produktivitas: 118, performance: "4,4", flightRisk: "8%", flightTone: "amber", fokusDev: "Coaching stakeholder management" },
+  { name: "The Inspirer", pct: "22%", color: PALETTE.slate, bestFit: ["Commercial", "HC", "Change Mgmt"], produktivitas: 114, performance: "4,3", flightRisk: "6%", flightTone: "amber", fokusDev: "Eksekusi & orientasi detail" },
+  { name: "The Analyst", pct: "18%", color: PALETTE.teal, bestFit: ["Finance", "Risk", "Planning"], produktivitas: 108, performance: "4,1", flightRisk: "5%", flightTone: "amber", fokusDev: "Komunikasi & agility" },
+  { name: "The Collaborator", pct: "15%", color: PALETTE.purple, bestFit: ["HC", "Service", "Cross-unit"], produktivitas: 106, performance: "4,0", flightRisk: "4%", flightTone: "green", fokusDev: "Assertiveness & decision making" },
+  { name: "The Stabilizer", pct: "8%", color: PALETTE.green, bestFit: ["Operations Rutin", "QA", "Admin"], produktivitas: 101, performance: "3,9", flightRisk: "3%", flightTone: "green", fokusDev: "Adaptabilitas terhadap perubahan" },
+  { name: "The Pioneer", pct: "6%", color: PALETTE.amber, bestFit: ["Inovasi", "R&D", "Transformation"], produktivitas: 120, performance: "4,5", flightRisk: "11%", flightTone: "red", fokusDev: "Retention plan & fokus prioritas" },
+];
+
+export const clusterIntelCatatan =
+  "Productivity index (100 = rata-rata grup) & flight risk berasal dari linkage People Productivity + Talent Intelligence — data ilustratif.";
+
+/* ── Intervention Outcome Tracking (Closed Loop) ──────────────────── */
+
+export interface OutcomeStep {
+  tahap: string;
+  nilai: string;
+  detail: string;
+}
+
+export const outcomeLoop = {
+  stages: ["Assess", "Diagnose", "Intervene", "Measure", "Learn"],
+  pilotLabel: "Pilot Tracking — Digitalisasi Reporting Kebun (PTPN IV · 1.240 Manajer & Asisten Kebun)",
+  steps: [
+    { tahap: "Assess", nilai: "HPI-E 68", detail: "Baseline Environment populasi pilot" },
+    { tahap: "Diagnose", nilai: "Environment – Tools", detail: "Reporting manual, data tidak real-time" },
+    { tahap: "Intervene", nilai: "Digital Reporting", detail: "Rollout Q1–Q2 2026" },
+    { tahap: "Adoption", nilai: "87%", detail: "Pengguna aktif mingguan" },
+    { tahap: "HPI Change", nilai: "68 → 76", detail: "+8 pts dalam 2 kuartal" },
+    { tahap: "Performance", nilai: "4,1 → 4,4", detail: "Rata-rata skor performance" },
+    { tahap: "Business Impact", nilai: "+6,2%", detail: "Produktivitas unit pilot" },
+  ] as OutcomeStep[],
+  learning:
+    "Intervensi terbukti efektif untuk populasi manajer kebun. Rekomendasi: scale ke 14 unit dengan profil root cause serupa (estimasi populasi 9.800 orang).",
+  catatan:
+    "Data pilot ilustratif — outcome tracking penuh membutuhkan data intervensi & produktivitas aktual per unit.",
+};
+
+/* ── Methodology (modal ⓘ) ───────────────────────────────────────── */
+
+export interface MetodologiSection {
+  judul: string;
+  items: [string, string][];
+}
+
+export const metodologi = {
+  versi: "PTPN HPI-BEM v1.0",
+  sections: [
+    {
+      judul: "People Math Score",
+      items: [
+        ["Definisi", "Skor komposit pola individu dari 6 dimensi: Thinking Style, Driving Force, Interpersonal Style, Resilience, Learning Agility, Emotional Balance."],
+        ["Skala", "0–100; Kuat ≥75, Sedang 60–74, Perlu Ditingkatkan <60."],
+        ["Bobot & formula", "Proprietary — governed oleh tim metodologi; bobot per dimensi ditinjau tahunan."],
+        ["Normalisasi", "Standardisasi terhadap norma populasi PTPN Group."],
+        ["Sumber data", "Asesmen People Math (self-assessment + verifikasi), siklus 2025–2026."],
+      ],
+    },
+    {
+      judul: "PTPN HPI-BEM Score",
+      items: [
+        ["Definisi", "Human Performance Index berbasis 3 dimensi: Behavior, Environment, Mindset."],
+        ["Skala", "0–100 per dimensi; skor grup = rata-rata populasi ter-asesmen."],
+        ["Sumber data", "Survey & asesmen HPI-BEM — 27.891 responden (39,7% populasi)."],
+        ["Benchmark", "Internal antar-PTPN; benchmark eksternal belum tersedia."],
+        ["Confidence", "Medium — coverage parsial, recency asesmen < 6 bulan."],
+      ],
+    },
+    {
+      judul: "Governance",
+      items: [
+        ["Kepemilikan", "Tim Metodologi HC Holding — perubahan melalui review board."],
+        ["Review cycle", "Tahunan, atau saat perubahan besar struktur organisasi."],
+        ["Akses detail", "Formula lengkap tersedia bagi peran terotorisasi (BOD-1 HC)."],
+      ],
+    },
+  ] as MetodologiSection[],
+  disclaimer:
+    "Konten metodologi bersifat placeholder — versi final ditetapkan tim metodologi HC Holding.",
+};
+
+/* ── Intelligence Coverage Strip ──────────────────────────────────── */
+
+export const pmCoverage = {
+  asOf: "31 Mei 2026",
+  basis: "70.142 karyawan",
+  peopleMath: { pct: "55,1%", detail: "38.642 orang" },
+  hpi: { pct: "39,7%", detail: "27.891 orang" },
+  combined: { pct: "36,4%", detail: "25.530 orang dengan kedua asesmen" },
+  confidence: "Medium" as const,
+  catatan: "Skor grup merepresentasikan populasi ter-asesmen, bukan seluruh karyawan.",
 };

@@ -26,7 +26,7 @@ export function TalentImpactSummary() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "180ms" } as React.CSSProperties}
     >
-      <SectionHead no="6" title="Dampak Talent Summary (2028)" />
+      <SectionHead title="Dampak Talent Summary (2028)" />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Ringkasan dampak terhadap talent organization
       </p>

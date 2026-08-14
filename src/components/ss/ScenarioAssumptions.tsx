@@ -8,7 +8,7 @@ export function ScenarioAssumptions() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead no="4" title="Asumsi Skenario Terpilih (Skenario C)" />
+      <SectionHead title="Asumsi Skenario Terpilih (Skenario C)" />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Parameter utama yang digunakan dalam simulasi
       </p>

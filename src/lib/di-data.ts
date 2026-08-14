@@ -100,11 +100,11 @@ export interface DonutRow {
   color: string;
 }
 
-export const totalKaryawan = "70.482";
+export const totalKaryawan = "70.142";
 
 export const komposisiGender: DonutRow[] = [
-  { name: "Laki-laki", jumlah: "48.750", pct: "69,2%", share: 69.2, color: GENDER.lakiLaki },
-  { name: "Perempuan", jumlah: "21.732", pct: "30,8%", share: 30.8, color: GENDER.perempuan },
+  { name: "Laki-laki", jumlah: "48.538", pct: "69,2%", share: 69.2, color: GENDER.lakiLaki },
+  { name: "Perempuan", jumlah: "21.604", pct: "30,8%", share: 30.8, color: GENDER.perempuan },
 ];
 
 /* ── Tren representasi perempuan di manajemen ────────────── */
@@ -124,18 +124,18 @@ export const trenPerempuanManajemen = [
 /* ── Komposisi karyawan berdasarkan generasi ─────────────── */
 
 export const komposisiGenerasi: DonutRow[] = [
-  { name: "Gen Z (≤ 25 th)", jumlah: "7.901", pct: "11,2%", share: 11.2, color: GENERATION.genZ },
+  { name: "Gen Z (≤ 25 th)", jumlah: "7.856", pct: "11,2%", share: 11.2, color: GENERATION.genZ },
   {
     name: "Milenial (26-40 th)",
-    jumlah: "32.758",
+    jumlah: "32.616",
     pct: "46,5%",
     share: 46.5,
     color: GENERATION.millennial,
   },
-  { name: "Gen X (41-55 th)", jumlah: "23.957", pct: "34,0%", share: 34.0, color: GENERATION.genX },
+  { name: "Gen X (41-55 th)", jumlah: "23.848", pct: "34,0%", share: 34.0, color: GENERATION.genX },
   {
     name: "Baby Boomer (≥ 56 th)",
-    jumlah: "5.866",
+    jumlah: "5.822",
     pct: "8,3%",
     share: 8.3,
     color: GENERATION.babyBoomer,
@@ -158,34 +158,34 @@ export const piramidaPopulasi: PiramidaRow[] = [
   {
     generasi: "Gen Z",
     warnaGenerasi: GENERATION.genZ,
-    lakiLaki: 4583,
-    perempuan: 3318,
-    labelL: "4.583",
-    labelP: "3.318",
+    lakiLaki: 4552,
+    perempuan: 3304,
+    labelL: "4.552",
+    labelP: "3.304",
   },
   {
     generasi: "Milenial",
     warnaGenerasi: GENERATION.millennial,
-    lakiLaki: 21570,
-    perempuan: 11188,
-    labelL: "21.570",
-    labelP: "11.188",
+    lakiLaki: 21502,
+    perempuan: 11114,
+    labelL: "21.502",
+    labelP: "11.114",
   },
   {
     generasi: "Gen X",
     warnaGenerasi: GENERATION.genX,
-    lakiLaki: 17728,
-    perempuan: 6229,
-    labelL: "17.728",
-    labelP: "6.229",
+    lakiLaki: 17654,
+    perempuan: 6194,
+    labelL: "17.654",
+    labelP: "6.194",
   },
   {
     generasi: "Baby Boomer",
     warnaGenerasi: GENERATION.babyBoomer,
-    lakiLaki: 4869,
-    perempuan: 997,
-    labelL: "4.869",
-    labelP: "997",
+    lakiLaki: 4830,
+    perempuan: 992,
+    labelL: "4.830",
+    labelP: "992",
   },
 ];
 

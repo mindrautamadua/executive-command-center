@@ -10,7 +10,7 @@ export function DdCategories() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead no="2" title="Kategori Metrik" />
+      <SectionHead title="Kategori Metrik" />
       <p className="mt-[3px] text-[9px] text-ink-500">Sebaran 128 istilah per domain</p>
 
       <ul className="scroll-thin flex min-h-0 flex-1 flex-col justify-around gap-y-1 overflow-y-auto py-1">

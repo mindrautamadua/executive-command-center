@@ -1,5 +1,5 @@
-import { ClipboardList, LayoutGrid, MonitorSmartphone, Rocket } from "lucide-react";
-import { tiDevFocus, tiInvestment, type DevFocus } from "@/lib/ti-data";
+import { ChevronRight, ClipboardList, Info, LayoutGrid, MonitorSmartphone, Rocket } from "lucide-react";
+import { tiDevFocus, tiDevRoi, tiDevRoiNote, tiInvestment, type DevFocus } from "@/lib/ti-data";
 import { SectionHead } from "../hc/SectionHead";
 import { Delta } from "../ui/Delta";
 
@@ -46,8 +46,10 @@ function MiniTrend({ data }: { data: number[] }) {
 export function TalentDevelopmentFocus() {
   return (
     <section className="card anim-rise flex flex-col p-3.5">
-      <SectionHead no="7" title="Talent Development Focus" />
-      <p className="mt-[3px] text-[9px] text-ink-500">Prioritas Pengembangan Talenta</p>
+      <SectionHead title="Talent Development Focus" />
+      <p className="mt-[3px] text-[9px] text-ink-500">
+        Prioritas Pengembangan Talenta — Investment → Capability → Readiness → Performance
+      </p>
 
       <div className="mt-3 grid flex-1 grid-cols-[repeat(4,minmax(0,1fr))_150px] gap-3">
         {tiDevFocus.map((d) => {
@@ -85,6 +87,32 @@ export function TalentDevelopmentFocus() {
             <Delta value={tiInvestment.delta} trend="up" tone="good" size={9} />
             <span className="text-[8px] text-ink-400">{tiInvestment.compare}</span>
           </span>
+        </div>
+      </div>
+
+      {/* rantai outcome development */}
+      <div className="mt-3 rounded-lg border border-[#eef2f6] bg-[#fbfcfd] px-3 pb-2.5 pt-2">
+        <div className="flex items-center gap-2">
+          {tiDevRoi.map((step, i) => (
+            <div key={step.label} className="flex min-w-0 flex-1 items-center gap-2">
+              <div className="min-w-0 flex-1">
+                <div className="truncate text-[8px] font-bold uppercase tracking-[0.04em] text-ink-400">
+                  {step.label}
+                </div>
+                <div className="mt-[3px] text-[13px] font-extrabold leading-none text-ink-900">
+                  {step.value}
+                </div>
+                <div className="mt-[3px] truncate text-[7.5px] text-ink-400">{step.sub}</div>
+              </div>
+              {i < tiDevRoi.length - 1 && (
+                <ChevronRight size={12} className="shrink-0 text-ink-300" />
+              )}
+            </div>
+          ))}
+        </div>
+        <div className="mt-2 flex items-center gap-1.5 border-t border-[#eef2f6] pt-1.5 text-[8px] text-ink-400">
+          <Info size={9} className="shrink-0" />
+          {tiDevRoiNote}
         </div>
       </div>
     </section>

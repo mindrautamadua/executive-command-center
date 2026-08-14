@@ -11,7 +11,7 @@ const HEAD = [
   "High Performer",
   "Below Target",
   "Distribusi",
-  "Trend vs Q1 2025",
+  "Trend vs Q1 2026",
   "Aksi",
 ];
 

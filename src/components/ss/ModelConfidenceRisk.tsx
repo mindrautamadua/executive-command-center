@@ -59,7 +59,7 @@ export function ModelConfidenceRisk() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "180ms" } as React.CSSProperties}
     >
-      <SectionHead no="9" title="Model Confidence & Risk" />
+      <SectionHead title="Model Confidence & Risk" />
 
       <div className="scroll-thin mt-2 flex min-h-0 flex-1 items-start gap-5 overflow-y-auto">
         <div className="flex shrink-0 flex-col items-center pt-1">

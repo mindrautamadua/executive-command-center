@@ -11,7 +11,7 @@ export function TopIrIssues() {
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
       <div className="flex items-baseline gap-1.5">
-        <SectionHead no="8" title="Top Isu Industrial Relations" />
+        <SectionHead title="Top Isu Industrial Relations" />
         <span className="shrink-0 text-[8.5px] text-ink-400">(YTD)</span>
       </div>
 

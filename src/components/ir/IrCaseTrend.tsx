@@ -26,7 +26,7 @@ export function IrCaseTrend() {
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
       <div className="flex items-baseline gap-1.5">
-        <SectionHead no="2" title="Trend Kasus Industrial Relations" />
+        <SectionHead title="Trend Kasus Industrial Relations" />
         <span className="shrink-0 text-[8.5px] text-ink-400">(12 Bulan Terakhir)</span>
       </div>
 

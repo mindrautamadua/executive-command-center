@@ -17,7 +17,7 @@ export function DdTable() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead no="1" title="Katalog Istilah & Metrik" />
+      <SectionHead title="Katalog Istilah & Metrik" />
       <p className="mt-[3px] text-[9px] text-ink-500">
         12 metrik inti dari 128 istilah terdokumentasi
       </p>

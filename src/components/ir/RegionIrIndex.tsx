@@ -12,7 +12,7 @@ export function RegionIrIndex() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead no="7" title="Indeks Hubungan Industrial per Region" />
+      <SectionHead title="Indeks Hubungan Industrial per Region" />
 
       <div className="flex min-h-0 flex-1 items-center gap-3 pt-1">
         <div className="relative h-full w-[42%] shrink-0 self-center">

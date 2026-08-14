@@ -2,6 +2,7 @@ import { Sparkles } from "lucide-react";
 import { SdmSidebar } from "@/components/sdm/SdmSidebar";
 import { ProduktivitasHeader } from "@/components/produktivitas/ProduktivitasHeader";
 import { ProduktivitasKpiStrip } from "@/components/produktivitas/ProduktivitasKpiStrip";
+import { ProduktivitasIntelligence } from "@/components/produktivitas/ProduktivitasIntelligence";
 import { ProduktivitasTrend } from "@/components/produktivitas/ProduktivitasTrend";
 import { ProduktivitasUnitKerja } from "@/components/produktivitas/ProduktivitasUnitKerja";
 import { ProduktivitasJenisUsaha } from "@/components/produktivitas/ProduktivitasJenisUsaha";
@@ -23,6 +24,8 @@ export default function PeopleProductivityPage() {
 
         <div className="mx-5 mb-4 flex flex-col gap-3">
           <ProduktivitasKpiStrip />
+
+          <ProduktivitasIntelligence />
 
           <div className="grid h-[300px] grid-cols-[minmax(0,430fr)_minmax(0,430fr)_minmax(0,440fr)] grid-rows-[minmax(0,1fr)] gap-3">
             <ProduktivitasTrend />

@@ -22,8 +22,8 @@ export function HeadcountTrend() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead no="1" title="Headcount Trend" action="Lihat Detail" />
-      <p className="mt-[3px] text-[9px] text-ink-500">Perkembangan Headcount 12 Bulan Terakhir</p>
+      <SectionHead title="Headcount Trend" action="Lihat Detail" />
+      <p className="mt-[3px] text-[9px] text-ink-500">Perkembangan Headcount 36 Bulan Terakhir</p>
 
       <div className="mt-1.5 min-h-0 w-full flex-1">
         <ResponsiveContainer width="100%" height="100%">
@@ -40,12 +40,12 @@ export function HeadcountTrend() {
               tickLine={false}
               axisLine={{ stroke: CHART_AXIS.axis }}
               tick={{ fontSize: 7.5, fill: CHART_AXIS.tick }}
-              interval={0}
+              interval={2}
               tickFormatter={(v: string) => v.replace(" 20", " ")}
             />
             <YAxis
-              domain={[60000, 72000]}
-              ticks={[60000, 62000, 64000, 66000, 68000, 70000, 72000]}
+              domain={[58000, 72000]}
+              ticks={[58000, 62000, 66000, 70000]}
               tickLine={false}
               axisLine={false}
               tick={{ fontSize: 8.5, fill: CHART_AXIS.tick }}
@@ -62,15 +62,31 @@ export function HeadcountTrend() {
               stroke={PALETTE.green}
               strokeWidth={1.8}
               fill="url(#wa-hc-fill)"
-              dot={{ r: 2.5, fill: "#fff", stroke: PALETTE.green, strokeWidth: 1.8 }}
+              dot={false}
               activeDot={{ r: 4 }}
             >
+              {/* Label hanya pada titik terakhir agar 36 titik tetap terbaca */}
               <LabelList
                 dataKey="value"
-                position="top"
-                offset={8}
-                formatter={ribuan}
-                style={{ fontSize: 7.5, fill: "#334155", fontWeight: 700 }}
+                content={(props) => {
+                  const { x, y, value, index } = props as {
+                    x?: number;
+                    y?: number;
+                    value?: number;
+                    index?: number;
+                  };
+                  if (index !== headcountTrend.length - 1 || x == null || y == null) return null;
+                  return (
+                    <text
+                      x={x}
+                      y={y - 8}
+                      textAnchor="end"
+                      style={{ fontSize: 7.5, fill: "#334155", fontWeight: 700 }}
+                    >
+                      {ribuan(value ?? 0)}
+                    </text>
+                  );
+                }}
               />
             </Area>
           </AreaChart>

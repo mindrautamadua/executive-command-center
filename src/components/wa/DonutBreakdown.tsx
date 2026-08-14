@@ -7,13 +7,11 @@ import type { DonutRow } from "@/lib/wa-data";
 
 /** Kartu donut + legend (dipakai Headcount by Organization & Employment Type). */
 export function DonutBreakdown({
-  no,
   title,
   subtitle,
   data,
   delay = 0,
 }: {
-  no: string;
   title: string;
   subtitle: string;
   data: DonutRow[];
@@ -26,7 +24,7 @@ export function DonutBreakdown({
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": `${delay}ms` } as React.CSSProperties}
     >
-      <SectionHead no={no} title={title} action="Lihat Detail" />
+      <SectionHead title={title} action="Lihat Detail" />
       <p className="mt-[3px] text-[9px] text-ink-500">{subtitle}</p>
 
       <div className="flex min-h-0 flex-1 items-center gap-3">

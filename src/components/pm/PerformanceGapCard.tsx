@@ -14,7 +14,7 @@ export function PerformanceGapCard() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "160ms" } as React.CSSProperties}
     >
-      <SectionHead no="3" title="Performance Gap Analysis (Top Level)" />
+      <SectionHead title="Performance Opportunity Gap (Top Level)" />
 
       <div className="flex min-h-0 flex-1 items-center gap-4 px-1">
         <DonutChart

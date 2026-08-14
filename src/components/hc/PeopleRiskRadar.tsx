@@ -115,7 +115,7 @@ export function PeopleRiskRadar() {
       className="card anim-rise flex h-full flex-col px-4 pb-3.5 pt-3"
       style={{ "--d": "80ms" } as React.CSSProperties}
     >
-      <SectionHead no="4" title="People Risk Radar" action="Lihat Semua" />
+      <SectionHead title="People Risk Radar" action="Lihat Semua" />
 
       <div className="mt-1 flex min-h-0 flex-1 items-stretch gap-3">
         <div className="flex min-w-0 flex-[54] flex-col">
@@ -168,6 +168,14 @@ export function PeopleRiskRadar() {
                         drivers={r.drivers}
                         tone={r.severity === "High" ? "red" : "amber"}
                       />
+                      <div className="mt-1 flex items-start gap-1.5 rounded-md bg-ptpn-greenLight px-2 py-[5px]">
+                        <span className="mt-[1px] text-[8px] font-extrabold uppercase tracking-[0.04em] text-ptpn-green">
+                          Aksi
+                        </span>
+                        <span className="text-[8.5px] leading-[1.4] text-ink-700">
+                          {r.recommendation}
+                        </span>
+                      </div>
                     </div>
                   )}
                 </div>

@@ -50,7 +50,7 @@ export function HeadcountProjection() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead no="1" title="Proyeksi Headcount 2026 - 2028" />
+      <SectionHead title="Proyeksi Headcount 2026 - 2028" />
       <LegendRow />
 
       <div className="mt-1 min-h-0 w-full flex-1">

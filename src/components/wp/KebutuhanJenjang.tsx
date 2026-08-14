@@ -11,7 +11,7 @@ export function KebutuhanJenjang() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead no="2" title="Kebutuhan Talenta Berdasarkan Jenjang" />
+      <SectionHead title="Kebutuhan Talenta Berdasarkan Jenjang" />
 
       <div className="scroll-thin mt-2 min-h-0 flex-1 overflow-y-auto">
       <table className="w-full">

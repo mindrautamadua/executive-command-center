@@ -14,7 +14,7 @@ export function CaseCategoryBreakdown() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead no="1" title="Sebaran Kasus Berdasarkan Kategori" />
+      <SectionHead title="Sebaran Kasus Berdasarkan Kategori" />
 
       <div className="flex min-h-0 flex-1 items-center gap-3">
         <DonutChart

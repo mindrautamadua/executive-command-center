@@ -32,7 +32,7 @@ export function RekomendasiKepatuhan() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "240ms" } as React.CSSProperties}
     >
-      <SectionHead no="7" title="Rekomendasi Tindakan Kepatuhan" />
+      <SectionHead title="Rekomendasi Tindakan Kepatuhan" />
       <p className="mt-[3px] text-[9px] text-ink-500">Tindakan yang Direkomendasikan</p>
 
       <ul className="scroll-thin mt-2 flex min-h-0 flex-1 flex-col justify-between gap-1.5 overflow-y-auto">

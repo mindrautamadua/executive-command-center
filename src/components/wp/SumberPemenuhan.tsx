@@ -39,7 +39,7 @@ export function SumberPemenuhan() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead no="5" title="Sumber Pemenuhan Kebutuhan Talenta (2026-2028)" />
+      <SectionHead title="Sumber Pemenuhan Kebutuhan Talenta (2026-2028)" />
 
       <div className="flex min-h-0 flex-1 items-center gap-4">
         <div className="relative shrink-0" style={{ width: 158, height: 158 }}>

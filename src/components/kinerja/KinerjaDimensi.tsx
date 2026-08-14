@@ -32,7 +32,7 @@ export function KinerjaDimensi() {
         <div>
           <h3 className="card-title-navy">KINERJA BERDASARKAN DIMENSI</h3>
           <p className="mt-[3px] text-[9.5px] text-ink-500">
-            Rata-rata Score per Dimensi — Q2 vs Q1 2025
+            Rata-rata Score per Dimensi — Q2 vs Q1 2026
           </p>
         </div>
         <button className="select-chip whitespace-nowrap px-2.5 py-[5px] text-[9.5px] transition-colors hover:bg-[#f7f9fb]">
@@ -51,7 +51,7 @@ export function KinerjaDimensi() {
             {/* domain sempit agar selisih antar-dimensi terlihat */}
             <PolarRadiusAxis domain={[60, 95]} tick={false} axisLine={false} />
             <Radar
-              name="Q1 2025"
+              name="Q1 2026"
               dataKey="lalu"
               stroke={PALETTE.slate}
               strokeWidth={1.4}
@@ -61,7 +61,7 @@ export function KinerjaDimensi() {
               animationDuration={900}
             />
             <Radar
-              name="Q2 2025"
+              name="Q2 2026"
               dataKey="kini"
               stroke={PALETTE.green}
               strokeWidth={1.8}

@@ -63,9 +63,9 @@ export const tiKpi: TiKpi[] = [
     tone: "indigo",
   },
   {
-    label: "Flight Risk (High)",
+    label: "Talent at Flight Risk",
     value: "186",
-    sub: "Orang (5,0%)",
+    sub: "Orang (5,0%) • 86 High Risk",
     delta: "1,2 ppts",
     trend: "up",
     deltaTone: "bad",
@@ -85,9 +85,9 @@ export const tiKpi: TiKpi[] = [
     tone: "amber",
   },
   {
-    label: "Talent Density Index",
+    label: "Talent Intelligence Index",
     value: "74",
-    sub: "(0–100)",
+    sub: "Composite 7 komponen (0–100)",
     delta: "6 pts",
     trend: "up",
     deltaTone: "good",
@@ -106,22 +106,26 @@ export interface NineBoxCell {
   tone: "lavender" | "greenSoft" | "green" | "amber" | "amberSoft" | "red";
 }
 
-/** Baris dari Potential High → Low; kolom Performance Low → High. */
+/**
+ * Baris dari Potential High → Low; kolom Performance Low → High.
+ * Invariant: jumlah seluruh sel = Total Talenta Aktif (3.742) dan
+ * sel High/High = KPI HiPo (1.068).
+ */
 export const tiNineBox: NineBoxCell[][] = [
   [
-    { value: "124", pct: "3,3%", tone: "lavender" },
-    { value: "286", pct: "7,6%", tone: "greenSoft" },
+    { value: "108", pct: "2,9%", tone: "lavender" },
+    { value: "248", pct: "6,6%", tone: "greenSoft" },
     { value: "1.068", pct: "28,5%", tone: "green" },
   ],
   [
-    { value: "278", pct: "7,4%", tone: "amber" },
-    { value: "876", pct: "23,4%", tone: "amberSoft" },
-    { value: "1.086", pct: "29,0%", tone: "greenSoft" },
+    { value: "242", pct: "6,5%", tone: "amber" },
+    { value: "762", pct: "20,4%", tone: "amberSoft" },
+    { value: "945", pct: "25,3%", tone: "greenSoft" },
   ],
   [
-    { value: "132", pct: "3,5%", tone: "red" },
-    { value: "184", pct: "4,9%", tone: "red" },
-    { value: "108", pct: "2,9%", tone: "red" },
+    { value: "115", pct: "3,1%", tone: "red" },
+    { value: "160", pct: "4,3%", tone: "red" },
+    { value: "94", pct: "2,5%", tone: "red" },
   ],
 ];
 
@@ -161,7 +165,8 @@ export const tiPipelineFokus = [
 
 /* ── 3. Top Talent by Potential ───────────────────────────────────── */
 
-export type Readiness = "Ready Now" | "Ready in 1-2 Yrs" | "Ready in 2-3 Yrs";
+/** Taxonomy readiness seragam dengan pipeline & coverage: Now / 1-2 Yrs / 3-5 Yrs. */
+export type Readiness = "Ready Now" | "Ready in 1-2 Yrs" | "Ready in 3-5 Yrs";
 
 export interface TopTalent {
   nama: string;
@@ -177,10 +182,10 @@ export const tiTopTalent: TopTalent[] = [
   { nama: "Dewi Kartika", jabatan: "Manajer Keuangan", unit: "PTPN I", score: "9,1", readiness: "Ready in 1-2 Yrs" },
   { nama: "Fajar Nugroho", jabatan: "Manajer Pabrik", unit: "PTPN V", score: "8,9", readiness: "Ready Now" },
   { nama: "Yudi Prasetyo", jabatan: "Manajer HR", unit: "PTPN II", score: "8,8", readiness: "Ready in 1-2 Yrs" },
-  { nama: "Nadia Arifah", jabatan: "Manajer Sustainability", unit: "PTPN VI", score: "8,7", readiness: "Ready in 2-3 Yrs" },
+  { nama: "Nadia Arifah", jabatan: "Manajer Sustainability", unit: "PTPN VI", score: "8,7", readiness: "Ready in 3-5 Yrs" },
   { nama: "Budi Santoso", jabatan: "Kepala Engineering", unit: "PTPN IV", score: "8,6", readiness: "Ready Now" },
-  { nama: "Maya Sari", jabatan: "Manajer Komersial", unit: "PTPN III", score: "8,6", readiness: "Ready in 2-3 Yrs" },
-  { nama: "Andi Kurniawan", jabatan: "Kepala Tanaman", unit: "PTPN V", score: "8,5", readiness: "Ready in 2-3 Yrs" },
+  { nama: "Maya Sari", jabatan: "Manajer Komersial", unit: "PTPN III", score: "8,6", readiness: "Ready in 3-5 Yrs" },
+  { nama: "Andi Kurniawan", jabatan: "Kepala Tanaman", unit: "PTPN V", score: "8,5", readiness: "Ready in 3-5 Yrs" },
   { nama: "Rina Ekawati", jabatan: "Manajer QA/QC", unit: "PTPN I", score: "8,5", readiness: "Ready in 1-2 Yrs" },
 ];
 
@@ -196,14 +201,73 @@ export interface FlightRisk {
   nama: string;
   jabatan: string;
   score: number;
+  /** Faktor kontributor risk score (arah: up = memperburuk naik, down = memperburuk turun). */
+  factors: { label: string; arah: "up" | "down" }[];
+  /** Eksposur bisnis bila talenta keluar. */
+  exposure: { critical: boolean; leadTime: string; impact: "High" | "Medium" };
+  action: string;
 }
 
 export const tiTopFlightRisk: FlightRisk[] = [
-  { nama: "Andi Wijaya", jabatan: "Manajer Pabrik – PTPN V", score: 85 },
-  { nama: "Dimas Pratama", jabatan: "Kepala Kebun – PTPN IV", score: 82 },
-  { nama: "Siti Rahmawati", jabatan: "Manajer Keuangan – PTPN III", score: 80 },
-  { nama: "Hendra Saputra", jabatan: "Asisten Teknik – PTPN II", score: 78 },
-  { nama: "Ratna Dewi", jabatan: "Supervisor QC – PTPN I", score: 76 },
+  {
+    nama: "Andi Wijaya",
+    jabatan: "Manajer Pabrik – PTPN V",
+    score: 85,
+    factors: [
+      { label: "Engagement", arah: "down" },
+      { label: "Compensation percentile", arah: "down" },
+      { label: "Career mobility", arah: "down" },
+      { label: "External demand", arah: "up" },
+    ],
+    exposure: { critical: true, leadTime: "8–12 bulan", impact: "High" },
+    action: "Retensi intervensi + aktifkan backup suksesi (Fajar Nugroho, match 87%).",
+  },
+  {
+    nama: "Dimas Pratama",
+    jabatan: "Kepala Kebun – PTPN IV",
+    score: 82,
+    factors: [
+      { label: "Manager effectiveness", arah: "down" },
+      { label: "Career mobility", arah: "down" },
+      { label: "External demand", arah: "up" },
+    ],
+    exposure: { critical: true, leadTime: "6–9 bulan", impact: "High" },
+    action: "Retensi targeted + percepat 2 kandidat pool Ready in 1-2 Years.",
+  },
+  {
+    nama: "Siti Rahmawati",
+    jabatan: "Manajer Keuangan – PTPN III",
+    score: 80,
+    factors: [
+      { label: "Compensation percentile", arah: "down" },
+      { label: "Engagement", arah: "down" },
+      { label: "External demand", arah: "up" },
+    ],
+    exposure: { critical: true, leadTime: "8–12 bulan", impact: "High" },
+    action: "Prioritas retensi tertinggi — coverage Manajer Keuangan terendah (58%).",
+  },
+  {
+    nama: "Hendra Saputra",
+    jabatan: "Asisten Teknik – PTPN II",
+    score: 78,
+    factors: [
+      { label: "Career mobility", arah: "down" },
+      { label: "Workload", arah: "up" },
+    ],
+    exposure: { critical: false, leadTime: "3–6 bulan", impact: "Medium" },
+    action: "Career path review + tawarkan rotasi/penugasan proyek.",
+  },
+  {
+    nama: "Ratna Dewi",
+    jabatan: "Supervisor QC – PTPN I",
+    score: 76,
+    factors: [
+      { label: "Compensation percentile", arah: "down" },
+      { label: "External demand", arah: "up" },
+    ],
+    exposure: { critical: false, leadTime: "3–6 bulan", impact: "Medium" },
+    action: "Penyesuaian kompensasi + program development targeted.",
+  },
 ];
 
 export const tiRiskNote =
@@ -310,3 +374,237 @@ export const tiMobilityImpact = [
     icon: "award" as const,
   },
 ];
+
+/* ── 9. Executive Talent Intelligence ─────────────────────────────── */
+
+export interface TiExecSignal {
+  no: string;
+  tone: "red" | "amber" | "green";
+  title: string;
+  text: string;
+  impactLabel: string;
+  impactValue: string;
+}
+
+export const tiExecCounts = [
+  { label: "Kritis", value: "2", tone: "red" as const },
+  { label: "Perhatian", value: "1", tone: "amber" as const },
+  { label: "Peluang", value: "1", tone: "green" as const },
+];
+
+/**
+ * Sinyal sintesis lintas widget — angka harus konsisten dengan widget sumber:
+ * 86 (risk donut), 27 (agregat No Successor tiRoleCoverage), −0,2 (tiAttributes),
+ * 87% / +0,36 pts (tiMobilityImpact).
+ */
+export const tiExecSignals: TiExecSignal[] = [
+  {
+    no: "S1",
+    tone: "red",
+    title: "86 talenta kritikal berisiko tinggi",
+    text: "5 di antaranya memegang posisi kritikal tanpa backup suksesor aktif. Lead time penggantian 8–12 bulan.",
+    impactLabel: "Exposure",
+    impactValue: "Kontinuitas operasi",
+  },
+  {
+    no: "S2",
+    tone: "red",
+    title: "27 posisi kritikal tanpa suksesor",
+    text: "13% dari 208 posisi kritikal belum punya kandidat pada pipeline manapun; terkonsentrasi di Manajer Keuangan & Komersial.",
+    impactLabel: "Exposure",
+    impactValue: "Risiko 12 bulan",
+  },
+  {
+    no: "S3",
+    tone: "amber",
+    title: "Gap kapabilitas Technical & Digital −0,2",
+    text: "Technical Expertise 3,9 vs benchmark 4,1; Digital Literacy 3,8 vs 4,0. 1.245 talenta sedang dalam program terkait.",
+    impactLabel: "Dampak",
+    impactValue: "Readiness pipeline",
+  },
+  {
+    no: "S4",
+    tone: "green",
+    title: "87% mobilitas berdampak positif",
+    text: "Performance naik rata-rata +0,36 pts pasca mobilitas. Mobilitas internal terbukti efektif sebagai lever pengembangan.",
+    impactLabel: "Peluang",
+    impactValue: "Internal-first",
+  },
+];
+
+export const tiExecRecommendation =
+  "Lindungi 86 talenta kritikal berisiko tinggi melalui retensi targeted, sambil mengakselerasi pool Ready in 1-2 Years (656 orang) untuk menutup 27 posisi kritikal tanpa suksesor.";
+
+/* ── 10. Role–Talent–Skill Match ──────────────────────────────────── */
+
+export interface RoleMatch {
+  posisi: string;
+  unit: string;
+  /** Skill wajib beserta level minimal (skala 1–5). */
+  requiredSkills: { label: string; level: string }[];
+  kandidat: string;
+  score: string;
+  match: number;
+  /** Skill gap terbesar kandidat vs requirement. */
+  gap: string;
+  readiness: Readiness;
+  flightRisk: "Low" | "Medium" | "High";
+  rekomendasi: string;
+}
+
+/** Kandidat & readiness diambil dari tiTopTalent; posisi dari tiRoleCoverage. */
+export const tiRoleMatch: RoleMatch[] = [
+  {
+    posisi: "Kepala Kebun",
+    unit: "PTPN III",
+    requiredSkills: [
+      { label: "Agronomy", level: "4,3" },
+      { label: "Leadership", level: "4,2" },
+      { label: "Digital Agriculture", level: "4,0" },
+    ],
+    kandidat: "Agung Setiawan",
+    score: "9,2",
+    match: 91,
+    gap: "Digital Agriculture −0,4",
+    readiness: "Ready Now",
+    flightRisk: "Low",
+    rekomendasi: "Siap suksesi",
+  },
+  {
+    posisi: "Manajer Pabrik",
+    unit: "PTPN V",
+    requiredSkills: [
+      { label: "Operations", level: "4,4" },
+      { label: "Leadership", level: "4,1" },
+      { label: "Financial Acumen", level: "4,0" },
+    ],
+    kandidat: "Fajar Nugroho",
+    score: "8,9",
+    match: 87,
+    gap: "Financial Acumen −0,3",
+    readiness: "Ready Now",
+    flightRisk: "Low",
+    rekomendasi: "Siap suksesi",
+  },
+  {
+    posisi: "Manajer Keuangan",
+    unit: "PTPN I",
+    requiredSkills: [
+      { label: "Finance", level: "4,5" },
+      { label: "Leadership", level: "4,2" },
+      { label: "Digital Finance", level: "4,0" },
+    ],
+    kandidat: "Dewi Kartika",
+    score: "9,1",
+    match: 84,
+    gap: "Leadership −0,5",
+    readiness: "Ready in 1-2 Yrs",
+    flightRisk: "Medium",
+    rekomendasi: "Akselerasi development",
+  },
+  {
+    posisi: "Manajer Komersial",
+    unit: "PTPN III",
+    requiredSkills: [
+      { label: "Commercial", level: "4,3" },
+      { label: "Business Acumen", level: "4,2" },
+      { label: "Negotiation", level: "4,0" },
+    ],
+    kandidat: "Maya Sari",
+    score: "8,6",
+    match: 78,
+    gap: "Business Acumen −0,6",
+    readiness: "Ready in 3-5 Yrs",
+    flightRisk: "Low",
+    rekomendasi: "Development jangka menengah",
+  },
+];
+
+/* ── 11. Talent Decisions ─────────────────────────────────────────── */
+
+export interface TalentDecision {
+  tone: "red" | "amber" | "green";
+  kicker: string;
+  title: string;
+  text: string;
+  rekomendasi: string;
+  pill: string;
+}
+
+export const tiDecisions: TalentDecision[] = [
+  {
+    tone: "red",
+    kicker: "Decision Required",
+    title: "27 posisi kritikal tanpa suksesor",
+    text: "Terbesar pada Manajer Keuangan (16% posisi) dan Manajer Komersial (15%). Lead time penggantian eksternal 8–12 bulan.",
+    rekomendasi: "Akselerasi 54 kandidat dari pool Ready in 1-2 Years (656 orang).",
+    pill: "Kontinuitas",
+  },
+  {
+    tone: "amber",
+    kicker: "Action Required",
+    title: "86 talenta high flight risk",
+    text: "5 di antaranya pada posisi kritikal — termasuk Manajer Pabrik PTPN V (risk 85) dan Kepala Kebun PTPN IV (risk 82).",
+    rekomendasi: "Program retensi targeted + siapkan backup suksesi paralel.",
+    pill: "Retensi",
+  },
+  {
+    tone: "green",
+    kicker: "Opportunity",
+    title: "47 HiPo match lowongan kritikal",
+    text: "Skill profile 47 talenta HiPo cocok (match ≥80%) dengan lowongan posisi kritikal yang sedang dibuka.",
+    rekomendasi: "Prioritaskan mobilitas internal sebelum hiring eksternal.",
+    pill: "Efisiensi",
+  },
+];
+
+/* ── 12. Talent Development ROI Chain ─────────────────────────────── */
+
+export interface RoiStep {
+  label: string;
+  value: string;
+  sub: string;
+}
+
+/**
+ * Rantai outcome development — "estimated contribution", bukan causal ROI,
+ * sampai model atribusi tersedia.
+ */
+export const tiDevRoi: RoiStep[] = [
+  { label: "Investment", value: "Rp 24,8 M", sub: "YTD 2026" },
+  { label: "Completion", value: "87%", sub: "3.228 program" },
+  { label: "Capability Uplift", value: "+12%", sub: "vs baseline asesmen" },
+  { label: "Promotion Readiness", value: "+8%", sub: "naik kelas readiness" },
+  { label: "Performance Uplift", value: "+4,3%", sub: "peserta vs non-peserta" },
+];
+
+export const tiDevRoiNote =
+  "Estimated contribution — atribusi kausal penuh membutuhkan model evaluasi dampak (fase berikutnya).";
+
+/* ── 13. Talent Intelligence Index ────────────────────────────────── */
+
+export interface IndexComponent {
+  label: string;
+  score: number;
+  tone: "good" | "warn" | "bad";
+}
+
+/**
+ * Komposit 7 komponen, rata-rata sederhana = 74 (selaras KPI Talent
+ * Intelligence Index). Skor komponen selaras widget sumber:
+ * Critical Role Coverage 68 (KPI), Talent Risk dari flight-risk profile, dst.
+ */
+export const tiIndexScore = 74;
+
+export const tiIndexComponents: IndexComponent[] = [
+  { label: "Talent Quality", score: 82, tone: "good" },
+  { label: "Development Effectiveness", score: 79, tone: "good" },
+  { label: "Internal Mobility", score: 76, tone: "good" },
+  { label: "Talent Risk", score: 74, tone: "warn" },
+  { label: "Critical Skills", score: 71, tone: "warn" },
+  { label: "Leadership Readiness", score: 68, tone: "warn" },
+  { label: "Critical Role Coverage", score: 68, tone: "warn" },
+];
+
+export const tiIndexNote =
+  "Terlemah: Leadership Readiness & Critical Role Coverage — konsisten dengan 27 posisi tanpa suksesor.";

@@ -40,7 +40,7 @@ export function PeopleMathHpi() {
       className="card anim-rise flex h-full flex-col px-4 pb-3.5 pt-3"
       style={{ "--d": "100ms" } as React.CSSProperties}
     >
-      <SectionHead no="5" title="People Math & HPI BEM Summary" action="Lihat Detail" />
+      <SectionHead title="People Math & HPI BEM Summary" action="Lihat Detail" />
 
       <div className="mt-3 grid min-h-0 flex-1 grid-cols-3 gap-2.5">
         <div className="flex flex-col rounded-xl border border-[#eef2f6] px-3 pb-2 pt-2.5 text-center">

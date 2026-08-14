@@ -23,17 +23,17 @@ export function TrenTalenta() {
       style={{ "--d": "420ms" } as React.CSSProperties}
     >
       <div className="flex items-start justify-between gap-2">
-        <h3 className="card-title-navy">Tren Jumlah Talenta (High Potential)</h3>
+        <h3 className="card-title-navy">Tren Total Talenta Aktif</h3>
         <button className="select-chip whitespace-nowrap px-2.5 py-[5px] text-[9.5px]">
           12 Bulan Terakhir <ChevronDown size={11} />
         </button>
       </div>
 
       <div className="mt-2 flex items-baseline gap-2">
-        <span className="text-[20px] font-extrabold leading-none text-ink-900">3.142</span>
-        <Delta value="8,2%" trend="up" size={10} />
+        <span className="text-[20px] font-extrabold leading-none text-ink-900">3.742</span>
+        <Delta value="6,8%" trend="up" size={10} />
       </div>
-      <div className="mt-[4px] text-[9px] text-ink-400">vs Des 2024: 2.903</div>
+      <div className="mt-[4px] text-[9px] text-ink-400">vs Mei 2025: 3.504</div>
 
       <div className="mt-1 min-h-0 w-full flex-1">
         <ResponsiveContainer width="100%" height="100%">
@@ -54,8 +54,8 @@ export function TrenTalenta() {
             />
             {/* domain dirapatkan ke rentang data agar tren terbaca */}
             <YAxis
-              domain={[2000, 3400]}
-              ticks={[2000, 2400, 2800, 3200]}
+              domain={[3400, 3800]}
+              ticks={[3400, 3500, 3600, 3700, 3800]}
               tickLine={false}
               axisLine={false}
               tick={{ fontSize: 8, fill: CHART_AXIS.tick }}

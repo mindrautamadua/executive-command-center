@@ -27,7 +27,7 @@ export function RiskTrend() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead no="4" title="People Risk Trend (12 Bulan Terakhir)" />
+      <SectionHead title="People Risk Trend (12 Bulan Terakhir)" />
       <p className="mt-[3px] text-[9px] text-ink-500">Pergerakan Overall Risk Score</p>
 
       <div className="mt-1 min-h-0 w-full flex-1">

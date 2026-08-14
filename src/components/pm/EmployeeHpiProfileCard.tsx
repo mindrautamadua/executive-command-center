@@ -16,7 +16,7 @@ export function EmployeeHpiProfileCard() {
       className="card anim-rise px-4 pb-3.5 pt-3"
       style={{ "--d": "100ms" } as React.CSSProperties}
     >
-      <SectionHead no="7" title="Employee HPI Profile (Contoh)" />
+      <SectionHead title="Employee HPI Profile (Contoh)" />
 
       <div className="mt-2.5 grid grid-cols-[minmax(0,270fr)_minmax(0,150fr)_minmax(0,430fr)_minmax(0,260fr)_minmax(0,330fr)] items-stretch gap-4">
         {/* Identitas */}
@@ -50,7 +50,7 @@ export function EmployeeHpiProfileCard() {
             ({p.performance.kategori})
           </div>
           <div className="mt-2.5 border-t border-[#f0f3f6] pt-2 text-[8.5px] font-semibold text-ink-500">
-            Performance Gap
+            Opportunity Gap
           </div>
           <div className="mt-1 text-[15px] font-extrabold leading-none text-[#d98b06]">
             {p.performance.gap}
@@ -99,12 +99,13 @@ export function EmployeeHpiProfileCard() {
               </li>
             ))}
           </ul>
-          <div className="mt-2 border-t border-[#f4e6c6] pt-1.5">
+          <div className="mt-2 border-t border-[#f4e6c6] pt-1.5" title={p.rootCause.estimasiTooltip}>
             <div className="text-[8px] font-semibold uppercase tracking-[0.04em] text-ink-400">
-              Estimated Impact
+              Estimated Improvement Potential
             </div>
             <div className="mt-[2px] text-[9.5px] font-extrabold text-ptpn-greenDark">
               {p.rootCause.estimasi}
+              <span className="ml-1 text-[8px] font-medium text-ink-400">(estimasi model)</span>
             </div>
           </div>
         </div>

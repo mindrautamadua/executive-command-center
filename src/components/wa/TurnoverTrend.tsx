@@ -22,8 +22,8 @@ export function TurnoverTrend() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead no="8" title="Turnover Rate Trend" action="Lihat Detail" />
-      <p className="mt-[3px] text-[9px] text-ink-500">Trend Turnover Rate 12 Bulan Terakhir</p>
+      <SectionHead title="Turnover Rate Trend" action="Lihat Detail" />
+      <p className="mt-[3px] text-[9px] text-ink-500">Trend Turnover Rate 36 Bulan Terakhir</p>
 
       <div className="mt-1.5 min-h-0 w-full flex-1">
         <ResponsiveContainer width="100%" height="100%">
@@ -40,12 +40,12 @@ export function TurnoverTrend() {
               tickLine={false}
               axisLine={{ stroke: CHART_AXIS.axis }}
               tick={{ fontSize: 7, fill: CHART_AXIS.tick }}
-              interval={0}
+              interval={2}
               tickFormatter={(v: string) => v.replace(" 20", " ")}
             />
             <YAxis
-              domain={[0, 10]}
-              ticks={[0, 2, 4, 7, 10]}
+              domain={[0, 12]}
+              ticks={[0, 3, 6, 9, 12]}
               tickLine={false}
               axisLine={false}
               tick={{ fontSize: 8.5, fill: CHART_AXIS.tick }}
@@ -62,15 +62,31 @@ export function TurnoverTrend() {
               stroke={PALETTE.red}
               strokeWidth={1.8}
               fill="url(#wa-to-fill)"
-              dot={{ r: 2.5, fill: PALETTE.red, strokeWidth: 0 }}
+              dot={false}
               activeDot={{ r: 4 }}
             >
+              {/* Label hanya pada titik terakhir agar 36 titik tetap terbaca */}
               <LabelList
                 dataKey="value"
-                position="top"
-                offset={7}
-                formatter={persen}
-                style={{ fontSize: 7.5, fill: "#334155", fontWeight: 700 }}
+                content={(props) => {
+                  const { x, y, value, index } = props as {
+                    x?: number;
+                    y?: number;
+                    value?: number;
+                    index?: number;
+                  };
+                  if (index !== turnoverTrend.length - 1 || x == null || y == null) return null;
+                  return (
+                    <text
+                      x={x}
+                      y={y - 7}
+                      textAnchor="end"
+                      style={{ fontSize: 7.5, fill: "#334155", fontWeight: 700 }}
+                    >
+                      {persen(value ?? 0)}
+                    </text>
+                  );
+                }}
               />
             </Area>
           </AreaChart>

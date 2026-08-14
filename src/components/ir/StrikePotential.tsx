@@ -15,7 +15,7 @@ export function StrikePotential() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "180ms" } as React.CSSProperties}
     >
-      <SectionHead no="3" title="Potensi Aksi Mogok (Top 5 Lokasi)" />
+      <SectionHead title="Potensi Aksi Mogok (Top 5 Lokasi)" />
 
       <div className="mt-2.5 grid grid-cols-[minmax(0,1fr)_74px_92px_36px] items-center gap-x-2 border-b border-[#eef2f6] pb-1.5 text-[8px] font-semibold uppercase tracking-[0.04em] text-ink-400">
         <span>Lokasi</span>

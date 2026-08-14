@@ -1,5 +1,5 @@
 import { ArrowLeftRight, Trophy } from "lucide-react";
-import { BENCHMARK_MAX, benchmarkEksternal } from "@/lib/produktivitas-data";
+import { BENCHMARK_MAX, benchmarkEksternal, benchmarkMeta } from "@/lib/produktivitas-data";
 
 const BAR_COLOR = {
   green: "#1a9c5b",
@@ -57,6 +57,10 @@ export function BenchmarkingEksternal() {
           </span>
         </div>
       </div>
+
+      <p className="mt-1.5 border-t border-[var(--border-line)] pt-1.5 text-[8px] leading-[1.4] text-ink-400">
+        {benchmarkMeta.definisi} {benchmarkMeta.sumber}
+      </p>
     </div>
   );
 }

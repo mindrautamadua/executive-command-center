@@ -4,6 +4,7 @@ import {
   CartesianGrid,
   Cell,
   LabelList,
+  ReferenceArea,
   ReferenceLine,
   ResponsiveContainer,
   Scatter,
@@ -15,9 +16,20 @@ import {
 } from "recharts";
 import { Lightbulb } from "lucide-react";
 import { biayaVsIndex } from "@/lib/produktivitas-data";
-import { CATEGORICAL, CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
+import { CATEGORICAL, CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE, SEMANTIC } from "@/lib/chart-palette";
 
 const ribuan = (v: number) => v.toLocaleString("id-ID");
+
+/** Batas kuadran: biaya median ±Rp 2.600/Ton, index base Mei '25 = 106. */
+const SPLIT_X = 2600;
+const SPLIT_Y = 106;
+
+const QUADRANTS = [
+  { x1: 1500, x2: SPLIT_X, y1: SPLIT_Y, y2: 140, fill: SEMANTIC.good, label: "STAR", pos: "insideTopLeft" },
+  { x1: SPLIT_X, x2: 3500, y1: SPLIT_Y, y2: 140, fill: SEMANTIC.warn, label: "COST WATCH", pos: "insideTopRight" },
+  { x1: 1500, x2: SPLIT_X, y1: 80, y2: SPLIT_Y, fill: SEMANTIC.neutral, label: "OPPORTUNITY", pos: "insideBottomLeft" },
+  { x1: SPLIT_X, x2: 3500, y1: 80, y2: SPLIT_Y, fill: SEMANTIC.bad, label: "TURNAROUND", pos: "insideBottomRight" },
+] as const;
 
 export function ProduktivitasBiaya() {
   return (
@@ -25,9 +37,9 @@ export function ProduktivitasBiaya() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "240ms" } as React.CSSProperties}
     >
-      <h3 className="card-title-navy">4. Hubungan Produktivitas dengan Biaya</h3>
+      <h3 className="card-title-navy">4. Productivity Opportunity Map</h3>
       <p className="mt-[3px] text-[9.5px] text-ink-500">
-        Labor Cost per Ton vs Productivity Index
+        Labor Cost per Ton vs Productivity Index · ukuran bubble = headcount
       </p>
 
       <div className="mt-1 min-h-0 w-full flex-1">
@@ -67,14 +79,25 @@ export function ProduktivitasBiaya() {
               }}
             />
             <ZAxis type="number" dataKey="headcount" range={[120, 420]} />
-            <ReferenceLine
-              segment={[
-                { x: 1600, y: 130 },
-                { x: 3400, y: 90 },
-              ]}
-              stroke={PALETTE.slate}
-              strokeDasharray="4 4"
-            />
+            {QUADRANTS.map((q) => (
+              <ReferenceArea
+                key={q.label}
+                x1={q.x1}
+                x2={q.x2}
+                y1={q.y1}
+                y2={q.y2}
+                fill={q.fill}
+                fillOpacity={0.05}
+                stroke="none"
+                label={{
+                  value: q.label,
+                  position: q.pos,
+                  style: { fontSize: 8, fontWeight: 800, fill: q.fill, opacity: 0.85 },
+                }}
+              />
+            ))}
+            <ReferenceLine x={SPLIT_X} stroke={PALETTE.slate} strokeDasharray="4 4" />
+            <ReferenceLine y={SPLIT_Y} stroke={PALETTE.slate} strokeDasharray="4 4" />
             <Tooltip
               contentStyle={CHART_TOOLTIP_STYLE}
               cursor={{ strokeDasharray: "3 3" }}
@@ -105,8 +128,8 @@ export function ProduktivitasBiaya() {
       <div className="mt-1.5 flex items-start gap-2 rounded-lg bg-[#f2faf5] px-3 py-2">
         <Lightbulb size={13} className="mt-[1px] shrink-0 text-ptpn-green" />
         <p className="text-[9px] leading-[1.45] text-ink-700">
-          Semakin tinggi Productivity Index dengan Labor Cost per Ton yang rendah menunjukkan
-          efisiensi yang lebih baik.
+          STAR = produktif &amp; efisien (best practice) · COST WATCH = produktif tapi mahal ·
+          TURNAROUND = prioritas intervensi (PTPN II &amp; VI).
         </p>
       </div>
     </div>

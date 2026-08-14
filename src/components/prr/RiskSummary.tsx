@@ -54,7 +54,7 @@ export function RiskSummary() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead no="2" title="Ringkasan Risiko" />
+      <SectionHead title="Ringkasan Risiko" />
 
       <div className="mt-2 grid grid-cols-[minmax(0,1fr)_44px_34px_36px_66px] items-center gap-x-1 border-b border-[#eef2f6] pb-1.5 text-[8px] font-semibold uppercase tracking-[0.04em] text-ink-400">
         <span>Risiko</span>
