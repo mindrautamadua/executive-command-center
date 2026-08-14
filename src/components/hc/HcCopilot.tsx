@@ -1,6 +1,5 @@
-import { BarChart3, ClipboardList, Lightbulb, RefreshCw } from "lucide-react";
-import { aiChips, aiGreeting } from "@/lib/hc-data";
-import { SectionHead } from "./SectionHead";
+import { HelpCircle, Lightbulb, SlidersHorizontal, TrendingUp, Users } from "lucide-react";
+import { copilotChips, copilotGreeting } from "@/lib/hc-data";
 
 function RobotHead() {
   return (
@@ -32,20 +31,21 @@ function RobotHead() {
   );
 }
 
-const CHIP_ICONS = [ClipboardList, RefreshCw, BarChart3, Lightbulb];
+const CHIP_ICONS = [HelpCircle, Users, SlidersHorizontal, TrendingUp, Lightbulb];
 
-export function AiHrAssistant() {
+/** Copilot keputusan HC: quick action bergaya Why / Simulate / Recommend. */
+export function HcCopilot() {
   return (
     <div className="card anim-rise px-4 pb-4 pt-3" style={{ "--d": "220ms" } as React.CSSProperties}>
       <div className="flex items-center justify-between gap-2">
         <h3 className="flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-[0.05em] text-ink-900">
-          10. AI HR Assistant
+          13. HC Intelligence Copilot
           <span className="rounded bg-ptpn-greenLight px-1 py-[1px] text-[8px] font-bold normal-case tracking-normal text-ptpn-green">
             AI
           </span>
         </h3>
         <button className="flex shrink-0 cursor-pointer items-center gap-1 text-[9.5px] font-semibold text-ptpn-green hover:underline">
-          Lihat Semua →
+          Buka Copilot →
         </button>
       </div>
 
@@ -56,14 +56,14 @@ export function AiHrAssistant() {
           </span>
         </span>
         <p className="min-w-0 pt-1 text-[10px] font-medium leading-[1.5] text-ink-900">
-          {aiGreeting}
+          {copilotGreeting}
         </p>
       </div>
 
       <div className="mt-3 flex flex-wrap gap-1.5">
-        {aiChips.map((chip, i) => {
+        {copilotChips.map((chip, i) => {
           const Icon = CHIP_ICONS[i % CHIP_ICONS.length];
-          const solid = i === aiChips.length - 1;
+          const solid = i === copilotChips.length - 1;
           return (
             <button
               key={chip}

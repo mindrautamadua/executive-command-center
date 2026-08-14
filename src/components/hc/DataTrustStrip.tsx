@@ -35,6 +35,11 @@ export function DataTrustStrip() {
         <span className="text-[9.5px] font-semibold text-ink-900">{dataTrust.freshness}</span>
       </div>
 
+      <div className="flex items-center gap-1.5 rounded bg-[#eef2f6] px-2 py-[3px]">
+        <span className="text-[8.5px] text-ink-500">Data as of</span>
+        <span className="text-[9.5px] font-bold text-ink-900">{dataTrust.asOf}</span>
+      </div>
+
       <Metric icon={Gauge} label="Coverage" value={dataTrust.coverage} />
       <Metric icon={ShieldCheck} label="Quality" value={dataTrust.quality} />
 

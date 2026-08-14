@@ -31,7 +31,7 @@ export function BodDecisionCenter() {
 
   return (
     <div className="card anim-rise px-4 pb-3.5 pt-3" style={{ "--d": "120ms" } as React.CSSProperties}>
-      <SectionHead no="5" title="BOD Decision Center" action="Lihat Semua" />
+      <SectionHead no="6" title="BOD Decision Center" action="Lihat Semua" />
 
       <div className="mt-2.5 flex items-center gap-4 border-b border-[#f0f3f6]">
         {bodTabs.map((t, i) => (
@@ -66,7 +66,14 @@ export function BodDecisionCenter() {
                   </span>
                 </div>
                 <p className="mt-1.5 text-[9px] leading-[1.45] text-ink-500">{d.text}</p>
-                <div className="mt-1.5 text-[8.5px] font-semibold text-ink-400">Due: {d.due}</div>
+                <div className="mt-1.5 flex items-center gap-1.5 text-[8.5px] font-semibold text-ink-400">
+                  Due: {d.due}
+                  {d.overdue && (
+                    <span className="rounded bg-[#ef4444] px-1.5 py-[1px] text-[7.5px] font-bold uppercase tracking-[0.04em] text-white">
+                      Overdue
+                    </span>
+                  )}
+                </div>
               </div>
             );
           })

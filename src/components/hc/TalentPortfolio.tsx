@@ -17,7 +17,7 @@ export function TalentPortfolio() {
 
   return (
     <div className="card anim-rise px-4 pb-3.5 pt-3" style={{ "--d": "180ms" } as React.CSSProperties}>
-      <SectionHead no="9" title="Talent Portfolio" action="Lihat Detail" />
+      <SectionHead no="10" title="Talent Portfolio" action="Lihat Detail" />
 
       <div className="mt-3 flex items-start gap-3">
         <div className="flex shrink-0 items-center gap-1.5">

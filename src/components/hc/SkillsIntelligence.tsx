@@ -22,7 +22,7 @@ export function SkillsIntelligence() {
     <div className="card anim-rise px-4 pb-3.5 pt-3" style={{ "--d": "170ms" } as React.CSSProperties}>
       <div className="flex items-center justify-between gap-2">
         <h3 className="text-[10px] font-extrabold uppercase tracking-[0.05em] text-ink-900">
-          8. Skills Intelligence{" "}
+          9. Skills Intelligence{" "}
           <span className="font-semibold normal-case tracking-normal text-ink-400">
             (Supply vs Demand 2028)
           </span>

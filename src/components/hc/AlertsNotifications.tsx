@@ -28,7 +28,7 @@ const TONE = {
 export function AlertsNotifications() {
   return (
     <div className="card anim-rise px-4 pb-3.5 pt-3" style={{ "--d": "200ms" } as React.CSSProperties}>
-      <SectionHead no="10" title="Alerts & Notifications" action="Lihat Semua" />
+      <SectionHead no="12" title="Alerts & Notifications" action="Lihat Semua" />
 
       <div className="mt-2.5 grid grid-cols-5 gap-2.5">
         {hcAlerts.map((a) => {

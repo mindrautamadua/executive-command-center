@@ -29,6 +29,7 @@ export const orgNodes: OrgNode[] = [
 
 export const dataTrust = {
   freshness: "Diperbarui 14 menit lalu",
+  asOf: "31 Mei 2026",
   coverage: "97,8%",
   quality: "96,4%",
   lastSync: "Sync terakhir 22:14 WIB",
@@ -118,7 +119,54 @@ export const hcKpi: HcKpi[] = [
   },
 ];
 
-/* ── 2. Strategic Alignment ───────────────────────────────────────── */
+/* ── 2. Executive Intelligence ────────────────────────────────────── */
+
+export interface ExecSignal {
+  no: string;
+  title: string;
+  text: string;
+  impactLabel: string;
+  impactValue: string;
+  tone: "red" | "amber";
+}
+
+export const execIntelCounts = [
+  { label: "Critical Signals", value: 3, tone: "red" },
+  { label: "Opportunities", value: 2, tone: "green" },
+  { label: "Decisions Pending", value: 3, tone: "amber" },
+] as { label: string; value: number; tone: "red" | "green" | "amber" }[];
+
+export const execSignals: ExecSignal[] = [
+  {
+    no: "01",
+    title: "Succession Exposure",
+    text: "12 posisi kritikal tanpa suksesor Ready Now; 5 di antaranya akan kosong dalam 90 hari.",
+    impactLabel: "Business Impact",
+    impactValue: "High",
+    tone: "red",
+  },
+  {
+    no: "02",
+    title: "Productivity Gap",
+    text: "Labor cost +8,2% sementara productivity hanya +2,1% di Palm Oil Operations.",
+    impactLabel: "Potential Impact",
+    impactValue: "Rp 48 M",
+    tone: "amber",
+  },
+  {
+    no: "03",
+    title: "Critical Skill Shortage",
+    text: "Proyeksi shortage 830 kapabilitas AI & Data pada 2028; reskilling rate 6% vs target 12%.",
+    impactLabel: "Risk Horizon",
+    impactValue: "12 bulan",
+    tone: "amber",
+  },
+];
+
+export const execRecommendation =
+  "Prioritaskan internal mobility + accelerated leadership development sebelum external hiring. Potensi saving Rp 12,6 M.";
+
+/* ── 3. Strategic Alignment ───────────────────────────────────────── */
 
 export const strategicObjective = "Meningkatkan Produktivitas & Efisiensi Operasional";
 
@@ -129,7 +177,14 @@ export const alignmentFlow = [
   { label: "Business Outcome", value: "+8,2%", sub: "Produktivitas (Ton/Ha)", icon: "outcome" },
 ] as const;
 
-/* ── 3. People Risk Radar ─────────────────────────────────────────── */
+/** Sinyal korelasi (bukan klaim kausal) antara kapabilitas people dan outcome bisnis. */
+export const alignmentSignal = {
+  label: "People Contribution Signal",
+  value: "High",
+  note: "Korelasional — bukan hubungan kausal terverifikasi.",
+};
+
+/* ── 4. People Risk Radar ─────────────────────────────────────────── */
 
 export interface RiskRadarAxis {
   axis: string;
@@ -219,7 +274,7 @@ export const topRisks: TopRisk[] = [
   },
 ];
 
-/* ── 4. People Math & HPI BEM ─────────────────────────────────────── */
+/* ── 5. People Math & HPI BEM ─────────────────────────────────────── */
 
 export const peopleMath = {
   score: 79,
@@ -238,7 +293,7 @@ export const hpiBem = {
   opportunity: "Opportunity terbesar ada pada Environment (Sistem & Proses Kerja).",
 };
 
-/* ── 5. BOD Decision Center ───────────────────────────────────────── */
+/* ── 6. BOD Decision Center ───────────────────────────────────────── */
 
 export interface BodDecision {
   title: string;
@@ -246,6 +301,8 @@ export interface BodDecision {
   tone: "red" | "amber" | "green";
   text: string;
   due: string;
+  /** Deadline sudah lewat relatif periode data (Mei 2026). */
+  overdue?: boolean;
 }
 
 export const bodTabs = [
@@ -274,11 +331,12 @@ export const bodDecisions: BodDecision[] = [
     impact: "Low Impact",
     tone: "green",
     text: "127 karyawan high potential dapat mengisi projected vacancies. Potensi saving: Rp 12,6 M.",
-    due: "Q2 2026",
+    due: "Q1 2026",
+    overdue: true,
   },
 ];
 
-/* ── 6. People Productivity ───────────────────────────────────────── */
+/* ── 7. People Productivity ───────────────────────────────────────── */
 
 export interface ProductivityRow {
   indikator: string;
@@ -301,7 +359,7 @@ export const productivityRows: ProductivityRow[] = [
 
 export const productivityNote = "Produktivitas membaik di atas target. Pertahankan momentum!";
 
-/* ── 7. Scenario Simulation ───────────────────────────────────────── */
+/* ── 8. Scenario Simulation ───────────────────────────────────────── */
 
 export interface ScenarioRow {
   skenario: string;
@@ -347,7 +405,7 @@ export const scenarioRows: ScenarioRow[] = [
 export const scenarioNote =
   "Skenario D memberikan keseimbangan terbaik antara biaya dan peningkatan produktivitas.";
 
-/* ── 8. Skills Intelligence ───────────────────────────────────────── */
+/* ── 9. Skills Intelligence ───────────────────────────────────────── */
 
 export interface CriticalSkill {
   skill: string;
@@ -369,7 +427,7 @@ export const criticalSkills: CriticalSkill[] = [
 export const skillsNote =
   "Proyeksi shortage terbesar: 830 kapabilitas AI & Data pada 2028 bila tanpa intervensi. Rekomendasi: reskilling 400 karyawan/tahun + strategic hiring untuk 3 skill teratas.";
 
-/* ── 9. Talent Portfolio (9-box) ──────────────────────────────────── */
+/* ── 10. Talent Portfolio (9-box) ─────────────────────────────────── */
 
 /** Grid 9-box: baris dari Performance High → Low, kolom Potential Low → High. */
 export const nineBox: { value: string; tone: "soft" | "mid" | "strong" }[][] = [
@@ -407,7 +465,25 @@ export const flightRiskDrivers: RiskDriver[] = [
   { label: "Manager effectiveness rendah", weight: 17 },
 ];
 
-/* ── 10. Alerts & Notifications ───────────────────────────────────── */
+/* ── 11. Talent Action Intelligence ───────────────────────────────── */
+
+export const talentActions = {
+  headline: {
+    value: 32,
+    label: "Critical Talent berstatus Flight Risk",
+    sub: "High Performer · High Potential · Critical Position",
+  },
+  exposure: { label: "Potential Business Exposure", value: "Rp 86 M" },
+  rows: [
+    { label: "Suksesor Ready Now siap dimobilisasi", value: "18" },
+    { label: "High-Potential siap internal mobility", value: "47" },
+    { label: "Posisi kritikal tanpa suksesor", value: "12" },
+  ],
+  recommendation:
+    "Retention intervention: review kompensasi ke P50 pasar + engagement plan untuk 32 critical talent.",
+};
+
+/* ── 12. Alerts & Notifications ───────────────────────────────────── */
 
 export interface HcAlert {
   title: string;
@@ -449,13 +525,15 @@ export const hcAlerts: HcAlert[] = [
   },
 ];
 
-/* ── 11. AI HR Assistant ──────────────────────────────────────────── */
+/* ── 13. HC Intelligence Copilot ──────────────────────────────────── */
 
-export const aiGreeting = "Good morning, Pak Direktur Utama 👋 Ada yang bisa saya bantu hari ini?";
+export const copilotGreeting =
+  "Good morning, Pak Direktur Utama 👋 Tanyakan apa saja tentang People, Talent & Workforce.";
 
-export const aiChips = [
-  "Ringkasan Eksekutif",
-  "Analisis Turnover",
-  "Top Risk Saat Ini",
-  "Rekomendasi Tindakan",
+export const copilotChips = [
+  "Mengapa turnover naik?",
+  "Siapa critical talent kita?",
+  "Simulasi pengurangan 5% workforce",
+  "Cari peluang produktivitas",
+  "Rekomendasikan tindakan",
 ];

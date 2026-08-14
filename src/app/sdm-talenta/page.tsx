@@ -2,6 +2,7 @@ import { Download } from "lucide-react";
 import { SdmSidebar } from "@/components/sdm/SdmSidebar";
 import { SdmHeader } from "@/components/sdm/SdmHeader";
 import { HcKpiStrip } from "@/components/hc/HcKpiStrip";
+import { ExecutiveIntelligence } from "@/components/hc/ExecutiveIntelligence";
 import { StrategicAlignment } from "@/components/hc/StrategicAlignment";
 import { PeopleRiskRadar } from "@/components/hc/PeopleRiskRadar";
 import { PeopleMathHpi } from "@/components/hc/PeopleMathHpi";
@@ -11,8 +12,9 @@ import { ScenarioSimulation } from "@/components/hc/ScenarioSimulation";
 import { SkillsIntelligence } from "@/components/hc/SkillsIntelligence";
 import { DataTrustStrip } from "@/components/hc/DataTrustStrip";
 import { TalentPortfolio } from "@/components/hc/TalentPortfolio";
+import { TalentActionIntelligence } from "@/components/hc/TalentActionIntelligence";
 import { AlertsNotifications } from "@/components/hc/AlertsNotifications";
-import { AiHrAssistant } from "@/components/hc/AiHrAssistant";
+import { HcCopilot } from "@/components/hc/HcCopilot";
 
 export const metadata = { title: "HC Executive Command Center — PTPN Group" };
 
@@ -40,6 +42,7 @@ export default function SdmTalentaPage() {
             {/* kolom utama */}
             <div className="flex min-w-0 flex-col gap-3">
               <HcKpiStrip />
+              <ExecutiveIntelligence />
               <div className="grid grid-cols-[minmax(0,52fr)_minmax(0,48fr)] items-stretch gap-3">
                 <PeopleRiskRadar />
                 <PeopleMathHpi />
@@ -57,7 +60,8 @@ export default function SdmTalentaPage() {
               <StrategicAlignment />
               <BodDecisionCenter />
               <TalentPortfolio />
-              <AiHrAssistant />
+              <TalentActionIntelligence />
+              <HcCopilot />
             </div>
           </div>
         </div>

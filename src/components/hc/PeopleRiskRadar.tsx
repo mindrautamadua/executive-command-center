@@ -115,7 +115,7 @@ export function PeopleRiskRadar() {
       className="card anim-rise flex h-full flex-col px-4 pb-3.5 pt-3"
       style={{ "--d": "80ms" } as React.CSSProperties}
     >
-      <SectionHead no="3" title="People Risk Radar" action="Lihat Semua" />
+      <SectionHead no="4" title="People Risk Radar" action="Lihat Semua" />
 
       <div className="mt-1 flex min-h-0 flex-1 items-stretch gap-3">
         <div className="flex min-w-0 flex-[54] flex-col">

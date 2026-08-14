@@ -9,7 +9,7 @@ export function PeopleProductivity() {
       className="card anim-rise flex h-full flex-col px-4 pb-3.5 pt-3"
       style={{ "--d": "140ms" } as React.CSSProperties}
     >
-      <SectionHead no="6" title="People Productivity" action="Lihat Detail" />
+      <SectionHead no="7" title="People Productivity" action="Lihat Detail" />
 
       <table className="mt-2 w-full border-collapse">
         <thead>

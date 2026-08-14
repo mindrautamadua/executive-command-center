@@ -9,7 +9,7 @@ export function ScenarioSimulation() {
     >
       <div className="flex items-center justify-between gap-2">
         <h3 className="text-[10px] font-extrabold uppercase tracking-[0.05em] text-ink-900">
-          7. Scenario Simulation{" "}
+          8. Scenario Simulation{" "}
           <span className="font-semibold normal-case tracking-normal text-ink-400">(What-if)</span>
         </h3>
         <button className="flex shrink-0 cursor-pointer items-center gap-1 text-[9.5px] font-semibold text-ptpn-green hover:underline">

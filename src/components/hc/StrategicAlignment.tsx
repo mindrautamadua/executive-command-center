@@ -1,5 +1,5 @@
 import { ArrowRight, Award, ChevronDown, ClipboardList, Factory, GraduationCap } from "lucide-react";
-import { alignmentFlow, strategicObjective } from "@/lib/hc-data";
+import { alignmentFlow, alignmentSignal, strategicObjective } from "@/lib/hc-data";
 import { SectionHead } from "./SectionHead";
 
 const FLOW_ICONS = {
@@ -12,7 +12,7 @@ const FLOW_ICONS = {
 export function StrategicAlignment() {
   return (
     <div className="card anim-rise px-4 pb-4 pt-3" style={{ "--d": "60ms" } as React.CSSProperties}>
-      <SectionHead no="2" title="Strategic Alignment" action="Lihat Detail" />
+      <SectionHead no="3" title="Strategic Alignment" action="Lihat Detail" />
 
       <button className="mt-3 flex w-full items-center justify-between rounded-lg border border-[#e3e9ef] bg-[#f8fafc] px-3 py-2 text-left">
         <span className="leading-tight">
@@ -50,6 +50,14 @@ export function StrategicAlignment() {
           );
         })}
       </div>
+
+      <div className="mt-3 flex items-center justify-between rounded-lg bg-[#f8fafc] px-3 py-2">
+        <span className="text-[8.5px] text-ink-500" title={alignmentSignal.note}>
+          {alignmentSignal.label}
+        </span>
+        <span className="text-[9.5px] font-bold text-ptpn-green">{alignmentSignal.value}</span>
+      </div>
+      <div className="mt-1 text-[7.5px] leading-[1.3] text-ink-400">{alignmentSignal.note}</div>
     </div>
   );
 }
