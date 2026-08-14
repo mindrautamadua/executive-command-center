@@ -5,7 +5,8 @@ import { ArrowRight } from "lucide-react";
 import { payGapPerLevel, payGapRingkas, payGapWarna } from "@/lib/comp-data";
 import { Delta } from "../ui/Delta";
 
-const MAX = 65; // skala global (Rp juta) agar antar level sebanding
+/* skala global (Rp juta) agar antar level sebanding — dihitung dari data + headroom 5% */
+const MAX = Math.max(...payGapPerLevel.map((r) => Math.max(r.lakiLaki, r.perempuan))) * 1.05;
 
 const jt = (v: number) => v.toLocaleString("id-ID", { maximumFractionDigits: 1 });
 
@@ -64,7 +65,7 @@ export function PayGapAnalisis() {
           </div>
 
           <div className="border-t border-[#f0f3f6] pt-1.5">
-            <div className="text-[9px] text-ink-500">Pay Gap</div>
+            <div className="text-[9px] text-ink-500">Pay Gap (Unadjusted)</div>
             <div className="mt-[2px] flex items-baseline gap-1.5 whitespace-nowrap">
               <span className="text-[17px] font-extrabold leading-none text-ink-900">
                 {payGapRingkas.gap}
@@ -72,9 +73,13 @@ export function PayGapAnalisis() {
               <Delta
                 value={payGapRingkas.gapDelta}
                 trend={payGapRingkas.gapTrend}
-                tone="bad"
+                tone={payGapRingkas.gapTrend === "up" ? "bad" : "good"}
                 size={9}
               />
+            </div>
+            <div className="mt-[2px] whitespace-nowrap text-[9px] text-ink-500">
+              Adjusted per level:{" "}
+              <span className="font-bold text-ink-900">{payGapRingkas.gapAdjusted}</span>
             </div>
             <div className="mt-[2px] text-[9px] text-ink-400">{payGapRingkas.gapCompare}</div>
           </div>
@@ -99,21 +104,47 @@ export function PayGapAnalisis() {
             <span className="text-[9px] text-ink-400">(Rp Juta)</span>
           </div>
 
-          <div className="mt-1 flex min-h-0 flex-1 flex-col justify-around">
-            {payGapPerLevel.map((r) => (
-              <div key={r.level} className="group relative flex items-center gap-2">
-                <span className="w-[72px] shrink-0 truncate text-[9px] text-ink-700">
+          {/* header kolom nilai: dot warna mengikuti legend, angka dalam Rp juta */}
+          <div className="mt-1 flex items-center gap-2">
+            <span className="w-[80px] shrink-0" />
+            <span className="min-w-0 flex-1" />
+            <span className="flex w-[30px] shrink-0 justify-end">
+              <span
+                className="h-[6px] w-[6px] rounded-full"
+                style={{ background: payGapWarna.lakiLaki }}
+              />
+            </span>
+            <span className="flex w-[30px] shrink-0 justify-end">
+              <span
+                className="h-[6px] w-[6px] rounded-full"
+                style={{ background: payGapWarna.perempuan }}
+              />
+            </span>
+            <span className="w-[34px] shrink-0 text-right text-[8.5px] font-semibold text-ink-400">
+              Gap
+            </span>
+          </div>
+
+          <div className="flex min-h-0 flex-1 flex-col justify-around">
+            {payGapPerLevel.map((r, ri) => (
+              <div
+                key={r.level}
+                tabIndex={0}
+                aria-label={`${r.level}: laki-laki Rp ${jt(r.lakiLaki)} juta, perempuan Rp ${jt(r.perempuan)} juta, gap ${r.gap}`}
+                className="group relative flex items-center gap-2 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptpn-green"
+              >
+                <span className="w-[80px] shrink-0 truncate text-[9px] text-ink-700">
                   {r.level}
                 </span>
 
                 <span className="relative h-[14px] min-w-0 flex-1">
                   <span className="absolute left-0 right-0 top-1/2 h-[2px] -translate-y-1/2 rounded-full bg-[#f2f5f8]" />
-                  {/* bar gap antara dua titik */}
+                  {/* bar gap antara dua titik — aman untuk arah gap manapun */}
                   <span
                     className="absolute top-1/2 h-[4px] -translate-y-1/2 rounded-full bg-[#d7e0e8]"
                     style={{
-                      left: on ? `${p(r.perempuan)}%` : "0%",
-                      width: on ? `${p(r.lakiLaki) - p(r.perempuan)}%` : "0%",
+                      left: on ? `${Math.min(p(r.lakiLaki), p(r.perempuan))}%` : "0%",
+                      width: on ? `${Math.abs(p(r.lakiLaki) - p(r.perempuan))}%` : "0%",
                       transition: "left 0.9s cubic-bezier(0.22,1,0.36,1), width 0.9s cubic-bezier(0.22,1,0.36,1)",
                     }}
                   />
@@ -137,12 +168,22 @@ export function PayGapAnalisis() {
                   />
                 </span>
 
+                <span className="w-[30px] shrink-0 text-right text-[9px] tabular-nums text-ink-700">
+                  {jt(r.lakiLaki)}
+                </span>
+                <span className="w-[30px] shrink-0 text-right text-[9px] tabular-nums text-ink-700">
+                  {jt(r.perempuan)}
+                </span>
                 <span className="w-[34px] shrink-0 text-right text-[9px] font-bold tabular-nums text-ink-900">
                   {r.gap}
                 </span>
 
-                {/* tooltip gaji + headcount */}
-                <div className="pointer-events-none absolute bottom-full right-0 z-20 mb-0.5 hidden whitespace-nowrap rounded-lg border border-[#e3e9ef] bg-white px-2.5 py-1.5 shadow-cardHover group-hover:block">
+                {/* tooltip gaji + headcount; baris pertama membuka ke bawah agar tak terpotong overflow card */}
+                <div
+                  className={`pointer-events-none absolute right-0 z-20 hidden whitespace-nowrap rounded-lg border border-[#e3e9ef] bg-white px-2.5 py-1.5 shadow-cardHover group-hover:block group-focus-within:block ${
+                    ri === 0 ? "top-full mt-0.5" : "bottom-full mb-0.5"
+                  }`}
+                >
                   <div className="text-[9.5px] font-bold text-ink-900">{r.level}</div>
                   <div className="mt-[2px] text-[9px] text-ink-500">
                     Laki-laki{" "}

@@ -8,6 +8,8 @@ import { PeopleMathHpi } from "@/components/hc/PeopleMathHpi";
 import { BodDecisionCenter } from "@/components/hc/BodDecisionCenter";
 import { PeopleProductivity } from "@/components/hc/PeopleProductivity";
 import { ScenarioSimulation } from "@/components/hc/ScenarioSimulation";
+import { SkillsIntelligence } from "@/components/hc/SkillsIntelligence";
+import { DataTrustStrip } from "@/components/hc/DataTrustStrip";
 import { TalentPortfolio } from "@/components/hc/TalentPortfolio";
 import { AlertsNotifications } from "@/components/hc/AlertsNotifications";
 import { AiHrAssistant } from "@/components/hc/AiHrAssistant";
@@ -23,6 +25,7 @@ export default function SdmTalentaPage() {
         <SdmHeader />
 
         <div className="px-5 pb-5">
+          <DataTrustStrip />
           <div className="mb-2 flex items-center justify-between">
             <h2 className="text-[10px] font-extrabold uppercase tracking-[0.05em] text-ink-900">
               1. Key Strategic KPI
@@ -45,6 +48,7 @@ export default function SdmTalentaPage() {
                 <PeopleProductivity />
                 <ScenarioSimulation />
               </div>
+              <SkillsIntelligence />
               <AlertsNotifications />
             </div>
 

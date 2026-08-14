@@ -14,6 +14,10 @@ import { ArrowRight, ChevronDown } from "lucide-react";
 import { distribusiGaji } from "@/lib/comp-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 
+/* skala sumbu Y mengikuti data: dibulatkan ke atas kelipatan 10 */
+const yMax = Math.ceil(Math.max(...distribusiGaji.map((d) => d.value)) / 10) * 10;
+const yTicks = Array.from({ length: yMax / 10 + 1 }, (_, i) => i * 10);
+
 export function DistribusiGaji() {
   return (
     <div
@@ -44,8 +48,8 @@ export function DistribusiGaji() {
               interval={0}
             />
             <YAxis
-              domain={[0, 40]}
-              ticks={[0, 10, 20, 30, 40]}
+              domain={[0, yMax]}
+              ticks={yTicks}
               tickLine={false}
               axisLine={false}
               tick={{ fontSize: 9, fill: CHART_AXIS.tick }}
@@ -69,7 +73,7 @@ export function DistribusiGaji() {
                 position="top"
                 offset={5}
                 formatter={(v: number) => `${v}%`}
-                style={{ fontSize: 9, fill: "#334155", fontWeight: 700 }}
+                style={{ fontSize: 9, fill: "var(--text-3)", fontWeight: 700 }}
               />
             </Bar>
           </BarChart>

@@ -2,10 +2,10 @@
 
 import { ChevronDown, ChevronRight } from "lucide-react";
 import {
-  Area,
-  AreaChart,
   CartesianGrid,
   LabelList,
+  Line,
+  LineChart,
   ReferenceLine,
   ResponsiveContainer,
   Tooltip,
@@ -32,13 +32,7 @@ export function TimeToFillTrend() {
 
       <div className="mt-1 min-h-0 w-full flex-1">
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={timeToFillTrend} margin={{ top: 20, right: 14, bottom: 0, left: -16 }}>
-            <defs>
-              <linearGradient id="ttf-fill" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor={PALETTE.green} stopOpacity="0.2" />
-                <stop offset="100%" stopColor={PALETTE.green} stopOpacity="0.02" />
-              </linearGradient>
-            </defs>
+          <LineChart data={timeToFillTrend} margin={{ top: 20, right: 14, bottom: 0, left: -16 }}>
             <CartesianGrid stroke={CHART_AXIS.grid} vertical={false} />
             <XAxis
               dataKey="name"
@@ -47,7 +41,8 @@ export function TimeToFillTrend() {
               tick={{ fontSize: 9, fill: CHART_AXIS.tick }}
               interval={0}
             />
-            {/* domain sempit [25, 35] agar penurunan 32,8 → 28,6 terlihat */}
+            {/* domain sempit [25, 35] agar penurunan 32,8 → 28,6 terlihat;
+               sumbu terpotong hanya aman untuk line, bukan area fill */}
             <YAxis
               domain={[25, 35]}
               ticks={[25, 27, 29, 31, 33, 35]}
@@ -72,12 +67,11 @@ export function TimeToFillTrend() {
                 fontWeight: 600,
               }}
             />
-            <Area
+            <Line
               type="linear"
               dataKey="value"
               stroke={PALETTE.green}
               strokeWidth={1.8}
-              fill="url(#ttf-fill)"
               dot={{ r: 3, fill: PALETTE.green, strokeWidth: 0 }}
               activeDot={{ r: 4.5 }}
               animationDuration={900}
@@ -89,8 +83,8 @@ export function TimeToFillTrend() {
                 formatter={(v: number) => fmt(v)}
                 style={{ fontSize: 9, fill: "var(--text-3)", fontWeight: 600 }}
               />
-            </Area>
-          </AreaChart>
+            </Line>
+          </LineChart>
         </ResponsiveContainer>
       </div>
 

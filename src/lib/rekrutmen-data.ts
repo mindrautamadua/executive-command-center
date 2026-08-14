@@ -26,7 +26,7 @@ export const rekrutmenKpi: RekrutmenKpi[] = [
     value: "156",
     delta: "12,5%",
     trend: "up",
-    compare: "vs Q1 2025",
+    compare: "vs Q1 2026",
     icon: "requisition",
     tone: "blue",
     line: PALETTE.blue,
@@ -37,7 +37,7 @@ export const rekrutmenKpi: RekrutmenKpi[] = [
     value: "4.789",
     delta: "18,7%",
     trend: "up",
-    compare: "vs Q1 2025",
+    compare: "vs Q1 2026",
     icon: "kandidat",
     tone: "green",
     line: PALETTE.green,
@@ -48,7 +48,7 @@ export const rekrutmenKpi: RekrutmenKpi[] = [
     value: "892",
     delta: "15,4%",
     trend: "up",
-    compare: "vs Q1 2025",
+    compare: "vs Q1 2026",
     icon: "seleksi",
     tone: "purple",
     line: PALETTE.purple,
@@ -59,7 +59,7 @@ export const rekrutmenKpi: RekrutmenKpi[] = [
     value: "312",
     delta: "9,3%",
     trend: "up",
-    compare: "vs Q1 2025",
+    compare: "vs Q1 2026",
     icon: "offer",
     tone: "amber",
     line: PALETTE.amber,
@@ -72,7 +72,7 @@ export const rekrutmenKpi: RekrutmenKpi[] = [
     trend: "down",
     // makin cepat terisi = makin baik
     deltaTone: "good",
-    compare: "vs Q1 2025",
+    compare: "vs Q1 2026",
     icon: "ttf",
     tone: "teal",
     line: PALETTE.teal,
@@ -83,7 +83,7 @@ export const rekrutmenKpi: RekrutmenKpi[] = [
     value: "78,3%",
     delta: "7,1%",
     trend: "up",
-    compare: "vs Q1 2025",
+    compare: "vs Q1 2026",
     icon: "rate",
     tone: "blue",
     line: PALETTE.blue,
@@ -97,7 +97,7 @@ export const rekrutmenKpi: RekrutmenKpi[] = [
     trend: "down",
     // biaya turun = efisiensi naik
     deltaTone: "good",
-    compare: "vs Q1 2025",
+    compare: "vs Q1 2026",
     icon: "cost",
     tone: "slate",
     line: PALETTE.slate,
@@ -119,12 +119,12 @@ export const totalRequisition = "156";
 /* ── tren rekrutmen ──────────────────────────────────────── */
 
 export const trenRekrutmen = [
-  { name: "Jan 2025", requisition: 112, hire: 45 },
-  { name: "Feb 2025", requisition: 128, hire: 52 },
-  { name: "Mar 2025", requisition: 142, hire: 61 },
-  { name: "Apr 2025", requisition: 156, hire: 73 },
-  { name: "Mei 2025", requisition: 168, hire: 81 },
-  { name: "Jun 2025", requisition: 156, hire: 89 },
+  { name: "Jan 2026", requisition: 112, hire: 45 },
+  { name: "Feb 2026", requisition: 128, hire: 52 },
+  { name: "Mar 2026", requisition: 142, hire: 61 },
+  { name: "Apr 2026", requisition: 156, hire: 73 },
+  { name: "Mei 2026", requisition: 168, hire: 81 },
+  { name: "Jun 2026", requisition: 156, hire: 89 },
 ];
 
 /* ── funnel pipeline ─────────────────────────────────────── */
@@ -190,12 +190,12 @@ export const rekrutmenUnit: UnitRow[] = [
 /* ── time to fill trend ──────────────────────────────────── */
 
 export const timeToFillTrend = [
-  { name: "Jan 2025", value: 32.8 },
-  { name: "Feb 2025", value: 31.6 },
-  { name: "Mar 2025", value: 30.1 },
-  { name: "Apr 2025", value: 29.8 },
-  { name: "Mei 2025", value: 29.0 },
-  { name: "Jun 2025", value: 28.6 },
+  { name: "Jan 2026", value: 32.8 },
+  { name: "Feb 2026", value: 31.6 },
+  { name: "Mar 2026", value: 30.1 },
+  { name: "Apr 2026", value: 29.8 },
+  { name: "Mei 2026", value: 29.0 },
+  { name: "Jun 2026", value: 28.6 },
 ];
 
 /** benchmark industri time to fill (hari) */
@@ -239,7 +239,7 @@ export const aktivitasTerbaru: Aktivitas[] = [
     icon: "check",
   },
   {
-    judul: "Dashboard rekrutmen Q2 2025 telah diperbarui",
+    judul: "Dashboard rekrutmen Q2 2026 telah diperbarui",
     jam: "08:30",
     tone: "hijau",
     icon: "refresh",
@@ -366,7 +366,7 @@ export const kualitasHireBar = [
 /* ── insight AI ──────────────────────────────────────────── */
 
 export const insightAiRekrutmen = [
-  "Time to Fill menurun 4,2 hari dibanding Q1 2025. Pertahankan strategi sourcing yang efektif.",
+  "Time to Fill menurun 4,2 hari dibanding Q1 2026. Pertahankan strategi sourcing yang efektif.",
   "Sumber terbaik adalah Employee Referral dengan Offer Acceptance Rate 85%.",
   "Posisi dengan time to fill tertinggi: Manager Agronomy (45 hari). Disarankan memperluas talent pool.",
 ];

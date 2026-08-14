@@ -43,8 +43,11 @@ export function RekrutmenPipeline() {
                 <span className="w-[80px] shrink-0 text-[9px] text-ink-700">{s.stage}</span>
                 <div className="relative min-w-0 flex-1">
                   <div className="flex h-[20px] items-center justify-center">
-                    <div
-                      className="anim-grow-x h-full rounded-[4px] transition-opacity duration-150"
+                    <button
+                      className="anim-grow-x h-full cursor-default rounded-[4px] transition-opacity duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptpn-green"
+                      aria-label={`${s.stage}: ${fmtId(s.valueNum)} kandidat${
+                        prev ? `, drop-off ${fmtId(dropOff)} dari ${prev.stage}` : ""
+                      }`}
                       style={
                         {
                           width: `${(s.valueNum / maxValue) * 100}%`,
@@ -57,6 +60,8 @@ export function RekrutmenPipeline() {
                       }
                       onMouseEnter={() => setActive(i)}
                       onMouseLeave={() => setActive(null)}
+                      onFocus={() => setActive(i)}
+                      onBlur={() => setActive(null)}
                     />
                   </div>
                   {/* tooltip drop-off per tahap */}

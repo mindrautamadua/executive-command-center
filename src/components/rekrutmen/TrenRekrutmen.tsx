@@ -14,6 +14,11 @@ import {
 import { trenRekrutmen } from "@/lib/rekrutmen-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 
+/* skala sumbu Y mengikuti data: dibulatkan ke atas kelipatan 50 */
+const yMax =
+  Math.ceil(Math.max(...trenRekrutmen.flatMap((d) => [d.requisition, d.hire])) / 50) * 50;
+const yTicks = Array.from({ length: yMax / 50 + 1 }, (_, i) => i * 50);
+
 export function TrenRekrutmen() {
   return (
     <div
@@ -38,10 +43,9 @@ export function TrenRekrutmen() {
               tick={{ fontSize: 9, fill: CHART_AXIS.tick }}
               interval={0}
             />
-            {/* interval sumbu Y seragam per 50 */}
             <YAxis
-              domain={[0, 200]}
-              ticks={[0, 50, 100, 150, 200]}
+              domain={[0, yMax]}
+              ticks={yTicks}
               tickLine={false}
               axisLine={false}
               tick={{ fontSize: 9, fill: CHART_AXIS.tick }}

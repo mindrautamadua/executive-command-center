@@ -41,7 +41,7 @@ export function InsightComp() {
         })}
       </div>
 
-      <button className="relative z-10 mt-2 flex w-[196px] items-center justify-between rounded-lg bg-gradient-to-r from-[#3fae63] to-[#1a9c5b] px-3 py-[7px] text-[10px] font-semibold text-white shadow-pill transition-opacity hover:opacity-90">
+      <button className="relative z-10 mt-2 flex w-[196px] items-center justify-between rounded-lg bg-ptpn-green px-3 py-[7px] text-[10px] font-semibold text-white shadow-pill transition-opacity hover:opacity-90">
         Lihat Rekomendasi Lengkap
         <ArrowRight size={12} />
       </button>

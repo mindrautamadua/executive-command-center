@@ -55,7 +55,12 @@ export function BenchmarkGaji() {
           const pad = span * 0.12;
           const p = (v: number) => ((v - (lo - pad)) / (span + pad * 2)) * 100;
           return (
-            <div key={r.level} className="group relative flex items-center gap-2">
+            <div
+              key={r.level}
+              tabIndex={0}
+              aria-label={`${r.level}: market Rp ${num(r.marketMin)}–${num(r.marketMax)} juta, rata-rata market Rp ${num(r.marketAvg)} juta, perusahaan Rp ${num(r.perusahaan)} juta`}
+              className="group relative flex items-center gap-2 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptpn-green"
+            >
               <span className="w-[92px] shrink-0 text-[9.5px] leading-[1.2] text-ink-700">
                 {r.level}
               </span>
@@ -100,7 +105,7 @@ export function BenchmarkGaji() {
               </span>
 
               {/* tooltip semua nilai */}
-              <div className="pointer-events-none absolute bottom-full left-[100px] z-20 mb-0.5 hidden whitespace-nowrap rounded-lg border border-[#e3e9ef] bg-white px-2.5 py-1.5 shadow-cardHover group-hover:block">
+              <div className="pointer-events-none absolute bottom-full left-[100px] z-20 mb-0.5 hidden whitespace-nowrap rounded-lg border border-[#e3e9ef] bg-white px-2.5 py-1.5 shadow-cardHover group-hover:block group-focus-within:block">
                 <div className="text-[9.5px] font-bold text-ink-900">{r.level}</div>
                 <div className="mt-[2px] text-[9px] text-ink-500">
                   Market: Rp {num(r.marketMin)}–{num(r.marketMax)} Jt · Rata-rata market{" "}

@@ -29,7 +29,7 @@ function SelectField({
 export function CompHeader() {
   return (
     <>
-      <header className="flex items-start justify-between px-5 pt-4">
+      <header className="flex items-start justify-between px-5 pb-3 pt-4">
         <div>
           <h1 className="text-[21px] font-extrabold leading-none tracking-[-0.01em] text-[#1b3a6b]">
             Compensation &amp; Benefits
@@ -40,9 +40,9 @@ export function CompHeader() {
         </div>
 
         <div className="flex shrink-0 items-center gap-3">
-          <SelectField label="Periode" value="Q2 2025 (Apr - Jun)" width={164} />
+          <SelectField label="Periode" value="Q2 2026 (Apr - Jun)" width={164} />
           <SelectField label="Unit Organisasi" value="Semua Unit" width={152} />
-          <SelectField label="Bandingkan dengan" value="Q1 2025" width={146} />
+          <SelectField label="Bandingkan dengan" value="Q1 2026" width={146} />
 
           <button
             className="ml-1 text-[#2f6fe4] transition-opacity hover:opacity-75"
@@ -73,24 +73,22 @@ export function CompHeader() {
               </svg>
             </div>
             <div className="leading-tight">
-              <div className="text-[11px] font-bold text-ink-900">BOD Dashboard</div>
-              <div className="text-[9.5px] text-ink-500">Direksi</div>
+              <div className="text-[11px] font-bold text-ink-900">Direktur Utama</div>
+              <div className="text-[9.5px] text-ink-500">BOD-1</div>
             </div>
             <ChevronDown size={14} className="text-ink-400" />
           </div>
+
+          <button className="flex items-center gap-1.5 rounded-lg border border-[#e3e9ef] bg-white px-3 py-[7px] text-[10px] font-semibold text-ink-700 shadow-card transition-colors hover:bg-[#f5f8fa]">
+            <FileText size={12} className="text-ink-500" />
+            Laporan
+          </button>
+          <button className="flex items-center gap-1.5 rounded-lg bg-ptpn-green px-3 py-[7px] text-[10px] font-semibold text-white shadow-pill transition-opacity hover:opacity-90">
+            <Download size={12} />
+            Export
+          </button>
         </div>
       </header>
-
-      <div className="flex justify-end gap-2.5 px-5 pb-3 pt-3">
-        <button className="flex items-center gap-1.5 rounded-lg border border-[#e3e9ef] bg-white px-3.5 py-[7px] text-[11px] font-semibold text-ink-700 shadow-card transition-colors hover:bg-[#f5f8fa]">
-          <Download size={14} className="text-ink-500" />
-          Export
-        </button>
-        <button className="flex items-center gap-1.5 rounded-lg border border-[#e3e9ef] bg-white px-3.5 py-[7px] text-[11px] font-semibold text-ink-700 shadow-card transition-colors hover:bg-[#f5f8fa]">
-          <FileText size={14} className="text-ink-500" />
-          Laporan Detail
-        </button>
-      </div>
     </>
   );
 }

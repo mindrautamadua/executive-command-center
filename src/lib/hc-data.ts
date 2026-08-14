@@ -3,6 +3,38 @@
  * Periode acuan: Mei 2026 (YTD).
  */
 
+/* ── 0a. Konteks Organisasi (drill-down) ──────────────────────────── */
+
+export type OrgLevel = "Enterprise" | "Subholding" | "Region" | "Business Unit";
+
+export interface OrgNode {
+  label: string;
+  level: OrgLevel;
+  depth: 0 | 1 | 2 | 3;
+}
+
+export const orgNodes: OrgNode[] = [
+  { label: "PTPN Group (Holding)", level: "Enterprise", depth: 0 },
+  { label: "PalmCo — PTPN IV", level: "Subholding", depth: 1 },
+  { label: "Regional 1 (Sumut)", level: "Region", depth: 2 },
+  { label: "PKS Adolina", level: "Business Unit", depth: 3 },
+  { label: "Kebun Dolok Ilir", level: "Business Unit", depth: 3 },
+  { label: "Regional 2 (Sumut)", level: "Region", depth: 2 },
+  { label: "Regional 3 (Riau)", level: "Region", depth: 2 },
+  { label: "SupportingCo — PTPN I", level: "Subholding", depth: 1 },
+  { label: "SugarCo — PTPN III", level: "Subholding", depth: 1 },
+];
+
+/* ── 0b. Data Trust ───────────────────────────────────────────────── */
+
+export const dataTrust = {
+  freshness: "Diperbarui 14 menit lalu",
+  coverage: "97,8%",
+  quality: "96,4%",
+  lastSync: "Sync terakhir 22:14 WIB",
+  sources: ["SAP HCM", "IHCMS", "Payroll", "LMS", "e-Rekrutmen"],
+};
+
 /* ── 1. Key Strategic KPI ─────────────────────────────────────────── */
 
 export interface HcKpi {
@@ -120,12 +152,71 @@ export const riskRadar: RiskRadarAxis[] = [
 
 export type RiskSeverity = "High" | "Medium" | "Low";
 
-export const topRisks: { label: string; severity: RiskSeverity }[] = [
-  { label: "Critical Position Vacancy", severity: "High" },
-  { label: "Succession Risk", severity: "High" },
-  { label: "Turnover Risk", severity: "Medium" },
-  { label: "Leadership Gap", severity: "Medium" },
-  { label: "Critical Skill Gap", severity: "High" },
+export interface RiskDriver {
+  label: string;
+  /** Kontribusi terhadap skor risiko (%), total per risiko = 100. */
+  weight: number;
+}
+
+export interface TopRisk {
+  label: string;
+  severity: RiskSeverity;
+  /** Skor risiko 0-100. */
+  score: number;
+  drivers: RiskDriver[];
+}
+
+export const topRisks: TopRisk[] = [
+  {
+    label: "Critical Position Vacancy",
+    severity: "High",
+    score: 82,
+    drivers: [
+      { label: "Time-to-fill posisi kritikal > 90 hari", weight: 38 },
+      { label: "Pipeline internal Ready Now tipis", weight: 34 },
+      { label: "Pensiun BOD-2 dalam 12 bulan", weight: 28 },
+    ],
+  },
+  {
+    label: "Succession Risk",
+    severity: "High",
+    score: 78,
+    drivers: [
+      { label: "12 posisi kritikal tanpa suksesor Ready Now", weight: 42 },
+      { label: "Readiness suksesor rata-rata 1-2 tahun", weight: 33 },
+      { label: "Konsentrasi suksesor di 3 regional", weight: 25 },
+    ],
+  },
+  {
+    label: "Turnover Risk",
+    severity: "Medium",
+    score: 58,
+    drivers: [
+      { label: "Turnover tenure 2-4 tahun 11,4%", weight: 40 },
+      { label: "Compensation percentile < P50 pasar", weight: 35 },
+      { label: "Manager effectiveness rendah di 8 unit", weight: 25 },
+    ],
+  },
+  {
+    label: "Leadership Gap",
+    severity: "Medium",
+    score: 55,
+    drivers: [
+      { label: "Leadership readiness index 64 (target 75)", weight: 45 },
+      { label: "Span of control melebar pasca-restrukturisasi", weight: 30 },
+      { label: "Coverage program leadership 58%", weight: 25 },
+    ],
+  },
+  {
+    label: "Critical Skill Gap",
+    severity: "High",
+    score: 74,
+    drivers: [
+      { label: "Shortage AI & Data 830 orang (proyeksi 2028)", weight: 44 },
+      { label: "Adopsi digital agriculture masih 31%", weight: 31 },
+      { label: "Reskilling rate 6%/tahun (target 12%)", weight: 25 },
+    ],
+  },
 ];
 
 /* ── 4. People Math & HPI BEM ─────────────────────────────────────── */
@@ -256,7 +347,29 @@ export const scenarioRows: ScenarioRow[] = [
 export const scenarioNote =
   "Skenario D memberikan keseimbangan terbaik antara biaya dan peningkatan produktivitas.";
 
-/* ── 8. Talent Portfolio (9-box) ──────────────────────────────────── */
+/* ── 8. Skills Intelligence ───────────────────────────────────────── */
+
+export interface CriticalSkill {
+  skill: string;
+  /** Jumlah karyawan dengan proficiency memadai saat ini. */
+  supply: number;
+  /** Kebutuhan proyeksi 2028 (skills-first workforce model). */
+  demand: number;
+}
+
+export const criticalSkills: CriticalSkill[] = [
+  { skill: "AI & Data Analytics", supply: 420, demand: 1250 },
+  { skill: "Digital / Precision Agriculture", supply: 380, demand: 740 },
+  { skill: "Sustainability (ISPO / RSPO)", supply: 310, demand: 520 },
+  { skill: "Teknik Pengolahan (PKS)", supply: 2140, demand: 2380 },
+  { skill: "Agronomi", supply: 3420, demand: 3600 },
+  { skill: "Finance & Risk", supply: 1280, demand: 1100 },
+];
+
+export const skillsNote =
+  "Proyeksi shortage terbesar: 830 kapabilitas AI & Data pada 2028 bila tanpa intervensi. Rekomendasi: reskilling 400 karyawan/tahun + strategic hiring untuk 3 skill teratas.";
+
+/* ── 9. Talent Portfolio (9-box) ──────────────────────────────────── */
 
 /** Grid 9-box: baris dari Performance High → Low, kolom Potential Low → High. */
 export const nineBox: { value: string; tone: "soft" | "mid" | "strong" }[][] = [
@@ -286,7 +399,15 @@ export const talentStats = {
   ] as { label: string; value: string; tone: "red" | "ink" }[],
 };
 
-/* ── 9. Alerts & Notifications ────────────────────────────────────── */
+/** Driver skor Flight Risk High pada Talent Portfolio (explainability). */
+export const flightRiskDrivers: RiskDriver[] = [
+  { label: "Compensation percentile < P50", weight: 34 },
+  { label: "Engagement turun ≥ 10 pts", weight: 27 },
+  { label: "External demand tinggi", weight: 22 },
+  { label: "Manager effectiveness rendah", weight: 17 },
+];
+
+/* ── 10. Alerts & Notifications ───────────────────────────────────── */
 
 export interface HcAlert {
   title: string;
@@ -328,7 +449,7 @@ export const hcAlerts: HcAlert[] = [
   },
 ];
 
-/* ── 10. AI HR Assistant ──────────────────────────────────────────── */
+/* ── 11. AI HR Assistant ──────────────────────────────────────────── */
 
 export const aiGreeting = "Good morning, Pak Direktur Utama 👋 Ada yang bisa saya bantu hari ini?";
 

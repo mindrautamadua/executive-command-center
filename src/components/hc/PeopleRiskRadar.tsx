@@ -1,6 +1,11 @@
+"use client";
+
+import { useState } from "react";
+import { ChevronDown } from "lucide-react";
 import { riskRadar, topRisks, type RiskSeverity } from "@/lib/hc-data";
 import { PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "./SectionHead";
+import { WhyDrivers } from "./WhyDrivers";
 
 const SEVERITY: Record<RiskSeverity, string> = {
   High: "bg-[#fdecec] text-[#ef4444]",
@@ -103,6 +108,8 @@ function RadarSvg() {
 }
 
 export function PeopleRiskRadar() {
+  const [openRisk, setOpenRisk] = useState<number | null>(null);
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3.5 pt-3"
@@ -131,19 +138,41 @@ export function PeopleRiskRadar() {
         <div className="flex min-w-0 flex-[46] flex-col">
           <div className="text-[9.5px] font-bold text-ink-700">Top 5 People Risks</div>
           <div className="mt-1.5 flex flex-col gap-[5px]">
-            {topRisks.map((r) => (
-              <div
-                key={r.label}
-                className="flex items-center justify-between gap-2 rounded-lg border border-[#eef2f6] bg-white px-2.5 py-[6px]"
-              >
-                <span className="truncate text-[9.5px] font-medium text-ink-700">{r.label}</span>
-                <span
-                  className={`shrink-0 rounded px-1.5 py-[2px] text-[8.5px] font-bold ${SEVERITY[r.severity]}`}
-                >
-                  {r.severity}
-                </span>
-              </div>
-            ))}
+            {topRisks.map((r, i) => {
+              const open = openRisk === i;
+              return (
+                <div key={r.label} className="rounded-lg border border-[#eef2f6] bg-white">
+                  <button
+                    onClick={() => setOpenRisk(open ? null : i)}
+                    className="flex w-full items-center justify-between gap-2 px-2.5 py-[6px] text-left"
+                  >
+                    <span className="min-w-0 truncate text-[9.5px] font-medium text-ink-700">
+                      {r.label}
+                    </span>
+                    <span className="flex shrink-0 items-center gap-1.5">
+                      <span className="text-[9px] font-bold text-ink-500">{r.score}</span>
+                      <span
+                        className={`rounded px-1.5 py-[2px] text-[8.5px] font-bold ${SEVERITY[r.severity]}`}
+                      >
+                        {r.severity}
+                      </span>
+                      <ChevronDown
+                        size={11}
+                        className={`text-ink-400 transition-transform ${open ? "rotate-180" : ""}`}
+                      />
+                    </span>
+                  </button>
+                  {open && (
+                    <div className="px-1.5 pb-1.5">
+                      <WhyDrivers
+                        drivers={r.drivers}
+                        tone={r.severity === "High" ? "red" : "amber"}
+                      />
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
           <div className="flex-1" />
           <button className="mt-2 w-full rounded-lg border border-[#e3e9ef] py-[6px] text-[9.5px] font-semibold text-ink-700 transition-colors hover:bg-[#f5f8fa]">

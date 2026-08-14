@@ -30,7 +30,7 @@ export function AktivitasTerbaru() {
           return (
             <div
               key={a.judul}
-              className="anim-rise flex items-start gap-2 rounded-md py-[3px] transition-colors hover:bg-[#f7f9fb]"
+              className="anim-rise flex items-start gap-2 rounded-md py-[3px]"
               style={{ "--d": `${200 + i * 70}ms` } as React.CSSProperties}
             >
               <span

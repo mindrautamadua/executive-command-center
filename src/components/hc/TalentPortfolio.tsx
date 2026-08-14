@@ -1,5 +1,10 @@
-import { nineBox, talentStats } from "@/lib/hc-data";
+"use client";
+
+import { useState } from "react";
+import { ChevronDown } from "lucide-react";
+import { flightRiskDrivers, nineBox, talentStats } from "@/lib/hc-data";
 import { SectionHead } from "./SectionHead";
+import { WhyDrivers } from "./WhyDrivers";
 
 const CELL_TONE = {
   strong: "bg-ptpn-green text-white",
@@ -8,9 +13,11 @@ const CELL_TONE = {
 } as const;
 
 export function TalentPortfolio() {
+  const [showWhy, setShowWhy] = useState(false);
+
   return (
     <div className="card anim-rise px-4 pb-3.5 pt-3" style={{ "--d": "180ms" } as React.CSSProperties}>
-      <SectionHead no="8" title="Talent Portfolio" action="Lihat Detail" />
+      <SectionHead no="9" title="Talent Portfolio" action="Lihat Detail" />
 
       <div className="mt-3 flex items-start gap-3">
         <div className="flex shrink-0 items-center gap-1.5">
@@ -53,21 +60,43 @@ export function TalentPortfolio() {
             <span className="text-[9px] text-ink-500">{talentStats.star.unit}</span>
           </div>
           <div className="mt-2.5 flex flex-col gap-[7px]">
-            {talentStats.rows.map((r) => (
-              <div key={r.label} className="flex items-center justify-between gap-2">
-                <span className="text-[9px] text-ink-500">{r.label}</span>
-                <span
-                  className={`text-[10px] font-bold ${
-                    r.tone === "red" ? "text-[#ef4444]" : "text-ink-900"
-                  }`}
-                >
-                  {r.value}
-                </span>
-              </div>
-            ))}
+            {talentStats.rows.map((r) => {
+              const isFlightRisk = r.label === "Flight Risk High";
+              return (
+                <div key={r.label} className="flex items-center justify-between gap-2">
+                  {isFlightRisk ? (
+                    <button
+                      onClick={() => setShowWhy((s) => !s)}
+                      className="flex items-center gap-1 text-[9px] text-ink-500 hover:text-ink-900"
+                    >
+                      {r.label}
+                      <ChevronDown
+                        size={10}
+                        className={`text-ink-400 transition-transform ${showWhy ? "rotate-180" : ""}`}
+                      />
+                    </button>
+                  ) : (
+                    <span className="text-[9px] text-ink-500">{r.label}</span>
+                  )}
+                  <span
+                    className={`text-[10px] font-bold ${
+                      r.tone === "red" ? "text-[#ef4444]" : "text-ink-900"
+                    }`}
+                  >
+                    {r.value}
+                  </span>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
+
+      {showWhy && (
+        <div className="mt-2.5">
+          <WhyDrivers drivers={flightRiskDrivers} />
+        </div>
+      )}
 
       <button className="mt-3 w-full rounded-lg border border-[#e3e9ef] py-[6px] text-[9.5px] font-semibold text-ink-700 transition-colors hover:bg-[#f5f8fa]">
         Lihat Talent Pipeline

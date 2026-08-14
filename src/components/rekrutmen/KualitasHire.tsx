@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { ChevronDown, ChevronRight, Star } from "lucide-react";
 import { kualitasHire, kualitasHireBar } from "@/lib/rekrutmen-data";
 import { CountUp } from "../ui/CountUp";
+import { PALETTE } from "@/lib/chart-palette";
 
 /** gauge 281° dengan celah di bawah; sapuan busur dianimasikan saat mount */
 function ScoreGauge({ pct }: { pct: number }) {
@@ -37,7 +38,7 @@ function ScoreGauge({ pct }: { pct: number }) {
           r={r}
           pathLength={100}
           fill="none"
-          stroke="#22a45d"
+          stroke={PALETTE.green}
           strokeWidth={11}
           strokeLinecap="round"
           strokeDasharray={`${(arc * sweep) / 100} ${100 - (arc * sweep) / 100}`}
@@ -57,7 +58,7 @@ export function KualitasHire() {
       <div className="flex items-start justify-between gap-2">
         <h3 className="card-title-navy">Kualitas Hire (New Hire Performance)</h3>
         <button className="select-chip whitespace-nowrap px-2.5 py-[5px] text-[9.5px] transition-colors hover:bg-[#f7f9fb]">
-          Q2 2025 <ChevronDown size={11} />
+          Q2 2026 <ChevronDown size={11} />
         </button>
       </div>
 
@@ -79,7 +80,7 @@ export function KualitasHire() {
                 key={i}
                 size={13}
                 strokeWidth={0}
-                fill="#22a45d"
+                fill={PALETTE.green}
                 opacity={i < kualitasHire.bintang ? 1 : 0.45}
               />
             ))}

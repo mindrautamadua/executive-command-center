@@ -1,10 +1,10 @@
 "use client";
 
 import {
-  Area,
-  AreaChart,
   CartesianGrid,
   LabelList,
+  Line,
+  LineChart,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -34,13 +34,7 @@ export function TrenBiayaKompensasi() {
 
       <div className="min-h-0 w-full flex-1">
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={trenBiaya} margin={{ top: 18, right: 20, bottom: 0, left: -6 }}>
-            <defs>
-              <linearGradient id="comp-tren-fill" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor={PALETTE.blue} stopOpacity="0.2" />
-                <stop offset="100%" stopColor={PALETTE.blue} stopOpacity="0.02" />
-              </linearGradient>
-            </defs>
+          <LineChart data={trenBiaya} margin={{ top: 18, right: 20, bottom: 0, left: -6 }}>
             <CartesianGrid stroke={CHART_AXIS.grid} vertical={false} />
             <XAxis
               dataKey="name"
@@ -49,7 +43,8 @@ export function TrenBiayaKompensasi() {
               tick={{ fontSize: 9, fill: CHART_AXIS.tick }}
               interval={0}
             />
-            {/* domain dirapatkan (1.800–2.600) supaya kenaikan 2.020→2.480 terbaca */}
+            {/* domain dirapatkan (1.800–2.600) supaya kenaikan 2.020→2.480 terbaca;
+               sumbu terpotong hanya aman untuk line, bukan area fill */}
             <YAxis
               domain={[1800, 2600]}
               ticks={[1800, 2000, 2200, 2400, 2600]}
@@ -63,12 +58,11 @@ export function TrenBiayaKompensasi() {
               formatter={(v: number) => [`Rp ${v.toLocaleString("id-ID")} M`, "Biaya Kompensasi"]}
               contentStyle={CHART_TOOLTIP_STYLE}
             />
-            <Area
+            <Line
               type="monotone"
               dataKey="value"
               stroke={PALETTE.blue}
               strokeWidth={1.8}
-              fill="url(#comp-tren-fill)"
               dot={{ r: 3, fill: "#fff", stroke: PALETTE.blue, strokeWidth: 2 }}
               activeDot={{ r: 4.5 }}
               animationDuration={900}
@@ -77,10 +71,10 @@ export function TrenBiayaKompensasi() {
                 dataKey="label"
                 position="top"
                 offset={9}
-                style={{ fontSize: 9, fill: "#334155", fontWeight: 700 }}
+                style={{ fontSize: 9, fill: "var(--text-3)", fontWeight: 700 }}
               />
-            </Area>
-          </AreaChart>
+            </Line>
+          </LineChart>
         </ResponsiveContainer>
       </div>
 

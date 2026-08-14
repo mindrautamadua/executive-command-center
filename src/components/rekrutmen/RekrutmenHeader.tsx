@@ -1,6 +1,6 @@
 "use client";
 
-import { Bell, ChevronDown, Plus } from "lucide-react";
+import { Bell, ChevronDown, Download } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { PersonAvatar } from "@/components/ui/PersonAvatar";
 
@@ -30,7 +30,7 @@ function SelectField({
 export function RekrutmenHeader() {
   return (
     <>
-      <header className="flex items-start justify-between px-5 pt-4">
+      <header className="flex items-start justify-between px-5 pb-3 pt-4">
         <div>
           <h1 className="text-[21px] font-extrabold leading-none tracking-[-0.01em] text-[#1b3a6b]">
             Rekrutmen
@@ -41,7 +41,7 @@ export function RekrutmenHeader() {
         </div>
 
         <div className="flex shrink-0 items-center gap-3">
-          <SelectField label="Periode" value="Q2 2025 (Apr - Jun)" width={168} />
+          <SelectField label="Periode" value="Q2 2026 (Apr - Jun)" width={168} />
           <SelectField label="Unit Organisasi" value="Semua Unit" width={158} />
           <SelectField label="Lokasi" value="Semua Lokasi" width={158} />
 
@@ -59,19 +59,17 @@ export function RekrutmenHeader() {
           <div className="flex items-center gap-2.5">
             <PersonAvatar seed={0} size={36} className="ring-2 ring-[#e6ecf2]" />
             <div className="leading-tight">
-              <div className="text-[11px] font-bold text-ink-900">BOD Dashboard</div>
-              <div className="text-[9.5px] text-ink-500">Direksi</div>
+              <div className="text-[11px] font-bold text-ink-900">Direktur Utama</div>
+              <div className="text-[9.5px] text-ink-500">BOD-1</div>
             </div>
           </div>
+
+          <button className="flex items-center gap-1.5 rounded-lg bg-ptpn-green px-3 py-[7px] text-[10px] font-semibold text-white shadow-pill transition-opacity hover:opacity-90">
+            <Download size={12} />
+            Export Dashboard
+          </button>
         </div>
       </header>
-
-      <div className="flex justify-end px-5 pb-3 pt-3">
-        <button className="flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-[#3fae63] to-[#1a9c5b] px-4 py-[8px] text-[11px] font-semibold text-white shadow-pill transition-opacity hover:opacity-90">
-          <Plus size={14} />
-          Buat Requisition
-        </button>
-      </div>
     </>
   );
 }

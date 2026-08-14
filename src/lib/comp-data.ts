@@ -24,7 +24,7 @@ export const compKpi: CompKpi[] = [
     value: "Rp 2,48 T",
     delta: "8,7%",
     trend: "up",
-    compare: "vs Q1 2025: Rp 2,28 T",
+    compare: "vs Q1 2026: Rp 2,28 T",
     icon: "biaya",
     tone: "blue",
     line: PALETTE.blue,
@@ -35,7 +35,7 @@ export const compKpi: CompKpi[] = [
     value: "Rp 12,45 Jt",
     delta: "5,3%",
     trend: "up",
-    compare: "vs Q1 2025: Rp 11,82 Jt",
+    compare: "vs Q1 2026: Rp 11,82 Jt",
     icon: "gaji",
     tone: "green",
     line: PALETTE.green,
@@ -46,7 +46,7 @@ export const compKpi: CompKpi[] = [
     value: "68,4%",
     delta: "2,1%",
     trend: "up",
-    compare: "vs Q1 2025: 66,3%",
+    compare: "vs Q1 2026: 66,3%",
     icon: "rasio",
     tone: "purple",
     line: PALETTE.purple,
@@ -57,7 +57,7 @@ export const compKpi: CompKpi[] = [
     value: "5,8%",
     delta: "0,6%",
     trend: "up",
-    compare: "vs Q1 2025: 5,2%",
+    compare: "vs Q1 2026: 5,2%",
     icon: "kenaikan",
     tone: "amber",
     line: PALETTE.amber,
@@ -68,7 +68,7 @@ export const compKpi: CompKpi[] = [
     value: "Rp 356 M",
     delta: "9,1%",
     trend: "up",
-    compare: "vs Q1 2025: Rp 326 M",
+    compare: "vs Q1 2026: Rp 326 M",
     icon: "benefit",
     tone: "teal",
     line: PALETTE.teal,
@@ -79,7 +79,7 @@ export const compKpi: CompKpi[] = [
     value: "0,95",
     delta: "0,03",
     trend: "up",
-    compare: "vs Q1 2025: 0,92",
+    compare: "vs Q1 2026: 0,92",
     icon: "equity",
     tone: "blue",
     line: PALETTE.blue,
@@ -115,12 +115,12 @@ export const komposisiRewards: RewardSlice[] = [
 /* ── Tren biaya kompensasi (Rp miliar) ───────────────────── */
 
 export const trenBiaya = [
-  { name: "Jan 2025", value: 2020, label: "2,02 T" },
-  { name: "Feb 2025", value: 2100, label: "2,10 T" },
-  { name: "Mar 2025", value: 2210, label: "2,21 T" },
-  { name: "Apr 2025", value: 2280, label: "2,28 T" },
-  { name: "Mei 2025", value: 2370, label: "2,37 T" },
-  { name: "Jun 2025", value: 2480, label: "2,48 T" },
+  { name: "Jan 2026", value: 2020, label: "2,02 T" },
+  { name: "Feb 2026", value: 2100, label: "2,10 T" },
+  { name: "Mar 2026", value: 2210, label: "2,21 T" },
+  { name: "Apr 2026", value: 2280, label: "2,28 T" },
+  { name: "Mei 2026", value: 2370, label: "2,37 T" },
+  { name: "Jun 2026", value: 2480, label: "2,48 T" },
 ];
 
 /* ── Benchmark gaji per level (Rp juta) ──────────────────── */
@@ -146,13 +146,19 @@ export const benchmarkGaji: BenchmarkRow[] = [
 
 /* ── Pay gap ─────────────────────────────────────────────── */
 
+/**
+ * Ringkasan konsisten dengan payGapPerLevel (rata-rata tertimbang headcount).
+ * Unadjusted = gap agregat (termasuk efek komposisi level);
+ * adjusted = rata-rata gap per level (tertimbang headcount level).
+ */
 export const payGapRingkas = {
-  lakiLaki: "Rp 13,28 Jt",
-  perempuan: "Rp 11,85 Jt",
-  gap: "10,8%",
+  lakiLaki: "Rp 12,03 Jt",
+  perempuan: "Rp 10,15 Jt",
+  gap: "15,6%",
+  gapAdjusted: "10,0%",
   gapDelta: "1,2%",
   gapTrend: "up" as Trend,
-  gapCompare: "vs Q1 2025",
+  gapCompare: "vs Q1 2026",
 };
 
 /** Dumbbell per level: rata-rata gaji laki-laki vs perempuan (Rp juta). */
@@ -347,7 +353,7 @@ export interface CompInsight {
 export const compInsight: CompInsight[] = [
   {
     highlight: "Total biaya kompensasi",
-    isi: " meningkat 8,7% dibandingkan Q1 2025, sejalan dengan peningkatan kinerja perusahaan.",
+    isi: " meningkat 8,7% dibandingkan Q1 2026, sejalan dengan peningkatan kinerja perusahaan.",
     tone: "blue",
     icon: "trend",
   },

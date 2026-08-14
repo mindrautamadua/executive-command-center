@@ -29,7 +29,7 @@ function HalfGauge({ label }: { label: string }) {
   return (
     <span className="relative inline-flex" style={{ width: CX * 2, height: CY + 8 }}>
       <svg width={CX * 2} height={CY + 8}>
-        <path d={d} fill="none" stroke="#eef2f6" strokeWidth={16} />
+        <path d={d} fill="none" stroke="var(--surface-3)" strokeWidth={16} />
         {segs.map((s, i) => (
           <path
             key={s.label}
@@ -66,7 +66,7 @@ export function RealisasiKenaikanGaji() {
       style={{ "--d": "400ms" } as React.CSSProperties}
     >
       <h3 className="card-title-navy">Realisasi Kenaikan Gaji</h3>
-      <p className="mt-[3px] text-[9.5px] text-ink-500">Status Kenaikan Gaji Tahunan 2025</p>
+      <p className="mt-[3px] text-[9.5px] text-ink-500">Status Kenaikan Gaji Tahunan 2026</p>
 
       <div className="flex min-h-0 flex-1 items-center gap-2">
         <div className="flex flex-1 justify-center">

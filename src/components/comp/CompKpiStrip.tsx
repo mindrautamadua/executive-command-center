@@ -27,7 +27,7 @@ function MiniRing({ pct, color }: { pct: number; color: string }) {
   const c = 2 * Math.PI * r;
   return (
     <svg width={size} height={size} className="-rotate-90">
-      <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#eef2f6" strokeWidth={sw} />
+      <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="var(--surface-3)" strokeWidth={sw} />
       <circle
         cx={size / 2}
         cy={size / 2}

@@ -49,7 +49,7 @@ export function RingkasanUnitKompensasi() {
           {unitKompensasi.map((r, ri) => (
             <tr
               key={r.unit}
-              className="border-b border-[#f4f7fa] transition-colors last:border-0 hover:bg-[#f7f9fb]"
+              className="border-b border-[#f4f7fa] last:border-0"
             >
               <td className="whitespace-nowrap px-2 py-[6px] text-[9.5px] text-ink-900">
                 {r.unit}
