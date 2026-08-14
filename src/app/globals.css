@@ -1,0 +1,592 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-app: #f4f7f9;
+  --border-soft: #e8edf2;
+
+  /* Token tema — dipakai oleh lapisan override di bagian bawah file. */
+  --surface: #ffffff;
+  --surface-2: #f5f8fa;
+  --surface-3: #eef2f6;
+  --border-line: #e3e9ef;
+  --border-hair: #eef2f6;
+  --text-1: #1f2937;
+  --text-2: #374151;
+  --text-3: #6b7280;
+  --text-4: #9ca3af;
+  --text-5: #d1d5db;
+  --text-navy: #1b3a6b;
+  --text-blue: #2f6fe4;
+  --chart-grid: #f0f3f6;
+  --chart-axis: #e8edf2;
+  --chart-tick: #98a4b2;
+}
+
+[data-theme="dark"] {
+  --bg-app: #0e1420;
+  --border-soft: #27313f;
+
+  --surface: #161d29;
+  --surface-2: #1c2431;
+  --surface-3: #222b3a;
+  --border-line: #2a3444;
+  --border-hair: #232c3a;
+  --text-1: #e7ecf3;
+  --text-2: #c6cfdb;
+  --text-3: #94a1b2;
+  --text-4: #7b8898;
+  --text-5: #5c6675;
+  --text-navy: #8bb2f0;
+  --text-blue: #6fa4f7;
+  --chart-grid: #263042;
+  --chart-axis: #2c3648;
+  --chart-tick: #7d8b9c;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--bg-app);
+  color: var(--text-1);
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "tnum" 1;
+}
+
+@layer components {
+  .card {
+    @apply overflow-hidden rounded-xl border border-[#eef2f6] bg-white shadow-card transition-shadow duration-200 hover:shadow-cardHover;
+  }
+  .card-title {
+    @apply text-[11px] font-bold uppercase tracking-[0.06em] text-ink-900;
+  }
+  .card-title-navy {
+    @apply text-[11px] font-bold uppercase tracking-[0.05em] text-[#1b3a6b];
+  }
+  .card-title-sm {
+    @apply text-[10px] font-bold uppercase tracking-[0.04em] text-ink-900;
+  }
+  .select-chip-sm {
+    @apply inline-flex shrink-0 items-center gap-0.5 whitespace-nowrap rounded-md border border-[#e3e9ef] bg-white px-1.5 py-[4px] text-[9px] font-medium text-ink-500;
+  }
+  .muted-label {
+    @apply text-[10px] font-semibold tracking-[0.07em] text-ink-500 uppercase;
+  }
+  .link-more {
+    @apply text-[10px] font-semibold text-ptpn-greenDark hover:underline;
+  }
+  .select-chip {
+    @apply inline-flex items-center gap-1 rounded-md border border-[#e3e9ef] bg-white px-2 py-[3px] text-[10px] font-medium text-ink-500;
+  }
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* thin scrollbars */
+.scroll-thin::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+.scroll-thin::-webkit-scrollbar-thumb {
+  background: #d7dee6;
+  border-radius: 8px;
+}
+.scroll-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.recharts-surface {
+  overflow: visible;
+}
+
+/* ==========================================================================
+   MODE GELAP
+   Komponen memakai warna terang secara literal (bg-white, text-ink-*, dan
+   nilai heksa arbitrer). Daripada menyentuh 165 file, tema gelap dipasang
+   sebagai lapisan override yang memetakan warna-warna itu ke token gelap.
+   Selektor `[data-theme="dark"] .x` lebih spesifik dari utility `.x` sehingga
+   selalu menang tanpa perlu !important (kecuali untuk inline style).
+   ========================================================================== */
+
+[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+/* --- permukaan ------------------------------------------------------------ */
+[data-theme="dark"] .bg-white,
+[data-theme="dark"] .bg-\[\#fbfdfe\],
+[data-theme="dark"] .bg-\[\#f9fbfc\],
+[data-theme="dark"] .bg-\[\#f6f9fc\] {
+  background-color: var(--surface);
+}
+
+[data-theme="dark"] .bg-\[\#f5f8fa\],
+[data-theme="dark"] .bg-\[\#f7f9fb\],
+[data-theme="dark"] .bg-\[\#f4f7f9\],
+[data-theme="dark"] .bg-\[\#f1f5f8\],
+[data-theme="dark"] .bg-\[\#f2f5f8\],
+[data-theme="dark"] .bg-\[\#f8fafc\],
+[data-theme="dark"] .bg-\[\#fafcfd\],
+[data-theme="dark"] .bg-\[\#f6f8fa\] {
+  background-color: var(--surface-2);
+}
+
+[data-theme="dark"] .bg-\[\#eef2f6\],
+[data-theme="dark"] .bg-\[\#e3e9ef\],
+[data-theme="dark"] .bg-\[\#d7e0e8\],
+[data-theme="dark"] .bg-\[\#f2f6fa\],
+[data-theme="dark"] .bg-\[\#eef3f8\],
+[data-theme="dark"] .bg-\[\#f1f4f8\],
+[data-theme="dark"] .bg-\[\#e9eef3\],
+[data-theme="dark"] .bg-\[\#d9e2ea\],
+[data-theme="dark"] .bg-\[\#c6cfd8\],
+[data-theme="dark"] .bg-\[\#c3ccd8\] {
+  background-color: var(--surface-3);
+}
+
+/* --- kartu & garis -------------------------------------------------------- */
+[data-theme="dark"] .card {
+  background-color: var(--surface);
+  border-color: var(--border-hair);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.4),
+    0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .shadow-card {
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.4),
+    0 1px 2px rgba(0, 0, 0, 0.3);
+}
+[data-theme="dark"] .shadow-cardHover,
+[data-theme="dark"] .hover\:shadow-cardHover:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .border-\[\#e3e9ef\],
+[data-theme="dark"] .border-\[\#e9eef3\],
+[data-theme="dark"] .border-\[\#c9d4df\],
+[data-theme="dark"] .border-\[\#e8edf2\],
+[data-theme="dark"] .border-\[\#e6ecf2\],
+[data-theme="dark"] .border-\[\#dbe4ee\],
+[data-theme="dark"] .border-\[\#dbe3ea\],
+[data-theme="dark"] .border-\[\#dbeaf5\] {
+  border-color: var(--border-line);
+}
+
+[data-theme="dark"] .border-\[\#eef2f6\],
+[data-theme="dark"] .border-\[\#f4f7fa\],
+[data-theme="dark"] .border-\[\#f0f3f6\],
+[data-theme="dark"] .border-\[\#f2f5f8\],
+[data-theme="dark"] .border-\[\#f5f8fa\],
+[data-theme="dark"] .border-gray-100,
+[data-theme="dark"] .border-slate-100 {
+  border-color: var(--border-hair);
+}
+
+[data-theme="dark"] .ring-\[\#e6ecf2\],
+[data-theme="dark"] .ring-\[\#eef5f0\],
+[data-theme="dark"] .ring-\[\#eef2f6\] {
+  --tw-ring-color: var(--border-line);
+}
+
+[data-theme="dark"] .divide-\[\#eef2f6\] > :not([hidden]) ~ :not([hidden]),
+[data-theme="dark"] .divide-\[\#f2f5f8\] > :not([hidden]) ~ :not([hidden]) {
+  border-color: var(--border-hair);
+}
+
+/* --- teks ----------------------------------------------------------------- */
+[data-theme="dark"] .text-ink-900 {
+  color: var(--text-1);
+}
+[data-theme="dark"] .text-ink-700 {
+  color: var(--text-2);
+}
+[data-theme="dark"] .text-ink-500,
+[data-theme="dark"] .hover\:text-ink-700:hover {
+  color: var(--text-3);
+}
+[data-theme="dark"] .text-ink-400 {
+  color: var(--text-4);
+}
+[data-theme="dark"] .text-ink-300 {
+  color: var(--text-5);
+}
+[data-theme="dark"] .text-\[\#1b3a6b\],
+[data-theme="dark"] .card-title-navy {
+  color: var(--text-navy);
+}
+[data-theme="dark"] .text-\[\#2f6fe4\],
+[data-theme="dark"] .text-\[\#2563c9\],
+[data-theme="dark"] .text-ptpn-blue,
+[data-theme="dark"] .text-\[\#3b7ded\] {
+  color: var(--text-blue);
+}
+[data-theme="dark"] .text-\[\#d97706\],
+[data-theme="dark"] .text-\[\#b45309\] {
+  color: #fbbf24;
+}
+[data-theme="dark"] .text-\[\#65a30d\] {
+  color: #a3e635;
+}
+[data-theme="dark"] .text-\[\#7c5cf0\],
+[data-theme="dark"] .text-\[\#8b5cf6\] {
+  color: #a78bfa;
+}
+[data-theme="dark"] .text-\[\#16a34a\],
+[data-theme="dark"] .text-\[\#0f7a44\],
+[data-theme="dark"] .text-\[\#3f8f68\] {
+  color: #4ade80;
+}
+[data-theme="dark"] .text-\[\#0e8f7e\],
+[data-theme="dark"] .text-\[\#0d9488\] {
+  color: #2dd4bf;
+}
+[data-theme="dark"] .text-\[\#dc2626\] {
+  color: #f87171;
+}
+[data-theme="dark"] .text-ptpn-green,
+[data-theme="dark"] .text-ptpn-greenDark,
+[data-theme="dark"] .link-more {
+  color: #3ecf83;
+}
+[data-theme="dark"] .text-ptpn-navy {
+  color: var(--text-navy);
+}
+
+/* --- badge / tint pastel -------------------------------------------------- */
+[data-theme="dark"] .bg-ptpn-greenLight,
+[data-theme="dark"] .bg-\[\#e8f7ef\],
+[data-theme="dark"] .bg-\[\#eaf6ee\],
+[data-theme="dark"] .bg-\[\#e0f2e7\],
+[data-theme="dark"] .bg-\[\#eef9f2\],
+[data-theme="dark"] .bg-\[\#f0faf4\],
+[data-theme="dark"] .bg-\[\#ddf2e6\],
+[data-theme="dark"] .bg-\[\#dcfce7\] {
+  background-color: rgba(62, 207, 131, 0.14);
+}
+[data-theme="dark"] .bg-\[\#dbe9fb\],
+[data-theme="dark"] .bg-\[\#e8f0fe\],
+[data-theme="dark"] .bg-\[\#eef4ff\] {
+  background-color: rgba(111, 164, 247, 0.16);
+}
+[data-theme="dark"] .bg-\[\#fef4e3\],
+[data-theme="dark"] .bg-\[\#fde8bd\] {
+  background-color: rgba(245, 165, 36, 0.16);
+}
+[data-theme="dark"] .bg-\[\#efeaff\] {
+  background-color: rgba(167, 139, 250, 0.16);
+}
+[data-theme="dark"] .border-\[\#f5c76f\] {
+  border-color: rgba(245, 165, 36, 0.4);
+}
+[data-theme="dark"] .bg-\[\#e3f7f6\] {
+  background-color: rgba(45, 212, 191, 0.14);
+}
+[data-theme="dark"] .bg-\[\#fee2e2\],
+[data-theme="dark"] .bg-\[\#fdecec\],
+[data-theme="dark"] .bg-\[\#fdeaea\] {
+  background-color: rgba(248, 113, 113, 0.16);
+}
+[data-theme="dark"] .ring-\[\#e8f7ef\] {
+  --tw-ring-color: rgba(62, 207, 131, 0.25);
+}
+[data-theme="dark"] .border-\[\#dcefe3\],
+[data-theme="dark"] .border-\[\#9ad9b8\],
+[data-theme="dark"] .border-\[\#c3e4cd\] {
+  border-color: rgba(62, 207, 131, 0.3);
+}
+[data-theme="dark"] .border-\[\#dbeafe\],
+[data-theme="dark"] .border-\[\#dbeff0\],
+[data-theme="dark"] .border-\[\#e4eff0\] {
+  border-color: rgba(111, 164, 247, 0.3);
+}
+
+/* --- gradien wash terang -------------------------------------------------- */
+[data-theme="dark"] .from-\[\#f0faf6\],
+[data-theme="dark"] .from-\[\#eefaf7\],
+[data-theme="dark"] .from-\[\#eef5fd\],
+[data-theme="dark"] .from-\[\#dfeaf8\] {
+  --tw-gradient-from: var(--surface-2) var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(28 36 49 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+[data-theme="dark"] .to-\[\#eaf5fb\],
+[data-theme="dark"] .to-\[\#e7f0fb\],
+[data-theme="dark"] .to-\[\#e6f4fb\],
+[data-theme="dark"] .to-\[\#c9dcf3\] {
+  --tw-gradient-to: var(--surface-3) var(--tw-gradient-to-position);
+}
+[data-theme="dark"] .via-\[\#f2fbf8\] {
+  --tw-gradient-to: rgb(28 36 49 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops:
+    var(--tw-gradient-from), var(--surface-2) var(--tw-gradient-via-position),
+    var(--tw-gradient-to);
+}
+
+/* --- hover state ---------------------------------------------------------- */
+[data-theme="dark"] .hover\:bg-\[\#f5f8fa\]:hover,
+[data-theme="dark"] .hover\:bg-\[\#f7f9fb\]:hover,
+[data-theme="dark"] .hover\:bg-\[\#f2f5f8\]:hover,
+[data-theme="dark"] .hover\:bg-\[\#f1f5f8\]:hover,
+[data-theme="dark"] .hover\:bg-\[\#f4f7f9\]:hover {
+  background-color: var(--surface-3);
+}
+[data-theme="dark"] .hover\:bg-white:hover {
+  background-color: var(--surface-2);
+}
+
+/* --- scrollbar ------------------------------------------------------------ */
+[data-theme="dark"] .scroll-thin::-webkit-scrollbar-thumb {
+  background: #33405280;
+}
+
+/* --- recharts ------------------------------------------------------------- */
+[data-theme="dark"] .recharts-cartesian-grid line,
+[data-theme="dark"] .recharts-polar-grid line,
+[data-theme="dark"] .recharts-polar-grid path {
+  stroke: var(--chart-grid);
+}
+[data-theme="dark"] .recharts-cartesian-axis-line,
+[data-theme="dark"] .recharts-cartesian-axis-tick-line {
+  stroke: var(--chart-axis);
+}
+[data-theme="dark"] .recharts-cartesian-axis-tick-value tspan,
+[data-theme="dark"] .recharts-polar-angle-axis-tick-value tspan,
+[data-theme="dark"] .recharts-polar-radius-axis-tick-value tspan {
+  fill: var(--chart-tick);
+}
+[data-theme="dark"] .recharts-legend-item-text {
+  color: var(--text-3) !important;
+}
+/* Label chart yang di-hardcode gelap agar tetap terbaca. */
+[data-theme="dark"] .recharts-wrapper text[fill="#1f2937"],
+[data-theme="dark"] .recharts-wrapper text[fill="#334155"] {
+  fill: var(--text-1);
+}
+[data-theme="dark"] .recharts-wrapper text[fill="#64748b"] {
+  fill: var(--text-3);
+}
+/* Tooltip memakai inline style, jadi perlu !important. */
+[data-theme="dark"] .recharts-default-tooltip {
+  background-color: var(--surface-2) !important;
+  border-color: var(--border-line) !important;
+  color: var(--text-1) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
+}
+[data-theme="dark"] .recharts-tooltip-label,
+[data-theme="dark"] .recharts-tooltip-item-name,
+[data-theme="dark"] .recharts-tooltip-item-separator,
+[data-theme="dark"] .recharts-tooltip-item-value {
+  color: var(--text-1) !important;
+}
+/* Titik garis memakai stroke putih agar "menempel" di kartu terang. */
+[data-theme="dark"] .recharts-dot[stroke="#fff"],
+[data-theme="dark"] .recharts-dot[stroke="#ffffff"] {
+  stroke: var(--surface);
+}
+
+/* --- tombol tema ---------------------------------------------------------- */
+.theme-toggle {
+  background-color: var(--surface-2);
+  border-color: var(--border-line);
+}
+.theme-toggle-knob {
+  background-color: var(--surface);
+  color: var(--text-2);
+}
+[data-theme="dark"] .theme-toggle {
+  background-color: #0b101a;
+}
+[data-theme="dark"] .theme-toggle-knob {
+  background-color: #3a4658;
+  color: #e7ecf3;
+}
+
+/* --- ilustrasi SVG di luar recharts -------------------------------------- */
+[data-theme="dark"] svg [stroke="#f2f5f8"],
+[data-theme="dark"] svg [stroke="#eef2f6"],
+[data-theme="dark"] svg [stroke="#f0f3f6"],
+[data-theme="dark"] svg [stroke="#e9ebfa"],
+[data-theme="dark"] svg [stroke="#e6ecf2"] {
+  stroke: var(--chart-grid);
+}
+/* Label chart SVG manual yang fill-nya hex gelap/abu literal. */
+[data-theme="dark"] svg text[fill="#1f2937"],
+[data-theme="dark"] svg text[fill="#374151"] {
+  fill: var(--text-1);
+}
+[data-theme="dark"] svg text[fill="#6b7280"] {
+  fill: var(--text-3);
+}
+[data-theme="dark"] svg text[fill="#9ca3af"] {
+  fill: var(--chart-tick);
+}
+/* Titik data putih pada line chart manual agar menempel di kartu gelap. */
+[data-theme="dark"] svg circle[fill="#fff"][stroke="#1a9c5b"] {
+  fill: var(--surface);
+}
+
+/* ==========================================================================
+   SEL 9 BOX TALENT GRID
+   Latar pastel dipakai sebagai kelas (bukan inline style) supaya punya
+   pasangan gelap — inline style tidak bisa di-override tanpa !important.
+   ========================================================================== */
+.nb-green {
+  background-color: #ddf2e6;
+  border-color: #9ad9b8;
+}
+.nb-green-soft {
+  background-color: #eaf7ef;
+  border-color: #c3e4cd;
+}
+.nb-green-pale {
+  background-color: #f2faf5;
+  border-color: #d5ebde;
+}
+.nb-amber {
+  background-color: #fdf6e3;
+  border-color: #f5e3b3;
+}
+.nb-red {
+  background-color: #fdeaea;
+  border-color: #f6c9c9;
+}
+
+[data-theme="dark"] .nb-green {
+  background-color: rgba(62, 207, 131, 0.24);
+  border-color: rgba(62, 207, 131, 0.42);
+}
+[data-theme="dark"] .nb-green-soft {
+  background-color: rgba(62, 207, 131, 0.16);
+  border-color: rgba(62, 207, 131, 0.32);
+}
+[data-theme="dark"] .nb-green-pale {
+  background-color: rgba(62, 207, 131, 0.1);
+  border-color: rgba(62, 207, 131, 0.24);
+}
+[data-theme="dark"] .nb-amber {
+  background-color: rgba(245, 165, 36, 0.16);
+  border-color: rgba(245, 165, 36, 0.34);
+}
+[data-theme="dark"] .nb-red {
+  background-color: rgba(248, 113, 113, 0.16);
+  border-color: rgba(248, 113, 113, 0.34);
+}
+
+/* Sel nine-box halaman profil — tiga intensitas per warna. */
+.nb-c-green-3 { background-color: #9fdcb4; }
+.nb-c-green-2 { background-color: #dcf2e2; }
+.nb-c-amber-2 { background-color: #fdeecd; }
+.nb-c-amber-1 { background-color: #fdf2d2; }
+.nb-c-red-3   { background-color: #f6c7c1; }
+.nb-c-red-2   { background-color: #f8d3cc; }
+.nb-c-red-1   { background-color: #f9dcd7; }
+
+[data-theme="dark"] .nb-c-green-3 { background-color: rgba(62, 207, 131, 0.38); }
+[data-theme="dark"] .nb-c-green-2 { background-color: rgba(62, 207, 131, 0.18); }
+[data-theme="dark"] .nb-c-amber-2 { background-color: rgba(245, 165, 36, 0.28); }
+[data-theme="dark"] .nb-c-amber-1 { background-color: rgba(245, 165, 36, 0.16); }
+[data-theme="dark"] .nb-c-red-3   { background-color: rgba(248, 113, 113, 0.36); }
+[data-theme="dark"] .nb-c-red-2   { background-color: rgba(248, 113, 113, 0.26); }
+[data-theme="dark"] .nb-c-red-1   { background-color: rgba(248, 113, 113, 0.16); }
+
+/* Kartu jalur karier — wash pastel dengan pasangan gelap. */
+.career-blue   { background-color: #e8f0fe; border-color: #c7dbfb; }
+.career-green  { background-color: #f2fbf6; border-color: #c9ecd8; }
+.career-amber  { background-color: #fefaf1; border-color: #f3e3bd; }
+.career-purple { background-color: #faf8fe; border-color: #e2d8f8; }
+
+[data-theme="dark"] .career-blue   { background-color: rgba(111, 164, 247, 0.14); border-color: rgba(111, 164, 247, 0.3); }
+[data-theme="dark"] .career-green  { background-color: rgba(62, 207, 131, 0.12); border-color: rgba(62, 207, 131, 0.28); }
+[data-theme="dark"] .career-amber  { background-color: rgba(245, 165, 36, 0.12); border-color: rgba(245, 165, 36, 0.28); }
+[data-theme="dark"] .career-purple { background-color: rgba(167, 139, 250, 0.12); border-color: rgba(167, 139, 250, 0.28); }
+
+/* ==========================================================================
+   TONE CHIP — pengganti inline style pastel (icon KPI, badge, insight).
+   Kelas punya pasangan gelap; inline style tidak.
+   ========================================================================== */
+.tone-green  { background-color: #e8f7ef; color: #0f7a44; }
+.tone-lime   { background-color: #f3f8e3; color: #4d7c0f; }
+.tone-blue   { background-color: #e3edfd; color: #2563c9; }
+.tone-teal   { background-color: #e0f5f3; color: #0d9488; }
+.tone-amber  { background-color: #fdf3dd; color: #b45309; }
+.tone-red    { background-color: #fdeaea; color: #dc2626; }
+.tone-purple { background-color: #f2ecfe; color: #7c3aed; }
+.tone-pink   { background-color: #fdeaf4; color: #db2777; }
+.tone-slate  { background-color: #eef2f6; color: #64748b; }
+
+[data-theme="dark"] .tone-green  { background-color: rgba(62, 207, 131, 0.14); color: #4ade80; }
+[data-theme="dark"] .tone-lime   { background-color: rgba(163, 230, 53, 0.14); color: #a3e635; }
+[data-theme="dark"] .tone-blue   { background-color: rgba(111, 164, 247, 0.16); color: #6fa4f7; }
+[data-theme="dark"] .tone-teal   { background-color: rgba(45, 212, 191, 0.14); color: #2dd4bf; }
+[data-theme="dark"] .tone-amber  { background-color: rgba(245, 165, 36, 0.16); color: #fbbf24; }
+[data-theme="dark"] .tone-red    { background-color: rgba(248, 113, 113, 0.16); color: #f87171; }
+[data-theme="dark"] .tone-purple { background-color: rgba(167, 139, 250, 0.16); color: #a78bfa; }
+[data-theme="dark"] .tone-pink   { background-color: rgba(244, 114, 182, 0.16); color: #f472b6; }
+[data-theme="dark"] .tone-slate  { background-color: rgba(148, 163, 184, 0.14); color: #94a3b8; }
+
+/* Warna Delta (naik/turun) dengan pasangan gelap. */
+.delta-good { color: #16a34a; }
+.delta-bad  { color: #ef4444; }
+[data-theme="dark"] .delta-good { color: #4ade80; }
+[data-theme="dark"] .delta-bad  { color: #f87171; }
+
+/* ==========================================================================
+   SISTEM MOTION
+   anim-rise: entrance kartu (fade + naik), stagger via --d (animation-delay).
+   anim-grow-x: bar tumbuh dari kiri (pasang pada elemen fill bar).
+   anim-draw: garis SVG ter-gambar (butuh pathLength={1} pada path).
+   anim-fade: fade-in sederhana.
+   ========================================================================== */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes growX {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+@keyframes drawLine {
+  from { stroke-dashoffset: 1; }
+  to   { stroke-dashoffset: 0; }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.anim-rise {
+  animation: rise 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--d, 0ms);
+}
+.anim-grow-x {
+  transform-origin: left;
+  animation: growX 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--d, 0ms);
+}
+.anim-draw {
+  stroke-dasharray: 1;
+  animation: drawLine 1s ease-out both;
+  animation-delay: var(--d, 0ms);
+}
+.anim-fade {
+  animation: fadeIn 0.7s ease-out both;
+  animation-delay: var(--d, 0ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-rise, .anim-grow-x, .anim-draw, .anim-fade {
+    animation: none;
+  }
+}
