@@ -17,7 +17,20 @@ export function CountUp({
   className?: string;
 }) {
   const [text, setText] = useState(value);
+  const [flash, setFlash] = useState(false);
   const raf = useRef<number>(0);
+  const firstRender = useRef(true);
+
+  // Flash hijau singkat saat nilai berubah setelah mount (data ter-update).
+  useEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false;
+      return;
+    }
+    setFlash(true);
+    const t = setTimeout(() => setFlash(false), 700);
+    return () => clearTimeout(t);
+  }, [value]);
 
   useEffect(() => {
     const m = value.match(/-?\d[\d.]*(?:,\d+)?/);
@@ -51,5 +64,7 @@ export function CountUp({
     return () => cancelAnimationFrame(raf.current);
   }, [value, duration]);
 
-  return <span className={className}>{text}</span>;
+  return (
+    <span className={`${flash ? "anim-value-flash " : ""}${className}`}>{text}</span>
+  );
 }

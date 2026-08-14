@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Cell, Pie, PieChart, ResponsiveContainer, Sector, Tooltip } from "recharts";
 import { CHART_TOOLTIP_STYLE } from "@/lib/chart-palette";
+import { CountUp } from "./CountUp";
 
 export interface DonutDatum {
   name: string;
@@ -60,6 +61,8 @@ export function DonutChart({
             strokeWidth={0}
             startAngle={90}
             endAngle={-270}
+            animationBegin={200}
+            animationDuration={700}
             activeIndex={active ?? undefined}
             activeShape={(props: any) => (
               <Sector {...props} outerRadius={props.outerRadius + 4} />
@@ -83,7 +86,9 @@ export function DonutChart({
         </PieChart>
       </ResponsiveContainer>
       <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center">
-        <span className="text-[19px] font-bold leading-none text-ink-900">{center}</span>
+        <span className="text-[19px] font-bold leading-none text-ink-900">
+          <CountUp value={center} />
+        </span>
         {centerCaption && (
           <span className="mt-1 text-[9.5px] font-medium text-ink-400">{centerCaption}</span>
         )}

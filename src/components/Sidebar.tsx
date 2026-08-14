@@ -1,5 +1,6 @@
 "use client";
 
+import { useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowRight } from "lucide-react";
@@ -8,6 +9,21 @@ import { NAV } from "@/lib/nav";
 
 export function Sidebar() {
   const pathname = usePathname();
+  const navRef = useRef<HTMLElement>(null);
+  const [pill, setPill] = useState<{ top: number; height: number } | null>(null);
+
+  // Pill hijau meluncur mengikuti item aktif, diukur ulang saat rute berubah.
+  useLayoutEffect(() => {
+    const nav = navRef.current;
+    if (!nav) return;
+    const measure = () => {
+      const el = nav.querySelector<HTMLElement>('[data-active="true"]');
+      setPill(el ? { top: el.offsetTop, height: el.offsetHeight } : null);
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, [pathname]);
 
   return (
     <aside className="flex h-full w-[196px] shrink-0 flex-col border-r border-[#e9eef3] bg-white">
@@ -25,12 +41,19 @@ export function Sidebar() {
       </div>
 
       {/* nav */}
-      <nav className="scroll-thin flex-1 overflow-y-auto px-3 pb-2">
+      <nav ref={navRef} className="scroll-thin relative flex-1 overflow-y-auto px-3 pb-2">
+        {pill && (
+          <span
+            aria-hidden
+            className="absolute left-3 right-3 top-0 rounded-lg bg-ptpn-greenLight transition-[transform,height] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none"
+            style={{ transform: `translateY(${pill.top}px)`, height: pill.height }}
+          />
+        )}
         {NAV.map(({ label, href, icon: Icon, ready }) => {
           const on = pathname === href;
-          const cls = `mb-[3px] flex w-full items-center gap-2.5 rounded-lg px-3 py-[9px] text-left text-[11.5px] transition-colors ${
+          const cls = `relative mb-[3px] flex w-full items-center gap-2.5 rounded-lg px-3 py-[9px] text-left text-[11.5px] transition-[background-color,color,transform] duration-150 active:scale-[0.98] motion-reduce:transition-none motion-reduce:active:scale-100 ${
             on
-              ? "bg-ptpn-greenLight font-semibold text-ptpn-green"
+              ? "font-semibold text-ptpn-green"
               : "font-medium text-ink-500 hover:bg-[#f5f8fa]"
           }`;
           const inner = (
@@ -41,7 +64,7 @@ export function Sidebar() {
           );
 
           return ready ? (
-            <Link key={label} href={href} className={cls}>
+            <Link key={label} href={href} data-active={on || undefined} className={cls}>
               {inner}
             </Link>
           ) : (
@@ -93,7 +116,7 @@ export function Sidebar() {
           <p className="text-[9.5px] leading-[1.4] text-ink-500">
             Transformation for Sustainable Future
           </p>
-          <button className="mt-2.5 flex w-full items-center justify-between rounded-lg border border-[#e3e9ef] bg-white px-2.5 py-1.5 text-[10px] font-semibold text-ptpn-green transition-colors hover:bg-ptpn-greenLight">
+          <button className="mt-2.5 flex w-full items-center justify-between rounded-lg border border-[#e3e9ef] bg-white px-2.5 py-1.5 text-[10px] font-semibold text-ptpn-green transition-[background-color,transform] duration-150 hover:bg-ptpn-greenLight active:scale-[0.98] motion-reduce:transition-none motion-reduce:active:scale-100">
             Selengkapnya
             <ArrowRight size={12} />
           </button>

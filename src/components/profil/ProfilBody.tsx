@@ -65,7 +65,10 @@ export function ProfilBody() {
         <ProfilHero />
         <ProfilTabs active={active} onChange={setActive} />
       </div>
-      <Active />
+      {/* key memaksa re-mount agar konten tab masuk dengan fade */}
+      <div key={active} className="anim-fade" style={{ "--d": "0ms" } as React.CSSProperties}>
+        <Active />
+      </div>
     </div>
   );
 }
