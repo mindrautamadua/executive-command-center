@@ -9,11 +9,14 @@ import {
   hpiBemRootCause,
 } from "@/lib/profil-data";
 
-/* Kelas chip/teks per tone dimensi B/E/M (pasangan gelap di globals.css). */
+/* Kelas chip/teks per tone sel BEM Gilbert (pasangan gelap di globals.css). */
 const DIMENSI_TONE: Record<string, { chip: string; text: string }> = {
   green: { chip: "tone-green", text: "text-[#16a34a]" },
   blue: { chip: "tone-blue", text: "text-[#3b7ded]" },
-  purple: { chip: "tone-purple", text: "text-[#8b5cf6]" },
+  purple: { chip: "tone-purple", text: "text-[#7c3aed]" },
+  red: { chip: "tone-red", text: "text-[#dc2626]" },
+  amber: { chip: "tone-amber", text: "text-[#b45309]" },
+  teal: { chip: "tone-teal", text: "text-[#0d9488]" },
 };
 
 /* ── Ringkasan Performance Gap ──────────────────────────── */
@@ -106,20 +109,20 @@ function DonutSkor() {
 function DimensiKolom({ d }: { d: (typeof hpiBemDiagnostic.dimensi)[number] }) {
   const tone = DIMENSI_TONE[d.tone] ?? DIMENSI_TONE.green;
   return (
-    <div className="min-w-0 flex-1 border-l border-[#f1f4f8] pl-4 first:border-l-0 first:pl-0">
+    <div className="min-w-0 rounded-lg border border-[#f1f4f8] p-2.5">
       <div className="flex items-center gap-2">
         <span
-          className={`flex h-[26px] w-[26px] shrink-0 items-center justify-center rounded-lg text-[11px] font-extrabold ${tone.chip}`}
+          className={`flex h-[26px] shrink-0 items-center justify-center rounded-lg px-1.5 text-[9px] font-extrabold ${tone.chip}`}
         >
           {d.inisial}
         </span>
-        <div className="leading-tight">
-          <div className="text-[10px] font-bold text-ink-900">{d.label}</div>
-          <div className="text-[8px] text-ink-500">{d.sub}</div>
+        <div className="min-w-0 leading-tight">
+          <div className="truncate text-[10px] font-bold text-ink-900">{d.label}</div>
+          <div className="truncate text-[8px] text-ink-500">{d.sub}</div>
         </div>
       </div>
       <div className="mt-2 flex items-baseline gap-1">
-        <span className={`text-[24px] font-extrabold leading-none ${tone.text}`}>{d.skor}</span>
+        <span className={`text-[22px] font-extrabold leading-none ${tone.text}`}>{d.skor}</span>
         <span className="text-[9px] text-ink-400">/100</span>
       </div>
       <span
@@ -177,11 +180,15 @@ function InterpretasiPanel() {
   );
 }
 
+/** Urutan kelompok sel Behavior Engineering Model (Gilbert). */
+const KELOMPOK = ["Environmental Supports", "Person's Repertory"];
+
 function DiagnosticCard() {
   return (
     <div className="card px-4 pb-4 pt-3.5">
       <h3 className="flex items-center gap-1.5 text-[11px] font-bold text-ink-900">
-        1. HPI BEM DIAGNOSTIC <Info size={11} className="text-ink-400" />
+        1. HPI BEM DIAGNOSTIC — BEHAVIOR ENGINEERING MODEL (6 SEL){" "}
+        <Info size={11} className="text-ink-400" />
       </h3>
       <div className="flex items-start gap-4 pt-3">
         <div className="flex shrink-0 flex-col items-center">
@@ -200,9 +207,20 @@ function DiagnosticCard() {
             </div>
           </div>
         </div>
-        <div className="flex min-w-0 flex-1 gap-4 rounded-xl border border-[#f1f4f8] p-3.5">
-          {hpiBemDiagnostic.dimensi.map((d) => (
-            <DimensiKolom key={d.label} d={d} />
+        <div className="min-w-0 flex-1 space-y-2.5 rounded-xl border border-[#f1f4f8] p-3.5">
+          {KELOMPOK.map((k) => (
+            <div key={k}>
+              <div className="text-[8px] font-bold uppercase tracking-[0.05em] text-ink-400">
+                {k}
+              </div>
+              <div className="mt-1.5 grid grid-cols-3 gap-2.5">
+                {hpiBemDiagnostic.dimensi
+                  .filter((d) => d.kelompok === k)
+                  .map((d) => (
+                    <DimensiKolom key={d.label} d={d} />
+                  ))}
+              </div>
+            </div>
           ))}
         </div>
         <InterpretasiPanel />

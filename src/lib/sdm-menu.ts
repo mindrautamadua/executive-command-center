@@ -3,6 +3,7 @@ import {
   BookText,
   BrainCircuit,
   CalendarCheck,
+  Contact,
   CalendarClock,
   Database,
   Gauge,
@@ -41,7 +42,10 @@ export interface SdmMenuSection {
 /** Menu HC Executive Command Center — dikelompokkan per domain intelijen. */
 export const SDM_MENU_SECTIONS: SdmMenuSection[] = [
   {
-    items: [{ label: "Executive Overview", icon: LayoutDashboard, href: "/sdm-talenta" }],
+    items: [
+      { label: "Executive Overview", icon: LayoutDashboard, href: "/sdm-talenta" },
+      { label: "Direktori Karyawan", icon: Contact, href: "/sdm-talenta/direktori-karyawan" },
+    ],
   },
   {
     title: "People Intelligence",

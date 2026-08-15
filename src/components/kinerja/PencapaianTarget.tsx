@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { pencapaian, kpiStrategis } from "@/lib/kinerja-data";
 import { Delta } from "../ui/Delta";
@@ -100,9 +101,9 @@ export function PencapaianTarget() {
         </div>
       </div>
 
-      <button className="link-more mt-1 flex items-center gap-1">
+      <Link href="/kinerja-karyawan/kpi-strategis" className="link-more mt-1 flex items-center gap-1">
         Lihat KPI strategis <ChevronRight size={11} />
-      </button>
+      </Link>
     </div>
   );
 }

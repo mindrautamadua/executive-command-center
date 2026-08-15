@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { levelJabatan, levelLegend } from "@/lib/kinerja-data";
 import { ScopeNote } from "@/components/ui/ScopeNote";
@@ -56,9 +57,9 @@ export function KinerjaLevelJabatan() {
         ))}
       </div>
 
-      <button className="link-more mt-1 flex items-center gap-1">
+      <Link href="/kinerja-karyawan/level-jabatan" className="link-more mt-1 flex items-center gap-1">
         Lihat detail level jabatan <ChevronRight size={11} />
-      </button>
+      </Link>
     </div>
   );
 }

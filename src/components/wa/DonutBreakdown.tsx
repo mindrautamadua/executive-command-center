@@ -15,11 +15,14 @@ export function DonutBreakdown({
   data,
   delay = 0,
   orgDimension = false,
+  href,
 }: {
   title: string;
   subtitle: string;
   data: DonutRow[];
   delay?: number;
+  /** Tujuan tautan "Lihat Detail". */
+  href?: string;
   /** true bila `name` tiap baris adalah entitas organisasi (dimensi subholding). */
   orgDimension?: boolean;
 }) {
@@ -42,6 +45,7 @@ export function DonutBreakdown({
       <SectionHead
         title={title}
         action="Lihat Detail"
+        href={href}
         badge={orgDimension ? undefined : <ScopeNote />}
       />
       <p className="mt-[3px] text-[9px] text-ink-500">{subtitle}</p>

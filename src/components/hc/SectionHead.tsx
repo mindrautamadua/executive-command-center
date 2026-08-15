@@ -1,15 +1,19 @@
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 /** Kepala seksi + tautan aksi di kanan, dipakai semua kartu HC ECC. */
 export function SectionHead({
   title,
   action,
+  href,
   badge,
   className = "",
 }: {
   title: string;
   /** Label tautan kanan; kosongkan untuk tanpa tautan. */
   action?: string;
+  /** Tujuan tautan aksi. Tanpa ini, aksi tetap tombol tanpa navigasi. */
+  href?: string;
   /** Penanda kecil di samping judul, mis. <ScopeNote /> untuk kartu konsolidasi. */
   badge?: React.ReactNode;
   className?: string;
@@ -20,7 +24,15 @@ export function SectionHead({
         <span className="truncate">{title}</span>
         {badge}
       </h3>
-      {action && (
+      {action && href && (
+        <Link
+          href={href}
+          className="flex shrink-0 cursor-pointer items-center gap-1 text-[9.5px] font-semibold text-ptpn-green hover:underline"
+        >
+          {action} <ArrowRight size={11} />
+        </Link>
+      )}
+      {action && !href && (
         <button className="flex shrink-0 cursor-pointer items-center gap-1 text-[9.5px] font-semibold text-ptpn-green hover:underline">
           {action} <ArrowRight size={11} />
         </button>

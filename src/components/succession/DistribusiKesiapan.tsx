@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ArrowRight, ChevronRight } from "lucide-react";
 import { distribusiKesiapan, totalKandidat } from "@/lib/succession-data";
 
@@ -73,9 +74,9 @@ export function DistribusiKesiapan() {
         </div>
       </div>
 
-      <button className="link-more mt-1 flex cursor-pointer items-center gap-0.5">
+      <Link href="/succession-planning/kesiapan" className="link-more mt-1 flex cursor-pointer items-center gap-0.5">
         Lihat detail kesiapan <ChevronRight size={12} />
-      </button>
+      </Link>
     </div>
   );
 }

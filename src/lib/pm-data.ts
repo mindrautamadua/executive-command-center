@@ -105,7 +105,7 @@ export const pmKpi: PmKpi[] = [
 
 export const pmInsightUtama = {
   title: "Insight Utama",
-  text: "Performance gap terbesar disebabkan oleh faktor Environment. Fokus utama: perbaikan sistem kerja, proses, tools, dan dukungan leadership.",
+  text: "Performance gap terbesar berasal dari sisi Environmental Supports (Data, Instruments, Incentives) — 64% total gap. Fokus utama: kejelasan ekspektasi & feedback, sistem/tools kerja, dan keterkaitan insentif dengan outcome.",
 };
 
 /* ── 1. People Math Dimension Score (radar) ───────────────────────── */
@@ -135,15 +135,33 @@ export const pmDimensiLegend = [
 
 /* ── 2. HPI BEM Score Overview ────────────────────────────────────── */
 
+/**
+ * Behavior Engineering Model (Thomas F. Gilbert) — 6 sel dalam 2 kelompok:
+ * Environmental Supports (Data, Instruments, Incentives) dan
+ * Person's Repertory of Behavior (Knowledge, Capacity, Motives).
+ */
 export const hpiBemOverview = {
   total: "82,1",
   kategori: "Kuat",
-  dimensi: [
-    { label: "Behavior (B)", skor: 84, color: PALETTE.green },
-    { label: "Environment (E)", skor: 76, color: PALETTE.amber },
-    { label: "Mindset (M)", skor: 86, color: PALETTE.green },
+  kelompok: [
+    {
+      judul: "Environmental Supports",
+      sel: [
+        { label: "Data (Informasi)", kode: "DAT", skor: 76, color: PALETTE.green },
+        { label: "Instruments (Sarana)", kode: "INS", skor: 73, color: PALETTE.amber },
+        { label: "Incentives (Insentif)", kode: "INC", skor: 81, color: PALETTE.green },
+      ],
+    },
+    {
+      judul: "Person's Repertory of Behavior",
+      sel: [
+        { label: "Knowledge (Pengetahuan)", kode: "KNW", skor: 88, color: PALETTE.green },
+        { label: "Capacity (Kapasitas)", kode: "CAP", skor: 89, color: PALETTE.green },
+        { label: "Motives (Motif)", kode: "MOT", skor: 86, color: PALETTE.green },
+      ],
+    },
   ],
-  catatan: "Opportunity terbesar berada pada Dimensi Environment.",
+  catatan: "Opportunity terbesar berada pada sel Instruments (sarana & sistem kerja).",
 };
 
 /* ── 3. Performance Gap Analysis ──────────────────────────────────── */
@@ -151,11 +169,15 @@ export const hpiBemOverview = {
 export const gapAnalysis = {
   avg: "11,8%",
   rows: [
-    { name: "Behavior Gap", value: 3.2, pct: "3,2%", color: PALETTE.red },
-    { name: "Environment Gap", value: 5.1, pct: "5,1%", color: PALETTE.amber },
-    { name: "Mindset Gap", value: 3.5, pct: "3,5%", color: PALETTE.greenSoft },
+    { name: "Data Gap", value: 2.1, pct: "2,1%", color: PALETTE.blue },
+    { name: "Instruments Gap", value: 3.4, pct: "3,4%", color: PALETTE.red },
+    { name: "Incentives Gap", value: 2.0, pct: "2,0%", color: PALETTE.amber },
+    { name: "Knowledge Gap", value: 1.6, pct: "1,6%", color: PALETTE.teal },
+    { name: "Capacity Gap", value: 1.3, pct: "1,3%", color: PALETTE.purple },
+    { name: "Motives Gap", value: 1.4, pct: "1,4%", color: PALETTE.greenSoft },
   ],
-  catatan: "Environment Gap adalah penyebab utama performance gap.",
+  catatanHighlight: "Environmental Supports",
+  catatan: "menyumbang 7,5% dari 11,8% total gap (64%) — sel Instruments terbesar.",
 };
 
 /* ── 4. People Math Profile Cluster ───────────────────────────────── */
@@ -186,13 +208,13 @@ export const pmClusterCatatan =
 /* ── 5. HPI Root Cause Analysis ───────────────────────────────────── */
 
 export const rootCause = {
-  header: "Dimensi Environment – Gap 5,1% (Tertinggi)",
+  header: "Environmental Supports – Gap 7,5% (64% dari total gap)",
   rows: [
-    { faktor: "Proses kerja belum terstandarisasi", impact: "High", populasi: "12.842 (46%)" },
-    { faktor: "Sistem & tools belum optimal", impact: "High", populasi: "10.231 (37%)" },
-    { faktor: "Dukungan leadership belum konsisten", impact: "Medium", populasi: "7.421 (27%)" },
-    { faktor: "Akses data & informasi terbatas", impact: "Medium", populasi: "6.311 (22%)" },
-    { faktor: "Beban kerja tidak seimbang", impact: "Low", populasi: "4.008 (14%)" },
+    { faktor: "Instruments — Sistem & tools kerja belum optimal", impact: "High", populasi: "12.842 (46%)" },
+    { faktor: "Data — Ekspektasi & SOP belum terstandarisasi", impact: "High", populasi: "10.231 (37%)" },
+    { faktor: "Data — Feedback kinerja belum rutin & spesifik", impact: "Medium", populasi: "7.421 (27%)" },
+    { faktor: "Incentives — Insentif belum terkait outcome kerja", impact: "Medium", populasi: "6.311 (22%)" },
+    { faktor: "Instruments — Waktu & beban kerja tidak seimbang", impact: "Low", populasi: "4.008 (14%)" },
   ] as { faktor: string; impact: "High" | "Medium" | "Low"; populasi: string }[],
   catatan: "Estimated Improvement Potential:",
   catatanHighlight: "+8–12%",
@@ -202,10 +224,22 @@ export const rootCause = {
 
 /* ── 6. Intervention Portfolio ────────────────────────────────────── */
 
+/** Kode sel Behavior Engineering Model — lihat `BEM_SEL`. */
+export type BemSel = "DAT" | "INS" | "INC" | "KNW" | "CAP" | "MOT";
+
+export const BEM_SEL: Record<BemSel, { nama: string; kelompok: "Environmental" | "Repertory" }> = {
+  DAT: { nama: "Data (Informasi)", kelompok: "Environmental" },
+  INS: { nama: "Instruments (Sarana)", kelompok: "Environmental" },
+  INC: { nama: "Incentives (Insentif)", kelompok: "Environmental" },
+  KNW: { nama: "Knowledge (Pengetahuan)", kelompok: "Repertory" },
+  CAP: { nama: "Capacity (Kapasitas)", kelompok: "Repertory" },
+  MOT: { nama: "Motives (Motif)", kelompok: "Repertory" },
+};
+
 export interface IntervensiRow {
   prioritas: number;
   intervensi: string;
-  dimensi: "B" | "E" | "M";
+  dimensi: BemSel;
   impact: string;
   populasi: string;
   /** Estimasi biaya program (ilustratif — final di business case). */
@@ -216,11 +250,11 @@ export interface IntervensiRow {
 }
 
 export const intervensiPriority: IntervensiRow[] = [
-  { prioritas: 1, intervensi: "Perbaikan Proses & SOP", dimensi: "E", impact: "+4,2%", populasi: "12.842", cost: "Rp 12,5 M", confidence: "High", status: "Berjalan", valueCost: "Sangat Tinggi" },
-  { prioritas: 2, intervensi: "Digitalisasi Tools & Sistem", dimensi: "E", impact: "+3,1%", populasi: "10.231", cost: "Rp 28,0 M", confidence: "Medium", status: "Pilot", valueCost: "Tinggi" },
-  { prioritas: 3, intervensi: "Leadership Coaching", dimensi: "M", impact: "+2,8%", populasi: "7.421", cost: "Rp 9,8 M", confidence: "Medium", status: "Berjalan", valueCost: "Tinggi" },
-  { prioritas: 4, intervensi: "Workload Management", dimensi: "E", impact: "+1,9%", populasi: "6.311", cost: "Rp 4,2 M", confidence: "Medium", status: "Perencanaan", valueCost: "Sedang" },
-  { prioritas: 5, intervensi: "Komunikasi & Feedback Loop", dimensi: "B", impact: "+1,5%", populasi: "5.927", cost: "Rp 2,6 M", confidence: "High", status: "Berjalan", valueCost: "Sedang" },
+  { prioritas: 1, intervensi: "Standardisasi Ekspektasi & SOP", dimensi: "DAT", impact: "+4,2%", populasi: "12.842", cost: "Rp 12,5 M", confidence: "High", status: "Berjalan", valueCost: "Sangat Tinggi" },
+  { prioritas: 2, intervensi: "Digitalisasi Tools & Sistem Kerja", dimensi: "INS", impact: "+3,1%", populasi: "10.231", cost: "Rp 28,0 M", confidence: "Medium", status: "Pilot", valueCost: "Tinggi" },
+  { prioritas: 3, intervensi: "Feedback Loop & Coaching Rutin", dimensi: "DAT", impact: "+2,8%", populasi: "7.421", cost: "Rp 9,8 M", confidence: "Medium", status: "Berjalan", valueCost: "Tinggi" },
+  { prioritas: 4, intervensi: "Insentif Berbasis Outcome", dimensi: "INC", impact: "+1,9%", populasi: "6.311", cost: "Rp 4,2 M", confidence: "Medium", status: "Perencanaan", valueCost: "Sedang" },
+  { prioritas: 5, intervensi: "Upskilling Analytics & Reporting", dimensi: "KNW", impact: "+1,5%", populasi: "5.927", cost: "Rp 2,6 M", confidence: "High", status: "Berjalan", valueCost: "Sedang" },
 ];
 
 export const intervensiPortfolioCatatan =
@@ -235,12 +269,15 @@ export const contohProfil = {
   badges: ["High Potential", "Ready in 1-2 Years"],
   performance: { skor: "4,3", maks: "/ 5", kategori: "Baik", gap: "12%", gapCaption: "Opportunity" },
   bem: [
-    { label: "Behavior (B)", nilai: "4,2", skor: 84, color: PALETTE.green },
-    { label: "Environment (E)", nilai: "3,4", skor: 68, color: PALETTE.amber },
-    { label: "Mindset (M)", nilai: "4,3", skor: 86, color: PALETTE.green },
+    { label: "Data", nilai: "3,7", skor: 74, color: PALETTE.amber },
+    { label: "Instruments", nilai: "3,4", skor: 68, color: PALETTE.amber },
+    { label: "Incentives", nilai: "3,9", skor: 78, color: PALETTE.green },
+    { label: "Knowledge", nilai: "4,3", skor: 86, color: PALETTE.green },
+    { label: "Capacity", nilai: "4,4", skor: 88, color: PALETTE.green },
+    { label: "Motives", nilai: "4,2", skor: 84, color: PALETTE.green },
   ],
   rootCause: {
-    judul: "Environment – Sistem & Tools",
+    judul: "Instruments – Sistem & Tools",
     poin: ["Reporting masih manual", "Data tidak real-time", "Akses analytical tools terbatas"],
     estimasi: "+8 – 12% Performance",
     estimasiTooltip:
@@ -257,13 +294,13 @@ export const pmFootnote = {
   parts: [
     { text: "People Math memahami " },
     { text: "WHO", bold: true },
-    { text: " seseorang. HPI BEM menjelaskan " },
+    { text: " seseorang. HPI BEM (Behavior Engineering Model — Gilbert, 6 sel) menjelaskan " },
     { text: "WHY", bold: true },
     { text: " performance belum optimal dan " },
     { text: "HOW", bold: true },
     { text: " memperbaikinya. Metodologi: " },
     { text: "PTPN HPI-BEM v1.0", bold: true },
-    { text: " (governed) — skor grup merepresentasikan populasi ter-asesmen." },
+    { text: " (adaptasi Gilbert BEM, governed) — skor grup merepresentasikan populasi ter-asesmen." },
   ],
 };
 
@@ -290,16 +327,16 @@ export const pmIntelSignals: PmIntelSignal[] = [
   {
     no: "S2",
     tone: "red",
-    title: "Environment Dominan",
-    text: "Environment menyumbang 43% dari total performance opportunity gap (5,1% dari 11,8%).",
+    title: "Environmental Supports Dominan",
+    text: "Data + Instruments + Incentives menyumbang 64% dari total performance opportunity gap (7,5% dari 11,8%).",
     impactLabel: "Kontribusi gap",
-    impactValue: "43%",
+    impactValue: "64%",
   },
   {
     no: "S3",
     tone: "amber",
-    title: "Proses Belum Standar",
-    text: "12.842 karyawan terdampak proses kerja belum terstandarisasi — driver Environment terbesar.",
+    title: "Sel Instruments Terlemah",
+    text: "12.842 karyawan terdampak sistem & tools kerja belum optimal — sel BEM dengan gap terbesar (3,4%).",
     impactLabel: "Populasi",
     impactValue: "12.842 orang",
   },
@@ -307,7 +344,7 @@ export const pmIntelSignals: PmIntelSignal[] = [
     no: "S4",
     tone: "green",
     title: "HPI Membaik",
-    text: "Rata-rata HPI-BEM naik 3,1 pts vs April 2026, seiring turunnya gap Environment.",
+    text: "Rata-rata HPI-BEM naik 3,1 pts vs April 2026, seiring turunnya gap sel Instruments.",
     impactLabel: "Tren",
     impactValue: "+3,1 pts MoM",
   },
@@ -320,7 +357,7 @@ export const pmIntelCounts = [
 ] as { label: string; value: number; tone: "red" | "amber" | "green" }[];
 
 export const pmIntelRecommendation =
-  "Prioritaskan standardisasi proses kerja & digitalisasi tools (dimensi Environment) sebelum menambah training individual — 43% gap berasal dari sistem kerja, bukan kapabilitas orang.";
+  "Prioritaskan sel Data (ekspektasi, SOP, feedback) & Instruments (tools, sistem) sebelum menambah training individual — 64% gap berada di Environmental Supports, bukan pada repertoire orang (Knowledge/Capacity/Motives).";
 
 /* ── Cluster Intelligence (Role Fit & Productivity Linkage) ───────── */
 
@@ -361,8 +398,8 @@ export const outcomeLoop = {
   stages: ["Assess", "Diagnose", "Intervene", "Measure", "Learn"],
   pilotLabel: "Pilot Tracking — Digitalisasi Reporting Kebun (PTPN IV · 1.240 Manajer & Asisten Kebun)",
   steps: [
-    { tahap: "Assess", nilai: "HPI-E 68", detail: "Baseline Environment populasi pilot" },
-    { tahap: "Diagnose", nilai: "Environment – Tools", detail: "Reporting manual, data tidak real-time" },
+    { tahap: "Assess", nilai: "HPI-INS 68", detail: "Baseline sel Instruments populasi pilot" },
+    { tahap: "Diagnose", nilai: "Instruments – Tools", detail: "Reporting manual, data tidak real-time" },
     { tahap: "Intervene", nilai: "Digital Reporting", detail: "Rollout Q1–Q2 2026" },
     { tahap: "Adoption", nilai: "87%", detail: "Pengguna aktif mingguan" },
     { tahap: "HPI Change", nilai: "68 → 76", detail: "+8 pts dalam 2 kuartal" },
@@ -383,7 +420,7 @@ export interface MetodologiSection {
 }
 
 export const metodologi = {
-  versi: "PTPN HPI-BEM v1.0",
+  versi: "PTPN HPI-BEM v1.0 (adaptasi Gilbert Behavior Engineering Model)",
   sections: [
     {
       judul: "People Math Score",
@@ -398,8 +435,10 @@ export const metodologi = {
     {
       judul: "PTPN HPI-BEM Score",
       items: [
-        ["Definisi", "Human Performance Index berbasis 3 dimensi: Behavior, Environment, Mindset."],
-        ["Skala", "0–100 per dimensi; skor grup = rata-rata populasi ter-asesmen."],
+        ["Definisi", "Human Performance Index berbasis Behavior Engineering Model (Thomas F. Gilbert, 1978) — 6 sel dalam 2 kelompok."],
+        ["Environmental Supports", "Data (ekspektasi, guide, feedback), Instruments (tools, sistem, waktu, material), Incentives (finansial & non-finansial, karier)."],
+        ["Person's Repertory", "Knowledge (pengetahuan & keterampilan), Capacity (kapasitas & kesesuaian penempatan), Motives (motif & kesesuaian dengan pekerjaan)."],
+        ["Skala", "0–100 per sel; skor grup = rata-rata populasi ter-asesmen."],
         ["Sumber data", "Survey & asesmen HPI-BEM — 27.891 responden (39,7% populasi)."],
         ["Benchmark", "Internal antar-PTPN; benchmark eksternal belum tersedia."],
         ["Confidence", "Medium — coverage parsial, recency asesmen < 6 bulan."],

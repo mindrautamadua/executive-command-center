@@ -984,81 +984,124 @@ export const hpiBemGap = {
 };
 
 export const hpiBemDiagnostic = {
-  skor: 82,
+  /** Rata-rata 6 sel BEM (74+70+79+88+89+86)/6 = 81. */
+  skor: 81,
   status: "Good",
   tanggal: "10 Mei 2026",
   assessor: "Ahmad Fauzi (HC BP)",
   dimensi: [
     {
-      inisial: "B",
-      label: "Behavior",
-      sub: "Perilaku & Kebiasaan Kerja",
+      inisial: "DAT",
+      label: "Data",
+      kelompok: "Environmental Supports",
+      sub: "Ekspektasi, Panduan & Feedback",
+      skor: 74,
+      status: "Needs Attention",
+      warna: "#3b7ded",
+      tone: "blue",
+      rincian: [
+        { label: "Kejelasan Ekspektasi", skor: 78 },
+        { label: "Feedback Kinerja", skor: 71 },
+        { label: "Akses Data & Informasi", skor: 68 },
+      ],
+    },
+    {
+      inisial: "INS",
+      label: "Instruments",
+      kelompok: "Environmental Supports",
+      sub: "Tools, Sistem, Waktu & Material",
+      skor: 70,
+      status: "Needs Attention",
+      warna: "#dc2626",
+      tone: "red",
+      rincian: [
+        { label: "Tools & Teknologi", skor: 68 },
+        { label: "Proses & Sistem", skor: 70 },
+        { label: "Waktu & Beban Kerja", skor: 73 },
+      ],
+    },
+    {
+      inisial: "INC",
+      label: "Incentives",
+      kelompok: "Environmental Supports",
+      sub: "Insentif, Konsekuensi & Karier",
+      skor: 79,
+      status: "Needs Attention",
+      warna: "#b45309",
+      tone: "amber",
+      rincian: [
+        { label: "Insentif Finansial", skor: 80 },
+        { label: "Recognition Non-Finansial", skor: 76 },
+        { label: "Kejelasan Jalur Karier", skor: 81 },
+      ],
+    },
+    {
+      inisial: "KNW",
+      label: "Knowledge",
+      kelompok: "Person's Repertory",
+      sub: "Pengetahuan & Keterampilan",
       skor: 88,
       status: "Good",
       warna: "#16a34a",
       tone: "green",
       rincian: [
-        { label: "Disiplin & Konsistensi", skor: 90 },
-        { label: "Kolaborasi", skor: 88 },
-        { label: "Inisiatif", skor: 87 },
-        { label: "Tanggung Jawab", skor: 91 },
-        { label: "Fokus pada Hasil", skor: 86 },
+        { label: "Technical Skill", skor: 89 },
+        { label: "Pemahaman Proses Kerja", skor: 90 },
+        { label: "Analytical Skill", skor: 85 },
       ],
     },
     {
-      inisial: "E",
-      label: "Environment",
-      sub: "Lingkungan & Sistem Kerja",
-      skor: 76,
-      status: "Needs Attention",
-      warna: "#3b7ded",
-      tone: "blue",
-      rincian: [
-        { label: "Proses & Sistem", skor: 72 },
-        { label: "Tools & Teknologi", skor: 70 },
-        { label: "Data & Informasi", skor: 68 },
-        { label: "Sumber Daya", skor: 77 },
-        { label: "Leadership Support", skor: 82 },
-      ],
-    },
-    {
-      inisial: "M",
-      label: "Mindset",
-      sub: "Pola Pikir & Motivasi",
-      skor: 84,
+      inisial: "CAP",
+      label: "Capacity",
+      kelompok: "Person's Repertory",
+      sub: "Kapasitas & Kesesuaian Penempatan",
+      skor: 89,
       status: "Good",
-      warna: "#8b5cf6",
+      warna: "#0d9488",
+      tone: "teal",
+      rincian: [
+        { label: "Kesesuaian Penempatan", skor: 91 },
+        { label: "Learning Agility", skor: 88 },
+        { label: "Resiliensi & Stamina Kerja", skor: 88 },
+      ],
+    },
+    {
+      inisial: "MOT",
+      label: "Motives",
+      kelompok: "Person's Repertory",
+      sub: "Motif & Kesesuaian dengan Pekerjaan",
+      skor: 86,
+      status: "Good",
+      warna: "#7c3aed",
       tone: "purple",
       rincian: [
-        { label: "Growth Mindset", skor: 86 },
-        { label: "Ownership", skor: 85 },
-        { label: "Motivasi Intrinsik", skor: 83 },
-        { label: "Resiliensi", skor: 84 },
-        { label: "Adaptabilitas", skor: 83 },
+        { label: "Motivasi Intrinsik", skor: 87 },
+        { label: "Ownership", skor: 86 },
+        { label: "Keselarasan Nilai & Peran", skor: 85 },
       ],
     },
   ],
   interpretasi:
-    "Rizky memiliki perilaku kerja yang sangat baik dan mindset yang kuat. Namun lingkungan kerja (Environment) masih menjadi faktor penghambat utama untuk mencapai performance optimal.",
-  fokus: ["Data & Informasi", "Tools & Teknologi", "Proses & Sistem"],
+    "Repertoire Rizky kuat (Knowledge, Capacity, Motives ≥86). Hambatan utama ada di sisi Environmental Supports — terutama sel Instruments (tools & sistem) dan Data (akses informasi & feedback). Sesuai prinsip Gilbert, perbaiki lingkungan kerja lebih dulu sebelum intervensi individual.",
+  fokus: ["Instruments — Tools & Teknologi", "Data — Akses Data & Informasi", "Data — Feedback Kinerja"],
 };
 
 export const hpiBemRootCause = {
   items: [
     {
-      judul: "Data Produksi Belum Terintegrasi",
+      judul: "Data — Informasi Produksi Belum Terintegrasi",
       deskripsi: "Data dari lapangan, pabrik, dan gudang belum terintegrasi real-time.",
       dampak: "High",
       impact: "-5% s.d -7%",
     },
     {
-      judul: "Proses Approval Masih Manual",
+      judul: "Instruments — Proses Approval Masih Manual",
       deskripsi: "Banyak proses persetujuan masih menggunakan dokumen & tanda tangan.",
       dampak: "Medium",
       impact: "-3% s.d -4%",
     },
     {
-      judul: "Akses Analytical Tools Terbatas",
+      judul: "Instruments — Akses Analytical Tools Terbatas",
       deskripsi: "Belum semua karyawan memiliki akses ke tools analitik yang memadai.",
       dampak: "Medium",
       impact: "-2% s.d -3%",
@@ -1066,7 +1109,7 @@ export const hpiBemRootCause = {
   ],
   total: "+8% s.d +12%",
   catatan:
-    "Analisis berdasarkan framework HPI BEM (Behavior, Environment, Mindset) dan data performance tahun berjalan.",
+    "Analisis berdasarkan Behavior Engineering Model (Gilbert) — 6 sel: Data, Instruments, Incentives, Knowledge, Capacity, Motives — dan data performance tahun berjalan.",
 };
 
 export const hpiBemIntervensi = {
@@ -1074,7 +1117,7 @@ export const hpiBemIntervensi = {
     {
       judul: "Integrasi Data Produksi Kebun",
       deskripsi: "Membangun dashboard produksi real-time terintegrasi dari hulu ke hilir.",
-      kategori: "Environment",
+      kategori: "Data",
       owner: "IT PTPN IV",
       target: "Q4 2026",
       impact: "+5% s.d +6%",
@@ -1082,7 +1125,7 @@ export const hpiBemIntervensi = {
     {
       judul: "Digitalisasi Approval Workflow",
       deskripsi: "Implementasi e-Workflow untuk approval dan disposisi kerja.",
-      kategori: "Environment",
+      kategori: "Instruments",
       owner: "Operational",
       target: "Q3 2026",
       impact: "+2% s.d +3%",
@@ -1090,15 +1133,15 @@ export const hpiBemIntervensi = {
     {
       judul: "Penyediaan Tools Analitik",
       deskripsi: "Memberikan akses Power BI dan training dasar analitik data.",
-      kategori: "Environment",
+      kategori: "Instruments",
       owner: "HC Learning",
       target: "Q3 2026",
       impact: "+1% s.d +2%",
     },
     {
       judul: "Coaching for Performance Excellence",
-      deskripsi: "Coaching 1-on-1 untuk penguatan mindset & ownership.",
-      kategori: "Mindset",
+      deskripsi: "Coaching 1-on-1 untuk penguatan motif kerja & ownership.",
+      kategori: "Motives",
       owner: "HC BP",
       target: "Q2 2026",
       impact: "+1%",
@@ -1106,7 +1149,7 @@ export const hpiBemIntervensi = {
     {
       judul: "Penguatan Feedback & Recognition",
       deskripsi: "Program feedback rutin dan recognition atas pencapaian.",
-      kategori: "Behavior",
+      kategori: "Incentives",
       owner: "Atasan Langsung",
       target: "Q2 2026",
       impact: "+1%",
@@ -1118,9 +1161,12 @@ export const hpiBemIntervensi = {
 
 /* Kelas tone (globals.css) — punya pasangan gelap. */
 export const HPI_BEM_KATEGORI_STYLE: Record<string, string> = {
-  Behavior: "tone-green",
-  Environment: "tone-blue",
-  Mindset: "tone-purple",
+  Data: "tone-blue",
+  Instruments: "tone-red",
+  Incentives: "tone-amber",
+  Knowledge: "tone-green",
+  Capacity: "tone-teal",
+  Motives: "tone-purple",
 };
 
 export const hpiBemProyeksi = {
@@ -1134,8 +1180,8 @@ export const hpiBemProyeksi = {
   tren: [
     { label: "2023", skor: 68 },
     { label: "2024", skor: 72 },
-    { label: "Q1 2026", skor: 79 },
-    { label: "Mei 2026", skor: 82 },
+    { label: "Q1 2026", skor: 78 },
+    { label: "Mei 2026", skor: 81 },
   ],
   trenCatatan:
     "Konsistensi perilaku & mindset yang baik menjadi fondasi untuk peningkatan performance jangka panjang.",

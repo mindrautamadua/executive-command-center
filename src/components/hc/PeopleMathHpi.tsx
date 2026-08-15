@@ -94,23 +94,23 @@ export function PeopleMathHpi() {
         </div>
 
         <div className="flex flex-col rounded-xl border border-[#eef2f6] px-3 pb-2.5 pt-2.5">
-          <div className="text-[9px] font-bold text-ink-700">Dimensi HPI BEM</div>
-          <div className="mt-2 flex flex-1 flex-col justify-center gap-2.5">
+          <div className="text-[9px] font-bold text-ink-700">6 Sel HPI BEM (Gilbert)</div>
+          <div className="mt-1.5 flex flex-1 flex-col justify-center gap-[7px]">
             {hpiBem.dimensi.map((d) => (
               <div key={d.label}>
                 <div className="flex items-center justify-between">
                   <span
-                    className={`text-[9.5px] font-bold ${
+                    className={`text-[9px] font-bold ${
                       d.tone === "amber" ? "text-[#d98b06]" : "text-ptpn-green"
                     }`}
                   >
                     {d.label}
                   </span>
-                  <span className="text-[9.5px] font-bold text-ink-900">
+                  <span className="text-[9px] font-bold text-ink-900">
                     {d.value} <span className="font-medium text-ink-400">/100</span>
                   </span>
                 </div>
-                <div className="mt-[4px] h-[5px] overflow-hidden rounded-full bg-[#eef2f6]">
+                <div className="mt-[3px] h-[4px] overflow-hidden rounded-full bg-[#eef2f6]">
                   <div
                     className={`h-full rounded-full ${
                       d.tone === "amber" ? "bg-[#f5a524]" : "bg-ptpn-green"

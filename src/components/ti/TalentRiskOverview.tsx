@@ -11,7 +11,11 @@ export function TalentRiskOverview() {
 
   return (
     <section className="card anim-rise flex flex-col p-3.5">
-      <SectionHead title="Talent Risk Overview" action="Lihat Detail" />
+      <SectionHead
+        title="Talent Risk Overview"
+        action="Lihat Detail"
+        href="/talent-intelligence/talent-risk"
+      />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Identifikasi Risiko Kehilangan Talenta — klik nama untuk root cause
       </p>

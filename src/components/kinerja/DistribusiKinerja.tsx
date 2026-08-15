@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { ChevronRight } from "lucide-react";
 import { distribusiKinerja } from "@/lib/kinerja-data";
@@ -55,9 +56,9 @@ export function DistribusiKinerja() {
         </div>
       </div>
 
-      <button className="link-more mt-1 flex items-center gap-1">
+      <Link href="/kinerja-karyawan/distribusi" className="link-more mt-1 flex items-center gap-1">
         Lihat detail distribusi <ChevronRight size={11} />
-      </button>
+      </Link>
     </div>
   );
 }

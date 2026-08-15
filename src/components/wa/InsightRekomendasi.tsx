@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import {
   Activity,
   ArrowRight,
@@ -44,9 +45,12 @@ export function InsightRekomendasi() {
           </span>
           <ScopeNote />
         </h3>
-        <button className="flex shrink-0 items-center gap-1.5 rounded-lg border border-[#e3e9ef] bg-white px-3 py-[6px] text-[9.5px] font-semibold text-ink-700 transition-colors hover:border-ptpn-green hover:text-ptpn-green">
+        <Link
+          href="/workforce-analytics/insight"
+          className="flex shrink-0 items-center gap-1.5 rounded-lg border border-[#e3e9ef] bg-white px-3 py-[6px] text-[9.5px] font-semibold text-ink-700 transition-colors hover:border-ptpn-green hover:text-ptpn-green"
+        >
           Lihat Semua Insight <ArrowRight size={11} />
-        </button>
+        </Link>
       </div>
 
       <div className="mt-2.5 grid grid-cols-5 gap-3">

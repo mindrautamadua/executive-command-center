@@ -46,8 +46,8 @@ export function PerformanceGapCard() {
       <div className="flex items-center gap-2 rounded-lg border border-[#f8e3bd] bg-[#fdf3e0] px-3 py-2">
         <AlertCircle size={13} className="shrink-0 text-[#d98b06]" />
         <span className="text-[9px] font-medium text-ink-700">
-          <span className="font-bold text-[#d98b06]">Environment Gap</span> adalah penyebab utama
-          performance gap.
+          <span className="font-bold text-[#d98b06]">{gapAnalysis.catatanHighlight}</span>{" "}
+          {gapAnalysis.catatan}
         </span>
       </div>
     </div>

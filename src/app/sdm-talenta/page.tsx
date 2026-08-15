@@ -1,4 +1,3 @@
-import { Download } from "lucide-react";
 import { SdmSidebar } from "@/components/sdm/SdmSidebar";
 import { SdmHeader } from "@/components/sdm/SdmHeader";
 import { HcKpiStrip } from "@/components/hc/HcKpiStrip";
@@ -28,15 +27,9 @@ export default function SdmTalentaPage() {
 
         <div className="px-5 pb-5">
           <DataTrustStrip />
-          <div className="mb-2 flex items-center justify-between">
-            <h2 className="text-[10px] font-extrabold uppercase tracking-[0.05em] text-ink-900">
-              Key Strategic KPI
-            </h2>
-            <button className="flex items-center gap-1.5 rounded-lg bg-ptpn-green px-3 py-[7px] text-[10px] font-semibold text-white shadow-pill transition-opacity hover:opacity-90">
-              <Download size={12} />
-              Export Dashboard
-            </button>
-          </div>
+          <h2 className="mb-2 text-[10px] font-extrabold uppercase tracking-[0.05em] text-ink-900">
+            Key Strategic KPI
+          </h2>
 
           <div className="grid grid-cols-[minmax(0,1fr)_330px] items-start gap-3">
             {/* kolom utama */}

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Check, ChevronDown, LayoutDashboard } from "lucide-react";
 import { orgNodes } from "@/lib/hc-data";
-import { ModuleHeader, SelectBox } from "@/components/ui/ModuleHeader";
+import { ExportButton, ModuleHeader, SelectBox } from "@/components/ui/ModuleHeader";
 
 /** Dropdown drill-down: Enterprise → Subholding → Region → Business Unit. */
 function OrgLevelSelect() {
@@ -78,6 +78,7 @@ export function SdmHeader() {
         </>
       }
       dataAsOf="Data per 31 Mei 2026 (YTD)"
+      actions={<ExportButton label="Export Dashboard" />}
     />
   );
 }

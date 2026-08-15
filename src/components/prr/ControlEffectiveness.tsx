@@ -1,4 +1,5 @@
-import { MoveRight } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, MoveRight } from "lucide-react";
 import { levelOfScore, riskControls } from "@/lib/prr-data";
 import { SectionHead } from "../hc/SectionHead";
 
@@ -86,6 +87,9 @@ export function ControlEffectiveness() {
         Residual = skor register saat ini. Selisih inherent-residual menunjukkan penurunan risiko
         yang sudah dicapai kontrol eksisting.
       </p>
+      <Link href="/people-risk-radar/efektivitas-kontrol" className="mt-1.5 flex w-full items-center justify-center gap-1 rounded-lg border border-[#e3e9ef] bg-[#f8fafc] py-[7px] text-[9.5px] font-semibold text-ptpn-greenDark transition-colors hover:bg-[#eef4f0]">
+        Lihat Detail Kontrol <ArrowRight size={11} />
+      </Link>
     </div>
   );
 }

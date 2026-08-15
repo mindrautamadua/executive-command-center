@@ -23,7 +23,12 @@ export function HeadcountTrend() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead title="Headcount Trend" action="Lihat Detail" badge={<ScopeNote />} />
+      <SectionHead
+        title="Headcount Trend"
+        action="Lihat Detail"
+        href="/workforce-analytics/headcount-trend"
+        badge={<ScopeNote />}
+      />
       <p className="mt-[3px] text-[9px] text-ink-500">Perkembangan Headcount 36 Bulan Terakhir</p>
 
       <div className="mt-1.5 min-h-0 w-full flex-1">

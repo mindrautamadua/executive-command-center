@@ -1,11 +1,15 @@
 import { Info } from "lucide-react";
 import { SectionHead } from "../hc/SectionHead";
-import { intervensiPortfolioCatatan, intervensiPriority } from "@/lib/pm-data";
+import { BEM_SEL, intervensiPortfolioCatatan, intervensiPriority } from "@/lib/pm-data";
 
+/** Biru/amber = Environmental Supports, hijau = Person's Repertory. */
 const DIMENSI_CHIP: Record<string, string> = {
-  B: "bg-[#e8f1fd] text-[#2f6fe4]",
-  E: "bg-[#fdf3e0] text-[#d98b06]",
-  M: "bg-ptpn-greenLight text-ptpn-green",
+  DAT: "bg-[#e8f1fd] text-[#2f6fe4]",
+  INS: "bg-[#fdecec] text-[#ef4444]",
+  INC: "bg-[#fdf3e0] text-[#d98b06]",
+  KNW: "bg-ptpn-greenLight text-ptpn-green",
+  CAP: "bg-ptpn-greenLight text-ptpn-green",
+  MOT: "bg-ptpn-greenLight text-ptpn-green",
 };
 
 const CONFIDENCE_BADGE: Record<string, string> = {
@@ -44,7 +48,7 @@ export function InterventionPortfolioCard() {
         >
           <span>Prioritas</span>
           <span>Intervensi</span>
-          <span className="text-center">Dimensi</span>
+          <span className="text-center">Sel BEM</span>
           <span className="text-right">Populasi</span>
           <span className="text-right">Est. Cost</span>
           <span className="text-right">Exp. Impact</span>
@@ -61,7 +65,8 @@ export function InterventionPortfolioCard() {
               </span>
               <span className="flex justify-center">
                 <span
-                  className={`flex h-[18px] w-[18px] items-center justify-center rounded-md text-[8.5px] font-bold ${DIMENSI_CHIP[r.dimensi]}`}
+                  title={BEM_SEL[r.dimensi].nama}
+                  className={`flex h-[18px] items-center justify-center rounded-md px-1.5 text-[8.5px] font-bold ${DIMENSI_CHIP[r.dimensi]}`}
                 >
                   {r.dimensi}
                 </span>

@@ -46,7 +46,11 @@ function MiniTrend({ data }: { data: number[] }) {
 export function TalentDevelopmentFocus() {
   return (
     <section className="card anim-rise flex flex-col p-3.5">
-      <SectionHead title="Talent Development Focus" />
+      <SectionHead
+        title="Talent Development Focus"
+        action="Lihat Detail"
+        href="/talent-intelligence/development"
+      />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Prioritas Pengembangan Talenta — Investment → Capability → Readiness → Performance
       </p>

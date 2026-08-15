@@ -1,8 +1,18 @@
+"use client";
+
+import { useState } from "react";
+
 const SKIN = ["#e0ac69", "#c68642", "#f1c27d", "#d8a05a", "#b97a4a"];
 const HAIR = ["#2b2118", "#3b2b1d", "#1f1a15", "#4a3421"];
 const SHIRT = ["#2a3b52", "#1f4e79", "#37474f", "#3d5a80", "#4a4e69", "#2f5d50"];
 
-/** Avatar SVG deterministik dari `seed` — pengganti pasfoto pada mockup. */
+/** Jumlah varian pasfoto dummy yang tersedia di layanan pravatar.cc. */
+const PHOTO_COUNT = 70;
+
+/**
+ * Avatar orang deterministik dari `seed` — memakai pasfoto dummy.
+ * Bila foto gagal dimuat (mis. offline), otomatis jatuh balik ke ilustrasi SVG.
+ */
 export function PersonAvatar({
   seed = 0,
   size = 32,
@@ -11,6 +21,38 @@ export function PersonAvatar({
   seed?: number;
   size?: number;
   className?: string;
+}) {
+  const [photoFailed, setPhotoFailed] = useState(false);
+  const photoId = (Math.abs(seed) % PHOTO_COUNT) + 1;
+
+  if (!photoFailed) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={`https://i.pravatar.cc/150?img=${photoId}`}
+        alt=""
+        width={size}
+        height={size}
+        loading="lazy"
+        onError={() => setPhotoFailed(true)}
+        className={`shrink-0 rounded-full object-cover bg-slate-200 ${className}`}
+        style={{ width: size, height: size }}
+      />
+    );
+  }
+
+  return <PersonAvatarFallback seed={seed} size={size} className={className} />;
+}
+
+/** Ilustrasi SVG deterministik, dipakai saat pasfoto tidak tersedia. */
+function PersonAvatarFallback({
+  seed,
+  size,
+  className,
+}: {
+  seed: number;
+  size: number;
+  className: string;
 }) {
   const skin = SKIN[seed % SKIN.length];
   const hair = HAIR[(seed * 3) % HAIR.length];

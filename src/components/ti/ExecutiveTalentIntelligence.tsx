@@ -1,4 +1,5 @@
-import { BrainCircuit, Sparkles } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, BrainCircuit, Sparkles } from "lucide-react";
 import {
   tiExecCounts,
   tiExecRecommendation,
@@ -51,6 +52,12 @@ export function ExecutiveTalentIntelligence() {
               <span className="text-[8.5px] font-semibold text-ink-500">{c.label}</span>
             </span>
           ))}
+          <Link
+            href="/talent-intelligence/executive-signals"
+            className="flex shrink-0 items-center gap-1 text-[9.5px] font-semibold text-ptpn-green hover:underline"
+          >
+            Lihat Detail <ArrowRight size={11} />
+          </Link>
         </div>
       </div>
 

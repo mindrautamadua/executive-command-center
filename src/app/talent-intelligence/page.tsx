@@ -1,4 +1,3 @@
-import { CalendarDays, Download } from "lucide-react";
 import { SdmSidebar } from "@/components/sdm/SdmSidebar";
 import { TiHeader } from "@/components/ti/TiHeader";
 import { TiKpiStrip } from "@/components/ti/TiKpiStrip";
@@ -27,18 +26,7 @@ export default function TalentIntelligencePage() {
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
         <TiHeader />
 
-        <div className="px-5 pb-5">
-          <div className="mb-2 flex items-center justify-between">
-            <span className="flex items-center gap-1.5 text-[9.5px] font-semibold text-ink-500">
-              <CalendarDays size={12} className="text-ink-400" />
-              Data per 31 Mei 2026
-            </span>
-            <button className="flex items-center gap-1.5 rounded-lg bg-ptpn-green px-3 py-[7px] text-[10px] font-semibold text-white shadow-pill transition-opacity hover:opacity-90">
-              <Download size={12} />
-              Export
-            </button>
-          </div>
-
+        <div className="px-5 pb-5 pt-3">
           <div className="flex flex-col gap-3">
             <TiKpiStrip />
 

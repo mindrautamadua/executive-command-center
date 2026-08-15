@@ -1,3 +1,5 @@
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 import { businessExposure, levelOfScore } from "@/lib/prr-data";
 import { SectionHead } from "../hc/SectionHead";
 
@@ -64,6 +66,9 @@ export function ExposureByBusiness() {
         Palm Oil menyerap 53% total exposure — prioritas mitigasi mengikuti bobot bisnis, bukan
         sekadar skor risiko tertinggi.
       </p>
+      <Link href="/people-risk-radar/eksposur-bisnis" className="mt-1.5 flex w-full items-center justify-center gap-1 rounded-lg border border-[#e3e9ef] bg-[#f8fafc] py-[7px] text-[9.5px] font-semibold text-ptpn-greenDark transition-colors hover:bg-[#eef4f0]">
+        Lihat Detail Eksposur <ArrowRight size={11} />
+      </Link>
     </div>
   );
 }

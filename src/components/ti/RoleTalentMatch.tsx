@@ -20,7 +20,11 @@ const matchColor = (m: number) => (m >= 85 ? "#1a9c5b" : m >= 80 ? "#f2c53d" : "
 export function RoleTalentMatch() {
   return (
     <section className="card anim-rise flex flex-col p-3.5">
-      <SectionHead title="Role–Talent–Skill Match" action="Lihat Semua Posisi" />
+      <SectionHead
+        title="Role–Talent–Skill Match"
+        action="Lihat Semua Posisi"
+        href="/talent-intelligence/role-match"
+      />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Kecocokan kandidat suksesor terhadap requirement posisi kritikal
       </p>

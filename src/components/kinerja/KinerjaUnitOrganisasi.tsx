@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { unitOrganisasi } from "@/lib/kinerja-data";
 import { useSubholding } from "@/components/SubholdingProvider";
@@ -51,9 +52,9 @@ export function KinerjaUnitOrganisasi() {
         ))}
       </div>
 
-      <button className="link-more mt-1 flex items-center gap-1">
+      <Link href="/kinerja-karyawan/unit-organisasi" className="link-more mt-1 flex items-center gap-1">
         Lihat ranking lengkap <ChevronRight size={11} />
-      </button>
+      </Link>
     </div>
   );
 }

@@ -1,4 +1,5 @@
-import { Gauge } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, Gauge } from "lucide-react";
 import {
   tiIndexComponents,
   tiIndexNote,
@@ -26,9 +27,17 @@ export function TalentIntelligenceIndex() {
           {tiIndexScore} / 100
         </span>
       </div>
-      <p className="mt-[3px] text-[9px] text-ink-500">
-        Komposit 7 komponen — rata-rata sederhana, skala 0–100
-      </p>
+      <div className="mt-[3px] flex items-center justify-between gap-2">
+        <p className="min-w-0 truncate text-[9px] text-ink-500">
+          Komposit 7 komponen — rata-rata sederhana, skala 0–100
+        </p>
+        <Link
+          href="/talent-intelligence/index-talenta"
+          className="flex shrink-0 items-center gap-1 text-[9px] font-semibold text-ptpn-green hover:underline"
+        >
+          Lihat Detail <ArrowRight size={10} />
+        </Link>
+      </div>
 
       <div className="mt-2 flex min-h-0 flex-1 flex-col justify-between gap-[3px]">
         {tiIndexComponents.map((c) => (

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import {
   Area,
   AreaChart,
@@ -98,9 +99,9 @@ export function TrendOverallScore() {
         </ResponsiveContainer>
       </div>
 
-      <button className="link-more mt-1 flex items-center gap-1">
+      <Link href="/kinerja-karyawan/tren-score" className="link-more mt-1 flex items-center gap-1">
         Lihat trend lengkap <ChevronRight size={11} />
-      </button>
+      </Link>
     </div>
   );
 }

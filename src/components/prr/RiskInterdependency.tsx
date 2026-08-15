@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { SectionHead } from "../hc/SectionHead";
 
 type NodeTone = "red" | "amber" | "navy";
@@ -43,7 +45,7 @@ function Node({
  * People Risk Interdependency: rantai risiko yang saling menguatkan
  * (amplification chain), bukan 10 risiko yang berdiri sendiri.
  */
-export function RiskInterdependency() {
+export function RiskInterdependency({ showLink = true }: { showLink?: boolean } = {}) {
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
@@ -98,6 +100,15 @@ export function RiskInterdependency() {
           Amplifikasi: HIGH
         </span>
       </div>
+
+      {showLink && (
+        <Link
+          href="/people-risk-radar/interdependensi"
+          className="mt-1.5 flex w-full items-center justify-center gap-1 rounded-lg border border-[#e3e9ef] bg-[#f8fafc] py-[7px] text-[9.5px] font-semibold text-ptpn-greenDark transition-colors hover:bg-[#eef4f0]"
+        >
+          Lihat Rantai Risiko <ArrowRight size={11} />
+        </Link>
+      )}
     </div>
   );
 }

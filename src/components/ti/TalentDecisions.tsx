@@ -33,7 +33,11 @@ const TONE: Record<
 export function TalentDecisions() {
   return (
     <section className="card anim-rise flex flex-col p-3.5">
-      <SectionHead title="Talent Decisions" action="Kirim ke BOD Decision Center" />
+      <SectionHead
+        title="Talent Decisions"
+        action="Kirim ke BOD Decision Center"
+        href="/talent-intelligence/decisions"
+      />
       <p className="mt-[3px] text-[9px] text-ink-500">Keputusan &amp; aksi prioritas dari insight talenta</p>
 
       <div className="mt-2.5 flex flex-1 flex-col gap-2">

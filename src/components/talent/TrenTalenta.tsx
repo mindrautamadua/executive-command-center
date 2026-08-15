@@ -9,7 +9,8 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { ChevronDown } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import { trenTalenta } from "@/lib/talent-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { Delta } from "../ui/Delta";
@@ -24,9 +25,17 @@ export function TrenTalenta() {
     >
       <div className="flex items-start justify-between gap-2">
         <h3 className="card-title-navy">Tren Total Talenta Aktif</h3>
-        <button className="select-chip whitespace-nowrap px-2.5 py-[5px] text-[9.5px]">
-          12 Bulan Terakhir <ChevronDown size={11} />
-        </button>
+        <span className="flex shrink-0 items-center gap-2">
+          <Link
+            href="/talent-intelligence/tren-talenta"
+            className="flex items-center gap-1 whitespace-nowrap text-[9px] font-semibold text-ptpn-green hover:underline"
+          >
+            Lihat Detail <ArrowRight size={10} />
+          </Link>
+          <button className="select-chip whitespace-nowrap px-2.5 py-[5px] text-[9.5px]">
+            12 Bulan Terakhir <ChevronDown size={11} />
+          </button>
+        </span>
       </div>
 
       <div className="mt-2 flex items-baseline gap-2">

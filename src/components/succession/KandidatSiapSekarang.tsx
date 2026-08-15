@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { kandidatSiap } from "@/lib/succession-data";
 import { PersonAvatar } from "../ui/PersonAvatar";
@@ -38,9 +39,9 @@ export function KandidatSiapSekarang() {
         ))}
       </div>
 
-      <button className="link-more mt-1 flex cursor-pointer items-center gap-0.5">
+      <Link href="/succession-planning/kandidat-siap" className="link-more mt-1 flex cursor-pointer items-center gap-0.5">
         Lihat semua kandidat siap <ChevronRight size={12} />
-      </button>
+      </Link>
     </div>
   );
 }

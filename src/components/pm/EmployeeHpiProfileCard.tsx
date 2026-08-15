@@ -60,8 +60,10 @@ export function EmployeeHpiProfileCard() {
 
         {/* HPI BEM Detail */}
         <div>
-          <div className="text-[9.5px] font-bold text-ink-900">HPI BEM Detail</div>
-          <div className="mt-2.5 grid grid-cols-3 gap-3">
+          <div className="text-[9.5px] font-bold text-ink-900">
+            HPI BEM Detail — 6 Sel (Environmental Supports · Person&apos;s Repertory)
+          </div>
+          <div className="mt-2.5 grid grid-cols-3 gap-x-3 gap-y-2.5">
             {p.bem.map((b) => (
               <div key={b.label} className="text-center">
                 <div className="text-[8.5px] font-semibold" style={{ color: b.color }}>

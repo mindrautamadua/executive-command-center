@@ -11,7 +11,11 @@ const READINESS_TONES: Record<Readiness, string> = {
 export function TopTalentPotential() {
   return (
     <section className="card anim-rise flex flex-col p-3.5" style={{ "--d": "120ms" } as React.CSSProperties}>
-      <SectionHead title="Top Talent by Potential" action="Lihat Semua" />
+      <SectionHead
+        title="Top Talent by Potential"
+        action="Lihat Semua"
+        href="/talent-intelligence/top-talent"
+      />
       <p className="mt-[3px] text-[9px] text-ink-500">10 Talenta dengan Potential Tertinggi</p>
 
       <div className="mt-2 min-h-0 flex-1 overflow-hidden">

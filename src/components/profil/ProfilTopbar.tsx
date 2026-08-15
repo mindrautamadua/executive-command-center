@@ -5,11 +5,11 @@ export function ProfilTopbar() {
   return (
     <div className="flex items-center gap-3 px-5 pb-3 pt-3.5">
       <Link
-        href="/sdm-talenta"
+        href="/sdm-talenta/direktori-karyawan"
         className="flex items-center gap-1.5 text-[11px] font-semibold text-ink-500 transition-colors hover:text-ptpn-green"
       >
         <ArrowLeft size={14} />
-        Kembali
+        Direktori Karyawan
       </Link>
       <h1 className="text-[13px] font-bold text-ink-900">Profil Karyawan</h1>
 

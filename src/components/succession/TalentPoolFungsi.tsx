@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { ChevronRight } from "lucide-react";
 import { talentPoolFungsi } from "@/lib/succession-data";
@@ -55,9 +56,9 @@ export function TalentPoolFungsi() {
         </div>
       </div>
 
-      <button className="link-more mt-1 flex cursor-pointer items-center gap-0.5">
+      <Link href="/succession-planning/talent-pool" className="link-more mt-1 flex cursor-pointer items-center gap-0.5">
         Lihat detail talent pool <ChevronRight size={12} />
-      </button>
+      </Link>
     </div>
   );
 }

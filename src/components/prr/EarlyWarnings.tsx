@@ -1,4 +1,5 @@
-import { Siren } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, Siren } from "lucide-react";
 import { earlyWarnings } from "@/lib/prr-data";
 import { SectionHead } from "../hc/SectionHead";
 import { LevelBadge } from "./LevelBadge";
@@ -48,6 +49,9 @@ export function EarlyWarnings() {
           </li>
         ))}
       </ul>
+      <Link href="/people-risk-radar/early-warning" className="mt-2 flex w-full items-center justify-center gap-1 rounded-lg border border-[#e3e9ef] bg-[#f8fafc] py-[7px] text-[9.5px] font-semibold text-ptpn-greenDark transition-colors hover:bg-[#eef4f0]">
+        Lihat Semua Sinyal Dini <ArrowRight size={11} />
+      </Link>
     </div>
   );
 }

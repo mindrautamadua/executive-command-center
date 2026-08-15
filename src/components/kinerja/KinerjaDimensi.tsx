@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import {
   Legend,
@@ -86,9 +87,9 @@ export function KinerjaDimensi() {
         </ResponsiveContainer>
       </div>
 
-      <button className="link-more mt-1 flex items-center gap-1">
+      <Link href="/kinerja-karyawan/dimensi" className="link-more mt-1 flex items-center gap-1">
         Lihat detail dimensi <ChevronRight size={11} />
-      </button>
+      </Link>
     </div>
   );
 }

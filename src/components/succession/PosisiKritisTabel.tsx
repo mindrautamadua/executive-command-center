@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { ChevronDown, ChevronRight, UserSearch, X } from "lucide-react";
 import {
@@ -249,9 +250,9 @@ export function PosisiKritisTabel() {
         </table>
       </div>
 
-      <button className="link-more mt-1.5 flex cursor-pointer items-center gap-0.5">
+      <Link href="/succession-planning/posisi-kritis" className="link-more mt-1.5 flex cursor-pointer items-center gap-0.5">
         Lihat semua posisi kritis <ChevronRight size={12} />
-      </button>
+      </Link>
 
       {detail && <FitModal posisi={detail} onClose={() => setDetail(null)} />}
     </div>

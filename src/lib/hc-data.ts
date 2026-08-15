@@ -300,15 +300,20 @@ export const peopleMath = {
   trend: [72, 74, 73, 76, 75, 78, 79],
 };
 
+/** 6 sel Behavior Engineering Model (Gilbert); rata-rata (76+73+81+88+89+86)/6 = 82. */
 export const hpiBem = {
   score: 82,
   kategori: "Strong",
   dimensi: [
-    { label: "Behavior", value: 88, tone: "green" },
-    { label: "Environment", value: 76, tone: "amber" },
-    { label: "Mindset", value: 84, tone: "green" },
+    { label: "Data", value: 76, tone: "green" },
+    { label: "Instruments", value: 73, tone: "amber" },
+    { label: "Incentives", value: 81, tone: "green" },
+    { label: "Knowledge", value: 88, tone: "green" },
+    { label: "Capacity", value: 89, tone: "green" },
+    { label: "Motives", value: 86, tone: "green" },
   ] as { label: string; value: number; tone: "green" | "amber" }[],
-  opportunity: "Opportunity terbesar ada pada Environment (Sistem & Proses Kerja).",
+  opportunity:
+    "Opportunity terbesar ada pada Environmental Supports — sel Instruments (tools & sistem kerja).",
 };
 
 /* ── 6. BOD Decision Center ───────────────────────────────────────── */

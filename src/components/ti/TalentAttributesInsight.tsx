@@ -22,7 +22,11 @@ const ICONS = {
 export function TalentAttributesInsight() {
   return (
     <section className="card anim-rise flex flex-col p-3.5" style={{ "--d": "60ms" } as React.CSSProperties}>
-      <SectionHead title="Talent Attributes Insight" action="Lihat Detail" />
+      <SectionHead
+        title="Talent Attributes Insight"
+        action="Lihat Detail"
+        href="/talent-intelligence/atribut-talenta"
+      />
       <p className="mt-[3px] text-[9px] text-ink-500">Analisis Atribut Talenta Kritis</p>
 
       <div className="mt-2 flex-1">

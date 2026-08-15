@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ArrowRight, CircleCheck, Lightbulb, ShieldAlert, TriangleAlert } from "lucide-react";
 import { suksesiInsight } from "@/lib/succession-data";
 import { SuksesiIlustrasi } from "./SuksesiIlustrasi";
@@ -37,10 +38,13 @@ export function InsightSuksesi() {
         })}
       </div>
 
-      <button className="relative z-10 mt-2 flex w-[196px] cursor-pointer items-center justify-between rounded-lg bg-gradient-to-r from-[#3fae63] to-[#1a9c5b] px-3 py-[7px] text-[10px] font-semibold text-white shadow-pill transition-opacity hover:opacity-90">
+      <Link
+        href="/succession-planning/rekomendasi"
+        className="relative z-10 mt-2 flex w-[196px] cursor-pointer items-center justify-between rounded-lg bg-gradient-to-r from-[#3fae63] to-[#1a9c5b] px-3 py-[7px] text-[10px] font-semibold text-white shadow-pill transition-opacity hover:opacity-90"
+      >
         Lihat Rekomendasi Lengkap
         <ArrowRight size={12} />
-      </button>
+      </Link>
 
       <div className="pointer-events-none absolute bottom-1 right-2 w-[150px]">
         <SuksesiIlustrasi className="h-[124px] w-full" />

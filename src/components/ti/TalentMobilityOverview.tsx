@@ -9,7 +9,11 @@ export function TalentMobilityOverview() {
 
   return (
     <section className="card anim-rise flex flex-col p-3.5" style={{ "--d": "60ms" } as React.CSSProperties}>
-      <SectionHead title="Talent Mobility Overview" action="Lihat Detail" />
+      <SectionHead
+        title="Talent Mobility Overview"
+        action="Lihat Detail"
+        href="/talent-intelligence/mobilitas"
+      />
       <p className="mt-[3px] text-[9px] text-ink-500">Mobilitas Talenta Internal</p>
 
       <div className="mt-3 flex flex-1 items-start gap-4">

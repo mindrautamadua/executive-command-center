@@ -1,5 +1,8 @@
 "use client";
 
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+
 import {
   Area,
   CartesianGrid,
@@ -127,6 +130,9 @@ export function RiskTrend() {
           </span>
         ))}
       </div>
+      <Link href="/people-risk-radar/tren-risiko" className="mt-1.5 flex w-full items-center justify-center gap-1 rounded-lg border border-[#e3e9ef] bg-[#f8fafc] py-[7px] text-[9.5px] font-semibold text-ptpn-greenDark transition-colors hover:bg-[#eef4f0]">
+        Lihat Tren & Forecast <ArrowRight size={11} />
+      </Link>
     </div>
   );
 }

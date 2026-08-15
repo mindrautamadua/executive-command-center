@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { rencanaAksi, KESEHATAN_COLOR, STATUS_STYLE } from "@/lib/succession-data";
 
@@ -89,9 +90,9 @@ export function RencanaAksi() {
         </table>
       </div>
 
-      <button className="link-more mt-1.5 flex cursor-pointer items-center gap-0.5">
+      <Link href="/succession-planning/rencana-aksi" className="link-more mt-1.5 flex cursor-pointer items-center gap-0.5">
         Lihat semua rencana aksi <ChevronRight size={12} />
-      </button>
+      </Link>
     </div>
   );
 }

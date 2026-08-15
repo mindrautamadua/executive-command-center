@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ArrowRight, MoveRight } from "lucide-react";
 import { riskDrivers } from "@/lib/prr-data";
 import { SectionHead } from "../hc/SectionHead";
@@ -59,9 +60,12 @@ export function TopRiskDrivers() {
         ))}
       </ul>
 
-      <button className="mt-1 flex w-full items-center justify-center gap-1 rounded-lg border border-[#e3e9ef] bg-[#f8fafc] py-[7px] text-[9.5px] font-semibold text-ptpn-greenDark transition-colors hover:bg-[#eef4f0]">
+      <Link
+        href="/people-risk-radar/all-drivers"
+        className="mt-1 flex w-full items-center justify-center gap-1 rounded-lg border border-[#e3e9ef] bg-[#f8fafc] py-[7px] text-[9.5px] font-semibold text-ptpn-greenDark transition-colors hover:bg-[#eef4f0]"
+      >
         Lihat Semua Driver <ArrowRight size={11} />
-      </button>
+      </Link>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import {
   Area,
   AreaChart,
@@ -97,9 +98,9 @@ export function TrenBenchStrength() {
         </ResponsiveContainer>
       </div>
 
-      <button className="link-more mt-1 flex cursor-pointer items-center gap-0.5">
+      <Link href="/succession-planning/bench-strength" className="link-more mt-1 flex cursor-pointer items-center gap-0.5">
         Lihat tren lengkap <ChevronRight size={12} />
-      </button>
+      </Link>
     </div>
   );
 }

@@ -46,22 +46,33 @@ export function HpiBemOverviewCard() {
         <GaugeRing />
         <div className="min-w-0 flex-1">
           <div className="border-b border-[#f0f3f6] pb-1.5 text-[9.5px] font-bold text-ink-900">
-            HPI BEM Dimension
+            Behavior Engineering Model — 6 Sel
           </div>
-          <div className="mt-2.5 space-y-3">
-            {hpiBemOverview.dimensi.map((d) => (
-              <div key={d.label}>
-                <div className="flex items-center justify-between">
-                  <span className="text-[9.5px] font-semibold text-ink-700">{d.label}</span>
-                  <span className="text-[9.5px] font-bold text-ink-900">
-                    {d.skor} <span className="font-medium text-ink-400">/100</span>
-                  </span>
+          <div className="mt-2 space-y-2">
+            {hpiBemOverview.kelompok.map((g) => (
+              <div key={g.judul}>
+                <div className="text-[8px] font-bold uppercase tracking-[0.04em] text-ink-400">
+                  {g.judul}
                 </div>
-                <div className="mt-1.5 h-[7px] overflow-hidden rounded-full bg-[#eef2f6]">
-                  <div
-                    className="anim-grow-x h-full rounded-full"
-                    style={{ width: `${d.skor}%`, background: d.color }}
-                  />
+                <div className="mt-1 space-y-[7px]">
+                  {g.sel.map((d) => (
+                    <div key={d.label}>
+                      <div className="flex items-center justify-between">
+                        <span className="truncate text-[9px] font-semibold text-ink-700">
+                          {d.label}
+                        </span>
+                        <span className="shrink-0 text-[9px] font-bold text-ink-900">
+                          {d.skor} <span className="font-medium text-ink-400">/100</span>
+                        </span>
+                      </div>
+                      <div className="mt-1 h-[6px] overflow-hidden rounded-full bg-[#eef2f6]">
+                        <div
+                          className="anim-grow-x h-full rounded-full"
+                          style={{ width: `${d.skor}%`, background: d.color }}
+                        />
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             ))}

@@ -53,6 +53,7 @@ export default function WorkforceAnalyticsPage() {
               subtitle="Distribusi Headcount per Holding/Sub Holding"
               data={headcountByOrg}
               delay={120}
+              href="/workforce-analytics/headcount-organisasi"
               orgDimension
             />
             <DonutBreakdown
@@ -60,6 +61,7 @@ export default function WorkforceAnalyticsPage() {
               subtitle="Komposisi berdasarkan Jenis Karyawan"
               data={headcountByType}
               delay={180}
+              href="/workforce-analytics/headcount-status-kerja"
             />
           </div>
 

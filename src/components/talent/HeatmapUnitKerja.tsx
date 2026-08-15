@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { ISLANDS, MAP_H } from "@/lib/indonesia";
 import {
   heatLevelByRegion,
@@ -9,7 +11,9 @@ import {
   heatRegions,
 } from "@/lib/talent-data";
 
-export function HeatmapUnitKerja() {
+/** Dipakai di dashboard Talent Intelligence dan di halaman detailnya sendiri
+ *  — pada halaman detail, tautan "Lihat Detail" dimatikan lewat `showDetailLink`. */
+export function HeatmapUnitKerja({ showDetailLink = true }: { showDetailLink?: boolean }) {
   const [hover, setHover] = useState<number | null>(null);
   const hovered = heatRegions.find((r) => r.region === hover);
 
@@ -19,8 +23,18 @@ export function HeatmapUnitKerja() {
       style={{ "--d": "600ms" } as React.CSSProperties}
     >
       <div className="flex items-start justify-between gap-2">
-        <div>
-          <h3 className="card-title-navy">Talent Density Map</h3>
+        <div className="min-w-0">
+          <span className="flex items-center gap-2">
+            <h3 className="card-title-navy">Talent Density Map</h3>
+            {showDetailLink && (
+              <Link
+                href="/talent-intelligence/talent-density"
+                className="flex shrink-0 items-center gap-1 text-[9px] font-semibold text-ptpn-green hover:underline"
+              >
+                Lihat Detail <ArrowRight size={10} />
+              </Link>
+            )}
+          </span>
           <p className="mt-[3px] text-[9.5px] text-ink-500">
             HiPo relatif terhadap workforce &amp; posisi kritikal per region
           </p>

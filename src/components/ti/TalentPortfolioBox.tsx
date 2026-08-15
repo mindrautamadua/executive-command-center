@@ -17,7 +17,11 @@ const PERFORMANCE_LABELS = ["Low", "Medium", "High"];
 export function TalentPortfolioBox() {
   return (
     <section className="card anim-rise flex flex-col p-3.5">
-      <SectionHead title="Talent Portfolio (9 Box Grid)" action="Lihat Detail" />
+      <SectionHead
+        title="Talent Portfolio (9 Box Grid)"
+        action="Lihat Detail"
+        href="/talent-intelligence/portfolio-9box"
+      />
       <p className="mt-[3px] text-[9px] text-ink-500">Kombinasi Performance vs Potential</p>
 
       <div className="mt-3 flex flex-1 items-start gap-3">

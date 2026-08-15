@@ -4,7 +4,11 @@ import { SectionHead } from "../hc/SectionHead";
 export function TalentPipelineReadiness() {
   return (
     <section className="card anim-rise flex flex-col p-3.5" style={{ "--d": "60ms" } as React.CSSProperties}>
-      <SectionHead title="Talent Pipeline by Readiness" action="Lihat Detail" />
+      <SectionHead
+        title="Talent Pipeline by Readiness"
+        action="Lihat Detail"
+        href="/talent-intelligence/pipeline-readiness"
+      />
 
       <div className="mt-3 flex flex-1 items-center gap-3">
         {/* funnel */}

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import {
   kesiapanSeri,
@@ -129,9 +130,9 @@ export function PipelineKepemimpinan() {
         </div>
       </div>
 
-      <button className="link-more mt-1.5 flex cursor-pointer items-center gap-0.5">
+      <Link href="/succession-planning/pipeline" className="link-more mt-1.5 flex cursor-pointer items-center gap-0.5">
         Lihat pipeline lengkap <ChevronRight size={12} />
-      </button>
+      </Link>
     </div>
   );
 }
