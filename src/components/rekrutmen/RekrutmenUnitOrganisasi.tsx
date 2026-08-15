@@ -1,5 +1,5 @@
 import { ChevronRight } from "lucide-react";
-import { rekrutmenUnit } from "@/lib/rekrutmen-data";
+import { rekrutmenUnit, unitTotal } from "@/lib/rekrutmen-data";
 import { PALETTE } from "@/lib/chart-palette";
 
 const maxReq = Math.max(...rekrutmenUnit.map((u) => u.requisition));
@@ -21,7 +21,9 @@ export function RekrutmenUnitOrganisasi() {
             <th className="px-2 py-[5px] text-left text-[9px] font-semibold text-ink-500">
               Requisition
             </th>
-            <th className="px-2 py-[5px] text-left text-[9px] font-semibold text-ink-500">Hire</th>
+            <th className="px-2 py-[5px] text-left text-[9px] font-semibold text-ink-500">
+              Onboard
+            </th>
             <th className="px-2 py-[5px] text-left text-[9px] font-semibold text-ink-500">
               Time to Fill (Hari)
             </th>
@@ -60,6 +62,18 @@ export function RekrutmenUnitOrganisasi() {
             </tr>
           ))}
         </tbody>
+        <tfoot>
+          <tr className="border-t border-[#eef2f6]">
+            <td className="px-2 py-[5px] text-[9.5px] font-bold text-ink-900">Total</td>
+            <td className="px-2 text-[9.5px] font-bold tabular-nums text-ink-900">
+              {unitTotal.requisition}
+            </td>
+            <td className="px-2 text-[9.5px] font-bold tabular-nums text-ink-900">
+              {unitTotal.hire}
+            </td>
+            <td className="px-2 text-[9.5px] text-ink-500">Sem I 2026</td>
+          </tr>
+        </tfoot>
       </table>
 
       <button className="link-more mt-auto flex items-center gap-1 self-start pt-2">

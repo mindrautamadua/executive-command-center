@@ -1,21 +1,21 @@
 import {
+  HeartPulse,
   ShieldCheck,
+  UserX,
   CalendarClock,
-  Hexagon,
   Briefcase,
-  FileCheck2,
-  Activity,
+  Hexagon,
 } from "lucide-react";
 import { absensiKpi } from "@/lib/absensi-data";
 import { KpiCard } from "../ui/KpiCard";
 
 const ICONS = {
+  health: HeartPulse,
   kehadiran: ShieldCheck,
+  absen: UserX,
   ontime: CalendarClock,
-  jam: Hexagon,
   lembur: Briefcase,
-  izin: FileCheck2,
-  sakit: Activity,
+  jam: Hexagon,
 };
 
 export function AbsensiKpiStrip() {
@@ -32,6 +32,7 @@ export function AbsensiKpiStrip() {
             value={k.unit ? `${k.value}${k.unit}` : k.value}
             delta={{ value: k.delta, trend: k.trend, tone: k.deltaTone }}
             compare={k.compare}
+            info={k.info}
             spark={{ data: k.series, color: k.line }}
             delay={i * 60}
           />

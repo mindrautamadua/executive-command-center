@@ -11,6 +11,9 @@ import { StatusPengisian } from "@/components/org/StatusPengisian";
 import { PerubahanOrganisasi } from "@/components/org/PerubahanOrganisasi";
 import { MappingJabatanKritis } from "@/components/org/MappingJabatanKritis";
 import { OrgInsightAi } from "@/components/org/OrgInsightAi";
+import { OrgHealthScore } from "@/components/org/OrgHealthScore";
+import { LayerDensitas } from "@/components/org/LayerDensitas";
+import { EfisiensiBiaya } from "@/components/org/EfisiensiBiaya";
 
 export const metadata = { title: "Organisasi & Jabatan — PTPN Group" };
 
@@ -42,6 +45,12 @@ export default function OrganisasiJabatanPage() {
             <TingkatOrganisasi />
             <StatusPengisian />
             <PerubahanOrganisasi />
+          </div>
+
+          <div className="grid h-[248px] grid-cols-[minmax(0,452fr)_minmax(0,417fr)_minmax(0,420fr)] grid-rows-[minmax(0,1fr)] gap-3">
+            <OrgHealthScore />
+            <LayerDensitas />
+            <EfisiensiBiaya />
           </div>
 
           <div className="grid h-[195px] grid-cols-[minmax(0,917fr)_minmax(0,372fr)] grid-rows-[minmax(0,1fr)] gap-3">

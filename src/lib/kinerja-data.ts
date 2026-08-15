@@ -23,7 +23,7 @@ export interface KinerjaKpi {
 
 export const kinerjaKpi: KinerjaKpi[] = [
   {
-    label: "Overall Score (Rata-rata)",
+    label: "Overall Score",
     value: "87,6",
     unit: "/100",
     delta: "4,8 pts",
@@ -432,7 +432,7 @@ export const funnelTalenta: FunnelTalenta[] = [
   { label: "High Potential (HiPo)", jumlah: "4.312", jumlahNum: 4312, sub: "33,8% dari high performer", tone: "blue" },
   { label: "Critical Talent", jumlah: "1.842", jumlahNum: 1842, sub: "Menduduki / kandidat critical role", tone: "purple" },
   { label: "Ready Now", jumlah: "624", jumlahNum: 624, sub: "Siap promosi — prioritas suksesi", tone: "teal" },
-  { label: "Flight Risk", jumlah: "86", jumlahNum: 86, sub: "Ready Now dengan risiko keluar tinggi", tone: "red" },
+  { label: "Flight Risk", jumlah: "86", jumlahNum: 86, sub: "Ready Now berisiko keluar tinggi", tone: "red" },
 ];
 
 /* ── Goal alignment (line of sight) ──────────────────────── */

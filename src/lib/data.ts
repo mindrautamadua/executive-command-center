@@ -137,17 +137,17 @@ export const inisiatif = [
 
 export const berita = [
   {
-    date: "12 Mei 2025",
-    title: "PTPN Group Catat Kinerja Positif di Kuartal 1 2025",
+    date: "12 Agu 2026",
+    title: "PTPN Group Catat Kinerja Positif di Semester I 2026",
     hue: 120,
   },
   {
-    date: "09 Mei 2025",
+    date: "09 Agu 2026",
     title: "PTPN Perkuat Kemitraan dengan Petani Plasma",
     hue: 95,
   },
   {
-    date: "07 Mei 2025",
+    date: "07 Agu 2026",
     title: "Inovasi Teknologi Tingkatkan Produktivitas Kebun",
     hue: 140,
   },
@@ -212,7 +212,7 @@ export const kpiStrategis = [
 
 export const analitikPrediktif = [
   {
-    label: "Proyeksi Produksi CPO 2025",
+    label: "Proyeksi Produksi CPO 2026",
     value: "4,15",
     unit: "Juta Ton",
     delta: "6,8% vs 2024",
@@ -220,14 +220,14 @@ export const analitikPrediktif = [
     series: [20, 24, 22, 28, 26, 32, 30, 36, 34, 40, 44, 48],
   },
   {
-    label: "Proyeksi Pendapatan 2025",
+    label: "Proyeksi Pendapatan 2026",
     value: "Rp 125,6 T",
     delta: "8,9% vs 2024",
     color: "#2f9bf5",
     series: [24, 22, 27, 25, 31, 29, 35, 33, 39, 37, 43, 47],
   },
   {
-    label: "Proyeksi Laba Bersih 2025",
+    label: "Proyeksi Laba Bersih 2026",
     value: "Rp 9,8 T",
     delta: "10,2% vs 2024",
     color: "#8b5cf6",

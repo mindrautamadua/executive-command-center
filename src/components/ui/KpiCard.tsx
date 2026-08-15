@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Info } from "lucide-react";
 import { CountUp } from "./CountUp";
 import { Delta } from "./Delta";
 import { Sparkline } from "./Sparkline";
@@ -25,6 +26,7 @@ export function KpiCard({
   value,
   delta,
   compare,
+  info,
   spark,
   chart,
   delay = 0,
@@ -36,6 +38,8 @@ export function KpiCard({
   value: string;
   delta?: { value: string; trend: "up" | "down"; tone?: "good" | "bad" };
   compare?: string;
+  /** Definisi/metodologi metrik — tampil sebagai tooltip pada ikon ⓘ. */
+  info?: string;
   spark?: { data: number[]; color: string };
   chart?: ReactNode;
   delay?: number;
@@ -57,6 +61,11 @@ export function KpiCard({
         <span className="truncate text-[10px] font-semibold uppercase tracking-[0.05em] text-ink-500">
           {label}
         </span>
+        {info && (
+          <span title={info} className="ml-auto shrink-0 cursor-help text-ink-400">
+            <Info size={11} strokeWidth={2} />
+          </span>
+        )}
       </div>
       <div className="mt-2 flex items-baseline gap-2">
         <CountUp value={value} className="text-[20px] font-bold leading-none text-ink-900" />

@@ -10,6 +10,14 @@ import { DistribusiKesiapan } from "@/components/succession/DistribusiKesiapan";
 import { RencanaAksi } from "@/components/succession/RencanaAksi";
 import { KandidatSiapSekarang } from "@/components/succession/KandidatSiapSekarang";
 import { InsightSuksesi } from "@/components/succession/InsightSuksesi";
+import { EmergencyCoverage } from "@/components/succession/EmergencyCoverage";
+import { BodDecisionCenter } from "@/components/succession/BodDecisionCenter";
+import { KnowledgeTransfer } from "@/components/succession/KnowledgeTransfer";
+import { SuccessorConcentration } from "@/components/succession/SuccessorConcentration";
+import { DiversityPipeline } from "@/components/succession/DiversityPipeline";
+import { ExternalBench } from "@/components/succession/ExternalBench";
+import { TrenSuksesi } from "@/components/succession/TrenSuksesi";
+import { SuksesiFootnote } from "@/components/succession/SuksesiFootnote";
 
 export const metadata = { title: "Succession Planning — PTPN Group" };
 
@@ -46,6 +54,24 @@ export default function SuccessionPlanningPage() {
             <KandidatSiapSekarang />
             <InsightSuksesi />
           </div>
+
+          <div className="grid h-[196px] grid-cols-[minmax(0,435fr)_minmax(0,842fr)] grid-rows-[minmax(0,1fr)] gap-3">
+            <EmergencyCoverage />
+            <BodDecisionCenter />
+          </div>
+
+          <div className="grid h-[212px] grid-cols-[minmax(0,460fr)_minmax(0,375fr)_minmax(0,442fr)] grid-rows-[minmax(0,1fr)] gap-3">
+            <KnowledgeTransfer />
+            <SuccessorConcentration />
+            <DiversityPipeline />
+          </div>
+
+          <div className="grid h-[178px] grid-cols-[minmax(0,842fr)_minmax(0,435fr)] grid-rows-[minmax(0,1fr)] gap-3">
+            <ExternalBench />
+            <TrenSuksesi />
+          </div>
+
+          <SuksesiFootnote />
         </div>
       </main>
     </div>

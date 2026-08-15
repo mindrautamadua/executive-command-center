@@ -1,9 +1,18 @@
 import { ArrowRight } from "lucide-react";
-import { complianceIssues } from "@/lib/rc-data";
+import { complianceIssues, type ResidualLevel } from "@/lib/rc-data";
 import { SectionHead } from "../hc/SectionHead";
 import { StatusBadge } from "./StatusBadge";
 
 const RANK_BG = ["#ef4444", "#f0662d", "#f5a524", "#f5a524", "#f5c518"];
+
+const RESIDUAL_CLS: Record<ResidualLevel, string> = {
+  Tinggi: "bg-[#fdecec] text-[#ef4444]",
+  Sedang: "bg-[#fdf3e0] text-[#d98b06]",
+  Rendah: "bg-ptpn-greenLight text-ptpn-green",
+};
+
+const remColor = (pct: number) =>
+  pct >= 70 ? "#1a9c5b" : pct >= 50 ? "#f5a524" : "#ef4444";
 
 export function TopComplianceIssues() {
   return (
@@ -41,11 +50,32 @@ export function TopComplianceIssues() {
                 <StatusBadge status={c.status} />
               </span>
               <span className="mt-[1px] block truncate text-[8.5px] text-ink-500">{c.desc}</span>
-              <span className="block truncate text-[8px] text-ink-400">{c.units}</span>
+              <span className="block truncate text-[8px] text-ink-400">
+                {c.units} · Owner: {c.owner} · Umur {c.ageDays} hr
+              </span>
+              <span
+                className="mt-[3px] flex items-center gap-1.5"
+                title={`Remediasi ${c.remediation}% · Efektivitas kontrol ${c.controlEff}%`}
+              >
+                <span className="h-[5px] w-[64px] overflow-hidden rounded-full bg-[#eef2f6]">
+                  <span
+                    className="block h-full rounded-full"
+                    style={{ width: `${c.remediation}%`, background: remColor(c.remediation) }}
+                  />
+                </span>
+                <span className="text-[7.5px] font-bold text-ink-500">
+                  Remediasi {c.remediation}% · Kontrol {c.controlEff}%
+                </span>
+              </span>
             </span>
             <span className="shrink-0 text-right leading-[1.35]">
               <span className="block text-[10px] font-extrabold text-[#ef4444]">{c.exposure}</span>
               <span className="block text-[8.5px] text-ink-500">{c.due}</span>
+              <span
+                className={`mt-[2px] inline-flex rounded px-1 py-[1px] text-[7.5px] font-bold ${RESIDUAL_CLS[c.residual]}`}
+              >
+                Residual {c.residual}
+              </span>
             </span>
           </li>
         ))}

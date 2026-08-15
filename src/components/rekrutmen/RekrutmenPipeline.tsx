@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { ChevronDown, ChevronRight } from "lucide-react";
-import { conversionRate, rekrutmenPipeline } from "@/lib/rekrutmen-data";
+import { conversionRate, onboardNote, rekrutmenPipeline } from "@/lib/rekrutmen-data";
 
 const fmtId = (n: number) => n.toLocaleString("id-ID");
 const fmtPct = (n: number) => n.toFixed(1).replace(".", ",");
@@ -89,13 +89,18 @@ export function RekrutmenPipeline() {
       </div>
 
       <div className="mt-1 flex items-center justify-between border-t border-[#f2f5f8] pt-1.5">
-        <span className="text-[10px] text-ink-700">Conversion Rate (Applied → Hire)</span>
+        <span className="text-[10px] text-ink-700">
+          Conversion Rate (Applied → Offer Accepted)
+        </span>
         <span className="text-[13px] font-extrabold text-ptpn-green">{conversionRate}</span>
       </div>
 
-      <button className="link-more mt-1 flex items-center gap-1 self-start">
-        Lihat detail pipeline <ChevronRight size={11} />
-      </button>
+      <div className="mt-[3px] flex items-center justify-between">
+        <span className="text-[9px] text-ink-500">{onboardNote}</span>
+        <button className="link-more flex items-center gap-1">
+          Detail pipeline <ChevronRight size={11} />
+        </button>
+      </div>
     </div>
   );
 }

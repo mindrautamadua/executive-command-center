@@ -1,5 +1,5 @@
 import { ShieldCheck } from "lucide-react";
-import { ddCategories } from "@/lib/dd-data";
+import { ddCategories, ddTotalMetrics } from "@/lib/dd-data";
 import { SectionHead } from "../hc/SectionHead";
 
 const MAX_COUNT = 24;
@@ -11,7 +11,9 @@ export function DdCategories() {
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
       <SectionHead title="Kategori Metrik" />
-      <p className="mt-[3px] text-[9px] text-ink-500">Sebaran 128 istilah per domain</p>
+      <p className="mt-[3px] text-[9px] text-ink-500">
+        Sebaran {ddTotalMetrics} metrik tergovernance per domain
+      </p>
 
       <ul className="scroll-thin flex min-h-0 flex-1 flex-col justify-around gap-y-1 overflow-y-auto py-1">
         {ddCategories.map((c) => (

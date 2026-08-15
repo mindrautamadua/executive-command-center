@@ -26,14 +26,21 @@ const TONES: Record<RiskAction["tone"], string> = {
   green: "bg-ptpn-greenLight text-ptpn-green",
 };
 
+const STATUS_CLS: Record<RiskAction["status"], string> = {
+  "In Progress": "bg-[#fdf3e0] text-[#d98b06]",
+  Planned: "bg-[#e8f1fd] text-[#2f6fe4]",
+};
+
 export function RekomendasiTindakan() {
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "240ms" } as React.CSSProperties}
     >
-      <SectionHead title="Rekomendasi Tindakan Prioritas" />
-      <p className="mt-[3px] text-[9px] text-ink-500">Tindakan yang Direkomendasikan</p>
+      <SectionHead title="Rekomendasi Tindakan & Risk Treatment" />
+      <p className="mt-[3px] text-[9px] text-ink-500">
+        Tindakan Mitigasi, Owner, dan Ekspektasi Penurunan Risiko
+      </p>
 
       <ul className="scroll-thin mt-2 flex min-h-0 flex-1 flex-col justify-between gap-1.5 overflow-y-auto">
         {riskActions.map((a) => {
@@ -52,11 +59,29 @@ export function RekomendasiTindakan() {
                 <span className="block truncate text-[9.5px] font-extrabold text-ink-900">
                   {a.title}
                 </span>
-                <span className="block truncate text-[8.5px] text-ink-500">{a.desc}</span>
+                <span className="block truncate text-[8.5px] text-ink-500" title={a.desc}>
+                  {a.desc} · Owner: <span className="font-semibold text-ink-700">{a.owner}</span>
+                </span>
               </span>
-              <span className="flex shrink-0 items-center gap-2">
-                <LevelBadge level={a.level} />
-                <span className="text-[8.5px] font-semibold text-ink-500">{a.quarter}</span>
+              <span className="flex shrink-0 flex-col items-end gap-[3px]">
+                <span className="flex items-center gap-1.5">
+                  <span
+                    className="text-[8.5px] font-extrabold text-ink-700"
+                    title="Ekspektasi penurunan skor risiko setelah treatment"
+                  >
+                    {a.before} → {a.after}
+                    <span className="ml-1 text-[#16a34a]">(-{a.before - a.after})</span>
+                  </span>
+                  <LevelBadge level={a.level} />
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <span
+                    className={`rounded-md px-1.5 py-[2px] text-[7.5px] font-extrabold ${STATUS_CLS[a.status]}`}
+                  >
+                    {a.status}
+                  </span>
+                  <span className="text-[8px] font-semibold text-ink-500">{a.quarter}</span>
+                </span>
               </span>
             </li>
           );

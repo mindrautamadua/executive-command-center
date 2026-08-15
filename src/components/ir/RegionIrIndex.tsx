@@ -1,10 +1,16 @@
 "use client";
 
 import { ISLANDS, MAP_H } from "@/lib/indonesia";
-import { regionIndex, regionLegend } from "@/lib/ir-data";
+import { RISK_STYLE, regionLegend } from "@/lib/ir-data";
+import { regionHeatmap } from "@/lib/ir-intel-data";
 import { SectionHead } from "../hc/SectionHead";
 import { PanelFooterLink } from "./PanelFooterLink";
-import { Delta } from "../ui/Delta";
+
+const TONE_DOT: Record<"good" | "warn" | "bad", string> = {
+  good: "bg-[#1a9c5b]",
+  warn: "bg-[#f5a524]",
+  bad: "bg-[#ef4444]",
+};
 
 export function RegionIrIndex() {
   return (
@@ -12,10 +18,10 @@ export function RegionIrIndex() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead title="Indeks Hubungan Industrial per Region" />
+      <SectionHead title="IR Risk Heatmap per Region" />
 
       <div className="flex min-h-0 flex-1 items-center gap-3 pt-1">
-        <div className="relative h-full w-[42%] shrink-0 self-center">
+        <div className="relative h-full w-[30%] shrink-0 self-center">
           <svg
             viewBox={`0 0 1000 ${MAP_H}`}
             className="h-full w-full"
@@ -48,9 +54,8 @@ export function RegionIrIndex() {
                 key={is.id}
                 d={is.d}
                 fill="url(#ir-map-fill)"
-                stroke="#ffffff"
+                stroke="var(--map-stroke)"
                 strokeWidth="1"
-                strokeOpacity="0.7"
                 strokeLinejoin="round"
               />
             ))}
@@ -58,28 +63,45 @@ export function RegionIrIndex() {
         </div>
 
         <div className="flex min-w-0 flex-1 flex-col self-stretch">
-          <div className="flex items-center justify-between border-b border-[#eef2f6] pb-1 text-[8px] font-semibold uppercase tracking-[0.04em] text-ink-400">
+          <div className="grid grid-cols-[minmax(0,1fr)_36px_52px_40px_18px] items-center gap-x-1.5 border-b border-[#eef2f6] pb-1 text-[8px] font-semibold uppercase tracking-[0.04em] text-ink-400">
             <span>Region</span>
-            <span className="flex items-center gap-4">
-              <span>Indeks</span>
-              <span className="w-[42px] text-right">Perubahan</span>
-            </span>
+            <span className="text-right">Indeks</span>
+            <span className="text-center">Strike</span>
+            <span className="text-right">Comp.</span>
+            <span />
           </div>
           <div className="flex min-h-0 flex-1 flex-col justify-around">
-            {regionIndex.map((r) => (
-              <div key={r.name} className="flex items-center">
-                <span className="min-w-0 flex-1 truncate text-[9px] font-medium text-ink-700">
-                  {r.name}
+            {regionHeatmap.map((r) => (
+              <div
+                key={r.name}
+                className="grid grid-cols-[minmax(0,1fr)_36px_52px_40px_18px] items-center gap-x-1.5"
+              >
+                <span className="flex min-w-0 items-center gap-1">
+                  <span className="truncate text-[9px] font-medium text-ink-700" title={r.name}>
+                    {r.name}
+                  </span>
+                  {r.watch && (
+                    <span className="shrink-0 rounded bg-[#fdf9e0] px-1 py-[1px] text-[7.5px] font-extrabold uppercase tracking-[0.03em] text-[#a8891b]">
+                      Watch
+                    </span>
+                  )}
                 </span>
-                <span className="w-[34px] shrink-0 text-right text-[9.5px] font-bold tabular-nums text-ink-900">
+                <span className="text-right text-[9.5px] font-bold tabular-nums text-ink-900">
                   {r.index}
                 </span>
-                <Delta
-                  value={r.delta}
-                  trend={r.trend}
-                  size={9}
-                  className="w-[42px] shrink-0 justify-end"
-                />
+                <span className="text-center">
+                  <span
+                    className={`inline-block rounded px-1.5 py-[1px] text-[7.5px] font-bold ${RISK_STYLE[r.strike]}`}
+                  >
+                    {r.strike}
+                  </span>
+                </span>
+                <span className="text-right text-[9px] font-semibold tabular-nums text-ink-700">
+                  {r.compliance}%
+                </span>
+                <span className="flex justify-center">
+                  <span className={`h-[7px] w-[7px] rounded-full ${TONE_DOT[r.tone]}`} />
+                </span>
               </div>
             ))}
           </div>
@@ -93,6 +115,12 @@ export function RegionIrIndex() {
             {l.label}
           </span>
         ))}
+        <span className="flex items-center gap-1 text-[8px] text-ink-500">
+          <span className="rounded bg-[#fdf9e0] px-1 py-[1px] text-[7.5px] font-extrabold uppercase text-[#a8891b]">
+            Watch
+          </span>
+          &lt;2 pts di atas batas kategori
+        </span>
       </div>
 
       <PanelFooterLink label="Lihat Detail Regional" />

@@ -10,6 +10,13 @@ import { TalentImpactSummary } from "@/components/ss/TalentImpactSummary";
 import { SsInsightRekomendasi } from "@/components/ss/SsInsightRekomendasi";
 import { NextBestAction } from "@/components/ss/NextBestAction";
 import { ModelConfidenceRisk } from "@/components/ss/ModelConfidenceRisk";
+import { ValueCreationBridge } from "@/components/ss/ValueCreationBridge";
+import { SensitivityTornado } from "@/components/ss/SensitivityTornado";
+import { OutcomeRange } from "@/components/ss/OutcomeRange";
+import { ExecutionFeasibility } from "@/components/ss/ExecutionFeasibility";
+import { StressScenario } from "@/components/ss/StressScenario";
+import { GoalSeekPanel } from "@/components/ss/GoalSeekPanel";
+import { SsDecisionCenter } from "@/components/ss/SsDecisionCenter";
 import { SsFootnote } from "@/components/ss/SsFootnote";
 
 export const metadata = { title: "Scenario Simulation — PTPN Group" };
@@ -37,7 +44,23 @@ export default function ScenarioSimulationPage() {
             <TalentImpactSummary />
           </div>
 
-          <div className="grid h-[215px] grid-cols-[minmax(0,34fr)_minmax(0,34fr)_minmax(0,32fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid h-[250px] grid-cols-[minmax(0,36fr)_minmax(0,33fr)_minmax(0,31fr)] grid-rows-[minmax(0,1fr)] gap-3">
+            <ValueCreationBridge />
+            <SensitivityTornado />
+            <OutcomeRange />
+          </div>
+
+          <div className="grid h-[260px] grid-cols-[minmax(0,33fr)_minmax(0,36fr)_minmax(0,31fr)] grid-rows-[minmax(0,1fr)] gap-3">
+            <ExecutionFeasibility />
+            <StressScenario />
+            <GoalSeekPanel />
+          </div>
+
+          <div className="grid h-[235px] grid-rows-[minmax(0,1fr)]">
+            <SsDecisionCenter />
+          </div>
+
+          <div className="grid h-[225px] grid-cols-[minmax(0,36fr)_minmax(0,32fr)_minmax(0,32fr)] grid-rows-[minmax(0,1fr)] gap-3">
             <SsInsightRekomendasi />
             <NextBestAction />
             <ModelConfidenceRisk />

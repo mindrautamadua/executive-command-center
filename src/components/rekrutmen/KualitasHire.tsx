@@ -58,7 +58,7 @@ export function KualitasHire() {
       <div className="flex items-start justify-between gap-2">
         <h3 className="card-title-navy">Kualitas Hire (New Hire Performance)</h3>
         <button className="select-chip whitespace-nowrap px-2.5 py-[5px] text-[9.5px] transition-colors hover:bg-[#f7f9fb]">
-          Q2 2026 <ChevronDown size={11} />
+          Cohort 2025 <ChevronDown size={11} />
         </button>
       </div>
 

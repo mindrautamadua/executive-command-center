@@ -42,7 +42,7 @@ export function KomoditasUtama() {
     <div className="card flex min-h-0 flex-1 flex-col overflow-hidden px-4 pb-2.5 pt-2">
       <div className="flex items-baseline justify-between">
         <h3 className="card-title whitespace-nowrap">KOMODITAS UTAMA</h3>
-        <span className="text-[9px] text-ink-400">(YTD 2025)</span>
+        <span className="text-[9px] text-ink-400">(YTD 2026)</span>
       </div>
 
       <div className="relative mt-1 shrink-0">

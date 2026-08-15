@@ -36,7 +36,20 @@ function Panel({
               <Icon size={10} strokeWidth={2} />
             </span>
             <div className="min-w-0 flex-1">
-              <div className="truncate text-[9.5px] text-ink-900">{r.faktor}</div>
+              <div className="flex items-center gap-1.5">
+                <span className="truncate text-[9.5px] text-ink-900">{r.faktor}</span>
+                <span
+                  className={`${
+                    r.impact === "Very High"
+                      ? "tone-red"
+                      : r.impact === "High"
+                        ? "tone-amber"
+                        : "tone-slate"
+                  } shrink-0 rounded px-1 py-[1px] text-[7px] font-bold leading-none`}
+                >
+                  Impact: {r.impact}
+                </span>
+              </div>
               <span className="mt-[4px] block h-[6px] w-full overflow-hidden rounded-full bg-[#eef2f6]">
                 <span
                   className="anim-grow-x block h-full rounded-full"

@@ -7,18 +7,24 @@ export function RencanaAksi() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "780ms" } as React.CSSProperties}
     >
-      <h3 className="card-title-navy">Rencana Aksi Suksesi</h3>
+      <div className="flex items-start justify-between gap-2">
+        <h3 className="card-title-navy">Rencana Aksi Suksesi</h3>
+        <span className="shrink-0 text-[8.5px] font-medium text-ink-400">
+          Δ = dampak thd readiness kandidat
+        </span>
+      </div>
 
       <div className="mt-2 min-h-0 flex-1">
         {/* leading-none: tanpa ini tiap <tr> mewarisi line-height 24px dan baris jadi tinggi */}
         <table className="w-full table-fixed border-collapse leading-none">
           <thead>
             <tr className="border-b border-[#eef2f6] text-[9px] font-semibold text-ink-500">
-              <th className="w-[23%] pb-1.5 text-left">Inisiatif</th>
-              <th className="w-[35%] pb-1.5 text-left">Deskripsi</th>
-              <th className="w-[12%] pb-1.5 text-left">Target</th>
-              <th className="w-[14%] pb-1.5 text-left">Progress</th>
-              <th className="w-[16%] pb-1.5 text-left">Status</th>
+              <th className="w-[26%] pb-1.5 text-left">Inisiatif</th>
+              <th className="w-[13%] pb-1.5 text-left">Target</th>
+              <th className="w-[19%] pb-1.5 text-left">Progress</th>
+              <th className="w-[13%] pb-1.5 text-right">Δ Readiness</th>
+              <th className="w-[12%] pb-1.5 text-right">Δ Waktu</th>
+              <th className="w-[17%] pb-1.5 pl-2 text-left">Status</th>
             </tr>
           </thead>
           <tbody>
@@ -27,11 +33,11 @@ export function RencanaAksi() {
                 key={a.inisiatif}
                 className="h-[28px] border-b border-[#f4f7fa] transition-colors last:border-0 hover:bg-[#f7f9fb]"
               >
-                <td className="py-0 pr-1 text-[9px] font-semibold leading-[1.25] text-ink-900">
+                <td
+                  className="truncate py-0 pr-1 text-[9px] font-semibold leading-[1.25] text-ink-900"
+                  title={a.deskripsi}
+                >
                   {a.inisiatif}
-                </td>
-                <td className="py-0 pr-1 text-[9px] leading-[1.25] text-ink-500">
-                  {a.deskripsi}
                 </td>
                 <td className="py-0 pr-1 text-[9px] leading-none text-ink-700">{a.target}</td>
                 <td className="py-0 pr-2">
@@ -54,7 +60,23 @@ export function RencanaAksi() {
                     </span>
                   </span>
                 </td>
-                <td className="py-0">
+                <td
+                  className={`py-0 text-right text-[9px] font-semibold leading-none tabular-nums ${
+                    a.uplift === "—" ? "text-ink-400" : "text-ptpn-green"
+                  }`}
+                  title="Kenaikan readiness rata-rata peserta yang menyelesaikan program"
+                >
+                  {a.uplift}
+                </td>
+                <td
+                  className={`py-0 text-right text-[9px] font-semibold leading-none tabular-nums ${
+                    a.deltaWaktu === "—" ? "text-ink-400" : "text-ptpn-green"
+                  }`}
+                  title="Percepatan time-to-readiness rata-rata"
+                >
+                  {a.deltaWaktu}
+                </td>
+                <td className="py-0 pl-2">
                   <span
                     className={`inline-flex items-center whitespace-nowrap rounded px-1.5 py-[2px] text-[9px] font-semibold leading-none ${STATUS_STYLE[a.status]}`}
                   >

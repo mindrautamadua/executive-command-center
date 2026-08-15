@@ -1,23 +1,24 @@
 import {
+  ArrowLeftRight,
   BookOpenCheck,
-  UsersRound,
-  Package,
-  BadgeCheck,
-  Timer,
+  Crosshair,
+  Gauge,
+  TrendingUp,
   Wallet,
 } from "lucide-react";
 import { lndKpi } from "@/lib/lnd-data";
 import { KpiCard } from "../ui/KpiCard";
 
 const ICONS = {
+  gap: Crosshair,
+  transfer: ArrowLeftRight,
+  impact: Gauge,
+  roi: TrendingUp,
   jam: BookOpenCheck,
-  peserta: UsersRound,
-  program: Package,
-  completion: BadgeCheck,
-  rata: Timer,
   investasi: Wallet,
 };
 
+/** Hierarki capability-first: gap closure → transfer → results → ROI, baru aktivitas. */
 export function LndKpiStrip() {
   return (
     <div className="grid grid-cols-6 gap-3">
@@ -32,6 +33,7 @@ export function LndKpiStrip() {
             value={k.value}
             delta={{ value: k.delta, trend: k.trend }}
             compare={k.compare}
+            info={k.info}
             spark={{ data: k.series, color: k.line }}
             delay={60 * i}
           />

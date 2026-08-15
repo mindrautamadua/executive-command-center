@@ -1,4 +1,4 @@
-import { irIssues } from "@/lib/ir-data";
+import { irIssues12m as irIssues } from "@/lib/ir-intel-data";
 import { SectionHead } from "../hc/SectionHead";
 import { PanelFooterLink } from "./PanelFooterLink";
 
@@ -12,7 +12,7 @@ export function TopIrIssues() {
     >
       <div className="flex items-baseline gap-1.5">
         <SectionHead title="Top Isu Industrial Relations" />
-        <span className="shrink-0 text-[8.5px] text-ink-400">(YTD)</span>
+        <span className="shrink-0 text-[8.5px] text-ink-400">(12 Bulan · 170 Kasus)</span>
       </div>
 
       <ul className="flex min-h-0 flex-1 flex-col justify-around py-1">

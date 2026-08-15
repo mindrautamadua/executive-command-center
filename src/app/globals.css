@@ -22,6 +22,8 @@
   --chart-grid: #f0f3f6;
   --chart-axis: #e8edf2;
   --chart-tick: #98a4b2;
+  /* Garis pemisah pulau pada peta SVG (alpha ikut di token, bukan strokeOpacity). */
+  --map-stroke: rgba(255, 255, 255, 0.7);
 }
 
 [data-theme="dark"] {
@@ -43,6 +45,8 @@
   --chart-grid: #263042;
   --chart-axis: #2c3648;
   --chart-tick: #7d8b9c;
+  /* Hairline gelap di atas landmass hijau — putih menyilaukan di kartu gelap. */
+  --map-stroke: rgba(11, 16, 26, 0.55);
 }
 
 html,
@@ -576,6 +580,49 @@ body {
 [data-theme="dark"] .hover\:bg-\[\#f8fafc\]:hover,
 [data-theme="dark"] .hover\:bg-\[\#eef2f6\]:hover {
   background-color: var(--surface-3);
+}
+
+/* --- hasil audit dark mode: Industrial Relations -------------------------- */
+/* Wash hijau pucat panel Disruption Risk & kartu Bipartite Index. */
+[data-theme="dark"] .bg-\[\#f2faf6\] {
+  background-color: rgba(62, 207, 131, 0.1);
+}
+/* Varian opacity bg-white lain tidak kena selector .bg-white biasa. */
+[data-theme="dark"] .bg-white\/70 {
+  background-color: rgba(22, 29, 41, 0.7);
+}
+[data-theme="dark"] .text-\[\#c03434\] {
+  color: #f87171;
+}
+/* Chip "Watch" pada heatmap regional. */
+[data-theme="dark"] .bg-\[\#fdf9e0\] {
+  background-color: rgba(234, 179, 8, 0.14);
+}
+[data-theme="dark"] .text-\[\#a8891b\] {
+  color: #facc15;
+}
+
+/* --- hasil audit dark mode: People Math & HPI ----------------------------- */
+/* Tone hijau kartu sinyal — pasangan red/amber-nya sudah terpetakan di atas. */
+[data-theme="dark"] .bg-\[\#f4fbf7\] {
+  background-color: rgba(62, 207, 131, 0.1);
+}
+[data-theme="dark"] .border-\[\#cfe9d9\] {
+  border-color: rgba(62, 207, 131, 0.3);
+}
+/* Varian hover selain -700 adalah kelas terpisah, perlu aturan sendiri. */
+[data-theme="dark"] .hover\:text-ink-900:hover {
+  color: var(--text-1);
+}
+[data-theme="dark"] .text-\[\#0ea5e9\] {
+  color: #38bdf8;
+}
+[data-theme="dark"] svg text[fill="#1a9c5b"] {
+  fill: #4ade80;
+}
+/* Scrim modal: #0f1b2d/40 nyaris sama dengan --bg-app gelap. */
+[data-theme="dark"] .bg-\[\#0f1b2d\]\/40 {
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 /* --- scrollbar ------------------------------------------------------------ */

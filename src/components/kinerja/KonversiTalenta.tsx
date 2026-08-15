@@ -43,7 +43,7 @@ export function KonversiTalenta() {
               <span className={`w-[42px] shrink-0 text-right text-[10px] font-extrabold tabular-nums ${t.text}`}>
                 {f.jumlah}
               </span>
-              <span className="w-[150px] shrink-0 truncate text-[8.5px] text-ink-400">{f.sub}</span>
+              <span className="w-[168px] shrink-0 truncate text-[8.5px] text-ink-400">{f.sub}</span>
             </div>
           );
         })}

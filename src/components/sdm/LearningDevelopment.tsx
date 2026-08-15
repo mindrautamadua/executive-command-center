@@ -14,7 +14,7 @@ export function LearningDevelopment() {
           <p className="mt-[3px] text-[9.5px] text-ink-500">Ringkasan Pelatihan</p>
         </div>
         <button className="select-chip-sm">
-          YTD 2025 <ChevronDown size={10} />
+          YTD 2026 <ChevronDown size={10} />
         </button>
       </div>
 

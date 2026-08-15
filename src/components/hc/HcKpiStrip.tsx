@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { hcKpi } from "@/lib/hc-data";
 import { Delta } from "../ui/Delta";
+import { MetricInfo } from "../ui/MetricInfo";
 
 const ICONS = {
   users: Users,
@@ -35,10 +36,16 @@ export function HcKpiStrip() {
         return (
           <div
             key={k.label}
-            className="card anim-rise px-3.5 pb-3 pt-3"
+            className="card anim-rise group/metric relative !overflow-visible px-3.5 pb-3 pt-3 hover:z-20"
             style={{ "--d": `${50 * i}ms` } as React.CSSProperties}
           >
-            <div className="flex items-center gap-2">
+            <MetricInfo
+              term={k.metric}
+              align={i >= 3 ? "right" : "left"}
+              className="absolute right-3 top-3"
+            />
+
+            <div className="flex items-center gap-2 pr-4">
               <span
                 className={`flex h-[26px] w-[26px] shrink-0 items-center justify-center rounded-lg ${TONES[k.tone]}`}
               >

@@ -38,7 +38,7 @@ export function TingkatOrganisasi() {
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
       <h3 className="card-title-navy">Tingkat Organisasi</h3>
-      <p className="mt-[3px] text-[9.5px] text-ink-500">Distribusi berdasarkan Level</p>
+      <p className="mt-[3px] text-[9.5px] text-ink-500">Distribusi Jabatan berdasarkan Level</p>
 
       <div className="relative mt-1 flex min-h-0 flex-1 items-stretch">
         <div className="relative min-h-0 flex-1">
@@ -80,7 +80,7 @@ export function TingkatOrganisasi() {
             >
               <span className="font-bold text-ink-900">{bands[active].level}</span>{" "}
               <span className="text-ink-700">
-                {bands[active].value} karyawan ({bands[active].pct})
+                {bands[active].value} jabatan ({bands[active].pct})
               </span>
             </div>
           )}

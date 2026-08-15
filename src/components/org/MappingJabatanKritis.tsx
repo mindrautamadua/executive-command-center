@@ -1,5 +1,10 @@
 import { ChevronRight } from "lucide-react";
-import { mappingJabatanKritis, RISIKO_TONE, rencanaColor } from "@/lib/org-data";
+import {
+  mappingJabatanKritis,
+  RISIKO_TONE,
+  rencanaColor,
+  riskScoreColor,
+} from "@/lib/org-data";
 import { READINESS } from "@/lib/chart-palette";
 
 const HEAD = [
@@ -8,6 +13,7 @@ const HEAD = [
   "Level",
   "Karyawan Saat Ini",
   "Risiko Kehilangan",
+  "Skor Risiko Posisi",
   "Kesiapan (Now / 1-2 / 3+ Thn)",
   "Rencana Suksesi",
 ];
@@ -90,6 +96,14 @@ export function MappingJabatanKritis() {
             >
               <td className="whitespace-nowrap px-2 py-[6px] text-[9.5px] text-ink-900">
                 {r.jabatan}
+                {r.spof && (
+                  <span
+                    className="tone-red ml-1.5 inline-block rounded-md px-1.5 py-[1px] text-[8px] font-bold"
+                    title="Single Point of Failure: 1 pemegang jabatan, 0 suksesor siap"
+                  >
+                    SPOF
+                  </span>
+                )}
               </td>
               <td className="whitespace-nowrap px-2 text-[9.5px] text-ink-700">{r.unit}</td>
               <td className="whitespace-nowrap px-2 text-[9.5px] text-ink-700">{r.level}</td>
@@ -105,6 +119,18 @@ export function MappingJabatanKritis() {
                     <span className="h-[6px] w-[6px] shrink-0 animate-pulseDot rounded-full bg-[#ef4444]" />
                   )}
                 </span>
+              </td>
+              <td
+                className="px-2"
+                title="Kritikalitas × vacancy × kesiapan suksesi × ketersediaan talenta (0–100)"
+              >
+                <span
+                  className="text-[10px] font-bold tabular-nums"
+                  style={{ color: riskScoreColor(r.riskScore) }}
+                >
+                  {r.riskScore}
+                </span>
+                <span className="text-[8.5px] text-ink-400"> /100</span>
               </td>
               <td className="px-2">
                 <ReadinessBar now={r.readyNow} r12={r.ready12} r3={r.ready3} delay={i * 60} />

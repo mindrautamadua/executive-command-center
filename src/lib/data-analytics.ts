@@ -24,7 +24,7 @@ export const dataKpi: DataKpi[] = [
     value: "70.142",
     delta: "2,7%",
     trend: "up",
-    compare: "vs Q1 2025: 68.295",
+    compare: "vs Q1 2026: 68.295",
     icon: "employee",
     tone: "blue",
     line: PALETTE.blue,
@@ -35,18 +35,18 @@ export const dataKpi: DataKpi[] = [
     value: "95,6%",
     delta: "2,8%",
     trend: "up",
-    compare: "vs Q1 2025: 92,8%",
+    compare: "vs Q1 2026: 92,8%",
     icon: "kelengkapan",
     tone: "green",
     line: PALETTE.green,
     series: [28, 33, 30, 36, 32, 39, 35, 42, 38, 45, 41, 48, 44, 51, 55],
   },
   {
-    label: "Kualitas Data (DQ Score)",
+    label: "Data Trust Index",
     value: "94,1",
     delta: "1,7 pts",
     trend: "up",
-    compare: "vs Q1 2025: 92,4",
+    compare: "vs Q1 2026: 92,4",
     icon: "kualitas",
     tone: "purple",
     line: PALETTE.purple,
@@ -57,7 +57,7 @@ export const dataKpi: DataKpi[] = [
     value: "98,3%",
     delta: "1,9%",
     trend: "up",
-    compare: "vs Q1 2025: 96,4%",
+    compare: "vs Q1 2026: 96,4%",
     icon: "tepatWaktu",
     tone: "amber",
     line: PALETTE.amber,
@@ -68,7 +68,7 @@ export const dataKpi: DataKpi[] = [
     value: "18",
     delta: "2",
     trend: "up",
-    compare: "vs Q1 2025: 16",
+    compare: "vs Q1 2026: 16",
     icon: "sumber",
     tone: "teal",
     line: PALETTE.teal,
@@ -81,7 +81,7 @@ export const dataKpi: DataKpi[] = [
     trend: "down",
     // anomali turun = kualitas data membaik
     deltaTone: "good",
-    compare: "vs Q1 2025: 178",
+    compare: "121 resolved · 35 outstanding",
     icon: "anomali",
     tone: "red",
     line: PALETTE.red,
@@ -89,8 +89,13 @@ export const dataKpi: DataKpi[] = [
   },
 ];
 
-/* ── Data Quality Overview (radar 5 dimensi) ─────────────── */
+/* ── Data Trust Index (radar 6 dimensi) ──────────────────── */
 
+/**
+ * Indeks komposit tertimbang dari 6 dimensi di bawah — bobot lebih besar
+ * pada Konsistensi & Governance. Satu-satunya angka payung kualitas data;
+ * skor lain di halaman ini adalah sub-dimensinya.
+ */
 export const dqScore = "94,1";
 
 export interface DimensiKualitas {
@@ -99,24 +104,25 @@ export interface DimensiKualitas {
   share: number;
 }
 
-/** 5 skor independen — divisualkan sebagai radar, bukan pie share. */
+/** 6 skor independen — divisualkan sebagai radar, bukan pie share. */
 export const dimensiKualitas: DimensiKualitas[] = [
   { name: "Akurasi", pct: "96,4%", share: 96.4 },
   { name: "Kelengkapan", pct: "95,6%", share: 95.6 },
   { name: "Konsistensi", pct: "93,2%", share: 93.2 },
   { name: "Validitas", pct: "93,8%", share: 93.8 },
   { name: "Timeliness", pct: "98,3%", share: 98.3 },
+  { name: "Governance", pct: "92,3%", share: 92.3 },
 ];
 
 /* ── Tren DQ Score ───────────────────────────────────────── */
 
 export const trenDqScore = [
-  { name: "Jan 2025", value: 91.2 },
-  { name: "Feb 2025", value: 91.8 },
-  { name: "Mar 2025", value: 92.4 },
-  { name: "Apr 2025", value: 92.9 },
-  { name: "Mei 2025", value: 93.4 },
-  { name: "Jun 2025", value: 94.1 },
+  { name: "Jan 2026", value: 91.2 },
+  { name: "Feb 2026", value: 91.8 },
+  { name: "Mar 2026", value: 92.4 },
+  { name: "Apr 2026", value: 92.9 },
+  { name: "Mei 2026", value: 93.4 },
+  { name: "Jun 2026", value: 94.1 },
 ];
 
 /* ── Kelengkapan per domain ──────────────────────────────── */
@@ -202,6 +208,71 @@ export const anomaliHarian = [
   4, 6, 5, 8, 3, 2, 5, 7, 9, 6, 4, 3, 5, 8, 6, 5, 4, 7, 5, 3, 6, 4, 8, 5, 4, 6, 3, 5, 4, 6,
 ];
 
+/* ── DQ incident management ──────────────────────────────── */
+
+/** Status lifecycle 156 anomali terdeteksi — total harus = totalAnomali. */
+export const insidenStatus = [
+  { label: "Resolved", value: 121, tone: "tone-green" },
+  { label: "Investigasi", value: 22, tone: "tone-blue" },
+  { label: "Pending Owner", value: 9, tone: "tone-amber" },
+  { label: "Kritis", value: 4, tone: "tone-red" },
+] as const;
+
+export const insidenMeta = { tertuaHari: 17, slaBreach: 6 };
+
+export interface InsidenRow {
+  jenis: string;
+  total: number;
+  owner: string;
+  sla: string;
+  resolved: number;
+}
+
+/** Per jenis anomali: penanggung jawab, SLA remediasi, progres penyelesaian. */
+export const insidenRows: InsidenRow[] = [
+  { jenis: "Data Ganda", total: 42, owner: "HR Operations", sla: "2 hari", resolved: 31 },
+  { jenis: "Data Tidak Lengkap", total: 38, owner: "HC Analytics", sla: "3 hari", resolved: 30 },
+  { jenis: "Data Tidak Valid", total: 31, owner: "IT Data Mgmt", sla: "2 hari", resolved: 26 },
+  { jenis: "Data Outlier", total: 27, owner: "HC Analytics", sla: "5 hari", resolved: 21 },
+  { jenis: "Lainnya", total: 18, owner: "Unit Terkait", sla: "5 hari", resolved: 13 },
+];
+
+/* ── Rekonsiliasi lintas sistem ──────────────────────────── */
+
+export const konsistensiLintasSistem = "94,2%";
+
+export interface RekonSistem {
+  sistem: string;
+  records: string;
+  /** Selisih vs source of truth (SAP ERP); 0 = cocok. */
+  selisih: number;
+  sourceOfTruth?: boolean;
+}
+
+/** Headcount per sistem vs SAP ERP sebagai source of truth. */
+export const rekonSistem: RekonSistem[] = [
+  { sistem: "SAP ERP", records: "70.142", selisih: 0, sourceOfTruth: true },
+  { sistem: "ECC Dashboard", records: "70.142", selisih: 0 },
+  { sistem: "HC Data Hub", records: "70.138", selisih: -4 },
+  { sistem: "Payroll System", records: "70.138", selisih: -4 },
+  { sistem: "Time Attendance", records: "69.982", selisih: -160 },
+  { sistem: "Performance System", records: "68.421", selisih: -1721 },
+];
+
+/* ── Cakupan elemen data kritis ──────────────────────────── */
+
+/** Elemen wajib — dibobot lebih tinggi daripada kelengkapan domain umum. */
+export const elemenKritis = [
+  { name: "Employee ID", pct: 100 },
+  { name: "Status Kepegawaian", pct: 99.8 },
+  { name: "Organisasi", pct: 99.4 },
+  { name: "Jabatan", pct: 98.9 },
+  { name: "Cost Center", pct: 97.8 },
+  { name: "Manajer (Atasan)", pct: 95.2 },
+  { name: "Kompensasi", pct: 93.8 },
+  { name: "Absensi", pct: 90.2 },
+];
+
 /* ── Perbandingan kualitas per unit ──────────────────────── */
 
 /** Ambang batas skor kualitas — flag dihitung dari sini, bukan hardcode. */
@@ -267,91 +338,71 @@ export const unitKualitas: UnitKualitas[] = [
   },
 ];
 
-/* ── Data usage & analytics ──────────────────────────────── */
+/* ── Data-to-decision funnel ─────────────────────────────── */
 
-export interface UsageItem {
+export interface FunnelTahap {
   label: string;
   value: string;
-  delta: string;
-  trend: Trend;
-  compare: string;
+  /** Lebar bar relatif (%) — skala visual funnel, bukan proporsi aktual. */
+  width: number;
   color: string;
-  /** deret tren 12 periode untuk sparkline */
-  series: number[];
+  caption: string;
 }
 
-export const dataUsage: UsageItem[] = [
-  {
-    label: "Dashboard Aktif",
-    value: "142",
-    delta: "12%",
-    trend: "up",
-    compare: "vs Q1 2025: 127",
-    color: PALETTE.blue,
-    series: [38, 52, 44, 60, 48, 66, 56, 72, 62, 80, 70, 88],
-  },
-  {
-    label: "Laporan Dibuat",
-    value: "1.287",
-    delta: "8,4%",
-    trend: "up",
-    compare: "vs Q1 2025: 1.189",
-    color: PALETTE.green,
-    series: [42, 56, 48, 62, 52, 68, 58, 74, 64, 82, 72, 90],
-  },
-  {
-    label: "Pengguna Aktif",
-    value: "856",
-    delta: "10,3%",
-    trend: "up",
-    compare: "vs Q1 2025: 776",
-    color: PALETTE.purple,
-    series: [40, 54, 46, 64, 50, 70, 60, 76, 66, 84, 74, 92],
-  },
-  {
-    label: "Query Data",
-    value: "4.562",
-    delta: "15,7%",
-    trend: "up",
-    compare: "vs Q1 2025: 3.942",
-    color: PALETTE.amber,
-    series: [36, 50, 44, 58, 50, 64, 56, 72, 64, 78, 72, 86],
-  },
+/** Dari data mentah sampai aksi bisnis — bukti data dipakai mengambil keputusan. */
+export const funnelKeputusan: FunnelTahap[] = [
+  { label: "Data", value: "70.142", width: 100, color: PALETTE.blue, caption: "record karyawan" },
+  { label: "Analitik", value: "4.562", width: 78, color: PALETTE.teal, caption: "query kuartal ini" },
+  { label: "Insight", value: "126", width: 56, color: PALETTE.purple, caption: "insight tervalidasi" },
+  { label: "Keputusan", value: "42", width: 38, color: PALETTE.amber, caption: "keputusan didukung data" },
+  { label: "Aksi", value: "31", width: 24, color: PALETTE.green, caption: "aksi dieksekusi" },
 ];
+
+export const funnelFooter = "856 pengguna aktif · 142 dashboard · 1.287 laporan dibuat";
 
 /* ── Top 5 insight ───────────────────────────────────────── */
 
 export interface InsightData {
   isi: string;
   tone: "success" | "info" | "warning" | "neutral";
+  /** Confidence berbasis kelengkapan sumber, n, dan signifikansi statistik. */
+  conf: string;
 }
 
 export const topInsight: InsightData[] = [
   {
-    isi: "Tingkat turnover menurun 8,7% dibandingkan Q1 2025, terutama pada kelompok usia < 30 tahun.",
+    isi: "Tingkat turnover menurun 8,7% dibandingkan Q1 2026, terutama pada kelompok usia < 30 tahun.",
     tone: "success",
+    conf: "94%",
   },
   {
     isi: "Rata-rata jam pelatihan per karyawan meningkat 12,1% dibandingkan periode sebelumnya.",
     tone: "success",
+    conf: "92%",
   },
   {
     isi: "Kelengkapan data Core HR meningkat 2,8% berkat integrasi data dari SAP ERP.",
     tone: "success",
+    conf: "96%",
   },
   {
-    isi: "Data kinerja menunjukkan korelasi positif antara pelatihan dan pencapaian KPI (r = 0,62).",
+    isi: "Jam pelatihan berasosiasi positif dengan pencapaian KPI (r = 0,62; n = 12.842; p < 0,001).",
     tone: "info",
+    conf: "91%",
   },
   {
-    isi: "Tingkat kehadiran meningkat 2,3% dibandingkan Q1 2025.",
+    isi: "Tingkat kehadiran meningkat 2,3% dibandingkan Q1 2026.",
     tone: "neutral",
+    conf: "88%",
   },
 ];
 
 /* ── Data governance ─────────────────────────────────────── */
 
 export const governanceScore = { pct: 92.3, label: "92,3%", status: "Baik" };
+
+/** Maturitas governance skala 1-5 (CMMI-style). */
+export const governanceMaturity = { level: "Level 4 dari 5", label: "Managed" };
 
 export interface GovernanceItem {
   label: string;

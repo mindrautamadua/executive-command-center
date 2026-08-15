@@ -19,7 +19,7 @@ export default function DataDictionaryPage() {
         <div className="flex flex-col gap-3 px-5 pb-5">
           <DdStats />
 
-          <div className="grid h-[520px] grid-cols-[minmax(0,68fr)_minmax(0,32fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid h-[600px] grid-cols-[minmax(0,68fr)_minmax(0,32fr)] grid-rows-[minmax(0,1fr)] gap-3">
             <DdTable />
             <DdCategories />
           </div>

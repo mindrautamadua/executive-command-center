@@ -1,10 +1,10 @@
-import { BookMarked, CalendarClock, Database, LayoutGrid } from "lucide-react";
+import { BadgeCheck, BookMarked, CalendarClock, Gauge } from "lucide-react";
 import { ddStats, type DdStat } from "@/lib/dd-data";
 
 const ICONS: Record<DdStat["icon"], typeof BookMarked> = {
   terms: BookMarked,
-  category: LayoutGrid,
-  source: Database,
+  certified: BadgeCheck,
+  trust: Gauge,
   updated: CalendarClock,
 };
 

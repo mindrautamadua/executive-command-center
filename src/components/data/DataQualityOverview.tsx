@@ -10,30 +10,27 @@ import {
   Tooltip,
 } from "recharts";
 import { ArrowRight } from "lucide-react";
-import { dimensiKualitas } from "@/lib/data-analytics";
+import { dimensiKualitas, dqScore } from "@/lib/data-analytics";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { CountUp } from "../ui/CountUp";
 
-/* Rata-rata 5 dimensi — diturunkan dari data, bukan hardcode. */
-const RATA =
-  dimensiKualitas.reduce((s, d) => s + d.share, 0) / dimensiKualitas.length;
-const RATA_LABEL = RATA.toFixed(1).replace(".", ",");
-
 /**
- * 5 skor kualitas yang saling independen — radar, bukan pie share
+ * 6 skor dimensi yang saling independen — radar, bukan pie share
  * (skor-skor ini bukan bagian dari satu keseluruhan 100%).
+ * Headline memakai dqScore: indeks komposit tertimbang, satu-satunya
+ * angka payung kualitas data di seluruh halaman.
  */
 export function DataQualityOverview() {
   return (
     <div className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3">
       <div className="flex items-start justify-between gap-2">
-        <h3 className="card-title-navy">Data Quality Overview</h3>
+        <h3 className="card-title-navy">Data Trust Index</h3>
         <div className="text-right leading-tight">
           <CountUp
-            value={RATA_LABEL}
+            value={dqScore}
             className="block text-[15px] font-extrabold leading-none text-ink-900"
           />
-          <span className="text-[9px] text-ink-400">Rata-rata Skor</span>
+          <span className="text-[9px] text-ink-400">Indeks Komposit</span>
         </div>
       </div>
 
@@ -70,7 +67,7 @@ export function DataQualityOverview() {
       </div>
 
       <button className="link-more mt-1 flex items-center gap-1">
-        Lihat detail kualitas data <ArrowRight size={11} />
+        Lihat detail dimensi trust <ArrowRight size={11} />
       </button>
     </div>
   );

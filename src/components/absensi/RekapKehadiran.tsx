@@ -1,5 +1,5 @@
 import { ArrowRight, ChevronDown } from "lucide-react";
-import { rekapKehadiran } from "@/lib/absensi-data";
+import { rekapKehadiran, type RisikoLevel } from "@/lib/absensi-data";
 import { PALETTE } from "@/lib/chart-palette";
 
 const HEAD = [
@@ -11,7 +11,14 @@ const HEAD = [
   "Izin",
   "Sakit",
   "Alpha",
+  "Risiko",
 ];
+
+const RISIKO_CHIP: Record<RisikoLevel, string> = {
+  Rendah: "tone-green",
+  Waspada: "tone-amber",
+  Tinggi: "tone-red",
+};
 
 const angka = (s: string) => parseFloat(s.replace(",", "."));
 
@@ -22,7 +29,15 @@ export function RekapKehadiran() {
       style={{ "--d": "420ms" } as React.CSSProperties}
     >
       <div className="flex items-start justify-between gap-2">
-        <h3 className="card-title-navy">Rekap Kehadiran Karyawan</h3>
+        <div>
+          <h3 className="card-title-navy">Matriks Risiko Kehadiran per Unit</h3>
+          <p
+            className="mt-[3px] cursor-help text-[9.5px] text-ink-500"
+            title="Kehadiran tinggi + lembur tinggi tetap berisiko: indikasi understaffed, bukan sekadar disiplin."
+          >
+            Risiko komposit: kehadiran × alpha × lembur × on-time ⓘ
+          </p>
+        </div>
         <button className="select-chip whitespace-nowrap px-2.5 py-[5px] text-[9.5px]">
           Semua Unit <ChevronDown size={11} />
         </button>
@@ -45,13 +60,13 @@ export function RekapKehadiran() {
         </thead>
         <tbody>
           {rekapKehadiran.map((r, ri) => {
-            const alphaTinggi = angka(r.alpha) > 1;
+            const alphaTinggi = angka(r.alpha) > 4;
             return (
               <tr
                 key={r.unit}
                 className="border-b border-[#f4f7fa] transition-colors last:border-0 hover:bg-[#f5f8fa]"
               >
-                <td className="whitespace-nowrap px-2 py-[6px] text-[10px] text-ink-900">
+                <td className="whitespace-nowrap px-2 py-[4px] text-[10px] text-ink-900">
                   {r.unit}
                 </td>
                 <td className="whitespace-nowrap px-2 text-right text-[10px] tabular-nums text-ink-700">
@@ -85,7 +100,7 @@ export function RekapKehadiran() {
                     {v}
                   </td>
                 ))}
-                {/* Alpha > 1% diberi tint merah */}
+                {/* Alpha > 4% diberi tint merah */}
                 <td className="whitespace-nowrap px-2 text-right">
                   <span
                     className={`inline-block rounded px-1 text-[10px] tabular-nums ${
@@ -93,6 +108,13 @@ export function RekapKehadiran() {
                     }`}
                   >
                     {r.alpha}
+                  </span>
+                </td>
+                <td className="whitespace-nowrap px-2 text-right">
+                  <span
+                    className={`${RISIKO_CHIP[r.risiko]} inline-block rounded px-1.5 py-[1px] text-[9px] font-bold`}
+                  >
+                    {r.risiko}
                   </span>
                 </td>
               </tr>

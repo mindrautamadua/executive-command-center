@@ -26,7 +26,7 @@ export function KinerjaProduksi() {
       <div className="flex items-center justify-between gap-1">
         <h3 className="card-title whitespace-nowrap">KINERJA PRODUKSI</h3>
         <button className="select-chip whitespace-nowrap">
-          YTD 2025 <ChevronDown size={11} />
+          YTD 2026 <ChevronDown size={11} />
         </button>
       </div>
 

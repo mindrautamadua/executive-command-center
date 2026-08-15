@@ -10,12 +10,13 @@ export function PartisipasiSurvey() {
     >
       <div className="flex items-start justify-between gap-2">
         <div>
-          <h3 className="card-title-navy">Partisipasi Survey per Unit</h3>
+          <h3 className="card-title-navy">Partisipasi &amp; Data Confidence</h3>
           <p className="mt-[3px] text-[9.5px] text-ink-500">
             Response rate ·{" "}
             <span className="font-semibold" style={{ color: PALETTE.amber }}>
               Target {partisipasiTarget}%
-            </span>
+            </span>{" "}
+            · response rendah = confidence interpretasi turun
           </p>
         </div>
         <button className="select-chip whitespace-nowrap px-2.5 py-[5px] text-[9.5px]">
@@ -46,6 +47,13 @@ export function PartisipasiSurvey() {
             </span>
             <span className="w-[26px] shrink-0 text-right text-[9px] font-semibold tabular-nums text-ink-900">
               {u.skor}
+            </span>
+            <span
+              className={`${
+                u.bar >= 80 ? "tone-green" : u.bar >= 70 ? "tone-amber" : "tone-red"
+              } w-[42px] shrink-0 rounded px-1 py-[1px] text-center text-[7px] font-bold leading-none`}
+            >
+              {u.bar >= 80 ? "High" : u.bar >= 70 ? "Medium" : "Low"}
             </span>
           </div>
         ))}

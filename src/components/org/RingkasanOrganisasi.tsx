@@ -22,6 +22,7 @@ export function RingkasanOrganisasi() {
             value={k.value}
             delta={k.delta && k.trend ? { value: k.delta, trend: k.trend } : undefined}
             compare={k.compare}
+            info={k.info}
             delay={i * 60}
             chart={
               k.gauge ? (

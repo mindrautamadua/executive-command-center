@@ -3,13 +3,16 @@ import { LndHeader } from "@/components/lnd/LndHeader";
 import { LndKpiStrip } from "@/components/lnd/LndKpiStrip";
 import { DistribusiKompetensi } from "@/components/lnd/DistribusiKompetensi";
 import { TrenJamPelatihan } from "@/components/lnd/TrenJamPelatihan";
-import { TopProgram } from "@/components/lnd/TopProgram";
+import { LearningValueChain } from "@/components/lnd/LearningValueChain";
+import { SkillGapClosure } from "@/components/lnd/SkillGapClosure";
+import { LearningRoi } from "@/components/lnd/LearningRoi";
 import { ProgramTipe } from "@/components/lnd/ProgramTipe";
-import { CapaianKirkpatrick } from "@/components/lnd/CapaianKirkpatrick";
-import { PartisipasiGenerasi } from "@/components/lnd/PartisipasiGenerasi";
-import { HeatmapPartisipasi } from "@/components/lnd/HeatmapPartisipasi";
+import { TopProgram } from "@/components/lnd/TopProgram";
+import { PersonalizedLearning } from "@/components/lnd/PersonalizedLearning";
+import { EffectivenessUnit } from "@/components/lnd/EffectivenessUnit";
 import { TopInstruktur } from "@/components/lnd/TopInstruktur";
 import { InsightLnd } from "@/components/lnd/InsightLnd";
+import { LndDecisionCenter } from "@/components/lnd/LndDecisionCenter";
 
 export const metadata = { title: "Learning & Development — PTPN Group" };
 
@@ -27,20 +30,27 @@ export default function LearningDevelopmentPage() {
           <div className="grid h-[280px] grid-cols-[minmax(0,380fr)_minmax(0,473fr)_minmax(0,450fr)] grid-rows-[minmax(0,1fr)] gap-3">
             <DistribusiKompetensi />
             <TrenJamPelatihan />
-            <TopProgram />
+            <LearningValueChain />
           </div>
 
-          <div className="grid h-[194px] grid-cols-[minmax(0,380fr)_minmax(0,473fr)_minmax(0,450fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid h-[256px] grid-cols-[minmax(0,865fr)_minmax(0,450fr)] grid-rows-[minmax(0,1fr)] gap-3">
+            <SkillGapClosure />
+            <LearningRoi />
+          </div>
+
+          <div className="grid h-[208px] grid-cols-[minmax(0,380fr)_minmax(0,473fr)_minmax(0,450fr)] grid-rows-[minmax(0,1fr)] gap-3">
             <ProgramTipe />
-            <CapaianKirkpatrick />
-            <PartisipasiGenerasi />
+            <TopProgram />
+            <PersonalizedLearning />
           </div>
 
           <div className="grid h-[262px] grid-cols-[minmax(0,523fr)_minmax(0,318fr)_minmax(0,454fr)] grid-rows-[minmax(0,1fr)] gap-3">
-            <HeatmapPartisipasi />
+            <EffectivenessUnit />
             <TopInstruktur />
             <InsightLnd />
           </div>
+
+          <LndDecisionCenter />
         </div>
       </main>
     </div>

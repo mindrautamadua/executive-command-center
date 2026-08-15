@@ -11,6 +11,13 @@ import { KomposisiBenefits } from "@/components/comp/KomposisiBenefits";
 import { RingkasanUnitKompensasi } from "@/components/comp/RingkasanUnitKompensasi";
 import { RasioKinerja } from "@/components/comp/RasioKinerja";
 import { InsightComp } from "@/components/comp/InsightComp";
+import { CompaRangePanel } from "@/components/comp/CompaRangePanel";
+import { PayEquityRemediation } from "@/components/comp/PayEquityRemediation";
+import { PayForPerformance } from "@/components/comp/PayForPerformance";
+import { PeopleCostEfficiency } from "@/components/comp/PeopleCostEfficiency";
+import { CriticalTalentCompRisk } from "@/components/comp/CriticalTalentCompRisk";
+import { CompDecisionCenter } from "@/components/comp/CompDecisionCenter";
+import { CompFootnote } from "@/components/comp/CompFootnote";
 
 export const metadata = { title: "Compensation & Benefits — PTPN Group" };
 
@@ -43,11 +50,28 @@ export default function CompensationBenefitsPage() {
             <KomposisiBenefits />
           </div>
 
+          <div className="grid h-[236px] grid-cols-[minmax(0,58fr)_minmax(0,42fr)] grid-rows-[minmax(0,1fr)] gap-3">
+            <CompaRangePanel />
+            <PayEquityRemediation />
+          </div>
+
+          <div className="grid h-[240px] grid-cols-[minmax(0,36fr)_minmax(0,32fr)_minmax(0,32fr)] grid-rows-[minmax(0,1fr)] gap-3">
+            <PayForPerformance />
+            <PeopleCostEfficiency />
+            <CriticalTalentCompRisk />
+          </div>
+
+          <div className="grid h-[228px] grid-rows-[minmax(0,1fr)]">
+            <CompDecisionCenter />
+          </div>
+
           <div className="grid h-[216px] grid-cols-[minmax(0,495fr)_minmax(0,328fr)_minmax(0,468fr)] grid-rows-[minmax(0,1fr)] gap-3">
             <RingkasanUnitKompensasi />
             <RasioKinerja />
             <InsightComp />
           </div>
+
+          <CompFootnote />
         </div>
       </main>
     </div>

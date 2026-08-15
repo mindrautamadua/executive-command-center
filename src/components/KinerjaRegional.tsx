@@ -9,7 +9,7 @@ export function KinerjaRegional() {
     <div className="card flex h-full flex-col px-4 pb-2.5 pt-3">
       <div className="flex items-baseline gap-1.5">
         <h3 className="card-title">KINERJA REGIONAL</h3>
-        <span className="text-[9px] text-ink-400">(YTD 2025)</span>
+        <span className="text-[9px] text-ink-400">(YTD 2026)</span>
       </div>
 
       <div className="relative mt-0.5 h-[104px] w-full shrink-0">
@@ -45,9 +45,8 @@ export function KinerjaRegional() {
               key={is.id}
               d={is.d}
               fill="url(#kr-fill)"
-              stroke="#ffffff"
+              stroke="var(--map-stroke)"
               strokeWidth="1"
-              strokeOpacity="0.7"
               strokeLinejoin="round"
             />
           ))}
@@ -56,7 +55,7 @@ export function KinerjaRegional() {
 
       <div className="mt-1 flex items-center justify-between">
         <span className="muted-label">REGIONAL</span>
-        <span className="text-[9px] text-ink-400">Pendapatan (YTD 2025)</span>
+        <span className="text-[9px] text-ink-400">Pendapatan (YTD 2026)</span>
       </div>
 
       <div className="mt-1 flex flex-1 flex-col justify-around">

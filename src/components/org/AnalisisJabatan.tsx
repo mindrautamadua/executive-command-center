@@ -26,21 +26,19 @@ export function AnalisisJabatan() {
           onHover={setActive}
         />
 
-        <div className="flex w-[96px] shrink-0 flex-col gap-2.5">
+        <div className="flex w-[110px] shrink-0 flex-col gap-1">
           {analisisJabatan.map((s, i) => (
             <div
               key={s.name}
-              className="leading-tight transition-opacity duration-150"
+              className="flex items-baseline gap-1.5 leading-tight transition-opacity duration-150"
               style={{ opacity: active === null || active === i ? 1 : 0.4 }}
             >
-              <span className="flex items-center gap-1.5 text-[9.5px] font-medium text-ink-700">
-                <span
-                  className="h-[8px] w-[8px] shrink-0 rounded-[2px]"
-                  style={{ background: s.color }}
-                />
-                {s.name}
-              </span>
-              <span className="mt-[2px] block pl-[14px] text-[9px] text-ink-500">
+              <span
+                className="h-[8px] w-[8px] shrink-0 self-center rounded-[2px]"
+                style={{ background: s.color }}
+              />
+              <span className="text-[9.5px] font-medium text-ink-700">{s.name}</span>
+              <span className="ml-auto whitespace-nowrap text-[9px] tabular-nums text-ink-500">
                 {s.value} ({s.pct})
               </span>
             </div>

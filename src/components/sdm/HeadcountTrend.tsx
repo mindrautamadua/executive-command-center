@@ -26,10 +26,10 @@ export function HeadcountTrend() {
       <div className="flex items-start justify-between">
         <div>
           <h3 className="card-title-navy">HEADCOUNT TREND</h3>
-          <p className="mt-[3px] text-[9.5px] text-ink-500">YTD 2025</p>
+          <p className="mt-[3px] text-[9.5px] text-ink-500">YTD 2026</p>
         </div>
         <button className="select-chip whitespace-nowrap px-2.5 py-[5px] text-[10px]">
-          YTD 2025 <ChevronDown size={12} />
+          YTD 2026 <ChevronDown size={12} />
         </button>
       </div>
 

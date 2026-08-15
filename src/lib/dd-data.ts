@@ -1,48 +1,25 @@
 /**
  * Data statis halaman Data Dictionary (/data-dictionary).
  * Katalog definisi metrik HC yang dipakai seluruh modul dashboard.
+ *
+ * Angka ringkasan pada ddStats diturunkan dari ddGovernance dan ddEntries agar
+ * tidak pernah melenceng dari isi tabel saat entri ditambah atau statusnya berubah.
  */
 
-/* ── Ringkasan katalog ────────────────────────────────────────────── */
+/* ── Status governance katalog ────────────────────────────────────── */
 
-export interface DdStat {
-  label: string;
-  value: string;
-  sub: string;
-  icon: "terms" | "category" | "source" | "updated";
-  tone: "green" | "blue" | "teal" | "amber";
-}
+/** Rekapitulasi sertifikasi seluruh katalog; total harus sama dengan jumlah ketiganya. */
+export const ddGovernance = {
+  certified: 118,
+  provisional: 7,
+  deprecated: 3,
+} as const;
 
-export const ddStats: DdStat[] = [
-  {
-    label: "Total Istilah & Metrik",
-    value: "128",
-    sub: "Terdokumentasi dan tervalidasi",
-    icon: "terms",
-    tone: "green",
-  },
-  {
-    label: "Kategori",
-    value: "8",
-    sub: "Domain metrik HC",
-    icon: "category",
-    tone: "blue",
-  },
-  {
-    label: "Sumber Sistem",
-    value: "6",
-    sub: "SAP HCM, SuccessFactors, e-Absensi, dll",
-    icon: "source",
-    tone: "teal",
-  },
-  {
-    label: "Pembaruan Terakhir",
-    value: "31 Mei 2026",
-    sub: "Review triwulanan oleh Data Governance",
-    icon: "updated",
-    tone: "amber",
-  },
-];
+export const ddTotalMetrics =
+  ddGovernance.certified + ddGovernance.provisional + ddGovernance.deprecated;
+
+/** Format angka desimal gaya Indonesia (koma sebagai pemisah desimal). */
+const dec1 = (n: number) => n.toFixed(1).replace(".", ",");
 
 /* ── Kategori ─────────────────────────────────────────────────────── */
 
@@ -65,6 +42,8 @@ export const ddCategories: DdCategory[] = [
 
 /* ── Entri kamus (contoh 12 teratas) ──────────────────────────────── */
 
+export type DdStatus = "Certified" | "Provisional" | "Deprecated";
+
 export interface DdEntry {
   term: string;
   category: string;
@@ -72,6 +51,11 @@ export interface DdEntry {
   formula: string;
   source: string;
   frequency: "Harian" | "Bulanan" | "Triwulanan";
+  /** Unit HC yang accountable atas definisi dan angka metrik ini. */
+  owner: string;
+  status: DdStatus;
+  /** Skor keyakinan gabungan definisi, sumber, kelengkapan, dan rekonsiliasi (0-100). */
+  trust: number;
 }
 
 export const ddEntries: DdEntry[] = [
@@ -82,6 +66,9 @@ export const ddEntries: DdEntry[] = [
     formula: "Σ karyawan aktif per tanggal cut-off",
     source: "SAP HCM",
     frequency: "Harian",
+    owner: "HC Operations",
+    status: "Certified",
+    trust: 99,
   },
   {
     term: "FTE (Full-Time Equivalent)",
@@ -90,6 +77,9 @@ export const ddEntries: DdEntry[] = [
     formula: "Σ (jam kerja karyawan / jam kerja standar)",
     source: "SAP HCM",
     frequency: "Bulanan",
+    owner: "HC Operations",
+    status: "Certified",
+    trust: 97,
   },
   {
     term: "Turnover Rate",
@@ -98,6 +88,9 @@ export const ddEntries: DdEntry[] = [
     formula: "(Σ keluar YTD / rata-rata headcount) × 100%",
     source: "SAP HCM",
     frequency: "Bulanan",
+    owner: "HC Performance & Reward",
+    status: "Certified",
+    trust: 97,
   },
   {
     term: "Voluntary Attrition",
@@ -106,6 +99,9 @@ export const ddEntries: DdEntry[] = [
     formula: "(Σ resign YTD / rata-rata headcount) × 100%",
     source: "SAP HCM",
     frequency: "Bulanan",
+    owner: "HC Performance & Reward",
+    status: "Certified",
+    trust: 96,
   },
   {
     term: "HC Cost to Revenue",
@@ -114,6 +110,20 @@ export const ddEntries: DdEntry[] = [
     formula: "(Total biaya SDM / pendapatan) × 100%",
     source: "SAP FI-CO",
     frequency: "Bulanan",
+    owner: "HC Cost Control",
+    status: "Certified",
+    trust: 95,
+  },
+  {
+    term: "Revenue per Employee",
+    category: "Produktivitas",
+    definition: "Pendapatan perusahaan per karyawan setara penuh waktu",
+    formula: "Pendapatan periode / FTE rata-rata periode",
+    source: "SAP FI-CO",
+    frequency: "Bulanan",
+    owner: "People Analytics",
+    status: "Certified",
+    trust: 95,
   },
   {
     term: "Human Productivity Index (HPI)",
@@ -122,6 +132,9 @@ export const ddEntries: DdEntry[] = [
     formula: "Rata-rata tertimbang (revenue/FTE, output/FTE, kualitas)",
     source: "Data Warehouse HC",
     frequency: "Bulanan",
+    owner: "People Analytics",
+    status: "Certified",
+    trust: 94,
   },
   {
     term: "Span of Control",
@@ -130,6 +143,9 @@ export const ddEntries: DdEntry[] = [
     formula: "Σ karyawan / Σ posisi atasan aktif",
     source: "SAP OM",
     frequency: "Bulanan",
+    owner: "Organization Development",
+    status: "Certified",
+    trust: 96,
   },
   {
     term: "Bench Strength",
@@ -138,6 +154,21 @@ export const ddEntries: DdEntry[] = [
     formula: "(Posisi kritis dengan suksesor siap / total posisi kritis) × 100%",
     source: "SuccessFactors",
     frequency: "Triwulanan",
+    owner: "Talent Management",
+    status: "Certified",
+    trust: 92,
+  },
+  {
+    term: "Talent Readiness",
+    category: "Talenta & Suksesi",
+    definition:
+      "Porsi talenta kunci berstatus siap promosi, yaitu Ready Now atau Ready in 1-2 Yrs",
+    formula: "((Ready Now + Ready 1-2 thn) / total talenta kunci) × 100%",
+    source: "SuccessFactors",
+    frequency: "Triwulanan",
+    owner: "Talent Management",
+    status: "Certified",
+    trust: 92,
   },
   {
     term: "Time to Fill",
@@ -146,6 +177,9 @@ export const ddEntries: DdEntry[] = [
     formula: "Σ hari pengisian / Σ posisi terisi",
     source: "SuccessFactors RCM",
     frequency: "Bulanan",
+    owner: "Talent Acquisition",
+    status: "Certified",
+    trust: 95,
   },
   {
     term: "Engagement Score",
@@ -154,6 +188,9 @@ export const ddEntries: DdEntry[] = [
     formula: "Rata-rata tertimbang dimensi survei tahunan/pulse",
     source: "Survei Engagement",
     frequency: "Triwulanan",
+    owner: "HC Culture & Engagement",
+    status: "Certified",
+    trust: 91,
   },
   {
     term: "Compliance Score",
@@ -162,6 +199,9 @@ export const ddEntries: DdEntry[] = [
     formula: "Rata-rata tertimbang 8 area kepatuhan",
     source: "GRC System",
     frequency: "Bulanan",
+    owner: "HC Risk & Compliance",
+    status: "Certified",
+    trust: 93,
   },
   {
     term: "Indeks Hubungan Industrial",
@@ -170,8 +210,58 @@ export const ddEntries: DdEntry[] = [
     formula: "Komposit (kasus, aksi, PKB, aktivitas bipartit)",
     source: "Modul HI",
     frequency: "Bulanan",
+    owner: "Industrial Relations",
+    status: "Provisional",
+    trust: 88,
+  },
+];
+
+/** Cari definisi resmi sebuah metrik untuk ditampilkan sebagai tooltip di dashboard lain. */
+export const ddLookup = (term: string) => ddEntries.find((e) => e.term === term);
+
+/* ── Ringkasan katalog (diturunkan dari data di atas) ─────────────── */
+
+export interface DdStat {
+  label: string;
+  value: string;
+  sub: string;
+  icon: "terms" | "certified" | "trust" | "updated";
+  tone: "green" | "blue" | "teal" | "amber";
+}
+
+const coverage = (ddGovernance.certified / ddTotalMetrics) * 100;
+const avgTrust = ddEntries.reduce((s, e) => s + e.trust, 0) / ddEntries.length;
+
+export const ddStats: DdStat[] = [
+  {
+    label: "Metrik Tergovernance",
+    value: String(ddTotalMetrics),
+    sub: `${ddGovernance.certified} certified · ${ddGovernance.provisional} provisional · ${ddGovernance.deprecated} deprecated`,
+    icon: "terms",
+    tone: "green",
+  },
+  {
+    label: "Cakupan Sertifikasi",
+    value: `${dec1(coverage)}%`,
+    sub: `${ddGovernance.certified} dari ${ddTotalMetrics} metrik lolos sertifikasi definisi`,
+    icon: "certified",
+    tone: "blue",
+  },
+  {
+    label: "Trust Score Metrik Inti",
+    value: dec1(avgTrust),
+    sub: `Rata-rata ${ddEntries.length} metrik inti eksekutif (skala 0-100)`,
+    icon: "trust",
+    tone: "teal",
+  },
+  {
+    label: "Pembaruan Terakhir",
+    value: "31 Mei 2026",
+    sub: "Review triwulanan oleh Data Governance",
+    icon: "updated",
+    tone: "amber",
   },
 ];
 
 export const ddFootnote =
-  "Data Dictionary menjadi acuan tunggal definisi metrik HC di seluruh dashboard sehingga setiap angka dibaca dengan pemahaman yang sama. Perubahan definisi dikelola Data Governance Committee melalui review triwulanan.";
+  "Setiap angka di Executive Command Center memiliki satu definisi, satu formula, satu pemilik, dan satu sumber resmi. Status Certified berarti definisi disetujui, sumber terverifikasi, dan kualitas data tervalidasi; Provisional berarti definisi disetujui namun validasi data masih berjalan. Perubahan definisi dikelola Data Governance Committee melalui review triwulanan.";

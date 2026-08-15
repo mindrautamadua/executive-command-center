@@ -32,7 +32,7 @@ export function LiveFeed() {
 
       <div className="flex shrink-0 items-center gap-3 pl-6 pr-5">
         <span className="text-[10px] text-ink-500">
-          Data terakhir diperbarui: 13 Mei 2025 09:41 WIB
+          Data terakhir diperbarui: 14 Agu 2026 22:14 WIB
         </span>
         <span className="flex items-center gap-1.5 text-[10px] text-ink-500">
           <span className="h-[7px] w-[7px] rounded-full bg-[#22a45d] animate-pulseDot" />

@@ -24,7 +24,7 @@ export function TrenDataQuality() {
     >
       <div className="flex items-start justify-between gap-2">
         <div className="flex items-center gap-1.5">
-          <h3 className="card-title-navy">Tren Data Quality Score</h3>
+          <h3 className="card-title-navy">Tren Data Trust Index</h3>
           <Info size={12} className="text-ink-400" />
         </div>
         <button className="select-chip whitespace-nowrap px-2.5 py-[5px] text-[9.5px]">
@@ -58,7 +58,7 @@ export function TrenDataQuality() {
               width={40}
             />
             <Tooltip
-              formatter={(v: number) => [koma(v), "DQ Score"]}
+              formatter={(v: number) => [koma(v), "Trust Index"]}
               contentStyle={CHART_TOOLTIP_STYLE}
             />
             <Area

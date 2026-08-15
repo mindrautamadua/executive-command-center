@@ -1,8 +1,8 @@
 import { ChevronDown, ChevronRight } from "lucide-react";
-import { requisitionJobFamily } from "@/lib/rekrutmen-data";
+import { jobFamilyTotal, requisitionJobFamily } from "@/lib/rekrutmen-data";
 import { PALETTE } from "@/lib/chart-palette";
 
-const HEAD = ["Job Family", "Requisition", "%", "Hire", "%", "Open Position", "Req vs Hire"];
+const HEAD = ["Job Family", "Requisition", "%", "Onboard", "%", "Open Position", "Req vs Onboard"];
 
 /* skala bar mini disamakan terhadap persentase terbesar di tabel */
 const maxPct = Math.max(
@@ -94,6 +94,23 @@ export function RequisitionJobFamily() {
             </tr>
           ))}
         </tbody>
+        <tfoot>
+          <tr className="border-t border-[#eef2f6]">
+            <td className="px-2 py-[5px] text-[9.5px] font-bold text-ink-900">Total</td>
+            <td className="px-2 text-right text-[9.5px] font-bold tabular-nums text-ink-900">
+              {jobFamilyTotal.requisition}
+            </td>
+            <td className="px-2 text-right text-[9.5px] tabular-nums text-ink-500">100%</td>
+            <td className="px-2 text-right text-[9.5px] font-bold tabular-nums text-ink-900">
+              {jobFamilyTotal.hire}
+            </td>
+            <td className="px-2 text-right text-[9.5px] tabular-nums text-ink-500">100%</td>
+            <td className="px-2 text-right text-[9.5px] font-bold tabular-nums text-ink-900">
+              {jobFamilyTotal.open}
+            </td>
+            <td className="px-2 text-[9px] text-ink-500">Sem I 2026</td>
+          </tr>
+        </tfoot>
       </table>
 
       <div className="mt-auto flex items-center justify-between pt-2">
@@ -104,7 +121,7 @@ export function RequisitionJobFamily() {
           </span>
           <span className="flex items-center gap-1">
             <span className="h-[6px] w-[10px] rounded-full" style={{ background: PALETTE.green }} />
-            Hire %
+            Onboard %
           </span>
         </span>
         <button className="link-more flex items-center gap-1">

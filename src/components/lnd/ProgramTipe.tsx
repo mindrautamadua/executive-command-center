@@ -1,53 +1,84 @@
-"use client";
-
-import { useState } from "react";
 import { ArrowRight } from "lucide-react";
-import { programTipe } from "@/lib/lnd-data";
-import { DonutChart } from "../ui/DonutChart";
+import { modalityNote, programTipe } from "@/lib/lnd-data";
 
+/**
+ * Bukan hanya komposisi tipe program — outcome per modalitas (Kirkpatrick
+ * L3/L4) supaya terlihat modalitas mana yang benar-benar mentransfer.
+ */
 export function ProgramTipe() {
-  const [active, setActive] = useState<number | null>(null);
-
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
-      style={{ "--d": "280ms" } as React.CSSProperties}
+      style={{ "--d": "400ms" } as React.CSSProperties}
     >
-      <h3 className="card-title-navy">Program Berdasarkan Tipe</h3>
+      <h3 className="card-title-navy">Outcome per Modalitas Program</h3>
 
-      <div className="flex min-h-0 flex-1 items-center">
-        <DonutChart
-          data={programTipe.map((d) => ({ name: d.name, value: d.share, color: d.color }))}
-          size={128}
-          thickness={22}
-          centerValue="248"
-          centerCaption="Program"
-          valueFormatter={(v) => `${v.toLocaleString("id-ID", { minimumFractionDigits: 1 })}%`}
-          onHover={setActive}
-        />
-
-        <div className="ml-2 flex flex-1 flex-col gap-[7px]">
-          {programTipe.map((d, i) => (
-            <div
-              key={d.name}
-              className="flex items-center gap-2 whitespace-nowrap transition-opacity"
-              style={{ opacity: active === null || active === i ? 1 : 0.4 }}
-            >
-              <span
-                className="h-[8px] w-[8px] shrink-0 rounded-[2px]"
-                style={{ background: d.color }}
-              />
-              <span className="w-[58px] text-[9.5px] text-ink-700">{d.name}</span>
-              <span className="ml-auto text-[9.5px] font-semibold tabular-nums text-ink-900">
-                {d.jumlah}
-              </span>
-              <span className="w-[42px] text-right text-[9.5px] tabular-nums text-ink-400">
-                ({d.pct})
-              </span>
-            </div>
-          ))}
-        </div>
+      {/* komposisi share sebagai bar bertumpuk */}
+      <div className="mt-1.5 flex h-[10px] w-full overflow-hidden rounded-md">
+        {programTipe.map((d, i) => (
+          <span
+            key={d.name}
+            title={`${d.name} ${d.pct}`}
+            className="anim-grow-x h-full"
+            style={
+              {
+                width: `${d.share}%`,
+                background: d.color,
+                "--d": `${80 * i}ms`,
+              } as React.CSSProperties
+            }
+          />
+        ))}
       </div>
+
+      <div className="mt-1.5 min-h-0 flex-1">
+        <table className="w-full">
+          <thead>
+            <tr className="text-[8px] font-semibold uppercase tracking-[0.03em] text-ink-400">
+              <th className="pb-[2px] text-left">Modalitas</th>
+              <th className="pb-[2px] text-right">Program</th>
+              <th className="pb-[2px] text-right">Behavior L3</th>
+              <th className="pb-[2px] text-right">Result L4</th>
+            </tr>
+          </thead>
+          <tbody>
+            {programTipe.map((d) => {
+              const best = d.name === "Blended";
+              return (
+                <tr key={d.name} className={best ? "font-semibold" : ""}>
+                  <td className="py-[1px]">
+                    <span className="flex items-center gap-1.5">
+                      <span
+                        className="h-[7px] w-[7px] shrink-0 rounded-[2px]"
+                        style={{ background: d.color }}
+                      />
+                      <span className="text-[9px] text-ink-700">{d.name}</span>
+                      {best && (
+                        <span className="rounded bg-[#eaf7ef] px-1 py-[1px] text-[7px] font-extrabold text-[#0f7a44]">
+                          BEST
+                        </span>
+                      )}
+                    </span>
+                  </td>
+                  <td className="text-right text-[9px] tabular-nums text-ink-900">
+                    {d.jumlah}
+                  </td>
+                  <td className="text-right text-[9px] tabular-nums text-ink-900">
+                    {d.behavior !== null ? `${d.behavior}%` : "—"}
+                  </td>
+                  <td className="text-right text-[9px] tabular-nums text-ink-900">
+                    {d.result !== null ? `${d.result}%` : "—"}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+
+      <p className="mt-1 truncate text-[8.5px] text-ink-400" title={modalityNote}>
+        {modalityNote}
+      </p>
 
       <button className="link-more mt-1 flex items-center gap-1">
         Lihat detail program <ArrowRight size={11} />

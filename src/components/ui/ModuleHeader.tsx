@@ -1,0 +1,135 @@
+"use client";
+
+import type { ReactNode } from "react";
+import { Bell, CalendarDays, ChevronDown, Download } from "lucide-react";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { PersonAvatar } from "@/components/ui/PersonAvatar";
+
+/** Kontrol dropdown standar pada header modul (pola Tipe A). */
+export function SelectBox({
+  label,
+  value,
+  width,
+}: {
+  label: string;
+  value: string;
+  width: string;
+}) {
+  return (
+    <button
+      className="flex items-center justify-between rounded-lg border border-[#e3e9ef] bg-white px-3 py-1.5 text-left shadow-card"
+      style={{ width }}
+    >
+      <span className="leading-tight">
+        <span className="block text-[8.5px] font-medium text-ink-400">{label}</span>
+        <span className="mt-[2px] block text-[11px] font-bold text-ink-900">{value}</span>
+      </span>
+      <ChevronDown size={13} className="ml-2 shrink-0 text-ink-400" />
+    </button>
+  );
+}
+
+/** Tombol export standar (hijau solid) pada secondary bar. */
+export function ExportButton({ label = "Export" }: { label?: string }) {
+  return (
+    <button className="flex items-center gap-1.5 rounded-lg bg-ptpn-green px-3 py-[7px] text-[10px] font-semibold text-white shadow-pill transition-opacity hover:opacity-90">
+      <Download size={12} />
+      {label}
+    </button>
+  );
+}
+
+/**
+ * Header modul standar (pola Tipe A): baris utama ber-border dengan judul,
+ * subtitle, kontrol kanan (ThemeToggle + notifikasi + avatar), lalu secondary
+ * bar berisi timestamp data dan aksi (default: tombol Export).
+ */
+export function ModuleHeader({
+  title,
+  subtitle,
+  icon,
+  titleExtra,
+  controls,
+  dataAsOf,
+  secondaryLeft,
+  actions,
+  showSecondary = true,
+}: {
+  title: ReactNode;
+  subtitle: ReactNode;
+  /** Icon lucide untuk badge 9x9 di kiri judul, mis. `<Scale size={19} strokeWidth={1.9} />`. */
+  icon?: ReactNode;
+  /** Elemen tambahan di samping judul, mis. tombol info metodologi. */
+  titleExtra?: ReactNode;
+  /** Kontrol spesifik modul (SelectBox, search, dsb.) sebelum ThemeToggle. */
+  controls?: ReactNode;
+  /** Teks "Data per ..." di kiri secondary bar. */
+  dataAsOf?: string;
+  /** Konten kustom kiri secondary bar; menggantikan `dataAsOf`. */
+  secondaryLeft?: ReactNode;
+  /** Aksi kanan secondary bar; default tombol Export standar. */
+  actions?: ReactNode;
+  showSecondary?: boolean;
+}) {
+  return (
+    <>
+      <header className="flex items-center gap-4 border-b border-[#eef2f6] px-5 pb-3.5 pt-3.5">
+        <div className="flex min-w-0 shrink-0 items-center gap-2.5">
+          {icon && (
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#e8f1fd] text-[#1b3a6b]">
+              {icon}
+            </span>
+          )}
+          <div className="min-w-0">
+            <div className="flex items-center gap-2">
+              <h1 className="text-[20px] font-extrabold leading-none tracking-[-0.01em] text-[#1b3a6b]">
+                {title}
+              </h1>
+              {titleExtra}
+            </div>
+            <p className="mt-[5px] text-[10.5px] font-semibold text-ink-500">{subtitle}</p>
+          </div>
+        </div>
+
+        <div className="ml-auto flex shrink-0 items-center gap-3">
+          {controls}
+
+          <ThemeToggle />
+          <button
+            className="relative text-ink-500 transition-colors hover:text-ptpn-green"
+            aria-label="Notifikasi"
+          >
+            <Bell size={18} strokeWidth={1.7} />
+            <span className="absolute -right-[7px] -top-[6px] flex h-[15px] min-w-[15px] items-center justify-center rounded-full bg-[#ef4444] px-[3px] text-[9px] font-bold text-white">
+              12
+            </span>
+          </button>
+
+          <div className="flex items-center gap-2.5">
+            <PersonAvatar seed={0} size={36} className="ring-2 ring-[#e6ecf2]" />
+            <div className="leading-tight">
+              <div className="text-[11px] font-bold text-ink-900">Direktur Utama</div>
+              <div className="text-[9.5px] text-ink-500">BOD-1</div>
+            </div>
+            <ChevronDown size={13} className="text-ink-400" />
+          </div>
+        </div>
+      </header>
+
+      {showSecondary && (
+        <div className="flex items-center justify-between px-5 pb-3 pt-3">
+          <div className="flex items-center gap-1.5 text-[10px] font-semibold text-ink-500">
+            {secondaryLeft ??
+              (dataAsOf ? (
+                <>
+                  <CalendarDays size={13} className="text-ink-400" />
+                  {dataAsOf}
+                </>
+              ) : null)}
+          </div>
+          <div className="flex items-center gap-2.5">{actions ?? <ExportButton />}</div>
+        </div>
+      )}
+    </>
+  );
+}

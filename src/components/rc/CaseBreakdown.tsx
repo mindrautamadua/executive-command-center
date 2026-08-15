@@ -1,5 +1,5 @@
 import { ArrowRight, MoveRight } from "lucide-react";
-import { caseCategories } from "@/lib/rc-data";
+import { caseCategories, caseSeverities, fraudIntel } from "@/lib/rc-data";
 import { SectionHead } from "../hc/SectionHead";
 
 function TrendArrow({ trend }: { trend: "up" | "down" | "flat" }) {
@@ -27,9 +27,25 @@ export function CaseBreakdown() {
       style={{ "--d": "180ms" } as React.CSSProperties}
     >
       <SectionHead title="Breakdown Kasus Pelanggaran" />
-      <p className="mt-[3px] text-[9px] text-ink-500">Komposisi Kasus Aktif per Kategori</p>
+      <p className="mt-[3px] text-[9px] text-ink-500">Komposisi &amp; Severity 24 Kasus Aktif</p>
 
-      <div className="mt-2.5 flex items-center justify-between border-b border-[#eef2f6] pb-1.5 text-[8px] font-semibold uppercase tracking-[0.04em] text-ink-400">
+      <div className="mt-2 grid grid-cols-4 gap-1">
+        {caseSeverities.map((s) => (
+          <div
+            key={s.label}
+            className="flex flex-col items-center rounded-md border border-[#eef2f6] bg-[#fbfcfd] py-1"
+          >
+            <span className="text-[11px] font-extrabold leading-none" style={{ color: s.color }}>
+              {s.count}
+            </span>
+            <span className="mt-[3px] text-[7px] font-semibold uppercase tracking-[0.03em] text-ink-400">
+              {s.label}
+            </span>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-2 flex items-center justify-between border-b border-[#eef2f6] pb-1.5 text-[8px] font-semibold uppercase tracking-[0.04em] text-ink-400">
         <span>Kategori</span>
         <span className="flex items-center gap-3">
           <span>Proporsi</span>
@@ -58,6 +74,16 @@ export function CaseBreakdown() {
           </li>
         ))}
       </ul>
+
+      <p
+        className="mt-1 rounded-md bg-[#f8fafc] px-2 py-[4px] text-[8px] leading-[1.4] text-ink-500"
+        title={`Umur rata-rata kasus kritis ${fraudIntel.avgCriticalAgeDays} hari`}
+      >
+        Fraud: {fraudIntel.activeCases} kasus · potensi {fraudIntel.potentialLoss} · recovered{" "}
+        <span className="font-bold text-ptpn-green">
+          {fraudIntel.recovered} ({fraudIntel.recoveryRate}%)
+        </span>
+      </p>
 
       <button className="mt-1 flex w-full items-center justify-center gap-1 rounded-lg border border-[#e3e9ef] bg-[#f8fafc] py-[7px] text-[9.5px] font-semibold text-ptpn-greenDark transition-colors hover:bg-[#eef4f0]">
         Lihat Semua Kasus <ArrowRight size={11} />

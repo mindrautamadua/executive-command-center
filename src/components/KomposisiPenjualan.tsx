@@ -10,7 +10,7 @@ export function KomposisiPenjualan() {
     <div className="card flex h-full flex-col px-3.5 pb-2.5 pt-3">
       <div className="flex items-baseline gap-1.5">
         <h3 className="card-title whitespace-nowrap">KOMPOSISI PENJUALAN</h3>
-        <span className="text-[9px] text-ink-400">(YTD 2025)</span>
+        <span className="text-[9px] text-ink-400">(YTD 2026)</span>
       </div>
 
       <div className="flex min-h-0 flex-1 items-center">

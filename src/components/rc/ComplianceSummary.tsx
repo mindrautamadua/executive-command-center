@@ -44,6 +44,26 @@ function TrendArrow({ area }: { area: ComplianceArea }) {
   );
 }
 
+/** Gap terhadap tolerance: negatif = outside tolerance. */
+function GapChip({ score, tolerance }: { score: number; tolerance: number }) {
+  const gap = score - tolerance;
+  const cls =
+    gap < 0
+      ? "bg-[#fdecec] text-[#ef4444]"
+      : gap <= 4
+        ? "bg-[#fdf3e0] text-[#d98b06]"
+        : "bg-ptpn-greenLight text-ptpn-green";
+  return (
+    <span
+      className={`mx-auto flex h-[17px] w-[30px] items-center justify-center rounded text-[8px] font-extrabold ${cls}`}
+      title={`Minimum acceptable ${tolerance} · gap ${gap > 0 ? "+" : ""}${gap} pts${gap < 0 ? " — outside tolerance" : ""}`}
+    >
+      {gap > 0 ? "+" : ""}
+      {gap}
+    </span>
+  );
+}
+
 export function ComplianceSummary() {
   return (
     <div
@@ -52,12 +72,15 @@ export function ComplianceSummary() {
     >
       <SectionHead title="Ringkasan Kepatuhan" />
 
-      <div className="mt-2 grid grid-cols-[minmax(0,1fr)_44px_34px_36px_58px] items-center gap-x-1 border-b border-[#eef2f6] pb-1.5 text-[8px] font-semibold uppercase tracking-[0.04em] text-ink-400">
+      <div className="mt-2 grid grid-cols-[minmax(0,1fr)_44px_30px_34px_30px_40px] items-center gap-x-1 border-b border-[#eef2f6] pb-1.5 text-[8px] font-semibold uppercase tracking-[0.04em] text-ink-400">
         <span>Area Kepatuhan</span>
         <span className="text-center">Status</span>
         <span className="text-center">Skor</span>
+        <span className="text-center" title="Gap terhadap minimum acceptable score (tolerance)">
+          Gap
+        </span>
         <span className="text-center">Trend</span>
-        <span className="text-right">Temuan Terbuka</span>
+        <span className="text-right">Temuan</span>
       </div>
 
       <ul className="scroll-thin flex min-h-0 flex-1 flex-col justify-between gap-y-1 overflow-y-auto py-1">
@@ -66,7 +89,7 @@ export function ComplianceSummary() {
           return (
             <li
               key={a.name}
-              className="grid shrink-0 grid-cols-[minmax(0,1fr)_44px_34px_36px_58px] items-center gap-x-1"
+              className="grid shrink-0 grid-cols-[minmax(0,1fr)_44px_30px_34px_30px_40px] items-center gap-x-1"
             >
               <span className="flex min-w-0 items-center gap-1.5">
                 <span
@@ -82,6 +105,7 @@ export function ComplianceSummary() {
               <span className="text-center text-[9.5px] font-extrabold text-ink-900">
                 {a.score}
               </span>
+              <GapChip score={a.score} tolerance={a.tolerance} />
               <span className="flex justify-center">
                 <TrendArrow area={a} />
               </span>

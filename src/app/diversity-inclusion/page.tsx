@@ -4,14 +4,18 @@ import { DiKpiStrip } from "@/components/di/DiKpiStrip";
 import { KomposisiGender } from "@/components/di/KomposisiGender";
 import { TrenPerempuanManajemen } from "@/components/di/TrenPerempuanManajemen";
 import { PiramidaPopulasi } from "@/components/di/PiramidaPopulasi";
-import { PerempuanLevelJabatan } from "@/components/di/PerempuanLevelJabatan";
+import { GenderLeadershipFunnel } from "@/components/di/GenderLeadershipFunnel";
+import { TargetTrajectory } from "@/components/di/TargetTrajectory";
 import { KaryawanDisabilitas } from "@/components/di/KaryawanDisabilitas";
-import { PemerataanKesempatan } from "@/components/di/PemerataanKesempatan";
+import { EquityOfOpportunity } from "@/components/di/EquityOfOpportunity";
 import { GenderPayGap } from "@/components/di/GenderPayGap";
-import { DiversityIndexUnit } from "@/components/di/DiversityIndexUnit";
+import { FemaleTalentPipeline } from "@/components/di/FemaleTalentPipeline";
+import { DeiRiskMatrix } from "@/components/di/DeiRiskMatrix";
+import { DeiActionTracker } from "@/components/di/DeiActionTracker";
 import { InsightDi } from "@/components/di/InsightDi";
+import { DiFootnote } from "@/components/di/DiFootnote";
 
-export const metadata = { title: "Diversity & Inclusion — PTPN Group" };
+export const metadata = { title: "Diversity, Equity & Inclusion — PTPN Group" };
 
 export default function DiversityInclusionPage() {
   return (
@@ -19,7 +23,7 @@ export default function DiversityInclusionPage() {
       <SdmSidebar
         assistantCard="coach"
         assistantTitle="AI Insight"
-        assistantText="Dapatkan insight otomatis tentang Diversity & Inclusion di organisasi Anda."
+        assistantText="Dapatkan insight otomatis tentang Diversity, Equity & Inclusion di organisasi Anda."
         assistantCta="Tanya AI Assistant"
       />
 
@@ -29,23 +33,35 @@ export default function DiversityInclusionPage() {
         <div className="mx-5 mb-4 flex flex-col gap-3">
           <DiKpiStrip />
 
+          {/* D — Representation: siapa yang terwakili */}
           <div className="grid h-[262px] grid-cols-[minmax(0,366fr)_minmax(0,452fr)_minmax(0,442fr)] grid-rows-[minmax(0,1fr)] gap-3">
             <KomposisiGender />
             <TrenPerempuanManajemen />
             <PiramidaPopulasi />
           </div>
 
-          <div className="grid h-[222px] grid-cols-[minmax(0,366fr)_minmax(0,452fr)_minmax(0,442fr)] grid-rows-[minmax(0,1fr)] gap-3">
-            <PerempuanLevelJabatan />
+          {/* Leadership pipeline: leakage, trajectory target, dan disabilitas */}
+          <div className="grid h-[252px] grid-cols-[minmax(0,452fr)_minmax(0,404fr)_minmax(0,404fr)] grid-rows-[minmax(0,1fr)] gap-3">
+            <GenderLeadershipFunnel />
+            <TargetTrajectory />
             <KaryawanDisabilitas />
-            <PemerataanKesempatan />
           </div>
 
-          <div className="grid h-[234px] grid-cols-[minmax(0,366fr)_minmax(0,378fr)_minmax(0,516fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          {/* E — Equity: kesempatan, gaji, dan pipeline talenta perempuan */}
+          <div className="grid h-[232px] grid-cols-[minmax(0,452fr)_minmax(0,404fr)_minmax(0,404fr)] grid-rows-[minmax(0,1fr)] gap-3">
+            <EquityOfOpportunity />
             <GenderPayGap />
-            <DiversityIndexUnit />
+            <FemaleTalentPipeline />
+          </div>
+
+          {/* I & O — Inclusion per unit, akuntabilitas, dan intelligence */}
+          <div className="grid h-[240px] grid-cols-[minmax(0,366fr)_minmax(0,428fr)_minmax(0,466fr)] grid-rows-[minmax(0,1fr)] gap-3">
+            <DeiRiskMatrix />
+            <DeiActionTracker />
             <InsightDi />
           </div>
+
+          <DiFootnote />
         </div>
       </main>
     </div>

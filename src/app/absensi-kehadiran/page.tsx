@@ -11,6 +11,9 @@ import { StatusHariIni } from "@/components/absensi/StatusHariIni";
 import { RekapKehadiran } from "@/components/absensi/RekapKehadiran";
 import { InsightAbsensi } from "@/components/absensi/InsightAbsensi";
 import { KalenderKehadiran } from "@/components/absensi/KalenderKehadiran";
+import { EkonomiAbsensi } from "@/components/absensi/EkonomiAbsensi";
+import { EarlyWarningAbsensi } from "@/components/absensi/EarlyWarningAbsensi";
+import { KapasitasWorkforce } from "@/components/absensi/KapasitasWorkforce";
 
 export const metadata = { title: "Absensi & Kehadiran — PTPN Group" };
 
@@ -44,7 +47,14 @@ export default function AbsensiKehadiranPage() {
             <StatusHariIni />
           </div>
 
-          <div className="grid h-[228px] grid-cols-[minmax(0,552fr)_minmax(0,368fr)_minmax(0,367fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          {/* Intelligence layer: ekonomi absensi → early warning → kapasitas */}
+          <div className="grid h-[248px] grid-cols-[minmax(0,452fr)_minmax(0,415fr)_minmax(0,415fr)] grid-rows-[minmax(0,1fr)] gap-3">
+            <EkonomiAbsensi />
+            <EarlyWarningAbsensi />
+            <KapasitasWorkforce />
+          </div>
+
+          <div className="grid h-[264px] grid-cols-[minmax(0,552fr)_minmax(0,368fr)_minmax(0,367fr)] grid-rows-[minmax(0,1fr)] gap-3">
             <RekapKehadiran />
             <InsightAbsensi />
             <KalenderKehadiran />

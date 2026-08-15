@@ -13,7 +13,7 @@ export function InsightLnd() {
   return (
     <div
       className="card anim-rise relative flex h-full flex-col overflow-hidden px-4 pb-2.5 pt-3"
-      style={{ "--d": "580ms" } as React.CSSProperties}
+      style={{ "--d": "700ms" } as React.CSSProperties}
     >
       <div className="flex items-center gap-1.5">
         <h3 className="card-title-navy">Insight &amp; Rekomendasi AI</h3>
@@ -22,7 +22,7 @@ export function InsightLnd() {
         </span>
       </div>
       <p className="mt-[3px] text-[9px] text-ink-400">
-        Berdasarkan analisis data pembelajaran Q2 2025.
+        Diagnostik lintas modul: learning, workforce planning, risiko &amp; suksesi (Q2 2026).
       </p>
 
       <div className="relative z-10 mt-2 flex min-h-0 flex-1 flex-col justify-around pr-[86px]">

@@ -25,7 +25,7 @@ export function MethodologyInfo() {
           onClick={() => setOpen(false)}
         >
           <div
-            className="scroll-thin max-h-[82vh] w-[560px] overflow-y-auto rounded-2xl bg-white p-5 shadow-xl"
+            className="scroll-thin max-h-[82vh] w-[560px] overflow-y-auto rounded-2xl border border-[#eef2f6] bg-white p-5 shadow-xl"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between gap-3">

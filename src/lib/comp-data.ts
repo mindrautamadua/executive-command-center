@@ -1,6 +1,12 @@
 import type { Trend } from "./data";
 import { GENDER, PALETTE } from "./chart-palette";
 import type { ChipTone } from "@/components/ui/KpiCard";
+import {
+  equityBridgeCanon,
+  levelGapPct,
+  payEquityCanon,
+  payLevels,
+} from "./pay-equity-data";
 
 /* ── KPI strip ───────────────────────────────────────────── */
 
@@ -75,16 +81,17 @@ export const compKpi: CompKpi[] = [
     series: [29, 35, 31, 39, 34, 42, 37, 45, 40, 47, 43, 50, 46, 53, 57],
   },
   {
+    // = unadjusted ratio dari pay-equity-data (sumber tunggal dengan halaman D&I)
     label: "Pay Equity Index",
-    value: "0,95",
-    delta: "0,03",
+    value: payEquityCanon.unadjustedRatio,
+    delta: "0,01",
     trend: "up",
-    compare: "vs Q1 2026: 0,92",
+    compare: "vs Q1 2026: 0,96",
     icon: "equity",
     tone: "blue",
     line: PALETTE.blue,
     series: [],
-    ring: 95,
+    ring: 97,
   },
 ];
 
@@ -136,28 +143,32 @@ export interface BenchmarkRow {
   perusahaan: number;
 }
 
+/**
+ * Level & kolom `perusahaan` selaras payLevels (rata-rata gabungan L+P per
+ * level) supaya benchmark tidak bertentangan dengan analisis pay gap.
+ */
 export const benchmarkGaji: BenchmarkRow[] = [
-  { level: "Direktur", marketMin: 60, marketMax: 88, marketAvg: 72, perusahaan: 82 },
-  { level: "GM / Senior Manager", marketMin: 35, marketMax: 52, marketAvg: 42, perusahaan: 48 },
-  { level: "Manager", marketMin: 22, marketMax: 32, marketAvg: 26, perusahaan: 30 },
-  { level: "Supervisor", marketMin: 12, marketMax: 19, marketAvg: 15, perusahaan: 17 },
-  { level: "Staff", marketMin: 6, marketMax: 9, marketAvg: 7.2, perusahaan: 8 },
+  { level: "Direksi", marketMin: 60, marketMax: 88, marketAvg: 72, perusahaan: 81 },
+  { level: "Vice President", marketMin: 38, marketMax: 56, marketAvg: 46, perusahaan: 47.3 },
+  { level: "Senior Manager", marketMin: 24, marketMax: 36, marketAvg: 29, perusahaan: 29.6 },
+  { level: "Manager", marketMin: 16, marketMax: 26, marketAvg: 20.5, perusahaan: 19.7 },
+  { level: "Assistant Manager", marketMin: 10, marketMax: 16, marketAvg: 12.8, perusahaan: 12.9 },
+  { level: "Staff", marketMin: 6.5, marketMax: 9.5, marketAvg: 7.8, perusahaan: 8.3 },
 ];
 
 /* ── Pay gap ─────────────────────────────────────────────── */
 
 /**
- * Ringkasan konsisten dengan payGapPerLevel (rata-rata tertimbang headcount).
- * Unadjusted = gap agregat (termasuk efek komposisi level);
- * adjusted = rata-rata gap per level (tertimbang headcount level).
+ * Seluruh angka diturunkan dari pay-equity-data (sumber tunggal dengan
+ * halaman Diversity, Equity & Inclusion) — tidak ada agregat hardcode.
  */
 export const payGapRingkas = {
-  lakiLaki: "Rp 12,03 Jt",
-  perempuan: "Rp 10,15 Jt",
-  gap: "15,6%",
-  gapAdjusted: "10,0%",
-  gapDelta: "1,2%",
-  gapTrend: "up" as Trend,
+  lakiLaki: payEquityCanon.rataL,
+  perempuan: payEquityCanon.rataP,
+  gap: payEquityCanon.unadjustedGap,
+  gapAdjusted: payEquityCanon.adjustedGap,
+  gapDelta: "0,2%",
+  gapTrend: "down" as Trend,
   gapCompare: "vs Q1 2026",
 };
 
@@ -172,13 +183,14 @@ export interface PayGapLevelRow {
   headcountPerempuan: number;
 }
 
-export const payGapPerLevel: PayGapLevelRow[] = [
-  { level: "Direktur", lakiLaki: 60.3, perempuan: 53.0, gap: "12,1%", headcountLaki: 96, headcountPerempuan: 32 },
-  { level: "Senior Manager", lakiLaki: 38.3, perempuan: 34.3, gap: "10,4%", headcountLaki: 380, headcountPerempuan: 175 },
-  { level: "Manager", lakiLaki: 22.3, perempuan: 20.0, gap: "10,3%", headcountLaki: 1420, headcountPerempuan: 860 },
-  { level: "Supervisor", lakiLaki: 14.2, perempuan: 12.7, gap: "10,6%", headcountLaki: 3210, headcountPerempuan: 2180 },
-  { level: "Staff", lakiLaki: 8.2, perempuan: 7.4, gap: "9,8%", headcountLaki: 9450, headcountPerempuan: 7120 },
-];
+export const payGapPerLevel: PayGapLevelRow[] = payLevels.map((r) => ({
+  level: r.level,
+  lakiLaki: r.gajiL,
+  perempuan: r.gajiP,
+  gap: `${levelGapPct(r).toFixed(1).replace(".", ",")}%`,
+  headcountLaki: r.headcountL,
+  headcountPerempuan: r.headcountP,
+}));
 
 export const payGapWarna = GENDER;
 
@@ -250,8 +262,8 @@ export const unitKompensasi: UnitKompensasi[] = [
     kenaikan: "5,9%",
     rasioRewards: "69,1%",
     rasioNum: 69.1,
-    payEquity: "0,96",
-    payEquityNum: 0.96,
+    payEquity: "0,97",
+    payEquityNum: 0.97,
   },
   {
     unit: "PTPN II",
@@ -260,8 +272,8 @@ export const unitKompensasi: UnitKompensasi[] = [
     kenaikan: "5,6%",
     rasioRewards: "67,8%",
     rasioNum: 67.8,
-    payEquity: "0,94",
-    payEquityNum: 0.94,
+    payEquity: "0,96",
+    payEquityNum: 0.96,
   },
   {
     unit: "PTPN III (Persero)",
@@ -270,8 +282,8 @@ export const unitKompensasi: UnitKompensasi[] = [
     kenaikan: "5,8%",
     rasioRewards: "68,6%",
     rasioNum: 68.6,
-    payEquity: "0,95",
-    payEquityNum: 0.95,
+    payEquity: "0,97",
+    payEquityNum: 0.97,
   },
   {
     unit: "PTPN IV",
@@ -280,8 +292,8 @@ export const unitKompensasi: UnitKompensasi[] = [
     kenaikan: "5,4%",
     rasioRewards: "66,9%",
     rasioNum: 66.9,
-    payEquity: "0,93",
-    payEquityNum: 0.93,
+    payEquity: "0,95",
+    payEquityNum: 0.95,
   },
   {
     unit: "PTPN V",
@@ -290,8 +302,8 @@ export const unitKompensasi: UnitKompensasi[] = [
     kenaikan: "5,7%",
     rasioRewards: "67,1%",
     rasioNum: 67.1,
-    payEquity: "0,94",
-    payEquityNum: 0.94,
+    payEquity: "0,96",
+    payEquityNum: 0.96,
   },
   {
     unit: "Holding & Supporting Co",
@@ -300,10 +312,9 @@ export const unitKompensasi: UnitKompensasi[] = [
     kenaikan: "6,1%",
     rasioRewards: "69,8%",
     rasioNum: 69.8,
-    payEquity: "0,97",
-    payEquityNum: 0.97,
-  },
-];
+    payEquity: "0,98",
+    payEquityNum: 0.98,
+  },];
 
 /* ── Rasio kompensasi terhadap kinerja ───────────────────── */
 
@@ -341,6 +352,221 @@ export const rasioTren = [
   { x: 97, y: 92 },
 ];
 
+/* ── Compa-ratio & range position ────────────────────────── */
+
+export interface CompaLevelRow {
+  level: string;
+  /** rata-rata gaji aktual (Rp juta) */
+  aktual: number;
+  /** market P50 (Rp juta) */
+  marketP50: number;
+  /** compa-ratio = aktual / market P50 */
+  compa: number;
+  posisi: string;
+  status: "Competitive" | "Above Market" | "Monitor";
+}
+
+export const compaPerLevel: CompaLevelRow[] = [
+  { level: "Direktur", aktual: 82, marketP50: 72, compa: 114, posisi: "P75", status: "Above Market" },
+  { level: "GM / Senior Manager", aktual: 48, marketP50: 42, compa: 114, posisi: "P75", status: "Above Market" },
+  { level: "Manager", aktual: 30, marketP50: 26, compa: 115, posisi: "P75", status: "Above Market" },
+  { level: "Supervisor", aktual: 17, marketP50: 15, compa: 113, posisi: "P70", status: "Competitive" },
+  { level: "Staff", aktual: 8, marketP50: 7.2, compa: 111, posisi: "P65", status: "Competitive" },
+];
+
+/** Distribusi compa-ratio seluruh karyawan */
+export const compaDistribusi = [
+  { bucket: "<80%", pct: 4, color: PALETTE.red },
+  { bucket: "80–90%", pct: 12, color: PALETTE.amber },
+  { bucket: "90–110%", pct: 64, color: PALETTE.green },
+  { bucket: "110–120%", pct: 15, color: PALETTE.blue },
+  { bucket: ">120%", pct: 5, color: PALETTE.purple },
+];
+
+/** Posisi karyawan dalam rentang gaji (range penetration) */
+export const rangePosition = [
+  { label: "Below Range", pct: 8, color: PALETTE.red },
+  { label: "Lower Quartile", pct: 18, color: PALETTE.amber },
+  { label: "Midpoint", pct: 47, color: PALETTE.green },
+  { label: "Upper Quartile", pct: 21, color: PALETTE.blue },
+  { label: "Above Range", pct: 6, color: PALETTE.purple },
+];
+
+export const strukturRisiko = [
+  { label: "Di bawah minimum range", value: "486", tone: "red" as ChipTone },
+  { label: "Di atas maximum range", value: "312", tone: "amber" as ChipTone },
+  { label: "Pay compression (gap <5% vs new hire)", value: "1.240", tone: "amber" as ChipTone },
+  { label: "Salary inversion (new hire > incumbent)", value: "74", tone: "red" as ChipTone },
+];
+
+/* ── Pay equity: bridge & remediation ────────────────────── */
+
+/** Waterfall: unadjusted → within-level → unexplained (dari pay-equity-data). */
+export const equityBridge = equityBridgeCanon;
+
+export const equityRemediasi = {
+  affected: "812",
+  affectedNote: "karyawan berpotensi terdampak",
+  biaya: "Rp 14 M",
+  biayaNote: "estimasi biaya remediasi / tahun",
+  prioritas: ["Direksi", "Vice President", "Senior Manager"],
+  konsentrasi:
+    "Within-level gap ~4,8% sebagian besar dijelaskan rumpun jabatan & tenur; unexplained 1,2% terkonsentrasi di level senior — targeted review, bukan remediasi massal.",
+  confidence: [
+    { label: "Pay Equity Confidence", value: 94 },
+    { label: "Sample Coverage", value: 92 },
+    { label: "Model Fit (R²)", value: 89 },
+    { label: "Data Completeness", value: 97 },
+  ],
+};
+
+/* ── Pay-for-performance effectiveness ───────────────────── */
+
+export interface RewardPerfRow {
+  rating: string;
+  avgReward: string;
+  rewardNum: number;
+  merit: string;
+  meritNum: number;
+}
+
+export const rewardByPerformance: RewardPerfRow[] = [
+  { rating: "Outstanding", avgReward: "Rp 18,6 Jt", rewardNum: 18.6, merit: "8,2%", meritNum: 8.2 },
+  { rating: "Exceeds", avgReward: "Rp 15,2 Jt", rewardNum: 15.2, merit: "6,8%", meritNum: 6.8 },
+  { rating: "Meets", avgReward: "Rp 13,1 Jt", rewardNum: 13.1, merit: "5,1%", meritNum: 5.1 },
+  { rating: "Below", avgReward: "Rp 11,8 Jt", rewardNum: 11.8, merit: "2,8%", meritNum: 2.8 },
+  { rating: "Poor", avgReward: "Rp 10,9 Jt", rewardNum: 10.9, merit: "1,0%", meritNum: 1.0 },
+];
+
+export const p4pRingkas = {
+  rewardDiff: "1,42×",
+  rewardDiffNote: "Outstanding vs Meets — total rewards",
+  meritDiff: "1,61×",
+  meritDiffNote: "Outstanding vs Meets — merit increase",
+  korelasi: "r = 0,87",
+};
+
+export const rewardMisalignment = [
+  {
+    label: "High Performer / Underpaid",
+    value: "482",
+    note: "Compa <90% — retention risk",
+    tone: "red" as ChipTone,
+  },
+  {
+    label: "Low Performer / Overpaid",
+    value: "731",
+    note: "Compa >110% — cost effectiveness risk",
+    tone: "amber" as ChipTone,
+  },
+];
+
+/* ── People cost efficiency ──────────────────────────────── */
+
+export const costEfficiency = [
+  { label: "Compensation / Revenue", value: "38,2%", note: "Target industri: <40%", tone: "green" as ChipTone },
+  { label: "Compensation / Opex", value: "52,4%", note: "vs Q1: 53,1%", tone: "blue" as ChipTone },
+  { label: "Revenue / Comp Cost", value: "2,62×", note: "vs Q1: 2,55×", tone: "teal" as ChipTone },
+  { label: "EBITDA / Comp Cost", value: "0,75×", note: "vs Q1: 0,71×", tone: "purple" as ChipTone },
+];
+
+export const affordability = {
+  narasi:
+    "Kenaikan biaya kompensasi 8,7% masih di bawah pertumbuhan revenue 11,2% dan EBITDA 13,4% — kenaikan payroll affordable.",
+  bars: [
+    { label: "Compensation Growth", value: 8.7, color: PALETTE.amber },
+    { label: "Revenue Growth", value: 11.2, color: PALETTE.blue },
+    { label: "EBITDA Growth", value: 13.4, color: PALETTE.green },
+  ],
+};
+
+/* ── Critical talent compensation risk ───────────────────── */
+
+export const criticalTalentRisk = {
+  level: "HIGH",
+  funnel: [
+    { label: "Critical Talent", value: "2.842", pct: 100 },
+    { label: "Di bawah Market P50", value: "614", pct: 22 },
+    { label: "Compa-ratio <90%", value: "421", pct: 15 },
+    { label: "High Performer + Compa <90%", value: "187", pct: 6.6 },
+    { label: "HiPo + Compa <90%", value: "82", pct: 2.9 },
+  ],
+  ekonomi: [
+    { label: "Retention gap ke Market P75", value: "Rp 3,4 Jt/bln" },
+    { label: "Biaya retention adjustment", value: "Rp 11 M/thn" },
+    { label: "Estimasi replacement cost", value: "Rp 34,6 M" },
+  ],
+  kesimpulan: "Adjustment < replacement cost — retention premium economically justified.",
+};
+
+/* ── Compensation scenario → decision center ─────────────── */
+
+export interface CompScenario {
+  nama: string;
+  deskripsi: string;
+  payroll: string;
+  equity: string;
+  retention: string;
+  rekomendasi: boolean;
+  color: string;
+}
+
+export const compScenarios: CompScenario[] = [
+  {
+    nama: "A — Broad Increase",
+    deskripsi: "Kenaikan merata 6,5% seluruh workforce",
+    payroll: "+Rp 168 M",
+    equity: "+2 pts",
+    retention: "+1,2%",
+    rekomendasi: false,
+    color: PALETTE.slate,
+  },
+  {
+    nama: "B — Targeted Equity",
+    deskripsi: "Merit 5,8% + adjustment high performer under-market & equity gap",
+    payroll: "+Rp 46 M",
+    equity: "+5 pts",
+    retention: "+6,8% high performer",
+    rekomendasi: true,
+    color: PALETTE.green,
+  },
+  {
+    nama: "C — Market Correction",
+    deskripsi: "Critical roles dinaikkan ke market P75",
+    payroll: "+Rp 92 M",
+    equity: "+3 pts",
+    retention: "−18 pts critical risk",
+    rekomendasi: false,
+    color: PALETTE.blue,
+  },
+];
+
+export const compDecision = {
+  rekomendasi: "Scenario B — Targeted Equity",
+  alasan:
+    "Impact retention tertinggi per rupiah incremental payroll: prioritas 187 high performer under-market, 82 HiPo di bawah P50, dan remediasi unexplained gap 1,2%.",
+  syarat: [
+    "Validasi individual compa-ratio sebelum adjustment",
+    "Remediasi pay equity dieksekusi dalam 2 siklus payroll",
+    "Review dampak retention 2 kuartal setelah implementasi",
+  ],
+  log: [
+    { label: "Diajukan oleh", value: "Direktur SDM" },
+    { label: "Review", value: "Komite Remunerasi" },
+    { label: "Status", value: "Menunggu approval BOD" },
+    { label: "Target efektif", value: "Q3 2026" },
+  ],
+};
+
+/* ── Market data governance ──────────────────────────────── */
+
+export const marketGovernance = {
+  sumber: "Mercer TRS + Korn Ferry (blended)",
+  cut: "Indonesia · Plantation / Agribusiness · BUMN",
+  percentile: "P50 / P75",
+  asOf: "Mar 2026",
+};
+
 /* ── Insight & rekomendasi AI ────────────────────────────── */
 
 export interface CompInsight {
@@ -352,27 +578,27 @@ export interface CompInsight {
 
 export const compInsight: CompInsight[] = [
   {
-    highlight: "Total biaya kompensasi",
-    isi: " meningkat 8,7% dibandingkan Q1 2026, sejalan dengan peningkatan kinerja perusahaan.",
+    highlight: "Biaya kompensasi naik 8,7%",
+    isi: " — masih affordable: di bawah pertumbuhan revenue 11,2% dan EBITDA 13,4%.",
     tone: "blue",
     icon: "trend",
   },
   {
-    highlight: "Pay Equity Index",
-    isi: " berada di 0,95 (mendekati ideal 1,00). Pertahankan konsistensi kebijakan remunerasi.",
-    tone: "green",
-    icon: "check",
-  },
-  {
-    highlight: "Gap gaji terbesar",
-    isi: " terdapat pada level Senior Manager ke atas. Rekomendasi: review struktur gaji pada level tersebut.",
+    highlight: "Adjusted pay gap ~10% konsisten di semua level",
+    isi: " — indikasi pola struktural, bukan outlier. Pay equity memerlukan targeted review, bukan sekadar dipertahankan.",
     tone: "amber",
     icon: "warning",
   },
   {
-    highlight: "Rasio Total Rewards",
-    isi: " yang kompetitif membantu meningkatkan retention karyawan potensial.",
-    tone: "teal",
-    icon: "info",
+    highlight: "187 high performer & 82 HiPo under-market",
+    isi: " (compa <90% / di bawah P50) — retention compensation risk tinggi pada critical talent.",
+    tone: "red",
+    icon: "warning",
+  },
+  {
+    highlight: "Rekomendasi: targeted adjustment",
+    isi: " (+Rp 46 M) melindungi critical talent dan menutup equity gap dengan biaya jauh di bawah broad increase (+Rp 168 M).",
+    tone: "green",
+    icon: "check",
   },
 ];

@@ -78,7 +78,7 @@ export function PayGapAnalisis() {
               />
             </div>
             <div className="mt-[2px] whitespace-nowrap text-[9px] text-ink-500">
-              Adjusted per level:{" "}
+              Adjusted (full controls):{" "}
               <span className="font-bold text-ink-900">{payGapRingkas.gapAdjusted}</span>
             </div>
             <div className="mt-[2px] text-[9px] text-ink-400">{payGapRingkas.gapCompare}</div>

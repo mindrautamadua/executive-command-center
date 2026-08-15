@@ -7,11 +7,14 @@ import { KelengkapanDomain } from "@/components/data/KelengkapanDomain";
 import { SumberDataTerhubung } from "@/components/data/SumberDataTerhubung";
 import { AnomalyDetection } from "@/components/data/AnomalyDetection";
 import { PerbandinganUnit } from "@/components/data/PerbandinganUnit";
-import { DataUsage } from "@/components/data/DataUsage";
+import { DataToDecision } from "@/components/data/DataToDecision";
 import { TopInsightData } from "@/components/data/TopInsightData";
 import { GovernanceStatus } from "@/components/data/GovernanceStatus";
+import { DataReconciliation } from "@/components/data/DataReconciliation";
+import { ElemenKritis } from "@/components/data/ElemenKritis";
+import { DqIncidents } from "@/components/data/DqIncidents";
 
-export const metadata = { title: "Data & Analytic — PTPN Group" };
+export const metadata = { title: "Data & Analytics — PTPN Group" };
 
 export default function DataAnalyticsPage() {
   return (
@@ -42,8 +45,14 @@ export default function DataAnalyticsPage() {
             <PerbandinganUnit />
           </div>
 
+          <div className="grid h-[235px] grid-cols-[minmax(0,470fr)_minmax(0,355fr)_minmax(0,470fr)] grid-rows-[minmax(0,1fr)] gap-3">
+            <DataReconciliation />
+            <ElemenKritis />
+            <DqIncidents />
+          </div>
+
           <div className="grid h-[225px] grid-cols-[minmax(0,470fr)_minmax(0,355fr)_minmax(0,470fr)] grid-rows-[minmax(0,1fr)] gap-3">
-            <DataUsage />
+            <DataToDecision />
             <TopInsightData />
             <GovernanceStatus />
           </div>

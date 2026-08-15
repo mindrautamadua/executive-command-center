@@ -12,7 +12,7 @@ export function StatusPengisian() {
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
       <h3 className="card-title-navy">Status Pengisian Jabatan</h3>
-      <p className="mt-[3px] text-[9.5px] text-ink-500">Tingkat Keterisian per Level</p>
+      <p className="mt-[3px] text-[9.5px] text-ink-500">Keterisian Jabatan per Level (dari 1.256 posisi)</p>
 
       <table className="mt-2 w-full">
         <thead>

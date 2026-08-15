@@ -7,7 +7,12 @@ export function SumberDataTerhubung() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "180ms" } as React.CSSProperties}
     >
-      <h3 className="card-title-navy">Sumber Data Terhubung</h3>
+      <h3 className="card-title-navy">
+        Sumber Data Terhubung{" "}
+        <span className="text-[9.5px] font-medium normal-case tracking-normal text-ink-400">
+          (8 dari 18 sumber utama)
+        </span>
+      </h3>
 
       <div className="mt-2 grid min-h-0 flex-1 grid-cols-4 grid-rows-2 gap-2">
         {sumberData.map((s, i) => {

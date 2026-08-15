@@ -9,7 +9,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { caseTrend } from "@/lib/ir-data";
+import { caseTrend12m as caseTrend } from "@/lib/ir-intel-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "../hc/SectionHead";
 import { PanelFooterLink } from "./PanelFooterLink";
@@ -51,8 +51,8 @@ export function IrCaseTrend() {
               interval={0}
             />
             <YAxis
-              domain={[0, 80]}
-              ticks={[0, 20, 40, 60, 80]}
+              domain={[0, 30]}
+              ticks={[0, 10, 20, 30]}
               tickLine={false}
               axisLine={false}
               tick={{ fontSize: 8, fill: CHART_AXIS.tick }}

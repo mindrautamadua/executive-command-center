@@ -67,7 +67,7 @@ export function HeatmapUnitKerja() {
               d={is.d}
               fill={HEAT_COLOR[heatLevelByRegion[is.region]]}
               fillOpacity={hover === null || hover === is.region ? 0.78 : 0.3}
-              stroke="#ffffff"
+              stroke="var(--map-stroke)"
               strokeWidth="1.2"
               strokeLinejoin="round"
               style={{ transition: "fill-opacity .15s" }}

@@ -1,5 +1,5 @@
 import { ArrowRight } from "lucide-react";
-import { equalPayNote, rataGaji } from "@/lib/di-data";
+import { payEquityDi, rataGaji } from "@/lib/di-data";
 import { PALETTE } from "@/lib/chart-palette";
 import { CountUp } from "../ui/CountUp";
 
@@ -9,9 +9,9 @@ const RASIO = WANITA.jt / PRIA.jt;
 const RASIO_LABEL = RASIO.toFixed(2).replace(".", ",");
 const GAP_LABEL = `${((1 - RASIO) * 100).toFixed(1).replace(".", ",")}%`;
 
-/* Skala dumbbell dipersempit (13,0-14,0 Jt) agar selisih 3% terlihat. */
-const MIN = 13.0;
-const MAX = 14.0;
+/* Skala dumbbell dipersempit (11,9-12,9 Jt) agar selisih 3% terlihat. */
+const MIN = 11.9;
+const MAX = 12.9;
 const posisi = (v: number) => ((v - MIN) / (MAX - MIN)) * 100;
 
 export function GenderPayGap() {
@@ -21,7 +21,7 @@ export function GenderPayGap() {
   return (
     <div className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3">
       <h3 className="card-title-navy">Perbandingan Rata-rata Gaji (Gender Pay Gap)</h3>
-      <p className="mt-[3px] text-[9px] text-ink-400">(Per 30 Jun 2025)</p>
+      <p className="mt-[3px] text-[9px] text-ink-400">(Per 30 Jun 2026)</p>
 
       {/* dumbbell gap */}
       <div className="relative mx-2 mt-2 h-[86px] min-h-0">
@@ -86,13 +86,28 @@ export function GenderPayGap() {
 
       <div className="mt-2 flex min-h-0 flex-1 items-center gap-3 rounded-xl bg-[#f6f9fc] px-3 py-2">
         <div className="shrink-0 text-center leading-tight">
-          <div className="text-[9px] text-ink-500">Equal Pay Ratio</div>
+          <div className="text-[9px] text-ink-500">Unadjusted</div>
           <CountUp
             value={RASIO_LABEL}
-            className="mt-1 block text-[19px] font-extrabold leading-none text-ink-900"
+            className="mt-1 block text-[17px] font-extrabold leading-none text-ink-900"
           />
+          <div className="mt-[3px] text-[8.5px] tabular-nums text-ink-400">
+            Gap {payEquityDi.unadjustedGap}
+          </div>
         </div>
-        <p className="min-w-0 flex-1 text-[9px] leading-[1.45] text-ink-500">{equalPayNote}</p>
+        <div className="shrink-0 text-center leading-tight">
+          <div className="text-[9px] text-ink-500">Adjusted</div>
+          <CountUp
+            value={payEquityDi.adjustedRatio}
+            className="mt-1 block text-[17px] font-extrabold leading-none text-ptpn-green"
+          />
+          <div className="mt-[3px] text-[8.5px] tabular-nums text-ink-400">
+            Gap {payEquityDi.adjustedGap}
+          </div>
+        </div>
+        <p className="min-w-0 flex-1 text-[8.5px] leading-[1.4] text-ink-500">
+          {payEquityDi.catatan}
+        </p>
       </div>
 
       <button className="link-more mt-2 flex items-center gap-1">

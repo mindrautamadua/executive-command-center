@@ -23,7 +23,7 @@ export const engagementKpi: EngagementKpi[] = [
     value: "82,4",
     delta: "4,6 pts",
     trend: "up",
-    compare: "vs Q1 2025: 77,8",
+    compare: "vs Q1 2026: 77,8",
     icon: "score",
     tone: "blue",
     line: PALETTE.blue,
@@ -34,7 +34,7 @@ export const engagementKpi: EngagementKpi[] = [
     value: "+46",
     delta: "8 pts",
     trend: "up",
-    compare: "vs Q1 2025: +38",
+    compare: "vs Q1 2026: +38",
     icon: "enps",
     tone: "green",
     line: PALETTE.green,
@@ -45,7 +45,7 @@ export const engagementKpi: EngagementKpi[] = [
     value: "78,3%",
     delta: "5,2%",
     trend: "up",
-    compare: "vs Q1 2025: 73,1%",
+    compare: "vs Q1 2026: 73,1%",
     icon: "response",
     tone: "purple",
     line: PALETTE.purple,
@@ -56,7 +56,7 @@ export const engagementKpi: EngagementKpi[] = [
     value: "34,6%",
     delta: "3,8%",
     trend: "up",
-    compare: "vs Q1 2025: 30,8%",
+    compare: "vs Q1 2026: 30,8%",
     icon: "engaged",
     tone: "amber",
     line: PALETTE.amber,
@@ -67,7 +67,7 @@ export const engagementKpi: EngagementKpi[] = [
     value: "Positif",
     delta: "Meningkat",
     trend: "up",
-    compare: "vs Q1 2025: Stabil",
+    compare: "vs Q1 2026: Stabil",
     icon: "trend",
     tone: "teal",
     line: PALETTE.teal,
@@ -78,7 +78,7 @@ export const engagementKpi: EngagementKpi[] = [
     value: "81,1%",
     delta: "4,1%",
     trend: "up",
-    compare: "vs Q1 2025: 77,0%",
+    compare: "vs Q1 2026: 77,0%",
     icon: "satisfaction",
     tone: "pink",
     line: PALETTE.pink,
@@ -103,12 +103,12 @@ export const overallScore = "82,4";
 /* ── tren engagement score ───────────────────────────────── */
 
 export const trenEngagement = [
-  { name: "Jan 2025", value: 73.2 },
-  { name: "Feb 2025", value: 75.1 },
-  { name: "Mar 2025", value: 76.8 },
-  { name: "Apr 2025", value: 79.3 },
-  { name: "Mei 2025", value: 80.6 },
-  { name: "Jun 2025", value: 82.4 },
+  { name: "Jan 2026", value: 73.2 },
+  { name: "Feb 2026", value: 75.1 },
+  { name: "Mar 2026", value: 76.8 },
+  { name: "Apr 2026", value: 79.3 },
+  { name: "Mei 2026", value: 80.6 },
+  { name: "Jun 2026", value: 82.4 },
 ];
 
 export const trenEngagementTarget = 80;
@@ -120,12 +120,12 @@ export const trenEngagementTarget = 80;
  * Detractors disimpan positif; komponen menggambar ke bawah (diverging).
  */
 export const enpsTrend = [
-  { name: "Jan 2025", promoters: 48, passives: 32, detractors: 20, enps: 28 },
-  { name: "Feb 2025", promoters: 50, passives: 31, detractors: 19, enps: 31 },
-  { name: "Mar 2025", promoters: 53, passives: 29, detractors: 18, enps: 35 },
-  { name: "Apr 2025", promoters: 55, passives: 28, detractors: 17, enps: 38 },
-  { name: "Mei 2025", promoters: 57, passives: 28, detractors: 15, enps: 42 },
-  { name: "Jun 2025", promoters: 60, passives: 26, detractors: 14, enps: 46 },
+  { name: "Jan 2026", promoters: 48, passives: 32, detractors: 20, enps: 28 },
+  { name: "Feb 2026", promoters: 50, passives: 31, detractors: 19, enps: 31 },
+  { name: "Mar 2026", promoters: 53, passives: 29, detractors: 18, enps: 35 },
+  { name: "Apr 2026", promoters: 55, passives: 28, detractors: 17, enps: 38 },
+  { name: "Mei 2026", promoters: 57, passives: 28, detractors: 15, enps: 42 },
+  { name: "Jun 2026", promoters: 60, passives: 26, detractors: 14, enps: 46 },
 ];
 
 /* ── engagement per unit organisasi ──────────────────────── */
@@ -202,18 +202,20 @@ export const demografiData: Record<DemografiTab, DemografiCohort[]> = {
 export interface FaktorRow {
   faktor: string;
   pct: number;
+  /** kontribusi relatif terhadap engagement (relative weight analysis) */
+  impact: "Very High" | "High" | "Medium";
 }
 
 export const faktorKekuatan: FaktorRow[] = [
-  { faktor: "Kualitas Hubungan dengan Tim", pct: 85 },
-  { faktor: "Kepemimpinan Atasan Langsung", pct: 83 },
-  { faktor: "Rasa Bangga terhadap Perusahaan", pct: 82 },
+  { faktor: "Kualitas Hubungan dengan Tim", pct: 85, impact: "Medium" },
+  { faktor: "Kepemimpinan Atasan Langsung", pct: 83, impact: "High" },
+  { faktor: "Rasa Bangga terhadap Perusahaan", pct: 82, impact: "Medium" },
 ];
 
 export const faktorPerbaikan: FaktorRow[] = [
-  { faktor: "Work-life Balance", pct: 68 },
-  { faktor: "Peluang Pengembangan Karier", pct: 70 },
-  { faktor: "Sistem Reward & Recognition", pct: 72 },
+  { faktor: "Work-life Balance", pct: 68, impact: "Very High" },
+  { faktor: "Peluang Pengembangan Karier", pct: 70, impact: "Very High" },
+  { faktor: "Sistem Reward & Recognition", pct: 72, impact: "High" },
 ];
 
 /* ── sentimen komentar ───────────────────────────────────── */
@@ -240,7 +242,7 @@ export const sentimenKomentar: SentimenTile[] = [
     share: 68,
     delta: "6%",
     trend: "up",
-    compare: "vs Q1 2025",
+    compare: "vs Q1 2026",
     kutipan: [
       "Saya bangga menjadi bagian dari perusahaan ini",
       "Atasan saya selalu mendukung pengembangan karier tim",
@@ -256,7 +258,7 @@ export const sentimenKomentar: SentimenTile[] = [
     share: 22,
     delta: "1%",
     trend: "down",
-    compare: "vs Q1 2025",
+    compare: "vs Q1 2026",
     kutipan: [
       "Beberapa hal sudah baik, namun masih bisa ditingkatkan",
       "Fasilitas cukup memadai, komunikasi bisa lebih terbuka",
@@ -272,7 +274,7 @@ export const sentimenKomentar: SentimenTile[] = [
     share: 10,
     delta: "5%",
     trend: "down",
-    compare: "vs Q1 2025",
+    compare: "vs Q1 2026",
     kutipan: [
       "Workload tinggi dan waktu istirahat kurang seimbang",
       "Jenjang karier terasa lambat di beberapa unit",
@@ -312,23 +314,304 @@ export interface EngagementInsight {
 
 export const insightEngagement: EngagementInsight[] = [
   {
-    isi: "Engagement meningkat 4,6 pts dibandingkan Q1 2025, pertahankan momentum positif ini.",
-    tone: "green",
-    icon: "trend",
-  },
-  {
-    isi: "Perhatian khusus pada Work-life Balance karena memiliki skor terendah (68%).",
+    isi: "Engagement naik +4,6 pts namun tidak merata: Regional 3 tertinggal 8,3 pts di bawah rata-rata grup dengan partisipasi terendah (68%) — pola low engagement + low response adalah sinyal risiko tersembunyi.",
     tone: "amber",
     icon: "warning",
   },
   {
-    isi: "Generasi Baby Boomer menunjukkan engagement lebih rendah, berikan program yang lebih relevan untuk mereka.",
+    isi: "Work-life Balance (68) adalah driver berdampak tertinggi (+18%). Komentar negatif didominasi workload & overtime — indikasi tekanan kapasitas workforce, bukan sekadar preferensi.",
+    tone: "red",
+    icon: "warning",
+  },
+  {
+    isi: "42 tim mengombinasikan low engagement + low manager effectiveness. Coaching manajer bottom-quartile diproyeksikan menaikkan engagement tim +3–5 pts.",
     tone: "blue",
     icon: "info",
   },
   {
-    isi: "Unit dengan partisipasi survey < 70% perlu dorongan komunikasi internal lebih intensif.",
+    isi: "Engagement <70 berasosiasi dengan turnover 12,8% vs 4,1% pada cluster >85 — estimasi avoidable turnover exposure ±410 karyawan.",
     tone: "teal",
-    icon: "check",
+    icon: "trend",
   },
 ];
+
+/* ── engagement driver model (relative weight analysis) ──── */
+
+export interface DriverImpactRow {
+  driver: string;
+  skor: number;
+  /** kontribusi relatif terhadap varians engagement (%) */
+  impactPct: number;
+  impact: "Very High" | "High" | "Medium";
+  gap: "prioritas" | "jaga" | "pantau";
+}
+
+export const driverModel: DriverImpactRow[] = [
+  { driver: "Work-life Balance", skor: 68, impactPct: 18, impact: "Very High", gap: "prioritas" },
+  { driver: "Pengembangan Karier", skor: 70, impactPct: 15, impact: "Very High", gap: "prioritas" },
+  { driver: "Kepemimpinan Atasan Langsung", skor: 83, impactPct: 13, impact: "High", gap: "jaga" },
+  { driver: "Reward & Recognition", skor: 72, impactPct: 11, impact: "High", gap: "prioritas" },
+  { driver: "Hubungan dengan Tim", skor: 85, impactPct: 9, impact: "Medium", gap: "jaga" },
+  { driver: "Rasa Bangga (Purpose)", skor: 82, impactPct: 8, impact: "Medium", gap: "pantau" },
+];
+
+/* ── manager intelligence ────────────────────────────────── */
+
+export const managerSummary = [
+  { label: "Manager Effectiveness Index", value: "79", sub: "skala 0–100" },
+  { label: "Tim Berisiko", value: "42", sub: "low engagement + low mgr effectiveness" },
+  { label: "Manajer Perlu Intervensi", value: "68", sub: "bottom-quartile, coaching prioritas" },
+  { label: "Gap Top vs Bottom 10%", value: "+27", sub: "pts team engagement" },
+] as const;
+
+export interface ManagerCluster {
+  cluster: string;
+  teamEngagement: number;
+  effectiveness: number;
+  tone: ChipTone;
+  status: string;
+}
+
+export const managerClusters: ManagerCluster[] = [
+  { cluster: "Top 10%", teamEngagement: 91, effectiveness: 94, tone: "green", status: "Benchmark" },
+  { cluster: "Top 25%", teamEngagement: 87, effectiveness: 88, tone: "green", status: "Sehat" },
+  { cluster: "Median", teamEngagement: 82, effectiveness: 81, tone: "amber", status: "Stabil" },
+  { cluster: "Bottom 25%", teamEngagement: 72, effectiveness: 68, tone: "amber", status: "Coaching" },
+  { cluster: "Bottom 10%", teamEngagement: 64, effectiveness: 59, tone: "red", status: "Intervensi" },
+];
+
+/* ── engagement → outcome linkage ────────────────────────── */
+
+export interface OutcomeCluster {
+  cluster: string;
+  range: string;
+  populasi: string;
+  turnover: string;
+  performa: string;
+  produktivitas: number;
+  tone: ChipTone;
+  color: string;
+}
+
+export const outcomeClusters: OutcomeCluster[] = [
+  {
+    cluster: "High Engagement",
+    range: "Skor > 85",
+    populasi: "34,6%",
+    turnover: "4,1%",
+    performa: "4,22",
+    produktivitas: 108,
+    tone: "green",
+    color: PALETTE.green,
+  },
+  {
+    cluster: "Moderate",
+    range: "Skor 70–85",
+    populasi: "49,8%",
+    turnover: "7,6%",
+    performa: "3,91",
+    produktivitas: 100,
+    tone: "amber",
+    color: PALETTE.amber,
+  },
+  {
+    cluster: "Low Engagement",
+    range: "Skor < 70",
+    populasi: "15,6%",
+    turnover: "12,8%",
+    performa: "3,48",
+    produktivitas: 91,
+    tone: "red",
+    color: PALETTE.red,
+  },
+];
+
+export const outcomeHighlights = [
+  { label: "Retention differential", value: "8,7 pts", sub: "turnover low vs high engagement" },
+  { label: "Avoidable turnover exposure", value: "±410", sub: "karyawan pada cluster berisiko" },
+  { label: "Produktivitas gap", value: "−16%", sub: "cluster <70 vs >85 (indeks)" },
+] as const;
+
+/* ── engagement risk matrix (engagement × response) ──────── */
+
+export interface MatrixPoint {
+  unit: string;
+  /** engagement score (sumbu X) */
+  x: number;
+  /** response rate % (sumbu Y) */
+  y: number;
+  kuadran: "reliable-strength" | "quiet-strength" | "reliable-risk" | "hidden-risk";
+}
+
+export const matrixThreshold = { engagement: 80, response: 80 };
+
+export const engagementMatrix: MatrixPoint[] = [
+  { unit: "PTPN IV", x: 88.3, y: 92, kuadran: "reliable-strength" },
+  { unit: "PTPN III", x: 85.7, y: 89, kuadran: "reliable-strength" },
+  { unit: "PalmCo", x: 84.1, y: 86, kuadran: "reliable-strength" },
+  { unit: "PTPN I", x: 82.9, y: 84, kuadran: "reliable-strength" },
+  { unit: "PTPN V", x: 81.6, y: 80, kuadran: "reliable-strength" },
+  { unit: "PTPN II", x: 80.5, y: 78, kuadran: "quiet-strength" },
+  { unit: "Holding & Supp", x: 78.4, y: 76, kuadran: "hidden-risk" },
+  { unit: "Regional 1", x: 77.8, y: 74, kuadran: "hidden-risk" },
+  { unit: "Regional 2", x: 75.3, y: 72, kuadran: "hidden-risk" },
+  { unit: "Regional 3", x: 74.1, y: 68, kuadran: "hidden-risk" },
+];
+
+/* ── voice of employee: topic intelligence ───────────────── */
+
+export interface VoiceTopic {
+  topik: string;
+  share: number;
+  delta: string;
+  trend: Trend;
+  /** naik = memburuk (mention bertambah) untuk topik keluhan */
+  tone: ChipTone;
+  contoh: string;
+}
+
+export const voiceTopics: VoiceTopic[] = [
+  {
+    topik: "Workload & Overtime",
+    share: 28,
+    delta: "+24%",
+    trend: "up",
+    tone: "red",
+    contoh: "Workload tinggi, waktu istirahat kurang seimbang",
+  },
+  {
+    topik: "Karier & Mobility",
+    share: 22,
+    delta: "-8%",
+    trend: "down",
+    tone: "amber",
+    contoh: "Jenjang karier terasa lambat di beberapa unit",
+  },
+  {
+    topik: "Reward & Recognition",
+    share: 18,
+    delta: "+12%",
+    trend: "up",
+    tone: "amber",
+    contoh: "Apresiasi belum konsisten antar unit",
+  },
+  {
+    topik: "Leadership",
+    share: 14,
+    delta: "-3%",
+    trend: "down",
+    tone: "blue",
+    contoh: "Atasan mendukung, komunikasi bisa lebih terbuka",
+  },
+  {
+    topik: "Tools & Teknologi",
+    share: 10,
+    delta: "+5%",
+    trend: "up",
+    tone: "purple",
+    contoh: "Proses administrasi internal masih panjang",
+  },
+  {
+    topik: "Lainnya",
+    share: 8,
+    delta: "0%",
+    trend: "down",
+    tone: "slate",
+    contoh: "Fasilitas, lingkungan kerja, lain-lain",
+  },
+];
+
+/* ── diagnosis kapasitas workforce (cross-module) ────────── */
+
+export interface CapacityRow {
+  unit: string;
+  engagement: number;
+  adequacy: string;
+  overtime: string;
+  absen: string;
+  tone: ChipTone;
+}
+
+export const capacityDiagnosis: CapacityRow[] = [
+  { unit: "Regional 3", engagement: 74.1, adequacy: "82%", overtime: "+18%", absen: "6,2%", tone: "red" },
+  { unit: "Regional 2", engagement: 75.3, adequacy: "85%", overtime: "+12%", absen: "5,4%", tone: "amber" },
+  { unit: "PTPN IV (baseline)", engagement: 88.3, adequacy: "97%", overtime: "+4%", absen: "2,8%", tone: "green" },
+];
+
+export const capacityConclusion =
+  "Low engagement di Regional 2–3 berasosiasi dengan workforce adequacy rendah, overtime tinggi, dan absenteeism di atas rata-rata — indikasi kuat tekanan kapasitas workforce, bukan sekadar isu motivasi.";
+
+/* ── engagement action engine ────────────────────────────── */
+
+export interface ActionCard {
+  issue: string;
+  skor: string;
+  severity: "red" | "amber";
+  evidence: string;
+  affected: string;
+  rootCause: string;
+  action: string;
+  owner: string;
+  target: string;
+  status: "In Progress" | "Planned" | "Selesai";
+  statusTone: ChipTone;
+}
+
+export const actionEngine: ActionCard[] = [
+  {
+    issue: "Work-life Balance",
+    skor: "68",
+    severity: "red",
+    evidence: "28% komentar negatif = workload/overtime; korelasi overtime +18%, absen 6,2% (Regional 3)",
+    affected: "±8,4% workforce",
+    rootCause: "Tekanan kapasitas workforce",
+    action: "Workforce rebalancing + review beban kerja manajer",
+    owner: "HC + Operations",
+    target: "74 dalam 6 bulan",
+    status: "In Progress",
+    statusTone: "amber",
+  },
+  {
+    issue: "Pengembangan Karier",
+    skor: "70",
+    severity: "amber",
+    evidence: "Topik karier 22% dari mention; internal mobility rendah pada job family kritis",
+    affected: "Job family kritis, tenure 5–10 th",
+    rootCause: "Jalur karier & mobility belum memadai",
+    action: "Career pathway job family kritis + program internal mobility",
+    owner: "HC Talent",
+    target: "76 pada Q4 2026",
+    status: "Planned",
+    statusTone: "blue",
+  },
+  {
+    issue: "Manager Bottom-Quartile",
+    skor: "42 tim",
+    severity: "amber",
+    evidence: "42 tim low engagement + manager effectiveness <70; gap top vs bottom 10% = 27 pts",
+    affected: "68 manajer, ±4.800 karyawan",
+    rootCause: "Kapabilitas people management belum merata",
+    action: "Program coaching manajer bottom-quartile",
+    owner: "HC L&D",
+    target: "+6 pts team engagement",
+    status: "In Progress",
+    statusTone: "amber",
+  },
+];
+
+export const actionExpectedImpact = "+3–5 pts engagement pada populasi prioritas dalam 2 kuartal";
+
+/* ── metodologi & data governance ────────────────────────── */
+
+export const engagementMetodologi = {
+  index:
+    "Engagement Index 82,4/100 = rata-rata tertimbang 6 dimensi survey (Likert 1–5, dinormalisasi). Highly Engaged 34,6% = proporsi klasifikasi model internal (bukan klasifikasi Gallup).",
+  distribusi: [
+    { label: "Engaged", pct: 34.6, color: PALETTE.green },
+    { label: "Moderately Engaged", pct: 49.8, color: PALETTE.amber },
+    { label: "Disengaged", pct: 15.6, color: PALETTE.red },
+  ],
+  survey: "Survey Q2 2026",
+  responden: "n = 78,3% populasi",
+  catatan: "Linkage outcome = asosiasi, bukan kausalitas",
+} as const;

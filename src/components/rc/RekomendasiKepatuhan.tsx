@@ -33,7 +33,9 @@ export function RekomendasiKepatuhan() {
       style={{ "--d": "240ms" } as React.CSSProperties}
     >
       <SectionHead title="Rekomendasi Tindakan Kepatuhan" />
-      <p className="mt-[3px] text-[9px] text-ink-500">Tindakan yang Direkomendasikan</p>
+      <p className="mt-[3px] text-[9px] text-ink-500">
+        Tindakan + Ekspektasi Penurunan Risiko (Risk Before → After)
+      </p>
 
       <ul className="scroll-thin mt-2 flex min-h-0 flex-1 flex-col justify-between gap-1.5 overflow-y-auto">
         {complianceActions.map((a) => {
@@ -53,10 +55,28 @@ export function RekomendasiKepatuhan() {
                   {a.title}
                 </span>
                 <span className="block truncate text-[8.5px] text-ink-500">{a.desc}</span>
+                <span className="mt-[2px] flex items-center gap-1.5">
+                  <span className="h-[4px] w-[52px] overflow-hidden rounded-full bg-[#eef2f6]">
+                    <span
+                      className="block h-full rounded-full bg-ptpn-green"
+                      style={{ width: `${a.progress}%` }}
+                    />
+                  </span>
+                  <span className="text-[7.5px] font-bold text-ink-500">
+                    {a.progress}% · {a.quarter}
+                  </span>
+                </span>
               </span>
-              <span className="flex shrink-0 items-center gap-2">
+              <span className="flex shrink-0 flex-col items-end gap-1">
                 <StatusBadge status={a.status} />
-                <span className="text-[8.5px] font-semibold text-ink-500">{a.quarter}</span>
+                <span
+                  className="whitespace-nowrap text-[8.5px] font-extrabold"
+                  title={`Skor risiko ${a.riskBefore} diekspektasikan turun ke ${a.riskAfter} setelah tindakan selesai`}
+                >
+                  <span className="text-[#ef4444]">{a.riskBefore}</span>
+                  <span className="mx-[3px] text-ink-400">→</span>
+                  <span className="text-ptpn-green">{a.riskAfter}</span>
+                </span>
               </span>
             </li>
           );

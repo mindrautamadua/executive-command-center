@@ -1,17 +1,24 @@
-import { ShieldCheck } from "lucide-react";
+import { Info } from "lucide-react";
 import { SdmSidebar } from "@/components/sdm/SdmSidebar";
 import { IrHeader } from "@/components/ir/IrHeader";
 import { IrKpiStrip } from "@/components/ir/IrKpiStrip";
+import { IrDisruptionBanner } from "@/components/ir/IrDisruptionBanner";
 import { CaseCategoryBreakdown } from "@/components/ir/CaseCategoryBreakdown";
 import { IrCaseTrend } from "@/components/ir/IrCaseTrend";
-import { StrikePotential } from "@/components/ir/StrikePotential";
+import { IrEarlyWarning } from "@/components/ir/IrEarlyWarning";
+import { CaseSeverity } from "@/components/ir/CaseSeverity";
+import { CaseAging } from "@/components/ir/CaseAging";
+import { RepeatRootCause } from "@/components/ir/RepeatRootCause";
 import { CaseResolution } from "@/components/ir/CaseResolution";
 import { IrCompliance } from "@/components/ir/IrCompliance";
-import { UnionComposition } from "@/components/ir/UnionComposition";
+import { UnionRelationsHealth } from "@/components/ir/UnionRelationsHealth";
 import { RegionIrIndex } from "@/components/ir/RegionIrIndex";
 import { TopIrIssues } from "@/components/ir/TopIrIssues";
-import { IrRecommendations } from "@/components/ir/IrRecommendations";
-import { irFootnote } from "@/lib/ir-data";
+import { IrAiIntelligence } from "@/components/ir/IrAiIntelligence";
+import { IrBusinessImpact } from "@/components/ir/IrBusinessImpact";
+import { IrCostLegal } from "@/components/ir/IrCostLegal";
+import { CrossModuleSignals } from "@/components/ir/CrossModuleSignals";
+import { irMethodology } from "@/lib/ir-intel-data";
 
 export const metadata = { title: "Industrial Relations — PTPN Group" };
 
@@ -26,27 +33,48 @@ export default function IndustrialRelationsPage() {
         <div className="flex flex-col gap-3 px-5 pb-5">
           <IrKpiStrip />
 
-          <div className="grid h-[300px] grid-cols-[minmax(0,33fr)_minmax(0,35fr)_minmax(0,32fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <IrDisruptionBanner />
+
+          <div className="grid h-[300px] grid-cols-[minmax(0,32fr)_minmax(0,34fr)_minmax(0,34fr)] grid-rows-[minmax(0,1fr)] gap-3">
             <CaseCategoryBreakdown />
             <IrCaseTrend />
-            <StrikePotential />
+            <IrEarlyWarning />
           </div>
 
-          <div className="grid h-[280px] grid-cols-[minmax(0,33fr)_minmax(0,35fr)_minmax(0,32fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid h-[310px] grid-cols-[minmax(0,38fr)_minmax(0,27fr)_minmax(0,35fr)] grid-rows-[minmax(0,1fr)] gap-3">
+            <CaseSeverity />
+            <CaseAging />
+            <RepeatRootCause />
+          </div>
+
+          <div className="grid h-[300px] grid-cols-[minmax(0,31fr)_minmax(0,35fr)_minmax(0,34fr)] grid-rows-[minmax(0,1fr)] gap-3">
             <CaseResolution />
             <IrCompliance />
-            <UnionComposition />
+            <UnionRelationsHealth />
           </div>
 
-          <div className="grid h-[330px] grid-cols-[minmax(0,36fr)_minmax(0,31fr)_minmax(0,33fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid h-[330px] grid-cols-[minmax(0,37fr)_minmax(0,28fr)_minmax(0,35fr)] grid-rows-[minmax(0,1fr)] gap-3">
             <RegionIrIndex />
             <TopIrIssues />
-            <IrRecommendations />
+            <IrAiIntelligence />
           </div>
 
-          <div className="anim-rise flex items-center gap-2 rounded-xl border border-[#cde8da] bg-[#e9f6ef] px-3.5 py-2.5">
-            <ShieldCheck size={13} className="shrink-0 text-ptpn-green" />
-            <span className="text-[9px] text-ink-700">{irFootnote}</span>
+          <div className="grid h-[300px] grid-cols-[minmax(0,37fr)_minmax(0,29fr)_minmax(0,34fr)] grid-rows-[minmax(0,1fr)] gap-3">
+            <IrBusinessImpact />
+            <IrCostLegal />
+            <CrossModuleSignals />
+          </div>
+
+          <div className="anim-rise grid grid-cols-3 gap-3 rounded-xl border border-[#d8e6f7] bg-[#eef5fd] px-3.5 py-2.5">
+            {irMethodology.map((m) => (
+              <div key={m.title} className="flex items-start gap-2">
+                <Info size={13} className="mt-[1px] shrink-0 text-[#2f6fe4]" />
+                <span className="text-[9px] leading-[1.45] text-ink-700">
+                  <span className="font-bold text-ink-900">{m.title}: </span>
+                  {m.text}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
       </main>

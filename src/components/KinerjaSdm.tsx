@@ -12,7 +12,7 @@ export function KinerjaSdm() {
       <div className="flex items-center justify-between gap-1">
         <h3 className="card-title-navy whitespace-nowrap">KINERJA SDM</h3>
         <button className="select-chip whitespace-nowrap">
-          YTD 2025 <ChevronDown size={11} />
+          YTD 2026 <ChevronDown size={11} />
         </button>
       </div>
 

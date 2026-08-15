@@ -88,6 +88,7 @@ export function SuksesiKpiStrip() {
                 : undefined
             }
             compare={k.extra ? `${k.extra} • ${k.compare}` : k.compare}
+            info={k.info}
             spark={k.icon === "bench" ? undefined : { data: k.series, color: k.line }}
             chart={k.icon === "bench" ? <BenchGauge /> : undefined}
             delay={60 * i}

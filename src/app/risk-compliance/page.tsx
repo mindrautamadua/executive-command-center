@@ -9,6 +9,11 @@ import { ComplianceTrend } from "@/components/rc/ComplianceTrend";
 import { ComplianceHeatmapOrg } from "@/components/rc/ComplianceHeatmapOrg";
 import { CaseBreakdown } from "@/components/rc/CaseBreakdown";
 import { RekomendasiKepatuhan } from "@/components/rc/RekomendasiKepatuhan";
+import { ControlEffectiveness } from "@/components/rc/ControlEffectiveness";
+import { AuditAging } from "@/components/rc/AuditAging";
+import { SpeakUpIntelligence } from "@/components/rc/SpeakUpIntelligence";
+import { RegulatoryChangeRadar } from "@/components/rc/RegulatoryChangeRadar";
+import { RcBodDecisionCenter } from "@/components/rc/RcBodDecisionCenter";
 import { rcFootnote } from "@/lib/rc-data";
 
 export const metadata = { title: "Risk & Compliance — PTPN Group" };
@@ -35,6 +40,17 @@ export default function RiskCompliancePage() {
             <ComplianceHeatmapOrg />
             <CaseBreakdown />
             <RekomendasiKepatuhan />
+          </div>
+
+          <div className="grid h-[258px] grid-cols-[minmax(0,38fr)_minmax(0,28fr)_minmax(0,34fr)] grid-rows-[minmax(0,1fr)] gap-3">
+            <ControlEffectiveness />
+            <AuditAging />
+            <SpeakUpIntelligence />
+          </div>
+
+          <div className="grid h-[252px] grid-cols-[minmax(0,42fr)_minmax(0,58fr)] grid-rows-[minmax(0,1fr)] gap-3">
+            <RegulatoryChangeRadar />
+            <RcBodDecisionCenter />
           </div>
 
           <div className="anim-rise flex items-center gap-2 rounded-xl border border-[#d8e6f7] bg-[#eef5fd] px-3.5 py-2.5">

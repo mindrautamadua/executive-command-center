@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { ArrowRight } from "lucide-react";
-import { governanceItems, governanceScore } from "@/lib/data-analytics";
+import { governanceItems, governanceMaturity, governanceScore } from "@/lib/data-analytics";
 import { SEMANTIC } from "@/lib/chart-palette";
 import { CountUp } from "../ui/CountUp";
 
@@ -65,8 +65,14 @@ export function GovernanceStatus() {
       <h3 className="card-title-navy">Data Governance Status</h3>
 
       <div className="flex min-h-0 flex-1 items-center gap-3">
-        <div className="flex shrink-0 items-center justify-center pl-2">
+        <div className="flex shrink-0 flex-col items-center justify-center pl-2">
           <HalfGauge pct={governanceScore.pct} />
+          <span
+            className="tone-blue mt-1 rounded-md px-2 py-[2px] text-[9px] font-bold"
+            title={`Maturitas governance: ${governanceMaturity.level}`}
+          >
+            {governanceMaturity.level} — {governanceMaturity.label}
+          </span>
         </div>
 
         <div className="flex flex-1 flex-col gap-[8px]">

@@ -28,23 +28,36 @@ const ICONS: Record<PeopleRisk["icon"], { Icon: typeof Crown; cls: string }> = {
   industrial: { Icon: Handshake, cls: "bg-ptpn-greenLight text-ptpn-green" },
 };
 
-function TrendArrow({ risk }: { risk: PeopleRisk }) {
+/** Risk velocity: arah + besaran perubahan skor vs bulan lalu. */
+function Velocity({ risk }: { risk: PeopleRisk }) {
   if (risk.trend === "flat") {
-    return <ArrowRight size={11} className="text-ink-400" />;
+    return (
+      <span className="flex items-center justify-center gap-[3px] text-ink-400">
+        <ArrowRight size={10} />
+        <span className="text-[8.5px] font-bold">0</span>
+      </span>
+    );
   }
   const good = risk.trendTone === "good";
+  const label = `${risk.deltaPts > 0 ? "+" : ""}${risk.deltaPts}`;
   return (
-    <svg
-      width={11}
-      height={11}
-      viewBox="0 0 24 24"
-      className={`${good ? "text-[#16a34a]" : "text-[#ef4444]"} ${
-        risk.trend === "down" ? "rotate-180" : ""
+    <span
+      className={`flex items-center justify-center gap-[3px] ${
+        good ? "text-[#16a34a]" : "text-[#ef4444]"
       }`}
-      fill="currentColor"
+      title={good ? "Improving (skor turun MoM)" : "Accelerating (skor naik MoM)"}
     >
-      <path d="M12 5 4 15h16Z" />
-    </svg>
+      <svg
+        width={10}
+        height={10}
+        viewBox="0 0 24 24"
+        className={risk.trend === "down" ? "rotate-180" : ""}
+        fill="currentColor"
+      >
+        <path d="M12 5 4 15h16Z" />
+      </svg>
+      <span className="text-[8.5px] font-bold">{label}</span>
+    </span>
   );
 }
 
@@ -56,11 +69,11 @@ export function RiskSummary() {
     >
       <SectionHead title="Ringkasan Risiko" />
 
-      <div className="mt-2 grid grid-cols-[minmax(0,1fr)_44px_34px_36px_66px] items-center gap-x-1 border-b border-[#eef2f6] pb-1.5 text-[8px] font-semibold uppercase tracking-[0.04em] text-ink-400">
+      <div className="mt-2 grid grid-cols-[minmax(0,1fr)_44px_34px_40px_62px] items-center gap-x-1 border-b border-[#eef2f6] pb-1.5 text-[8px] font-semibold uppercase tracking-[0.04em] text-ink-400">
         <span>Risiko</span>
         <span className="text-center">Level</span>
         <span className="text-center">Skor</span>
-        <span className="text-center">Trend</span>
+        <span className="text-center">Δ MoM</span>
         <span className="text-right">Karyawan Terdampak</span>
       </div>
 
@@ -70,7 +83,7 @@ export function RiskSummary() {
           return (
             <li
               key={r.name}
-              className="grid shrink-0 grid-cols-[minmax(0,1fr)_44px_34px_36px_66px] items-center gap-x-1"
+              className="grid shrink-0 grid-cols-[minmax(0,1fr)_44px_34px_40px_62px] items-center gap-x-1"
             >
               <span className="flex min-w-0 items-center gap-1.5">
                 <span
@@ -86,9 +99,7 @@ export function RiskSummary() {
               <span className="text-center text-[9.5px] font-extrabold text-ink-900">
                 {r.score}
               </span>
-              <span className="flex justify-center">
-                <TrendArrow risk={r} />
-              </span>
+              <Velocity risk={r} />
               <span className="text-right text-[9px] font-semibold text-ink-700">
                 {r.impacted}
               </span>

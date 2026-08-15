@@ -11,7 +11,12 @@ export function RingkasanKehadiran() {
   return (
     <div className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3">
       <h3 className="card-title-navy">Ringkasan Kehadiran</h3>
-      <p className="mt-[3px] text-[9.5px] text-ink-500">Berdasarkan Status Kehadiran</p>
+      <p
+        className="mt-[3px] cursor-help text-[9.5px] text-ink-500"
+        title="Presence Rate = karyawan hadir ÷ total populasi (snapshot orang). Berbeda dari Attendance Rate 96,2% yang dihitung dari hari kerja hadir ÷ hari kerja terjadwal."
+      >
+        Berdasarkan Status Karyawan · Presence Rate 92,1% ⓘ
+      </p>
 
       <div className="flex min-h-0 flex-1 items-center">
         <DonutChart

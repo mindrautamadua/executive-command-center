@@ -22,7 +22,7 @@ export function TrenJamPelatihan() {
       style={{ "--d": "160ms" } as React.CSSProperties}
     >
       <div className="flex items-start justify-between gap-2">
-        <h3 className="card-title-navy">Tren Jam Pelatihan</h3>
+        <h3 className="card-title-navy">Tren Jam Pelatihan Bulanan</h3>
         <button className="select-chip whitespace-nowrap px-2.5 py-[5px] text-[9.5px]">
           6 Bulan Terakhir <ChevronDown size={11} />
         </button>

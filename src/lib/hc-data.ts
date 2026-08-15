@@ -49,6 +49,8 @@ export interface HcKpi {
   compare: string;
   icon: "users" | "trend" | "heart" | "cycle" | "target" | "wallet";
   tone: "blue" | "green" | "pink" | "red" | "teal" | "amber";
+  /** Nama kanonik metrik di Data Dictionary; dipakai tooltip definisi pada kartu KPI. */
+  metric: string;
 }
 
 export const hcKpi: HcKpi[] = [
@@ -62,6 +64,7 @@ export const hcKpi: HcKpi[] = [
     compare: "vs Des 2025",
     icon: "users",
     tone: "blue",
+    metric: "Headcount",
   },
   {
     label: "People Productivity",
@@ -73,6 +76,7 @@ export const hcKpi: HcKpi[] = [
     compare: "vs Mei 2025",
     icon: "trend",
     tone: "green",
+    metric: "Revenue per Employee",
   },
   {
     label: "Engagement Index",
@@ -84,6 +88,7 @@ export const hcKpi: HcKpi[] = [
     compare: "vs Mei 2025",
     icon: "heart",
     tone: "pink",
+    metric: "Engagement Score",
   },
   {
     label: "Turnover Rate",
@@ -95,6 +100,7 @@ export const hcKpi: HcKpi[] = [
     compare: "vs Mei 2025",
     icon: "cycle",
     tone: "red",
+    metric: "Turnover Rate",
   },
   {
     label: "Talent Readiness",
@@ -106,6 +112,7 @@ export const hcKpi: HcKpi[] = [
     compare: "vs Mei 2025",
     icon: "target",
     tone: "teal",
+    metric: "Talent Readiness",
   },
   {
     label: "HC Cost to Revenue",
@@ -117,6 +124,7 @@ export const hcKpi: HcKpi[] = [
     compare: "vs Mei 2025",
     icon: "wallet",
     tone: "amber",
+    metric: "HC Cost to Revenue",
   },
 ];
 

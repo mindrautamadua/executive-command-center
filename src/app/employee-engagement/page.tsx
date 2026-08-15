@@ -10,6 +10,14 @@ import { FaktorEngagement } from "@/components/engagement/FaktorEngagement";
 import { KomentarSentimen } from "@/components/engagement/KomentarSentimen";
 import { PartisipasiSurvey } from "@/components/engagement/PartisipasiSurvey";
 import { InsightEngagement } from "@/components/engagement/InsightEngagement";
+import { EngagementDriverModel } from "@/components/engagement/EngagementDriverModel";
+import { ManagerIntelligence } from "@/components/engagement/ManagerIntelligence";
+import { EngagementOutcomeLink } from "@/components/engagement/EngagementOutcomeLink";
+import { EngagementRiskMatrix } from "@/components/engagement/EngagementRiskMatrix";
+import { VoiceOfEmployee } from "@/components/engagement/VoiceOfEmployee";
+import { CapacityDiagnosis } from "@/components/engagement/CapacityDiagnosis";
+import { EngagementActionEngine } from "@/components/engagement/EngagementActionEngine";
+import { EngagementFootnote } from "@/components/engagement/EngagementFootnote";
 
 export const metadata = { title: "Employee Engagement — PTPN Group" };
 
@@ -41,11 +49,32 @@ export default function EmployeeEngagementPage() {
             <FaktorEngagement />
           </div>
 
+          <div className="grid h-[252px] grid-cols-[minmax(0,46fr)_minmax(0,54fr)] grid-rows-[minmax(0,1fr)] gap-3">
+            <EngagementDriverModel />
+            <ManagerIntelligence />
+          </div>
+
+          <div className="grid h-[248px] grid-cols-[minmax(0,52fr)_minmax(0,48fr)] grid-rows-[minmax(0,1fr)] gap-3">
+            <EngagementOutcomeLink />
+            <EngagementRiskMatrix />
+          </div>
+
+          <div className="grid h-[240px] grid-cols-[minmax(0,50fr)_minmax(0,50fr)] grid-rows-[minmax(0,1fr)] gap-3">
+            <VoiceOfEmployee />
+            <CapacityDiagnosis />
+          </div>
+
           <div className="grid h-[228px] grid-cols-[minmax(0,440fr)_minmax(0,348fr)_minmax(0,495fr)] grid-rows-[minmax(0,1fr)] gap-3">
             <KomentarSentimen />
             <PartisipasiSurvey />
             <InsightEngagement />
           </div>
+
+          <div className="grid h-[236px] grid-rows-[minmax(0,1fr)]">
+            <EngagementActionEngine />
+          </div>
+
+          <EngagementFootnote />
         </div>
       </main>
     </div>

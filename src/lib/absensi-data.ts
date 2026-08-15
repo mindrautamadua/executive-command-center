@@ -20,27 +20,57 @@ export interface AbsensiKpi {
   delta: string;
   /** Arah panah delta. */
   trend: Trend;
-  /** Warna delta: "good" hijau, "bad" merah. Turunnya angka izin/sakit itu kabar baik. */
+  /** Warna delta: "good" hijau, "bad" merah. Turunnya absenteeism itu kabar baik. */
   deltaTone: "good" | "bad";
   compare: string;
-  icon: "kehadiran" | "ontime" | "jam" | "lembur" | "izin" | "sakit";
+  icon: "health" | "kehadiran" | "absen" | "ontime" | "lembur" | "jam";
   tone: KpiChipTone;
   line: string;
   series: number[];
+  /** Definisi/metodologi metrik — tampil sebagai tooltip ⓘ (data dictionary). */
+  info: string;
 }
 
 export const absensiKpi: AbsensiKpi[] = [
+  {
+    label: "Attendance Health",
+    value: "84",
+    unit: "/100",
+    delta: "2 pts",
+    trend: "up",
+    deltaTone: "good",
+    compare: "Komposit 7 sinyal · Status: Waspada",
+    icon: "health",
+    tone: "green",
+    line: PALETTE.green,
+    series: [38, 40, 39, 41, 40, 42, 41, 43, 42, 44, 45, 46, 47, 48, 50],
+    info: "Indeks komposit: kehadiran, absenteeism, ketepatan waktu, lembur, sakit, alpha, kepatuhan jadwal. Skala: ≥85 Sehat · 70–84 Waspada · <70 Kritis.",
+  },
   {
     label: "Tingkat Kehadiran",
     value: "96,2%",
     delta: "2,8%",
     trend: "up",
     deltaTone: "good",
-    compare: "vs Apr 2025: 93,4%",
+    compare: "vs Apr 2026: 93,4%",
     icon: "kehadiran",
     tone: "blue",
     line: PALETTE.blue,
     series: [34, 32, 36, 33, 37, 34, 38, 35, 39, 36, 41, 38, 44, 47, 52],
+    info: "Attendance Rate: hari kerja hadir ÷ hari kerja terjadwal = 96,2%. Berbeda dari Presence Rate: 17.162 karyawan hadir ÷ 18.642 populasi = 92,1% (snapshot orang, bukan hari kerja).",
+  },
+  {
+    label: "Absenteeism (Unplanned)",
+    value: "4,8%",
+    delta: "0,3%",
+    trend: "down",
+    deltaTone: "good",
+    compare: "Alpha 3,6% · Sakit 1,2% · 902 karyawan",
+    icon: "absen",
+    tone: "red",
+    line: PALETTE.red,
+    series: [46, 48, 45, 47, 44, 46, 43, 45, 42, 44, 41, 43, 40, 41, 39],
+    info: "Absen tak terencana (alpha + sakit) ÷ hari kerja terjadwal. Izin terencana (3,1%) tidak termasuk — dihitung sebagai planned leave. Kehilangan kapasitas ±895 FTE.",
   },
   {
     label: "Tepat Waktu (On Time)",
@@ -48,23 +78,12 @@ export const absensiKpi: AbsensiKpi[] = [
     delta: "3,6%",
     trend: "up",
     deltaTone: "good",
-    compare: "vs Apr 2025: 83,9%",
+    compare: "vs Apr 2026: 83,9%",
     icon: "ontime",
     tone: "green",
     line: PALETTE.green,
     series: [28, 31, 29, 33, 31, 35, 32, 37, 34, 39, 36, 42, 45, 49, 54],
-  },
-  {
-    label: "Rata-rata Jam Kerja",
-    value: "8j 12m",
-    delta: "0j 18m",
-    trend: "up",
-    deltaTone: "good",
-    compare: "vs Apr 2025: 7j 54m",
-    icon: "jam",
-    tone: "purple",
-    line: PALETTE.purple,
-    series: [36, 33, 38, 35, 40, 36, 41, 37, 42, 38, 43, 40, 45, 42, 47],
+    info: "Check-in ≤ jadwal shift ÷ total check-in. Terlambat 1.234 karyawan: 268 di antaranya >30 menit, 72 >60 menit; 1.124 tergolong terlambat kronis (≥8×/kuartal).",
   },
   {
     label: "Lembur",
@@ -72,35 +91,25 @@ export const absensiKpi: AbsensiKpi[] = [
     delta: "1,2%",
     trend: "down",
     deltaTone: "bad",
-    compare: "vs Apr 2025: 13,6%",
+    compare: "Target <8% · Gap +4,4 pts",
     icon: "lembur",
     tone: "amber",
     line: PALETTE.amber,
     series: [44, 41, 45, 42, 46, 43, 45, 42, 44, 41, 43, 40, 42, 39, 41],
+    info: "Jam lembur ÷ jam kerja reguler. vs Apr 2026: 13,6%. 2.314 karyawan lembur >40 jam/bulan; top 10% karyawan menyerap 41% total jam lembur (Rp 21,4 M/bulan).",
   },
   {
-    label: "Izin",
-    value: "3,1%",
-    delta: "0,5%",
-    trend: "down",
+    label: "Rata-rata Jam Kerja",
+    value: "8j 12m",
+    delta: "0j 18m",
+    trend: "up",
     deltaTone: "good",
-    compare: "vs Apr 2025: 3,6%",
-    icon: "izin",
-    tone: "teal",
-    line: PALETTE.teal,
-    series: [42, 45, 41, 44, 40, 43, 39, 42, 38, 41, 37, 40, 36, 39, 35],
-  },
-  {
-    label: "Sakit",
-    value: "1,2%",
-    delta: "0,3%",
-    trend: "down",
-    deltaTone: "good",
-    compare: "vs Apr 2025: 1,5%",
-    icon: "sakit",
-    tone: "pink",
-    line: PALETTE.pink,
-    series: [38, 42, 39, 44, 40, 45, 41, 46, 42, 47, 43, 48, 44, 49, 45],
+    compare: "vs Apr 2026: 7j 54m",
+    icon: "jam",
+    tone: "purple",
+    line: PALETTE.purple,
+    series: [36, 33, 38, 35, 40, 36, 41, 37, 42, 38, 43, 40, 45, 42, 47],
+    info: "Rata-rata jam kerja efektif per karyawan per hari kerja, termasuk lembur, tidak termasuk istirahat.",
   },
 ];
 
@@ -143,12 +152,12 @@ export const subStatusKehadiran: StatusSlice[] = [
 /* ── Tren tingkat kehadiran ──────────────────────────────── */
 
 export const trenKehadiran = [
-  { name: "Des 2024", value: 92.1 },
-  { name: "Jan 2025", value: 92.8 },
-  { name: "Feb 2025", value: 93.4 },
-  { name: "Mar 2025", value: 94.1 },
-  { name: "Apr 2025", value: 93.4 },
-  { name: "Mei 2025", value: 96.2 },
+  { name: "Des 2025", value: 92.1 },
+  { name: "Jan 2026", value: 92.8 },
+  { name: "Feb 2026", value: 93.4 },
+  { name: "Mar 2026", value: 94.1 },
+  { name: "Apr 2026", value: 93.4 },
+  { name: "Mei 2026", value: 96.2 },
 ];
 
 /* ── Kehadiran per unit organisasi ───────────────────────── */
@@ -248,9 +257,15 @@ export const statusHariIni: StatusHariIniRow[] = [
   { nama: "WFH", jumlah: "368", pct: "(2,0%)", color: PALETTE.purple },
 ];
 
-export const stempelRealtime = "13 Mei 2025";
+/**
+ * Status "hari ini" adalah stream live — terpisah dari periode pelaporan
+ * (Mei 2026). Mengikuti lastRefresh pada dataTrust global.
+ */
+export const stempelRealtime = "15 Agu 2026";
 
 /* ── Rekap kehadiran karyawan ────────────────────────────── */
+
+export type RisikoLevel = "Rendah" | "Waspada" | "Tinggi";
 
 export interface RekapRow {
   unit: string;
@@ -261,6 +276,11 @@ export interface RekapRow {
   izin: string;
   sakit: string;
   alpha: string;
+  /**
+   * Risiko komposit: kehadiran × alpha × lembur × on-time.
+   * Kehadiran tinggi + lembur tinggi tetap bisa berisiko (indikasi understaffed).
+   */
+  risiko: RisikoLevel;
 }
 
 export const rekapKehadiran: RekapRow[] = [
@@ -273,6 +293,7 @@ export const rekapKehadiran: RekapRow[] = [
     izin: "2,6%",
     sakit: "0,9%",
     alpha: "3,2%",
+    risiko: "Waspada",
   },
   {
     unit: "PTPN III (Persero)",
@@ -283,6 +304,7 @@ export const rekapKehadiran: RekapRow[] = [
     izin: "3,0%",
     sakit: "1,1%",
     alpha: "3,3%",
+    risiko: "Rendah",
   },
   {
     unit: "PTPN I",
@@ -293,6 +315,7 @@ export const rekapKehadiran: RekapRow[] = [
     izin: "2,9%",
     sakit: "1,2%",
     alpha: "3,6%",
+    risiko: "Rendah",
   },
   {
     unit: "PalmCo",
@@ -303,6 +326,7 @@ export const rekapKehadiran: RekapRow[] = [
     izin: "3,2%",
     sakit: "1,3%",
     alpha: "3,7%",
+    risiko: "Rendah",
   },
   {
     unit: "PTPN V",
@@ -313,6 +337,40 @@ export const rekapKehadiran: RekapRow[] = [
     izin: "3,1%",
     sakit: "1,0%",
     alpha: "4,0%",
+    risiko: "Waspada",
+  },
+  {
+    unit: "PTPN Regional 1",
+    karyawan: "1.428",
+    kehadiran: "94,1%",
+    tepatWaktu: "84,2%",
+    lembur: "14,8%",
+    izin: "3,4%",
+    sakit: "1,3%",
+    alpha: "4,2%",
+    risiko: "Waspada",
+  },
+  {
+    unit: "PTPN Regional 2",
+    karyawan: "1.245",
+    kehadiran: "93,7%",
+    tepatWaktu: "83,6%",
+    lembur: "15,4%",
+    izin: "3,5%",
+    sakit: "1,4%",
+    alpha: "4,5%",
+    risiko: "Waspada",
+  },
+  {
+    unit: "PTPN Regional 3",
+    karyawan: "1.162",
+    kehadiran: "92,8%",
+    tepatWaktu: "82,1%",
+    lembur: "16,2%",
+    izin: "3,7%",
+    sakit: "1,5%",
+    alpha: "4,8%",
+    risiko: "Tinggi",
   },
 ];
 
@@ -323,21 +381,25 @@ export interface AbsensiInsight {
   tone: "success" | "info" | "warning" | "neutral";
 }
 
+/**
+ * Format diagnosis, bukan reporting: sinyal → kemungkinan akar masalah →
+ * rekomendasi → estimasi dampak. Hindari lompat ke kesimpulan disiplin.
+ */
 export const absensiInsight: AbsensiInsight[] = [
   {
-    isi: "Tingkat kehadiran meningkat 2,8% dibandingkan bulan lalu. Pertahankan momentum positif ini!",
+    isi: "Kehadiran naik 2,8 pts MoM ke 96,2% — tren positif 5 bulan beruntun. Attendance Health 84/100 (Waspada, membaik dari 82).",
     tone: "success",
   },
   {
-    isi: "Terlambat masuk tertinggi terjadi di hari Senin. Saran: Pengaturan jadwal atau fleksibilitas awal minggu.",
-    tone: "info",
-  },
-  {
-    isi: "Unit PTPN Regional 3 memiliki tingkat alpha tertinggi (4,8%). Saran: Evaluasi disiplin dan komunikasi internal.",
+    isi: "Regional 3: alpha 4,8% + lembur 16,2% + gap kapasitas −218 FTE. Pola konsisten dengan understaffing struktural, bukan semata indisipliner. Review kecukupan staffing & alokasi shift sebelum intervensi disiplin. Estimasi dampak: alpha −1,5 pts, lembur −3 pts.",
     tone: "warning",
   },
   {
-    isi: "Penggunaan WFH meningkat 0,6% dibanding bulan lalu. Pastikan produktivitas tetap terpantau.",
+    isi: "Top 10% karyawan menyerap 41% jam lembur (Rp 21,4 M/bulan). Rekrut 120 FTE diestimasi lebih hemat ± Rp 3,3 M/bulan — uji di Scenario Simulation.",
+    tone: "info",
+  },
+  {
+    isi: "Input manual masih 4,8% (912 karyawan) — risiko kualitas data absensi. Percepat enrollment face recognition; keterlambatan terkonsentrasi di hari Senin.",
     tone: "neutral",
   },
 ];
@@ -392,14 +454,14 @@ const BULAN = [
  * server dan client identik — aman dari hydration mismatch.
  */
 function buatKalender(): KalenderSel[][] {
-  let s = 20250511;
+  let s = 20260510;
   const acak = () => {
     s = (s * 1103515245 + 12345) % 2147483648;
     return s / 2147483648;
   };
   // Basis per hari kerja mengikuti polaHarian (Senin..Minggu).
   const basis = [96.1, 96.3, 96.4, 96.0, 95.6, 78.2, 42.7];
-  const mulai = new Date(2025, 1, 10); // Senin 10 Feb 2025 → 13 minggu s.d. 11 Mei
+  const mulai = new Date(2026, 1, 9); // Senin 9 Feb 2026 → 13 minggu s.d. 10 Mei 2026
   const minggu: KalenderSel[][] = [];
   for (let w = 0; w < 13; w++) {
     const hari: KalenderSel[] = [];
@@ -429,4 +491,67 @@ export const warnaKalender = (pct: number) => {
   if (pct >= 94.5) return SEQ_GREEN[2];
   if (pct >= 93.0) return SEQ_GREEN[1];
   return SEQ_GREEN[0];
+};
+
+/* ── Ekonomi absensi & lembur ────────────────────────────── */
+
+/**
+ * Konversi absensi ke eksposur ekonomi (estimasi Mei 2026):
+ * hari hilang × biaya tenaga kerja rata-rata/hari + lembur pengganti +
+ * kerugian produktivitas. Semua angka bulanan.
+ */
+export const ekonomiAbsensi = {
+  hariHilang: "18.790",
+  biayaAbsensi: "Rp 7,2 M",
+  jamLembur: "312.400",
+  biayaLembur: "Rp 21,4 M",
+  lemburPerPayroll: "6,8%",
+  produktivitasLoss: "Rp 6,2 M",
+  totalEksposur: "Rp 34,8 M",
+  konsentrasi: "Top 10% karyawan = 41% jam lembur",
+  skenario: {
+    current: "Status quo: lembur Rp 21,4 M/bln, fatigue naik",
+    alternatif: "Rekrut 120 FTE: Rp 8,6 M/bln, lembur −35%",
+    verdict: "Rekrutmen lebih ekonomis — hemat ± Rp 3,3 M/bln",
+  },
+};
+
+/* ── Early warning kehadiran ─────────────────────────────── */
+
+export interface EarlyWarningRow {
+  label: string;
+  value: string;
+  pct: string;
+  tone: "amber" | "red";
+}
+
+/** Rolling 12 bulan; sinyal gabungan = absen + telat + lembur simultan. */
+export const earlyWarningAbsensi: EarlyWarningRow[] = [
+  { label: "Absensi kronis (≥10 hari/12 bln)", value: "1.482", pct: "7,9%", tone: "amber" },
+  { label: "Absensi berat (≥15 hari/12 bln)", value: "642", pct: "3,4%", tone: "red" },
+  { label: "Terlambat kronis (≥8×/kuartal)", value: "1.124", pct: "6,0%", tone: "amber" },
+  { label: "Lembur tinggi (>40 jam/bln)", value: "2.314", pct: "12,4%", tone: "amber" },
+  { label: "Sinyal gabungan (absen+telat+lembur)", value: "486", pct: "2,6%", tone: "red" },
+];
+
+export const paretoAbsen = "214 karyawan (1,1%) menyumbang 18% total hari absen";
+
+/* ── Kapasitas workforce efektif ─────────────────────────── */
+
+export const kapasitasWorkforce = {
+  required: "18.470",
+  tersedia: "17.748",
+  gap: "−722",
+  gapPct: "3,9%",
+  spotlight: {
+    unit: "PTPN Regional 3",
+    butuh: "1.280 FTE",
+    efektif: "1.062 FTE",
+    gap: "−218 FTE",
+    lembur: "16,2%",
+    diagnosis:
+      "Lembur 16,2% menutup gap kapasitas — indikasi understaffing, bukan indisipliner.",
+  },
+  asosiasiProduktivitas:
+    "Unit dengan kehadiran <93% menunjukkan produktivitas 17% lebih rendah (asosiasi, bukan hubungan kausal).",
 };

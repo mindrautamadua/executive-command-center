@@ -200,7 +200,7 @@ export const informasiTambahan = {
   ],
 };
 
-export const terakhirDiperbarui = "13 Mei 2025 09:41 WIB";
+export const terakhirDiperbarui = "14 Agu 2026 22:14 WIB";
 
 /* ── Tab: Pekerjaan ──────────────────────────────────────── */
 
@@ -339,7 +339,7 @@ export const perilakuKompetensi = [
 export const feedbackPenilaian = [
   {
     judul: "Penilaian Atasan Langsung",
-    tanggal: "15 Jan 2025",
+    tanggal: "15 Jan 2026",
     isi: "Rizky menunjukkan kinerja yang sangat baik. Target produksi tercapai di atas ekspektasi dan memiliki inisiatif tinggi dalam perbaikan proses panen.",
     nama: "Ahmad Fauzi",
     jabatan: "Afdeling Manager",
@@ -347,7 +347,7 @@ export const feedbackPenilaian = [
   },
   {
     judul: "Penilaian Komite",
-    tanggal: "24 Jan 2025",
+    tanggal: "24 Jan 2026",
     isi: "Komite menilai Rizky konsisten memberikan kontribusi positif dan direkomendasikan untuk pengembangan ke jenjang yang lebih tinggi.",
     nama: "Komite Penilaian Kinerja",
     jabatan: "PTPN IV Regional 1",
@@ -397,13 +397,13 @@ export const kompetensiInti = [
 ];
 
 export const kompetensiTeknisFungsional = [
-  { label: "Budidaya Kelapa Sawit", skor: 4.8, level: "Sangat Kuat" as const, dinilai: "15 Jan 2025" },
-  { label: "Manajemen Kebun", skor: 4.6, level: "Sangat Kuat" as const, dinilai: "15 Jan 2025" },
-  { label: "Panen & Pasca Panen", skor: 4.5, level: "Sangat Kuat" as const, dinilai: "15 Jan 2025" },
-  { label: "Pengendalian Hama & Penyakit", skor: 4.2, level: "Kompeten" as const, dinilai: "15 Jan 2025" },
-  { label: "Keselamatan & Kesehatan Kerja (K3)", skor: 4.7, level: "Sangat Kuat" as const, dinilai: "15 Jan 2025" },
-  { label: "Analisis Data Produksi", skor: 4.0, level: "Kompeten" as const, dinilai: "15 Jan 2025" },
-  { label: "Pengelolaan SDM di Kebun", skor: 4.3, level: "Kompeten" as const, dinilai: "15 Jan 2025" },
+  { label: "Budidaya Kelapa Sawit", skor: 4.8, level: "Sangat Kuat" as const, dinilai: "15 Jan 2026" },
+  { label: "Manajemen Kebun", skor: 4.6, level: "Sangat Kuat" as const, dinilai: "15 Jan 2026" },
+  { label: "Panen & Pasca Panen", skor: 4.5, level: "Sangat Kuat" as const, dinilai: "15 Jan 2026" },
+  { label: "Pengendalian Hama & Penyakit", skor: 4.2, level: "Kompeten" as const, dinilai: "15 Jan 2026" },
+  { label: "Keselamatan & Kesehatan Kerja (K3)", skor: 4.7, level: "Sangat Kuat" as const, dinilai: "15 Jan 2026" },
+  { label: "Analisis Data Produksi", skor: 4.0, level: "Kompeten" as const, dinilai: "15 Jan 2026" },
+  { label: "Pengelolaan SDM di Kebun", skor: 4.3, level: "Kompeten" as const, dinilai: "15 Jan 2026" },
 ];
 
 /* Perbandingan kompetensi terhadap standar jabatan saat ini. */
@@ -443,7 +443,7 @@ export const rencanaPengembanganKompetensi = [
     tujuan: "Mampu menghasilkan ide inovatif untuk peningkatan efisiensi proses",
     metode: "Pelatihan + Project Inovasi",
     targetLevel: 4,
-    targetWaktu: "Q4 2025",
+    targetWaktu: "Q4 2026",
     status: "On Progress" as const,
   },
   {
@@ -451,7 +451,7 @@ export const rencanaPengembanganKompetensi = [
     tujuan: "Meningkatkan kemampuan analisis data produksi dan biaya",
     metode: "Pelatihan + Mentoring",
     targetLevel: 4,
-    targetWaktu: "Q4 2025",
+    targetWaktu: "Q4 2026",
     status: "On Progress" as const,
   },
   {
@@ -485,7 +485,7 @@ export const idpAktif = [
     judul: "Meningkatkan Kemampuan Kepemimpinan",
     kategori: "Leadership & People Management",
     progress: 80,
-    target: "30 Sep 2025",
+    target: "30 Sep 2026",
     icon: "users",
     warna: "#3b7ded",
     tone: "tone-blue",
@@ -494,7 +494,7 @@ export const idpAktif = [
     judul: "Penguasaan Analisis Data Produksi",
     kategori: "Data Analytics",
     progress: 60,
-    target: "30 Nov 2025",
+    target: "30 Nov 2026",
     icon: "chart",
     warna: "#16a34a",
     tone: "tone-green",
@@ -503,7 +503,7 @@ export const idpAktif = [
     judul: "Efisiensi Proses Panen dan Pasca Panen",
     kategori: "Operational Excellence",
     progress: 40,
-    target: "31 Des 2025",
+    target: "31 Des 2026",
     icon: "settings",
     warna: "#d97706",
     tone: "tone-amber",
@@ -555,7 +555,7 @@ export const rekomendasiPelatihan = [
 
 export const sertifikasiDimiliki = [
   { nama: "GAP - Good Agricultural Practices", penerbit: "ISPO", tanggal: "20 Sep 2023", berlaku: "19 Sep 2026", status: "Aktif" },
-  { nama: "Ahli Panen Kelapa Sawit (APKASINDO)", penerbit: "APKASINDO", tanggal: "10 Apr 2022", berlaku: "09 Apr 2025", status: "Aktif" },
+  { nama: "Ahli Panen Kelapa Sawit (APKASINDO)", penerbit: "APKASINDO", tanggal: "10 Apr 2022", berlaku: "09 Apr 2028", status: "Aktif" },
   { nama: "K3 Umum", penerbit: "Kemnaker RI", tanggal: "15 Jan 2021", berlaku: "14 Jan 2026", status: "Aktif" },
   { nama: "Basic First Aid", penerbit: "PMI", tanggal: "12 Nov 2020", berlaku: "11 Nov 2023", status: "Kadaluarsa" },
 ];
@@ -607,9 +607,9 @@ export const catatanPengembangan = [
     inisial: "AF",
     nama: "Ahmad Fauzi",
     jabatan: "Afdeling Manager",
-    tanggal: "15 Jan 2025",
+    tanggal: "15 Jan 2026",
     isi: "Rizky menunjukkan perkembangan yang sangat baik dalam pengelolaan tim dan produktivitas. Disarankan untuk fokus pada penguatan kompetensi analisis data dan manajemen proyek.",
-    nextReview: "Jul 2025",
+    nextReview: "Okt 2026",
   },
 ];
 

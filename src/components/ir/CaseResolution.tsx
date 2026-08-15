@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { caseResolution } from "@/lib/ir-data";
+import { caseResolutionBasis } from "@/lib/ir-intel-data";
 import { DonutChart } from "../ui/DonutChart";
 import { SectionHead } from "../hc/SectionHead";
 import { PanelFooterLink } from "./PanelFooterLink";
@@ -47,6 +48,8 @@ export function CaseResolution() {
           ))}
         </div>
       </div>
+
+      <p className="text-[7.5px] leading-[1.35] text-ink-400">{caseResolutionBasis}</p>
 
       <PanelFooterLink label="Lihat Detail Penyelesaian" />
     </div>

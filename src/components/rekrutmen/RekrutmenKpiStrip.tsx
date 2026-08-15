@@ -1,29 +1,32 @@
 import {
+  AlertTriangle,
   BadgeCheck,
   CircleDollarSign,
-  ClipboardList,
   Clock,
+  ShieldAlert,
+  Star,
   Target,
   UserCheck,
-  UsersRound,
 } from "lucide-react";
 import { rekrutmenKpi } from "@/lib/rekrutmen-data";
 import { KpiCard } from "../ui/KpiCard";
 import { RingGauge } from "../org/RingGauge";
 
 const ICONS = {
-  requisition: ClipboardList,
-  kandidat: UsersRound,
-  seleksi: UserCheck,
-  offer: BadgeCheck,
+  fulfillment: Target,
+  critical: AlertTriangle,
+  quality: Star,
+  retensi: UserCheck,
   ttf: Clock,
-  rate: Target,
+  rate: BadgeCheck,
   cost: CircleDollarSign,
+  risk: ShieldAlert,
 };
 
+/** Executive Scorecard: urutan Quality/Demand → Speed → Cost → Risk. */
 export function RekrutmenKpiStrip() {
   return (
-    <div className="grid grid-cols-7 gap-3">
+    <div className="grid grid-cols-8 gap-3">
       {rekrutmenKpi.map((k, i) => {
         const Icon = ICONS[k.icon];
         return (
@@ -39,6 +42,7 @@ export function RekrutmenKpiStrip() {
                 : undefined
             }
             compare={k.compare}
+            info={k.info}
             spark={k.gauge ? undefined : { data: k.series, color: k.line }}
             chart={
               k.gauge ? (

@@ -54,7 +54,7 @@ export const rcKpi: RcKpi[] = [
   {
     label: "Kepatuhan Regulasi",
     value: "92,4%",
-    sub: "Dari 214 Kewajiban Regulasi",
+    sub: "214 Kewajiban: 198 Patuh · 11 Parsial · 5 Non",
     delta: "+1,2%",
     trend: "up",
     deltaTone: "good",
@@ -65,7 +65,7 @@ export const rcKpi: RcKpi[] = [
   {
     label: "Temuan Audit Terbuka",
     value: "18",
-    sub: "Dari 46 Temuan YTD",
+    sub: "7 Overdue · Rata-rata 74 Hari Terbuka",
     delta: "-5",
     trend: "down",
     deltaTone: "good",
@@ -88,7 +88,7 @@ export const rcKpi: RcKpi[] = [
   {
     label: "Laporan Whistleblowing",
     value: "31",
-    sub: "Laporan Masuk YTD",
+    sub: "42% Substantiated · 0 Retaliasi",
     delta: "+4",
     trend: "up",
     deltaTone: "bad",
@@ -110,7 +110,7 @@ export const rcKpi: RcKpi[] = [
   {
     label: "Potensi Denda & Sanksi",
     value: "Rp 12,4 M",
-    sub: "Estimasi Eksposur",
+    sub: "Gross · Residual Rp 3,6 M Setelah Mitigasi",
     delta: "-8,5%",
     trend: "down",
     deltaTone: "good",
@@ -133,6 +133,8 @@ export interface ComplianceArea {
   trendTone: "good" | "bad" | "neutral";
   /** Temuan audit terbuka pada area ini. */
   openFindings: number;
+  /** Skor minimum yang dapat diterima (compliance tolerance). */
+  tolerance: number;
   icon:
     | "labor"
     | "safety"
@@ -153,6 +155,7 @@ export const complianceAreas: ComplianceArea[] = [
     trend: "up",
     trendTone: "good",
     openFindings: 2,
+    tolerance: 90,
     icon: "labor",
   },
   {
@@ -163,6 +166,7 @@ export const complianceAreas: ComplianceArea[] = [
     trend: "up",
     trendTone: "good",
     openFindings: 5,
+    tolerance: 85,
     icon: "safety",
   },
   {
@@ -173,6 +177,7 @@ export const complianceAreas: ComplianceArea[] = [
     trend: "up",
     trendTone: "good",
     openFindings: 6,
+    tolerance: 85,
     icon: "privacy",
   },
   {
@@ -183,6 +188,7 @@ export const complianceAreas: ComplianceArea[] = [
     trend: "flat",
     trendTone: "neutral",
     openFindings: 1,
+    tolerance: 85,
     icon: "ethics",
   },
   {
@@ -193,6 +199,7 @@ export const complianceAreas: ComplianceArea[] = [
     trend: "down",
     trendTone: "bad",
     openFindings: 3,
+    tolerance: 90,
     icon: "fraud",
   },
   {
@@ -203,6 +210,7 @@ export const complianceAreas: ComplianceArea[] = [
     trend: "up",
     trendTone: "good",
     openFindings: 1,
+    tolerance: 80,
     icon: "environment",
   },
   {
@@ -213,6 +221,7 @@ export const complianceAreas: ComplianceArea[] = [
     trend: "flat",
     trendTone: "neutral",
     openFindings: 0,
+    tolerance: 90,
     icon: "tax",
   },
   {
@@ -223,11 +232,14 @@ export const complianceAreas: ComplianceArea[] = [
     trend: "down",
     trendTone: "bad",
     openFindings: 0,
+    tolerance: 80,
     icon: "industry",
   },
 ];
 
 /* ── 3. Top 5 Compliance Issues ───────────────────────────────────── */
+
+export type ResidualLevel = "Tinggi" | "Sedang" | "Rendah";
 
 export interface ComplianceIssue {
   name: string;
@@ -236,6 +248,15 @@ export interface ComplianceIssue {
   units: string;
   exposure: string;
   due: string;
+  /** Penanggung jawab remediasi. */
+  owner: string;
+  /** Umur isu sejak pertama teridentifikasi (hari). */
+  ageDays: number;
+  /** Progress remediasi (%). */
+  remediation: number;
+  /** Efektivitas kontrol terkait isu ini (%). */
+  controlEff: number;
+  residual: ResidualLevel;
 }
 
 export const complianceIssues: ComplianceIssue[] = [
@@ -246,6 +267,11 @@ export const complianceIssues: ComplianceIssue[] = [
     units: "Unit terdampak: Seluruh Holding",
     exposure: "Rp 4,8 M",
     due: "Due: Sep 2026",
+    owner: "CIO / HC Data Governance",
+    ageDays: 143,
+    remediation: 42,
+    controlEff: 58,
+    residual: "Tinggi",
   },
   {
     name: "Sertifikasi K3 Operator",
@@ -254,6 +280,11 @@ export const complianceIssues: ComplianceIssue[] = [
     units: "Unit terdampak: PTPN III, PTPN IV",
     exposure: "Rp 3,2 M",
     due: "Due: Agu 2026",
+    owner: "Direktur Operasional",
+    ageDays: 96,
+    remediation: 68,
+    controlEff: 64,
+    residual: "Sedang",
   },
   {
     name: "Kasus Fraud Pengadaan",
@@ -262,6 +293,11 @@ export const complianceIssues: ComplianceIssue[] = [
     units: "Unit terdampak: PTPN IV, PTPN V",
     exposure: "Rp 2,6 M",
     due: "Due: Jul 2026",
+    owner: "SPI / Komite Audit",
+    ageDays: 118,
+    remediation: 74,
+    controlEff: 70,
+    residual: "Tinggi",
   },
   {
     name: "Kepatuhan Jam Kerja & Lembur",
@@ -270,6 +306,11 @@ export const complianceIssues: ComplianceIssue[] = [
     units: "Unit terdampak: PTPN V, PTPN VI",
     exposure: "Rp 1,2 M",
     due: "Due: Okt 2026",
+    owner: "Direktur SDM",
+    ageDays: 64,
+    remediation: 35,
+    controlEff: 83,
+    residual: "Sedang",
   },
   {
     name: "Refreshment Training Kode Etik",
@@ -278,6 +319,11 @@ export const complianceIssues: ComplianceIssue[] = [
     units: "Unit terdampak: PTPN I, PTPN II",
     exposure: "Rp 0,6 M",
     due: "Due: Nov 2026",
+    owner: "Head of Compliance",
+    ageDays: 51,
+    remediation: 83,
+    controlEff: 88,
+    residual: "Rendah",
   },
 ];
 
@@ -309,15 +355,22 @@ export interface OrgComplianceRow {
   /** % training compliance. */
   training: number;
   score: number;
+  /** Eksposur finansial (bagian dari total Rp 12,4 M). */
+  exposure: string;
+  trend: "up" | "down" | "flat";
+  /** Naik = membaik. */
+  trendTone: "good" | "bad" | "neutral";
+  priority: "Tinggi" | "Sedang" | "Rendah";
 }
 
+/** Eksposur per organisasi menjumlah ke total Rp 12,4 M. */
 export const orgComplianceHeatmap: OrgComplianceRow[] = [
-  { name: "PTPN I", findings: 2, cases: 3, training: 86, score: 88 },
-  { name: "PTPN II", findings: 3, cases: 4, training: 82, score: 84 },
-  { name: "PTPN III", findings: 4, cases: 3, training: 88, score: 86 },
-  { name: "PTPN IV", findings: 5, cases: 7, training: 79, score: 76 },
-  { name: "PTPN V", findings: 3, cases: 5, training: 81, score: 82 },
-  { name: "PTPN VI", findings: 1, cases: 2, training: 90, score: 91 },
+  { name: "PTPN I", findings: 2, cases: 3, training: 86, score: 88, exposure: "0,9", trend: "flat", trendTone: "neutral", priority: "Rendah" },
+  { name: "PTPN II", findings: 3, cases: 4, training: 82, score: 84, exposure: "1,3", trend: "up", trendTone: "good", priority: "Sedang" },
+  { name: "PTPN III", findings: 4, cases: 3, training: 88, score: 86, exposure: "1,9", trend: "up", trendTone: "good", priority: "Sedang" },
+  { name: "PTPN IV", findings: 5, cases: 7, training: 79, score: 76, exposure: "4,3", trend: "down", trendTone: "bad", priority: "Tinggi" },
+  { name: "PTPN V", findings: 3, cases: 5, training: 81, score: 82, exposure: "3,1", trend: "down", trendTone: "bad", priority: "Tinggi" },
+  { name: "PTPN VI", findings: 1, cases: 2, training: 90, score: 91, exposure: "0,9", trend: "up", trendTone: "good", priority: "Rendah" },
 ];
 
 /* ── 6. Breakdown Kasus Pelanggaran ───────────────────────────────── */
@@ -348,6 +401,12 @@ export interface ComplianceAction {
   quarter: string;
   icon: "privacy" | "safety" | "investigation" | "training" | "policy";
   tone: "blue" | "purple" | "violet" | "teal" | "green";
+  /** Skor risiko sebelum remediasi (0-100, makin tinggi makin berisiko). */
+  riskBefore: number;
+  /** Progress pelaksanaan (%). */
+  progress: number;
+  /** Ekspektasi skor risiko setelah remediasi selesai. */
+  riskAfter: number;
 }
 
 export const complianceActions: ComplianceAction[] = [
@@ -358,6 +417,9 @@ export const complianceActions: ComplianceAction[] = [
     quarter: "Q3 2026",
     icon: "privacy",
     tone: "blue",
+    riskBefore: 88,
+    progress: 42,
+    riskAfter: 61,
   },
   {
     title: "Sertifikasi Ulang K3 Massal",
@@ -366,6 +428,9 @@ export const complianceActions: ComplianceAction[] = [
     quarter: "Q3 2026",
     icon: "safety",
     tone: "purple",
+    riskBefore: 81,
+    progress: 68,
+    riskAfter: 54,
   },
   {
     title: "Percepatan Investigasi Fraud",
@@ -374,6 +439,9 @@ export const complianceActions: ComplianceAction[] = [
     quarter: "Q3 2026",
     icon: "investigation",
     tone: "violet",
+    riskBefore: 92,
+    progress: 74,
+    riskAfter: 67,
   },
   {
     title: "Kampanye Training Kode Etik",
@@ -382,6 +450,9 @@ export const complianceActions: ComplianceAction[] = [
     quarter: "Q4 2026",
     icon: "training",
     tone: "teal",
+    riskBefore: 72,
+    progress: 83,
+    riskAfter: 59,
   },
   {
     title: "Review Kebijakan Jam Kerja",
@@ -390,8 +461,213 @@ export const complianceActions: ComplianceAction[] = [
     quarter: "Q4 2026",
     icon: "policy",
     tone: "green",
+    riskBefore: 65,
+    progress: 35,
+    riskAfter: 48,
   },
 ];
 
+/* ── 8. Control Effectiveness per Area ────────────────────────────── */
+
+export interface ControlRow {
+  area: string;
+  /** Total kontrol terpasang. */
+  controls: number;
+  effective: number;
+  partial: number;
+  failed: number;
+  /** (effective + 0.5*partial) / controls, dibulatkan. */
+  effectiveness: number;
+  residual: ResidualLevel;
+}
+
+export const controlRows: ControlRow[] = [
+  { area: "Perlindungan Data Pribadi", controls: 12, effective: 5, partial: 4, failed: 3, effectiveness: 58, residual: "Tinggi" },
+  { area: "K3 (Keselamatan Kerja)", controls: 14, effective: 7, partial: 4, failed: 3, effectiveness: 64, residual: "Sedang" },
+  { area: "Anti-Fraud & Gratifikasi", controls: 10, effective: 6, partial: 2, failed: 2, effectiveness: 70, residual: "Tinggi" },
+  { area: "Ketenagakerjaan & Jam Kerja", controls: 12, effective: 9, partial: 2, failed: 1, effectiveness: 83, residual: "Sedang" },
+  { area: "Kode Etik & Integritas", controls: 8, effective: 6, partial: 2, failed: 0, effectiveness: 88, residual: "Rendah" },
+  { area: "BPJS & Perpajakan SDM", controls: 9, effective: 8, partial: 1, failed: 0, effectiveness: 94, residual: "Rendah" },
+];
+
+/** Rata-rata tertimbang efektivitas kontrol seluruh area. */
+export const overallControlEffectiveness = 75;
+
+/* ── 9. Audit Finding Aging ───────────────────────────────────────── */
+
+export interface AgingBucket {
+  label: string;
+  count: number;
+  color: string;
+}
+
+/** Total = 18 temuan terbuka. */
+export const auditAging: AgingBucket[] = [
+  { label: "< 30 hari", count: 5, color: PALETTE.green },
+  { label: "30–90 hari", count: 6, color: PALETTE.amber },
+  { label: "90–180 hari", count: 4, color: "#f0662d" },
+  { label: "> 180 hari", count: 3, color: PALETTE.red },
+];
+
+export const auditStats = {
+  overdue: 7,
+  avgDaysOpen: 74,
+  closureRate: 81, // % temuan YTD yang sudah ditutup tepat waktu
+};
+
+/* ── 10. Speak-Up Intelligence (Whistleblowing) ───────────────────── */
+
+export const speakUp = {
+  reports: 31,
+  substantiated: 13, // 42%
+  investigating: 7, // 23%
+  unsubstantiated: 11, // 35%
+  avgInvestigationDays: 28,
+  overdueCases: 5,
+  retaliationCases: 0,
+  repeatOffense: 4,
+};
+
+/* ── 11. Severity Kasus Aktif + Fraud Intelligence ────────────────── */
+
+export interface CaseSeverity {
+  label: "Kritis" | "Tinggi" | "Sedang" | "Rendah";
+  count: number;
+  color: string;
+}
+
+/** Total = 24 kasus aktif. */
+export const caseSeverities: CaseSeverity[] = [
+  { label: "Kritis", count: 3, color: PALETTE.red },
+  { label: "Tinggi", count: 7, color: "#f0662d" },
+  { label: "Sedang", count: 10, color: PALETTE.amber },
+  { label: "Rendah", count: 4, color: PALETTE.green },
+];
+
+export const fraudIntel = {
+  activeCases: 3,
+  potentialLoss: "Rp 2,6 M",
+  recovered: "Rp 0,9 M",
+  recoveryRate: 35,
+  avgCriticalAgeDays: 72,
+};
+
+/* ── 12. Regulatory Obligation Register + Change Radar ────────────── */
+
+/** 214 kewajiban regulasi: 198 + 11 + 5. */
+export const obligationRegister = {
+  total: 214,
+  compliant: 198,
+  partial: 11,
+  nonCompliant: 5,
+  dueNext30: 7,
+  dueNext90: 18,
+  changePending: 4,
+};
+
+export interface RegChange {
+  name: string;
+  /** Tanggal mulai berlaku. */
+  effective: string;
+  impact: string;
+  affected: string;
+  /** Kesiapan organisasi (%). */
+  readiness: number;
+  action: string;
+  severity: "Kritis" | "Parsial";
+}
+
+export const regChanges: RegChange[] = [
+  {
+    name: "RPP Turunan UU PDP (Data Pekerja)",
+    effective: "Mar 2027",
+    impact: "Tata kelola data & sistem HRIS",
+    affected: "±70K karyawan",
+    readiness: 55,
+    action: "Update kebijakan + sistem + training",
+    severity: "Kritis",
+  },
+  {
+    name: "Revisi Permenaker Sertifikasi K3",
+    effective: "Okt 2026",
+    impact: "Operasional kebun & pabrik",
+    affected: "412 operator alat berat",
+    readiness: 71,
+    action: "Percepat sertifikasi ulang massal",
+    severity: "Parsial",
+  },
+  {
+    name: "PP Pengupahan — Formula UMP Baru",
+    effective: "Jan 2027",
+    impact: "Payroll & anggaran SDM",
+    affected: "±70K karyawan",
+    readiness: 62,
+    action: "Simulasi dampak + penyesuaian struktur upah",
+    severity: "Parsial",
+  },
+];
+
+/* ── 13. Financial Exposure Waterfall ─────────────────────────────── */
+
+/** Gross = maksimum denda; expected = tertimbang probabilitas;
+ *  residual = expected setelah program mitigasi berjalan. */
+export const exposureWaterfall = [
+  { label: "Gross Exposure", value: "Rp 12,4 M", desc: "Maksimum denda & sanksi" },
+  { label: "Expected Exposure", value: "Rp 7,9 M", desc: "Tertimbang probabilitas" },
+  { label: "Mitigation Cost", value: "Rp 2,3 M", desc: "Biaya program remediasi" },
+  { label: "Residual Exposure", value: "Rp 3,6 M", desc: "Setelah mitigasi efektif" },
+];
+
+/* ── 14. BOD Compliance Decision Center ───────────────────────────── */
+
+export interface RcDecision {
+  prioritas: "danger" | "warning";
+  label: string;
+  title: string;
+  context: string;
+  exposure: string;
+  /** Eskalasi eksposur jika keputusan ditunda: [3 bulan, 6 bulan]. */
+  ifDelayed: [string, string];
+  rekomendasi: string;
+}
+
+export const rcDecisions: RcDecision[] = [
+  {
+    prioritas: "danger",
+    label: "Keputusan Diperlukan",
+    title: "Remediasi UU PDP",
+    context: "6 temuan kritis tata kelola data, umur 143 hari, kontrol efektif hanya 58%",
+    exposure: "Rp 4,8 M",
+    ifDelayed: ["Rp 7,1 M", "Rp 10,3 M"],
+    rekomendasi: "Setujui program remediasi dipercepat + anggaran data governance",
+  },
+  {
+    prioritas: "danger",
+    label: "Keputusan Diperlukan",
+    title: "Sertifikasi Ulang K3",
+    context: "412 operator alat berat belum tersertifikasi ulang, due Agu 2026",
+    exposure: "Rp 3,2 M",
+    ifDelayed: ["Rp 4,5 M", "Rp 6,1 M"],
+    rekomendasi: "Setujui anggaran sertifikasi massal segera (batch prioritas PTPN III-IV)",
+  },
+  {
+    prioritas: "warning",
+    label: "Tindakan Manajemen",
+    title: "Training Kode Etik",
+    context: "15,4% karyawan belum menyelesaikan training tahunan",
+    exposure: "Rp 0,6 M",
+    ifDelayed: ["Rp 0,9 M", "Rp 1,3 M"],
+    rekomendasi: "Wajibkan penyelesaian sebelum penutupan siklus kinerja",
+  },
+];
+
+export const RC_DECISION_STYLE: Record<
+  RcDecision["prioritas"],
+  { border: string; chip: string }
+> = {
+  danger: { border: "#ef4444", chip: "bg-[#fdecec] text-[#ef4444]" },
+  warning: { border: "#f5a524", chip: "bg-[#fdf3e0] text-[#d98b06]" },
+};
+
 export const rcFootnote =
-  "Risk & Compliance memantau kepatuhan regulasi ketenagakerjaan, temuan audit, dan kasus pelanggaran secara terpusat sehingga eksposur hukum dan finansial dapat dimitigasi lebih dini.";
+  "Risk & Compliance memantau kepatuhan regulasi ketenagakerjaan, temuan audit, dan kasus pelanggaran secara terpusat sehingga eksposur hukum dan finansial dapat dimitigasi lebih dini. Overall Compliance Score (87/100) adalah komposit tertimbang dari kepatuhan regulasi, efektivitas kontrol, penutupan audit, severitas pelanggaran, training compliance, dan indikator conduct — berbeda dari Kepatuhan Regulasi (92,4%) yang murni persentase kewajiban regulasi terpenuhi. Data as-of 31 Mei 2026 · Data Quality Score 96,4%.";

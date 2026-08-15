@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Accessibility, ArrowRight, Brain, Ear, Eye, UsersRound } from "lucide-react";
 import { DonutChart } from "../ui/DonutChart";
-import { jenisDisabilitas, totalDisabilitas } from "@/lib/di-data";
+import { disabilitasEquity, jenisDisabilitas, totalDisabilitas } from "@/lib/di-data";
 
 const ICONS = {
   daksa: Accessibility,
@@ -22,7 +22,7 @@ export function KaryawanDisabilitas() {
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
       <h3 className="card-title-navy">Karyawan Disabilitas berdasarkan Jenis</h3>
-      <p className="mt-[3px] text-[9px] text-ink-400">(Per 30 Jun 2025)</p>
+      <p className="mt-[3px] text-[9px] text-ink-400">(Per 30 Jun 2026)</p>
 
       <div className="flex min-h-0 flex-1 items-center gap-3">
         <DonutChart
@@ -64,6 +64,22 @@ export function KaryawanDisabilitas() {
             );
           })}
         </div>
+      </div>
+
+      {/* inclusion outcome: rasio karier vs rata-rata organisasi — bukan hanya representasi */}
+      <div className="mt-1 flex items-center gap-2 border-t border-[#eef2f6] pt-1.5">
+        <span className="shrink-0 text-[8px] font-semibold uppercase tracking-[0.04em] text-ink-400">
+          Outcome vs org
+        </span>
+        {disabilitasEquity.map((e) => (
+          <span
+            key={e.label}
+            className="flex items-baseline gap-1 rounded bg-[#f6f9fc] px-1.5 py-[3px] leading-none"
+          >
+            <span className="text-[8.5px] text-ink-500">{e.label}</span>
+            <span className="text-[9.5px] font-bold tabular-nums text-ink-900">{e.nilai}</span>
+          </span>
+        ))}
       </div>
 
       <button className="link-more mt-1 flex items-center gap-1">

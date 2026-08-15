@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import {
   ArrowRight,
   BriefcaseBusiness,
@@ -8,7 +9,7 @@ import {
   Shuffle,
   Star,
 } from "lucide-react";
-import { talentImpact, talentReadiness } from "@/lib/ss-data";
+import { readinessDefinition, talentImpact, talentReadiness } from "@/lib/ss-data";
 import { SectionHead } from "../hc/SectionHead";
 import { DonutChart } from "../ui/DonutChart";
 
@@ -58,7 +59,10 @@ export function TalentImpactSummary() {
         </ul>
 
         <div className="flex shrink-0 flex-col items-center">
-          <p className="text-[8.5px] font-semibold text-ink-500">
+          <p
+            className="cursor-help text-[8.5px] font-semibold text-ink-500 underline decoration-dotted underline-offset-2"
+            title={readinessDefinition}
+          >
             Distribusi Talent Berdasarkan Readiness
           </p>
           <div className="mt-1 flex items-center gap-3">
@@ -87,9 +91,12 @@ export function TalentImpactSummary() {
         </div>
       </div>
 
-      <button className="mt-2 flex w-full items-center justify-center gap-1 rounded-lg border border-[#e3e9ef] bg-[#f8fafc] py-[7px] text-[9.5px] font-semibold text-ptpn-greenDark transition-colors hover:bg-[#eef4f0]">
-        Lihat Detail Talent Impact <ArrowRight size={11} />
-      </button>
+      <Link
+        href="/succession-planning"
+        className="mt-2 flex w-full items-center justify-center gap-1 rounded-lg border border-[#e3e9ef] bg-[#f8fafc] py-[7px] text-[9.5px] font-semibold text-ptpn-greenDark transition-colors hover:bg-[#eef4f0]"
+      >
+        Lihat Critical Role di Succession Planning <ArrowRight size={11} />
+      </Link>
     </div>
   );
 }

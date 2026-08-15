@@ -11,15 +11,19 @@ export function SsFootnote() {
           <ShieldCheck size={11} />
         </span>
         <p className="truncate text-[9px] text-ink-700">
-          <span className="font-extrabold text-ink-900">Scenario Simulation</span> menggunakan
-          data historis dan prediktif model. Hasil simulasi bersifat indikatif dan perlu validasi
-          berkala.
+          <span className="font-extrabold text-ink-900">Strategic Scenario Simulator</span>{" "}
+          menggunakan data historis dan prediktif model. Hasil simulasi bersifat indikatif dan
+          perlu validasi berkala.
         </p>
       </div>
       <p className="shrink-0 text-[8.5px] text-ink-500">
-        Methodology: <span className="font-bold text-ink-700">Workforce Planning 2.0</span>
+        Data Refresh: <span className="font-bold text-ink-700">14 Agu 2026 · 22:14 WIB</span>
         <span className="mx-1.5 text-ink-300">•</span>
         Last Model Update: <span className="font-bold text-ink-700">31 Mei 2026</span>
+        <span className="mx-1.5 text-ink-300">•</span>
+        Data Quality: <span className="font-bold text-ink-700">96,4%</span>
+        <span className="mx-1.5 text-ink-300">•</span>
+        Methodology: <span className="font-bold text-ink-700">Workforce Planning 2.0</span>
       </p>
     </div>
   );

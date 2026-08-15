@@ -57,7 +57,7 @@ export function EngagementOverview() {
             <PolarRadiusAxis domain={[60, 92]} tick={false} axisLine={false} />
             {/* overlay benchmark kuartal sebelumnya */}
             <Radar
-              name="Q1 2025"
+              name="Q1 2026"
               dataKey="skorQ1"
               stroke={PALETTE.slate}
               strokeWidth={1.2}
@@ -67,7 +67,7 @@ export function EngagementOverview() {
               animationDuration={900}
             />
             <Radar
-              name="Q2 2025"
+              name="Q2 2026"
               dataKey="skor"
               stroke={PALETTE.green}
               strokeWidth={1.8}
@@ -97,14 +97,14 @@ export function EngagementOverview() {
         <span className="flex items-center gap-3 text-[9px] text-ink-500">
           <span className="flex items-center gap-1">
             <span className="h-[3px] w-[12px] rounded-full" style={{ background: PALETTE.green }} />
-            Q2 2025
+            Q2 2026
           </span>
           <span className="flex items-center gap-1">
             <span
               className="h-0 w-[12px] border-t-[2px] border-dashed"
               style={{ borderColor: PALETTE.slate }}
             />
-            Q1 2025
+            Q1 2026
           </span>
         </span>
       </div>

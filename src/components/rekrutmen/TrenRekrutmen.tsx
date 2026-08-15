@@ -71,7 +71,7 @@ export function TrenRekrutmen() {
               animationDuration={900}
             />
             <Line
-              name="Hire"
+              name="Onboard"
               type="linear"
               dataKey="hire"
               stroke={PALETTE.green}

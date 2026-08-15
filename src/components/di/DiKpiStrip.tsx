@@ -1,9 +1,9 @@
 import {
-  Accessibility,
+  Coins,
+  Handshake,
   HeartHandshake,
   Ribbon,
   Scale,
-  Sprout,
   UsersRound,
 } from "lucide-react";
 import { diKpi } from "@/lib/di-data";
@@ -11,11 +11,11 @@ import { KpiCard } from "../ui/KpiCard";
 
 const ICONS = {
   index: HeartHandshake,
-  perempuan: Ribbon,
+  equity: Scale,
+  inclusion: Handshake,
   manajemen: UsersRound,
-  muda: Sprout,
-  disabilitas: Accessibility,
-  payratio: Scale,
+  perempuan: Ribbon,
+  payratio: Coins,
 };
 
 export function DiKpiStrip() {
@@ -32,6 +32,7 @@ export function DiKpiStrip() {
             value={k.unit ? `${k.value}${k.unit}` : k.value}
             delta={{ value: k.delta, trend: k.trend, tone: k.deltaTone }}
             compare={k.compare}
+            info={k.info}
             spark={{ data: k.series, color: k.line }}
             delay={i * 60}
           />
