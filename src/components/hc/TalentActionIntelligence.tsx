@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Crosshair, Sparkles } from "lucide-react";
 import { talentActions } from "@/lib/hc-data";
 import { SectionHead } from "./SectionHead";
@@ -9,7 +10,7 @@ import { ScopeNote } from "../ui/ScopeNote";
 export function TalentActionIntelligence() {
   return (
     <div className="card anim-rise px-4 pb-3.5 pt-3" style={{ "--d": "200ms" } as React.CSSProperties}>
-      <SectionHead title="Talent Action Intelligence" action="Lihat Semua" badge={<ScopeNote />} />
+      <SectionHead title="Talent Action Intelligence" action="Lihat Semua" href="/talent-intelligence/decisions" badge={<ScopeNote />} />
 
       <div className="mt-3 rounded-xl border border-[#f6d5d5] bg-[#fdf5f5] px-3 py-2.5">
         <div className="flex items-center gap-2">
@@ -55,9 +56,9 @@ export function TalentActionIntelligence() {
         </p>
       </div>
 
-      <button className="mt-2.5 w-full rounded-lg border border-[#e3e9ef] py-[6px] text-[9.5px] font-semibold text-ink-700 transition-colors hover:bg-[#f5f8fa]">
+      <Link href="/talent-intelligence/decisions" className="mt-2.5 block w-full text-center rounded-lg border border-[#e3e9ef] py-[6px] text-[9.5px] font-semibold text-ink-700 transition-colors hover:bg-[#f5f8fa]">
         Lihat Talent Actions
-      </button>
+      </Link>
     </div>
   );
 }

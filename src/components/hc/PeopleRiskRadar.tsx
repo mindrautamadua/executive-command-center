@@ -117,7 +117,7 @@ export function PeopleRiskRadar() {
       className="card anim-rise flex h-full flex-col px-4 pb-3.5 pt-3"
       style={{ "--d": "80ms" } as React.CSSProperties}
     >
-      <SectionHead title="People Risk Radar" action="Lihat Semua" badge={<ScopeNote />} />
+      <SectionHead title="People Risk Radar" action="Lihat Semua" href="/people-risk-radar" badge={<ScopeNote />} />
 
       <div className="mt-1 flex min-h-0 flex-1 items-stretch gap-3">
         <div className="flex min-w-0 flex-[54] flex-col">

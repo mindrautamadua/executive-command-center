@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { ArrowRight, Star } from "lucide-react";
 import { scenarioNote, scenarioRows } from "@/lib/hc-data";
 import { ScopeNote } from "../ui/ScopeNote";
@@ -18,9 +19,12 @@ export function ScenarioSimulation() {
           </span>
           <ScopeNote />
         </h3>
-        <button className="flex shrink-0 cursor-pointer items-center gap-1 text-[9.5px] font-semibold text-ptpn-green hover:underline">
+        <Link
+          href="/scenario-simulation"
+          className="flex shrink-0 cursor-pointer items-center gap-1 text-[9.5px] font-semibold text-ptpn-green hover:underline"
+        >
           Lihat Semua <ArrowRight size={11} />
-        </button>
+        </Link>
       </div>
 
       <table className="mt-2 w-full border-collapse">

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { flightRiskDrivers, nineBox, talentStats } from "@/lib/hc-data";
@@ -18,7 +19,7 @@ export function TalentPortfolio() {
 
   return (
     <div className="card anim-rise px-4 pb-3.5 pt-3" style={{ "--d": "180ms" } as React.CSSProperties}>
-      <SectionHead title="Talent Portfolio" action="Lihat Detail" badge={<ScopeNote />} />
+      <SectionHead title="Talent Portfolio" action="Lihat Detail" href="/talent-intelligence/portfolio-9box" badge={<ScopeNote />} />
 
       <div className="mt-3 flex items-start gap-3">
         <div className="flex shrink-0 items-center gap-1.5">
@@ -99,9 +100,9 @@ export function TalentPortfolio() {
         </div>
       )}
 
-      <button className="mt-3 w-full rounded-lg border border-[#e3e9ef] py-[6px] text-[9.5px] font-semibold text-ink-700 transition-colors hover:bg-[#f5f8fa]">
+      <Link href="/talent-intelligence/pipeline-readiness" className="mt-3 block w-full text-center rounded-lg border border-[#e3e9ef] py-[6px] text-[9.5px] font-semibold text-ink-700 transition-colors hover:bg-[#f5f8fa]">
         Lihat Talent Pipeline
-      </button>
+      </Link>
     </div>
   );
 }

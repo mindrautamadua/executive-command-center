@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { AlertCircle, AlertTriangle, CheckCircle2 } from "lucide-react";
 import { bodDecisions, bodTabs } from "@/lib/hc-data";
@@ -37,7 +38,7 @@ export function BodDecisionCenter() {
 
   return (
     <div className="card anim-rise px-4 pb-3.5 pt-3" style={{ "--d": "120ms" } as React.CSSProperties}>
-      <SectionHead title="BOD Decision Center" action="Lihat Semua" />
+      <SectionHead title="BOD Decision Center" action="Lihat Semua" href="/sdm-talenta/decision-center" />
 
       <div className="mt-2.5 flex items-center gap-4 border-b border-[#f0f3f6]">
         {bodTabs.map((t, i) => (
@@ -92,9 +93,9 @@ export function BodDecisionCenter() {
         )}
       </div>
 
-      <button className="mt-2.5 w-full rounded-lg border border-[#e3e9ef] py-[6px] text-[9.5px] font-semibold text-ink-700 transition-colors hover:bg-[#f5f8fa]">
+      <Link href="/sdm-talenta/decision-center" className="mt-2.5 block w-full text-center rounded-lg border border-[#e3e9ef] py-[6px] text-[9.5px] font-semibold text-ink-700 transition-colors hover:bg-[#f5f8fa]">
         Lihat Semua Decision
-      </button>
+      </Link>
     </div>
   );
 }
