@@ -1,84 +1,91 @@
 "use client";
 
-import { useRef } from "react";
-import { ChevronRight } from "lucide-react";
+import {
+  Banknote,
+  CircleDollarSign,
+  Coins,
+  Factory,
+  Gauge,
+  Leaf,
+  TrendingUp,
+} from "lucide-react";
 import { kpiStrip } from "@/lib/data";
 import { Sparkline } from "./ui/Sparkline";
 import { Delta } from "./ui/Delta";
 
+/** Ikon + nada lencana per KPI, meniru pola kartu KPI HC ECC (HcKpiStrip). */
+const BADGES: { Icon: typeof Banknote; cls: string }[] = [
+  { Icon: Banknote, cls: "bg-ptpn-greenLight text-ptpn-green" },
+  { Icon: TrendingUp, cls: "bg-[#e8f1fd] text-[#2f6fe4]" },
+  { Icon: Coins, cls: "bg-[#f3eefd] text-[#8b5cf6]" },
+  { Icon: Gauge, cls: "bg-[#e6f6f5] text-[#0d9488]" },
+  { Icon: Factory, cls: "bg-[#fdf3e0] text-[#d98b06]" },
+  { Icon: Leaf, cls: "bg-ptpn-greenLight text-ptpn-green" },
+  { Icon: CircleDollarSign, cls: "bg-[#fdecec] text-[#ef4444]" },
+];
+
+/**
+ * KPI strip dashboard utama, mengikuti bahasa kartu HcKpiStrip di modul
+ * SDM & Talenta: kartu terpisah per KPI dengan lencana ikon, nilai 22px,
+ * dan entrance anim-rise berjenjang — bukan lagi satu strip bersekat yang
+ * digulir. Baris RKAP dan sparkline dipertahankan karena menjawab "tercapai
+ * atau tidak" dan "arahnya ke mana".
+ */
 export function KpiStrip() {
-  const ref = useRef<HTMLDivElement>(null);
-
   return (
-    <div className="relative mx-5 mb-3">
-      <div className="card overflow-hidden">
-        <div
-          ref={ref}
-          className="scroll-thin flex overflow-x-auto scroll-smooth"
-        >
-          {kpiStrip.map((k, i) => (
-            <div
-              key={k.label}
-              className={`min-w-[214px] flex-1 shrink-0 px-4 pb-1.5 pt-2.5 ${
-                i !== 0 ? "border-l border-[#f0f3f6]" : ""
-              }`}
-            >
-              <div className="text-[9px] font-bold tracking-[0.06em] text-ink-500">
+    <div className="grid grid-cols-7 gap-3">
+      {kpiStrip.map((k, i) => {
+        const { Icon, cls } = BADGES[i % BADGES.length];
+        return (
+          <div
+            key={k.label}
+            className="card anim-rise px-3 pb-2.5 pt-2.5"
+            style={{ "--d": `${50 * i}ms` } as React.CSSProperties}
+          >
+            <div className="flex items-center gap-1.5">
+              <span
+                className={`flex h-[24px] w-[24px] shrink-0 items-center justify-center rounded-lg ${cls}`}
+              >
+                <Icon size={13} strokeWidth={1.9} />
+              </span>
+              <span className="min-w-0 text-[8.5px] font-semibold leading-[1.25] text-ink-500">
                 {k.label}
-              </div>
-              <div className="mt-1.5 flex items-baseline gap-1.5">
-                <span className="text-[20px] font-extrabold leading-none tracking-[-0.01em] text-ink-900">
-                  {k.value}
-                </span>
-                {k.unit && (
-                  <span className="text-[10.5px] font-medium text-ink-500">
-                    {k.unit}
-                  </span>
-                )}
-                <Delta value={k.delta} trend={k.trend} size={10} className="ml-auto" />
-              </div>
-              <div className="mt-1.5 text-[9px] text-ink-400">{k.compare}</div>
-
-              {/*
-                Baris RKAP dipisah dari baris pembanding tahun lalu karena
-                keduanya menjawab pertanyaan berbeda: yang di atas "tumbuh
-                berapa?", yang di bawah "tercapai atau tidak, dan akan sampai
-                di mana?". Menggabungkannya membuat pertumbuhan dua digit
-                terbaca sebagai pencapaian target.
-              */}
-              {k.target && (
-                <div className="mt-0.5 flex items-baseline gap-1 whitespace-nowrap text-[8.5px] leading-tight text-ink-400">
-                  <span className="truncate">RKAP YTD {k.target.label}</span>
-                  <span
-                    className={`shrink-0 font-bold ${
-                      k.target.onTrack ? "delta-good" : "delta-bad"
-                    }`}
-                  >
-                    {k.target.gap}
-                  </span>
-                  {k.target.forecast && (
-                    <span className="ml-auto shrink-0 truncate">
-                      Proy. FY {k.target.forecast}
-                    </span>
-                  )}
-                </div>
-              )}
-
-              <div className="-mx-1 mt-1">
-                <Sparkline data={k.series} color={k.color} height={26} />
-              </div>
+              </span>
             </div>
-          ))}
-        </div>
-      </div>
 
-      <button
-        onClick={() => ref.current?.scrollBy({ left: 320, behavior: "smooth" })}
-        className="absolute -right-[11px] top-1/2 z-10 flex h-[26px] w-[26px] -translate-y-1/2 items-center justify-center rounded-full border border-[#e6ecf2] bg-white text-ink-500 shadow-cardHover transition-colors hover:text-ptpn-green"
-        aria-label="Geser KPI"
-      >
-        <ChevronRight size={15} />
-      </button>
+            <div className="mt-2 flex items-baseline gap-1 whitespace-nowrap">
+              <span className="text-[19px] font-extrabold leading-none tracking-[-0.01em] text-ink-900">
+                {k.value}
+              </span>
+              {k.unit && (
+                <span className="text-[9px] font-medium text-ink-500">{k.unit}</span>
+              )}
+            </div>
+
+            <div className="mt-[5px] flex items-center gap-1.5">
+              <Delta value={k.delta} trend={k.trend} size={9.5} />
+              <span className="truncate text-[8px] text-ink-400">{k.compare}</span>
+            </div>
+
+            {k.target && (
+              <div className="mt-[3px] flex items-baseline gap-1 whitespace-nowrap text-[8px] leading-tight text-ink-400">
+                <span className="truncate">RKAP YTD {k.target.label}</span>
+                <span
+                  className={`shrink-0 font-bold ${
+                    k.target.onTrack ? "delta-good" : "delta-bad"
+                  }`}
+                >
+                  {k.target.gap}
+                </span>
+              </div>
+            )}
+
+            <div className="-mx-1 mt-1">
+              <Sparkline data={k.series} color={k.color} height={22} />
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 }

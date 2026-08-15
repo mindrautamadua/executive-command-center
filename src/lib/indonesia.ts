@@ -82,32 +82,30 @@ export const ISLANDS: { id: string; region: number; d: string }[] = [
   { id: "isl-69", region: 1, d: "M196.1 142.7L190.1 142.9L192.1 140.1L195.8 141.1L196.1 142.7Z" },
 ];
 
-export const REGION_COLORS: Record<number, string> = {
-  1: "#22a45d",
-  2: "#f5a524",
-  3: "#2f9bf5",
-  4: "#ef4444",
-  5: "#8b5cf6",
-};
+/**
+ * Skala sekuensial choropleth, terang → gelap.
+ *
+ * Peta ini mewarnai wilayah menurut besaran pendapatan, bukan menurut
+ * identitas wilayah. Skala sekuensial satu rona adalah satu-satunya skala
+ * yang boleh dipakai untuk besaran: rona berbeda per wilayah membuat mata
+ * membaca "kategori", padahal yang dibandingkan adalah "berapa banyak".
+ */
+export const CHOROPLETH_RAMP = [
+  "#d7efe0",
+  "#a6dcbf",
+  "#6cc79a",
+  "#37a877",
+  "#137a4f",
+] as const;
 
-/** Facility markers, same coordinate space as ISLANDS. */
-export const MARKERS = [
-  { x: 87.3, y: 57.9, c: "#38e0a0" },
-  { x: 96.6, y: 94.4, c: "#38bdf8" },
-  { x: 147, y: 123.8, c: "#38e0a0" },
-  { x: 193.1, y: 169.5, c: "#f5a524" },
-  { x: 217.8, y: 199.4, c: "#38e0a0" },
-  { x: 229, y: 251.7, c: "#38bdf8" },
-  { x: 316.3, y: 135.8, c: "#38e0a0" },
-  { x: 429, y: 206.4, c: "#38bdf8" },
-  { x: 483.9, y: 145.9, c: "#38e0a0" },
-  { x: 262.9, y: 268.5, c: "#a78bfa" },
-  { x: 339.5, y: 285.2, c: "#38e0a0" },
-  { x: 389.5, y: 290.8, c: "#38bdf8" },
-  { x: 533, y: 245.7, c: "#38e0a0" },
-  { x: 546.4, y: 154.5, c: "#38bdf8" },
-  { x: 649.1, y: 103.2, c: "#38e0a0" },
-  { x: 720.6, y: 213.5, c: "#38e0a0" },
-  { x: 787.3, y: 154.1, c: "#38bdf8" },
-  { x: 989.7, y: 189.5, c: "#a78bfa" },
-];
+/**
+ * Titik jangkar label per wilayah, dalam ruang koordinat `ISLANDS`.
+ * Dipakai untuk menempel penanda gugus fasilitas di tengah daratan wilayah.
+ */
+export const REGION_ANCHORS: Record<number, { x: number; y: number }> = {
+  1: { x: 128, y: 128 },
+  2: { x: 408, y: 148 },
+  3: { x: 330, y: 291 },
+  4: { x: 572, y: 178 },
+  5: { x: 900, y: 236 },
+};

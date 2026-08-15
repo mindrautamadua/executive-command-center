@@ -1,4 +1,5 @@
 import { AppShell } from "@/components/AppShell";
+import { DataTrustStrip } from "@/components/hc/DataTrustStrip";
 import { KpiStrip } from "@/components/KpiStrip";
 import { OperasionalCard } from "@/components/OperasionalCard";
 import { KomoditasUtama } from "@/components/KomoditasUtama";
@@ -15,45 +16,87 @@ import { KpiStrategis } from "@/components/KpiStrategis";
 import { AnalitikPrediktif } from "@/components/AnalitikPrediktif";
 import { AiInsight } from "@/components/AiInsight";
 
+/** Kepala seksi kecil bergaya HC ECC, memisahkan kelompok kartu. */
+function SectionLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <h2 className="mb-2 mt-3 text-[10px] font-extrabold uppercase tracking-[0.05em] text-ink-900">
+      {children}
+    </h2>
+  );
+}
+
+/**
+ * Dashboard utama, mengikuti kerangka halaman SDM & Talenta (HC ECC):
+ * DataTrustStrip di atas, kepala seksi kecil, kolom utama + rail kanan 330px,
+ * dan entrance anim-rise berjenjang per kartu.
+ */
 export default function Page() {
   return (
     <AppShell>
-      <KpiStrip />
+      <div className="px-5 pb-5">
+        <DataTrustStrip />
 
-      {/* main grid + right rail */}
-      <div className="mx-5 grid h-[548px] grid-cols-[minmax(0,1fr)_320px] grid-rows-[minmax(0,1fr)] gap-3">
-        <div className="flex min-h-0 min-w-0 flex-col gap-3">
-          {/* row 1 — operasional / peta / regional */}
-          <div className="grid h-[300px] shrink-0 grid-cols-[minmax(0,235fr)_minmax(0,388fr)_minmax(0,354fr)] grid-rows-[minmax(0,1fr)] gap-3">
-            <div className="flex min-h-0 flex-col gap-3">
+        <SectionLabel>Key Strategic KPI</SectionLabel>
+        <KpiStrip />
+
+        <SectionLabel>Operasi &amp; Kinerja Regional</SectionLabel>
+        <div className="grid grid-cols-[minmax(0,1fr)_330px] items-start gap-3">
+          {/* kolom utama */}
+          <div className="flex min-w-0 flex-col gap-3">
+            <div
+              className="anim-rise grid grid-cols-[minmax(0,58fr)_minmax(0,42fr)] items-stretch gap-3"
+              style={{ "--d": "60ms" } as React.CSSProperties}
+            >
+              <IndonesiaMap />
+              <KinerjaRegional />
+            </div>
+
+            <div
+              className="anim-rise grid grid-cols-3 items-stretch gap-3"
+              style={{ "--d": "120ms" } as React.CSSProperties}
+            >
               <OperasionalCard />
               <KomoditasUtama />
+              <KinerjaSdm />
             </div>
-            <IndonesiaMap />
-            <KinerjaRegional />
+
+            <div
+              className="anim-rise grid h-[248px] grid-cols-[minmax(0,40fr)_minmax(0,30fr)_minmax(0,30fr)] grid-rows-[minmax(0,1fr)] gap-3"
+              style={{ "--d": "180ms" } as React.CSSProperties}
+            >
+              <TrendKeuangan />
+              <KomposisiPenjualan />
+              <KinerjaProduksi />
+            </div>
+
+            <div
+              className="anim-rise grid h-[150px] grid-cols-[minmax(0,58fr)_minmax(0,42fr)] grid-rows-[minmax(0,1fr)] gap-3"
+              style={{ "--d": "240ms" } as React.CSSProperties}
+            >
+              <KpiStrategis />
+              <AnalitikPrediktif />
+            </div>
           </div>
 
-          {/* row 2 — 4 kartu grafik */}
-          <div className="grid min-h-0 flex-1 grid-cols-[minmax(0,275fr)_minmax(0,220fr)_minmax(0,237fr)_minmax(0,217fr)] grid-rows-[minmax(0,1fr)] gap-3">
-            <TrendKeuangan />
-            <KomposisiPenjualan />
-            <KinerjaProduksi />
-            <KinerjaSdm />
+          {/* rail kanan */}
+          <div className="flex min-w-0 flex-col gap-3">
+            <div className="anim-rise" style={{ "--d": "90ms" } as React.CSSProperties}>
+              <AlertPanel />
+            </div>
+            <div className="anim-rise" style={{ "--d": "150ms" } as React.CSSProperties}>
+              <InisiatifStrategis />
+            </div>
+            <div className="anim-rise" style={{ "--d": "210ms" } as React.CSSProperties}>
+              <BeritaInformasi />
+            </div>
+            <div
+              className="anim-rise min-h-[170px] flex-1"
+              style={{ "--d": "270ms" } as React.CSSProperties}
+            >
+              <AiInsight />
+            </div>
           </div>
         </div>
-
-        <aside className="flex min-h-0 flex-col gap-3">
-          <AlertPanel />
-          <InisiatifStrategis />
-          <BeritaInformasi />
-        </aside>
-      </div>
-
-      {/* row 3 — kpi / prediktif / ai */}
-      <div className="mx-5 mb-2 mt-2 grid h-[142px] grid-cols-[minmax(0,600fr)_minmax(0,412fr)_minmax(0,282fr)] grid-rows-[minmax(0,1fr)] gap-3">
-        <KpiStrategis />
-        <AnalitikPrediktif />
-        <AiInsight />
       </div>
     </AppShell>
   );

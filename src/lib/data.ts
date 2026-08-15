@@ -10,6 +10,7 @@ import {
   hargaGrup,
 } from "./group-baseline";
 import { formatMetric, metricChange, metricTarget, type MetricId } from "./metrics";
+import { CHOROPLETH_RAMP } from "./indonesia";
 
 export type Trend = "up" | "down";
 
@@ -181,12 +182,46 @@ export const operasional = [
   { label: "Kebun Plasma", value: "338", color: "#8b5cf6", bg: "#f1ecfe", icon: "layers" },
 ] as const;
 
-export const mapLegend = [
-  { label: "Kebun", value: "528", color: "#22a45d" },
-  { label: "Pabrik", value: "67", color: "#2f9bf5" },
-  { label: "Terminal", value: "23", color: "#f5a524" },
-  { label: "Pelabuhan", value: "7", color: "#8b5cf6" },
-];
+/**
+ * Rincian fasilitas per regional.
+ *
+ * Sumber tunggal untuk peta dan legendanya. Sebelumnya legenda menyebut 625
+ * fasilitas sementara peta menggambar 18 titik lepas tanpa asal — dua angka
+ * yang saling membantah di layar yang sama. Sekarang legenda dijumlahkan dari
+ * tabel ini, jadi jumlah di legenda dan jumlah yang diwakili penanda peta
+ * tidak mungkin lagi berselisih.
+ */
+const FASILITAS_REGIONAL: Record<
+  number,
+  { kebun: number; pabrik: number; terminal: number; pelabuhan: number }
+> = {
+  1: { kebun: 168, pabrik: 22, terminal: 7, pelabuhan: 2 },
+  2: { kebun: 126, pabrik: 16, terminal: 5, pelabuhan: 2 },
+  3: { kebun: 84, pabrik: 11, terminal: 4, pelabuhan: 1 },
+  4: { kebun: 78, pabrik: 9, terminal: 4, pelabuhan: 1 },
+  5: { kebun: 72, pabrik: 9, terminal: 3, pelabuhan: 1 },
+};
+
+const JENIS_FASILITAS = [
+  { key: "kebun", label: "Kebun" },
+  { key: "pabrik", label: "Pabrik" },
+  { key: "terminal", label: "Terminal" },
+  { key: "pelabuhan", label: "Pelabuhan" },
+] as const;
+
+/** Total fasilitas per jenis — dijumlahkan, tidak ditulis manual. */
+export const mapLegend = JENIS_FASILITAS.map((j) => ({
+  label: j.label,
+  value: Object.values(FASILITAS_REGIONAL)
+    .reduce((s, f) => s + f[j.key], 0)
+    .toLocaleString("id-ID"),
+}));
+
+/** Total seluruh fasilitas grup, dipakai di keterangan ukuran penanda peta. */
+export const totalFasilitas = Object.values(FASILITAS_REGIONAL).reduce(
+  (s, f) => s + f.kebun + f.pabrik + f.terminal + f.pelabuhan,
+  0,
+);
 
 /**
  * Pendapatan YTD per regional (Rp T) — jumlah 24,60 T sesuai kpiStrip.
@@ -195,28 +230,64 @@ export const mapLegend = [
  * penyebabnya bisa ditelusuri. Angka merah di dashboard Direksi harus menjadi
  * pintu masuk investigasi, bukan sekadar penanda.
  */
-export const regional: {
+const REGIONAL_DASAR: {
+  id: number;
   name: string;
-  color: string;
-  value: string;
+  /** Pendapatan YTD dalam Rp triliun — dipakai menskala warna choropleth. */
+  rpT: number;
   delta: string;
   trend: Trend;
   /** Tautan diagnosis; hanya diisi untuk regional yang perlu ditelusuri. */
   diagnosis?: string;
 }[] = [
-  { name: "Regional 1", color: "#22a45d", value: "Rp 8,09 T", delta: "13,2%", trend: "up" as Trend },
-  { name: "Regional 2", color: "#f5a524", value: "Rp 6,15 T", delta: "10,1%", trend: "up" as Trend },
-  { name: "Regional 3", color: "#2f9bf5", value: "Rp 4,06 T", delta: "8,7%", trend: "up" as Trend },
+  { id: 1, name: "Regional 1", rpT: 8.09, delta: "13,2%", trend: "up" as Trend },
+  { id: 2, name: "Regional 2", rpT: 6.15, delta: "10,1%", trend: "up" as Trend },
+  { id: 3, name: "Regional 3", rpT: 4.06, delta: "8,7%", trend: "up" as Trend },
   {
+    id: 4,
     name: "Regional 4",
-    color: "#ef4444",
-    value: "Rp 3,08 T",
+    rpT: 3.08,
     delta: "-2,3%",
     trend: "down" as Trend,
     diagnosis: "/produksi-operasi/produktivitas-kebun",
   },
-  { name: "Regional 5", color: "#8b5cf6", value: "Rp 3,22 T", delta: "5,6%", trend: "up" as Trend },
+  { id: 5, name: "Regional 5", rpT: 3.22, delta: "5,6%", trend: "up" as Trend },
 ];
+
+const pendapatanTerbesar = Math.max(...REGIONAL_DASAR.map((r) => r.rpT));
+
+/**
+ * Warna regional = langkah pada skala sekuensial menurut pendapatan.
+ *
+ * Sebelumnya tiap regional punya rona sendiri (hijau/oranye/biru/merah/ungu).
+ * Merah pada Regional 4 kebetulan bertepatan dengan pertumbuhan negatifnya,
+ * tetapi tiga regional lain memakai rona yang tidak berarti apa-apa — dan
+ * merah di dashboard ini sudah berarti "risiko". Satu rona bertingkat membuat
+ * titik daftar, batang, dan warna peta semuanya membaca besaran yang sama.
+ */
+const langkahWarna = (rpT: number) =>
+  CHOROPLETH_RAMP[
+    Math.min(
+      CHOROPLETH_RAMP.length - 1,
+      Math.floor((rpT / pendapatanTerbesar) * CHOROPLETH_RAMP.length),
+    )
+  ];
+
+export const regional = REGIONAL_DASAR.map((r) => ({
+  ...r,
+  color: langkahWarna(r.rpT),
+  value: `Rp ${r.rpT.toLocaleString("id-ID", { minimumFractionDigits: 2 })} T`,
+  /** Bagian dari pendapatan regional terbesar — dipakai untuk panjang batang. */
+  pct: Math.round((r.rpT / pendapatanTerbesar) * 100),
+  fasilitas: FASILITAS_REGIONAL[r.id],
+  totalFasilitas:
+    FASILITAS_REGIONAL[r.id].kebun +
+    FASILITAS_REGIONAL[r.id].pabrik +
+    FASILITAS_REGIONAL[r.id].terminal +
+    FASILITAS_REGIONAL[r.id].pelabuhan,
+}));
+
+export type RegionalItem = (typeof regional)[number];
 
 /* ── Kuantifikasi dampak ──────────────────────────────────────────────
  *

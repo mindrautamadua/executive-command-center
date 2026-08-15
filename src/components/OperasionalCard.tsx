@@ -8,7 +8,7 @@ const ICONS = { sprout: Sprout, factory: Factory, users: Users, layers: Layers }
 
 export function OperasionalCard() {
   return (
-    <div className="card flex h-[184px] shrink-0 flex-col px-4 pb-1 pt-2.5">
+    <div className="card flex h-full flex-col px-4 pb-1 pt-2.5">
       <div className="flex items-center justify-between gap-1">
         {/*
           Bukan "real-time": angkanya snapshot 31 Mei 2026 seperti seluruh

@@ -21,7 +21,7 @@ export function Delta({
   const good = tone ? tone === "good" : up;
   return (
     <span
-      className={`inline-flex items-center gap-[3px] font-semibold ${
+      className={`inline-flex items-center gap-[3px] whitespace-nowrap font-semibold ${
         good ? "delta-good" : "delta-bad"
       } ${className}`}
       style={{ fontSize: size }}

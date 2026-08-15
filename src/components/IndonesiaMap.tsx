@@ -1,143 +1,199 @@
 "use client";
 
-import { ISLANDS, MARKERS } from "@/lib/indonesia";
-import { mapLegend } from "@/lib/data";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { ISLANDS, MAP_H, REGION_ANCHORS, CHOROPLETH_RAMP } from "@/lib/indonesia";
+import { mapLegend, regional, totalFasilitas, type RegionalItem } from "@/lib/data";
+import { DetailLink } from "./DetailLink";
+
+const MAP_W = 1000;
+
+/** Peta dibaca dari kiri ke kanan; tooltip di sisi kanan layar dibalik arahnya. */
+const BALIK_TOOLTIP_X = 680;
+
+const byId = new Map(regional.map((r) => [r.id, r]));
+
+/**
+ * Radius penanda gugus menyandi jumlah fasilitas dengan skala akar.
+ *
+ * Akar, bukan linear: mata membaca luas lingkaran, bukan jari-jarinya, jadi
+ * skala linear melebih-lebihkan wilayah besar sampai dua kali lipat.
+ */
+const maxFasilitas = Math.max(...regional.map((r) => r.totalFasilitas));
+const radius = (n: number) => 13 + 13 * Math.sqrt(n / maxFasilitas);
+
+const tujuan = (r: RegionalItem) => r.diagnosis ?? "/produksi-operasi";
 
 export function IndonesiaMap() {
+  const router = useRouter();
+  const [aktif, setAktif] = useState<RegionalItem | null>(null);
+
   return (
-    <div className="card relative flex h-full flex-col overflow-hidden">
-      {/* legend */}
-      <div className="absolute inset-x-0 top-0 z-10 flex items-start justify-center gap-7 pt-3">
-        {mapLegend.map((l) => (
-          <div key={l.label} className="text-center leading-none">
-            <div className="text-[9px] font-semibold text-ink-500">{l.label}</div>
-            <div className="mt-1.5 flex items-center justify-center gap-1.5">
-              <span
-                className="h-[7px] w-[7px] rounded-full"
-                style={{ background: l.color }}
-              />
-              <span className="text-[15px] font-extrabold text-ink-900">
-                {l.value}
-              </span>
-            </div>
-          </div>
-        ))}
+    <div className="card flex h-full flex-col px-4 pb-3 pt-3">
+      <div className="flex items-baseline justify-between gap-2">
+        <h3 className="card-title whitespace-nowrap">SEBARAN OPERASI GRUP</h3>
+        <div className="flex shrink-0 items-baseline gap-2">
+          <span className="text-[9px] text-ink-400">Pendapatan YTD 2026</span>
+          <DetailLink href="/produksi-operasi" />
+        </div>
       </div>
 
-      {/* map stage */}
-      <div className="relative flex-1">
+      {/* Panggung peta mengunci rasio geometri, jadi tidak ada kanvas terbuang
+          dan posisi tooltip dalam persen selalu jatuh tepat di atas penanda. */}
+      <div className="relative mt-2 w-full" style={{ aspectRatio: `${MAP_W} / ${MAP_H}` }}>
         <svg
-          viewBox="0 0 1000 560"
-          className="absolute inset-0 h-full w-full"
-          preserveAspectRatio="xMidYMid meet"
+          viewBox={`0 0 ${MAP_W} ${MAP_H}`}
+          className="h-full w-full overflow-visible"
+          role="img"
+          aria-label={`Peta sebaran operasi PTPN Group: ${regional.length} regional, ${totalFasilitas} fasilitas. Warna wilayah menyandi pendapatan YTD 2026.`}
         >
-          <defs>
-            <linearGradient
-              id="mp-fill"
-              gradientUnits="userSpaceOnUse"
-              x1="80"
-              y1="0"
-              x2="620"
-              y2="376"
-            >
-              <stop offset="0%" stopColor="#9ceb8f" />
-              <stop offset="45%" stopColor="#45c57a" />
-              <stop offset="100%" stopColor="#199058" />
-            </linearGradient>
-            <linearGradient id="mp-glow" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#8bf5c8" stopOpacity="0.7" />
-              <stop offset="100%" stopColor="#2fd48a" stopOpacity="0.05" />
-            </linearGradient>
-            <radialGradient id="mp-core" cx="0.5" cy="0.5" r="0.5">
-              <stop offset="0%" stopColor="#eafffb" stopOpacity="0.95" />
-              <stop offset="45%" stopColor="#7fe3ff" stopOpacity="0.4" />
-              <stop offset="100%" stopColor="#3fb6e8" stopOpacity="0" />
-            </radialGradient>
-            <linearGradient id="mp-ray" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#bff3ff" stopOpacity="0" />
-              <stop offset="55%" stopColor="#8fe6ff" stopOpacity="0.22" />
-              <stop offset="100%" stopColor="#5fd8ff" stopOpacity="0.6" />
-            </linearGradient>
-            <filter id="mp-blur" x="-40%" y="-40%" width="180%" height="180%">
-              <feGaussianBlur stdDeviation="9" />
-            </filter>
-            <filter id="mp-soft" x="-60%" y="-60%" width="220%" height="220%">
-              <feGaussianBlur stdDeviation="3" />
-            </filter>
-          </defs>
+          {ISLANDS.map((is) => {
+            const r = byId.get(is.region);
+            return (
+              <path
+                key={is.id}
+                d={is.d}
+                fill={r?.color ?? CHOROPLETH_RAMP[0]}
+                stroke="var(--map-stroke)"
+                strokeWidth="0.8"
+                strokeLinejoin="round"
+                opacity={aktif && aktif.id !== is.region ? 0.45 : 1}
+                style={{ transition: "opacity 150ms" }}
+              />
+            );
+          })}
 
-          <g transform="translate(0 66)">
-            {/* light convergence rays from islands to the pedestal */}
-            <g opacity="0.6">
-              {MARKERS.filter((_, i) => i % 2 === 0).map((m, i) => (
-                <path
-                  key={i}
-                  d={`M${m.x - 9} ${m.y} L${m.x + 9} ${m.y} L${508} 388 L${492} 388 Z`}
-                  fill="url(#mp-ray)"
+          {regional.map((r) => {
+            const a = REGION_ANCHORS[r.id];
+            const rad = radius(r.totalFasilitas);
+            const on = aktif?.id === r.id;
+            return (
+              <g
+                key={r.id}
+                role="button"
+                tabIndex={0}
+                className="cursor-pointer focus:outline-none"
+                aria-label={`${r.name}: pendapatan ${r.value}, ${r.totalFasilitas} fasilitas`}
+                onMouseEnter={() => setAktif(r)}
+                onMouseLeave={() => setAktif(null)}
+                onFocus={() => setAktif(r)}
+                onBlur={() => setAktif(null)}
+                onClick={() => router.push(tujuan(r))}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    router.push(tujuan(r));
+                  }
+                }}
+              >
+                <circle
+                  cx={a.x}
+                  cy={a.y}
+                  r={rad}
+                  fill="#ffffff"
+                  fillOpacity={on ? 1 : 0.92}
+                  stroke="#0f7a44"
+                  strokeWidth={on ? 3 : 1.6}
                 />
-              ))}
-            </g>
-
-            {/* soft glow behind islands */}
-            <g filter="url(#mp-blur)" opacity="0.8">
-              {ISLANDS.map((is) => (
-                <path key={`g-${is.id}`} d={is.d} fill="url(#mp-glow)" />
-              ))}
-            </g>
-
-            {/* islands */}
-            <g>
-              {ISLANDS.map((is) => (
-                <path
-                  key={is.id}
-                  d={is.d}
-                  fill="url(#mp-fill)"
-                  stroke="#d6fbe2"
-                  strokeWidth="0.8"
-                  strokeOpacity="0.6"
+                <text
+                  x={a.x}
+                  y={a.y + 1}
+                  textAnchor="middle"
+                  dominantBaseline="middle"
+                  fontSize="15"
+                  fontWeight="800"
+                  fill="#0f7a44"
+                >
+                  R{r.id}
+                </text>
+                <text
+                  x={a.x}
+                  y={a.y + rad + 13}
+                  textAnchor="middle"
+                  fontSize="12.5"
+                  fontWeight="700"
+                  fill="var(--text-2)"
+                  paintOrder="stroke"
+                  stroke="var(--surface)"
+                  strokeWidth="4"
                   strokeLinejoin="round"
-                />
-              ))}
-            </g>
-
-            {/* facility markers */}
-            <g>
-              {MARKERS.map((m, i) => (
-                <g key={i}>
-                  <circle cx={m.x} cy={m.y} r="13" fill={m.c} opacity="0.25" filter="url(#mp-soft)" />
-                  <circle cx={m.x} cy={m.y} r="5" fill={m.c} />
-                  <circle cx={m.x} cy={m.y} r="2" fill="#ffffff" opacity="0.95" />
-                </g>
-              ))}
-            </g>
-
-            {/* pedestal / ripple rings */}
-            <g transform="translate(500 388)">
-              <ellipse rx="260" ry="52" fill="url(#mp-core)" opacity="0.75" />
-              {[0, 1, 2, 3].map((i) => (
-                <ellipse
-                  key={i}
-                  rx={72 + i * 58}
-                  ry={13 + i * 11}
-                  fill="none"
-                  stroke="#5fd8ff"
-                  strokeWidth="1.4"
-                  strokeOpacity={0.55 - i * 0.11}
-                />
-              ))}
-              <ellipse rx="36" ry="9" fill="#ddfcff" opacity="0.9" filter="url(#mp-soft)" />
-            </g>
-          </g>
+                >
+                  {r.value}
+                </text>
+              </g>
+            );
+          })}
         </svg>
 
-        {/* animated ripple */}
-        <div className="pointer-events-none absolute left-1/2 top-[80%] -translate-x-1/2 -translate-y-1/2">
-          {[0, 1, 2].map((i) => (
-            <span
-              key={i}
-              className="absolute left-1/2 top-1/2 block h-[46px] w-[170px] -translate-x-1/2 -translate-y-1/2 animate-ripple rounded-[50%] border border-[#5fd8ff]/50"
-              style={{ animationDelay: `${i * 1.2}s` }}
-            />
+        {aktif && (
+          <div
+            className="pointer-events-none absolute z-20 w-[172px] rounded-lg border border-[#e3e9ef] bg-white p-2.5 shadow-cardHover"
+            style={{
+              left: `${(REGION_ANCHORS[aktif.id].x / MAP_W) * 100}%`,
+              top: `${(REGION_ANCHORS[aktif.id].y / MAP_H) * 100}%`,
+              transform:
+                REGION_ANCHORS[aktif.id].x > BALIK_TOOLTIP_X
+                  ? "translate(-100%, -108%)"
+                  : "translate(0, -108%)",
+            }}
+          >
+            <div className="flex items-baseline justify-between gap-2">
+              <span className="text-[10px] font-bold text-ink-900">{aktif.name}</span>
+              <span
+                className={`text-[9.5px] font-bold ${
+                  aktif.trend === "up" ? "delta-good" : "delta-bad"
+                }`}
+              >
+                {aktif.delta}
+              </span>
+            </div>
+            <div className="mt-0.5 text-[12px] font-extrabold tabular-nums text-ink-900">
+              {aktif.value}
+            </div>
+            <dl className="mt-1.5 grid grid-cols-2 gap-x-2 gap-y-[2px] border-t border-[#f2f5f8] pt-1.5 text-[9px]">
+              {(
+                [
+                  ["Kebun", aktif.fasilitas.kebun],
+                  ["Pabrik", aktif.fasilitas.pabrik],
+                  ["Terminal", aktif.fasilitas.terminal],
+                  ["Pelabuhan", aktif.fasilitas.pelabuhan],
+                ] as const
+              ).map(([label, n]) => (
+                <div key={label} className="flex justify-between gap-1">
+                  <dt className="text-ink-500">{label}</dt>
+                  <dd className="font-bold tabular-nums text-ink-700">{n}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        )}
+      </div>
+
+      {/* Legenda: skala warna menerangkan isian wilayah, hitungan fasilitas
+          menerangkan ukuran penanda. Keduanya diturunkan dari data yang sama
+          dengan yang digambar, jadi angka legenda tidak bisa menyimpang. */}
+      <div className="mt-auto flex flex-wrap items-end justify-between gap-x-4 gap-y-1.5 pt-2">
+        <div>
+          <div className="muted-label">PENDAPATAN YTD</div>
+          <div className="mt-1 flex items-center gap-1.5">
+            <span className="text-[8.5px] text-ink-500">Rendah</span>
+            <span className="flex overflow-hidden rounded-[3px]">
+              {CHOROPLETH_RAMP.map((c) => (
+                <span key={c} className="h-[8px] w-[18px]" style={{ background: c }} />
+              ))}
+            </span>
+            <span className="text-[8.5px] text-ink-500">Tinggi</span>
+          </div>
+        </div>
+
+        <div className="flex items-end gap-3">
+          {mapLegend.map((l) => (
+            <div key={l.label} className="text-right">
+              <div className="text-[8.5px] text-ink-500">{l.label}</div>
+              <div className="text-[13px] font-extrabold tabular-nums text-ink-900">
+                {l.value}
+              </div>
+            </div>
           ))}
         </div>
       </div>

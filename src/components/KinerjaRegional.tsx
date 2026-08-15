@@ -2,87 +2,62 @@
 
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
-import { ISLANDS, MAP_H } from "@/lib/indonesia";
 import { regional } from "@/lib/data";
 import { Delta } from "./ui/Delta";
 
+/**
+ * Kartu ini dulu mengulang siluet Indonesia setinggi 104 px di samping peta
+ * utama — gambar yang sama, dua kali, dan yang kecil tidak menyandi apa pun.
+ * Ruangnya sekarang dipakai batang perbandingan: pertanyaan yang dijawab
+ * kartu ini adalah "regional mana yang menopang pendapatan", dan panjang
+ * batang menjawabnya lebih cepat daripada peta kedua.
+ */
 export function KinerjaRegional() {
   return (
-    <div className="card flex h-full flex-col px-4 pb-2.5 pt-3">
+    <div className="card flex h-full min-h-[300px] flex-col px-4 pb-3 pt-3">
       <div className="flex items-baseline gap-1.5">
         <h3 className="card-title">KINERJA REGIONAL</h3>
         <span className="text-[9px] text-ink-400">(YTD 2026)</span>
       </div>
 
-      <div className="relative mt-0.5 h-[104px] w-full shrink-0">
-        <svg
-          viewBox={`0 0 1000 ${MAP_H}`}
-          className="h-full w-full"
-          preserveAspectRatio="xMidYMid meet"
-        >
-          <defs>
-            <linearGradient
-              id="kr-fill"
-              gradientUnits="userSpaceOnUse"
-              x1="80"
-              y1="0"
-              x2="700"
-              y2="376"
-            >
-              <stop offset="0%" stopColor="#b7f0c6" />
-              <stop offset="50%" stopColor="#4ec583" />
-              <stop offset="100%" stopColor="#1e9a60" />
-            </linearGradient>
-            <filter id="kr-soft" x="-30%" y="-30%" width="160%" height="160%">
-              <feGaussianBlur stdDeviation="7" />
-            </filter>
-          </defs>
-          <g filter="url(#kr-soft)" opacity="0.35">
-            {ISLANDS.map((is) => (
-              <path key={`kg-${is.id}`} d={is.d} fill="#4ec583" />
-            ))}
-          </g>
-          {ISLANDS.map((is) => (
-            <path
-              key={is.id}
-              d={is.d}
-              fill="url(#kr-fill)"
-              stroke="var(--map-stroke)"
-              strokeWidth="1"
-              strokeLinejoin="round"
-            />
-          ))}
-        </svg>
-      </div>
-
       <div className="mt-1 flex items-center justify-between">
         <span className="muted-label">REGIONAL</span>
-        <span className="text-[9px] text-ink-400">Pendapatan (YTD 2026)</span>
+        <span className="text-[9px] text-ink-400">Pendapatan · vs 2025</span>
       </div>
 
-      <div className="mt-1 flex flex-1 flex-col justify-around">
+      <div className="mt-2 flex flex-1 flex-col justify-between gap-2">
         {regional.map((r) => {
           const baris = (
             <>
-              <span
-                className="mr-2 h-[7px] w-[7px] shrink-0 rounded-full"
-                style={{ background: r.color }}
-              />
-              <span className="text-[10.5px] font-medium text-ink-700">{r.name}</span>
-              {r.diagnosis && (
-                <span className="ml-1.5 shrink-0 rounded bg-[#fee2e2] px-1 py-[1px] text-[8px] font-bold text-[#dc2626]">
-                  PERLU PERHATIAN
+              <div className="flex items-baseline gap-2">
+                <span className="shrink-0 text-[10.5px] font-medium text-ink-700">{r.name}</span>
+                {r.diagnosis && (
+                  <span className="flex min-w-0 items-center gap-[1px] truncate rounded bg-[#fee2e2] px-1 py-[1px] text-[8px] font-bold leading-[1.5] text-[#dc2626]">
+                    PERHATIAN
+                    <ChevronRight size={12} aria-hidden />
+                  </span>
+                )}
+                <span className="ml-auto shrink-0 whitespace-nowrap text-[10.5px] font-bold tabular-nums text-ink-900">
+                  {r.value}
                 </span>
-              )}
-              <span className="ml-auto mr-5 text-[10.5px] font-bold tabular-nums text-ink-900">
-                {r.value}
-              </span>
-              <Delta
-                value={r.delta}
-                trend={r.trend}
-                size={10}
-                className="w-[46px] justify-end"
-              />
+                <Delta
+                  value={r.delta}
+                  trend={r.trend}
+                  size={10}
+                  className="w-[46px] shrink-0 justify-end"
+                />
+              </div>
+              <div className="mt-1 flex items-center gap-2">
+                <span className="h-[7px] flex-1 overflow-hidden rounded-full bg-[#eef2f6]">
+                  <span
+                    className="block h-full rounded-full"
+                    style={{ width: `${r.pct}%`, background: r.color }}
+                  />
+                </span>
+                <span className="w-[62px] shrink-0 text-right text-[8.5px] tabular-nums text-ink-400">
+                  {r.totalFasilitas} fasilitas
+                </span>
+              </div>
             </>
           );
 
@@ -93,14 +68,13 @@ export function KinerjaRegional() {
             <Link
               key={r.name}
               href={r.diagnosis}
-              className="-mx-1 flex items-center rounded px-1 py-[1px] transition-colors hover:bg-[#fef2f2]"
+              className="-mx-1.5 rounded px-1.5 py-1 transition-colors hover:bg-[#fef2f2]"
               title={`Telusuri penyebab penurunan ${r.name}`}
             >
               {baris}
-              <ChevronRight size={12} className="ml-0.5 shrink-0 text-[#dc2626]" />
             </Link>
           ) : (
-            <div key={r.name} className="flex items-center pr-[17px]">
+            <div key={r.name} className="-mx-1.5 px-1.5 py-1">
               {baris}
             </div>
           );
