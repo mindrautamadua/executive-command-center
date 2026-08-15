@@ -1,10 +1,12 @@
 "use client";
 
+import { GitBranch } from "lucide-react";
 import { ModuleHeader, SelectBox } from "@/components/ui/ModuleHeader";
 
 export function SsHeader() {
   return (
     <ModuleHeader
+      icon={<GitBranch size={19} strokeWidth={1.9} />}
       title="Strategic Scenario Simulator"
       subtitle="Modelkan pilihan strategi, dampak workforce, hasil finansial, dan risiko strategis sebelum keputusan diambil."
       controls={

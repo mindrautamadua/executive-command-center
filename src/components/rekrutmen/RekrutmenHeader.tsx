@@ -1,10 +1,12 @@
 "use client";
 
-import { ExportButton, ModuleHeader, SelectBox } from "@/components/ui/ModuleHeader";
+import { UserPlus } from "lucide-react";
+import { ModuleHeader, SelectBox } from "@/components/ui/ModuleHeader";
 
 export function RekrutmenHeader() {
   return (
     <ModuleHeader
+      icon={<UserPlus size={19} strokeWidth={1.9} />}
       title="Rekrutmen"
       subtitle="Pantau dan kelola seluruh proses rekrutmen secara real-time"
       controls={
@@ -14,7 +16,7 @@ export function RekrutmenHeader() {
           <SelectBox label="Lokasi" value="Semua Lokasi" width="158px" />
         </>
       }
-      actions={<ExportButton label="Export Dashboard" />}
+      dataAsOf="Data per 31 Mei 2026 (YTD)"
     />
   );
 }

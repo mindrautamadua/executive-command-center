@@ -1,5 +1,6 @@
 import { AlertTriangle, TriangleAlert, Lightbulb } from "lucide-react";
 import { alerts } from "@/lib/data";
+import { DetailLink } from "./DetailLink";
 
 const TONE = {
   danger: { text: "#dc2626", bg: "#fee2e2", Icon: AlertTriangle },
@@ -12,7 +13,7 @@ export function AlertPanel() {
     <div className="card flex shrink-0 flex-col px-4 pb-2.5 pt-3">
       <div className="flex items-center justify-between">
         <h3 className="card-title">ALERT &amp; NOTIFIKASI STRATEGIS</h3>
-        <button className="link-more">Lihat semua</button>
+        <DetailLink href="/risiko-kepatuhan" />
       </div>
 
       <div className="mt-1.5 flex flex-col">

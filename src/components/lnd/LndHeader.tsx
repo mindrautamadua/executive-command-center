@@ -1,11 +1,12 @@
 "use client";
 
-import { FileText, Search } from "lucide-react";
+import { FileText, GraduationCap, Search } from "lucide-react";
 import { ExportButton, ModuleHeader, SelectBox } from "@/components/ui/ModuleHeader";
 
 export function LndHeader() {
   return (
     <ModuleHeader
+      icon={<GraduationCap size={19} strokeWidth={1.9} />}
       title={<>Learning &amp; Development</>}
       subtitle={
         <>
@@ -26,6 +27,7 @@ export function LndHeader() {
           </button>
         </>
       }
+      dataAsOf="Data per 31 Mei 2026 (YTD)"
       actions={
         <>
           <ExportButton />

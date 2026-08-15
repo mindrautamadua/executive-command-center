@@ -50,7 +50,10 @@ interface DotProps {
 /** Titik radar diwarnai sesuai band skor (High merah, Medium amber, Low hijau). */
 function BandDot({ cx = 0, cy = 0, payload }: DotProps) {
   const color = RISK_BAND[levelOfScore(payload?.score ?? 0)];
-  return <circle cx={cx} cy={cy} r={3} fill={color} stroke="#fff" strokeWidth={1.2} />;
+  // Cincin titik ikut warna kartu, bukan putih tetap — putih menyilaukan di dark.
+  return (
+    <circle cx={cx} cy={cy} r={3} fill={color} stroke="var(--surface)" strokeWidth={1.2} />
+  );
 }
 
 const LEGEND = [

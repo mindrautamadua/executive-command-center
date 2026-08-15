@@ -1,11 +1,12 @@
 "use client";
 
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Network } from "lucide-react";
 import { ModuleHeader, SelectBox } from "@/components/ui/ModuleHeader";
 
 export function OrgHeader() {
   return (
     <ModuleHeader
+      icon={<Network size={19} strokeWidth={1.9} />}
       title="Organisasi & Jabatan"
       subtitle="Dashboard Struktur Organisasi dan Manajemen Jabatan"
       controls={
@@ -19,6 +20,7 @@ export function OrgHeader() {
           </button>
         </>
       }
+      dataAsOf="Data per 31 Mei 2026 (YTD)"
     />
   );
 }

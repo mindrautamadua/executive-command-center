@@ -1,11 +1,12 @@
 "use client";
 
-import { FileText } from "lucide-react";
+import { FileText, HeartHandshake } from "lucide-react";
 import { ExportButton, ModuleHeader, SelectBox } from "@/components/ui/ModuleHeader";
 
 export function EngagementHeader() {
   return (
     <ModuleHeader
+      icon={<HeartHandshake size={19} strokeWidth={1.9} />}
       title="Employee Engagement"
       subtitle="Pantau, pahami dan tingkatkan keterlibatan karyawan untuk organisasi yang lebih produktif"
       controls={
@@ -15,6 +16,7 @@ export function EngagementHeader() {
           <SelectBox label="Lokasi" value="Semua Lokasi" width="158px" />
         </>
       }
+      dataAsOf="Data per 31 Mei 2026 (YTD)"
       actions={
         <>
           <ExportButton />

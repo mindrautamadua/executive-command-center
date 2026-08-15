@@ -625,6 +625,41 @@ body {
   background-color: rgba(0, 0, 0, 0.6);
 }
 
+/* --- hasil audit dark mode: People Risk Radar ----------------------------- */
+/* Wash merah pucat item Early Warning Indicators & footer Risk
+   Interdependency; tanpa aturan ini latar tetap nyaris putih sehingga teks
+   ink-900 (terang di dark) tidak terbaca. */
+[data-theme="dark"] .bg-\[\#fdf7f7\] {
+  background-color: rgba(248, 113, 113, 0.1);
+}
+[data-theme="dark"] .border-\[\#f6dede\] {
+  border-color: rgba(248, 113, 113, 0.28);
+}
+/* Judul skenario ungu tua pada Scenario Impact. */
+[data-theme="dark"] .text-\[\#6d3fd8\] {
+  color: #a78bfa;
+}
+/* Ikon amber Decision Center — samakan dengan amber dark lain. */
+[data-theme="dark"] .text-\[\#f5a524\] {
+  color: #fbbf24;
+}
+/* Node SVG Risk Interdependency memakai atribut fill, tak tersentuh utility. */
+[data-theme="dark"] svg rect[fill="#fdecec"] {
+  fill: rgba(248, 113, 113, 0.16);
+}
+[data-theme="dark"] svg rect[fill="#fdf3e0"] {
+  fill: rgba(245, 158, 11, 0.16);
+}
+[data-theme="dark"] svg rect[fill="#1b3a6b"] {
+  fill: #2c4d84;
+}
+[data-theme="dark"] svg text[fill="#ef4444"] {
+  fill: #f87171;
+}
+[data-theme="dark"] svg text[fill="#d98b06"] {
+  fill: #fbbf24;
+}
+
 /* --- scrollbar ------------------------------------------------------------ */
 [data-theme="dark"] .scroll-thin::-webkit-scrollbar-thumb {
   background: #33405280;

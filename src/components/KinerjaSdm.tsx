@@ -5,15 +5,19 @@ import { ChevronDown, ChevronRight } from "lucide-react";
 import { komposisiKaryawan, sdmKpi } from "@/lib/data";
 import { CHART_TOOLTIP_STYLE } from "@/lib/chart-palette";
 import { Delta } from "./ui/Delta";
+import { DetailLink } from "./DetailLink";
 
 export function KinerjaSdm() {
   return (
     <div className="card flex h-full flex-col px-3.5 pb-2.5 pt-3">
       <div className="flex items-center justify-between gap-1">
         <h3 className="card-title-navy whitespace-nowrap">KINERJA SDM</h3>
-        <button className="select-chip whitespace-nowrap">
-          YTD 2026 <ChevronDown size={11} />
-        </button>
+        <div className="flex shrink-0 items-center gap-2">
+          <DetailLink href="/sdm-talenta" />
+          <button className="select-chip whitespace-nowrap">
+            YTD 2026 <ChevronDown size={11} />
+          </button>
+        </div>
       </div>
 
       <div className="mt-2.5 grid grid-cols-3 gap-1">

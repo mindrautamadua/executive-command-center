@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -E '^\\(land-plot|shovel|sprout|factory|calculator|handshake|truck|rocket|layout-dashboard\\)\\\\.js$')",
+      "Bash(node -e \"const l=require\\('lucide-react'\\); for \\(const n of ['LayoutDashboard','TrendingUp','PieChart','Layers','Banknote','Scale','Landmark','ClipboardCheck','Route','ShieldAlert']\\) console.log\\(n, !!l[n]\\)\")",
+      "Bash(git -C /Users/muhammadindrautama/Aplikasi/executive-command-center status --short)",
+      "Bash(npx tsx -e ' *)",
+      "Bash(node -e \"const l=require\\('lucide-react'\\);['Grid3x3','MonitorSmartphone','LayoutGrid','Milestone','Gem','Landmark','Rocket','Flag','Percent','Leaf','Coins','Wallet','Clock3','Award','BarChart3','AlertTriangle','Gauge','Target','LineChart','FolderKanban','GitBranch','Waypoints','ListChecks','TrendingUp'].forEach\\(n=>{if\\(!l[n]\\)console.log\\('MISSING',n\\)}\\);console.log\\('ok'\\)\")",
+      "Bash(echo \"EXIT=$?\")",
+      "Bash(node -e ' *)",
+      "Bash(perl -pi -e 's/Serapan biaya YTD Rp 284,2 M/Serapan biaya YTD ±Rp 284 M/; s/realisasi YTD Rp 284,2 M/realisasi YTD ±Rp 284 M/' src/lib/arp-data.ts)",
+      "Bash(pkill -f \"next dev -p 3987\")"
+    ]
+  }
+}

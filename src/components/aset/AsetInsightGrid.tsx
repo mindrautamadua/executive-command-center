@@ -1,0 +1,86 @@
+import { ArrowRight, Lightbulb, Sparkles } from "lucide-react";
+import type { AstInsight } from "@/lib/ast-core";
+import type { AstRekomendasi } from "@/lib/ast-data";
+
+const TONES: Record<AstInsight["tone"], { bg: string; icon: string; title: string }> = {
+  red: { bg: "bg-[#fdecec]", icon: "text-[#ef4444]", title: "text-[#ef4444]" },
+  amber: { bg: "bg-[#fdf3e0]", icon: "text-[#d98b06]", title: "text-[#d98b06]" },
+  green: { bg: "bg-ptpn-greenLight", icon: "text-ptpn-green", title: "text-ptpn-green" },
+  blue: { bg: "bg-[#e8f1fd]", icon: "text-[#2f6fe4]", title: "text-[#2f6fe4]" },
+};
+
+function Shell({ children }: { children: React.ReactNode }) {
+  return (
+    <div
+      className="card anim-rise px-4 pb-3.5 pt-3"
+      style={{ "--d": "120ms" } as React.CSSProperties}
+    >
+      <div className="flex items-center justify-between gap-2">
+        <h3 className="text-[10px] font-extrabold uppercase tracking-[0.05em] text-ink-900">
+          Insight &amp; Rekomendasi{" "}
+          <span className="font-semibold normal-case tracking-normal text-ink-400">
+            (Decision-grade)
+          </span>
+        </h3>
+        <button className="flex shrink-0 items-center gap-1.5 rounded-lg border border-[#e3e9ef] bg-white px-3 py-[6px] text-[9.5px] font-semibold text-ink-700 transition-colors hover:border-ptpn-green hover:text-ptpn-green">
+          Lihat Semua Insight <ArrowRight size={11} />
+        </button>
+      </div>
+      {children}
+    </div>
+  );
+}
+
+/** Insight bertajuk + nada (dipakai halaman detail dimensi Aset & Investasi). */
+export function AsetInsightGrid({ items, cols }: { items: AstInsight[]; cols: string }) {
+  return (
+    <Shell>
+      <div className={`mt-2.5 grid gap-3 ${cols}`}>
+        {items.map((ins) => {
+          const tone = TONES[ins.tone];
+          return (
+            <div key={ins.title} className="flex items-start gap-2.5">
+              <span
+                className={`flex h-[30px] w-[30px] shrink-0 items-center justify-center rounded-full ${tone.bg} ${tone.icon}`}
+              >
+                <Lightbulb size={14} strokeWidth={1.9} />
+              </span>
+              <div className="min-w-0">
+                <div className={`text-[9.5px] font-bold leading-snug ${tone.title}`}>
+                  {ins.title}
+                </div>
+                <p className="mt-[3px] text-[8.5px] leading-snug text-ink-500">{ins.text}</p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </Shell>
+  );
+}
+
+/** Pasangan temuan + aksi lanjutan (dipakai Executive Overview aset). */
+export function AsetRekomendasiGrid({ items, cols }: { items: AstRekomendasi[]; cols: string }) {
+  return (
+    <Shell>
+      <div className={`mt-2.5 grid gap-3 ${cols}`}>
+        {items.map((ins) => (
+          <div key={ins.insight} className="flex items-start gap-2.5">
+            <span className="flex h-[30px] w-[30px] shrink-0 items-center justify-center rounded-full bg-[#e8f1fd] text-[#2f6fe4]">
+              <Lightbulb size={14} strokeWidth={1.9} />
+            </span>
+            <div className="min-w-0">
+              <p className="text-[8.5px] leading-snug text-ink-700">{ins.insight}</p>
+              <p className="mt-[4px] flex items-start gap-1 text-[8.5px] leading-snug text-ink-500">
+                <Sparkles size={9} className="mt-[1px] shrink-0 text-ptpn-green" />
+                <span>
+                  <span className="font-bold text-ptpn-green">Rekomendasi:</span> {ins.rekomendasi}
+                </span>
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Shell>
+  );
+}

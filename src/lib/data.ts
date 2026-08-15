@@ -16,47 +16,47 @@ const s = (arr: number[]) => arr;
 export const kpiStrip: KpiStripItem[] = [
   {
     label: "PENDAPATAN KONSOLIDASI",
-    value: "Rp 56,80 T",
-    delta: "12,45%",
+    value: "Rp 24,60 T",
+    delta: "9,30%",
     trend: "up",
-    compare: "vs YTD 2024: Rp 50,48 T",
+    compare: "vs YTD 2025: Rp 22,51 T",
     color: "#22a45d",
     series: s([28, 26, 31, 29, 34, 33, 38, 36, 41, 44, 42, 48, 46, 52, 56]),
   },
   {
     label: "EBITDA",
-    value: "Rp 9,62 T",
-    delta: "15,30%",
+    value: "Rp 6,82 T",
+    delta: "12,10%",
     trend: "up",
-    compare: "vs YTD 2024: Rp 8,35 T",
+    compare: "vs YTD 2025: Rp 6,08 T",
     color: "#2f9bf5",
     series: s([22, 25, 23, 28, 26, 31, 29, 33, 36, 34, 39, 42, 40, 45, 49]),
   },
   {
     label: "LABA BERSIH",
-    value: "Rp 4,38 T",
-    delta: "18,70%",
+    value: "Rp 2,94 T",
+    delta: "14,80%",
     trend: "up",
-    compare: "vs YTD 2024: Rp 3,69 T",
+    compare: "vs YTD 2025: Rp 2,56 T",
     color: "#8b5cf6",
     series: s([18, 21, 19, 24, 22, 27, 25, 30, 28, 34, 32, 38, 41, 44, 50]),
   },
   {
     label: "ROA",
-    value: "5,61%",
-    delta: "0,82 ppts",
+    value: "4,60%",
+    delta: "0,40 ppts",
     trend: "up",
-    compare: "vs YTD 2024: 4,79%",
+    compare: "vs YTD 2025: 4,20%",
     color: "#38b6ff",
     series: s([30, 28, 33, 31, 36, 34, 38, 36, 40, 38, 43, 41, 46, 44, 49]),
   },
   {
     label: "PRODUKSI CPO",
-    value: "1,95",
+    value: "0,99",
     unit: "Juta Ton",
-    delta: "7,25%",
+    delta: "7,10%",
     trend: "up",
-    compare: "vs YTD 2024: 1,82 Juta Ton",
+    compare: "vs YTD 2025: 0,92 Juta Ton",
     color: "#f5a524",
     series: s([26, 29, 27, 32, 30, 35, 33, 37, 35, 40, 38, 42, 40, 45, 47]),
   },
@@ -66,7 +66,7 @@ export const kpiStrip: KpiStripItem[] = [
     unit: "/kg",
     delta: "9,10%",
     trend: "up",
-    compare: "vs YTD 2024: Rp 11.43 /kg",
+    compare: "vs YTD 2025: Rp 11.441 /kg",
     color: "#5fbf5f",
     series: s([24, 27, 25, 30, 28, 33, 31, 36, 34, 39, 37, 42, 40, 45, 48]),
   },
@@ -76,7 +76,7 @@ export const kpiStrip: KpiStripItem[] = [
     unit: "/kg",
     delta: "1,20%",
     trend: "down",
-    compare: "vs YTD 2024: Rp 18.87 /kg",
+    compare: "vs YTD 2025: Rp 18.877 /kg",
     color: "#ef4444",
     series: s([44, 42, 45, 41, 43, 39, 41, 37, 39, 35, 37, 33, 35, 31, 30]),
   },
@@ -96,12 +96,13 @@ export const mapLegend = [
   { label: "Pelabuhan", value: "7", color: "#8b5cf6" },
 ];
 
+/** Pendapatan YTD per regional (Rp T) — jumlah 24,60 T sesuai kpiStrip. */
 export const regional = [
-  { name: "Regional 1", color: "#22a45d", value: "Rp 18,65 T", delta: "13,2%", trend: "up" as Trend },
-  { name: "Regional 2", color: "#f5a524", value: "Rp 14,21 T", delta: "10,1%", trend: "up" as Trend },
-  { name: "Regional 3", color: "#2f9bf5", value: "Rp 9,38 T", delta: "8,7%", trend: "up" as Trend },
-  { name: "Regional 4", color: "#ef4444", value: "Rp 7,12 T", delta: "-2,3%", trend: "down" as Trend },
-  { name: "Regional 5", color: "#8b5cf6", value: "Rp 7,44 T", delta: "5,6%", trend: "up" as Trend },
+  { name: "Regional 1", color: "#22a45d", value: "Rp 8,09 T", delta: "13,2%", trend: "up" as Trend },
+  { name: "Regional 2", color: "#f5a524", value: "Rp 6,15 T", delta: "10,1%", trend: "up" as Trend },
+  { name: "Regional 3", color: "#2f9bf5", value: "Rp 4,06 T", delta: "8,7%", trend: "up" as Trend },
+  { name: "Regional 4", color: "#ef4444", value: "Rp 3,08 T", delta: "-2,3%", trend: "down" as Trend },
+  { name: "Regional 5", color: "#8b5cf6", value: "Rp 3,22 T", delta: "5,6%", trend: "up" as Trend },
 ];
 
 export const alerts = [
@@ -155,38 +156,56 @@ export const berita = [
 
 const bulan = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agt", "Sep", "Okt", "Nov", "Des"];
 
-export const trendKeuangan = bulan.map((m, i) => {
-  const base = [30, 31.5, 33, 34.5, 36.5, 38, 40, 41.5, 43.5, 45, 47, 49.5];
-  return {
-    name: m,
-    bar1: base[i] * 0.62,
-    bar2: base[i] * 0.38,
-    line: base[i] + 4.5,
-    dot: base[i] + 4.5,
-  };
-});
+/**
+ * Pendapatan kumulatif 2026 (Rp T): Jan–Mei realisasi (Mei = Rp 24,6 T sesuai
+ * group-baseline), Jun–Des proyeksi menuju RKAP FY Rp 58,4 T. `line` = target
+ * RKAP prorata. Bar dipecah PalmCo vs subholding lain (70,7% / 29,3%).
+ */
+const pendapatanKumulatif = [4.4, 9.0, 14.0, 19.2, 24.6, 29.6, 34.8, 40.2, 45.5, 50.7, 55.1, 58.4];
 
+export const trendKeuangan = bulan.map((m, i) => ({
+  name: m,
+  bar1: +(pendapatanKumulatif[i] * 0.707).toFixed(2),
+  bar2: +(pendapatanKumulatif[i] * 0.293).toFixed(2),
+  line: +((58.4 / 12) * (i + 1)).toFixed(2),
+  dot: +((58.4 / 12) * (i + 1)).toFixed(2),
+}));
+
+/** Komposisi nilai penjualan YTD (%) — selaras revenueByKomoditas di pemasaran-data.ts. */
 export const komposisiPenjualan = [
-  { name: "CPO", value: 58, color: "#3fb56f" },
-  { name: "PK", value: 22, color: "#57c8e8" },
-  { name: "Karet", value: 10, color: "#8b7cf6" },
-  { name: "Tebu", value: 6, color: "#f2c94c" },
-  { name: "Lainnya", value: 4, color: "#c9b8f7" },
+  { name: "CPO", value: 61, color: "#3fb56f" },
+  { name: "Hilirisasi", value: 15, color: "#57c8e8" },
+  { name: "Gula & Tetes", value: 9, color: "#f2c94c" },
+  { name: "PK & PKO", value: 8, color: "#8b7cf6" },
+  { name: "Karet, Teh & Lainnya", value: 7, color: "#c9b8f7" },
 ];
+
+/**
+ * Produksi kumulatif 2026 (juta ton): Jan–Mei realisasi (CPO 0,99 · PK 0,203 ·
+ * karet 0,0476 · gula 0,092 sesuai group-baseline), Jun–Des proyeksi menuju
+ * RKAP FY (CPO 2,53 · PK 0,52 · karet 0,118 · gula 0,78). Gula nol sebelum
+ * Mei karena musim giling baru dimulai bulan tersebut.
+ */
+const KUMULATIF = {
+  CPO: [0.19, 0.39, 0.59, 0.79, 0.99, 1.2, 1.42, 1.65, 1.88, 2.1, 2.32, 2.53],
+  PK: [0.039, 0.08, 0.122, 0.163, 0.203, 0.246, 0.291, 0.338, 0.385, 0.43, 0.475, 0.52],
+  Karet: [0.0095, 0.019, 0.0286, 0.0381, 0.0476, 0.0575, 0.067, 0.077, 0.0865, 0.096, 0.107, 0.118],
+  Gula: [0, 0, 0, 0, 0.092, 0.25, 0.41, 0.55, 0.66, 0.73, 0.77, 0.78],
+};
 
 export const produksiSeries = bulan.map((m, i) => ({
   name: m,
-  CPO: 1.55 + i * 0.033 + (i % 3 === 0 ? 0.05 : 0),
-  PK: 2.05 + i * 0.036 + (i % 4 === 0 ? 0.04 : 0),
-  Karet: 0.62 + i * 0.006,
-  Tebu: 0.28 + i * 0.004,
+  CPO: KUMULATIF.CPO[i],
+  PK: KUMULATIF.PK[i],
+  Karet: KUMULATIF.Karet[i],
+  Gula: KUMULATIF.Gula[i],
 }));
 
 export const produksiKpi = [
-  { label: "CPO", value: "1,95", unit: "Juta Ton", delta: "7,25%", trend: "up" as Trend },
-  { label: "PK", value: "2,48", unit: "Juta Ton", delta: "6,80%", trend: "up" as Trend },
-  { label: "KARET", value: "286", unit: "Ribu Ton", delta: "4,12%", trend: "up" as Trend },
-  { label: "TEBU", value: "3,21", unit: "Juta Ton", delta: "5,45%", trend: "up" as Trend },
+  { label: "CPO", value: "0,99", unit: "Juta Ton", delta: "7,10%", trend: "up" as Trend },
+  { label: "PK", value: "203", unit: "Ribu Ton", delta: "6,40%", trend: "up" as Trend },
+  { label: "KARET", value: "47,6", unit: "Ribu Ton", delta: "1,90%", trend: "down" as Trend },
+  { label: "TEBU", value: "1,24", unit: "Juta Ton", delta: "5,45%", trend: "up" as Trend },
 ];
 
 export const sdmKpi = [
@@ -202,34 +221,44 @@ export const komposisiKaryawan = [
   { name: "Manajerial", value: 4, color: "#cbd5e1" },
 ];
 
+/** Selaras group-baseline: yield CPO/ha, HPP CPO, utilisasi PKS, ROE = laba FY ÷ ekuitas. */
 export const kpiStrategis = [
-  { label: "Market Share CPO Nasional", value: "27,8%", delta: "1,2 ppts", trend: "up" as Trend },
-  { label: "Produktivitas CPO", value: "4,25", unit: "Ton/Ha", delta: "0,18", trend: "up" as Trend },
-  { label: "Biaya Produksi CPO", value: "Rp 8.432", unit: "/kg", delta: "-2,15%", trend: "down" as Trend },
-  { label: "Utilisasi Pabrik Kelapa Sawit", value: "87,3%", delta: "3,2 ppts", trend: "up" as Trend },
-  { label: "Return on Equity (ROE)", value: "12,45%", delta: "1,85 ppts", trend: "up" as Trend },
+  { label: "Market Share CPO Nasional", value: "5,4%", delta: "0,2 ppts", trend: "up" as Trend },
+  { label: "Produktivitas CPO", value: "4,90", unit: "Ton/Ha", delta: "0,14", trend: "up" as Trend },
+  {
+    label: "Biaya Produksi CPO",
+    value: "Rp 8.950",
+    unit: "/kg",
+    delta: "2,90%",
+    trend: "up" as Trend,
+    // HPP naik di atas target Rp 8.700 — kenaikan di sini berarti buruk.
+    tone: "bad" as const,
+  },
+  { label: "Utilisasi Pabrik Kelapa Sawit", value: "78,4%", delta: "1,8 ppts", trend: "up" as Trend },
+  { label: "Return on Equity (ROE)", value: "10,40%", delta: "0,95 ppts", trend: "up" as Trend },
 ];
 
+/** Proyeksi tutup tahun 2026 — selaras fyForecast di kba-data.ts & RKAP produksi. */
 export const analitikPrediktif = [
   {
     label: "Proyeksi Produksi CPO 2026",
-    value: "4,15",
+    value: "2,53",
     unit: "Juta Ton",
-    delta: "6,8% vs 2024",
+    delta: "6,8% vs 2025",
     color: "#22a45d",
     series: [20, 24, 22, 28, 26, 32, 30, 36, 34, 40, 44, 48],
   },
   {
     label: "Proyeksi Pendapatan 2026",
-    value: "Rp 125,6 T",
-    delta: "8,9% vs 2024",
+    value: "Rp 59,1 T",
+    delta: "9,0% vs 2025",
     color: "#2f9bf5",
     series: [24, 22, 27, 25, 31, 29, 35, 33, 39, 37, 43, 47],
   },
   {
     label: "Proyeksi Laba Bersih 2026",
-    value: "Rp 9,8 T",
-    delta: "10,2% vs 2024",
+    value: "Rp 6,3 T",
+    delta: "10,2% vs 2025",
     color: "#8b5cf6",
     series: [18, 22, 20, 26, 24, 30, 28, 34, 32, 38, 42, 46],
   },
@@ -240,7 +269,7 @@ export const liveFeed = [
   { label: "PK", value: "Rp 2.548", delta: "6,75%", trend: "up" as Trend },
   { label: "Karet", value: "Rp 18.650", delta: "-1,20%", trend: "down" as Trend },
   { label: "Tebu", value: "Rp 1.225", delta: "3,45%", trend: "up" as Trend },
-  { label: "Kurs: USD/IDR", value: "16.325", delta: "0,25%", trend: "up" as Trend },
+  { label: "Kurs: USD/IDR", value: "16.250", delta: "0,25%", trend: "up" as Trend },
   { label: "Brent Oil", value: "$82,45", delta: "-0,35%", trend: "down" as Trend },
 ];
 

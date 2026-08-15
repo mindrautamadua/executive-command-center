@@ -12,12 +12,13 @@ import {
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { produksiKpi, produksiSeries } from "@/lib/data";
 import { Delta } from "./ui/Delta";
+import { DetailLink } from "./DetailLink";
 
 const SERIES = [
   { key: "CPO", color: "#2f9bf5" },
   { key: "PK", color: "#7ed957" },
   { key: "Karet", color: "#f5a524" },
-  { key: "Tebu", color: "#8b5cf6" },
+  { key: "Gula", color: "#8b5cf6" },
 ];
 
 export function KinerjaProduksi() {
@@ -25,9 +26,12 @@ export function KinerjaProduksi() {
     <div className="card flex h-full flex-col px-3.5 pb-2.5 pt-3">
       <div className="flex items-center justify-between gap-1">
         <h3 className="card-title whitespace-nowrap">KINERJA PRODUKSI</h3>
-        <button className="select-chip whitespace-nowrap">
-          YTD 2026 <ChevronDown size={11} />
-        </button>
+        <div className="flex shrink-0 items-center gap-2">
+          <DetailLink href="/produksi-operasi" />
+          <button className="select-chip whitespace-nowrap">
+            YTD 2026 <ChevronDown size={11} />
+          </button>
+        </div>
       </div>
 
       <div className="mt-2.5 grid grid-cols-4 gap-1">

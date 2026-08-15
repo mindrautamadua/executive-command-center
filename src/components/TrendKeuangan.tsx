@@ -13,33 +13,38 @@ import {
 } from "recharts";
 import { ChevronDown } from "lucide-react";
 import { trendKeuangan } from "@/lib/data";
+import { DetailLink } from "./DetailLink";
 
 const CHIPS = ["Pendapatan", "EBITDA", "Laba Bersih"];
 
 export function TrendKeuangan() {
   const [chip, setChip] = useState(CHIPS[0]);
-  const scale = chip === "Pendapatan" ? 1 : chip === "EBITDA" ? 0.19 : 0.088;
+  // Rasio RKAP FY 2026: EBITDA 15,2 T dan laba bersih 6,1 T atas pendapatan 58,4 T.
+  const scale = chip === "Pendapatan" ? 1 : chip === "EBITDA" ? 0.26 : 0.104;
   const data = trendKeuangan.map((d) => ({
     ...d,
-    bar1: (d.bar1 + d.bar2) * 0.8 * scale,
-    bar2: (d.bar1 + d.bar2) * 0.2 * scale,
+    bar1: d.bar1 * scale,
+    bar2: d.bar2 * scale,
     line: d.line * scale,
   }));
-  const max = chip === "Pendapatan" ? 60 : chip === "EBITDA" ? 12 : 6;
+  const max = chip === "Pendapatan" ? 60 : chip === "EBITDA" ? 16 : 7;
   const ticks =
     chip === "Pendapatan"
       ? [0, 15, 30, 45, 60]
       : chip === "EBITDA"
-        ? [0, 3, 6, 9, 12]
-        : [0, 1.5, 3, 4.5, 6];
+        ? [0, 4, 8, 12, 16]
+        : [0, 1.75, 3.5, 5.25, 7];
 
   return (
     <div className="card flex h-full flex-col px-3.5 pb-2 pt-3">
       <div className="flex items-center justify-between gap-1">
         <h3 className="card-title whitespace-nowrap">TREND KINERJA KEUANGAN</h3>
-        <button className="select-chip whitespace-nowrap">
-          YTD 2026 <ChevronDown size={11} />
-        </button>
+        <div className="flex shrink-0 items-center gap-2">
+          <DetailLink href="/keuangan" />
+          <button className="select-chip whitespace-nowrap">
+            YTD 2026 <ChevronDown size={11} />
+          </button>
+        </div>
       </div>
 
       <div className="mt-2 flex gap-1.5">

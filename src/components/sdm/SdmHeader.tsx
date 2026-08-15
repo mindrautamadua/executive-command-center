@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Check, ChevronDown } from "lucide-react";
+import { Check, ChevronDown, LayoutDashboard } from "lucide-react";
 import { orgNodes } from "@/lib/hc-data";
 import { ModuleHeader, SelectBox } from "@/components/ui/ModuleHeader";
 
@@ -68,6 +68,7 @@ function OrgLevelSelect() {
 export function SdmHeader() {
   return (
     <ModuleHeader
+      icon={<LayoutDashboard size={19} strokeWidth={1.9} />}
       title="HC Executive Command Center"
       subtitle="Human Capital Intelligence for Sustainable Growth"
       controls={
@@ -76,6 +77,7 @@ export function SdmHeader() {
           <OrgLevelSelect />
         </>
       }
+      dataAsOf="Data per 31 Mei 2026 (YTD)"
     />
   );
 }

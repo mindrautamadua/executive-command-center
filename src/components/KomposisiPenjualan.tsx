@@ -4,6 +4,7 @@ import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 import { ArrowRight } from "lucide-react";
 import { komposisiPenjualan } from "@/lib/data";
 import { Delta } from "./ui/Delta";
+import { DetailLink } from "./DetailLink";
 
 export function KomposisiPenjualan() {
   return (
@@ -11,6 +12,9 @@ export function KomposisiPenjualan() {
       <div className="flex items-baseline gap-1.5">
         <h3 className="card-title whitespace-nowrap">KOMPOSISI PENJUALAN</h3>
         <span className="text-[9px] text-ink-400">(YTD 2026)</span>
+        <span className="ml-auto">
+          <DetailLink href="/pemasaran-penjualan" />
+        </span>
       </div>
 
       <div className="flex min-h-0 flex-1 items-center">

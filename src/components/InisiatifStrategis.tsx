@@ -1,11 +1,12 @@
 import { inisiatif } from "@/lib/data";
+import { DetailLink } from "./DetailLink";
 
 export function InisiatifStrategis() {
   return (
     <div className="card shrink-0 px-4 pb-2 pt-2">
       <div className="flex items-center justify-between">
         <h3 className="card-title">INISIATIF STRATEGIS</h3>
-        <button className="link-more">Lihat semua</button>
+        <DetailLink href="/strategi-kinerja" />
       </div>
 
       <div className="mt-1.5 flex flex-col gap-[6px]">

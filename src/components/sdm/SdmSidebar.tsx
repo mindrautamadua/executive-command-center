@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { ChevronLeft, LayoutGrid } from "lucide-react";
 import { PtpnLogo } from "../PtpnLogo";
 import { SDM_MENU_SECTIONS, type SdmMenuItem } from "@/lib/sdm-menu";
 import { dataTrust } from "@/lib/hc-data";
@@ -69,16 +70,32 @@ export function SdmSidebar({ active }: Props) {
 
   return (
     <aside className="flex h-full w-[200px] shrink-0 flex-col border-r border-[#e9eef3] bg-white">
-      <div className="flex items-center gap-2 border-b border-[#f0f3f6] px-4 pb-3 pt-3.5">
-        <PtpnLogo size={22} />
-        <div className="leading-none">
-          <div className="text-[14px] font-extrabold tracking-tight text-[#1b3a6b]">
-            PTPN <span className="text-ptpn-green">GROUP</span>
+      <div className="border-b border-[#f0f3f6] px-4 pb-3 pt-3.5">
+        <Link href="/" className="flex items-center gap-2" title="Kembali ke Dashboard Utama">
+          <PtpnLogo size={22} />
+          <div className="leading-none">
+            <div className="text-[14px] font-extrabold tracking-tight text-[#1b3a6b]">
+              PTPN <span className="text-ptpn-green">GROUP</span>
+            </div>
+            <div className="mt-[3px] whitespace-nowrap text-[7.5px] font-semibold text-ptpn-green">
+              Executive Command Center
+            </div>
           </div>
-          <div className="mt-[3px] whitespace-nowrap text-[7.5px] font-semibold text-ptpn-green">
-            Executive Command Center
-          </div>
+        </Link>
+        <div className="mt-2 inline-flex rounded bg-[#eef2f6] px-1.5 py-[2px] text-[8px] font-bold uppercase tracking-[0.06em] text-ink-500">
+          SDM &amp; Talenta
         </div>
+      </div>
+
+      <div className="border-b border-[#f0f3f6] px-2.5 py-2">
+        <Link
+          href="/"
+          className="flex w-full items-center gap-2 rounded-lg bg-[#f5f8fa] px-2.5 py-[7px] text-[10.5px] font-semibold text-ink-700 transition-colors hover:bg-ptpn-greenLight hover:text-ptpn-green"
+        >
+          <ChevronLeft size={13} strokeWidth={2} className="shrink-0" />
+          <LayoutGrid size={13} strokeWidth={1.8} className="shrink-0" />
+          <span className="min-w-0 flex-1 truncate leading-[1.2]">Dashboard Utama</span>
+        </Link>
       </div>
 
       <nav className="scroll-thin min-h-0 flex-1 overflow-y-auto px-2.5 pb-2 pt-2">

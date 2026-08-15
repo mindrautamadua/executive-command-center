@@ -1,7 +1,7 @@
 "use client";
 
 import { BookText, Search } from "lucide-react";
-import { ExportButton, ModuleHeader } from "@/components/ui/ModuleHeader";
+import { ModuleHeader } from "@/components/ui/ModuleHeader";
 
 export function DdHeader() {
   return (
@@ -16,7 +16,6 @@ export function DdHeader() {
         </div>
       }
       dataAsOf="Versi katalog: review triwulanan, pembaruan terakhir 31 Mei 2026"
-      actions={<ExportButton label="Export Katalog" />}
     />
   );
 }

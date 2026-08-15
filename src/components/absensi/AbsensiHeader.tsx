@@ -1,11 +1,12 @@
 "use client";
 
-import { FileText } from "lucide-react";
+import { CalendarCheck, FileText } from "lucide-react";
 import { ExportButton, ModuleHeader, SelectBox } from "@/components/ui/ModuleHeader";
 
 export function AbsensiHeader() {
   return (
     <ModuleHeader
+      icon={<CalendarCheck size={19} strokeWidth={1.9} />}
       title={<>Absensi &amp; Kehadiran</>}
       subtitle={
         <>
@@ -20,6 +21,7 @@ export function AbsensiHeader() {
           <SelectBox label="Lokasi" value="Semua Lokasi" width="158px" />
         </>
       }
+      dataAsOf="Data per 31 Mei 2026 (YTD)"
       actions={
         <>
           <ExportButton />

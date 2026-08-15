@@ -1,11 +1,12 @@
 "use client";
 
-import { FileText } from "lucide-react";
+import { FileText, Users } from "lucide-react";
 import { ExportButton, ModuleHeader, SelectBox } from "@/components/ui/ModuleHeader";
 
 export function DiHeader() {
   return (
     <ModuleHeader
+      icon={<Users size={19} strokeWidth={1.9} />}
       title={<>Diversity, Equity &amp; Inclusion</>}
       subtitle={
         <>
@@ -20,6 +21,7 @@ export function DiHeader() {
           <SelectBox label="Lokasi" value="Semua Lokasi" width="148px" />
         </>
       }
+      dataAsOf="Data per 31 Mei 2026 (YTD)"
       actions={
         <>
           <ExportButton />

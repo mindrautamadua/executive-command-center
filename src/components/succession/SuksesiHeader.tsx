@@ -1,11 +1,12 @@
 "use client";
 
-import { FileText } from "lucide-react";
+import { Crown, FileText } from "lucide-react";
 import { ExportButton, ModuleHeader, SelectBox } from "@/components/ui/ModuleHeader";
 
 export function SuksesiHeader() {
   return (
     <ModuleHeader
+      icon={<Crown size={19} strokeWidth={1.9} />}
       title="Succession Planning"
       subtitle="Memastikan keberlanjutan kepemimpinan untuk masa depan organisasi"
       controls={
@@ -15,6 +16,7 @@ export function SuksesiHeader() {
           <SelectBox label="Level Jabatan" value="Semua Level" width="148px" />
         </>
       }
+      dataAsOf="Data per 31 Mei 2026 (YTD)"
       actions={
         <>
           <ExportButton />

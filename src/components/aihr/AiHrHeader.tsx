@@ -6,9 +6,9 @@ import { ModuleHeader, SelectBox } from "@/components/ui/ModuleHeader";
 export function AiHrHeader() {
   return (
     <ModuleHeader
+      icon={<Sparkles size={19} strokeWidth={1.9} />}
       title="AI HR Assistant"
       subtitle="Asisten cerdas Anda untuk semua kebutuhan Human Capital"
-      icon={<Sparkles size={18} strokeWidth={1.9} />}
       controls={
         <>
           <SelectBox label="Mode" value="Standard" width="130px" />

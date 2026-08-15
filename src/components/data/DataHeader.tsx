@@ -1,10 +1,12 @@
 "use client";
 
+import { Database } from "lucide-react";
 import { ModuleHeader, SelectBox } from "@/components/ui/ModuleHeader";
 
 export function DataHeader() {
   return (
     <ModuleHeader
+      icon={<Database size={19} strokeWidth={1.9} />}
       title="Data & Analytics"
       subtitle="Trust · Quality · Governance · Intelligence"
       controls={

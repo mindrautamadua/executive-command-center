@@ -1,11 +1,15 @@
 import { ArrowRight } from "lucide-react";
 import { kpiStrategis } from "@/lib/data";
 import { Delta } from "./ui/Delta";
+import { DetailLink } from "./DetailLink";
 
 export function KpiStrategis() {
   return (
     <div className="card flex h-full flex-col px-4 pb-2 pt-2">
-      <h3 className="card-title">KPI STRATEGIS</h3>
+      <div className="flex items-center justify-between gap-1">
+        <h3 className="card-title">KPI STRATEGIS</h3>
+        <DetailLink href="/strategi-kinerja" />
+      </div>
 
       <div className="mt-1.5 grid min-h-0 flex-1 grid-cols-5 gap-2.5">
         {kpiStrategis.map((k) => (
@@ -24,7 +28,13 @@ export function KpiStrategis() {
                 <span className="text-[9px] font-medium text-ink-500">{k.unit}</span>
               )}
             </div>
-            <Delta value={k.delta} trend={k.trend} size={9.5} className="mt-1" />
+            <Delta
+              value={k.delta}
+              trend={k.trend}
+              tone={"tone" in k ? k.tone : undefined}
+              size={9.5}
+              className="mt-1"
+            />
           </div>
         ))}
       </div>

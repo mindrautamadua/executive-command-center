@@ -1,0 +1,327 @@
+/**
+ * Data statis halaman Executive Overview Strategi & Kinerja (/strategi-kinerja).
+ * Periode acuan: 31 Mei 2026 (YTD). Angka induk: group-baseline.ts + stg-core.ts.
+ */
+
+import { STRATEGI } from "./group-baseline";
+import {
+  initiatives,
+  scorecardScores,
+  type InitiativeStatus,
+  type InitiativeTheme,
+  type StgInsight,
+  type StgKpi,
+} from "./stg-core";
+
+/* ── 1. KPI Strip ─────────────────────────────────────────────────── */
+
+export const stgKpi: StgKpi[] = [
+  {
+    label: "Inisiatif Strategis RJPP",
+    value: "28",
+    sub: "17 On Track · 8 At Risk · 3 Off Track",
+    delta: "+2 on track",
+    trend: "up",
+    deltaTone: "good",
+    compare: "vs Q1 2026",
+    icon: "initiative",
+    tone: "blue",
+  },
+  {
+    label: "Skor KPI Korporat",
+    value: "87,4",
+    valueSuffix: "/100",
+    sub: "Kategori: Baik",
+    delta: "+0,6 pts",
+    trend: "up",
+    deltaTone: "good",
+    compare: "vs Q1 2026",
+    icon: "score",
+    tone: "green",
+  },
+  {
+    label: "Milestone Selesai",
+    value: "40,8%",
+    sub: "58 dari 142 Milestone 2026",
+    subDanger: true,
+    delta: "-5,1 pts vs rencana",
+    trend: "down",
+    deltaTone: "bad",
+    compare: "Rencana s.d. Mei: 47,9%",
+    icon: "milestone",
+    tone: "amber",
+  },
+  {
+    label: "Value Creation YTD",
+    value: "Rp 1,86 T",
+    sub: "44% dari Target FY Rp 4,2 T",
+    delta: "+Rp 0,45 T",
+    trend: "up",
+    deltaTone: "good",
+    compare: "vs Apr 2026",
+    icon: "value",
+    tone: "teal",
+  },
+  {
+    label: "Keputusan BOD Overdue",
+    value: "3",
+    sub: "Dari 46 Keputusan YTD",
+    subDanger: true,
+    delta: "+1",
+    trend: "up",
+    deltaTone: "bad",
+    compare: "vs Apr 2026",
+    icon: "decision",
+    tone: "red",
+  },
+  {
+    label: "Program Transformasi On-Track",
+    value: "4/6",
+    sub: "Health Index 74/100",
+    compare: "Stabil vs Apr 2026",
+    icon: "transform",
+    tone: "purple",
+  },
+];
+
+/* ── 2. Strategy Intelligence (narasi eksekutif) ──────────────────── */
+
+export interface StrategyIntelligence {
+  headline: string;
+  detail: string;
+  tone: "good" | "warn" | "bad";
+  /** Rute detail terkait. */
+  href: string;
+}
+
+export const strategyIntelligence: StrategyIntelligence[] = [
+  {
+    headline: "Swasembada gula tertinggal 2 milestone kritis",
+    detail:
+      "Perluasan areal tebu 60 rb ha (progres 28%) dan restrukturisasi 11 PG (22%) berstatus Off Track; revitalisasi 5 PG masih At Risk. Tanpa akselerasi Q3, target 1,45 jt ton gula 2028 mundur ±1 musim giling.",
+    tone: "bad",
+    href: "/strategi-kinerja/transformasi",
+  },
+  {
+    headline: "Hilirisasi berjalan lebih cepat dari rencana",
+    detail:
+      "5 dari 6 inisiatif hilirisasi On Track; refinery CPO terintegrasi progres 58% (rencana 52%) dan minyak goreng kemasan 64%. Porsi hilir 14,8% pendapatan — jalur ke target 25% pada 2030 tetap terbuka.",
+    tone: "good",
+    href: "/strategi-kinerja/portofolio-inisiatif",
+  },
+  {
+    headline: "Adopsi digital 68%, di bawah ambang efektif",
+    detail:
+      "Adopsi tools digital baru 68% vs target 80%; ERP S/4HANA At Risk (progres 54%) karena kesiapan data master SGN. Benefit digital baru Rp 0,13 T dari potensi Rp 1,3 T pada 2029.",
+    tone: "warn",
+    href: "/strategi-kinerja/transformasi",
+  },
+];
+
+/* ── 3. Initiative Portfolio Map (bubble) ─────────────────────────── */
+
+export interface PortfolioBubble {
+  name: string;
+  theme: InitiativeTheme;
+  /** Sumbu X: progres fisik (%). */
+  progress: number;
+  /** Sumbu Y: dampak = target EBITDA uplift 2029 (Rp T). */
+  impactRpT: number;
+  /** Ukuran bubble: kebutuhan investasi (Rp T). */
+  investRpT: number;
+  status: InitiativeStatus;
+}
+
+/** 28 bubble — diturunkan langsung dari register inisiatif stg-core. */
+export const portfolioBubbles: PortfolioBubble[] = initiatives.map((i) => ({
+  name: i.name,
+  theme: i.theme,
+  progress: i.progress,
+  impactRpT: i.valueTargetRpT,
+  investRpT: i.investRpT,
+  status: i.status,
+}));
+
+/* ── 4. Scorecard Snapshot (bar vs target 85) ─────────────────────── */
+
+export const scorecardSnapshot = scorecardScores;
+
+/* ── 5. Execution Risk Radar (6 sumbu) ────────────────────────────── */
+
+export interface ExecutionRiskAxis {
+  axis: string;
+  /** Skor eksposur 0-100 (semakin tinggi semakin berisiko). */
+  score: number;
+}
+
+export const executionRiskRadar: ExecutionRiskAxis[] = [
+  { axis: "Pendanaan", score: 62 },
+  { axis: "SDM & Kapabilitas", score: 58 },
+  { axis: "Perizinan & Lahan", score: 71 },
+  { axis: "Teknologi", score: 45 },
+  { axis: "Mitra Strategis", score: 52 },
+  { axis: "Regulasi", score: 66 },
+];
+
+/* ── 6. Value Creation Trend 2026 (area kumulatif) ────────────────── */
+
+export interface ValueTrendPoint {
+  month: string;
+  /** Realisasi kumulatif (Rp T); kosong setelah Mei. */
+  realisasi?: number;
+  /** Jalur target kumulatif menuju Rp 4,2 T. */
+  target: number;
+}
+
+/** Realisasi Mei = 1,86 T (baseline); target Des = 4,2 T. */
+export const valueCreationTrend: ValueTrendPoint[] = [
+  { month: "Jan", realisasi: 0.28, target: 0.3 },
+  { month: "Feb", realisasi: 0.61, target: 0.65 },
+  { month: "Mar", realisasi: 0.98, target: 1.05 },
+  { month: "Apr", realisasi: 1.41, target: 1.5 },
+  { month: "Mei", realisasi: STRATEGI.valueCreationYtdRpT, target: 2.0 },
+  { month: "Jun", target: 2.35 },
+  { month: "Jul", target: 2.7 },
+  { month: "Agu", target: 3.05 },
+  { month: "Sep", target: 3.4 },
+  { month: "Okt", target: 3.7 },
+  { month: "Nov", target: 3.95 },
+  { month: "Des", target: STRATEGI.valueCreationTargetFyRpT },
+];
+
+/* ── 7. Strategic Alignment — 5 sasaran RJPP 2025-2029 ────────────── */
+
+export interface RjppGoal {
+  goal: string;
+  /** Ukuran keberhasilan sasaran. */
+  measure: string;
+  /** Progres menuju sasaran (%). */
+  progress: number;
+  status: InitiativeStatus;
+}
+
+export const stgAlignment: RjppGoal[] = [
+  {
+    goal: "EBITDA Group Rp 25 T pada 2029",
+    measure: "Run-rate EBITDA 2026: Rp 16,4 T (annualized)",
+    progress: 48,
+    status: "On Track",
+  },
+  {
+    goal: "Swasembada gula konsumsi 2028",
+    measure: "Produksi 780 rb ton FY26 → target 1,45 jt ton 2028",
+    progress: 42,
+    status: "Off Track",
+  },
+  {
+    goal: "Porsi hilir 25% pendapatan pada 2030",
+    measure: "Porsi hilir saat ini 14,8%",
+    progress: 59,
+    status: "On Track",
+  },
+  {
+    goal: "Penurunan intensitas emisi 30% pada 2030",
+    measure: "Intensitas 1,82 tCO2e/ton CPO (baseline 2,10)",
+    progress: 38,
+    status: "At Risk",
+  },
+  {
+    goal: "Yield CPO 5,5 ton/ha pada 2029",
+    measure: "Yield CPO 4,69 ton/ha (basis areal tertanam)",
+    progress: 53,
+    status: "At Risk",
+  },
+];
+
+/* ── 8. BOD Strategy Decision Center ──────────────────────────────── */
+
+export interface StgDecision {
+  title: string;
+  situation: string;
+  decision: string;
+  exposure: string;
+  due: string;
+  tone: "red" | "amber";
+}
+
+/** Selaras 3 keputusan overdue di sbd-data.ts. */
+export const stgDecisions: StgDecision[] = [
+  {
+    title: "Restrukturisasi 11 PG Non-Kompetitif",
+    situation:
+      "11 PG SGN beroperasi di bawah skala ekonomis; inisiatif Off Track (progres 22%), menahan perbaikan HPP gula.",
+    decision: "Putuskan skema restrukturisasi (konsolidasi giling vs cold shutdown) per PG.",
+    exposure: "Rp 0,32 T/thn",
+    due: "Overdue 34 hari",
+    tone: "red",
+  },
+  {
+    title: "Divestasi Aset Non-Produktif PTPN I",
+    situation:
+      "Keputusan divestasi tahap I tertunda menunggu penilaian ulang KJPP; opportunity cost dana revitalisasi berjalan.",
+    decision: "Setujui long-list aset divestasi tahap I dan mandat eksekusi.",
+    exposure: "Rp 1,4 T",
+    due: "Overdue 21 hari",
+    tone: "red",
+  },
+  {
+    title: "Kemitraan Bioetanol Tebu",
+    situation:
+      "Term sheet mitra strategis belum final; feedstock commitment memerlukan keputusan alokasi tetes 2027.",
+    decision: "Setujui struktur kemitraan & alokasi feedstock bioetanol.",
+    exposure: "Rp 1,1 T",
+    due: "Overdue 12 hari",
+    tone: "amber",
+  },
+];
+
+/* ── 9. Alerts ────────────────────────────────────────────────────── */
+
+export interface StgAlert {
+  title: string;
+  desc: string;
+  tone: "red" | "amber" | "blue";
+}
+
+export const stgAlerts: StgAlert[] = [
+  {
+    title: "3 inisiatif Off Track",
+    desc: "Perluasan areal tebu, restrukturisasi 11 PG, elektrifikasi pabrik — perlu keputusan Direksi Q3.",
+    tone: "red",
+  },
+  {
+    title: "19 milestone terlambat",
+    desc: "8 di antaranya pada program Swasembada Gula; 7 milestone kritis jatuh tempo ≤30 hari.",
+    tone: "red",
+  },
+  {
+    title: "Gap pendanaan portofolio Rp 6,9 T",
+    desc: "Alokasi baru Rp 14,9 T dari kebutuhan Rp 21,8 T — menunggu keputusan funding mix.",
+    tone: "amber",
+  },
+  {
+    title: "Skor SGN turun 2 kuartal beruntun",
+    desc: "82,6 (Q2) dari 83,4 (Q4-25); driver: rendemen & HPP gula.",
+    tone: "amber",
+  },
+];
+
+/* ── 10. Insight & rekomendasi ────────────────────────────────────── */
+
+export const stgInsights: StgInsight[] = [
+  {
+    title: "Prioritaskan unblocking Swasembada Gula",
+    text: "3 keputusan struktural (restrukturisasi PG, perluasan areal, kemitraan bioetanol) menahan 5 inisiatif senilai Rp 2,6 T uplift. Jadikan agenda tunggal Radirsus Q3.",
+    tone: "bad",
+  },
+  {
+    title: "Realokasi pendanaan ke inisiatif ber-run-rate tinggi",
+    text: "Efisiensi biaya & yield menyumbang 59% value creation YTD dengan investasi terkecil — layak menyerap gap alokasi sebelum capex hilirisasi tahap II.",
+    tone: "info",
+  },
+  {
+    title: "Kunci momentum hilirisasi",
+    text: "Refinery & minyak goreng ahead of plan; amankan komitmen offtake dan jadwal komisioning agar benefit masuk sebelum musim harga lemah Q4.",
+    tone: "good",
+  },
+];

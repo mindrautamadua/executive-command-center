@@ -1,11 +1,12 @@
 "use client";
 
-import { FileText, Sparkles } from "lucide-react";
+import { FileText, Sparkles, Wallet } from "lucide-react";
 import { ExportButton, ModuleHeader, SelectBox } from "@/components/ui/ModuleHeader";
 
 export function CompHeader() {
   return (
     <ModuleHeader
+      icon={<Wallet size={19} strokeWidth={1.9} />}
       title={<>Compensation &amp; Benefits</>}
       subtitle="Kelola Strategi Remunerasi yang Kompetitif, Adil dan Berkelanjutan"
       controls={
@@ -22,6 +23,7 @@ export function CompHeader() {
           </button>
         </>
       }
+      dataAsOf="Data per 31 Mei 2026 (YTD)"
       actions={
         <>
           <ExportButton />

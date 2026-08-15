@@ -1,0 +1,81 @@
+import {
+  IDLE_TOTAL_HA,
+  IDLE_TOTAL_RP_M,
+  IDLE_TOTAL_UNIT,
+  idleAssetInventory,
+  idleAssetNote,
+} from "@/lib/aop-data";
+import { SectionHead } from "@/components/hc/SectionHead";
+import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
+
+const rp = (v: number) => v.toLocaleString("id-ID");
+
+const JENIS_TONE: Record<string, BadgeTone> = {
+  Lahan: "good",
+  "Bangunan & Lahan": "info",
+  Bangunan: "neutral",
+};
+
+/** Inventarisasi aset idle: 34,0 rb ha + 128 unit bangunan senilai Rp 8,9 T. */
+export function IdleAssetInventory() {
+  return (
+    <div
+      className="card anim-rise flex h-full min-h-0 flex-col px-4 pb-2.5 pt-3"
+      style={{ "--d": "60ms" } as React.CSSProperties}
+    >
+      <SectionHead title="Inventarisasi Aset Idle" action="Lihat Semua" />
+      <p className="mt-[3px] text-[9px] text-ink-500">
+        {rp(IDLE_TOTAL_HA)} Ha · {IDLE_TOTAL_UNIT} Unit Bangunan · Nilai Indikatif KJPP Rp{" "}
+        {rp(IDLE_TOTAL_RP_M)} M
+      </p>
+
+      <div className="scroll-thin mt-2 min-h-0 flex-1 overflow-y-auto pr-1">
+        <table className="w-full border-collapse">
+          <thead className="sticky top-0 bg-[var(--surface)]">
+            <tr className="border-b border-[#eef2f6] text-left">
+              <th className="pb-1.5 text-[8.5px] font-bold uppercase tracking-[0.04em] text-ink-400">
+                Lokasi
+              </th>
+              <th className="pb-1.5 text-[8.5px] font-bold uppercase tracking-[0.04em] text-ink-400">
+                Jenis
+              </th>
+              <th className="pb-1.5 text-right text-[8.5px] font-bold uppercase tracking-[0.04em] text-ink-400">
+                Luas / Unit
+              </th>
+              <th className="pb-1.5 text-right text-[8.5px] font-bold uppercase tracking-[0.04em] text-ink-400">
+                Nilai
+              </th>
+              <th className="pb-1.5 text-[8.5px] font-bold uppercase tracking-[0.04em] text-ink-400">
+                Opsi Monetisasi
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {idleAssetInventory.map((a) => (
+              <tr key={a.lokasi} className="border-b border-[#f4f7fa] align-top">
+                <td className="py-[7px] pr-2 text-[9.5px] font-bold text-ink-900">{a.lokasi}</td>
+                <td className="py-[7px] pr-2">
+                  <ToneBadge label={a.jenis} tone={JENIS_TONE[a.jenis] ?? "neutral"} />
+                </td>
+                <td className="whitespace-nowrap py-[7px] pr-2 text-right text-[9px] text-ink-700">
+                  {rp(a.luasHa)} ha
+                  {a.unitBangunan > 0 && (
+                    <span className="block text-[8px] text-ink-400">{a.unitBangunan} unit</span>
+                  )}
+                </td>
+                <td className="whitespace-nowrap py-[7px] pr-2 text-right text-[9px] font-bold text-ink-900">
+                  Rp {rp(a.nilaiRpM)} M
+                </td>
+                <td className="py-[7px] text-[8.5px] leading-snug text-ink-500">
+                  {a.opsiMonetisasi}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <p className="pt-1.5 text-[8px] leading-snug text-ink-400">{idleAssetNote}</p>
+    </div>
+  );
+}

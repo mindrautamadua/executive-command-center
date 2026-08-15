@@ -1,10 +1,12 @@
 "use client";
 
-import { ExportButton, ModuleHeader, SelectBox } from "@/components/ui/ModuleHeader";
+import { Target } from "lucide-react";
+import { ModuleHeader, SelectBox } from "@/components/ui/ModuleHeader";
 
 export function KinerjaHeader() {
   return (
     <ModuleHeader
+      icon={<Target size={19} strokeWidth={1.9} />}
       title="Kinerja Karyawan"
       subtitle="Pantau, kelola dan tingkatkan kinerja untuk mencapai target perusahaan"
       controls={
@@ -14,7 +16,7 @@ export function KinerjaHeader() {
           <SelectBox label="" value="PTPN Group" width="152px" />
         </>
       }
-      actions={<ExportButton label="Ekspor" />}
+      dataAsOf="Data per 31 Mei 2026 (YTD)"
     />
   );
 }

@@ -2,13 +2,17 @@
 
 import { Sprout, Factory, Users, Layers, MoreVertical } from "lucide-react";
 import { operasional } from "@/lib/data";
+import { DetailLink } from "./DetailLink";
 
 const ICONS = { sprout: Sprout, factory: Factory, users: Users, layers: Layers };
 
 export function OperasionalCard() {
   return (
     <div className="card flex h-[184px] shrink-0 flex-col px-4 pb-1 pt-2.5">
-      <h3 className="card-title whitespace-nowrap">OPERASIONAL REAL-TIME</h3>
+      <div className="flex items-center justify-between gap-1">
+        <h3 className="card-title whitespace-nowrap">OPERASIONAL REAL-TIME</h3>
+        <DetailLink href="/produksi-operasi" />
+      </div>
       <div className="mt-1.5 flex min-h-0 flex-1 flex-col justify-between">
         {operasional.map((o, i) => {
           const Icon = ICONS[o.icon];
