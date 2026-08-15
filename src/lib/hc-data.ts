@@ -1,3 +1,5 @@
+import { BASELINE_TRUST } from "./group-baseline";
+import type { DimensionDataTrust } from "./dimension-menu";
 /**
  * Data statis halaman HC Executive Command Center (/sdm-talenta).
  * Periode acuan: Mei 2026 (YTD).
@@ -27,11 +29,11 @@ export const orgNodes: OrgNode[] = [
 
 /* ── 0b. Data Trust ───────────────────────────────────────────────── */
 
-export const dataTrust = {
+export const dataTrust: DimensionDataTrust = {
   /** Periode bisnis yang direpresentasikan angka dashboard. */
-  asOf: "31 Mei 2026",
+  asOf: BASELINE_TRUST.asOf,
   /** Waktu sinkronisasi sistem terakhir (terpisah dari periode data). */
-  lastRefresh: "14 Agu 2026 · 22:14 WIB",
+  lastRefresh: BASELINE_TRUST.lastRefresh,
   coverage: "97,8%",
   quality: "96,4%",
   sources: ["SAP HCM", "IHCMS", "Payroll", "LMS", "e-Rekrutmen"],

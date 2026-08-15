@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { X, ArrowRight } from "lucide-react";
+import { X, ArrowRight, ArrowLeft } from "lucide-react";
+import { aiInsight } from "@/lib/data";
 
 function RobotMascot() {
   return (
@@ -49,7 +50,41 @@ function RobotMascot() {
 
 export function AiInsight() {
   const [open, setOpen] = useState(true);
+  /**
+   * Dasar perhitungan disembunyikan di balik satu klik, bukan dibuang.
+   * Rekomendasi bernilai rupiah yang tidak bisa dibongkar akan ditolak Direksi
+   * pada pertanyaan pertama: "angka ini dari mana?".
+   */
+  const [buktiTerbuka, setBuktiTerbuka] = useState(false);
+
   if (!open) return <div />;
+
+  if (buktiTerbuka) {
+    return (
+      <div className="relative flex h-full flex-col overflow-hidden rounded-xl border border-[#dbeff0] bg-gradient-to-br from-[#eefaf7] via-[#f2fbf8] to-[#e6f4fb] px-3.5 pb-2 pt-2.5 shadow-card">
+        <h3 className="card-title text-[#0e8f7e]">DASAR PERHITUNGAN</h3>
+
+        <ol className="scroll-thin mt-1 min-h-0 flex-1 space-y-[3px] overflow-y-auto pr-1">
+          {aiInsight.rantai.map((baris, i) => (
+            <li key={baris} className="flex gap-1.5 text-[9px] leading-[1.35] text-ink-700">
+              <span className="shrink-0 font-bold text-[#0e8f7e]">{i + 1}.</span>
+              <span>{baris}</span>
+            </li>
+          ))}
+        </ol>
+
+        <p className="mt-1 text-[9px] text-ink-400">Keyakinan: {aiInsight.keyakinan}</p>
+
+        <button
+          onClick={() => setBuktiTerbuka(false)}
+          className="mt-1.5 flex w-full items-center justify-center gap-1.5 rounded-lg border border-[#bfe4dd] py-[6px] text-[10px] font-bold text-[#0e8f7e] transition-colors hover:bg-white"
+        >
+          <ArrowLeft size={12} />
+          Kembali
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="relative flex h-full flex-col overflow-hidden rounded-xl border border-[#dbeff0] bg-gradient-to-br from-[#eefaf7] via-[#f2fbf8] to-[#e6f4fb] px-3.5 pb-2.5 pt-2.5 shadow-card">
@@ -64,20 +99,28 @@ export function AiInsight() {
       <h3 className="card-title text-[#0e8f7e]">AI INSIGHT</h3>
 
       <div className="mt-1 flex min-h-0 flex-1 items-center gap-2">
-        <div className="h-[78px] w-[66px] shrink-0">
+        <div className="h-[62px] w-[52px] shrink-0">
           <RobotMascot />
         </div>
         <div className="min-w-0 flex-1">
           <p className="text-[9.5px] font-medium text-[#0e8f7e]">Rekomendasi hari ini</p>
-          <p className="mt-1 text-[10px] font-semibold leading-[1.35] text-ink-900">
-            Fokus peningkatan produktivitas Regional 4 dapat meningkatkan laba bersih
-            hingga Rp 320 M
+          <p className="mt-[2px] text-[10px] font-semibold leading-[1.3] text-ink-900">
+            {aiInsight.judul}
+          </p>
+          <p className="mt-[3px] text-[9px] leading-[1.3] text-ink-500">
+            {aiInsight.dampakLabel}:{" "}
+            <span className="text-[10.5px] font-extrabold text-[#0e8f7e]">
+              {aiInsight.dampak}
+            </span>
           </p>
         </div>
       </div>
 
-      <button className="mt-2 flex w-full items-center justify-center gap-1.5 rounded-lg bg-gradient-to-r from-[#7ed957] to-[#1a9c5b] py-[7px] text-[10px] font-bold text-white shadow-pill transition-opacity hover:opacity-90">
-        Lihat Rekomendasi AI
+      <button
+        onClick={() => setBuktiTerbuka(true)}
+        className="mt-1.5 flex w-full items-center justify-center gap-1.5 rounded-lg bg-gradient-to-r from-[#7ed957] to-[#1a9c5b] py-[7px] text-[10px] font-bold text-white shadow-pill transition-opacity hover:opacity-90"
+      >
+        Lihat dasar perhitungan
         <ArrowRight size={12} />
       </button>
     </div>

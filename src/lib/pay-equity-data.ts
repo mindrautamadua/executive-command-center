@@ -1,3 +1,4 @@
+import { BASELINE_TRUST } from "./group-baseline";
 /**
  * Sumber kebenaran tunggal pay equity gender PTPN Group — dipakai
  * /compensation-benefits dan /diversity-inclusion agar tidak ada dua versi angka.
@@ -56,7 +57,7 @@ const withinLevelGap =
 const ADJUSTED_GAP = 1.2;
 
 export const payEquityCanon = {
-  periode: "Per 30 Jun 2026",
+  periode: `Per ${BASELINE_TRUST.asOf}`,
 
   totalL,
   totalP,

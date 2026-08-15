@@ -10,7 +10,12 @@ export function OperasionalCard() {
   return (
     <div className="card flex h-[184px] shrink-0 flex-col px-4 pb-1 pt-2.5">
       <div className="flex items-center justify-between gap-1">
-        <h3 className="card-title whitespace-nowrap">OPERASIONAL REAL-TIME</h3>
+        {/*
+          Bukan "real-time": angkanya snapshot 31 Mei 2026 seperti seluruh
+          baseline grup. Label real-time menjanjikan kesegaran yang tidak
+          dimiliki datanya, dan itu bertabrakan dengan stempel data sendiri.
+        */}
+        <h3 className="card-title whitespace-nowrap">OPERASIONAL GRUP</h3>
         <DetailLink href="/produksi-operasi" />
       </div>
       <div className="mt-1.5 flex min-h-0 flex-1 flex-col justify-between">

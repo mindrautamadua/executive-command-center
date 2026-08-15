@@ -19,7 +19,7 @@ export function KpiStrip() {
           {kpiStrip.map((k, i) => (
             <div
               key={k.label}
-              className={`min-w-[214px] flex-1 shrink-0 px-4 pb-2 pt-3 ${
+              className={`min-w-[214px] flex-1 shrink-0 px-4 pb-1.5 pt-2.5 ${
                 i !== 0 ? "border-l border-[#f0f3f6]" : ""
               }`}
             >
@@ -38,8 +38,34 @@ export function KpiStrip() {
                 <Delta value={k.delta} trend={k.trend} size={10} className="ml-auto" />
               </div>
               <div className="mt-1.5 text-[9px] text-ink-400">{k.compare}</div>
+
+              {/*
+                Baris RKAP dipisah dari baris pembanding tahun lalu karena
+                keduanya menjawab pertanyaan berbeda: yang di atas "tumbuh
+                berapa?", yang di bawah "tercapai atau tidak, dan akan sampai
+                di mana?". Menggabungkannya membuat pertumbuhan dua digit
+                terbaca sebagai pencapaian target.
+              */}
+              {k.target && (
+                <div className="mt-0.5 flex items-baseline gap-1 whitespace-nowrap text-[8.5px] leading-tight text-ink-400">
+                  <span className="truncate">RKAP YTD {k.target.label}</span>
+                  <span
+                    className={`shrink-0 font-bold ${
+                      k.target.onTrack ? "delta-good" : "delta-bad"
+                    }`}
+                  >
+                    {k.target.gap}
+                  </span>
+                  {k.target.forecast && (
+                    <span className="ml-auto shrink-0 truncate">
+                      Proy. FY {k.target.forecast}
+                    </span>
+                  )}
+                </div>
+              )}
+
               <div className="-mx-1 mt-1">
-                <Sparkline data={k.series} color={k.color} height={30} />
+                <Sparkline data={k.series} color={k.color} height={26} />
               </div>
             </div>
           ))}

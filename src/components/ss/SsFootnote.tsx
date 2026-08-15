@@ -1,4 +1,5 @@
 import { ShieldCheck } from "lucide-react";
+import { DataStamp } from "@/components/shared/DataStamp";
 
 export function SsFootnote() {
   return (
@@ -17,9 +18,7 @@ export function SsFootnote() {
         </p>
       </div>
       <p className="shrink-0 text-[8.5px] text-ink-500">
-        Data Refresh: <span className="font-bold text-ink-700">14 Agu 2026 · 22:14 WIB</span>
-        <span className="mx-1.5 text-ink-300">•</span>
-        Last Model Update: <span className="font-bold text-ink-700">31 Mei 2026</span>
+        <DataStamp />
         <span className="mx-1.5 text-ink-300">•</span>
         Data Quality: <span className="font-bold text-ink-700">96,4%</span>
         <span className="mx-1.5 text-ink-300">•</span>

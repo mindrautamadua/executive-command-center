@@ -1,4 +1,5 @@
 import { ShieldCheck } from "lucide-react";
+import { DataStamp } from "@/components/shared/DataStamp";
 
 /** Footnote data governance: definisi metrik kunci + periode & as-of. */
 export function SuksesiFootnote() {
@@ -19,9 +20,7 @@ export function SuksesiFootnote() {
         </p>
       </div>
       <p className="shrink-0 text-[8.5px] text-ink-500">
-        Assessment Period: <span className="font-bold text-ink-700">Q2 2026 (Apr – Jun)</span>
-        <span className="mx-1.5 text-ink-300">•</span>
-        Data as-of: <span className="font-bold text-ink-700">30 Jun 2026</span>
+        <DataStamp />
       </p>
     </div>
   );

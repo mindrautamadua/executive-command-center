@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import { riskRadar, topRisks, type RiskSeverity } from "@/lib/hc-data";
 import { PALETTE } from "@/lib/chart-palette";
@@ -184,9 +185,12 @@ export function PeopleRiskRadar() {
             })}
           </div>
           <div className="flex-1" />
-          <button className="mt-2 w-full rounded-lg border border-[#e3e9ef] py-[6px] text-[9.5px] font-semibold text-ink-700 transition-colors hover:bg-[#f5f8fa]">
+          <Link
+            href="/people-risk-radar/all-risks"
+            className="mt-2 block w-full rounded-lg border border-[#e3e9ef] py-[6px] text-center text-[9.5px] font-semibold text-ink-700 transition-colors hover:bg-[#f5f8fa]"
+          >
             Lihat Semua Risiko
-          </button>
+          </Link>
         </div>
       </div>
     </div>

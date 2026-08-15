@@ -1,3 +1,4 @@
+import { BASELINE_TRUST } from "./group-baseline";
 /* ── Profil karyawan (Employee Spotlight) ────────────────── */
 
 export const profil = {
@@ -200,7 +201,7 @@ export const informasiTambahan = {
   ],
 };
 
-export const terakhirDiperbarui = "14 Agu 2026 22:14 WIB";
+export const terakhirDiperbarui = BASELINE_TRUST.lastRefresh;
 
 /* ── Tab: Pekerjaan ──────────────────────────────────────── */
 

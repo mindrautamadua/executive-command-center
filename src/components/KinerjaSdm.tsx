@@ -2,7 +2,7 @@
 
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 import { ChevronDown, ChevronRight } from "lucide-react";
-import { komposisiKaryawan, sdmKpi } from "@/lib/data";
+import { komposisiKaryawan, sdmKonteks, sdmKpi } from "@/lib/data";
 import { CHART_TOOLTIP_STYLE } from "@/lib/chart-palette";
 import { Delta } from "./ui/Delta";
 import { DetailLink } from "./DetailLink";
@@ -23,16 +23,31 @@ export function KinerjaSdm() {
       <div className="mt-2.5 grid grid-cols-3 gap-1">
         {sdmKpi.map((k) => (
           <div key={k.label}>
-            <div className="text-[9px] font-medium text-ink-500">{k.label}</div>
-            <div className="mt-[3px] text-[14px] font-extrabold leading-none text-ink-900">
+            <div className="text-[9px] font-medium leading-[1.2] text-ink-500">{k.label}</div>
+            <div className="mt-[3px] text-[13.5px] font-extrabold leading-none text-ink-900">
               {k.value}
             </div>
-            <Delta value={k.delta} trend={k.trend} size={9} className="mt-[4px]" />
+            <Delta
+              value={k.delta}
+              trend={k.trend}
+              tone={"tone" in k ? k.tone : undefined}
+              size={9}
+              className="mt-[4px]"
+            />
           </div>
         ))}
       </div>
 
-      <div className="mt-2 text-[9px] font-medium text-ink-500">
+      {/*
+        Jumlah karyawan turun jadi konteks, bukan KPI utama: angka itu baru
+        berarti bagi Direksi ketika dikaitkan dengan produktivitas dan risiko,
+        dan ketiganya sudah diwakili rasio di atas.
+      */}
+      <div className="mt-1.5 truncate text-[8.5px] text-ink-400" title={sdmKonteks}>
+        {sdmKonteks}
+      </div>
+
+      <div className="mt-1.5 text-[9px] font-medium text-ink-500">
         Komposisi Karyawan
       </div>
 

@@ -1,3 +1,4 @@
+import { BASELINE_TRUST } from "./group-baseline";
 /**
  * Data statis halaman AI HR Assistant (/ai-hr-assistant).
  * Percakapan contoh memakai data periode Mei 2026 (YTD).
@@ -87,8 +88,8 @@ export const headcountAnswer = {
 /** Evidence card — grounding jawaban factual. */
 export const headcountEvidence = {
   source: "SAP HCM → HC Data Hub",
-  asOf: "31 Mei 2026",
-  refreshed: "1 Jun 2026 05:30 WIB",
+  asOf: BASELINE_TRUST.asOf,
+  refreshed: BASELINE_TRUST.lastRefresh,
   quality: "96,4%",
   confidence: "98%",
   formula: "42.561 + 19.823 + 7.758 = 70.142",

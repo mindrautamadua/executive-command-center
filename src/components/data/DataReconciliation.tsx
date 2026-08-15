@@ -1,3 +1,4 @@
+import { BASELINE_TRUST } from "@/lib/group-baseline";
 import { ArrowRight } from "lucide-react";
 import { konsistensiLintasSistem, rekonSistem } from "@/lib/data-analytics";
 
@@ -63,7 +64,7 @@ export function DataReconciliation() {
       </div>
 
       <div className="mt-1 border-t border-[#f0f3f6] pt-1.5 text-[9px] text-ink-400">
-        Basis: headcount aktif per 30 Jun 2026 · {varianTerbuka} varian terbuka
+        Basis: headcount aktif per {BASELINE_TRUST.asOf} · {varianTerbuka} varian terbuka
       </div>
 
       <button className="link-more mt-1 flex items-center gap-1">

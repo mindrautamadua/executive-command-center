@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { RotateCw, Maximize2, Calendar, ChevronDown } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
+import { tanggalDashboard, hariDashboard, jamDashboard } from "@/lib/data";
 
 export function Header() {
   const [spin, setSpin] = useState(false);
@@ -38,9 +39,9 @@ export function Header() {
         </button>
 
         <div className="leading-tight">
-          <div className="text-[13px] font-bold text-ink-900">15 Agu 2026</div>
+          <div className="text-[13px] font-bold text-ink-900">{tanggalDashboard}</div>
           <div className="mt-[2px] flex items-center gap-1.5 text-[10.5px] text-ink-500">
-            <span>Selasa, 09:41 WIB</span>
+            <span>{`${hariDashboard}, ${jamDashboard}`}</span>
             <span className="rounded-[3px] bg-[#22a45d] px-[5px] py-[1px] text-[7.5px] font-bold tracking-wide text-white">
               LIVE
             </span>

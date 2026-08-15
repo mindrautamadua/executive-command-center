@@ -45,8 +45,31 @@ export function AlertPanel() {
                 <p className="mt-[2px] text-[10.5px] font-semibold leading-[1.3] text-ink-900">
                   {a.title}
                 </p>
-                <p className="mt-[3px] text-[9.5px] leading-[1.35] text-ink-500">
-                  {a.rec}
+
+                {/*
+                  Dampak dulu, baru aksi. Alert tanpa angka tidak bisa
+                  diprioritaskan terhadap alert lain, dan aksi tanpa pemilik
+                  tidak pernah selesai — keduanya ditampilkan, bukan disimpan
+                  di halaman detail.
+                */}
+                <div
+                  className="mt-[3px] flex items-baseline gap-1.5 text-[9.5px] leading-[1.3]"
+                  title={a.dampak.basis}
+                >
+                  <span className="shrink-0 text-ink-500">{a.dampak.label}:</span>
+                  <span className="font-bold" style={{ color: t.text }}>
+                    {a.dampak.value}
+                  </span>
+                </div>
+                <p className="mt-[1px] truncate text-[9px] leading-[1.3] text-ink-400">
+                  {a.dampak.basis}
+                </p>
+
+                <p className="mt-[3px] text-[9.5px] leading-[1.35] text-ink-700">
+                  Aksi: {a.aksi}
+                </p>
+                <p className="mt-[1px] text-[9px] leading-[1.3] text-ink-400">
+                  {a.owner} · tenggat {a.tenggat}
                 </p>
               </div>
             </div>

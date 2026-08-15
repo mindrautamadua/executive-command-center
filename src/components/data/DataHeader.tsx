@@ -2,6 +2,8 @@
 
 import { Database } from "lucide-react";
 import { ModuleHeader, SelectBox } from "@/components/ui/ModuleHeader";
+import { DataStamp } from "@/components/shared/DataStamp";
+import { STEMPEL_DATA } from "@/lib/group-baseline";
 
 export function DataHeader() {
   return (
@@ -11,16 +13,12 @@ export function DataHeader() {
       subtitle="Trust · Quality · Governance · Intelligence"
       controls={
         <>
-          <SelectBox label="Periode" value="Q2 2026 (Apr - Jun)" width="168px" />
+          <SelectBox label="Periode" value={STEMPEL_DATA.periode} width="168px" />
           <SelectBox label="Unit Organisasi" value="Semua Unit" width="158px" />
           <SelectBox label="Sumber Data" value="Semua Sumber" width="158px" />
         </>
       }
-      secondaryLeft={
-        <span>
-          Data as-of: 30 Jun 2026 · Terakhir diperbarui: 14 Agu 2026 · 22:14 WIB
-        </span>
-      }
+      secondaryLeft={<DataStamp size={10} />}
     />
   );
 }

@@ -11,9 +11,24 @@
 
 export const PERIODE_LABEL = "Data per 31 Mei 2026 (YTD)";
 
+/**
+ * Tiga stempel waktu yang harus dibedakan di seluruh aplikasi. Menggabungkan
+ * ketiganya jadi satu kalimat "data terakhir diperbarui" membuat pembaca tidak
+ * bisa tahu apakah angka berlaku sampai Mei atau sampai Agustus.
+ *
+ * - `periode`  — rentang bisnis yang diwakili angka.
+ * - `snapshot` — tanggal potong data; angka tidak berubah setelah tanggal ini.
+ * - `refresh`  — kapan sistem terakhir menarik data. Tidak menambah periode.
+ */
+export const STEMPEL_DATA = {
+  periode: "YTD Jan–Mei 2026",
+  snapshot: "31 Mei 2026",
+  refresh: "14 Agu 2026 · 22:14 WIB",
+} as const;
+
 export const BASELINE_TRUST = {
-  asOf: "31 Mei 2026",
-  lastRefresh: "14 Agu 2026 · 22:14 WIB",
+  asOf: STEMPEL_DATA.snapshot,
+  lastRefresh: STEMPEL_DATA.refresh,
 } as const;
 
 /* ── Keuangan (Rp Triliun kecuali disebut lain) ───────────────────── */
@@ -76,19 +91,121 @@ export const PRODUKSI = {
 
 /* ── Harga & pemasaran ────────────────────────────────────────────── */
 
+/**
+ * Harga jual rata-rata YTD per regional (Rp/kg). Ini satu-satunya tempat harga
+ * komoditas ditulis; harga tingkat grup dihitung darinya lewat `hargaGrup()`
+ * sehingga tidak mungkin ada regional yang melebihi rata-ratanya sendiri.
+ */
+export const HARGA_REGIONAL_RP_KG: Record<string, Record<string, number>> = {
+  "Regional 1": { CPO: 12744, PK: 2648, Karet: 18790 },
+  "Regional 2": { CPO: 12560, PK: 2560, Tebu: 1238 },
+  "Regional 3": { CPO: 12482, PK: 2512, Teh: 9870 },
+  "Regional 4": { CPO: 12360, Karet: 18510, Tebu: 1212 },
+  "Regional 5": { CPO: 12264, PK: 2472, Kopi: 32400 },
+};
+
+/** Rata-rata harga lintas regional yang memproduksi komoditas bersangkutan. */
+export const hargaGrup = (() => {
+  const akumulasi: Record<string, number[]> = {};
+  for (const regional of Object.values(HARGA_REGIONAL_RP_KG)) {
+    for (const [komoditas, harga] of Object.entries(regional)) {
+      (akumulasi[komoditas] ??= []).push(harga);
+    }
+  }
+  return Object.fromEntries(
+    Object.entries(akumulasi).map(([komoditas, harga]) => [
+      komoditas,
+      Math.round(harga.reduce((a, b) => a + b, 0) / harga.length),
+    ]),
+  ) as Record<string, number>;
+})();
+
 export const PEMASARAN = {
   cpoKpbnSpotRpKg: 13680,
-  cpoAvgYtdRpKg: 12482, // selaras data.ts
+  cpoAvgYtdRpKg: hargaGrup.CPO,
   cpoCifRotterdamUsdTon: 1085,
   kursUsdIdr: 16250,
   gulaLelangRpKg: 14850,
-  karetSir20RpKg: 18650,
+  karetSir20RpKg: hargaGrup.Karet,
   penjualanYtdRpT: 19.9,
   eksporPctVolCpo: 22,
   stokCpoRbTon: 187,
   stokCpoHariJual: 24,
   porsiHilirPct: 14.8,
   marginBlendedPct: 24.1,
+  brentUsdBarel: 82.45,
+} as const;
+
+/* ── Target & proyeksi ────────────────────────────────────────────── */
+
+/**
+ * Beban RKAP sampai tanggal potong data (31 Mei 2026). Angka ini sengaja tidak
+ * dihitung prorata kalender (5/12 × RKAP setahun): panen sawit memuncak di
+ * semester II dan musim giling tebu baru mulai Mei, sehingga porsi RKAP yang
+ * jatuh pada Jan–Mei lebih kecil daripada porsi bulannya.
+ *
+ * Dipakai untuk menjawab "apakah kita on-track terhadap target?", yang berbeda
+ * dari pertumbuhan YoY. Sebuah metrik bisa tumbuh dua digit terhadap tahun lalu
+ * dan tetap di bawah RKAP — dua pertanyaan berbeda, dua angka berbeda.
+ */
+export const RKAP_YTD = {
+  pendapatanRpT: 23.9,
+  ebitdaRpT: 6.6,
+  labaBersihRpT: 2.85,
+  roaPct: 4.5,
+  produksiCpoJtTon: 1.02,
+  hargaCpoRpKg: 12100,
+  hargaKaretRpKg: 19200,
+} as const;
+
+/**
+ * Proyeksi tutup tahun 2026 (base case). Diselaraskan dengan kartu Analitik
+ * Prediktif di dashboard korporat supaya proyeksi yang sama tidak muncul dengan
+ * dua nilai berbeda di dua kartu.
+ */
+export const PROYEKSI_FY = {
+  pendapatanRpT: 59.1,
+  ebitdaRpT: 16.1,
+  labaBersihRpT: 6.3,
+  roaPct: 4.8,
+  produksiCpoJtTon: PRODUKSI.cpoFyJtTon,
+  hargaCpoRpKg: 12650,
+  hargaKaretRpKg: 18900,
+} as const;
+
+/**
+ * Kontribusi tiap segmen terhadap penjualan, beserta marjin EBITDA-nya.
+ *
+ * Porsi pendapatan saja menyesatkan: segmen bisa besar di pendapatan tetapi
+ * kecil di penciptaan nilai, dan sebaliknya. Marjin di sini yang menerjemahkan
+ * bauran pendapatan menjadi bauran EBITDA. Rata-rata tertimbangnya menghasilkan
+ * `KEUANGAN.ebitdaMarginPct` (27,7%), jadi kedua angka tidak bisa saling
+ * bertentangan.
+ */
+export const KOMPOSISI_SEGMEN = [
+  { nama: "CPO", pendapatanPct: 61, marginEbitdaPct: 26.5, color: "#3fb56f" },
+  { nama: "Hilirisasi", pendapatanPct: 15, marginEbitdaPct: 47.0, color: "#57c8e8" },
+  { nama: "Gula & Tetes", pendapatanPct: 9, marginEbitdaPct: 19.0, color: "#f2c94c" },
+  { nama: "PK & PKO", pendapatanPct: 8, marginEbitdaPct: 23.0, color: "#8b7cf6" },
+  { nama: "Karet, Teh & Lainnya", pendapatanPct: 7, marginEbitdaPct: 13.0, color: "#c9b8f7" },
+] as const;
+
+/* ── Sumber daya manusia ──────────────────────────────────────────── */
+
+/**
+ * Angka SDM tingkat grup yang dikutip dashboard korporat. Jumlah karyawan
+ * disimpan sebagai bilangan, bukan string berformat, supaya bisa dipakai
+ * menghitung produktivitas (pendapatan per karyawan).
+ */
+export const SDM = {
+  karyawanAktif: 70142,
+  engagementSkor: 4.21,
+  turnoverPct: 2.45,
+  /** Posisi kritikal yang sudah punya suksesor siap. */
+  cakupanSuksesiPct: 68,
+  /** Posisi kritikal tanpa suksesor Ready Now. */
+  posisiKritikalKosong: 12,
+  flightRiskPct: 5.0,
 } as const;
 
 /* ── Aset & investasi ─────────────────────────────────────────────── */

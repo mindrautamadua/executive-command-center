@@ -1,3 +1,4 @@
+import { BASELINE_TRUST } from "./group-baseline";
 /**
  * Data statis halaman Workforce Planning (/workforce-planning).
  * Horizon perencanaan: 2026 - 2028, data per 31 Mei 2026 (YTD).
@@ -622,7 +623,7 @@ export const wpFootnote = {
   definisi:
     "Critical role tanpa suksesor ready-now = 212 posisi kritis − 64 kandidat ready (konsisten Succession Planning) • Subtotal fungsi & jenjang reconcile otomatis ke total 70.142 → 73.856 • Sumber pemenuhan 1.671 + 928 + 743 + 372 = 3.714.",
   periode: "Horizon Plan: 2026 – 2028",
-  asOf: "Data as-of: 31 Mei 2026",
+  asOf: `Data as-of: ${BASELINE_TRUST.asOf}`,
 };
 
 /* ── Footer quote ─────────────────────────────────────────────────── */

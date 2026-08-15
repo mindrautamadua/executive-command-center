@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+import { ChevronRight } from "lucide-react";
 import { ISLANDS, MAP_H } from "@/lib/indonesia";
 import { regional } from "@/lib/data";
 import { Delta } from "./ui/Delta";
@@ -59,24 +61,50 @@ export function KinerjaRegional() {
       </div>
 
       <div className="mt-1 flex flex-1 flex-col justify-around">
-        {regional.map((r) => (
-          <div key={r.name} className="flex items-center">
-            <span
-              className="mr-2 h-[7px] w-[7px] shrink-0 rounded-full"
-              style={{ background: r.color }}
-            />
-            <span className="text-[10.5px] font-medium text-ink-700">{r.name}</span>
-            <span className="ml-auto mr-5 text-[10.5px] font-bold tabular-nums text-ink-900">
-              {r.value}
-            </span>
-            <Delta
-              value={r.delta}
-              trend={r.trend}
-              size={10}
-              className="w-[46px] justify-end"
-            />
-          </div>
-        ))}
+        {regional.map((r) => {
+          const baris = (
+            <>
+              <span
+                className="mr-2 h-[7px] w-[7px] shrink-0 rounded-full"
+                style={{ background: r.color }}
+              />
+              <span className="text-[10.5px] font-medium text-ink-700">{r.name}</span>
+              {r.diagnosis && (
+                <span className="ml-1.5 shrink-0 rounded bg-[#fee2e2] px-1 py-[1px] text-[8px] font-bold text-[#dc2626]">
+                  PERLU PERHATIAN
+                </span>
+              )}
+              <span className="ml-auto mr-5 text-[10.5px] font-bold tabular-nums text-ink-900">
+                {r.value}
+              </span>
+              <Delta
+                value={r.delta}
+                trend={r.trend}
+                size={10}
+                className="w-[46px] justify-end"
+              />
+            </>
+          );
+
+          // Baris yang tumbuh negatif jadi tautan diagnosis: pertanyaan
+          // berikutnya setelah melihat angka merah selalu "kenapa?", dan
+          // jawabannya ada di halaman produktivitas kebun.
+          return r.diagnosis ? (
+            <Link
+              key={r.name}
+              href={r.diagnosis}
+              className="-mx-1 flex items-center rounded px-1 py-[1px] transition-colors hover:bg-[#fef2f2]"
+              title={`Telusuri penyebab penurunan ${r.name}`}
+            >
+              {baris}
+              <ChevronRight size={12} className="ml-0.5 shrink-0 text-[#dc2626]" />
+            </Link>
+          ) : (
+            <div key={r.name} className="flex items-center pr-[17px]">
+              {baris}
+            </div>
+          );
+        })}
       </div>
     </div>
   );

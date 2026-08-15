@@ -1,4 +1,37 @@
+import {
+  HARGA_REGIONAL_RP_KG,
+  KEUANGAN,
+  KOMPOSISI_SEGMEN,
+  SDM,
+  PEMASARAN,
+  PRODUKSI,
+  PROYEKSI_FY,
+  RKAP_YTD,
+  hargaGrup,
+} from "./group-baseline";
+import { formatMetric, metricChange, metricTarget, type MetricId } from "./metrics";
+
 export type Trend = "up" | "down";
+
+/**
+ * Tanggal acuan tampilan dashboard (data demo). Nama hari diturunkan dari
+ * tanggal ini, bukan ditulis manual, supaya keduanya tidak pernah berbeda.
+ */
+const TANGGAL_DASHBOARD = new Date(2026, 7, 15);
+
+const NAMA_HARI = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+const NAMA_BULAN = [
+  "Jan", "Feb", "Mar", "Apr", "Mei", "Jun",
+  "Jul", "Agu", "Sep", "Okt", "Nov", "Des",
+];
+
+export const tanggalDashboard = `${TANGGAL_DASHBOARD.getDate()} ${
+  NAMA_BULAN[TANGGAL_DASHBOARD.getMonth()]
+} ${TANGGAL_DASHBOARD.getFullYear()}`;
+
+export const hariDashboard = NAMA_HARI[TANGGAL_DASHBOARD.getDay()];
+
+export const jamDashboard = "09:41 WIB";
 
 export interface KpiStripItem {
   label: string;
@@ -6,80 +39,139 @@ export interface KpiStripItem {
   unit?: string;
   delta: string;
   trend: Trend;
+  /** Pembanding tahun lalu — menjawab "tumbuh berapa?". */
   compare: string;
+  /**
+   * Beban RKAP sampai tanggal potong, jarak ke target, dan proyeksi tutup
+   * tahun — menjawab "tercapai atau tidak?" dan "akan sampai atau tidak?".
+   * `null` untuk metrik yang memang tidak punya RKAP, misalnya kurs.
+   */
+  target: {
+    label: string;
+    gap: string;
+    onTrack: boolean;
+    forecast: string | null;
+  } | null;
   color: string;
   series: number[];
 }
 
 const s = (arr: number[]) => arr;
 
+export const komoditasTabs = ["Regional 1", "Regional 2", "Regional 3", "Regional 4", "Regional 5"];
+
+export const rupiahPerKg = (n: number) => `Rp ${n.toLocaleString("id-ID")}`;
+
+/**
+ * Warna & bobot bar per komoditas — murni presentasi. Angkanya sendiri datang
+ * dari `HARGA_REGIONAL_RP_KG` di group-baseline, jadi kartu ini tidak pernah
+ * bisa menampilkan harga yang berbeda dari KPI atau Live Feed.
+ */
+const TAMPILAN_KOMODITAS: Record<string, { pct: number; color: string }> = {
+  CPO: { pct: 92, color: "#22a45d" },
+  PK: { pct: 64, color: "#2f9bf5" },
+  Karet: { pct: 48, color: "#f5a524" },
+  Tebu: { pct: 41, color: "#f5a524" },
+  Teh: { pct: 37, color: "#f5a524" },
+  Kopi: { pct: 44, color: "#f5a524" },
+};
+
+export const hargaRegional: Record<
+  string,
+  { name: string; price: number; pct: number; color: string }[]
+> = Object.fromEntries(
+  Object.entries(HARGA_REGIONAL_RP_KG).map(([regional, komoditas]) => [
+    regional,
+    Object.entries(komoditas).map(([name, price]) => ({
+      name,
+      price,
+      ...TAMPILAN_KOMODITAS[name],
+    })),
+  ]),
+);
+
+/**
+ * Bangun satu kartu KPI dari registri metrik. Nilai, delta, arah, pembanding,
+ * RKAP, dan proyeksi semuanya ditarik dari `metrics.ts` — kartu ini hanya
+ * menentukan label, warna, dan sparkline. Dengan begitu tidak mungkin lagi
+ * kartu KPI dan Live Feed menampilkan arah yang berlawanan untuk metrik sama.
+ */
+function kartuMetrik(
+  id: MetricId,
+  tampilan: { label: string; unit?: string; color: string; series: number[] },
+): KpiStripItem {
+  const perubahan = metricChange(id);
+  const target = metricTarget(id);
+
+  return {
+    label: tampilan.label,
+    value: formatMetric(id),
+    unit: tampilan.unit,
+    delta: perubahan?.value ?? "—",
+    trend: perubahan?.trend ?? "up",
+    compare: perubahan?.label ?? "",
+    target: target && {
+      label: target.targetLabel,
+      gap: target.gapLabel,
+      onTrack: target.onTrack,
+      forecast: target.forecastLabel,
+    },
+    color: tampilan.color,
+    series: tampilan.series,
+  };
+}
+
 export const kpiStrip: KpiStripItem[] = [
-  {
+  kartuMetrik("pendapatan", {
     label: "PENDAPATAN KONSOLIDASI",
-    value: "Rp 24,60 T",
-    delta: "9,30%",
-    trend: "up",
-    compare: "vs YTD 2025: Rp 22,51 T",
     color: "#22a45d",
     series: s([28, 26, 31, 29, 34, 33, 38, 36, 41, 44, 42, 48, 46, 52, 56]),
-  },
-  {
+  }),
+  kartuMetrik("ebitda", {
     label: "EBITDA",
-    value: "Rp 6,82 T",
-    delta: "12,10%",
-    trend: "up",
-    compare: "vs YTD 2025: Rp 6,08 T",
     color: "#2f9bf5",
     series: s([22, 25, 23, 28, 26, 31, 29, 33, 36, 34, 39, 42, 40, 45, 49]),
-  },
-  {
+  }),
+  kartuMetrik("labaBersih", {
     label: "LABA BERSIH",
-    value: "Rp 2,94 T",
-    delta: "14,80%",
-    trend: "up",
-    compare: "vs YTD 2025: Rp 2,56 T",
     color: "#8b5cf6",
     series: s([18, 21, 19, 24, 22, 27, 25, 30, 28, 34, 32, 38, 41, 44, 50]),
-  },
+  }),
   {
+    // ROA hanya tampil di dashboard korporat, jadi tetap didefinisikan di sini
+    // — registri metrik khusus untuk angka yang dikutip lintas halaman.
     label: "ROA",
     value: "4,60%",
     delta: "0,40 ppts",
     trend: "up",
     compare: "vs YTD 2025: 4,20%",
+    target: {
+      label: `${RKAP_YTD.roaPct.toLocaleString("id-ID", { minimumFractionDigits: 2 })}%`,
+      gap: "+0,10 ppts",
+      onTrack: true,
+      forecast: `${PROYEKSI_FY.roaPct.toLocaleString("id-ID", { minimumFractionDigits: 2 })}%`,
+    },
     color: "#38b6ff",
     series: s([30, 28, 33, 31, 36, 34, 38, 36, 40, 38, 43, 41, 46, 44, 49]),
   },
-  {
+  kartuMetrik("produksiCpo", {
     label: "PRODUKSI CPO",
-    value: "0,99",
     unit: "Juta Ton",
-    delta: "7,10%",
-    trend: "up",
-    compare: "vs YTD 2025: 0,92 Juta Ton",
     color: "#f5a524",
     series: s([26, 29, 27, 32, 30, 35, 33, 37, 35, 40, 38, 42, 40, 45, 47]),
-  },
-  {
+  }),
+  kartuMetrik("hargaCpo", {
     label: "HARGA RATA-RATA CPO",
-    value: "Rp 12.482",
     unit: "/kg",
-    delta: "9,10%",
-    trend: "up",
-    compare: "vs YTD 2025: Rp 11.441 /kg",
     color: "#5fbf5f",
     series: s([24, 27, 25, 30, 28, 33, 31, 36, 34, 39, 37, 42, 40, 45, 48]),
-  },
-  {
+  }),
+  kartuMetrik("hargaKaret", {
     label: "HARGA RATA-RATA KARET",
-    value: "Rp 18.650",
     unit: "/kg",
-    delta: "1,20%",
-    trend: "down",
-    compare: "vs YTD 2025: Rp 18.877 /kg",
     color: "#ef4444",
     series: s([44, 42, 45, 41, 43, 39, 41, 37, 39, 35, 37, 33, 35, 31, 30]),
-  },
+  }),
 ];
 
 export const operasional = [
@@ -96,62 +188,181 @@ export const mapLegend = [
   { label: "Pelabuhan", value: "7", color: "#8b5cf6" },
 ];
 
-/** Pendapatan YTD per regional (Rp T) — jumlah 24,60 T sesuai kpiStrip. */
-export const regional = [
+/**
+ * Pendapatan YTD per regional (Rp T) — jumlah 24,60 T sesuai kpiStrip.
+ *
+ * Regional yang tumbuh negatif membawa `diagnosis`: tautan ke halaman tempat
+ * penyebabnya bisa ditelusuri. Angka merah di dashboard Direksi harus menjadi
+ * pintu masuk investigasi, bukan sekadar penanda.
+ */
+export const regional: {
+  name: string;
+  color: string;
+  value: string;
+  delta: string;
+  trend: Trend;
+  /** Tautan diagnosis; hanya diisi untuk regional yang perlu ditelusuri. */
+  diagnosis?: string;
+}[] = [
   { name: "Regional 1", color: "#22a45d", value: "Rp 8,09 T", delta: "13,2%", trend: "up" as Trend },
   { name: "Regional 2", color: "#f5a524", value: "Rp 6,15 T", delta: "10,1%", trend: "up" as Trend },
   { name: "Regional 3", color: "#2f9bf5", value: "Rp 4,06 T", delta: "8,7%", trend: "up" as Trend },
-  { name: "Regional 4", color: "#ef4444", value: "Rp 3,08 T", delta: "-2,3%", trend: "down" as Trend },
+  {
+    name: "Regional 4",
+    color: "#ef4444",
+    value: "Rp 3,08 T",
+    delta: "-2,3%",
+    trend: "down" as Trend,
+    diagnosis: "/produksi-operasi/produktivitas-kebun",
+  },
   { name: "Regional 5", color: "#8b5cf6", value: "Rp 3,22 T", delta: "5,6%", trend: "up" as Trend },
 ];
 
-export const alerts = [
+/* ── Kuantifikasi dampak ──────────────────────────────────────────────
+ *
+ * Alert tanpa angka dampak tidak bisa diprioritaskan: Direksi tidak punya
+ * dasar memilih mana yang dibahas lebih dulu. Karena itu setiap alert membawa
+ * satu angka rupiah — dan angka itu diturunkan di sini dari baseline grup,
+ * bukan ditulis manual, supaya bisa ditelusuri dan ikut berubah ketika
+ * baseline diperbarui.
+ *
+ * Satuan: volume dalam juta ton, harga dalam Rp/kg. Satu juta ton = 1 miliar
+ * kg, jadi `jutaTon × rpKg` langsung menghasilkan nilai dalam miliar rupiah.
+ */
+const nilaiRpM = (jutaTon: number, rpKg: number) => jutaTon * rpKg;
+
+const rpM = (n: number) => `Rp ${Math.round(n).toLocaleString("id-ID")} M`;
+
+/** Marjin laba bersih realisasi YTD — dipakai menerjemahkan volume ke laba. */
+const marjinLabaBersih = KEUANGAN.labaBersihYtd / KEUANGAN.pendapatanYtd;
+
+/** Kekurangan produksi CPO terhadap RKAP sampai tanggal potong (juta ton). */
+const gapProduksiCpo = RKAP_YTD.produksiCpoJtTon - PRODUKSI.cpoYtdJtTon;
+
+/** Pendapatan yang belum terealisasi akibat gap produksi tersebut. */
+const gapProduksiRpM = nilaiRpM(gapProduksiCpo, hargaGrup.CPO);
+
+/**
+ * Sensitivitas harga: volume CPO yang belum terjual sampai akhir tahun
+ * (proyeksi FY − realisasi YTD) dikali pergerakan harga.
+ */
+const volumeCpoBelumTerjual = PROYEKSI_FY.produksiCpoJtTon - PRODUKSI.cpoYtdJtTon;
+const sensitivitasHargaCpoRpM = nilaiRpM(volumeCpoBelumTerjual, 100);
+const bandVolatilitasRpM = nilaiRpM(volumeCpoBelumTerjual, hargaGrup.CPO * 0.05);
+
+/** Eksposur pungutan ekspor: porsi volume ekspor × tarif per ton × kurs. */
+const volumeEksporCpo = (PROYEKSI_FY.produksiCpoJtTon * PEMASARAN.eksporPctVolCpo) / 100;
+const eksposurPungutanRpM = (volumeEksporCpo * 10 * PEMASARAN.kursUsdIdr) / 1_000;
+
+export interface Alert {
+  level: string;
+  tone: "danger" | "warning" | "info";
+  time: string;
+  title: string;
+  /** Angka dampak beserta dasar hitungnya — tanpa ini alert tidak bisa diadu. */
+  dampak: { label: string; value: string; basis: string };
+  /** Tindakan yang diminta, bukan sekadar "perlu dievaluasi". */
+  aksi: string;
+  owner: string;
+  tenggat: string;
+}
+
+export const alerts: Alert[] = [
   {
     level: "RISIKO TINGGI",
-    tone: "danger" as const,
+    tone: "danger",
     time: "08:30",
     title: "Fluktuasi harga CPO global meningkat signifikan",
-    rec: "Rekomendasi: Mitigasi risiko pasar",
+    dampak: {
+      label: "Eksposur pendapatan",
+      value: `± ${rpM(bandVolatilitasRpM)}`,
+      basis: `${volumeCpoBelumTerjual.toLocaleString("id-ID", {
+        minimumFractionDigits: 2,
+      })} juta ton belum terjual × ±5% harga · tiap Rp 100/kg = ${rpM(
+        sensitivitasHargaCpoRpM,
+      )}`,
+    },
+    aksi: "Kunci harga sebagian volume kuartal IV lewat kontrak berjangka",
+    owner: "Direktorat Pemasaran",
+    tenggat: "22 Agu 2026",
   },
   {
     level: "PERHATIAN",
-    tone: "warning" as const,
+    tone: "warning",
     time: "07:45",
     title: "Realisasi produksi Regional 4 di bawah target",
-    rec: "Rekomendasi: Evaluasi operasional kebun",
+    dampak: {
+      label: "Pendapatan tertunda",
+      value: rpM(gapProduksiRpM),
+      basis: `Gap ${(gapProduksiCpo * 1_000).toLocaleString("id-ID", {
+        maximumFractionDigits: 0,
+      })} ribu ton × ASP CPO Rp ${hargaGrup.CPO.toLocaleString("id-ID")}/kg · setara ${rpM(
+        gapProduksiRpM * KEUANGAN.ebitdaMarginPct / 100,
+      )} EBITDA`,
+    },
+    aksi: "Audit rotasi panen dan utilisasi PKS Regional 4",
+    owner: "Direktorat Operasional",
+    tenggat: "29 Agu 2026",
   },
   {
     level: "INFORMASI",
-    tone: "info" as const,
+    tone: "info",
     time: "06:15",
     title: "Kebijakan ekspor CPO terbaru dari pemerintah",
-    rec: "Rekomendasi: Penyesuaian strategi pemasaran",
+    dampak: {
+      label: "Eksposur pungutan",
+      value: `${rpM(eksposurPungutanRpM)} / USD 10 per ton`,
+      basis: `${PEMASARAN.eksporPctVolCpo}% volume CPO diekspor · kurs Rp ${PEMASARAN.kursUsdIdr.toLocaleString(
+        "id-ID",
+      )}`,
+    },
+    aksi: "Hitung ulang bauran ekspor–domestik untuk kuartal IV",
+    owner: "Direktorat Pemasaran",
+    tenggat: "05 Sep 2026",
   },
 ];
+
+/* ── AI Insight ───────────────────────────────────────────────────────
+ *
+ * Rekomendasi AI di dashboard Direksi harus bisa dibongkar. Angka dampak di
+ * sini dihitung dari rantai yang ditampilkan apa adanya di kartu — gap
+ * produksi, harga jual, marjin — sehingga pertanyaan "angka ini dari mana?"
+ * terjawab tanpa perlu membuka sistem lain.
+ */
+
+/** Gap produksi YTD (5 bulan) disetahunkan. */
+const gapProduksiSetahun = (gapProduksiCpo * 12) / 5;
+const potensiPendapatanRpM = nilaiRpM(gapProduksiSetahun, hargaGrup.CPO);
+const potensiLabaRpM = potensiPendapatanRpM * marjinLabaBersih;
+
+export const aiInsight = {
+  judul: "Menutup gap produksi Regional 4 menambah laba bersih",
+  dampakLabel: "Potensi laba bersih",
+  dampak: rpM(potensiLabaRpM),
+  /**
+   * Keyakinan masih ditetapkan manual — belum ada skor dari model. Ditampilkan
+   * apa adanya supaya tidak terbaca sebagai hasil perhitungan statistik.
+   */
+  keyakinan: "Sedang · asumsi manual",
+  rantai: [
+    `Gap produksi YTD ${(gapProduksiCpo * 1_000).toLocaleString("id-ID", {
+      maximumFractionDigits: 0,
+    })} ribu ton, disetahunkan jadi ${(gapProduksiSetahun * 1_000).toLocaleString("id-ID", {
+      maximumFractionDigits: 0,
+    })} ribu ton`,
+    `× ASP CPO Rp ${hargaGrup.CPO.toLocaleString("id-ID")}/kg = ${rpM(potensiPendapatanRpM)} pendapatan`,
+    `× marjin laba bersih ${(marjinLabaBersih * 100).toLocaleString("id-ID", {
+      maximumFractionDigits: 1,
+    })}% = ${rpM(potensiLabaRpM)}`,
+  ],
+  aksi: "Audit rotasi panen dan utilisasi PKS Regional 4",
+};
 
 export const inisiatif = [
   { label: "Transformasi Digital", value: 78 },
   { label: "Optimalisasi Portofolio Aset", value: 65 },
   { label: "Peningkatan Produktivitas", value: 82 },
   { label: "Pengembangan Talenta", value: 71 },
-];
-
-export const berita = [
-  {
-    date: "12 Agu 2026",
-    title: "PTPN Group Catat Kinerja Positif di Semester I 2026",
-    hue: 120,
-  },
-  {
-    date: "09 Agu 2026",
-    title: "PTPN Perkuat Kemitraan dengan Petani Plasma",
-    hue: 95,
-  },
-  {
-    date: "07 Agu 2026",
-    title: "Inovasi Teknologi Tingkatkan Produktivitas Kebun",
-    hue: 140,
-  },
 ];
 
 const bulan = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agt", "Sep", "Okt", "Nov", "Des"];
@@ -172,12 +383,81 @@ export const trendKeuangan = bulan.map((m, i) => ({
 }));
 
 /** Komposisi nilai penjualan YTD (%) — selaras revenueByKomoditas di pemasaran-data.ts. */
-export const komposisiPenjualan = [
-  { name: "CPO", value: 61, color: "#3fb56f" },
-  { name: "Hilirisasi", value: 15, color: "#57c8e8" },
-  { name: "Gula & Tetes", value: 9, color: "#f2c94c" },
-  { name: "PK & PKO", value: 8, color: "#8b7cf6" },
-  { name: "Karet, Teh & Lainnya", value: 7, color: "#c9b8f7" },
+/**
+ * Bauran pendapatan dan bauran EBITDA dari tabel segmen yang sama.
+ *
+ * Porsi EBITDA dihitung sebagai kontribusi tertimbang marjin tiap segmen —
+ * bukan angka terpisah — sehingga selalu berjumlah 100% dan tidak pernah lepas
+ * dari bauran pendapatannya. Perbedaan keduanya justru pesan utamanya:
+ * Hilirisasi menyumbang 15% pendapatan tetapi seperempat EBITDA grup.
+ */
+const kontribusiEbitda = KOMPOSISI_SEGMEN.map(
+  (s) => (s.pendapatanPct * s.marginEbitdaPct) / 100,
+);
+const totalKontribusiEbitda = kontribusiEbitda.reduce((a, b) => a + b, 0);
+
+export const komposisiPenjualan = KOMPOSISI_SEGMEN.map((s) => ({
+  name: s.nama,
+  value: s.pendapatanPct,
+  color: s.color,
+}));
+
+export const komposisiEbitda = KOMPOSISI_SEGMEN.map((s, i) => ({
+  name: s.nama,
+  value: +((kontribusiEbitda[i] / totalKontribusiEbitda) * 100).toFixed(1),
+  color: s.color,
+}));
+
+/** Nilai EBITDA per segmen (Rp T) — dasar tooltip bauran EBITDA. */
+export const ebitdaSegmenRpT = komposisiEbitda.map((s) => ({
+  name: s.name,
+  value: +((KEUANGAN.ebitdaYtd * s.value) / 100).toFixed(2),
+}));
+
+/* ── Intelijen eksekutif ──────────────────────────────────────────────
+ *
+ * Menggantikan daftar berita korporat. Judul rilis pers tidak mengubah satu
+ * keputusan pun di ruang Direksi; yang mengubah keputusan adalah temuan yang
+ * membawa angka dan arah tindakan. Nilainya diturunkan dari baseline yang sama
+ * dengan kartu lain, jadi tidak ada intel yang bertentangan dengan KPI.
+ */
+
+/** Potensi tambahan CPO bila utilisasi PKS naik ke 85%. */
+const targetUtilisasiPks = 85;
+const tambahanTbs =
+  (PRODUKSI.tbsDiolahYtdJtTon * (targetUtilisasiPks - PRODUKSI.utilisasiPksPct)) /
+  PRODUKSI.utilisasiPksPct;
+const potensiUtilisasiRpM = nilaiRpM((tambahanTbs * PRODUKSI.oerPct) / 100, hargaGrup.CPO);
+
+/** Kontribusi EBITDA segmen hilirisasi (Rp T). */
+const ebitdaHilirisasiRpT = ebitdaSegmenRpT.find((s) => s.name === "Hilirisasi")?.value ?? 0;
+
+export const intelijen = [
+  {
+    date: "12 Agu 2026",
+    title: "Hilirisasi menyumbang seperempat EBITDA dari 15% pendapatan",
+    dampak: `Rp ${ebitdaHilirisasiRpT.toLocaleString("id-ID", {
+      minimumFractionDigits: 2,
+    })} T EBITDA`,
+    relevansi: "Tinggi",
+    hue: 120,
+  },
+  {
+    date: "11 Agu 2026",
+    title: `Utilisasi PKS ${PRODUKSI.utilisasiPksPct.toLocaleString("id-ID", {
+      minimumFractionDigits: 1,
+    })}% — jarak ke ${targetUtilisasiPks}% setara tambahan volume CPO`,
+    dampak: `Potensi ${rpM(potensiUtilisasiRpM)}`,
+    relevansi: "Tinggi",
+    hue: 95,
+  },
+  {
+    date: "09 Agu 2026",
+    title: "Gap produksi Regional 4 menahan realisasi pendapatan",
+    dampak: `Kebocoran ${rpM(gapProduksiRpM)}`,
+    relevansi: "Sedang",
+    hue: 20,
+  },
 ];
 
 /**
@@ -208,11 +488,51 @@ export const produksiKpi = [
   { label: "TEBU", value: "1,24", unit: "Juta Ton", delta: "5,45%", trend: "up" as Trend },
 ];
 
+/**
+ * Pendapatan per karyawan (Rp juta). Pendapatan dalam Rp triliun, jadi
+ * dikali sejuta untuk mendapat Rp juta per orang.
+ */
+const pendapatanPerKaryawanJt = (KEUANGAN.pendapatanYtd * 1_000_000) / SDM.karyawanAktif;
+
+/**
+ * Tiga indikator SDM yang benar-benar strategis untuk Direksi: produktivitas,
+ * kesiapan talenta, dan risiko orang.
+ *
+ * Jumlah karyawan sendiri dipindah ke keterangan kartu — angka itu tidak
+ * menjawab pertanyaan Direksi kecuali dikaitkan dengan produktivitas atau
+ * biaya, dan jumlahnya tetap terbaca di kartu Operasional Grup.
+ */
 export const sdmKpi = [
-  { label: "Total Karyawan", value: "70.142", delta: "2,15%", trend: "up" as Trend },
-  { label: "Engagement Score", value: "4,21 / 5", delta: "0,18", trend: "up" as Trend },
-  { label: "Turnover Rate", value: "2,45%", delta: "-0,35%", trend: "down" as Trend },
+  {
+    label: "Pendapatan / Karyawan",
+    value: `Rp ${pendapatanPerKaryawanJt.toLocaleString("id-ID", {
+      maximumFractionDigits: 1,
+    })} Jt`,
+    delta: "7,00%",
+    trend: "up" as Trend,
+  },
+  {
+    label: "Cakupan Suksesi",
+    value: `${SDM.cakupanSuksesiPct}%`,
+    delta: "3,00 ppts",
+    trend: "up" as Trend,
+  },
+  {
+    label: "Posisi Kritikal Kosong",
+    value: `${SDM.posisiKritikalKosong}`,
+    delta: "2",
+    trend: "up" as Trend,
+    /** Bertambahnya posisi kosong itu buruk meski angkanya naik. */
+    tone: "bad" as const,
+  },
 ];
+
+/** Keterangan kaki kartu SDM — konteks jumlah orang di balik rasio di atas. */
+export const sdmKonteks = `${SDM.karyawanAktif.toLocaleString("id-ID")} karyawan aktif · engagement ${SDM.engagementSkor
+  .toLocaleString("id-ID", { minimumFractionDigits: 2 })}/5 · turnover ${SDM.turnoverPct.toLocaleString(
+  "id-ID",
+  { minimumFractionDigits: 2 },
+)}%`;
 
 export const komposisiKaryawan = [
   { name: "Operasional", value: 61, color: "#2f9bf5" },
@@ -239,10 +559,15 @@ export const kpiStrategis = [
 ];
 
 /** Proyeksi tutup tahun 2026 — selaras fyForecast di kba-data.ts & RKAP produksi. */
+/**
+ * Proyeksi tutup tahun. Nilainya diambil dari `PROYEKSI_FY` di baseline —
+ * proyeksi yang sama juga muncul sebagai "Proy. FY" pada kartu KPI, jadi
+ * keduanya harus bersumber dari satu angka.
+ */
 export const analitikPrediktif = [
   {
     label: "Proyeksi Produksi CPO 2026",
-    value: "2,53",
+    value: PROYEKSI_FY.produksiCpoJtTon.toLocaleString("id-ID", { minimumFractionDigits: 2 }),
     unit: "Juta Ton",
     delta: "6,8% vs 2025",
     color: "#22a45d",
@@ -250,27 +575,46 @@ export const analitikPrediktif = [
   },
   {
     label: "Proyeksi Pendapatan 2026",
-    value: "Rp 59,1 T",
+    value: `Rp ${PROYEKSI_FY.pendapatanRpT.toLocaleString("id-ID", { minimumFractionDigits: 1 })} T`,
     delta: "9,0% vs 2025",
     color: "#2f9bf5",
     series: [24, 22, 27, 25, 31, 29, 35, 33, 39, 37, 43, 47],
   },
   {
     label: "Proyeksi Laba Bersih 2026",
-    value: "Rp 6,3 T",
+    value: `Rp ${PROYEKSI_FY.labaBersihRpT.toLocaleString("id-ID", { minimumFractionDigits: 1 })} T`,
     delta: "10,2% vs 2025",
     color: "#8b5cf6",
     series: [18, 22, 20, 26, 24, 30, 28, 34, 32, 38, 42, 46],
   },
 ];
 
-export const liveFeed = [
-  { label: "CPO", value: "Rp 12.482", delta: "9,10%", trend: "up" as Trend },
-  { label: "PK", value: "Rp 2.548", delta: "6,75%", trend: "up" as Trend },
-  { label: "Karet", value: "Rp 18.650", delta: "-1,20%", trend: "down" as Trend },
-  { label: "Tebu", value: "Rp 1.225", delta: "3,45%", trend: "up" as Trend },
-  { label: "Kurs: USD/IDR", value: "16.250", delta: "0,25%", trend: "up" as Trend },
-  { label: "Brent Oil", value: "$82,45", delta: "-0,35%", trend: "down" as Trend },
-];
 
-export const komoditasTabs = ["Regional 1", "Regional 2", "Regional 3", "Regional 4", "Regional 5"];
+/**
+ * Delta ditulis sebagai besaran tanpa tanda; arah naik/turun dibawa oleh
+ * `trend` dan dirender sebagai segitiga oleh komponen `Delta`.
+ */
+const tickerMetrik = (label: string, id: MetricId) => {
+  const perubahan = metricChange(id);
+  return {
+    label,
+    value: formatMetric(id),
+    delta: perubahan?.value ?? "—",
+    trend: (perubahan?.trend ?? "up") as Trend,
+  };
+};
+
+export const liveFeed = [
+  tickerMetrik("CPO", "hargaCpo"),
+  tickerMetrik("PK", "hargaPk"),
+  tickerMetrik("Karet", "hargaKaret"),
+  tickerMetrik("Tebu", "hargaTebu"),
+  tickerMetrik("Kurs: USD/IDR", "kursUsdIdr"),
+  {
+    // Brent tidak dikutip di halaman lain, jadi tidak masuk registri metrik.
+    label: "Brent Oil",
+    value: `$${PEMASARAN.brentUsdBarel.toLocaleString("id-ID", { minimumFractionDigits: 2 })}`,
+    delta: "0,35%",
+    trend: "down" as Trend,
+  },
+];

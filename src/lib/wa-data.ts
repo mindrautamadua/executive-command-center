@@ -3,6 +3,8 @@
  * Periode acuan: Mei 2026 (YTD), data per 31 Mei 2026.
  */
 
+import { BASELINE_TRUST } from "./group-baseline";
+import type { DimensionDataTrust } from "./dimension-menu";
 import { PALETTE, SEQ_GREEN } from "./chart-palette";
 
 /* ── KPI Strip ────────────────────────────────────────────────────── */
@@ -107,9 +109,9 @@ export const waKpi: WaKpi[] = [
 
 /* ── 0. Data Trust ────────────────────────────────────────────────── */
 
-export const waDataTrust = {
-  asOf: "31 Mei 2026",
-  lastRefresh: "14 Agu 2026 · 22:14 WIB",
+export const waDataTrust: DimensionDataTrust = {
+  asOf: BASELINE_TRUST.asOf,
+  lastRefresh: BASELINE_TRUST.lastRefresh,
   coverage: "97,8%",
   quality: "92,0%",
   sources: ["SAP HCM", "IHCMS", "Payroll", "LMS", "e-Rekrutmen", "Attendance"],

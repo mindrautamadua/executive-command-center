@@ -133,7 +133,7 @@ export function ModuleHeader({
             <PersonAvatar seed={0} size={36} className="ring-2 ring-[#e6ecf2]" />
             <div className="leading-tight">
               <div className="text-[11px] font-bold text-ink-900">Direktur Utama</div>
-              <div className="text-[9.5px] text-ink-500">BOD-1</div>
+              <div className="text-[9.5px] text-ink-500">BOD</div>
             </div>
             <ChevronDown size={13} className="text-ink-400" />
           </div>

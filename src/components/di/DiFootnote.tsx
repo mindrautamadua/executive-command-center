@@ -1,4 +1,5 @@
 import { ShieldCheck } from "lucide-react";
+import { DataStamp } from "@/components/shared/DataStamp";
 
 export function DiFootnote() {
   return (
@@ -17,7 +18,7 @@ export function DiFootnote() {
         </p>
       </div>
       <p className="shrink-0 text-[8.5px] text-ink-500">
-        Data Refresh: <span className="font-bold text-ink-700">30 Jun 2026 · 23:40 WIB</span>
+        <DataStamp />
         <span className="mx-1.5 text-ink-300">•</span>
         Survei Inklusi: <span className="font-bold text-ink-700">41.238 responden (Mei 2026)</span>
         <span className="mx-1.5 text-ink-300">•</span>

@@ -1,28 +1,69 @@
 "use client";
 
+import { useState } from "react";
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 import { ArrowRight } from "lucide-react";
-import { komposisiPenjualan } from "@/lib/data";
+import { komposisiEbitda, komposisiPenjualan } from "@/lib/data";
 import { Delta } from "./ui/Delta";
 import { DetailLink } from "./DetailLink";
 
+/**
+ * Bauran pendapatan dan bauran EBITDA ditampilkan di kartu yang sama, bisa
+ * ditukar. Keduanya menjawab pertanyaan berbeda: yang satu "dari mana omzet
+ * datang", yang lain "di mana nilai sebenarnya diciptakan". Menampilkan
+ * pendapatan saja membuat segmen bermarjin tebal terlihat kecil.
+ */
+const MODE = {
+  pendapatan: {
+    tab: "Pendapatan",
+    data: komposisiPenjualan,
+    pusatLabel: "Total Penjualan",
+    pusatNilai: "Rp 19,90 T",
+  },
+  ebitda: {
+    tab: "EBITDA",
+    data: komposisiEbitda,
+    pusatLabel: "Total EBITDA",
+    pusatNilai: "Rp 6,82 T",
+  },
+} as const;
+
 export function KomposisiPenjualan() {
+  const [mode, setMode] = useState<keyof typeof MODE>("pendapatan");
+  const aktif = MODE[mode];
+
   return (
     <div className="card flex h-full flex-col px-3.5 pb-2.5 pt-3">
       <div className="flex items-baseline gap-1.5">
-        <h3 className="card-title whitespace-nowrap">KOMPOSISI PENJUALAN</h3>
+        <h3 className="card-title whitespace-nowrap">KOMPOSISI</h3>
         <span className="text-[9px] text-ink-400">(YTD 2026)</span>
         <span className="ml-auto">
           <DetailLink href="/pemasaran-penjualan" />
         </span>
       </div>
 
+      <div className="mt-1 flex gap-1">
+        {(Object.keys(MODE) as (keyof typeof MODE)[]).map((k) => (
+          <button
+            key={k}
+            onClick={() => setMode(k)}
+            className={`rounded-md px-1.5 py-[3px] text-[9px] font-semibold leading-none transition-colors ${
+              k === mode
+                ? "bg-ptpn-greenLight text-ptpn-green"
+                : "text-ink-500 hover:bg-[#f5f8fa]"
+            }`}
+          >
+            {MODE[k].tab}
+          </button>
+        ))}
+      </div>
+
       <div className="flex min-h-0 flex-1 items-center">
-        <div className="relative h-[122px] w-[122px] shrink-0">
+        <div className="relative h-[116px] w-[116px] shrink-0">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
-                data={komposisiPenjualan}
+                data={aktif.data}
                 dataKey="value"
                 innerRadius={41}
                 outerRadius={61}
@@ -31,7 +72,7 @@ export function KomposisiPenjualan() {
                 endAngle={-270}
                 stroke="none"
               >
-                {komposisiPenjualan.map((d) => (
+                {aktif.data.map((d) => (
                   <Cell key={d.name} fill={d.color} />
                 ))}
               </Pie>
@@ -47,25 +88,46 @@ export function KomposisiPenjualan() {
           </ResponsiveContainer>
 
           <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center">
-            <span className="text-[8.5px] text-ink-500">Total Penjualan</span>
-            <span className="mt-[2px] text-[13.5px] font-extrabold text-ink-900">
-              Rp 19,90 T
+            <span className="text-[8.5px] text-ink-500">{aktif.pusatLabel}</span>
+            <span className="mt-[2px] text-[13px] font-extrabold text-ink-900">
+              {aktif.pusatNilai}
             </span>
-            <Delta value="13,10%" trend="up" size={9.5} className="mt-[3px]" />
+            <Delta
+              value={mode === "pendapatan" ? "13,10%" : "12,10%"}
+              trend="up"
+              size={9.5}
+              className="mt-[3px]"
+            />
           </div>
         </div>
 
-        <div className="ml-1 flex flex-1 flex-col gap-[7px]">
-          {komposisiPenjualan.map((d) => (
+        <div className="ml-1 flex flex-1 flex-col gap-[6px]">
+          {aktif.data.map((d, i) => (
             <div key={d.name} className="flex items-center gap-2">
               <span
-                className="h-[8px] w-[8px] rounded-[2px]"
+                className="h-[8px] w-[8px] shrink-0 rounded-[2px]"
                 style={{ background: d.color }}
               />
-              <span className="text-[10px] text-ink-700">{d.name}</span>
-              <span className="ml-auto text-[10px] font-bold tabular-nums text-ink-900">
-                {d.value}%
+              <span className="truncate text-[10px] text-ink-700">{d.name}</span>
+              <span className="ml-auto shrink-0 text-[10px] font-bold tabular-nums text-ink-900">
+                {d.value.toLocaleString("id-ID", { maximumFractionDigits: 1 })}%
               </span>
+              {/*
+                Selisih porsi EBITDA terhadap porsi pendapatan — inilah yang
+                membedakan segmen penghasil omzet dari segmen penghasil nilai.
+              */}
+              {mode === "ebitda" && (
+                <span
+                  className={`w-[30px] shrink-0 text-right text-[8.5px] font-bold tabular-nums ${
+                    d.value >= komposisiPenjualan[i].value ? "delta-good" : "delta-bad"
+                  }`}
+                >
+                  {d.value >= komposisiPenjualan[i].value ? "+" : "−"}
+                  {Math.abs(d.value - komposisiPenjualan[i].value).toLocaleString("id-ID", {
+                    maximumFractionDigits: 1,
+                  })}
+                </span>
+              )}
             </div>
           ))}
         </div>
