@@ -13,8 +13,11 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { marginWaterfall } from "@/lib/hilir-stok-margin-data";
+import { marginWaterfall, type MarginWaterfallRow } from "@/lib/hilir-stok-margin-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
+import { filterBySubholding } from "@/lib/subholding";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { ScopeEmpty, commodityScope } from "@/components/ui/CommodityScope";
 import { SectionHead } from "../../hc/SectionHead";
 
 interface WfDatum {
@@ -29,8 +32,7 @@ const rp = (v: number) =>
   `${v < 0 ? "−" : ""}${Math.abs(v).toLocaleString("id-ID")}`;
 
 /** Susun langkah waterfall ASP → −HPP → −Biaya Jual → Margin Bersih. */
-function buildSteps(komoditas: string): WfDatum[] {
-  const row = marginWaterfall.find((r) => r.komoditas === komoditas) ?? marginWaterfall[0];
+function buildSteps(row: MarginWaterfallRow): WfDatum[] {
   const afterHpp = row.aspRpKg - row.hppRpKg;
   const afterBiaya = afterHpp - row.biayaJualRpKg;
   return [
@@ -53,10 +55,31 @@ function buildSteps(komoditas: string): WfDatum[] {
   ];
 }
 
+/**
+ * Waterfall margin per komoditas. Komoditas menentukan pemilik subholding:
+ * CPO → PalmCo, gula → SugarCo, karet & teh → SupportingCo. Saat filter aktif
+ * hanya komoditas milik subholding tersebut yang bisa dipilih.
+ */
 export function MarginWaterfall() {
+  const { active, def } = useSubholding();
   const [selected, setSelected] = useState(marginWaterfall[0].komoditas);
-  const row = marginWaterfall.find((r) => r.komoditas === selected) ?? marginWaterfall[0];
-  const data = buildSteps(selected);
+
+  const rows = filterBySubholding(marginWaterfall, active, (r) => commodityScope(r.komoditas));
+  const row = rows.find((r) => r.komoditas === selected) ?? rows[0];
+
+  if (!row) {
+    return (
+      <div
+        className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
+        style={{ "--d": "60ms" } as React.CSSProperties}
+      >
+        <SectionHead title="Margin Waterfall per Komoditas" />
+        <ScopeEmpty label={def.fullLabel} />
+      </div>
+    );
+  }
+
+  const data = buildSteps(row);
   const yMin = row.marginBersihRpKg < 0 ? -2000 : 0;
   const yMax = Math.ceil(row.aspRpKg / 4000) * 4000;
 
@@ -68,12 +91,12 @@ export function MarginWaterfall() {
       <div className="flex items-center justify-between gap-2">
         <SectionHead title="Margin Waterfall per Komoditas" className="min-w-0 flex-1" />
         <div className="flex shrink-0 items-center gap-1 rounded-lg bg-[#eef2f6] p-[3px]">
-          {marginWaterfall.map((r) => (
+          {rows.map((r) => (
             <button
               key={r.komoditas}
               onClick={() => setSelected(r.komoditas)}
               className={`rounded-md px-2 py-[3px] text-[8.5px] font-bold transition-colors ${
-                r.komoditas === selected
+                r.komoditas === row.komoditas
                   ? "bg-white text-ptpn-green shadow-card"
                   : "text-ink-500 hover:text-ink-700"
               }`}
@@ -84,7 +107,7 @@ export function MarginWaterfall() {
         </div>
       </div>
       <p className="mt-[3px] text-[9px] text-ink-500">
-        {selected}: ASP {rp(row.aspRpKg)} − HPP {rp(row.hppRpKg)} − Biaya Jual{" "}
+        {row.komoditas}: ASP {rp(row.aspRpKg)} − HPP {rp(row.hppRpKg)} − Biaya Jual{" "}
         {rp(row.biayaJualRpKg)} = Margin Bersih {rp(row.marginBersihRpKg)} Rp/kg (bruto{" "}
         {row.marginBrutoPct.toLocaleString("id-ID", { minimumFractionDigits: 1 })}%)
       </p>

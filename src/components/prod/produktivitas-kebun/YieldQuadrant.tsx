@@ -15,6 +15,8 @@ import {
 import { regionalYield, YIELD_GRUP_TON_HA } from "@/lib/produksi-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "../../hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { inScope, ScopeEmpty } from "@/components/ui/CommodityScope";
 
 const UMUR_TENGAH_THN = 14.5;
 
@@ -30,6 +32,10 @@ const data = regionalYield.map((r) => ({
 }));
 
 export function YieldQuadrant() {
+  const { active, def } = useSubholding();
+  // Quadrant yield x umur tanaman sawit per Regional 1-7 -> milik PalmCo.
+  const milikScope = inScope(active, "Regional 1 TBS sawit");
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -40,6 +46,10 @@ export function YieldQuadrant() {
         Yield (t/ha) vs Umur Rata-rata Tanaman (tahun) · 7 Regional
       </p>
 
+      {!milikScope && <ScopeEmpty label={def.fullLabel} />}
+
+      {milikScope && (
+        <>
       <div className="mt-1.5 min-h-0 w-full flex-1">
         <ResponsiveContainer width="100%" height="100%">
           <ScatterChart margin={{ top: 12, right: 14, bottom: 0, left: -22 }}>
@@ -105,6 +115,8 @@ export function YieldQuadrant() {
       <p className="mt-1 truncate text-[8px] text-ink-400">
         Kanan-bawah = tua &amp; rendah (R6–R7): prioritas replanting.
       </p>
+        </>
+      )}
     </div>
   );
 }

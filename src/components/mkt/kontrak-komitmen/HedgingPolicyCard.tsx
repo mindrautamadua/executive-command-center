@@ -1,5 +1,6 @@
 import { CircleCheck } from "lucide-react";
 import { hedgingPolicy } from "@/lib/kontrak-buyer-data";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 import { SectionHead } from "@/components/hc/SectionHead";
 import { ToneBadge } from "@/components/shared/ToneBadge";
 
@@ -11,7 +12,8 @@ export function HedgingPolicyCard() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "180ms" } as React.CSSProperties}
     >
-      <SectionHead title="Kebijakan Forward & Hedging" action="Lihat Detail" />
+      {/* Kebijakan komite pemasaran berlaku satu grup — bukan per subholding. */}
+      <SectionHead title="Kebijakan Forward & Hedging" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Posisi forward selling H2 vs batas kebijakan komite pemasaran
       </p>

@@ -1,6 +1,7 @@
 import { ArrowDownRight, ArrowUpRight, CircleCheck, Plus } from "lucide-react";
 import { riskMovement, riskMovers, type RiskMover } from "@/lib/risk-data";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
 
 const ARAH: Record<
@@ -27,7 +28,7 @@ export function RiskMovement() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "180ms" } as React.CSSProperties}
     >
-      <SectionHead title="Pergerakan Risiko QoQ" />
+      <SectionHead title="Pergerakan Risiko QoQ" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">{riskMovement.periode}</p>
 
       <div className="mt-2 grid grid-cols-4 gap-2">

@@ -1,6 +1,7 @@
 import { AlertOctagon, ArrowUpRight } from "lucide-react";
 import { breachLog, type BreachLogRow } from "@/lib/risk-data";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
 
 const ESKALASI_TONE: Record<BreachLogRow["eskalasi"], BadgeTone> = {
@@ -16,7 +17,7 @@ export function BreachLog() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead title="Breach Log" action="Lihat Riwayat" />
+      <SectionHead title="Breach Log" action="Lihat Riwayat" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         4 Limit Terlampaui — 2 Telah Melewati SLA Remediasi 60 Hari
       </p>

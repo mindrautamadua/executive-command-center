@@ -2,6 +2,7 @@ import { opexMilestones } from "@/lib/biaya-opex-data";
 import type { OpexMilestone } from "@/lib/biaya-opex-data";
 import { SectionHead } from "@/components/hc/SectionHead";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const STATUS_TONE: Record<OpexMilestone["status"], BadgeTone> = {
   Selesai: "good",
@@ -21,7 +22,8 @@ export function MilestoneTimeline() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead title="Milestone Kuartalan 2026" action="Lihat Roadmap" />
+      {/* Roadmap program OPEX satu grup — tonggak tidak dipecah per subholding. */}
+      <SectionHead title="Milestone Kuartalan 2026" action="Lihat Roadmap" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Tonggak Utama Program OPEX — 2 Selesai · 1 Berjalan · 1 Rencana
       </p>

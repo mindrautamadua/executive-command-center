@@ -13,11 +13,21 @@ import {
 import { sugarGapNote, sugarTrajectory } from "@/lib/stf-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
 
 const ribuan = (v: number) => `${v.toLocaleString("id-ID")} rb ton`;
 
-/** Trajektori produksi gula PTPN menuju swasembada 2028 + gap terhadap jalur. */
+/**
+ * Trajektori produksi gula PTPN menuju swasembada 2028 + gap terhadap jalur.
+ *
+ * Seluruh angka pada kartu ini adalah wilayah SugarCo (SGN) — tidak ada pecahan
+ * untuk subholding lain. Karena itu di cakupan PalmCo/SupportingCo grafik
+ * diredupkan dan diberi keterangan bahwa isinya khusus SugarCo.
+ */
 export function SugarSelfSufficiency() {
+  const { active, isFiltered } = useSubholding();
+  const luarCakupan = isFiltered && active !== "sugarco";
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -34,7 +44,17 @@ export function SugarSelfSufficiency() {
         jt ton
       </p>
 
-      <div className="mt-1.5 min-h-0 w-full flex-1">
+      {luarCakupan && (
+        <p className="mt-1 text-[8px] text-ink-400">
+          Program gula sepenuhnya wilayah SugarCo (SGN) — angka di bawah bukan bagian dari cakupan
+          yang sedang dipilih.
+        </p>
+      )}
+
+      <div
+        className="mt-1.5 min-h-0 w-full flex-1 transition-opacity"
+        style={{ opacity: luarCakupan ? 0.25 : 1 }}
+      >
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={sugarTrajectory} margin={{ top: 12, right: 14, bottom: 0, left: -8 }}>
             <CartesianGrid stroke={CHART_AXIS.grid} vertical={false} />
@@ -84,7 +104,12 @@ export function SugarSelfSufficiency() {
         </ResponsiveContainer>
       </div>
 
-      <p className="mt-1 text-[8px] leading-snug text-ink-400">{sugarGapNote.catatan}</p>
+      <p
+        className="mt-1 text-[8px] leading-snug text-ink-400 transition-opacity"
+        style={{ opacity: luarCakupan ? 0.25 : 1 }}
+      >
+        {sugarGapNote.catatan}
+      </p>
     </div>
   );
 }

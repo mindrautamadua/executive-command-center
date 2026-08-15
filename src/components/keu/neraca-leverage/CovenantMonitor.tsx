@@ -1,6 +1,7 @@
 import { covenants } from "@/lib/knl-data";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
 import { SectionHead } from "../../hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const STATUS_TONE: Record<string, BadgeTone> = {
   Aman: "good",
@@ -15,7 +16,7 @@ export function CovenantMonitor() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "240ms" } as React.CSSProperties}
     >
-      <SectionHead title="Covenant Monitor" action="Lihat Detail" />
+      <SectionHead title="Covenant Monitor" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         5 Covenant Kredit Utama · seluruhnya berstatus Aman
       </p>

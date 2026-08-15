@@ -1,5 +1,6 @@
 import { mitigationPortfolio } from "@/lib/risk-data-detail";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const TOTAL = mitigationPortfolio.reduce((s, r) => s + r.total, 0);
 const ON = mitigationPortfolio.reduce((s, r) => s + r.onTrack, 0);
@@ -13,7 +14,7 @@ export function MitigationPortfolio() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead title="Portofolio Aksi Mitigasi" />
+      <SectionHead title="Portofolio Aksi Mitigasi" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         {TOTAL} Aksi Register · On-Track {ON} · At-Risk {AT} · Terlambat {LATE}
       </p>

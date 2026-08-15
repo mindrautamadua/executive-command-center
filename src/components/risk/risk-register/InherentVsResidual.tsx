@@ -1,6 +1,7 @@
 import { inherentVsResidual } from "@/lib/risk-data";
 import { PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 /** Skala 0–25 (skor matriks 5×5) dipetakan ke lebar track. */
 const pos = (score: number) => (score / 25) * 100;
@@ -17,7 +18,7 @@ export function InherentVsResidual() {
     >
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0">
-          <SectionHead title="Inherent vs Residual — Top 15" />
+          <SectionHead title="Inherent vs Residual — Top 15" badge={<ScopeNote />} />
           <p className="mt-[3px] text-[9px] text-ink-500">
             Efektivitas Kontrol: Selisih Skor Sebelum &amp; Sesudah Mitigasi
           </p>

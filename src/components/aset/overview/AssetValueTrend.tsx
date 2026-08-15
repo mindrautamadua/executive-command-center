@@ -14,6 +14,7 @@ import {
 import { assetValueNote, assetValueTrend } from "@/lib/ast-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const num = (v: number) =>
   v.toLocaleString("id-ID", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
@@ -25,7 +26,7 @@ export function AssetValueTrend() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead title="Tren Nilai Aset Tetap" action="Lihat Detail" />
+      <SectionHead title="Tren Nilai Aset Tetap" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Nilai Buku Aset Tetap &amp; Capex 2022–2026 (Rp T)
       </p>

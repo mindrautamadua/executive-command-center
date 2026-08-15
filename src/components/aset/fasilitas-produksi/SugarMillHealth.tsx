@@ -1,6 +1,9 @@
+"use client";
+
 import { sugarMillHealth, sugarMillNote, type SugarMillStatus } from "@/lib/afs-data";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
 
 const num = (v: number) =>
   v.toLocaleString("id-ID", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
@@ -15,6 +18,10 @@ const COLS = "grid-cols-[minmax(0,1.4fr)_52px_50px_52px_62px_54px]";
 
 /** Kesehatan 17 PG: kapasitas, utilisasi, rendemen, laba-rugi unit, status. */
 export function SugarMillHealth() {
+  const { active } = useSubholding();
+  // Pemetaan domain: PG (gula, musim giling) seluruhnya milik SugarCo.
+  const outOfScope = active !== "all" && active !== "sugarco";
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
@@ -22,7 +29,9 @@ export function SugarMillHealth() {
     >
       <SectionHead title="Kesehatan 17 Pabrik Gula" action="Lihat Detail" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        Utilisasi, Rendemen &amp; Proyeksi Laba-Rugi Unit FY 2026 · 11 PG merah
+        {outOfScope
+          ? "Portofolio pabrik gula hanya untuk SugarCo"
+          : "Utilisasi, Rendemen & Proyeksi Laba-Rugi Unit FY 2026 · 11 PG merah"}
       </p>
 
       <div
@@ -36,7 +45,10 @@ export function SugarMillHealth() {
         <span className="text-right">Status</span>
       </div>
 
-      <ul className="scroll-thin mt-1 flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto pr-1">
+      <ul
+        className="scroll-thin mt-1 flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto pr-1 transition-opacity"
+        style={{ opacity: outOfScope ? 0.25 : 1 }}
+      >
         {sugarMillHealth.map((p) => (
           <li
             key={p.nama}

@@ -1,6 +1,9 @@
+"use client";
+
 import { CloudSun, Droplets, Sun } from "lucide-react";
 import { EL_NINO_PROBABILITAS_PCT, elNinoScenarios } from "@/lib/agro-data";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const STYLES = [
   {
@@ -26,6 +29,10 @@ const STYLES = [
 const fmt = (v: number, suffix: string) =>
   v === 0 ? "—" : `${v.toLocaleString("id-ID")}${suffix}`;
 
+/**
+ * Skenario El Nino menakar dampak EBITDA seluruh grup (sawit, tebu, karet, teh)
+ * — angka konsolidasi, tidak dipecah per subholding.
+ */
 export function DampakIklimSimulasi() {
   return (
     <div
@@ -33,7 +40,7 @@ export function DampakIklimSimulasi() {
       style={{ "--d": "180ms" } as React.CSSProperties}
     >
       <div className="flex items-center justify-between gap-2">
-        <SectionHead title="Simulasi Dampak Iklim H2 2026" />
+        <SectionHead title="Simulasi Dampak Iklim H2 2026" badge={<ScopeNote />} />
         <span className="shrink-0 rounded-md bg-[#fdecec] px-2 py-[3px] text-[8px] font-extrabold text-[#ef4444]">
           Probabilitas El Nino {EL_NINO_PROBABILITAS_PCT}%
         </span>

@@ -1,6 +1,7 @@
 import { AlertCircle, AlertTriangle, Info } from "lucide-react";
 import { stgAlerts } from "@/lib/stg-data";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const TONE = {
   red: {
@@ -27,7 +28,7 @@ export function StgAlerts() {
       className="card anim-rise px-4 pb-3.5 pt-3"
       style={{ "--d": "200ms" } as React.CSSProperties}
     >
-      <SectionHead title="Alerts & Notifications" action="Lihat Semua" />
+      <SectionHead title="Alerts & Notifications" action="Lihat Semua" badge={<ScopeNote />} />
 
       <div className="mt-2.5 flex flex-col gap-2">
         {stgAlerts.map((a) => {

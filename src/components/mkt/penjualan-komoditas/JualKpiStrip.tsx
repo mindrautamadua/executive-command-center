@@ -1,4 +1,9 @@
+"use client";
+
 import { Banknote, Droplets, Gauge, Percent, Tag, type LucideIcon } from "lucide-react";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { commodityScope, inScope } from "@/components/ui/CommodityScope";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 import { Delta } from "@/components/ui/Delta";
 
 interface JualKpi {
@@ -82,15 +87,26 @@ const items: JualKpi[] = [
 
 /** KPI strip penjualan (mirror WaKpiStrip). */
 export function JualKpiStrip() {
+  const { active } = useSubholding();
+
   return (
     <div className="grid grid-cols-5 gap-3">
       {items.map((k, i) => {
         const Icon = k.icon;
+        // Tile terikat komoditas (CPO → PalmCo) diredupkan di luar cakupan;
+        // tile lintas komoditas tetap konsolidasi grup dan ditandai ScopeNote.
+        const owner = commodityScope(`${k.label} ${k.sub}`);
+        const dim = !!owner && !inScope(active, owner);
         return (
           <div
             key={k.label}
             className="card anim-rise px-3 pb-3 pt-3"
-            style={{ "--d": `${40 * i}ms` } as React.CSSProperties}
+            style={
+              {
+                "--d": `${40 * i}ms`,
+                opacity: dim ? 0.25 : undefined,
+              } as React.CSSProperties
+            }
           >
             <div className="flex items-center gap-2">
               <span
@@ -101,6 +117,7 @@ export function JualKpiStrip() {
               <span className="min-w-0 text-[9px] font-semibold leading-[1.25] text-ink-500">
                 {k.label}
               </span>
+              {!owner && <ScopeNote />}
             </div>
             <div className="mt-2.5 whitespace-nowrap text-[19px] font-extrabold leading-none tracking-[-0.01em] text-ink-900">
               {k.value}

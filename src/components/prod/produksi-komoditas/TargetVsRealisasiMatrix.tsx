@@ -1,6 +1,11 @@
+"use client";
+
 import { komoditasScoreboard } from "@/lib/produksi-data";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
 import { SectionHead } from "../../hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { filterBySubholding } from "@/lib/subholding";
+import { commodityScope, ScopeEmpty } from "@/components/ui/CommodityScope";
 
 const STATUS_TONE: Record<string, BadgeTone> = {
   "On Track": "good",
@@ -15,6 +20,14 @@ const pct = (v: number) =>
   `${v.toLocaleString("id-ID", { minimumFractionDigits: 1, maximumFractionDigits: 1 })}%`;
 
 export function TargetVsRealisasiMatrix() {
+  const { active, def } = useSubholding();
+
+  // Baris punya dimensi komoditas: TBS/CPO = PalmCo, Gula = SugarCo,
+  // Karet & Teh = SupportingCo.
+  const rows = filterBySubholding(komoditasScoreboard, active, (k) =>
+    commodityScope(k.komoditas),
+  );
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
@@ -33,8 +46,10 @@ export function TargetVsRealisasiMatrix() {
         <span className="text-right">Status</span>
       </div>
 
+      {rows.length === 0 && <ScopeEmpty label={def.fullLabel} />}
+
       <ul className="mt-1 flex min-h-0 flex-1 flex-col justify-between gap-1">
-        {komoditasScoreboard.map((k) => (
+        {rows.map((k) => (
           <li
             key={k.komoditas}
             className="grid grid-cols-[minmax(0,1.15fr)_56px_56px_minmax(0,1.3fr)_70px] items-center gap-x-2 rounded-lg border border-[#eef2f6] bg-[#fbfcfd] px-2.5 py-1.5"

@@ -1,6 +1,7 @@
 import { statusFunnel } from "@/lib/alb-data";
 import { PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const COLORS = [PALETTE.blue, PALETTE.teal, PALETTE.greenSoft, PALETTE.green];
 const BASIS_RB_HA = statusFunnel[0].luasRbHa;
@@ -12,7 +13,7 @@ export function HguStatusFunnel() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead title="Funnel Perpanjangan HGU" action="Lihat Detail" />
+      <SectionHead title="Funnel Perpanjangan HGU" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Tahap Proses di ATR/BPN (rb ha) · basis {BASIS_RB_HA} rb ha
       </p>

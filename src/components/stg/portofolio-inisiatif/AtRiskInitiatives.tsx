@@ -1,10 +1,18 @@
+"use client";
+
 import { Sparkles, TriangleAlert } from "lucide-react";
 import { atRiskList } from "@/lib/spi-data";
 import { SectionHead } from "@/components/hc/SectionHead";
 import { ToneBadge } from "@/components/shared/ToneBadge";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { filterBySubholding } from "@/lib/subholding";
 
 /** 8 inisiatif At Risk beserta akar masalah dan rencana pemulihan. */
 export function AtRiskInitiatives() {
+  const { active } = useSubholding();
+  // `owner` (PalmCo / SGN / PTPN I / Holding) adalah dimensi subholding baris ini.
+  const rows = filterBySubholding(atRiskList, active, (r) => r.owner);
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
@@ -12,11 +20,17 @@ export function AtRiskInitiatives() {
     >
       <SectionHead title="Inisiatif At Risk" action="Lihat Semua" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        8 Inisiatif Berstatus At Risk — Akar Masalah &amp; Rencana Pemulihan
+        {rows.length} Inisiatif Berstatus At Risk — Akar Masalah &amp; Rencana Pemulihan
       </p>
 
+      {rows.length === 0 && (
+        <p className="mt-2 text-[9px] text-ink-500">
+          Tidak ada inisiatif At Risk untuk cakupan ini.
+        </p>
+      )}
+
       <div className="mt-2 grid min-h-0 flex-1 grid-cols-4 grid-rows-2 gap-2">
-        {atRiskList.map((r) => (
+        {rows.map((r) => (
           <div
             key={r.id}
             className="flex min-w-0 flex-col rounded-lg border border-[#f3e3c3] bg-[#fdf9f0] px-2.5 py-2"

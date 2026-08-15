@@ -1,7 +1,10 @@
+"use client";
+
 import { ChevronRight } from "lucide-react";
 import { pencapaian, kpiStrategis } from "@/lib/kinerja-data";
 import { Delta } from "../ui/Delta";
 import { CountUp } from "../ui/CountUp";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 /** Gauge setengah lingkaran; busur progres dianimasikan (anim-draw). */
 function Gauge({ value }: { value: number }) {
@@ -56,7 +59,7 @@ export function PencapaianTarget() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <h3 className="card-title-navy">PENCAPAIAN TARGET ORGANISASI</h3>
+      <h3 className="card-title-navy flex min-w-0 items-center gap-1.5"><span>PENCAPAIAN TARGET ORGANISASI</span><ScopeNote /></h3>
       <p className="mt-[3px] text-[9.5px] text-ink-500">Progress pencapaian KPI Strategis</p>
 
       <div className="mt-1 flex min-h-0 flex-1 gap-3">

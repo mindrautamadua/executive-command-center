@@ -1,6 +1,7 @@
 import { ArrowRight, CircleAlert, Info, Sparkles, TrendingUp, TriangleAlert } from "lucide-react";
 import { skcInsights } from "@/lib/skc-data";
 import type { StgInsight } from "@/lib/stg-core";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const TONES: Record<StgInsight["tone"], { bg: string; icon: string; title: string }> = {
   good: { bg: "bg-ptpn-greenLight", icon: "text-ptpn-green", title: "text-ptpn-green" },
@@ -24,11 +25,14 @@ export function SkcInsight() {
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
       <div className="flex items-center justify-between gap-2">
-        <h3 className="text-[10px] font-extrabold uppercase tracking-[0.05em] text-ink-900">
-          Insight &amp; Rekomendasi{" "}
-          <span className="font-semibold normal-case tracking-normal text-ink-400">
-            (Decision-grade)
+        <h3 className="flex min-w-0 items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-[0.05em] text-ink-900">
+          <span>
+            Insight &amp; Rekomendasi{" "}
+            <span className="font-semibold normal-case tracking-normal text-ink-400">
+              (Decision-grade)
+            </span>
           </span>
+          <ScopeNote />
         </h3>
         <button className="flex shrink-0 items-center gap-1.5 rounded-lg border border-[#e3e9ef] bg-white px-3 py-[6px] text-[9.5px] font-semibold text-ink-700 transition-colors hover:border-ptpn-green hover:text-ptpn-green">
           Lihat Semua Insight <ArrowRight size={11} />

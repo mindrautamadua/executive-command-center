@@ -13,6 +13,8 @@ import {
 } from "recharts";
 import { marginUplift } from "@/lib/hilir-stok-margin-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { inScope, ScopeEmpty } from "@/components/ui/CommodityScope";
 import { SectionHead } from "../../hc/SectionHead";
 
 const COLORS = [PALETTE.slate, PALETTE.blue, PALETTE.green];
@@ -27,6 +29,11 @@ const DATA = marginUplift.map((m) => ({
 
 /** Uplift margin terintegrasi per tahap rantai nilai (Rp/kg). */
 export function MarginUpliftChart() {
+  const { active, def } = useSubholding();
+  // Seluruh tahap rantai ini bertumpu pada CPO kebun (CPO curah → RBD olein →
+  // migor kemasan) = domain sawit → PalmCo.
+  const luarCakupan = !inScope(active, "CPO sawit");
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -37,6 +44,9 @@ export function MarginUpliftChart() {
         Margin Terintegrasi Rp/kg dari HPP Kebun Rp 8.950 · uplift vs CPO curah
       </p>
 
+      {luarCakupan ? (
+        <ScopeEmpty label={def.fullLabel} />
+      ) : (
       <div className="mt-1.5 min-h-0 w-full flex-1">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={DATA} margin={{ top: 18, right: 8, bottom: 0, left: -14 }} barCategoryGap="30%">
@@ -76,6 +86,7 @@ export function MarginUpliftChart() {
           </BarChart>
         </ResponsiveContainer>
       </div>
+      )}
 
       <p className="mt-1 truncate text-[8px] text-ink-400">
         Konversi ke migor kemasan menambah margin +Rp 1.188/kg vs jual CPO curah.

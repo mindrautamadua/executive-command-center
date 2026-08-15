@@ -2,6 +2,7 @@ import { salesVsTarget } from "@/lib/pemasaran-data";
 import { PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
 import { CountUp } from "@/components/ui/CountUp";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 /** Skala gauge 0–120% RKAP. */
 const SCALE_MAX = 120;
@@ -34,7 +35,8 @@ export function SalesVsTargetGauge() {
 
   return (
     <div className="card anim-rise px-4 pb-3.5 pt-3" style={{ "--d": "60ms" } as React.CSSProperties}>
-      <SectionHead title="Sales vs Target RKAP" action="Lihat Detail" />
+      {/* Capaian vs RKAP hanya tersedia pada level konsolidasi grup. */}
+      <SectionHead title="Sales vs Target RKAP" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">Capaian Nilai Penjualan YTD vs RKAP</p>
 
       <div className="relative mx-auto mt-2 w-[190px]">

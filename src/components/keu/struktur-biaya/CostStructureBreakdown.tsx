@@ -1,6 +1,7 @@
 import { costComponents } from "@/lib/ksb-data";
 import { fmtId } from "@/lib/keu-core";
 import { SectionHead } from "../../hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 /** Komposisi HPP YTD Rp 15,8 T: bar tersegmentasi + rincian per komponen. */
 export function CostStructureBreakdown() {
@@ -9,7 +10,7 @@ export function CostStructureBreakdown() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead title="Cost Structure Breakdown" />
+      <SectionHead title="Cost Structure Breakdown" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">Komposisi HPP YTD Rp 15,8 T per Komponen Biaya</p>
 
       <div className="mt-3 flex h-[18px] w-full overflow-hidden rounded-lg">

@@ -1,5 +1,8 @@
+"use client";
+
 import { BrainCircuit, Sparkles } from "lucide-react";
 import { waIntelCounts, waIntelPriority, waIntelSignals } from "@/lib/wa-data";
+import { ScopeNote } from "../ui/ScopeNote";
 
 const SIGNAL_TONE = {
   red: {
@@ -31,6 +34,7 @@ export function WorkforceIntelligence() {
           <span className="rounded bg-ptpn-greenLight px-1 py-[1px] text-[8px] font-bold normal-case tracking-normal text-ptpn-green">
             AI
           </span>
+          <ScopeNote />
         </h3>
         <div className="flex items-center gap-3">
           {waIntelCounts.map((c) => (

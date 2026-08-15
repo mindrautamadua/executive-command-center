@@ -14,6 +14,8 @@ import { plasmaSupply } from "@/lib/agro-data";
 import { produksiBulanan } from "@/lib/produksi-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { ScopeEmpty, inScope } from "@/components/ui/CommodityScope";
 
 /** Pihak III 250 rb ton YTD, disebar mengikuti musim (jumlah = 250). */
 const PIHAK_III_RB_TON = [48, 46, 50, 52, 54];
@@ -36,6 +38,10 @@ const komposisi = plasmaSupply.map((p, i) => {
 const ribuan = (v: number) => v.toLocaleString("id-ID");
 
 export function IntiVsPlasmaChart() {
+  // Domain: komposisi TBS masuk PKS (inti/plasma/pihak III) → milik PalmCo.
+  const { active, def } = useSubholding();
+  const luarCakupan = !inScope(active, "TBS");
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -46,6 +52,9 @@ export function IntiVsPlasmaChart() {
         TBS Diolah per Sumber, Jan–Mei 2026 (Rb Ton) — Plasma 13,3% dari Total
       </p>
 
+      {luarCakupan ? (
+        <ScopeEmpty label={def.fullLabel} />
+      ) : (
       <div className="mt-1.5 min-h-0 w-full flex-1">
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={komposisi} margin={{ top: 6, right: 8, bottom: 0, left: -8 }}>
@@ -117,6 +126,7 @@ export function IntiVsPlasmaChart() {
           </AreaChart>
         </ResponsiveContainer>
       </div>
+      )}
     </div>
   );
 }

@@ -1,7 +1,11 @@
+"use client";
+
 import { topVariance } from "@/lib/kcx-data";
 import { fmtId } from "@/lib/keu-core";
 import { SectionHead } from "@/components/hc/SectionHead";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { filterBySubholding } from "@/lib/subholding";
 
 const TONE_LABEL: Record<string, { label: string; tone: BadgeTone }> = {
   good: { label: "On Track", tone: "good" },
@@ -16,6 +20,11 @@ const BAR_COLOR: Record<string, string> = {
 };
 
 export function TopCapexVariance() {
+  const { active, isFiltered, def } = useSubholding();
+  // Nama proyek menyebut subholding (mis. "Replanting PalmCo Regional 4-5");
+  // proyek lintas grup tanpa penyebutan subholding tetap tampil.
+  const rows = filterBySubholding(topVariance, active, (p) => p.project);
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
@@ -24,6 +33,7 @@ export function TopCapexVariance() {
       <SectionHead title="Top Capex Variance" action="Lihat Semua" />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Proyek dengan Deviasi Progres Terbesar vs Plafon RKAP
+        {isFiltered ? ` — ${def.label} & proyek lintas grup` : ""}
       </p>
 
       <div className="mt-2 grid grid-cols-[minmax(0,1fr)_100px_76px] gap-x-3 border-b border-[#f0f3f6] pb-1 text-[8px] font-bold uppercase tracking-[0.04em] text-ink-400">
@@ -33,7 +43,7 @@ export function TopCapexVariance() {
       </div>
 
       <div className="scroll-thin min-h-0 flex-1 overflow-y-auto">
-        {topVariance.map((p) => {
+        {rows.map((p) => {
           const badge = TONE_LABEL[p.tone];
           return (
             <div

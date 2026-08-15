@@ -4,6 +4,7 @@ import { useState } from "react";
 import { tjslAllocation } from "@/lib/esg-data-detail";
 import { DonutChart } from "@/components/ui/DonutChart";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const TOTAL = tjslAllocation.reduce((s, t) => s + t.rpM, 0);
 
@@ -17,7 +18,7 @@ export function TjslAllocation() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "180ms" } as React.CSSProperties}
     >
-      <SectionHead title="Alokasi TJSL per Pilar" />
+      <SectionHead title="Alokasi TJSL per Pilar" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">Penyaluran YTD · 4 Pilar TJSL BUMN</p>
 
       <div className="flex min-h-0 flex-1 items-center gap-3">

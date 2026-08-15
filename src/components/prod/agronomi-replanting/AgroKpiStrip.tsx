@@ -1,5 +1,9 @@
+"use client";
+
 import type { ProdKpi } from "@/lib/produksi-data";
 import { ProdKpiCards } from "../ProdKpiCards";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { ScopeEmpty, inScope } from "@/components/ui/CommodityScope";
 
 const agroKpi: ProdKpi[] = [
   {
@@ -53,5 +57,14 @@ const agroKpi: ProdKpi[] = [
 ];
 
 export function AgroKpiStrip() {
+  // Domain: replanting, umur tanaman & pemupukan kebun sawit → milik PalmCo.
+  const { active, def } = useSubholding();
+  if (!inScope(active, "kebun sawit")) {
+    return (
+      <div className="card anim-rise flex flex-col px-4 pb-3 pt-3">
+        <ScopeEmpty label={def.fullLabel} />
+      </div>
+    );
+  }
   return <ProdKpiCards items={agroKpi} cols="grid-cols-4" />;
 }

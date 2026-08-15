@@ -12,11 +12,18 @@ import {
 } from "recharts";
 import { RESTAN_NORMA_PCT, RESTAN_RATA_GRUP_PCT, restanSeries } from "@/lib/agro-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
+import { filterBySubholding } from "@/lib/subholding";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { ScopeEmpty, commodityScope } from "@/components/ui/CommodityScope";
 
 const pct = (v: number) => `${v.toLocaleString("id-ID", { minimumFractionDigits: 1 })}%`;
 
 export function RestanTrend() {
+  // Domain: restan TBS diukur di Regional 1–7 kebun sawit → milik PalmCo.
+  const { active, def } = useSubholding();
+  const rows = filterBySubholding(restanSeries, active, (r) => commodityScope(r.regional));
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -28,9 +35,13 @@ export function RestanTrend() {
         {pct(RESTAN_RATA_GRUP_PCT)}
       </p>
 
+      {rows.length === 0 ? (
+        <ScopeEmpty label={def.fullLabel} />
+      ) : (
+      <>
       <div className="mt-1.5 min-h-0 w-full flex-1">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={restanSeries} margin={{ top: 12, right: 10, bottom: 0, left: -24 }}>
+          <LineChart data={rows} margin={{ top: 12, right: 10, bottom: 0, left: -24 }}>
             <CartesianGrid stroke={CHART_AXIS.grid} vertical={false} />
             <XAxis
               dataKey="regional"
@@ -98,6 +109,8 @@ export function RestanTrend() {
         Regional 5–7 (titik merah) melampaui norma 2% — akar FFA tinggi &amp; gap OER di PKS
         wilayah timur.
       </p>
+      </>
+      )}
     </div>
   );
 }

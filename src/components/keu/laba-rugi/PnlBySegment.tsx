@@ -1,19 +1,29 @@
+"use client";
+
 import { pnlBySegment } from "@/lib/kpl-data";
 import { EBITDA_HOLDING_ELIMINASI_RPT, fmtId } from "@/lib/keu-core";
 import { ToneBadge } from "@/components/shared/ToneBadge";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { filterBySubholding } from "@/lib/subholding";
 import { SectionHead } from "../../hc/SectionHead";
 
 const TONE_LABEL = { good: "Sehat", warn: "Membaik", bad: "Tertekan" } as const;
 
 /** Mini P&L per subholding: pendapatan → laba bersih + tone kesehatan margin. */
 export function PnlBySegment() {
+  const { active, isFiltered, def } = useSubholding();
+  // `segment` (PalmCo / SGN / PTPN I) adalah dimensi subholding baris ini.
+  const rows = filterBySubholding(pnlBySegment, active, (s) => s.segment);
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "240ms" } as React.CSSProperties}
     >
       <SectionHead title="P&L per Segmen" action="Lihat Detail" />
-      <p className="mt-[3px] text-[9px] text-ink-500">Mini P&amp;L 3 Subholding · Rp T (YTD)</p>
+      <p className="mt-[3px] text-[9px] text-ink-500">
+        {isFiltered ? `Mini P&L ${def.label}` : "Mini P&L 3 Subholding"} · Rp T (YTD)
+      </p>
 
       <div className="mt-2 min-h-0 flex-1">
         <table className="w-full border-collapse">
@@ -29,7 +39,7 @@ export function PnlBySegment() {
             </tr>
           </thead>
           <tbody>
-            {pnlBySegment.map((s) => (
+            {rows.map((s) => (
               <tr
                 key={s.segment}
                 className="border-b border-[#f5f8fa] transition-colors last:border-0 hover:bg-[#f5f8fa]"
@@ -62,8 +72,9 @@ export function PnlBySegment() {
       </div>
 
       <p className="mt-1 border-t border-[#f5f8fa] pt-1.5 text-[8.5px] leading-snug text-ink-500">
-        EBITDA holding, eliminasi &amp; non-segmen Rp {fmtId(EBITDA_HOLDING_ELIMINASI_RPT, 2)} T —
-        konsolidasi grup Rp 6,82 T.
+        {isFiltered
+          ? `Baris ${def.label} dari matriks P&L 3 subholding; eliminasi antar-segmen tetap di tingkat grup.`
+          : `EBITDA holding, eliminasi & non-segmen Rp ${fmtId(EBITDA_HOLDING_ELIMINASI_RPT, 2)} T — konsolidasi grup Rp 6,82 T.`}
       </p>
     </div>
   );

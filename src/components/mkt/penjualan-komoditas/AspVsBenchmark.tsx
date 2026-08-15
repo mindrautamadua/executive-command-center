@@ -13,6 +13,8 @@ import {
 import { aspPremiumAvg, aspVsBenchmark } from "@/lib/pemasaran-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { inScope, ScopeEmpty } from "@/components/ui/CommodityScope";
 
 const rp = (v: number) => `Rp ${v.toLocaleString("id-ID")}`;
 
@@ -27,12 +29,19 @@ function LegendDot({ color, label }: { color: string; label: string }) {
 
 /** ASP realisasi CPO vs benchmark KPBN + premium bulanan (bar). */
 export function AspVsBenchmark() {
+  // Seluruh kartu berbasis CPO → milik PalmCo.
+  const { active, def } = useSubholding();
+  const cpoScope = inScope(active, "CPO");
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "150ms" } as React.CSSProperties}
     >
       <SectionHead title="ASP vs Benchmark KPBN" action="Lihat Detail" />
+      {!cpoScope && <ScopeEmpty label={def.fullLabel} />}
+      {cpoScope && (
+        <>
       <div className="mt-[3px] flex items-center justify-between gap-2">
         <p className="text-[9px] text-ink-500">
           Premium/diskon ASP CPO terhadap KPBN per bulan (Rp/kg)
@@ -120,6 +129,8 @@ export function AspVsBenchmark() {
       <p className="mt-1 text-[8px] leading-snug text-ink-400">
         Rata-rata premium YTD {aspPremiumAvg} — FFA rendah &amp; kontrak premium buyer hilir
       </p>
+        </>
+      )}
     </div>
   );
 }

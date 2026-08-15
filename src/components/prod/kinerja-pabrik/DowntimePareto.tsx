@@ -13,6 +13,7 @@ import {
 } from "recharts";
 import { downtimePareto } from "@/lib/pabrik-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 import { SectionHead } from "../../hc/SectionHead";
 
 const ribuan = (v: number) => v.toLocaleString("id-ID");
@@ -23,7 +24,8 @@ export function DowntimePareto() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead title="Downtime Pareto" action="Lihat Detail" />
+      {/* Jam downtime dicatat gabungan PKS + PG tanpa pecahan subholding — angka tetap konsolidasi. */}
+      <SectionHead title="Downtime Pareto" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Jam Downtime Tak Terencana YTD per Penyebab · 64% dari 2 penyebab teratas
       </p>

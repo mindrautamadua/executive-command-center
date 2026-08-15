@@ -1,5 +1,10 @@
+"use client";
+
 import { outlookKonsensus } from "@/lib/harga-outlook-data";
+import { filterBySubholding } from "@/lib/subholding";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { commodityScope, ScopeEmpty } from "@/components/ui/CommodityScope";
 
 const n = (v: number) => v.toLocaleString("id-ID");
 
@@ -17,6 +22,10 @@ function ScenarioCell({ s }: { s: { bear: number; base: number; bull: number } }
 
 /** Outlook konsensus bear/base/bull Q3-Q4 2026 per komoditas. */
 export function OutlookKonsensus() {
+  const { active, def } = useSubholding();
+  // CPO → PalmCo, gula → SugarCo, karet → SupportingCo.
+  const rows = filterBySubholding(outlookKonsensus, active, (r) => commodityScope(r.komoditas));
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
@@ -35,8 +44,10 @@ export function OutlookKonsensus() {
         <span className="text-right">Q4 2026</span>
       </div>
 
+      {rows.length === 0 && <ScopeEmpty label={def.fullLabel} />}
+
       <ul className="mt-1 flex min-h-0 flex-1 flex-col justify-between gap-1">
-        {outlookKonsensus.map((r) => (
+        {rows.map((r) => (
           <li
             key={r.komoditas}
             className="grid grid-cols-[minmax(0,1.1fr)_150px_150px] items-center gap-x-2 rounded-lg border border-[#eef2f6] bg-[#fbfcfd] px-2.5 py-1.5"

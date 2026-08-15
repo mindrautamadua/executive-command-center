@@ -14,6 +14,7 @@ import { scenarios } from "@/lib/ksk-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { fmtId, fmtRpT } from "@/lib/keu-core";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const TONE_DOT: Record<string, string> = {
   bad: PALETTE.red,
@@ -33,7 +34,7 @@ export function ScenarioComparison() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead title="Scenario Comparison" />
+      <SectionHead title="Scenario Comparison" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         EBITDA &amp; Laba Bersih FY 2026 per Skenario (Rp T) — ★ outlook direkomendasikan
       </p>

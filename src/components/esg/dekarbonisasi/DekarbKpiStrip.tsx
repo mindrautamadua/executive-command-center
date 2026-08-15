@@ -1,3 +1,5 @@
+"use client";
+
 import { Flame, LayoutList, Sun, Wallet, Wind } from "lucide-react";
 import { dekarbKpi } from "@/lib/esg-data";
 import { EsgKpiCards, type EsgKpiCardItem } from "../EsgKpiCards";

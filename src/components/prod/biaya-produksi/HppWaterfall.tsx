@@ -14,6 +14,8 @@ import {
 } from "recharts";
 import { HPP_CPO_RP_KG, HPP_TARGET_RP_KG, hppKomponen, hppNote } from "@/lib/biaya-opex-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { inScope, ScopeEmpty } from "@/components/ui/CommodityScope";
 import { SectionHead } from "../../hc/SectionHead";
 
 const SHORT: Record<string, string> = {
@@ -53,6 +55,10 @@ const data: Step[] = (() => {
 const rp = (v: number) => `Rp ${v.toLocaleString("id-ID")}`;
 
 export function HppWaterfall() {
+  const { active, def } = useSubholding();
+  // HPP di modul ini adalah HPP CPO per kg — seluruhnya milik PalmCo.
+  const dalamCakupan = inScope(active, "HPP CPO (sawit)");
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -63,6 +69,10 @@ export function HppWaterfall() {
         Komponen HPP (Rp/kg) vs Alokasi Target RKAP · merah = di atas target
       </p>
 
+      {!dalamCakupan ? (
+        <ScopeEmpty label={def.fullLabel} />
+      ) : (
+        <>
       <div className="mt-1.5 min-h-0 w-full flex-1">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} margin={{ top: 16, right: 8, bottom: 0, left: -6 }} barCategoryGap="24%">
@@ -127,6 +137,8 @@ export function HppWaterfall() {
       </div>
 
       <p className="mt-1 line-clamp-2 text-[8px] leading-snug text-ink-400">{hppNote}</p>
+        </>
+      )}
     </div>
   );
 }

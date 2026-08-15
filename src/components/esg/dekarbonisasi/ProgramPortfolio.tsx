@@ -1,5 +1,6 @@
 import { programPortfolio, RAG_COLOR, type RagStatus } from "@/lib/esg-data";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
 
 const RAG_TONE: Record<RagStatus, BadgeTone> = {
@@ -16,7 +17,7 @@ export function ProgramPortfolio() {
       className="card anim-rise flex h-full min-h-0 flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "90ms" } as React.CSSProperties}
     >
-      <SectionHead title="Portofolio Program Dekarbonisasi" action="Lihat Semua" />
+      <SectionHead title="Portofolio Program Dekarbonisasi" action="Lihat Semua" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         12 Program Aktif · Status RAG, Progres &amp; Dampak Tahunan Penuh
       </p>

@@ -1,6 +1,10 @@
+"use client";
+
 import { register, type DecisionStatus } from "@/lib/sbd-data";
 import { SectionHead } from "@/components/hc/SectionHead";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { filterBySubholding } from "@/lib/subholding";
 
 const STATUS_TONE: Record<DecisionStatus, BadgeTone> = {
   Selesai: "good",
@@ -10,6 +14,11 @@ const STATUS_TONE: Record<DecisionStatus, BadgeTone> = {
 
 /** Register 14 keputusan terkini beserta PIC, batas waktu, dan status. */
 export function DecisionRegister() {
+  const { active, isFiltered, def } = useSubholding();
+  // Judul + PIC ("Dirut SGN", "Dir. Keuangan PTPN I") adalah dimensi subholding
+  // baris ini; keputusan tingkat holding tidak menyebut subholding → tetap tampil.
+  const rows = filterBySubholding(register, active, (d) => `${d.title} ${d.pic}`);
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -17,10 +26,15 @@ export function DecisionRegister() {
     >
       <SectionHead title="Register Keputusan" action="Lihat 46 Keputusan" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        14 Keputusan Terkini · Klasifikasi, PIC &amp; Batas Waktu Tindak Lanjut
+        {isFiltered
+          ? `${rows.length} Keputusan Terkini — ${def.label} & Holding · Klasifikasi, PIC & Batas Waktu`
+          : "14 Keputusan Terkini · Klasifikasi, PIC & Batas Waktu Tindak Lanjut"}
       </p>
 
       <div className="scroll-thin mt-1.5 min-h-0 flex-1 overflow-y-auto">
+        {rows.length === 0 && (
+          <p className="text-[9px] text-ink-500">Tidak ada keputusan untuk cakupan ini.</p>
+        )}
         <table className="w-full border-separate border-spacing-0">
           <thead className="sticky top-0 bg-[var(--surface)]">
             <tr className="text-left text-[7.5px] font-extrabold uppercase tracking-[0.05em] text-ink-400">
@@ -33,7 +47,7 @@ export function DecisionRegister() {
             </tr>
           </thead>
           <tbody>
-            {register.map((d) => (
+            {rows.map((d) => (
               <tr key={`${d.tanggal}-${d.title}`} className="align-middle">
                 <td className="whitespace-nowrap border-b border-[#f3f6f9] py-[6px] pr-2 text-[8px] font-semibold text-ink-500">
                   {d.tanggal}

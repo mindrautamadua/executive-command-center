@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { waRisks, waRiskScore } from "@/lib/wa-data";
+import { ScopeNote } from "../ui/ScopeNote";
 
 const TONE = {
   red: { dot: "bg-[#ef4444]", value: "text-[#ef4444]" },
@@ -16,8 +19,11 @@ export function WaRiskCompact() {
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
       <div className="flex items-center justify-between gap-2">
-        <h3 className="text-[10px] font-extrabold uppercase tracking-[0.05em] text-ink-900">
-          Workforce Risk Radar
+        <h3 className="flex min-w-0 items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-[0.05em] text-ink-900">
+          <span>
+            Workforce Risk Radar
+          </span>
+          <ScopeNote />
         </h3>
         <div className="flex items-center gap-2.5">
           <span className="rounded bg-[#fdf3e0] px-2 py-[3px] text-[9px] font-bold text-[#d98b06]">

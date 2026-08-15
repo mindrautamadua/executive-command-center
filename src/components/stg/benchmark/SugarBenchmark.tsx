@@ -14,6 +14,7 @@ import {
 import { sugarBench } from "@/lib/sbm-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
 
 const fmt2 = (v: number) =>
   v.toLocaleString("id-ID", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -32,8 +33,16 @@ const DATA = sugarBench.map((r) => ({
   isPtpn: r.isPtpn ?? false,
 }));
 
-/** Rendemen gula SGN vs rata-rata Jawa, swasta domestik, Thailand & Brasil. */
+/**
+ * Rendemen gula SGN vs rata-rata Jawa, swasta domestik, Thailand & Brasil.
+ * Entri PTPN di sini adalah SGN — PG/gula = SugarCo.
+ * Pembanding eksternal tidak pernah disaring: menghapusnya merusak benchmark.
+ */
 export function SugarBenchmark() {
+  const { active, isFiltered } = useSubholding();
+  // Batang SGN diredupkan bila cakupan aktif bukan SugarCo.
+  const dim = (isPtpn: boolean) => (!isFiltered || !isPtpn || active === "sugarco" ? 1 : 0.25);
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -41,7 +50,7 @@ export function SugarBenchmark() {
     >
       <SectionHead title="Benchmark Rendemen Gula" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        Rendemen (%) SGN vs Jawa, Thailand &amp; Brasil · Gap ke Thailand -3,75 pts
+        Rendemen (%) SGN (SugarCo) vs Jawa, Thailand &amp; Brasil · Gap ke Thailand -3,75 pts
       </p>
 
       <div className="mt-1.5 min-h-0 w-full flex-1">
@@ -74,7 +83,11 @@ export function SugarBenchmark() {
             />
             <Bar dataKey="rendemen" radius={[3, 3, 0, 0]} maxBarSize={34}>
               {DATA.map((d) => (
-                <Cell key={d.entity} fill={d.isPtpn ? PALETTE.red : PALETTE.amber} />
+                <Cell
+                  key={d.entity}
+                  fill={d.isPtpn ? PALETTE.red : PALETTE.amber}
+                  fillOpacity={dim(d.isPtpn)}
+                />
               ))}
               <LabelList
                 dataKey="rendemen"

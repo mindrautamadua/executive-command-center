@@ -1,5 +1,10 @@
+"use client";
+
 import { Scale } from "lucide-react";
 import { policyWatch, type PolicyWatchRow } from "@/lib/hilir-stok-margin-data";
+import { filterBySubholding } from "@/lib/subholding";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { commodityScope, ScopeEmpty } from "@/components/ui/CommodityScope";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
 import { SectionHead } from "../../hc/SectionHead";
 
@@ -15,8 +20,23 @@ const TONE_LABEL: Record<PolicyWatchRow["tone"], string> = {
   green: "Siap",
 };
 
+/** Lebar grid mengikuti jumlah kebijakan yang tersisa setelah filter subholding. */
+const COLS: Record<number, string> = {
+  1: "grid-cols-1",
+  2: "grid-cols-2",
+  3: "grid-cols-3",
+  4: "grid-cols-4",
+};
+
 /** Pipeline regulasi & kebijakan berikut status kesiapan grup. */
 export function PolicyWatchCard() {
+  const { active, def } = useSubholding();
+  // Kebijakan mengikuti komoditas yang diatur: mandat FAME/B40 = PalmCo,
+  // HET gula = SugarCo; regulasi lintas komoditas tetap tampil.
+  const rows = filterBySubholding(policyWatch, active, (p) =>
+    commodityScope(`${p.kebijakan} ${p.dampak}`),
+  );
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
@@ -27,8 +47,11 @@ export function PolicyWatchCard() {
         Pipeline Regulasi &amp; Kebijakan · status kesiapan PTPN Group
       </p>
 
-      <div className="mt-2 grid min-h-0 flex-1 grid-cols-4 gap-3">
-        {policyWatch.map((p) => (
+      {rows.length === 0 ? (
+        <ScopeEmpty label={def.fullLabel} />
+      ) : (
+      <div className={`mt-2 grid min-h-0 flex-1 gap-3 ${COLS[rows.length] ?? "grid-cols-4"}`}>
+        {rows.map((p) => (
           <div
             key={p.kebijakan}
             className="flex min-w-0 flex-col rounded-lg border border-[#eef2f6] bg-[#fbfcfd] px-2.5 py-2"
@@ -48,6 +71,7 @@ export function PolicyWatchCard() {
           </div>
         ))}
       </div>
+      )}
     </div>
   );
 }

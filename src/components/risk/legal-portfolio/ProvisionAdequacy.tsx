@@ -1,5 +1,6 @@
 import { provisionAdequacy, provisionStats, winRate } from "@/lib/risk-data-detail";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const rpM = (v: number) => `Rp ${v.toLocaleString("id-ID")} M`;
 
@@ -14,7 +15,7 @@ export function ProvisionAdequacy() {
     >
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <SectionHead title="Kecukupan Provisi Litigasi" />
+          <SectionHead title="Kecukupan Provisi Litigasi" badge={<ScopeNote />} />
           <p className="mt-[3px] text-[9px] text-ink-500">
             Provisi {provisionStats.provisiTotal} vs Expected Loss {provisionStats.expectedLoss} ·
             Kecukupan{" "}

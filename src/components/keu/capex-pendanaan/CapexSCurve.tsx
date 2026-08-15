@@ -14,6 +14,7 @@ import { capexSCurve } from "@/lib/kcx-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { fmtRpT } from "@/lib/keu-core";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 export function CapexSCurve() {
   return (
@@ -21,7 +22,7 @@ export function CapexSCurve() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "240ms" } as React.CSSProperties}
     >
-      <SectionHead title="S-Curve Capex 2026" />
+      <SectionHead title="S-Curve Capex 2026" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Kumulatif Rencana vs Realisasi (Rp T) — Gap Mei Rp 0,92 T
       </p>

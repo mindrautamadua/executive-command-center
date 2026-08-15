@@ -13,11 +13,16 @@ import {
 import { welfareTrend } from "@/lib/esg-data-detail";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
 
 const rp = (v: number) => `Rp ${v.toLocaleString("id-ID", { minimumFractionDigits: 1 })} jt`;
 
 /** Tren pendapatan bersih petani plasma vs UMP tertimbang wilayah operasi. */
 export function PlasmaWelfareTrend() {
+  const { active, def } = useSubholding();
+  // Skema plasma/inti adalah konstruksi kebun sawit — kartu ini milik PalmCo.
+  const outOfScope = active !== "all" && active !== "palmco";
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -25,10 +30,15 @@ export function PlasmaWelfareTrend() {
     >
       <SectionHead title="Kesejahteraan Plasma vs UMP" action="Lihat Detail" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        Pendapatan Bersih Rp jt/bln · Posisi 2026 ±1,6x UMP
+        {outOfScope
+          ? `Kemitraan plasma sawit hanya di PalmCo — di luar cakupan ${def.label}`
+          : "Pendapatan Bersih Rp jt/bln · Posisi 2026 ±1,6x UMP"}
       </p>
 
-      <div className="mt-1.5 min-h-0 w-full flex-1">
+      <div
+        className="mt-1.5 min-h-0 w-full flex-1 transition-opacity"
+        style={{ opacity: outOfScope ? 0.25 : 1 }}
+      >
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={welfareTrend} margin={{ top: 10, right: 12, bottom: 0, left: -14 }}>
             <CartesianGrid stroke={CHART_AXIS.grid} vertical={false} />

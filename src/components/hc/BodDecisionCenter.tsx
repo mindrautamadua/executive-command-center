@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { AlertCircle, AlertTriangle, CheckCircle2 } from "lucide-react";
 import { bodDecisions, bodTabs } from "@/lib/hc-data";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { filterBySubholding } from "@/lib/subholding";
 import { SectionHead } from "./SectionHead";
 
 const TONE = {
@@ -28,6 +30,10 @@ const TONE = {
 
 export function BodDecisionCenter() {
   const [tab, setTab] = useState(0);
+  const { active, isFiltered, def } = useSubholding();
+  // Judul keputusan menyebut entitas pemiliknya (mis. "Succession Risk – PTPN IV");
+  // keputusan yang tidak melekat pada satu subholding tetap tampil karena berlaku grup.
+  const decisions = filterBySubholding(bodDecisions, active, (d) => d.title);
 
   return (
     <div className="card anim-rise px-4 pb-3.5 pt-3" style={{ "--d": "120ms" } as React.CSSProperties}>
@@ -44,14 +50,14 @@ export function BodDecisionCenter() {
                 : "border-transparent text-ink-500 hover:text-ink-700"
             }`}
           >
-            {t.label} ({t.count})
+            {t.label} ({i === 0 ? decisions.length : t.count})
           </button>
         ))}
       </div>
 
       <div className="mt-2.5 flex flex-col gap-2">
-        {tab === 0 ? (
-          bodDecisions.map((d) => {
+        {tab === 0 && decisions.length > 0 ? (
+          decisions.map((d) => {
             const t = TONE[d.tone];
             const Icon = t.icon;
             return (
@@ -79,7 +85,9 @@ export function BodDecisionCenter() {
           })
         ) : (
           <div className="rounded-xl border border-[#eef2f6] bg-[#f8fafc] px-3 py-4 text-center text-[9.5px] text-ink-500">
-            Tidak ada item baru pada tab ini.
+            {tab === 0 && isFiltered
+              ? `Tidak ada keputusan tertunda untuk ${def.label}.`
+              : "Tidak ada item baru pada tab ini."}
           </div>
         )}
       </div>

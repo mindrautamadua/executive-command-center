@@ -1,3 +1,5 @@
+"use client";
+
 import {
   PSR_TARGET_HA,
   REPLANTING_FUNDING_TOTAL_HA,
@@ -7,6 +9,7 @@ import {
 } from "@/lib/arp-data";
 import { SectionHead } from "@/components/hc/SectionHead";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
+import { useSubholding } from "@/components/SubholdingProvider";
 
 const rp = (v: number) => v.toLocaleString("id-ID");
 const pct = (v: number) => v.toLocaleString("id-ID", { minimumFractionDigits: 1 });
@@ -15,6 +18,11 @@ const SEGMEN_TONE: Record<string, BadgeTone> = { Inti: "info", Plasma: "good" };
 
 /** Komposisi pendanaan program replanting 2026: kas internal, pinjaman & PSR/BPDPKS. */
 export function ReplantingFunding() {
+  const { active } = useSubholding();
+  // Pemetaan domain: kas internal PalmCo + hibah BPDPKS untuk PSR sawit —
+  // seluruh pendanaan pada kartu ini berada di cakupan PalmCo.
+  const outOfScope = active !== "all" && active !== "palmco";
+
   return (
     <div
       className="card anim-rise flex h-full min-h-0 flex-col px-4 pb-2.5 pt-3"
@@ -22,11 +30,20 @@ export function ReplantingFunding() {
     >
       <SectionHead title="Sumber Pendanaan Replanting 2026" action="Lihat Detail" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        Total Program Rp {rp(REPLANTING_FUNDING_TOTAL_RP_M)} M ·{" "}
-        {rp(REPLANTING_FUNDING_TOTAL_HA)} Ha · PSR Plasma {rp(PSR_TARGET_HA)} Ha
+        {outOfScope ? (
+          "Pendanaan replanting sawit hanya untuk PalmCo"
+        ) : (
+          <>
+            Total Program Rp {rp(REPLANTING_FUNDING_TOTAL_RP_M)} M ·{" "}
+            {rp(REPLANTING_FUNDING_TOTAL_HA)} Ha · PSR Plasma {rp(PSR_TARGET_HA)} Ha
+          </>
+        )}
       </p>
 
-      <div className="mt-2 grid min-h-0 flex-1 grid-cols-3 gap-2.5">
+      <div
+        className="mt-2 grid min-h-0 flex-1 grid-cols-3 gap-2.5 transition-opacity"
+        style={{ opacity: outOfScope ? 0.25 : 1 }}
+      >
         {replantingFunding.map((f) => (
           <div
             key={f.sumber}

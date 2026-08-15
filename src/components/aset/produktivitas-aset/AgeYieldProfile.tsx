@@ -16,6 +16,7 @@ import {
 import { ageYieldNote, ageYieldProfile } from "@/lib/apd-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
 
 const num = (v: number) =>
   v.toLocaleString("id-ID", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
@@ -25,6 +26,10 @@ const FILLS = [PALETTE.slate, PALETTE.blue, PALETTE.green, PALETTE.amber, PALETT
 
 /** Luas areal per kelompok umur (bar) dipasangkan dengan kurva yield-nya. */
 export function AgeYieldProfile() {
+  const { active } = useSubholding();
+  // Pemetaan domain: profil umur 508,7 rb ha adalah areal tanaman sawit PalmCo.
+  const outOfScope = active !== "all" && active !== "palmco";
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -32,10 +37,15 @@ export function AgeYieldProfile() {
     >
       <SectionHead title="Profil Umur Tanaman × Yield" action="Lihat Detail" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        Luas Areal (rb ha) per Kelompok Umur &amp; Kurva Yield (t/ha) · 508,7 rb Ha
+        {outOfScope
+          ? "Profil umur tanaman hanya untuk areal sawit PalmCo"
+          : "Luas Areal (rb ha) per Kelompok Umur & Kurva Yield (t/ha) · 508,7 rb Ha"}
       </p>
 
-      <div className="mt-1.5 min-h-0 w-full flex-1">
+      <div
+        className="mt-1.5 min-h-0 w-full flex-1 transition-opacity"
+        style={{ opacity: outOfScope ? 0.25 : 1 }}
+      >
         <ResponsiveContainer width="100%" height="100%">
           <ComposedChart
             data={ageYieldProfile}

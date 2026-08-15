@@ -13,6 +13,8 @@ import {
 import { ganttPrograms, type GanttBar } from "@/lib/sms-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { toSubholdingId } from "@/lib/subholding";
 
 const STATUS_FILL: Record<GanttBar["status"], string> = {
   Selesai: PALETTE.green,
@@ -33,6 +35,8 @@ interface Row {
   status: GanttBar["status"];
   start: number;
   end: number;
+  /** Subholding yang disebut eksplisit di label bar, mis. "(PalmCo)" / "SGN". */
+  sub: ReturnType<typeof toSubholdingId>;
 }
 
 // Gantt via BarChart horizontal: bar `base` transparan sebagai offset waktu mulai.
@@ -46,6 +50,7 @@ const rows: Row[] = ganttPrograms.flatMap((p) =>
     status: b.status,
     start: b.start,
     end: b.end,
+    sub: toSubholdingId(b.label),
   })),
 );
 
@@ -53,6 +58,11 @@ const LEGEND: GanttBar["status"][] = ["Selesai", "Berjalan", "Terlambat"];
 
 /** Timeline gantt milestone Q1–Q4 2026 per program transformasi. */
 export function MilestoneTimeline() {
+  const { active, isFiltered } = useSubholding();
+  // Hanya sebagian bar menyebut subholding di labelnya. Bar yang menyebut
+  // subholding lain diredupkan; bar lintas-grup tetap penuh sebagai konteks.
+  const dim = (sub: Row["sub"]) => (!isFiltered || sub === null || sub === active ? 0.85 : 0.25);
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -106,7 +116,7 @@ export function MilestoneTimeline() {
             <Bar dataKey="base" stackId="g" fill="transparent" isAnimationActive={false} />
             <Bar dataKey="durasi" stackId="g" radius={[3, 3, 3, 3]} barSize={9}>
               {rows.map((r) => (
-                <Cell key={r.label} fill={STATUS_FILL[r.status]} fillOpacity={0.85} />
+                <Cell key={r.label} fill={STATUS_FILL[r.status]} fillOpacity={dim(r.sub)} />
               ))}
             </Bar>
           </BarChart>

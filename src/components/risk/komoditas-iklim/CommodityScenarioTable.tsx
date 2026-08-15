@@ -1,5 +1,6 @@
 import { scenarioTable } from "@/lib/risk-data";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 /** Sensitivitas EBITDA/pendapatan terhadap pergerakan variabel komoditas & kurs. */
 export function CommodityScenarioTable() {
@@ -8,7 +9,7 @@ export function CommodityScenarioTable() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "240ms" } as React.CSSProperties}
     >
-      <SectionHead title="Sensitivitas Skenario Komoditas" action="Simulasi Lanjut" />
+      <SectionHead title="Sensitivitas Skenario Komoditas" action="Simulasi Lanjut" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Dampak Tahunan per Pergerakan Variabel Utama
       </p>

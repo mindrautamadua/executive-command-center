@@ -1,6 +1,7 @@
 import { eudrPillars } from "@/lib/esg-data-detail";
 import { PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const barColor = (skor: number, target: number) =>
   skor >= target ? PALETTE.green : skor >= target - 15 ? PALETTE.amber : PALETTE.red;
@@ -12,7 +13,7 @@ export function EudrReadinessGauge() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead title="EUDR Readiness per Pilar" action="Lihat Detail" />
+      <SectionHead title="EUDR Readiness per Pilar" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Skor Kesiapan vs Target Internal · Komposit 78/100
       </p>

@@ -1,5 +1,9 @@
+"use client";
+
 import { fraudHeat } from "@/lib/risk-data-detail";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { filterBySubholding } from "@/lib/subholding";
 
 const MAX = Math.max(...fraudHeat.map((r) => r.laporan));
 
@@ -8,6 +12,10 @@ const rateColor = (pct: number) =>
 
 /** Konsentrasi laporan & kerugian fraud per subholding/regional. */
 export function FraudTriangleHeat() {
+  const { active, isFiltered, def } = useSubholding();
+  // `name` (PalmCo / SGN / PTPN I (SupportingCo)) adalah dimensi subholding.
+  const rows = filterBySubholding(fraudHeat, active, (r) => r.name);
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
@@ -15,7 +23,9 @@ export function FraudTriangleHeat() {
     >
       <SectionHead title="Konsentrasi Fraud per Subholding" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        Laporan, Tingkat Terbukti &amp; Kerugian Teridentifikasi YTD
+        {isFiltered
+          ? `Laporan & Kerugian Teridentifikasi YTD — ${def.label}`
+          : "Laporan, Tingkat Terbukti & Kerugian Teridentifikasi YTD"}
       </p>
 
       <div className="scroll-thin mt-2 min-h-0 flex-1 overflow-y-auto">
@@ -33,7 +43,7 @@ export function FraudTriangleHeat() {
             </tr>
           </thead>
           <tbody>
-            {fraudHeat.map((r) => {
+            {rows.map((r) => {
               const rate = Math.round((r.substantiated / r.laporan) * 100);
               return (
                 <tr key={r.name} className="border-b border-[#f4f7f9] last:border-0">
@@ -69,8 +79,9 @@ export function FraudTriangleHeat() {
       </div>
 
       <p className="mt-1.5 rounded-md bg-[#f8fafc] px-2 py-[5px] text-[8px] leading-[1.4] text-ink-500">
-        PalmCo memegang 45% laporan dan 45% kerugian — proporsional terhadap skala operasi, bukan
-        anomali tata kelola.
+        {isFiltered
+          ? `Baris ${def.label} dari konsentrasi fraud 3 subholding; basis 43 laporan grup YTD.`
+          : "PalmCo memegang 45% laporan dan 45% kerugian — proporsional terhadap skala operasi, bukan anomali tata kelola."}
       </p>
     </div>
   );

@@ -14,6 +14,7 @@ import {
 import { peerBench } from "@/lib/esg-data-detail";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const num = (v: number) => v.toLocaleString("id-ID", { minimumFractionDigits: 1 });
 
@@ -24,7 +25,7 @@ export function RatingPeerBench() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead title="Benchmark Peer ESG Risk" />
+      <SectionHead title="Benchmark Peer ESG Risk" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Sustainalytics ESG Risk · makin rendah makin baik
       </p>

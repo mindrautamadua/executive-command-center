@@ -1,5 +1,9 @@
+"use client";
+
 import type { ProdKpi } from "@/lib/produksi-data";
 import { ProdKpiCards } from "../ProdKpiCards";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { inScope, ScopeEmpty } from "@/components/ui/CommodityScope";
 
 /** KPI kebun — diturunkan dari regionalYield, protasTrend & gapAnalysis (produksi-data). */
 const items: ProdKpi[] = [
@@ -78,5 +82,11 @@ const items: ProdKpi[] = [
 ];
 
 export function KebunKpiStrip() {
+  const { active, def } = useSubholding();
+  // Seluruh KPI halaman ini soal kebun sawit (yield TBS, Regional 1-7) -> PalmCo.
+  if (!inScope(active, "kebun sawit TBS Regional 1")) {
+    return <ScopeEmpty label={def.fullLabel} />;
+  }
+
   return <ProdKpiCards items={items} cols="grid-cols-6" />;
 }

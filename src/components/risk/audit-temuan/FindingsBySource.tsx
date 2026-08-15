@@ -4,6 +4,7 @@ import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 import { bySource } from "@/lib/risk-data-detail";
 import { CHART_TOOLTIP_STYLE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const TOTAL = bySource.reduce((s, r) => s + r.total, 0);
 const OPEN = bySource.reduce((s, r) => s + r.open, 0);
@@ -14,7 +15,7 @@ export function FindingsBySource() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead title="Temuan per Sumber Audit" />
+      <SectionHead title="Temuan per Sumber Audit" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         {TOTAL} Temuan YTD · {OPEN} Masih Terbuka
       </p>

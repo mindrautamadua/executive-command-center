@@ -14,6 +14,7 @@ import {
 import { effluentCompliance } from "@/lib/esg-data-detail";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
 
 const data = effluentCompliance.map((r) => ({
   ...r,
@@ -24,6 +25,11 @@ const pct = (v: number) => `${v.toLocaleString("id-ID", { minimumFractionDigits:
 
 /** Kepatuhan baku mutu effluent per regional vs ambang internal 95%. */
 export function EffluentCompliance() {
+  const { active, def } = useSubholding();
+  // IPAL yang diuji adalah kolam limbah PKS di Regional 1–7 (pecahan internal
+  // PalmCo), jadi seluruh kartu ini berada di cakupan PalmCo.
+  const outOfScope = active !== "all" && active !== "palmco";
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -31,10 +37,15 @@ export function EffluentCompliance() {
     >
       <SectionHead title="Kepatuhan Effluent per Regional" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        Uji Baku Mutu IPAL 12 Bulan · Grup 96,2% · 2 regional amber
+        {outOfScope
+          ? `Pecahan regional IPAL PKS hanya untuk PalmCo — di luar cakupan ${def.label}`
+          : "Uji Baku Mutu IPAL 12 Bulan · Grup 96,2% · 2 regional amber"}
       </p>
 
-      <div className="mt-1.5 min-h-0 w-full flex-1">
+      <div
+        className="mt-1.5 min-h-0 w-full flex-1 transition-opacity"
+        style={{ opacity: outOfScope ? 0.25 : 1 }}
+      >
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} margin={{ top: 12, right: 10, bottom: 0, left: -14 }}>
             <CartesianGrid stroke={CHART_AXIS.grid} vertical={false} />

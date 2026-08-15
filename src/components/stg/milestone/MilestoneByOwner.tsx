@@ -4,6 +4,7 @@ import {
   Bar,
   BarChart,
   CartesianGrid,
+  Cell,
   Legend,
   ResponsiveContainer,
   Tooltip,
@@ -13,9 +14,21 @@ import {
 import { byOwner } from "@/lib/sms-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { toSubholdingId } from "@/lib/subholding";
+
+// `owner` (PalmCo / SGN / PTPN I / Holding) adalah dimensi subholding batang ini.
+const data = byOwner.map((o) => ({ ...o, sub: toSubholdingId(o.owner) }));
 
 /** Komposisi status 142 milestone per owner (selesai / on track / terlambat). */
 export function MilestoneByOwner() {
+  const { active, isFiltered } = useSubholding();
+  // Grafik pembanding: batang non-aktif diredupkan agar komposisi antar owner
+  // tetap terbaca. Batang "Holding" ikut diredupkan saat filter aktif karena ia
+  // bukan bagian dari subholding terpilih — konsisten dengan owner lainnya.
+  const dim = (sub: ReturnType<typeof toSubholdingId>) =>
+    !isFiltered || sub === active ? 1 : 0.25;
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -28,7 +41,7 @@ export function MilestoneByOwner() {
 
       <div className="mt-1.5 min-h-0 w-full flex-1">
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={byOwner} margin={{ top: 6, right: 14, bottom: 0, left: -18 }}>
+          <BarChart data={data} margin={{ top: 6, right: 14, bottom: 0, left: -18 }}>
             <CartesianGrid stroke={CHART_AXIS.grid} vertical={false} />
             <XAxis
               dataKey="owner"
@@ -57,21 +70,35 @@ export function MilestoneByOwner() {
               iconSize={7}
               wrapperStyle={{ fontSize: 8.5, color: CHART_AXIS.tick }}
             />
-            <Bar dataKey="done" name="Selesai" stackId="m" fill={PALETTE.green} barSize={30} />
-            <Bar dataKey="onTrack" name="On Track" stackId="m" fill={PALETTE.blue} />
+            <Bar dataKey="done" name="Selesai" stackId="m" fill={PALETTE.green} barSize={30}>
+              {data.map((d) => (
+                <Cell key={d.owner} fillOpacity={dim(d.sub)} />
+              ))}
+            </Bar>
+            <Bar dataKey="onTrack" name="On Track" stackId="m" fill={PALETTE.blue}>
+              {data.map((d) => (
+                <Cell key={d.owner} fillOpacity={dim(d.sub)} />
+              ))}
+            </Bar>
             <Bar
               dataKey="late"
               name="Terlambat"
               stackId="m"
               fill={PALETTE.red}
               radius={[4, 4, 0, 0]}
-            />
+            >
+              {data.map((d) => (
+                <Cell key={d.owner} fillOpacity={dim(d.sub)} />
+              ))}
+            </Bar>
           </BarChart>
         </ResponsiveContainer>
       </div>
 
       <p className="mt-1 truncate text-[8px] text-ink-400">
-        SGN: 8 dari 40 milestone terlambat (20%) — rasio tertinggi lintas subholding.
+        {isFiltered
+          ? "Batang non-aktif diredupkan; komposisi seluruh owner tetap ditampilkan sebagai konteks."
+          : "SGN: 8 dari 40 milestone terlambat (20%) — rasio tertinggi lintas subholding."}
       </p>
     </div>
   );

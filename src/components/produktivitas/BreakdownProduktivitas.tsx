@@ -1,6 +1,10 @@
+"use client";
+
 import { ChevronDown } from "lucide-react";
 import { breakdownPtpnIv } from "@/lib/produktivitas-data";
 import { SEMANTIC } from "@/lib/chart-palette";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { ScopeEmpty } from "../ui/CommodityScope";
 
 const INDEX_MAX = 130;
 
@@ -11,7 +15,13 @@ function toneIndex(index: number) {
   return SEMANTIC.bad;
 }
 
+/** Drill-down unit kerja; seluruh isinya milik PTPN IV (PalmCo). */
 export function BreakdownProduktivitas() {
+  const { active, def } = useSubholding();
+  // Kartu ini sepenuhnya milik PalmCo — pada cakupan subholding lain tidak ada
+  // baris yang tersisa, jadi tampilkan placeholder alih-alih angka PalmCo.
+  const outOfScope = active !== "all" && active !== "palmco";
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
@@ -27,6 +37,9 @@ export function BreakdownProduktivitas() {
         </button>
       </div>
 
+      {outOfScope ? (
+        <ScopeEmpty label={def.label} />
+      ) : (
       <div className="mt-1.5 min-h-0 flex-1">
         <table className="w-full border-collapse">
           <thead>
@@ -107,6 +120,7 @@ export function BreakdownProduktivitas() {
           </tbody>
         </table>
       </div>
+      )}
     </div>
   );
 }

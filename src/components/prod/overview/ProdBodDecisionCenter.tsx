@@ -1,6 +1,11 @@
+"use client";
+
 import { AlertCircle, AlertTriangle } from "lucide-react";
 import { prodDecisions } from "@/lib/produksi-data";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { filterBySubholding } from "@/lib/subholding";
+import { commodityScope, ScopeEmpty } from "@/components/ui/CommodityScope";
 
 const TONE = {
   red: {
@@ -19,15 +24,26 @@ const TONE = {
 
 /** Keputusan produksi yang menunggu persetujuan BOD. */
 export function ProdBodDecisionCenter() {
+  const { active, def } = useSubholding();
+
+  // Kepemilikan keputusan dibaca dari judul + situasi: PKS/TBS/Regional = PalmCo,
+  // PG/giling/gula = SugarCo, karet/teh = SupportingCo. Keputusan lintas komoditas
+  // (mis. kontrak pupuk) tidak memetakan ke mana pun sehingga tetap tampil.
+  const rows = filterBySubholding(prodDecisions, active, (d) =>
+    commodityScope(`${d.title} ${d.situation}`),
+  );
+
   return (
     <div className="card anim-rise px-4 pb-3.5 pt-3" style={{ "--d": "120ms" } as React.CSSProperties}>
       <SectionHead title="BOD Decision Center" action="Lihat Semua" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        {prodDecisions.length} keputusan menunggu persetujuan
+        {rows.length} keputusan menunggu persetujuan
       </p>
 
+      {rows.length === 0 && <ScopeEmpty label={def.fullLabel} />}
+
       <div className="mt-2.5 flex flex-col gap-2">
-        {prodDecisions.map((d) => {
+        {rows.map((d) => {
           const t = TONE[d.tone];
           const Icon = t.icon;
           return (

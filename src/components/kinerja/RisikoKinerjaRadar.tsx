@@ -1,5 +1,8 @@
+"use client";
+
 import { Radar } from "lucide-react";
 import { risikoKinerja } from "@/lib/kinerja-data";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const TONE = {
   red: {
@@ -27,6 +30,7 @@ export function RisikoKinerjaRadar() {
         <h3 className="flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-[0.05em] text-ink-900">
           <Radar size={13} className="text-ptpn-green" />
           Performance Risk Radar
+          <ScopeNote />
         </h3>
         <span className="text-[8.5px] font-semibold text-ink-400">
           Basis: 68.142 karyawan dinilai · Q2 2026

@@ -4,8 +4,9 @@ import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YA
 import { premiumValue } from "@/lib/esg-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
 
-const angka = (v: number) => v.toLocaleString("id-ID");
+const angka =(v: number) => v.toLocaleString("id-ID");
 
 const KPI = [
   { label: "Premi CSPO", value: `USD ${premiumValue.premiUsdPerTon.toLocaleString("id-ID", { minimumFractionDigits: 1 })}/ton` },
@@ -14,15 +15,26 @@ const KPI = [
 ];
 
 export function PremiumValue() {
+  const { active, def } = useSubholding();
+  // Premi CSPO melekat pada volume CPO bersertifikat — komoditas sawit, PalmCo.
+  const outOfScope = active !== "all" && active !== "palmco";
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "150ms" } as React.CSSProperties}
     >
       <SectionHead title="Nilai Premi Sertifikasi (CSPO)" action="Lihat Detail" />
-      <p className="mt-[3px] text-[9px] text-ink-500">Realisasi Premi Bulanan 2026 (Rp Miliar)</p>
+      <p className="mt-[3px] text-[9px] text-ink-500">
+        {outOfScope
+          ? `Premi CSPO melekat pada volume CPO PalmCo — di luar cakupan ${def.label}`
+          : "Realisasi Premi Bulanan 2026 (Rp Miliar)"}
+      </p>
 
-      <div className="mt-2 grid grid-cols-3 gap-2">
+      <div
+        className="mt-2 grid grid-cols-3 gap-2 transition-opacity"
+        style={{ opacity: outOfScope ? 0.25 : 1 }}
+      >
         {KPI.map((k) => (
           <div key={k.label} className="rounded-xl bg-[#f8fafc] px-2.5 py-2">
             <div className="text-[8px] font-semibold text-ink-400">{k.label}</div>
@@ -33,7 +45,10 @@ export function PremiumValue() {
         ))}
       </div>
 
-      <div className="mt-1.5 min-h-0 w-full flex-1">
+      <div
+        className="mt-1.5 min-h-0 w-full flex-1 transition-opacity"
+        style={{ opacity: outOfScope ? 0.25 : 1 }}
+      >
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={premiumValue.monthly} margin={{ top: 12, right: 12, bottom: 0, left: -20 }}>
             <CartesianGrid stroke={CHART_AXIS.grid} vertical={false} />

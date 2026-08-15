@@ -19,6 +19,7 @@ import {
 } from "@/lib/apd-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
 
 const num = (v: number) =>
   v.toLocaleString("id-ID", { minimumFractionDigits: 1, maximumFractionDigits: 2 });
@@ -35,6 +36,10 @@ const data = sugarProductivity.map((r) => ({ ...r, short: SHORT[r.klaster] ?? r.
 
 /** Rendemen & utilisasi giling per klaster pabrik gula. */
 export function SugarProductivity() {
+  const { active } = useSubholding();
+  // Pemetaan domain: klaster PG (tebu/gula, musim giling) milik SugarCo.
+  const outOfScope = active !== "all" && active !== "sugarco";
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -42,10 +47,15 @@ export function SugarProductivity() {
     >
       <SectionHead title="Produktivitas Gula per Klaster PG" action="Lihat Detail" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        Rendemen (%) &amp; Utilisasi Giling (%) · 17 PG · 82,5 rb TCD
+        {outOfScope
+          ? "Klaster pabrik gula hanya untuk SugarCo"
+          : "Rendemen (%) & Utilisasi Giling (%) · 17 PG · 82,5 rb TCD"}
       </p>
 
-      <div className="mt-1.5 min-h-0 w-full flex-1">
+      <div
+        className="mt-1.5 min-h-0 w-full flex-1 transition-opacity"
+        style={{ opacity: outOfScope ? 0.25 : 1 }}
+      >
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={data}

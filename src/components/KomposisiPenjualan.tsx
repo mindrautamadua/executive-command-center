@@ -49,9 +49,9 @@ export function KomposisiPenjualan() {
           <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center">
             <span className="text-[8.5px] text-ink-500">Total Penjualan</span>
             <span className="mt-[2px] text-[13.5px] font-extrabold text-ink-900">
-              Rp 56,80 T
+              Rp 19,90 T
             </span>
-            <Delta value="12,45%" trend="up" size={9.5} className="mt-[3px]" />
+            <Delta value="13,10%" trend="up" size={9.5} className="mt-[3px]" />
           </div>
         </div>
 

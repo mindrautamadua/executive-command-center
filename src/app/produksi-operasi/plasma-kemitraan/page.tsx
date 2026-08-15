@@ -1,4 +1,5 @@
 import { ProdSidebar } from "@/components/prod/ProdSidebar";
+import { ScopeGuard } from "@/components/ui/ScopeGuard";
 import { DataTrustStrip } from "@/components/hc/DataTrustStrip";
 import { PlasmaHeader } from "@/components/prod/plasma-kemitraan/PlasmaHeader";
 import { PlasmaKpiStrip } from "@/components/prod/plasma-kemitraan/PlasmaKpiStrip";
@@ -18,6 +19,8 @@ export default function PlasmaKemitraanPage() {
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
         <PlasmaHeader />
+
+        <ScopeGuard owner="palmco">
 
         <div className="flex flex-col gap-3 px-5 pb-5">
           <div className="-mb-3">
@@ -40,6 +43,7 @@ export default function PlasmaKemitraanPage() {
 
           <PlasmaInsight />
         </div>
+        </ScopeGuard>
       </main>
     </div>
   );

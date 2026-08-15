@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowRight, AlertTriangle } from "lucide-react";
 import { criticalTalentRisk } from "@/lib/comp-data";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 /**
  * Critical Talent Compensation Risk: funnel critical talent → under-market →
@@ -17,6 +20,7 @@ export function CriticalTalentCompRisk() {
         <h3 className="card-title-navy flex items-center gap-1.5">
           <AlertTriangle size={13} className="text-[#b91c1c]" />
           Critical Talent Compensation Risk
+          <ScopeNote />
         </h3>
         <span className="shrink-0 rounded px-1.5 py-[2px] text-[8px] font-bold leading-none tone-red">
           {criticalTalentRisk.level}

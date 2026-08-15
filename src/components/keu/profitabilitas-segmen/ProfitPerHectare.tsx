@@ -16,6 +16,7 @@ import {
 import { regionalProfitability } from "@/lib/kps-data";
 import { fmtId } from "@/lib/keu-core";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE, SEMANTIC } from "@/lib/chart-palette";
+import { useSubholding } from "@/components/SubholdingProvider";
 import { SectionHead } from "../../hc/SectionHead";
 
 /** Batas kuadran: biaya kebun median ±Rp 49,8 jt/ha, yield median ±21,2 ton/ha. */
@@ -29,6 +30,11 @@ const DATA = regionalProfitability.map((d, i) => ({
 
 /** Peta yield TBS × biaya/ha per regional; bubble = luas tertanam. */
 export function ProfitPerHectare() {
+  const { active } = useSubholding();
+  // Sumbernya regionalProfitability: Regional 1..7 = pecahan internal PalmCo
+  // (klaster PG/mill adalah milik SugarCo), jadi kartu ini cakupan PalmCo.
+  const outOfScope = active !== "all" && active !== "palmco";
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -36,10 +42,15 @@ export function ProfitPerHectare() {
     >
       <SectionHead title="Profit per Hectare Map" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        Yield TBS vs Biaya Kebun/ha · bubble = luas tertanam · kiri-atas = best practice
+        {outOfScope
+          ? "Pecahan regional hanya untuk PalmCo"
+          : "Yield TBS vs Biaya Kebun/ha · bubble = luas tertanam · kiri-atas = best practice"}
       </p>
 
-      <div className="mt-1 min-h-0 w-full flex-1">
+      <div
+        className="mt-1 min-h-0 w-full flex-1 transition-opacity"
+        style={{ opacity: outOfScope ? 0.25 : 1 }}
+      >
         <ResponsiveContainer width="100%" height="100%">
           <ScatterChart margin={{ top: 10, right: 16, bottom: 12, left: -18 }}>
             <CartesianGrid stroke={CHART_AXIS.grid} />

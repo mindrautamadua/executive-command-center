@@ -1,6 +1,9 @@
+"use client";
+
 import { satelliteAlerts, satelliteAlertSummary } from "@/lib/esg-data-detail";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
 
 const STATUS_TONE: Record<string, BadgeTone> = {
   "Investigasi lapangan": "warn",
@@ -14,6 +17,10 @@ const STATUS_LABEL: Record<string, string> = {
 
 /** Log alert deforestasi satelit (14 YTD) — 5 alert terkini + ringkasan. */
 export function SatelliteAlertLog() {
+  const { active, def } = useSubholding();
+  // Seluruh alert berlokasi di Regional 1–7 (konsesi kebun sawit) — cakupan PalmCo.
+  const outOfScope = active !== "all" && active !== "palmco";
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
@@ -21,12 +28,21 @@ export function SatelliteAlertLog() {
     >
       <SectionHead title="Log Alert Satelit" action="Lihat Semua" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        {satelliteAlertSummary.ytdTotal} alert YTD · {satelliteAlertSummary.investigasi} investigasi
-        · {satelliteAlertSummary.falsePositiveClosed} false positive · verifikasi rata-rata{" "}
-        {satelliteAlertSummary.avgVerifikasiHari} hari
+        {outOfScope ? (
+          `Alert deforestasi dipantau di konsesi sawit PalmCo — di luar cakupan ${def.label}`
+        ) : (
+          <>
+            {satelliteAlertSummary.ytdTotal} alert YTD · {satelliteAlertSummary.investigasi}{" "}
+            investigasi · {satelliteAlertSummary.falsePositiveClosed} false positive · verifikasi
+            rata-rata {satelliteAlertSummary.avgVerifikasiHari} hari
+          </>
+        )}
       </p>
 
-      <div className="mt-2 min-h-0 flex-1 overflow-hidden">
+      <div
+        className="mt-2 min-h-0 flex-1 overflow-hidden transition-opacity"
+        style={{ opacity: outOfScope ? 0.25 : 1 }}
+      >
         <table className="w-full border-collapse">
           <thead>
             <tr className="border-b border-[#eef2f6] text-[8.5px] font-semibold text-ink-500">

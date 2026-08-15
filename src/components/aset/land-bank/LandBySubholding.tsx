@@ -4,6 +4,7 @@ import {
   Bar,
   BarChart,
   CartesianGrid,
+  Cell,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -12,6 +13,8 @@ import {
 import { landBySubholding } from "@/lib/alb-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { toSubholdingId } from "@/lib/subholding";
 
 const num = (v: number) =>
   v.toLocaleString("id-ID", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
@@ -25,6 +28,12 @@ const SERIES = [
 
 /** Land bank per subholding dipecah menurut peruntukan (rb ha). */
 export function LandBySubholding() {
+  const { active, isFiltered, def } = useSubholding();
+  // `subholding` (PalmCo / SGN (Lahan Tebu) / PTPN I) adalah dimensi subholding
+  // kolom ini; kolom di luar cakupan diredupkan agar porsinya tetap terbaca.
+  const dim = (subholding: string) =>
+    !isFiltered || toSubholdingId(subholding) === active ? 1 : 0.25;
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -32,7 +41,9 @@ export function LandBySubholding() {
     >
       <SectionHead title="Land Bank per Subholding" action="Lihat Detail" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        Peruntukan Lahan per Subholding (rb ha) · total 1.081 rb ha
+        {isFiltered
+          ? `Peruntukan Lahan ${def.label} dalam konteks grup (rb ha)`
+          : "Peruntukan Lahan per Subholding (rb ha) · total 1.081 rb ha"}
       </p>
 
       <div className="mt-1.5 min-h-0 w-full flex-1">
@@ -68,7 +79,11 @@ export function LandBySubholding() {
                 fill={s.color}
                 barSize={46}
                 radius={i === SERIES.length - 1 ? [2, 2, 0, 0] : undefined}
-              />
+              >
+                {landBySubholding.map((row) => (
+                  <Cell key={row.subholding} fillOpacity={dim(row.subholding)} />
+                ))}
+              </Bar>
             ))}
           </BarChart>
         </ResponsiveContainer>

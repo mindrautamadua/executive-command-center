@@ -15,6 +15,7 @@ import {
 import { obligationByDomain } from "@/lib/risk-data-detail";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const SERIES = [
   { key: "patuh", name: "Patuh", color: PALETTE.green },
@@ -31,7 +32,7 @@ export function ObligationByDomain() {
       className="card anim-rise flex h-full flex-col px-4 pb-2 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead title="Kewajiban per Domain Regulasi" />
+      <SectionHead title="Kewajiban per Domain Regulasi" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         386 Kewajiban — 352 Patuh · 28 Parsial · 6 Non-Compliant
       </p>

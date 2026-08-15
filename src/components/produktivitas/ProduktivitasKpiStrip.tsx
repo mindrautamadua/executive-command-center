@@ -1,3 +1,5 @@
+"use client";
+
 import {
   BarChart3,
   Clock4,
@@ -10,6 +12,7 @@ import {
 import { produktivitasKpi } from "@/lib/produktivitas-data";
 import { CountUp } from "@/components/ui/CountUp";
 import { Delta } from "@/components/ui/Delta";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const ICONS = {
   users: UsersRound,
@@ -21,6 +24,11 @@ const ICONS = {
   trending: TrendingUp,
 };
 
+/**
+ * Tujuh KPI produktivitas. Angkanya agregat grup (Revenue/Employee Rp 1,18 M dst.)
+ * tanpa pecahan per subholding, sehingga tetap utuh saat filter aktif dan
+ * ditandai <ScopeNote />. Pecahan per entitas ada di kartu 2, 4 dan 5.
+ */
 export function ProduktivitasKpiStrip() {
   return (
     <div className="grid grid-cols-7 gap-3">
@@ -38,9 +46,10 @@ export function ProduktivitasKpiStrip() {
               >
                 <Icon size={13} strokeWidth={1.9} />
               </span>
-              <span className="text-[9px] font-bold leading-[1.25] text-ink-700">
+              <span className="min-w-0 text-[9px] font-bold leading-[1.25] text-ink-700">
                 {k.label}
               </span>
+              <ScopeNote />
             </div>
             <CountUp
               value={k.value}

@@ -4,8 +4,28 @@ import type { ReactNode } from "react";
 import { Bell, CalendarDays, ChevronDown, Download } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { PersonAvatar } from "@/components/ui/PersonAvatar";
+import { SubholdingFilter } from "@/components/ui/SubholdingFilter";
+import { ScopeBanner } from "@/components/ui/ScopeNote";
 
-/** Kontrol dropdown standar pada header modul (pola Tipe A). */
+/**
+ * Label filter yang bermakna "pilih subholding". Header modul memakai beberapa
+ * penamaan berbeda untuk maksud yang sama, jadi semuanya dipetakan ke satu
+ * kontrol filter subholding yang benar-benar berfungsi.
+ */
+const SUBHOLDING_LABELS = [
+  "Subholding",
+  "Level Organisasi",
+  "Unit Organisasi",
+  "Segmen",
+  "Entitas",
+];
+
+/**
+ * Kontrol dropdown standar pada header modul (pola Tipe A).
+ *
+ * Untuk filter subholding, kontrol statis diganti otomatis oleh
+ * <SubholdingFilter /> sehingga pilihan berlaku lintas dimensi.
+ */
 export function SelectBox({
   label,
   value,
@@ -15,6 +35,10 @@ export function SelectBox({
   value: string;
   width: string;
 }) {
+  if (SUBHOLDING_LABELS.includes(label)) {
+    return <SubholdingFilter width={width} />;
+  }
+
   return (
     <button
       className="flex items-center justify-between rounded-lg border border-[#e3e9ef] bg-white px-3 py-1.5 text-left shadow-card"
@@ -130,6 +154,11 @@ export function ModuleHeader({
           <div className="flex items-center gap-2.5">{actions ?? <ExportButton />}</div>
         </div>
       )}
+
+      {/* Bilah cakupan muncul otomatis di seluruh modul saat filter subholding aktif. */}
+      <div className="px-5">
+        <ScopeBanner />
+      </div>
     </>
   );
 }

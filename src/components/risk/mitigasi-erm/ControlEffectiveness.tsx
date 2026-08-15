@@ -12,6 +12,7 @@ import {
 import { controlEffectiveness } from "@/lib/risk-data-detail";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const LATEST = controlEffectiveness[controlEffectiveness.length - 1];
 
@@ -21,7 +22,7 @@ export function ControlEffectiveness() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "180ms" } as React.CSSProperties}
     >
-      <SectionHead title="Efektivitas Kontrol" />
+      <SectionHead title="Efektivitas Kontrol" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Tren Hasil Uji Efektivitas Kontrol Kunci · Terkini {LATEST.pct}%
       </p>

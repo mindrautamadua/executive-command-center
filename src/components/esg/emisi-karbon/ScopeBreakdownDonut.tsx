@@ -4,6 +4,7 @@ import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 import { scopeBreakdown } from "@/lib/esg-data";
 import { CHART_TOOLTIP_STYLE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const total = scopeBreakdown.reduce((s, d) => s + d.value, 0);
 const angka = (v: number) => v.toLocaleString("id-ID", { minimumFractionDigits: 1 });
@@ -14,7 +15,7 @@ export function ScopeBreakdownDonut() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead title="Emisi per Scope" action="Lihat Detail" />
+      <SectionHead title="Emisi per Scope" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Setahunkan (jt tCO2e) · Total {angka(total)} jt tCO2e
       </p>

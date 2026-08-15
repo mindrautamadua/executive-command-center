@@ -1,5 +1,6 @@
 import { gratifikasiUpg } from "@/lib/risk-data-detail";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 function Tile({ label, value, tone = "neutral" }: { label: string; value: string; tone?: "neutral" | "bad" }) {
   return (
@@ -24,7 +25,7 @@ export function GratifikasiUpg() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead title="Gratifikasi & LHKPN (UPG)" />
+      <SectionHead title="Gratifikasi & LHKPN (UPG)" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Kepatuhan Pelaporan Harta &amp; Pengendalian Gratifikasi
       </p>

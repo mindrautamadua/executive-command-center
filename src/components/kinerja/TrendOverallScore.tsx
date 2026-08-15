@@ -14,6 +14,7 @@ import {
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { trendOverall, trendTarget } from "@/lib/kinerja-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE, SEMANTIC } from "@/lib/chart-palette";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 export function TrendOverallScore() {
   return (
@@ -23,7 +24,7 @@ export function TrendOverallScore() {
     >
       <div className="flex items-start justify-between gap-2">
         <div>
-          <h3 className="card-title-navy">TREND KINERJA OVERALL SCORE</h3>
+          <h3 className="card-title-navy flex min-w-0 items-center gap-1.5"><span>TREND KINERJA OVERALL SCORE</span><ScopeNote /></h3>
           <p className="mt-[3px] text-[9.5px] text-ink-500">
             Rata-rata Score dari Waktu ke Waktu
           </p>

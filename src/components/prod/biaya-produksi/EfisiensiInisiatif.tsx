@@ -1,10 +1,22 @@
+"use client";
+
 import { efisiensiInisiatif } from "@/lib/biaya-opex-data";
 import { ToneBadge } from "@/components/shared/ToneBadge";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { commodityScope, ScopeEmpty } from "@/components/ui/CommodityScope";
+import { filterBySubholding } from "@/lib/subholding";
 import { SectionHead } from "../../hc/SectionHead";
 
+// Skala bar tetap memakai nilai terbesar seluruh program agar panjang bar
+// konsisten walau daftar sedang disaring.
 const MAX_RP_M = Math.max(...efisiensiInisiatif.map((p) => p.kontribusiRpM));
 
 export function EfisiensiInisiatif() {
+  const { active, def } = useSubholding();
+  // Program yang menyebut komoditas ikut cakupan (mis. "logistik TBS" → PalmCo);
+  // program lintas komoditas tetap tampil di semua cakupan.
+  const rows = filterBySubholding(efisiensiInisiatif, active, (p) => commodityScope(p.program));
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
@@ -15,8 +27,11 @@ export function EfisiensiInisiatif() {
         Kontribusi Penghematan YTD · Total <span className="font-bold text-ptpn-green">Rp 412 M</span>
       </p>
 
+      {rows.length === 0 ? (
+        <ScopeEmpty label={def.fullLabel} />
+      ) : (
       <ul className="mt-2 flex min-h-0 flex-1 flex-col justify-between gap-1.5">
-        {efisiensiInisiatif.map((p) => (
+        {rows.map((p) => (
           <li key={p.program} className="leading-[1.3]">
             <div className="flex items-center justify-between gap-2">
               <span className="flex min-w-0 items-center gap-1.5">
@@ -38,6 +53,7 @@ export function EfisiensiInisiatif() {
           </li>
         ))}
       </ul>
+      )}
 
       <p className="mt-1.5 truncate text-[8px] text-ink-400">
         Run-rate FY ± Rp 1,0 T — bagian dampak OPEX Rp 680 M EBITDA plus uplift volume.

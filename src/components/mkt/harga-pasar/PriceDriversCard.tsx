@@ -1,6 +1,10 @@
+"use client";
+
 import { priceDrivers, type PriceDriver } from "@/lib/harga-outlook-data";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { inScope, ScopeEmpty } from "@/components/ui/CommodityScope";
 
 const DAMPAK_TONE: Record<PriceDriver["dampak"], BadgeTone> = {
   Bullish: "good",
@@ -16,6 +20,10 @@ const BAR_TONE: Record<PriceDriver["dampak"], string> = {
 
 /** Driver pergerakan harga CPO + arah dampak & bobot kontribusi. */
 export function PriceDriversCard() {
+  // Seluruh driver pada kartu ini menggerakkan harga CPO → milik PalmCo.
+  const { active, def } = useSubholding();
+  const cpoScope = inScope(active, "CPO");
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
@@ -26,6 +34,9 @@ export function PriceDriversCard() {
         Faktor penggerak harga &amp; bobot kontribusi (total 100%)
       </p>
 
+      {!cpoScope && <ScopeEmpty label={def.fullLabel} />}
+
+      {cpoScope && (
       <ul className="mt-2 flex min-h-0 flex-1 flex-col justify-between gap-1">
         {priceDrivers.map((d) => (
           <li
@@ -53,6 +64,7 @@ export function PriceDriversCard() {
           </li>
         ))}
       </ul>
+      )}
     </div>
   );
 }

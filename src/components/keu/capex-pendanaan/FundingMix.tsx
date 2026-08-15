@@ -5,6 +5,7 @@ import { fundingMix } from "@/lib/kcx-data";
 import { fmtId, fmtRpT } from "@/lib/keu-core";
 import { DonutChart } from "@/components/ui/DonutChart";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const donutData = fundingMix.map((f) => ({ name: f.name, value: f.pct, color: f.color }));
 
@@ -16,7 +17,7 @@ export function FundingMix() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "180ms" } as React.CSSProperties}
     >
-      <SectionHead title="Funding Mix" />
+      <SectionHead title="Funding Mix" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">Sumber Pendanaan Capex RKAP FY 2026</p>
 
       <div className="flex min-h-0 flex-1 items-center gap-3">

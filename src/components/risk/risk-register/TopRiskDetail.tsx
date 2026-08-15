@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { topRiskDetail, type RiskLevel } from "@/lib/risk-data";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
 
 const LEVEL_TONE: Record<RiskLevel, BadgeTone> = {
@@ -31,7 +32,7 @@ export function TopRiskDetail() {
       className="card anim-rise px-4 pb-3 pt-3"
       style={{ "--d": "300ms" } as React.CSSProperties}
     >
-      <SectionHead title="Detail 8 Risiko Prioritas" action="Ekspor Register" />
+      <SectionHead title="Detail 8 Risiko Prioritas" action="Ekspor Register" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Deskripsi, Key Risk Indicator, Rencana Mitigasi, dan Tenggat per Risiko
       </p>

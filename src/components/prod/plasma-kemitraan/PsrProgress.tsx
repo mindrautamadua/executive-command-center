@@ -1,10 +1,17 @@
+"use client";
+
 import { Banknote, Landmark, Sprout, UsersRound } from "lucide-react";
 import { psrProgress } from "@/lib/agro-data";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { ScopeEmpty, inScope } from "@/components/ui/CommodityScope";
 
 const rb = (v: number) => v.toLocaleString("id-ID");
 
 export function PsrProgress() {
+  // Domain: PSR = Peremajaan Sawit Rakyat (hibah BPDPKS) → milik PalmCo.
+  const { active, def } = useSubholding();
+  const luarCakupan = !inScope(active, "sawit rakyat");
   const danaPct = Math.round((psrProgress.tersalurRpM / psrProgress.totalDanaRpM) * 1000) / 10;
   return (
     <div
@@ -14,6 +21,10 @@ export function PsrProgress() {
       <SectionHead title="Progress PSR 2026" action="Lihat Detail" />
       <p className="mt-[3px] text-[9px] text-ink-500">Peremajaan Sawit Rakyat — Plasma Binaan</p>
 
+      {luarCakupan ? (
+        <ScopeEmpty label={def.fullLabel} />
+      ) : (
+      <>
       <div className="mt-2.5 flex items-baseline gap-2">
         <span className="text-[19px] font-extrabold leading-none tracking-[-0.01em] text-ink-900">
           {rb(psrProgress.realisasiYtdHa)} ha
@@ -73,6 +84,8 @@ export function PsrProgress() {
       </div>
 
       <p className="mt-auto pt-2 text-[8px] leading-snug text-ink-400">{psrProgress.note}</p>
+      </>
+      )}
     </div>
   );
 }

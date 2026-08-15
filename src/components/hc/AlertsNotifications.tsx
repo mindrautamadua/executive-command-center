@@ -1,5 +1,9 @@
+"use client";
+
 import { AlertCircle, AlertTriangle, CheckCircle2, Users } from "lucide-react";
 import { hcAlerts } from "@/lib/hc-data";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { filterBySubholding } from "@/lib/subholding";
 import { SectionHead } from "./SectionHead";
 
 const TONE = {
@@ -26,12 +30,17 @@ const TONE = {
 } as const;
 
 export function AlertsNotifications() {
+  const { active } = useSubholding();
+  // Sebagian alert menyebut entitas asalnya (mis. "PTPN IV Regional 2"); alert
+  // tanpa penyebutan entitas berlaku lintas grup sehingga tetap ditampilkan.
+  const alerts = filterBySubholding(hcAlerts, active, (a) => `${a.title} ${a.text}`);
+
   return (
     <div className="card anim-rise px-4 pb-3.5 pt-3" style={{ "--d": "200ms" } as React.CSSProperties}>
       <SectionHead title="Alerts & Notifications" action="Lihat Semua" />
 
       <div className="mt-2.5 grid grid-cols-5 gap-2.5">
-        {hcAlerts.map((a) => {
+        {alerts.map((a) => {
           const t = TONE[a.tone];
           const Icon = t.Icon;
           return (

@@ -1,5 +1,8 @@
+"use client";
+
 import { BrainCircuit, Sparkles, TrendingUp } from "lucide-react";
 import { produktivitasIntel } from "@/lib/produktivitas-data";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const TILE_TONE = {
   green: { wrap: "border-[#dcf1e6] bg-[#f2faf5]", value: "text-ptpn-greenDark" },
@@ -20,6 +23,7 @@ export function ProduktivitasIntelligence() {
           <span className="rounded bg-ptpn-greenLight px-1 py-[1px] text-[8px] font-bold normal-case tracking-normal text-ptpn-green">
             AI
           </span>
+          <ScopeNote />
         </h3>
         <span className="flex items-baseline gap-1.5">
           <TrendingUp size={12} className="self-center text-ptpn-green" />

@@ -13,6 +13,7 @@ import { balanceAssets, balanceFunding, balanceSummary } from "@/lib/knl-data";
 import { fmtId } from "@/lib/keu-core";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE } from "@/lib/chart-palette";
 import { SectionHead } from "../../hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 /** Dua kolom stacked: sisi aset vs sisi liabilitas + ekuitas (balancing). */
 const DATA = [
@@ -34,7 +35,7 @@ export function BalanceSheetComposition() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead title="Balance Sheet Composition" />
+      <SectionHead title="Balance Sheet Composition" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Total Aset Rp {fmtId(balanceSummary.totalAsetRpT, 1)} T · Rp T
       </p>

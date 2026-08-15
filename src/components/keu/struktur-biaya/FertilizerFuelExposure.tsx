@@ -3,6 +3,7 @@ import { fertilizerFuel } from "@/lib/ksb-data";
 import { fmtId } from "@/lib/keu-core";
 import { ToneBadge } from "@/components/shared/ToneBadge";
 import { SectionHead } from "../../hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 /** Eksposur harga pupuk & BBM vs asumsi RKAP + estimasi dampak FY. */
 export function FertilizerFuelExposure() {
@@ -11,7 +12,7 @@ export function FertilizerFuelExposure() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "240ms" } as React.CSSProperties}
     >
-      <SectionHead title="Eksposur Pupuk & BBM" />
+      <SectionHead title="Eksposur Pupuk & BBM" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">Harga Aktual YTD vs Asumsi RKAP · Dampak FY</p>
 
       <div className="mt-2 flex min-h-0 flex-1 flex-col justify-between gap-1.5">

@@ -1,5 +1,8 @@
+"use client";
+
 import { GENERATION_AXIS_MAX, headcountByGeneration } from "@/lib/wa-data";
 import { SectionHead } from "../hc/SectionHead";
+import { ScopeNote } from "../ui/ScopeNote";
 
 const AXIS_TICKS = [0, 10000, 20000, 30000, 40000];
 
@@ -9,7 +12,7 @@ export function HeadcountByGeneration() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead title="Headcount by Generation" action="Lihat Detail" />
+      <SectionHead title="Headcount by Generation" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">Komposisi berdasarkan Generasi</p>
 
       <div className="mt-2.5 flex min-h-0 flex-1 flex-col justify-center">

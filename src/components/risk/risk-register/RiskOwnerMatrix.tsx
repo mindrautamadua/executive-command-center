@@ -1,5 +1,6 @@
 import { ownerMatrix } from "@/lib/risk-data";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 function Cell({ value, cls }: { value: number; cls: string }) {
   return (
@@ -20,7 +21,7 @@ export function RiskOwnerMatrix() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "240ms" } as React.CSSProperties}
     >
-      <SectionHead title="Matriks Pemilik Risiko" />
+      <SectionHead title="Matriks Pemilik Risiko" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Sebaran Level Risiko per Direktorat Pemilik (Total 142)
       </p>

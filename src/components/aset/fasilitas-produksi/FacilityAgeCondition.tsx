@@ -19,6 +19,7 @@ import {
 } from "@/lib/afs-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
 
 const pks = ageCondition.filter((a) => a.jenis === "PKS");
 const pg = ageCondition.filter((a) => a.jenis === "PG");
@@ -32,6 +33,13 @@ const warna = (kondisi: number) =>
 
 /** Sebaran umur pabrik × indeks kondisi aset, dibedakan PKS dan PG. */
 export function FacilityAgeCondition() {
+  const { active, isFiltered } = useSubholding();
+  // Pemetaan domain: PKS (sawit) milik PalmCo, PG (gula) milik SugarCo.
+  const dim = (jenis: "PKS" | "PG") => {
+    if (!isFiltered) return 1;
+    return active === (jenis === "PKS" ? "palmco" : "sugarco") ? 1 : 0.25;
+  };
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -87,12 +95,12 @@ export function FacilityAgeCondition() {
             />
             <Scatter name="PKS" data={pks} shape="circle">
               {pks.map((d) => (
-                <Cell key={d.pabrik} fill={warna(d.kondisiIndex)} fillOpacity={0.85} />
+                <Cell key={d.pabrik} fill={warna(d.kondisiIndex)} fillOpacity={0.85 * dim("PKS")} />
               ))}
             </Scatter>
             <Scatter name="PG" data={pg} shape="square">
               {pg.map((d) => (
-                <Cell key={d.pabrik} fill={warna(d.kondisiIndex)} fillOpacity={0.85} />
+                <Cell key={d.pabrik} fill={warna(d.kondisiIndex)} fillOpacity={0.85 * dim("PG")} />
               ))}
             </Scatter>
           </ScatterChart>

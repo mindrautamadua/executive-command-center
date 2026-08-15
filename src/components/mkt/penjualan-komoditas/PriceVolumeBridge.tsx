@@ -14,6 +14,7 @@ import {
 import { priceVolumeBridge } from "@/lib/pemasaran-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const SHORT: Record<string, string> = {
   "Penjualan YTD 2025": "YTD 2025",
@@ -71,7 +72,8 @@ export function PriceVolumeBridge() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "90ms" } as React.CSSProperties}
     >
-      <SectionHead title="Price-Volume Bridge YoY" action="Lihat Detail" />
+      {/* Jembatan disusun dari nilai penjualan konsolidasi grup. */}
+      <SectionHead title="Price-Volume Bridge YoY" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Jembatan penjualan YTD 2025 → 2026 (Rp Triliun)
       </p>

@@ -1,5 +1,6 @@
 import { heatmapCells, levelOfScore, RISK_LEVEL_BAND, type RiskLevel } from "@/lib/risk-data";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const LIKELIHOOD = ["Jarang", "Kecil", "Sedang", "Besar", "Hampir Pasti"];
 const IMPACT = ["Minor", "Rendah", "Sedang", "Mayor", "Katastropik"];
@@ -22,7 +23,7 @@ export function EnterpriseHeatmap() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead title="Enterprise Risk Heatmap 5×5" action="Lihat Register" />
+      <SectionHead title="Enterprise Risk Heatmap 5×5" action="Lihat Register" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Distribusi 142 Risiko Korporat — Kemungkinan × Dampak (Residual)
       </p>

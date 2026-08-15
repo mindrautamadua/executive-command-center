@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { flightRiskDrivers, nineBox, talentStats } from "@/lib/hc-data";
 import { SectionHead } from "./SectionHead";
+import { ScopeNote } from "../ui/ScopeNote";
 import { WhyDrivers } from "./WhyDrivers";
 
 const CELL_TONE = {
@@ -17,7 +18,7 @@ export function TalentPortfolio() {
 
   return (
     <div className="card anim-rise px-4 pb-3.5 pt-3" style={{ "--d": "180ms" } as React.CSSProperties}>
-      <SectionHead title="Talent Portfolio" action="Lihat Detail" />
+      <SectionHead title="Talent Portfolio" action="Lihat Detail" badge={<ScopeNote />} />
 
       <div className="mt-3 flex items-start gap-3">
         <div className="flex shrink-0 items-center gap-1.5">

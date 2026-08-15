@@ -13,6 +13,8 @@ import {
 import { byCategory } from "@/lib/risk-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { toSubholdingId } from "@/lib/subholding";
 
 const SERIES = [
   { key: "palmco", name: "PalmCo", color: PALETTE.green },
@@ -23,6 +25,16 @@ const SERIES = [
 
 /** Komposisi register per kategori risiko, ditumpuk per subholding. */
 export function RegisterByCategory() {
+  const { active, isFiltered, def } = useSubholding();
+  // Nama seri (PalmCo / SGN / PTPN I / Holding) adalah dimensi subholding.
+  // Seri "Holding" tidak memetakan ke subholding mana pun sehingga tetap penuh
+  // sebagai konteks; seri subholding lain diredupkan.
+  const dim = (name: string) => {
+    if (!isFiltered) return 1;
+    const id = toSubholdingId(name);
+    return id === null || id === active ? 1 : 0.25;
+  };
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2 pt-3"
@@ -30,7 +42,9 @@ export function RegisterByCategory() {
     >
       <SectionHead title="Register per Kategori & Subholding" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        142 Risiko — PalmCo 50 · SGN 39 · PTPN I 23 · Holding 30
+        {isFiltered
+          ? `Porsi ${def.label} disorot dalam register 142 risiko grup`
+          : "142 Risiko — PalmCo 50 · SGN 39 · PTPN I 23 · Holding 30"}
       </p>
 
       <div className="mt-1.5 min-h-0 w-full flex-1">
@@ -63,6 +77,7 @@ export function RegisterByCategory() {
                 name={s.name}
                 stackId="reg"
                 fill={s.color}
+                fillOpacity={dim(s.name)}
                 radius={i === SERIES.length - 1 ? [3, 3, 0, 0] : undefined}
                 maxBarSize={44}
               />

@@ -1,7 +1,10 @@
+"use client";
+
 import { Briefcase, Factory, FileText, ShieldAlert, Sprout, Wallet } from "lucide-react";
 import { arpKpi } from "@/lib/arp-data";
 import type { AstKpi } from "@/lib/ast-core";
 import { Delta } from "@/components/ui/Delta";
+import { useSubholding } from "@/components/SubholdingProvider";
 
 const ICONS: Record<AstKpi["icon"], typeof Sprout> = {
   land: Sprout,
@@ -23,8 +26,16 @@ const TONES: Record<AstKpi["tone"], string> = {
 
 /** KPI strip halaman Replanting & Pemeliharaan (6 kartu). */
 export function ArpKpiStrip() {
+  const { active } = useSubholding();
+  // Pemetaan domain: replanting & TBM di halaman ini adalah program tanaman
+  // sawit (kebun PalmCo) — seluruh halaman berada di cakupan PalmCo.
+  const outOfScope = active !== "all" && active !== "palmco";
+
   return (
-    <div className="grid grid-cols-6 gap-3">
+    <div
+      className="grid grid-cols-6 gap-3 transition-opacity"
+      style={{ opacity: outOfScope ? 0.25 : 1 }}
+    >
       {arpKpi.map((k, i) => {
         const Icon = ICONS[k.icon];
         return (

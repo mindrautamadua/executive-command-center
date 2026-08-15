@@ -4,6 +4,7 @@ import {
   Bar,
   BarChart,
   CartesianGrid,
+  Cell,
   LabelList,
   ResponsiveContainer,
   Tooltip,
@@ -14,6 +15,8 @@ import { capexBySubholding } from "@/lib/kcx-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { fmtId, fmtRpT } from "@/lib/keu-core";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { toSubholdingId } from "@/lib/subholding";
 
 const data = capexBySubholding.map((s) => ({
   name: s.segment,
@@ -22,9 +25,17 @@ const data = capexBySubholding.map((s) => ({
   plan: s.plan,
   progressPct: s.progressPct,
   fokus: s.fokus,
+  // `segment` (PalmCo / SGN / PTPN I) adalah dimensi subholding batang ini.
+  sub: toSubholdingId(s.segment),
 }));
 
 export function CapexBySubholding() {
+  const { active, isFiltered } = useSubholding();
+  // Grafik pembanding: batang non-aktif diredupkan agar konteks antar
+  // subholding tetap terbaca, alih-alih menyisakan satu batang tunggal.
+  const dim = (sub: ReturnType<typeof toSubholdingId>) =>
+    !isFiltered || sub === active ? 1 : 0.25;
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -61,8 +72,15 @@ export function CapexBySubholding() {
                 name === "actual" ? "Realisasi YTD" : "Sisa RKAP",
               ]}
             />
-            <Bar dataKey="actual" stackId="cx" fill={PALETTE.green} maxBarSize={34} />
+            <Bar dataKey="actual" stackId="cx" fill={PALETTE.green} maxBarSize={34}>
+              {data.map((d) => (
+                <Cell key={d.name} fillOpacity={dim(d.sub)} />
+              ))}
+            </Bar>
             <Bar dataKey="sisa" stackId="cx" fill="#d7e3ee" radius={[2, 2, 0, 0]} maxBarSize={34}>
+              {data.map((d) => (
+                <Cell key={d.name} fillOpacity={dim(d.sub)} />
+              ))}
               <LabelList
                 dataKey="progressPct"
                 position="top"
@@ -77,7 +95,11 @@ export function CapexBySubholding() {
 
       <div className="flex flex-col gap-[2px] pb-1">
         {data.map((d) => (
-          <div key={d.name} className="flex items-center gap-1.5 text-[8px] text-ink-500">
+          <div
+            key={d.name}
+            className="flex items-center gap-1.5 text-[8px] text-ink-500 transition-opacity"
+            style={{ opacity: dim(d.sub) }}
+          >
             <span className="w-[42px] shrink-0 font-bold text-ink-700">{d.name}</span>
             <span className="truncate">{d.fokus}</span>
           </div>

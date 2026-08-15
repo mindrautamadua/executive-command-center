@@ -1,3 +1,5 @@
+"use client";
+
 import { CalendarCheck, Gauge, ShieldAlert, TriangleAlert } from "lucide-react";
 import { appetiteKpi } from "@/lib/risk-data";
 import { RiskKpiCards, type RiskKpiCardItem } from "../RiskKpiCards";

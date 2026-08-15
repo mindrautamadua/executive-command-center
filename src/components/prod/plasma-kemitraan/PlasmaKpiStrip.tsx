@@ -1,5 +1,9 @@
+"use client";
+
 import type { ProdKpi } from "@/lib/produksi-data";
 import { ProdKpiCards } from "../ProdKpiCards";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { ScopeEmpty, inScope } from "@/components/ui/CommodityScope";
 
 const plasmaKpi: ProdKpi[] = [
   {
@@ -53,5 +57,14 @@ const plasmaKpi: ProdKpi[] = [
 ];
 
 export function PlasmaKpiStrip() {
+  // Domain: kebun plasma sawit, TBS plasma & PSR → milik PalmCo.
+  const { active, def } = useSubholding();
+  if (!inScope(active, "plasma TBS sawit")) {
+    return (
+      <div className="card anim-rise flex flex-col px-4 pb-3 pt-3">
+        <ScopeEmpty label={def.fullLabel} />
+      </div>
+    );
+  }
   return <ProdKpiCards items={plasmaKpi} cols="grid-cols-4" />;
 }

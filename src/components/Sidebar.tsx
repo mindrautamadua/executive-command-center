@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import { PtpnLogo } from "./PtpnLogo";
-import { NAV } from "@/lib/nav";
+import { NAV_SECTIONS } from "@/lib/nav";
 
 export function Sidebar() {
   const pathname = usePathname();
@@ -49,30 +49,44 @@ export function Sidebar() {
             style={{ transform: `translateY(${pill.top}px)`, height: pill.height }}
           />
         )}
-        {NAV.map(({ label, href, icon: Icon, ready }) => {
-          const on = pathname === href;
-          const cls = `relative mb-[3px] flex w-full items-center gap-2.5 rounded-lg px-3 py-[9px] text-left text-[11.5px] transition-[background-color,color,transform] duration-150 active:scale-[0.98] motion-reduce:transition-none motion-reduce:active:scale-100 ${
-            on
-              ? "font-semibold text-ptpn-green"
-              : "font-medium text-ink-500 hover:bg-[#f5f8fa]"
-          }`;
-          const inner = (
-            <>
-              <Icon size={15} strokeWidth={1.8} className="shrink-0" />
-              <span className="leading-[1.25]">{label}</span>
-            </>
-          );
+        {NAV_SECTIONS.map((section, si) => (
+          <div key={section.title ?? si}>
+            {section.title && (
+              <div className="mb-1 mt-2.5 px-3 text-[8.5px] font-bold uppercase tracking-[0.09em] text-ink-400">
+                {section.title}
+              </div>
+            )}
+            {section.items.map(({ label, href, icon: Icon, ready }) => {
+              const on = pathname === href;
+              const cls = `relative mb-[3px] flex w-full items-center gap-2.5 rounded-lg px-3 py-[9px] text-left text-[11.5px] transition-[background-color,color,transform] duration-150 active:scale-[0.98] motion-reduce:transition-none motion-reduce:active:scale-100 ${
+                on
+                  ? "font-semibold text-ptpn-green"
+                  : "font-medium text-ink-500 hover:bg-[#f5f8fa]"
+              }`;
+              const inner = (
+                <>
+                  <Icon size={15} strokeWidth={1.8} className="shrink-0" />
+                  <span className="leading-[1.25]">{label}</span>
+                </>
+              );
 
-          return ready ? (
-            <Link key={label} href={href} data-active={on || undefined} className={cls}>
-              {inner}
-            </Link>
-          ) : (
-            <button key={label} type="button" className={cls} title="Segera hadir">
-              {inner}
-            </button>
-          );
-        })}
+              return ready ? (
+                <Link key={label} href={href} data-active={on || undefined} className={cls}>
+                  {inner}
+                </Link>
+              ) : (
+                <button
+                  key={label}
+                  type="button"
+                  className={`${cls} opacity-50`}
+                  title="Segera hadir"
+                >
+                  {inner}
+                </button>
+              );
+            })}
+          </div>
+        ))}
       </nav>
 
       {/* promo card */}

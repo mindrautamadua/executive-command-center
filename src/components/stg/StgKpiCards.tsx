@@ -52,7 +52,16 @@ const TONES: Record<StgKpi["tone"], string> = {
 };
 
 /** Renderer KPI strip dimensi Strategi & Kinerja (mirror MktKpiCards/WaKpiStrip). */
-export function StgKpiCards({ items, cols }: { items: StgKpi[]; cols: string }) {
+export function StgKpiCards({
+  items,
+  cols,
+  badge,
+}: {
+  items: StgKpi[];
+  cols: string;
+  /** Penanda kecil per kartu, mis. <ScopeNote /> untuk tile konsolidasi grup. */
+  badge?: (item: StgKpi) => React.ReactNode;
+}) {
   return (
     <div className={`grid gap-3 ${cols}`}>
       {items.map((k, i) => {
@@ -72,6 +81,7 @@ export function StgKpiCards({ items, cols }: { items: StgKpi[]; cols: string }) 
               <span className="min-w-0 text-[9px] font-semibold leading-[1.25] text-ink-500">
                 {k.label}
               </span>
+              {badge?.(k)}
             </div>
             <div className="mt-2.5 flex items-baseline gap-[2px] whitespace-nowrap text-[19px] font-extrabold leading-none tracking-[-0.01em] text-ink-900">
               {k.value}

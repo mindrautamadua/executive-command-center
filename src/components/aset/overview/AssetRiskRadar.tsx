@@ -12,6 +12,7 @@ import {
 import { assetRiskRadar } from "@/lib/ast-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 /** Radar 6 sumbu risiko aset: tingkat risiko saat ini vs ambang toleransi. */
 export function AssetRiskRadar() {
@@ -20,7 +21,7 @@ export function AssetRiskRadar() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "90ms" } as React.CSSProperties}
     >
-      <SectionHead title="Asset Risk Radar" action="Lihat Detail" />
+      <SectionHead title="Asset Risk Radar" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Tingkat Risiko 0–100 vs Ambang Toleransi · 6 sumbu
       </p>

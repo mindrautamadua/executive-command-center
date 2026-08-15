@@ -14,9 +14,14 @@ import {
 import { ageProjection, ageProjectionNote } from "@/lib/arp-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
 
 /** Proyeksi porsi areal tua/renta & prima: roadmap penuh vs laju saat ini. */
 export function AgeProfileProjection() {
+  const { active } = useSubholding();
+  // Pemetaan domain: profil umur areal sawit — cakupan PalmCo.
+  const outOfScope = active !== "all" && active !== "palmco";
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -24,10 +29,15 @@ export function AgeProfileProjection() {
     >
       <SectionHead title="Proyeksi Profil Umur 2026–2035" action="Lihat Detail" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        Porsi Areal Tua &amp; Renta (%) · Dengan vs Tanpa Akselerasi Replanting
+        {outOfScope
+          ? "Proyeksi profil umur areal sawit hanya untuk PalmCo"
+          : "Porsi Areal Tua & Renta (%) · Dengan vs Tanpa Akselerasi Replanting"}
       </p>
 
-      <div className="mt-1.5 min-h-0 w-full flex-1">
+      <div
+        className="mt-1.5 min-h-0 w-full flex-1 transition-opacity"
+        style={{ opacity: outOfScope ? 0.25 : 1 }}
+      >
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={ageProjection} margin={{ top: 10, right: 6, bottom: 0, left: -18 }}>
             <defs>

@@ -5,6 +5,7 @@ import { byType } from "@/lib/asg-data";
 import { PALETTE } from "@/lib/chart-palette";
 import { DonutChart } from "@/components/ui/DonutChart";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const num = (v: number) =>
   v.toLocaleString("id-ID", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
@@ -28,7 +29,7 @@ export function SengketaByType() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead title="Sengketa per Tipe" action="Lihat Detail" />
+      <SectionHead title="Sengketa per Tipe" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">Komposisi Areal Sengketa (rb ha) · 214 kasus</p>
 
       <div className="flex min-h-0 flex-1 items-center gap-3">

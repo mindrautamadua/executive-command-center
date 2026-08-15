@@ -15,6 +15,9 @@ import {
 } from "recharts";
 import { marginMatrix, type MarginMatrixRow } from "@/lib/hilir-stok-margin-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
+import { filterBySubholding } from "@/lib/subholding";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { commodityScope } from "@/components/ui/CommodityScope";
 import { SectionHead } from "../../hc/SectionHead";
 
 /** Warna entitas konsisten dengan revenueByKomoditas (pemasaran-data). */
@@ -31,7 +34,16 @@ const COLORS: Record<string, string> = {
 const pct = (v: number) =>
   `${v.toLocaleString("id-ID", { minimumFractionDigits: 1, maximumFractionDigits: 1 })}%`;
 
+/**
+ * Matriks volume × margin per komoditas. Komoditas menentukan pemilik
+ * subholding: CPO/PK & PKO → PalmCo, gula & tetes → SugarCo, karet & teh →
+ * SupportingCo; produk hilir tidak terikat satu subholding sehingga tetap
+ * tampil. Baris di luar cakupan disaring keluar dari scatter dan legenda.
+ */
 export function MarginMatrix() {
+  const { active } = useSubholding();
+  const rows = filterBySubholding(marginMatrix, active, (r) => commodityScope(r.komoditas));
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -90,8 +102,8 @@ export function MarginMatrix() {
               }
               labelFormatter={() => ""}
             />
-            <Scatter data={marginMatrix} name="Komoditas">
-              {marginMatrix.map((d: MarginMatrixRow) => (
+            <Scatter data={rows} name="Komoditas">
+              {rows.map((d: MarginMatrixRow) => (
                 <Cell key={d.komoditas} fill={COLORS[d.komoditas] ?? PALETTE.slate} fillOpacity={0.75} />
               ))}
             </Scatter>
@@ -100,7 +112,7 @@ export function MarginMatrix() {
       </div>
 
       <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1">
-        {marginMatrix.map((d) => (
+        {rows.map((d) => (
           <span key={d.komoditas} className="flex items-center gap-1.5 text-[8px] font-semibold text-ink-500">
             <span
               className="h-[7px] w-[7px] rounded-full"

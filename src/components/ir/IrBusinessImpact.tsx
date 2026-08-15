@@ -1,5 +1,4 @@
 import { Factory } from "lucide-react";
-import { RISK_STYLE } from "@/lib/ir-data";
 import { businessImpact, businessImpactTotal } from "@/lib/ir-intel-data";
 import { SectionHead } from "../hc/SectionHead";
 

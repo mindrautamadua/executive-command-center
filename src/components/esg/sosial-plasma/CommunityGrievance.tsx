@@ -1,6 +1,7 @@
 import { grievanceCategories, grievanceSummary } from "@/lib/esg-data-detail";
 import { PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 /** Grievance komunitas per kategori + capaian SLA 21 hari vs target 30 hari. */
 export function CommunityGrievance() {
@@ -9,7 +10,7 @@ export function CommunityGrievance() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead title="Community Grievance" action="Lihat Detail" />
+      <SectionHead title="Community Grievance" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         {grievanceSummary.total} pengaduan YTD · {grievanceSummary.selesai} selesai ·{" "}
         {grievanceSummary.proses} dalam proses

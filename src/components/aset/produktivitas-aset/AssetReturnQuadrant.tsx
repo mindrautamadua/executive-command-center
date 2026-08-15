@@ -21,6 +21,8 @@ import {
 } from "@/lib/apd-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { filterBySubholding } from "@/lib/subholding";
 
 const num = (v: number) =>
   v.toLocaleString("id-ID", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
@@ -41,7 +43,7 @@ const QUADRAN_CHIP: Record<AssetQuadrant, string> = {
 
 const ORDER: AssetQuadrant[] = ["Ekspansi", "Optimalkan", "Perbaiki", "Restrukturisasi"];
 
-const data = assetReturnQuadrant.map((u) => ({
+const allData = assetReturnQuadrant.map((u) => ({
   ...u,
   short: u.unit
     .replace("PalmCo Regional ", "R")
@@ -49,17 +51,23 @@ const data = assetReturnQuadrant.map((u) => ({
     .replace(/ \(.*\)/, ""),
 }));
 
-const ringkasan = ORDER.map((q) => {
-  const rows = data.filter((d) => d.kuadran === q);
-  return {
-    kuadran: q,
-    unit: rows.length,
-    nilaiRpT: +rows.reduce((s, r) => s + r.nilaiAsetRpT, 0).toFixed(1),
-  };
-});
-
 /** Kuadran ROA unit × utilisasi aset produktif; ukuran titik = nilai buku. */
 export function AssetReturnQuadrant() {
+  const { active, isFiltered, def } = useSubholding();
+  // `unit` menyebut subholding pemiliknya (PalmCo Regional n / SGN — Klaster n /
+  // PTPN I), jadi tabel titik & ringkasan kuadran ikut menyaring.
+  const data = filterBySubholding(allData, active, (u) => u.unit);
+  const nilaiTotalRpT = +data.reduce((s, r) => s + r.nilaiAsetRpT, 0).toFixed(1);
+
+  const ringkasan = ORDER.map((q) => {
+    const rows = data.filter((d) => d.kuadran === q);
+    return {
+      kuadran: q,
+      unit: rows.length,
+      nilaiRpT: +rows.reduce((s, r) => s + r.nilaiAsetRpT, 0).toFixed(1),
+    };
+  });
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -67,7 +75,9 @@ export function AssetReturnQuadrant() {
     >
       <SectionHead title="Kuadran Imbal Hasil Aset" action="Lihat Detail" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        ROA Unit (%) × Utilisasi Aset (%) · 12 Unit · Rp 78,3 T Nilai Buku
+        {isFiltered
+          ? `ROA Unit (%) × Utilisasi Aset (%) · ${def.label} · ${data.length} Unit · Rp ${num(nilaiTotalRpT)} T Nilai Buku`
+          : `ROA Unit (%) × Utilisasi Aset (%) · ${data.length} Unit · Rp ${num(nilaiTotalRpT)} T Nilai Buku`}
       </p>
 
       <div className="mt-1.5 min-h-0 w-full flex-1">

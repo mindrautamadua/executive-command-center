@@ -15,11 +15,22 @@ import {
 import { costPerRegional, HPP_CPO_TARGET_RP_KG } from "@/lib/ksb-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE, SEMANTIC } from "@/lib/chart-palette";
 import { SectionHead } from "../../hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
 
 const ribuan = (v: number) => v.toLocaleString("id-ID");
 
-/** HPP/kg CPO per regional vs garis target Rp 8.700. */
+/**
+ * HPP/kg CPO per regional vs garis target Rp 8.700.
+ *
+ * Regional 1–7 adalah pecahan internal PalmCo (kebun & PKS sawit), bukan
+ * dimensi grup: tidak ada padanannya di SugarCo maupun SupportingCo. Karena
+ * itu kartu tampil normal pada cakupan "semua" dan PalmCo, lalu diredupkan
+ * dengan keterangan saat cakupan lain dipilih.
+ */
 export function CostPerRegional() {
+  const { active, isFiltered } = useSubholding();
+  const inScope = !isFiltered || active === "palmco";
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -28,9 +39,13 @@ export function CostPerRegional() {
       <SectionHead title="HPP per Regional" />
       <p className="mt-[3px] text-[9px] text-ink-500">
         HPP/kg CPO vs Target Rp {ribuan(HPP_CPO_TARGET_RP_KG)}
+        {inScope ? "" : " — pecahan regional hanya untuk PalmCo"}
       </p>
 
-      <div className="mt-1.5 min-h-0 w-full flex-1">
+      <div
+        className="mt-1.5 min-h-0 w-full flex-1 transition-opacity"
+        style={{ opacity: inScope ? 1 : 0.25 }}
+      >
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={costPerRegional}

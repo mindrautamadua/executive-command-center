@@ -1,6 +1,10 @@
+"use client";
+
 import { economicProfit } from "@/lib/svc-data";
 import { SectionHead } from "@/components/hc/SectionHead";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { filterBySubholding } from "@/lib/subholding";
 
 const fmt1 = (v: number) =>
   v.toLocaleString("id-ID", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
@@ -12,6 +16,10 @@ const signed = (v: number, f: (n: number) => string) => `${v > 0 ? "+" : v < 0 ?
 /** ROIC vs WACC Group dan spread EVA per subholding. */
 export function EconomicProfitCard() {
   const { roicPct, waccPct, spreadPts, catatan, evaRows } = economicProfit;
+  const { active, isFiltered, def } = useSubholding();
+  // `entity` (PalmCo / SGN / PTPN I) adalah dimensi subholding baris EVA;
+  // "Holding & Lainnya" tidak mengacu ke satu subholding sehingga selalu tampil.
+  const rows = filterBySubholding(evaRows, active, (r) => r.entity);
 
   return (
     <div
@@ -20,7 +28,9 @@ export function EconomicProfitCard() {
     >
       <SectionHead title="Economic Profit (ROIC vs WACC)" action="Lihat Metodologi" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        Spread Nilai Ekonomis Group &amp; EVA Disetahunkan per Subholding
+        {isFiltered
+          ? `Spread Nilai Ekonomis Group (konsolidasi) & EVA Disetahunkan — Baris ${def.label}`
+          : "Spread Nilai Ekonomis Group & EVA Disetahunkan per Subholding"}
       </p>
 
       <div className="mt-2 flex min-h-0 flex-1 gap-3">
@@ -60,7 +70,14 @@ export function EconomicProfitCard() {
               </tr>
             </thead>
             <tbody>
-              {evaRows.map((r) => {
+              {rows.length === 0 && (
+                <tr>
+                  <td colSpan={5} className="py-[7px] text-[8.5px] text-ink-400">
+                    Tidak ada baris EVA untuk cakupan ini.
+                  </td>
+                </tr>
+              )}
+              {rows.map((r) => {
                 const tone: BadgeTone = r.spreadPts >= 0 ? "good" : r.spreadPts >= -3 ? "warn" : "bad";
                 const label =
                   r.spreadPts >= 0 ? "Menciptakan Nilai" : r.spreadPts >= -3 ? "Marginal" : "Merusak Nilai";

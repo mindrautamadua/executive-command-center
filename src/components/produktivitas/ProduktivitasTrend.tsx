@@ -11,6 +11,7 @@ import {
 } from "recharts";
 import { trenProduktivitas } from "@/lib/produktivitas-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
+import { ScopeNote } from "../ui/ScopeNote";
 
 const SERIES = [
   { key: "revenue", label: "Revenue per Employee (Jun '25 = 100)", color: PALETTE.green },
@@ -25,7 +26,10 @@ export function ProduktivitasTrend() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <h3 className="card-title-navy">1. Produktivitas Utama (Trend)</h3>
+      <h3 className="card-title-navy flex min-w-0 items-center gap-1.5">
+        <span>1. Produktivitas Utama (Trend)</span>
+        <ScopeNote />
+      </h3>
       <p className="mt-[3px] text-[9.5px] text-ink-500">
         Perkembangan 12 Bulan Terakhir · seri operasional di-rebase Jun &apos;25 = 100
       </p>

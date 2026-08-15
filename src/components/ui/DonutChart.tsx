@@ -24,6 +24,7 @@ export function DonutChart({
   centerCaption,
   valueFormatter = (v: number) => v.toLocaleString("id-ID"),
   onHover,
+  sliceOpacity,
   className = "",
 }: {
   data: DonutDatum[];
@@ -33,6 +34,11 @@ export function DonutChart({
   centerCaption?: string;
   valueFormatter?: (v: number) => string;
   onHover?: (index: number | null) => void;
+  /**
+   * Opasitas dasar per slice, di luar efek hover (mis. meredupkan slice di luar
+   * subholding aktif). Default 1 untuk semua slice sehingga perilaku tidak berubah.
+   */
+  sliceOpacity?: (index: number) => number;
   className?: string;
 }) {
   const [active, setActive] = useState<number | null>(null);
@@ -74,7 +80,7 @@ export function DonutChart({
               <Cell
                 key={d.name}
                 fill={d.color}
-                opacity={active === null || active === i ? 1 : 0.35}
+                opacity={(active === null || active === i ? 1 : 0.35) * (sliceOpacity?.(i) ?? 1)}
                 style={{ transition: "opacity .2s" }}
               />
             ))}

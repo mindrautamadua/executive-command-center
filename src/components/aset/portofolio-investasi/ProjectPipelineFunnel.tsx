@@ -5,6 +5,7 @@ import {
   pipelineFunnelNote,
 } from "@/lib/inv-data";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 import { PALETTE } from "@/lib/chart-palette";
 
 const num = (v: number) =>
@@ -21,7 +22,7 @@ export function ProjectPipelineFunnel() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead title="Pipeline Proyek Investasi" action="Lihat Detail" />
+      <SectionHead title="Pipeline Proyek Investasi" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         {INV_PROYEK_AKTIF} Proyek · Rp {num(INV_PIPELINE_RP_T)} T per Tahap Pipeline
       </p>

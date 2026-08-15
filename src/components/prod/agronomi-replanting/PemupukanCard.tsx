@@ -4,6 +4,8 @@ import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "rec
 import { hargaPupukTrend, pemupukan } from "@/lib/agro-data";
 import { CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { ScopeEmpty, inScope } from "@/components/ui/CommodityScope";
 
 function barTone(capaian: number | null) {
   if (capaian == null) return "bg-[#cbd5e1]";
@@ -13,6 +15,10 @@ function barTone(capaian: number | null) {
 }
 
 export function PemupukanCard() {
+  // Domain: program pemupukan NPK kebun sawit → milik PalmCo (bukan tebu/karet).
+  const { active, def } = useSubholding();
+  const luarCakupan = !inScope(active, "kebun sawit");
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -21,6 +27,10 @@ export function PemupukanCard() {
       <SectionHead title="Pemupukan: Realisasi vs Rencana" action="Lihat Detail" />
       <p className="mt-[3px] text-[9px] text-ink-500">Aplikasi NPK per Semester (Rb Ton)</p>
 
+      {luarCakupan ? (
+        <ScopeEmpty label={def.fullLabel} />
+      ) : (
+      <>
       <div className="mt-2 flex flex-col gap-[7px]">
         {pemupukan.map((s) => {
           const pct = s.capaianPct;
@@ -90,6 +100,8 @@ export function PemupukanCard() {
           </AreaChart>
         </ResponsiveContainer>
       </div>
+      </>
+      )}
     </div>
   );
 }

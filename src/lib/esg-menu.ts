@@ -31,7 +31,7 @@ export const ESG_MENU_SECTIONS: DimensionMenuSection[] = [
   {
     title: "Sosial",
     items: [
-      { label: "Sosial & Plasma", icon: HeartHandshake, href: "/esg-sustainability/sosial-plasma" },
+      { label: "Sosial & Plasma", icon: HeartHandshake, href: "/esg-sustainability/sosial-plasma", owner: "palmco" },
     ],
   },
   {

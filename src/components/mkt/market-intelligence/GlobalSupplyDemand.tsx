@@ -12,6 +12,8 @@ import {
 } from "recharts";
 import { globalSupplyDemand, globalSupplyDemandNote } from "@/lib/hilir-stok-margin-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { inScope, ScopeEmpty } from "@/components/ui/CommodityScope";
 import { SectionHead } from "../../hc/SectionHead";
 
 const num = (v: number) =>
@@ -25,6 +27,10 @@ const NAMES: Record<string, string> = {
 
 /** Supply-demand minyak sawit global + stok akhir pelaporan utama. */
 export function GlobalSupplyDemand() {
+  const { active, def } = useSubholding();
+  // Neraca ini khusus minyak sawit global → hanya relevan bagi PalmCo.
+  const luarCakupan = !inScope(active, "sawit");
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -35,6 +41,9 @@ export function GlobalSupplyDemand() {
         Produksi vs Konsumsi Global (jt ton) &amp; Stok Akhir Pelaporan Utama
       </p>
 
+      {luarCakupan ? (
+        <ScopeEmpty label={def.fullLabel} />
+      ) : (
       <div className="mt-1.5 min-h-0 w-full flex-1">
         <ResponsiveContainer width="100%" height="100%">
           <ComposedChart data={globalSupplyDemand} margin={{ top: 8, right: -8, bottom: 0, left: -22 }} barCategoryGap="30%">
@@ -81,6 +90,7 @@ export function GlobalSupplyDemand() {
           </ComposedChart>
         </ResponsiveContainer>
       </div>
+      )}
 
       <div className="mt-1 flex items-center gap-3">
         <span className="flex items-center gap-1.5 text-[8px] font-semibold text-ink-500">

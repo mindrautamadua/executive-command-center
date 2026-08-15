@@ -14,6 +14,7 @@ import {
 import { progressNote, progressPerRegional } from "@/lib/arp-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
 
 const ha = (v: number) => v.toLocaleString("id-ID");
 
@@ -24,6 +25,10 @@ const data = progressPerRegional.map((r) => ({
 
 /** Rencana prorata vs realisasi replanting YTD per regional. */
 export function ReplantingProgress() {
+  const { active } = useSubholding();
+  // Pemetaan domain: tanam ulang sawit di Regional 1–7 — cakupan PalmCo.
+  const outOfScope = active !== "all" && active !== "palmco";
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -31,10 +36,15 @@ export function ReplantingProgress() {
     >
       <SectionHead title="Progress Replanting per Regional" action="Lihat Detail" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        Rencana Prorata vs Realisasi YTD (Ha) · Target FY 12.500 Ha
+        {outOfScope
+          ? "Program replanting sawit hanya untuk PalmCo"
+          : "Rencana Prorata vs Realisasi YTD (Ha) · Target FY 12.500 Ha"}
       </p>
 
-      <div className="mt-1.5 min-h-0 w-full flex-1">
+      <div
+        className="mt-1.5 min-h-0 w-full flex-1 transition-opacity"
+        style={{ opacity: outOfScope ? 0.25 : 1 }}
+      >
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={data}

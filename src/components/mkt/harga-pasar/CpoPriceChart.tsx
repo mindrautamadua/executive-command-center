@@ -13,6 +13,8 @@ import {
 import { priceSeries } from "@/lib/harga-outlook-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { inScope, ScopeEmpty } from "@/components/ui/CommodityScope";
 
 const rp = (v: number) => `Rp ${v.toLocaleString("id-ID")}`;
 
@@ -26,12 +28,19 @@ function LegendDot({ color, label }: { color: string; label: string }) {
 }
 
 export function CpoPriceChart() {
+  // Seluruh kartu berbasis CPO → milik PalmCo.
+  const { active, def } = useSubholding();
+  const cpoScope = inScope(active, "CPO");
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
       <SectionHead title="Harga CPO 24 Bulan" action="Lihat Detail" />
+      {!cpoScope && <ScopeEmpty label={def.fullLabel} />}
+      {cpoScope && (
+        <>
       <div className="mt-[3px] flex items-center justify-between gap-2">
         <p className="text-[9px] text-ink-500">
           CIF Rotterdam vs KPBN vs HPP CPO — band margin Jun 2024 – Mei 2026
@@ -129,6 +138,8 @@ export function CpoPriceChart() {
         Spread KPBN Mei (Rp 13.635) vs HPP (Rp 8.950) = Rp 4.685/kg — terlebar dalam 24 bulan ·
         spot 31 Mei Rp 13.680/kg
       </p>
+        </>
+      )}
     </div>
   );
 }

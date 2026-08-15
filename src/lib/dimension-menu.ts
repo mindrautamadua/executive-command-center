@@ -1,4 +1,5 @@
 import type { LucideIcon } from "lucide-react";
+import type { SubholdingId } from "@/lib/subholding";
 
 /**
  * Tipe menu bersama untuk sidebar dimensi non-SDM (Keuangan, Produksi,
@@ -11,6 +12,13 @@ export interface DimensionMenuItem {
   href?: string;
   /** Badge kecil di kanan label, mis. "AI" atau "EU". */
   badge?: string;
+  /**
+   * Diisi bila seluruh isi halaman hanya milik satu subholding (mis. produktivitas
+   * kebun sawit = PalmCo). Dipakai sidebar untuk meredupkan menu yang di luar
+   * cakupan filter aktif, dan oleh ScopeGuard untuk mengganti kartu-kartu kosong
+   * dengan satu keterangan tingkat halaman.
+   */
+  owner?: Exclude<SubholdingId, "all">;
 }
 
 export interface DimensionMenuSection {

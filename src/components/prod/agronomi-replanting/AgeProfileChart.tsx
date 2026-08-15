@@ -15,6 +15,8 @@ import {
 import { ageProfile } from "@/lib/agro-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { ScopeEmpty, inScope } from "@/components/ui/CommodityScope";
 
 /** Tua & renta di-highlight amber/merah — driver 40% gap yield. */
 const BAR_COLORS: Record<string, string> = {
@@ -26,6 +28,11 @@ const BAR_COLORS: Record<string, string> = {
 };
 
 export function AgeProfileChart() {
+  // Domain: profil umur tanaman sawit inti (kebun sawit) → milik PalmCo;
+  // tidak ada pecahan tebu/karet, jadi di luar PalmCo kartu dikosongkan.
+  const { active, def } = useSubholding();
+  const luarCakupan = !inScope(active, "kebun sawit");
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -36,6 +43,10 @@ export function AgeProfileChart() {
         Distribusi Luas 508,7 Rb Ha Inti + Kurva Yield per Kelompok Umur
       </p>
 
+      {luarCakupan ? (
+        <ScopeEmpty label={def.fullLabel} />
+      ) : (
+      <>
       <div className="mt-1.5 min-h-0 w-full flex-1">
         <ResponsiveContainer width="100%" height="100%">
           <ComposedChart data={ageProfile} margin={{ top: 16, right: 4, bottom: 0, left: -14 }}>
@@ -104,6 +115,8 @@ export function AgeProfileChart() {
         Tua + renta 27% (137,4 rb ha) — yield jatuh dari 26,0 (prima) ke 13,2 t/ha (renta);
         driver 40% gap yield vs benchmark swasta.
       </p>
+      </>
+      )}
     </div>
   );
 }

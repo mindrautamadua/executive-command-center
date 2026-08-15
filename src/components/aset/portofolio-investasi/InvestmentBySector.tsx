@@ -5,6 +5,7 @@ import { investmentBySector, investmentBySectorNote, INV_PIPELINE_RP_T } from "@
 import { CATEGORICAL } from "@/lib/chart-palette";
 import { DonutChart } from "@/components/ui/DonutChart";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const num = (v: number) =>
   v.toLocaleString("id-ID", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
@@ -20,7 +21,7 @@ export function InvestmentBySector() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead title="Investasi per Sektor" />
+      <SectionHead title="Investasi per Sektor" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">Porsi Pipeline per Sektor Investasi</p>
 
       <div className="flex min-h-0 flex-1 items-center gap-3">

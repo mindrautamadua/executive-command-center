@@ -15,6 +15,7 @@ import { debtMaturity, debtMaturityNote } from "@/lib/knl-data";
 import { fmtId } from "@/lib/keu-core";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "../../hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 /** Profil jatuh tempo pokok utang 2026-2031; puncak 2027 disorot. */
 export function DebtMaturityProfile() {
@@ -23,7 +24,7 @@ export function DebtMaturityProfile() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead title="Debt Maturity Profile" />
+      <SectionHead title="Debt Maturity Profile" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Pokok Jatuh Tempo per Tahun · Rp T · total Rp 28,4 T
       </p>

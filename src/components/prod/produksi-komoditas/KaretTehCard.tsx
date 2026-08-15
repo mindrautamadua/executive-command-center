@@ -12,6 +12,8 @@ import {
 import { karetTehSeries } from "@/lib/produksi-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "../../hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { inScope, ScopeEmpty } from "@/components/ui/CommodityScope";
 
 const num = (v: number) =>
   v.toLocaleString("id-ID", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
@@ -71,6 +73,10 @@ function Mini({
 }
 
 export function KaretTehCard() {
+  const { active, def } = useSubholding();
+  // Karet & teh -> seluruh kartu milik SupportingCo (kedua seri tetap tampil).
+  const milikScope = inScope(active, "Karet teh");
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -79,7 +85,10 @@ export function KaretTehCard() {
       <SectionHead title="Karet & Teh Bulanan" action="Lihat Detail" />
       <p className="mt-[3px] text-[9px] text-ink-500">Produksi Jan–Mei 2026 (rb ton)</p>
 
-      <div className="mt-1 flex min-h-0 flex-1 flex-col gap-1">
+      {!milikScope && <ScopeEmpty label={def.fullLabel} />}
+
+      {milikScope && (
+        <div className="mt-1 flex min-h-0 flex-1 flex-col gap-1">
         <Mini
           label="Karet Kering · YTD 47,6"
           dataKey="karetRbTon"
@@ -95,6 +104,7 @@ export function KaretTehCard() {
           ticks={[1.8, 2.0, 2.2]}
         />
       </div>
+      )}
     </div>
   );
 }

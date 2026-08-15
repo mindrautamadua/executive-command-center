@@ -4,6 +4,8 @@ import { useState } from "react";
 import { AlertCircle, AlertTriangle, CheckCircle2 } from "lucide-react";
 import { keuDecisions } from "@/lib/keu-data";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { filterBySubholding } from "@/lib/subholding";
 
 const TONE = {
   red: {
@@ -26,13 +28,16 @@ const TONE = {
   },
 } as const;
 
-const TABS = [
-  { label: "Perlu Keputusan", count: keuDecisions.length },
-  { label: "Monitoring", count: 2 },
-];
-
 export function KeuDecisionCenter() {
   const [tab, setTab] = useState(0);
+  const { active } = useSubholding();
+  // Sebagian keputusan menyebut subholding pada judul/konteksnya (mis.
+  // revitalisasi PG untuk SGN); keputusan tingkat grup tetap tampil.
+  const decisions = filterBySubholding(keuDecisions, active, (d) => `${d.title} ${d.context}`);
+  const TABS = [
+    { label: "Perlu Keputusan", count: decisions.length },
+    { label: "Monitoring", count: 2 },
+  ];
 
   return (
     <div className="card anim-rise px-4 pb-3.5 pt-3" style={{ "--d": "120ms" } as React.CSSProperties}>
@@ -56,7 +61,7 @@ export function KeuDecisionCenter() {
 
       <div className="mt-2.5 flex flex-col gap-2">
         {tab === 0 ? (
-          keuDecisions.map((d) => {
+          decisions.map((d) => {
             const t = TONE[d.tone];
             const Icon = t.icon;
             return (

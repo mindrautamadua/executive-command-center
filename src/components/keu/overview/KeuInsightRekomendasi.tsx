@@ -1,5 +1,6 @@
 import { ArrowRight, Sparkles, TrendingUp, Wallet, Activity } from "lucide-react";
 import { keuInsights } from "@/lib/keu-data";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 /** Judul, ikon & tone presentasional per insight (urutan mengikuti keuInsights). */
 const META = [
@@ -20,6 +21,7 @@ export function KeuInsightRekomendasi() {
           <span className="font-semibold normal-case tracking-normal text-ink-400">
             (Decision-grade)
           </span>
+          <ScopeNote className="ml-1.5 align-middle" />
         </h3>
         <button className="flex shrink-0 items-center gap-1.5 rounded-lg border border-[#e3e9ef] bg-white px-3 py-[6px] text-[9.5px] font-semibold text-ink-700 transition-colors hover:border-ptpn-green hover:text-ptpn-green">
           Lihat Semua Insight <ArrowRight size={11} />

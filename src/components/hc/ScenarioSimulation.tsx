@@ -1,5 +1,8 @@
+"use client";
+
 import { ArrowRight, Star } from "lucide-react";
 import { scenarioNote, scenarioRows } from "@/lib/hc-data";
+import { ScopeNote } from "../ui/ScopeNote";
 
 export function ScenarioSimulation() {
   return (
@@ -8,9 +11,12 @@ export function ScenarioSimulation() {
       style={{ "--d": "160ms" } as React.CSSProperties}
     >
       <div className="flex items-center justify-between gap-2">
-        <h3 className="text-[10px] font-extrabold uppercase tracking-[0.05em] text-ink-900">
-          Scenario Simulation{" "}
-          <span className="font-semibold normal-case tracking-normal text-ink-400">(What-if)</span>
+        <h3 className="flex min-w-0 items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-[0.05em] text-ink-900">
+          <span>
+            Scenario Simulation{" "}
+            <span className="font-semibold normal-case tracking-normal text-ink-400">(What-if)</span>
+          </span>
+          <ScopeNote />
         </h3>
         <button className="flex shrink-0 cursor-pointer items-center gap-1 text-[9.5px] font-semibold text-ptpn-green hover:underline">
           Lihat Semua <ArrowRight size={11} />

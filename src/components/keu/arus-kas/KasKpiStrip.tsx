@@ -1,3 +1,5 @@
+"use client";
+
 import { Activity, Banknote, CalendarClock, CalendarCheck2, RefreshCw, Wallet } from "lucide-react";
 import { kasKpi } from "@/lib/kas-data";
 import { KeuKpiGrid, type KeuKpiItem } from "../KeuKpiGrid";

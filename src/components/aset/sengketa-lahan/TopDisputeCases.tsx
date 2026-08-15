@@ -1,7 +1,11 @@
+"use client";
+
 import { topCases } from "@/lib/asg-data";
 import type { AstRiskLevel } from "@/lib/ast-core";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { filterBySubholding } from "@/lib/subholding";
 
 const num = (v: number) =>
   v.toLocaleString("id-ID", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
@@ -17,6 +21,11 @@ const COLS = "grid-cols-[minmax(0,1.6fr)_54px_minmax(0,1fr)_60px]";
 
 /** 8 kasus sengketa terbesar: lokasi, luas, tahap proses, level risiko. */
 export function TopDisputeCases() {
+  const { active, isFiltered, def } = useSubholding();
+  // Tiap kasus menyebut subholding pemilik arealnya (PalmCo / SGN / PTPN I).
+  const rows = filterBySubholding(topCases, active, (c) => c.subholding);
+  const luasRows = +rows.reduce((s, c) => s + c.luasRbHa, 0).toFixed(1);
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
@@ -24,7 +33,9 @@ export function TopDisputeCases() {
     >
       <SectionHead title="Kasus Sengketa Terbesar" action="Lihat Detail" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        8 Kasus Prioritas menurut Luas &amp; Eksposur (rb ha)
+        {isFiltered
+          ? `${rows.length} Kasus Prioritas ${def.label} menurut Luas & Eksposur (rb ha)`
+          : "8 Kasus Prioritas menurut Luas & Eksposur (rb ha)"}
       </p>
 
       <div
@@ -37,7 +48,7 @@ export function TopDisputeCases() {
       </div>
 
       <ul className="scroll-thin mt-1 flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto pr-1">
-        {topCases.map((c) => (
+        {rows.map((c) => (
           <li
             key={c.lokasi}
             className={`grid shrink-0 ${COLS} items-center gap-x-2 rounded-lg border border-[#eef2f6] bg-[#fbfcfd] px-2 py-1`}
@@ -62,8 +73,17 @@ export function TopDisputeCases() {
       </ul>
 
       <p className="mt-1.5 text-[8px] leading-snug text-ink-400">
-        8 kasus teratas mencakup 26,8 rb ha (33% areal sengketa) — 5 di antaranya berisiko tinggi
-        atau ekstrem.
+        {isFiltered ? (
+          <>
+            {rows.length} kasus prioritas {def.label} mencakup {num(luasRows)} rb ha dari 82,4 rb ha
+            areal sengketa grup.
+          </>
+        ) : (
+          <>
+            8 kasus teratas mencakup 26,8 rb ha (33% areal sengketa) — 5 di antaranya berisiko
+            tinggi atau ekstrem.
+          </>
+        )}
       </p>
     </div>
   );

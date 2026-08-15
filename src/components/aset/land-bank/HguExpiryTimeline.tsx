@@ -14,6 +14,7 @@ import {
 import { hguExpiry, hguExpiryNote } from "@/lib/alb-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const PUNCAK_TAHUN = "2028";
 
@@ -24,7 +25,7 @@ export function HguExpiryTimeline() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "90ms" } as React.CSSProperties}
     >
-      <SectionHead title="Timeline Berakhirnya HGU" action="Lihat Detail" />
+      <SectionHead title="Timeline Berakhirnya HGU" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Luas HGU Berakhir per Tahun 2026–2035 (rb ha) · puncak 2028
       </p>

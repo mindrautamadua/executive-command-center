@@ -5,6 +5,7 @@ import { AlertCircle, AlertTriangle, CheckCircle2 } from "lucide-react";
 import { ratingDecisions } from "@/lib/esg-data-detail";
 import type { EsgDecision } from "@/lib/esg-data";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const TONE: Record<
   EsgDecision["tone"],
@@ -45,7 +46,7 @@ export function RatingDecisionCenter() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead title="Decision Center" action="Lihat Semua" />
+      <SectionHead title="Decision Center" action="Lihat Semua" badge={<ScopeNote />} />
 
       <div className="mt-2.5 flex items-center gap-4 border-b border-[#f0f3f6]">
         {TABS.map((t, i) => (

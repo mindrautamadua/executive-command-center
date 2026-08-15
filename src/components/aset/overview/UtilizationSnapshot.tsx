@@ -14,9 +14,23 @@ import {
 import { utilizationSnapshot } from "@/lib/ast-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { toSubholdingId } from "@/lib/subholding";
 
 const num = (v: number) =>
   v.toLocaleString("id-ID", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+
+/**
+ * Pemetaan domain: PKS & refinery/hilir sawit milik PalmCo; PG (gula) milik
+ * SugarCo; pabrik karet & teh milik SupportingCo (PTPN I).
+ */
+const FASILITAS_SUBHOLDING: Record<string, string> = {
+  "PKS (36 unit)": "PalmCo",
+  "PG (17 unit)": "SGN",
+  "Refinery & Hilir (4 unit)": "PalmCo",
+  "Pabrik Karet (9 unit)": "PTPN I",
+  "Pabrik Teh (5 unit)": "PTPN I",
+};
 
 const data = utilizationSnapshot.map((u) => ({
   ...u,
@@ -25,6 +39,11 @@ const data = utilizationSnapshot.map((u) => ({
 
 /** Utilisasi fasilitas olah (PKS, PG, refinery, karet, teh) vs target. */
 export function UtilizationSnapshot() {
+  const { active, isFiltered, def } = useSubholding();
+  // Grafik pembanding lintas jenis pabrik: batang di luar cakupan diredupkan.
+  const dim = (fasilitas: string) =>
+    !isFiltered || toSubholdingId(FASILITAS_SUBHOLDING[fasilitas]) === active ? 1 : 0.25;
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -32,7 +51,9 @@ export function UtilizationSnapshot() {
     >
       <SectionHead title="Utilization Snapshot" action="Lihat Detail" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        Utilisasi Kapasitas Terpasang per Jenis Fasilitas (%) vs Target RKAP
+        {isFiltered
+          ? `Utilisasi Kapasitas Terpasang — fasilitas ${def.label} disorot (%) vs Target RKAP`
+          : "Utilisasi Kapasitas Terpasang per Jenis Fasilitas (%) vs Target RKAP"}
       </p>
 
       <div className="mt-1.5 min-h-0 w-full flex-1">
@@ -65,7 +86,7 @@ export function UtilizationSnapshot() {
                 <Cell
                   key={d.fasilitas}
                   fill={d.utilisasiPct >= d.targetPct ? PALETTE.green : PALETTE.amber}
-                  fillOpacity={0.9}
+                  fillOpacity={0.9 * dim(d.fasilitas)}
                 />
               ))}
               <LabelList
@@ -76,7 +97,11 @@ export function UtilizationSnapshot() {
                 style={{ fontSize: 7.5, fill: "var(--text-1)", fontWeight: 700 }}
               />
             </Bar>
-            <Bar name="Target" dataKey="targetPct" barSize={30} radius={[3, 3, 0, 0]} fill={PALETTE.slate} fillOpacity={0.28} />
+            <Bar name="Target" dataKey="targetPct" barSize={30} radius={[3, 3, 0, 0]} fill={PALETTE.slate}>
+              {data.map((d) => (
+                <Cell key={d.fasilitas} fillOpacity={0.28 * dim(d.fasilitas)} />
+              ))}
+            </Bar>
           </BarChart>
         </ResponsiveContainer>
       </div>

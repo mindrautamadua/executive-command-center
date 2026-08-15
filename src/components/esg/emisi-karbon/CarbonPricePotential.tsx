@@ -1,6 +1,7 @@
 import { Coins } from "lucide-react";
 import { carbonPotential } from "@/lib/esg-data";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const angka = (v: number) => v.toLocaleString("id-ID");
 
@@ -10,7 +11,7 @@ export function CarbonPricePotential() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "180ms" } as React.CSSProperties}
     >
-      <SectionHead title="Potensi Monetisasi Karbon" action="Lihat Detail" />
+      <SectionHead title="Potensi Monetisasi Karbon" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">Kumulatif s.d. 2030 · SPE-GRK &amp; IDXCarbon</p>
 
       <div className="mt-2 flex items-center gap-2.5 rounded-xl bg-ptpn-greenLight px-3 py-2.5">

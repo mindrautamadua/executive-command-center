@@ -1,5 +1,8 @@
+"use client";
+
 import { Users } from "lucide-react";
 import { rater360, signal360 } from "@/lib/kinerja-data";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 /** Multi-rater signal: manager, peer, self, stakeholder (skala 1-5). */
 export function Signal360() {
@@ -7,7 +10,7 @@ export function Signal360() {
     <div className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3">
       <div className="flex items-start justify-between gap-2">
         <div>
-          <h3 className="card-title-navy">360° PERFORMANCE SIGNAL</h3>
+          <h3 className="card-title-navy flex min-w-0 items-center gap-1.5"><span>360° PERFORMANCE SIGNAL</span><ScopeNote /></h3>
           <p className="mt-[3px] text-[9.5px] text-ink-500">
             {signal360.coverage} {signal360.coverageSub}
           </p>

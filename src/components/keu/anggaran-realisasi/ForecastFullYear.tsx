@@ -3,6 +3,7 @@ import { fyForecast, fyForecastNote } from "@/lib/kba-data";
 import { fmtId } from "@/lib/keu-core";
 import { SectionHead } from "@/components/hc/SectionHead";
 import { ToneBadge } from "@/components/shared/ToneBadge";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 export function ForecastFullYear() {
   return (
@@ -10,7 +11,7 @@ export function ForecastFullYear() {
       className="card anim-rise px-4 pb-3.5 pt-3"
       style={{ "--d": "300ms" } as React.CSSProperties}
     >
-      <SectionHead title="Proyeksi Full-Year 2026" />
+      <SectionHead title="Proyeksi Full-Year 2026" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Forecast FY berbasis run-rate YTD + phasing musiman H2
       </p>

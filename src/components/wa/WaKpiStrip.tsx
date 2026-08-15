@@ -1,3 +1,5 @@
+"use client";
+
 import {
   CalendarDays,
   Clock3,
@@ -10,6 +12,7 @@ import {
 } from "lucide-react";
 import { waKpi } from "@/lib/wa-data";
 import { Delta } from "../ui/Delta";
+import { ScopeNote } from "../ui/ScopeNote";
 
 const ICONS = {
   users: Users,
@@ -31,6 +34,11 @@ const TONES: Record<string, string> = {
   amber: "bg-[#fdf3e0] text-[#d98b06]",
 };
 
+/**
+ * Delapan KPI workforce. Seluruhnya agregat grup (headcount 70.142, turnover 6,8%
+ * dst.) tanpa pecahan per subholding di sumber data, sehingga tetap utuh saat
+ * filter aktif dan ditandai <ScopeNote />.
+ */
 export function WaKpiStrip() {
   return (
     <div className="grid grid-cols-8 gap-3">
@@ -51,6 +59,7 @@ export function WaKpiStrip() {
               <span className="min-w-0 text-[9px] font-semibold leading-[1.25] text-ink-500">
                 {k.label}
               </span>
+              <ScopeNote />
             </div>
             <div className="mt-2.5 whitespace-nowrap text-[19px] font-extrabold leading-none tracking-[-0.01em] text-ink-900">
               {k.value}

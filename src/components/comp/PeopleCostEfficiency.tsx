@@ -1,5 +1,8 @@
+"use client";
+
 import { TrendingUp } from "lucide-react";
 import { affordability, costEfficiency } from "@/lib/comp-data";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 /**
  * People Cost Efficiency: kompensasi relatif terhadap revenue/EBITDA/opex
@@ -17,6 +20,7 @@ export function PeopleCostEfficiency() {
         <h3 className="card-title-navy flex items-center gap-1.5">
           <TrendingUp size={13} className="text-[#1b3a6b]" />
           People Cost Efficiency
+          <ScopeNote />
         </h3>
         <span className="shrink-0 rounded px-1.5 py-[2px] text-[8px] font-bold leading-none tone-green">
           Affordable

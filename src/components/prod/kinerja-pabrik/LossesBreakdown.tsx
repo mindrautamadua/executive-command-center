@@ -1,4 +1,8 @@
+"use client";
+
 import { lossesBreakdown, lossesNote } from "@/lib/pabrik-data";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { inScope, ScopeEmpty } from "@/components/ui/CommodityScope";
 import { SectionHead } from "../../hc/SectionHead";
 
 const MAX_PCT = 0.6; // skala bar horizontal
@@ -7,6 +11,10 @@ const num = (v: number) =>
   v.toLocaleString("id-ID", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
 export function LossesBreakdown() {
+  const { active, def } = useSubholding();
+  // Seluruh kartu ini milik PalmCo: losses CPO diukur terhadap TBS sawit.
+  const dalamCakupan = inScope(active, "CPO (sawit)");
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
@@ -17,6 +25,10 @@ export function LossesBreakdown() {
         Aktual vs Norma per Komponen (% terhadap TBS) · Total 1,58% vs norma 1,65%
       </p>
 
+      {!dalamCakupan ? (
+        <ScopeEmpty label={def.fullLabel} />
+      ) : (
+        <>
       <ul className="mt-2 flex min-h-0 flex-1 flex-col justify-between gap-1.5">
         {lossesBreakdown.map((l) => {
           const overNorma = l.aktualPct > l.normaPct;
@@ -51,6 +63,8 @@ export function LossesBreakdown() {
       </ul>
 
       <p className="mt-2 line-clamp-2 text-[8px] leading-snug text-ink-400">{lossesNote}</p>
+        </>
+      )}
     </div>
   );
 }

@@ -13,6 +13,7 @@ import {
 } from "recharts";
 import { hilirRevenueTrend, hilirTargetPath } from "@/lib/hilir-stok-margin-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 import { SectionHead } from "../../hc/SectionHead";
 
 interface TrendDatum {
@@ -43,7 +44,12 @@ export function HilirRevenueTrend() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead title="Porsi Pendapatan Hilir vs Jalur Target" action="Lihat Detail" />
+      {/* Porsi hilir dihitung atas total penjualan grup — tanpa pecahan per subholding. */}
+      <SectionHead
+        title="Porsi Pendapatan Hilir vs Jalur Target"
+        action="Lihat Detail"
+        badge={<ScopeNote />}
+      />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Realisasi Porsi Hilir (% penjualan) &amp; Jalur Target menuju 25% pada 2030
       </p>

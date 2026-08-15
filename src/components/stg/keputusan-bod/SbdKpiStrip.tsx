@@ -1,7 +1,12 @@
+"use client";
+
 import { AlarmClock, Clock3, Gauge, Gavel, Target, type LucideIcon } from "lucide-react";
 import { Delta } from "@/components/ui/Delta";
-import { sbdKpi } from "@/lib/sbd-data";
+import { overdueDetail, sbdKpi } from "@/lib/sbd-data";
 import type { StgKpi } from "@/lib/stg-core";
+import { ScopeNote } from "@/components/ui/ScopeNote";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { filterBySubholding } from "@/lib/subholding";
 
 const ICONS: Partial<Record<StgKpi["icon"], LucideIcon>> = {
   decision: Gavel,
@@ -20,12 +25,25 @@ const TONES: Record<StgKpi["tone"], string> = {
   amber: "bg-[#fdf3e0] text-[#d98b06]",
 };
 
-/** Strip 5 KPI keputusan direksi & dewan komisaris. */
+/**
+ * Strip 5 KPI keputusan direksi & dewan komisaris.
+ * Hanya tile Overdue yang punya rincian per baris (PIC/judul menyebut
+ * subholding) sehingga bisa dihitung ulang; sisanya angka induk YTD tingkat
+ * grup dan ditandai <ScopeNote /> saat filter aktif.
+ */
 export function SbdKpiStrip() {
+  const { active, isFiltered, def } = useSubholding();
+  const overdueRows = filterBySubholding(overdueDetail, active, (d) => `${d.title} ${d.pic}`);
+
   return (
     <div className="grid grid-cols-5 gap-3">
       {sbdKpi.map((k, i) => {
         const Icon = ICONS[k.icon] ?? Gavel;
+        // Tile Overdue mengikuti cakupan; delta bulanan tidak dapat diturunkan
+        // per subholding sehingga disembunyikan saat difilter.
+        const derived = k.icon === "late" && isFiltered;
+        const value = derived ? String(overdueRows.length) : k.value;
+        const sub = derived ? `Cakupan ${def.label}` : k.sub;
         return (
           <div
             key={k.label}
@@ -43,28 +61,29 @@ export function SbdKpiStrip() {
               </span>
             </div>
             <div className="mt-2.5 flex items-baseline gap-[3px] whitespace-nowrap text-[19px] font-extrabold leading-none tracking-[-0.01em] text-ink-900">
-              {k.value}
+              {value}
               {k.valueSuffix && (
                 <span className="text-[10px] font-bold text-ink-400">{k.valueSuffix}</span>
               )}
             </div>
             <div
               className={`mt-[4px] truncate text-[8.5px] ${k.subDanger ? "text-[#ef4444]" : "text-ink-500"}`}
-              title={k.sub}
+              title={sub}
             >
-              {k.sub}
+              {sub}
             </div>
             <div className="mt-2 flex items-center gap-1.5">
-              {k.delta && k.trend ? (
+              {!derived && k.delta && k.trend ? (
                 <>
                   <Delta value={k.delta} trend={k.trend} tone={k.deltaTone} size={10} />
                   <span className="truncate text-[8.5px] text-ink-400">{k.compare}</span>
                 </>
               ) : (
                 <span className="truncate text-[8.5px] font-semibold text-ink-400">
-                  {k.compare}
+                  {derived ? "Dari 3 keputusan overdue grup" : k.compare}
                 </span>
               )}
+              {!derived && <ScopeNote className="ml-auto" />}
             </div>
           </div>
         );

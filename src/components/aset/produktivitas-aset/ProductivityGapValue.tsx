@@ -4,6 +4,7 @@ import {
   productivityGapNote,
 } from "@/lib/apd-data";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const num = (v: number) =>
   v.toLocaleString("id-ID", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -17,7 +18,7 @@ export function ProductivityGapValue() {
       className="card anim-rise flex h-full min-h-0 flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead title="Nilai Gap Produktivitas" action="Lihat Detail" />
+      <SectionHead title="Nilai Gap Produktivitas" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Potensi Nilai Tahunan bila Gap Ditutup ·{" "}
         <span className="font-bold text-ptpn-green">

@@ -1,7 +1,11 @@
+"use client";
+
 import { ChevronRight } from "lucide-react";
 import { cascadeMap, type Rag } from "@/lib/skc-data";
 import { SectionHead } from "@/components/hc/SectionHead";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { filterBySubholding } from "@/lib/subholding";
 
 const RAG_TONE: Record<Rag, BadgeTone> = {
   green: "good",
@@ -17,6 +21,15 @@ const RAG_LABEL: Record<Rag, string> = {
 
 /** Peta cascade KPI holding → target turunan subholding. */
 export function KpiCascadeMap() {
+  const { active, isFiltered, def } = useSubholding();
+  // `entity` pada tiap target turunan adalah dimensi subholding baris cascade.
+  const rows = cascadeMap
+    .map((row) => ({
+      ...row,
+      cascade: filterBySubholding(row.cascade, active, (c) => c.entity),
+    }))
+    .filter((row) => row.cascade.length > 0);
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -24,12 +37,17 @@ export function KpiCascadeMap() {
     >
       <SectionHead title="Peta Cascade KPI Holding → Subholding" action="Lihat Semua Cascade" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        Keterkaitan 5 KPI Group Utama dengan Target Turunan PalmCo, SGN &amp; PTPN I
+        {isFiltered
+          ? `Keterkaitan ${rows.length} KPI Group Utama dengan Target Turunan ${def.label}`
+          : "Keterkaitan 5 KPI Group Utama dengan Target Turunan PalmCo, SGN & PTPN I"}
       </p>
 
       <div className="scroll-thin mt-1.5 min-h-0 flex-1 overflow-y-auto pr-1">
+        {rows.length === 0 && (
+          <p className="text-[9px] text-ink-500">Tidak ada cascade KPI untuk cakupan ini.</p>
+        )}
         <div className="flex flex-col gap-1.5">
-          {cascadeMap.map((row) => (
+          {rows.map((row) => (
             <div
               key={row.groupKpi}
               className="flex items-start gap-2.5 rounded-lg border border-[#eef2f6] bg-[#f5f8fa] px-2.5 py-2"

@@ -1,3 +1,5 @@
+"use client";
+
 import { Gauge, Layers, TrendingDown, Wallet } from "lucide-react";
 import { ksbKpi } from "@/lib/ksb-data";
 import { KeuKpiGrid, type KeuKpiItem } from "../KeuKpiGrid";

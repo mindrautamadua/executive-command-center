@@ -1,5 +1,6 @@
 import { insuranceLines } from "@/lib/risk-data-detail";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 import { ToneBadge } from "@/components/shared/ToneBadge";
 
 const TSI_TOTAL = insuranceLines.reduce((s, l) => s + l.tsiRpT, 0);
@@ -17,7 +18,7 @@ export function InsuranceCoverageMap() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead title="Peta Cakupan Asuransi Korporat" action="Lihat Polis" />
+      <SectionHead title="Peta Cakupan Asuransi Korporat" action="Lihat Polis" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         TSI Rp {rp(TSI_TOTAL)} T · Premi Rp {PREMI_TOTAL} M/tahun · Loss Ratio Blended 42%
       </p>

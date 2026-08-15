@@ -1,7 +1,11 @@
+"use client";
+
 import { CircleAlert, Gauge, type LucideIcon } from "lucide-react";
 import { Delta } from "@/components/ui/Delta";
 import { skcKpi } from "@/lib/skc-data";
 import type { StgKpi } from "@/lib/stg-core";
+import { toSubholdingId } from "@/lib/subholding";
+import { useSubholding } from "@/components/SubholdingProvider";
 
 const ICONS: Partial<Record<StgKpi["icon"], LucideIcon>> = {
   score: Gauge,
@@ -19,6 +23,14 @@ const TONES: Record<StgKpi["tone"], string> = {
 
 /** Strip 5 KPI skor scorecard korporat. */
 export function SkcKpiStrip() {
+  const { active, isFiltered } = useSubholding();
+  // Strip pembanding: tile subholding non-aktif diredupkan agar posisi relatif
+  // antar entitas tetap terbaca; tile Group & KPI Merah selalu penuh.
+  const dim = (label: string) => {
+    const sub = toSubholdingId(label);
+    return !isFiltered || sub === null || sub === active ? 1 : 0.25;
+  };
+
   return (
     <div className="grid grid-cols-5 gap-3">
       {skcKpi.map((k, i) => {
@@ -26,8 +38,8 @@ export function SkcKpiStrip() {
         return (
           <div
             key={k.label}
-            className="card anim-rise px-3 pb-3 pt-3"
-            style={{ "--d": `${40 * i}ms` } as React.CSSProperties}
+            className="card anim-rise px-3 pb-3 pt-3 transition-opacity"
+            style={{ "--d": `${40 * i}ms`, opacity: dim(k.label) } as React.CSSProperties}
           >
             <div className="flex items-center gap-2">
               <span

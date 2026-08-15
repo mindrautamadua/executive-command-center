@@ -1,5 +1,8 @@
+"use client";
+
 import { biogasList } from "@/lib/esg-data";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
 
 const angka = (v: number) => v.toLocaleString("id-ID", { minimumFractionDigits: 1 });
 
@@ -7,6 +10,11 @@ const totalMw = biogasList.reduce((s, r) => s + r.kapasitasMw, 0);
 const maxMw = Math.max(...biogasList.map((r) => r.kapasitasMw));
 
 export function BiogasList() {
+  const { active, def } = useSubholding();
+  // Biogas dibangun dari POME (limbah cair PKS) di Regional 1–7 — seluruhnya
+  // aset sawit, jadi kartu ini berada di cakupan PalmCo.
+  const outOfScope = active !== "all" && active !== "palmco";
+
   return (
     <div
       className="card anim-rise flex h-full min-h-0 flex-col px-4 pb-2.5 pt-3"
@@ -14,10 +22,15 @@ export function BiogasList() {
     >
       <SectionHead title="Sebaran Biogas per Regional" action="Lihat Detail" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        21 Beroperasi · 9 Konstruksi · Total {angka(totalMw)} MW
+        {outOfScope
+          ? `Biogas POME hanya di unit PKS PalmCo — di luar cakupan ${def.label}`
+          : `21 Beroperasi · 9 Konstruksi · Total ${angka(totalMw)} MW`}
       </p>
 
-      <div className="scroll-thin mt-2 flex min-h-0 flex-1 flex-col gap-1.5 overflow-y-auto pr-1">
+      <div
+        className="scroll-thin mt-2 flex min-h-0 flex-1 flex-col gap-1.5 overflow-y-auto pr-1 transition-opacity"
+        style={{ opacity: outOfScope ? 0.25 : 1 }}
+      >
         {biogasList.map((r) => (
           <div key={r.regional} className="rounded-xl border border-[#eef2f6] px-2.5 py-[7px]">
             <div className="flex items-center justify-between gap-2">
@@ -42,7 +55,9 @@ export function BiogasList() {
       </div>
 
       <p className="pt-1.5 text-[8px] leading-snug text-ink-400">
-        Regional 3 (Riau) memiliki 3 unit konstruksi terbanyak — fokus pengawasan COD.
+        {outOfScope
+          ? "Regional 1–7 adalah pecahan internal PalmCo; program biogas belum berjalan di subholding ini."
+          : "Regional 3 (Riau) memiliki 3 unit konstruksi terbanyak — fokus pengawasan COD."}
       </p>
     </div>
   );

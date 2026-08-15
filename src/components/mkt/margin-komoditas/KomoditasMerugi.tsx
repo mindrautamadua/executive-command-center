@@ -1,13 +1,25 @@
+"use client";
+
 import { Sparkles, TriangleAlert } from "lucide-react";
 import { komoditasMerugi } from "@/lib/hilir-stok-margin-data";
 import { ToneBadge } from "@/components/shared/ToneBadge";
+import { filterBySubholding } from "@/lib/subholding";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { ScopeEmpty, commodityScope } from "@/components/ui/CommodityScope";
 import { SectionHead } from "../../hc/SectionHead";
 
 const pct = (v: number) =>
   `${v < 0 ? "−" : ""}${Math.abs(v).toLocaleString("id-ID", { minimumFractionDigits: 1 })}%`;
 
-/** Diagnosis komoditas merugi/margin tipis (teh & karet) + opsi penanganan. */
+/**
+ * Diagnosis komoditas merugi/margin tipis (teh & karet) + opsi penanganan.
+ * Teh & karet keduanya milik SupportingCo (PTPN I), sehingga pada cakupan
+ * PalmCo/SugarCo tidak ada komoditas merugi yang tersisa.
+ */
 export function KomoditasMerugi() {
+  const { active, def } = useSubholding();
+  const rows = filterBySubholding(komoditasMerugi, active, (k) => commodityScope(k.komoditas));
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
@@ -19,8 +31,11 @@ export function KomoditasMerugi() {
         tipis)
       </p>
 
+      {rows.length === 0 ? (
+        <ScopeEmpty label={def.fullLabel} />
+      ) : (
       <div className="mt-2 grid min-h-0 flex-1 grid-cols-2 gap-3">
-        {komoditasMerugi.map((k) => (
+        {rows.map((k) => (
           <div
             key={k.komoditas}
             className="flex min-w-0 flex-col rounded-lg border border-[#eef2f6] bg-[#fbfcfd] px-3 py-2.5"
@@ -81,6 +96,7 @@ export function KomoditasMerugi() {
           </div>
         ))}
       </div>
+      )}
     </div>
   );
 }

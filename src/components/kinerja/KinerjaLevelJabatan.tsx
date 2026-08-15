@@ -1,5 +1,8 @@
+"use client";
+
 import { ChevronRight } from "lucide-react";
 import { levelJabatan, levelLegend } from "@/lib/kinerja-data";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 export function KinerjaLevelJabatan() {
   return (
@@ -7,7 +10,7 @@ export function KinerjaLevelJabatan() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <h3 className="card-title-navy">KINERJA BERDASARKAN LEVEL JABATAN</h3>
+      <h3 className="card-title-navy flex min-w-0 items-center gap-1.5"><span>KINERJA BERDASARKAN LEVEL JABATAN</span><ScopeNote /></h3>
       <p className="mt-[3px] text-[9.5px] text-ink-500">Distribusi Kategori per Level</p>
 
       <div className="mt-2 flex items-center gap-3">

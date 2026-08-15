@@ -1,5 +1,9 @@
+"use client";
+
 import { Building2, Factory, Gauge, Leaf, Percent, Sprout } from "lucide-react";
 import { segmentFinancials, fmtId, fmtRpT } from "@/lib/keu-core";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { filterBySubholding } from "@/lib/subholding";
 import { KeuKpiGrid, type KeuKpiItem } from "../KeuKpiGrid";
 
 const palmco = segmentFinancials[0];
@@ -76,5 +80,10 @@ const ITEMS: KeuKpiItem[] = [
 ];
 
 export function KpsKpiStrip() {
-  return <KeuKpiGrid items={ITEMS} cols={6} />;
+  const { active, isFiltered } = useSubholding();
+  // Label KPI menyebut subholding (mis. "EBITDA SGN"); KPI tingkat grup
+  // seperti "EBITDA Grup" dan "Spread ROIC" berlaku untuk semua cakupan.
+  const items = filterBySubholding(ITEMS, active, (k) => k.label);
+
+  return <KeuKpiGrid items={items} cols={isFiltered ? 4 : 6} />;
 }

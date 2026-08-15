@@ -1,5 +1,9 @@
+"use client";
+
 import { unitProduktivitas } from "@/lib/produktivitas-data";
 import { PALETTE, SEMANTIC } from "@/lib/chart-palette";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { orgDim } from "../ui/OrgScope";
 
 const INDEX_MAX = 130;
 
@@ -11,13 +15,22 @@ function toneIndex(index: number) {
 }
 
 export function ProduktivitasUnitKerja() {
+  const { active, isFiltered, def } = useSubholding();
+  // Tabel liga antar entitas: baris di luar subholding aktif diredupkan (bukan
+  // dibuang) agar posisi relatif dan gap produktivitasnya tetap terbaca; baris
+  // total grup selalu penuh sebagai garis acuan.
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
       <h3 className="card-title-navy">2. Produktivitas per Unit Kerja</h3>
-      <p className="mt-[3px] text-[9.5px] text-ink-500">Perbandingan Antar Sub Holding / Regional</p>
+      <p className="mt-[3px] text-[9.5px] text-ink-500">
+        {isFiltered
+          ? `Perbandingan Antar Sub Holding / Regional — ${def.label} disorot`
+          : "Perbandingan Antar Sub Holding / Regional"}
+      </p>
 
       <div className="mt-2 min-h-0 flex-1">
         <table className="w-full border-collapse">
@@ -39,9 +52,10 @@ export function ProduktivitasUnitKerja() {
             {unitProduktivitas.map((u) => (
               <tr
                 key={u.unit}
-                className={`border-b border-[#f5f8fa] transition-colors last:border-0 hover:bg-[#f5f8fa] ${
+                className={`border-b border-[#f5f8fa] transition-[background-color,opacity] last:border-0 hover:bg-[#f5f8fa] ${
                   u.total ? "bg-[#f7f9fb]" : ""
                 }`}
+                style={{ opacity: orgDim(active, u.unit, u.total) }}
               >
                 <td
                   className={`whitespace-nowrap py-[6px] text-[9.5px] text-ink-900 ${

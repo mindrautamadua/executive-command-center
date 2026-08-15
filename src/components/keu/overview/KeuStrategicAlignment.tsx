@@ -2,6 +2,7 @@ import { keuAlignment, type KeuAlignmentTarget } from "@/lib/keu-data";
 import { fmtId } from "@/lib/keu-core";
 import { SectionHead } from "@/components/hc/SectionHead";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const FILL: Record<KeuAlignmentTarget["tone"], string> = {
   good: "bg-ptpn-green",
@@ -19,7 +20,7 @@ const BADGE: Record<KeuAlignmentTarget["tone"], { label: string; tone: BadgeTone
 export function KeuStrategicAlignment() {
   return (
     <div className="card anim-rise px-4 pb-4 pt-3" style={{ "--d": "60ms" } as React.CSSProperties}>
-      <SectionHead title="Strategic Alignment" action="Lihat Detail" />
+      <SectionHead title="Strategic Alignment" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">Realisasi YTD vs Target RKAP 2026</p>
 
       <div className="mt-3 flex flex-col gap-3">

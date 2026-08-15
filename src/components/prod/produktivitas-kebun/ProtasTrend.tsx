@@ -18,11 +18,17 @@ import {
 } from "@/lib/produksi-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "../../hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { inScope, ScopeEmpty } from "@/components/ui/CommodityScope";
 
 const num = (v: number) =>
   v.toLocaleString("id-ID", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 
 export function ProtasTrend() {
+  const { active, def } = useSubholding();
+  // Protas = yield TBS kebun sawit -> seluruh kartu milik PalmCo.
+  const milikScope = inScope(active, "TBS sawit kebun");
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -31,6 +37,10 @@ export function ProtasTrend() {
       <SectionHead title="Protas Trend 5 Tahun" action="Lihat Detail" />
       <p className="mt-[3px] text-[9px] text-ink-500">Yield TBS Grup 2022–2026 (t/ha)</p>
 
+      {!milikScope && <ScopeEmpty label={def.fullLabel} />}
+
+      {milikScope && (
+        <>
       <div className="mt-1.5 min-h-0 w-full flex-1">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={protasTrend} margin={{ top: 16, right: 14, bottom: 0, left: -24 }}>
@@ -87,6 +97,8 @@ export function ProtasTrend() {
       </div>
 
       <p className="mt-1 truncate text-[8px] text-ink-400">{protasNote}</p>
+        </>
+      )}
     </div>
   );
 }

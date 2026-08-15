@@ -1,3 +1,5 @@
+"use client";
+
 import { Banknote, Gauge, Landmark, Percent, Scale, Wallet } from "lucide-react";
 import { balanceSummary, leverageTrend } from "@/lib/knl-data";
 import { fmtId, fmtRpT } from "@/lib/keu-core";

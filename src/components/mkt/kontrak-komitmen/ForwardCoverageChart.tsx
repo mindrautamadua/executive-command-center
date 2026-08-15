@@ -12,6 +12,7 @@ import {
 } from "recharts";
 import { forwardCoverage, forwardCoverageSummary } from "@/lib/kontrak-buyer-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 import { SectionHead } from "@/components/hc/SectionHead";
 
 function LegendDot({ color, label }: { color: string; label: string }) {
@@ -30,7 +31,8 @@ export function ForwardCoverageChart() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead title="Forward Coverage H2 2026" action="Lihat Detail" />
+      {/* Posisi forward dikelola komite pemasaran grup — tanpa pecahan subholding. */}
+      <SectionHead title="Forward Coverage H2 2026" action="Lihat Detail" badge={<ScopeNote />} />
       <div className="mt-[3px] flex items-center justify-between gap-2">
         <p className="text-[9px] text-ink-500">
           Volume CPO committed vs uncommitted per bulan (rb ton) vs proyeksi produksi

@@ -1,6 +1,11 @@
+"use client";
+
 import { Candy, Droplets, Gauge, Sprout, Trees, Wallet } from "lucide-react";
 import { prodKpi } from "@/lib/produksi-data";
 import { Delta } from "@/components/ui/Delta";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { filterBySubholding } from "@/lib/subholding";
+import { commodityScope } from "@/components/ui/CommodityScope";
 
 const ICONS = {
   tbs: Sprout,
@@ -21,9 +26,17 @@ const TONES: Record<string, string> = {
 };
 
 export function ProdKpiStrip() {
+  const { active } = useSubholding();
+
+  // Tiap KPI melekat pada satu komoditas: TBS/CPO/OER/HPP CPO = PalmCo,
+  // Gula = SugarCo, Karet = SupportingCo. KPI tanpa komoditas tetap tampil.
+  const items = filterBySubholding(prodKpi, active, (k) =>
+    commodityScope(`${k.label} ${k.metric}`),
+  );
+
   return (
     <div className="grid grid-cols-6 gap-3">
-      {prodKpi.map((k, i) => {
+      {items.map((k, i) => {
         const Icon = ICONS[k.icon];
         return (
           <div

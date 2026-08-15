@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { realisasiKenaikan } from "@/lib/comp-data";
 import { CountUp } from "../ui/CountUp";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const R = 58;
 const CX = 72;
@@ -65,7 +66,7 @@ export function RealisasiKenaikanGaji() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "400ms" } as React.CSSProperties}
     >
-      <h3 className="card-title-navy">Realisasi Kenaikan Gaji</h3>
+      <h3 className="card-title-navy flex min-w-0 items-center gap-1.5"><span>Realisasi Kenaikan Gaji</span><ScopeNote /></h3>
       <p className="mt-[3px] text-[9.5px] text-ink-500">Status Kenaikan Gaji Tahunan 2026</p>
 
       <div className="flex min-h-0 flex-1 items-center gap-2">

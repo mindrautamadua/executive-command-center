@@ -1,5 +1,6 @@
 import { Minus, TrendingDown, TrendingUp } from "lucide-react";
 import { topBuyers, topBuyersLainnya, type BuyerRow } from "@/lib/kontrak-buyer-data";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 import { SectionHead } from "@/components/hc/SectionHead";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
 
@@ -23,7 +24,8 @@ export function TopBuyerTable() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead title="Top 10 Buyer" action="Lihat Detail" />
+      {/* Baris buyer tidak menyimpan dimensi komoditas — angka konsolidasi grup. */}
+      <SectionHead title="Top 10 Buyer" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Serapan volume &amp; nilai per buyer — baris bertanda = top-5 (konsentrasi)
       </p>

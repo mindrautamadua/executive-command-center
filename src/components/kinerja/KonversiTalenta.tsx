@@ -1,5 +1,8 @@
+"use client";
+
 import { GitBranch } from "lucide-react";
 import { funnelTalenta } from "@/lib/kinerja-data";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const TONE = {
   green: { bar: "bg-gradient-to-r from-[#7ed957] to-[#22a45d]", text: "text-ptpn-green" },
@@ -17,7 +20,7 @@ export function KonversiTalenta() {
     <div className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3">
       <div className="flex items-start justify-between gap-2">
         <div>
-          <h3 className="card-title-navy">HIGH PERFORMER → TALENT CONVERSION</h3>
+          <h3 className="card-title-navy flex min-w-0 items-center gap-1.5"><span>HIGH PERFORMER → TALENT CONVERSION</span><ScopeNote /></h3>
           <p className="mt-[3px] text-[9.5px] text-ink-500">
             Alur Performance ke Succession Pipeline
           </p>

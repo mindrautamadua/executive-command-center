@@ -1,6 +1,7 @@
 import { ArrowLeftRight } from "lucide-react";
 import { intersegmentNotes } from "@/lib/kps-data";
 import { SectionHead } from "../../hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 /** Kartu info transaksi & alokasi antar-segmen (eliminasi konsolidasi). */
 export function IntersegmentFlow() {
@@ -9,7 +10,7 @@ export function IntersegmentFlow() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "300ms" } as React.CSSProperties}
     >
-      <SectionHead title="Catatan Antar-Segmen" />
+      <SectionHead title="Catatan Antar-Segmen" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Eliminasi, alokasi holding &amp; pendanaan antar-perusahaan
       </p>

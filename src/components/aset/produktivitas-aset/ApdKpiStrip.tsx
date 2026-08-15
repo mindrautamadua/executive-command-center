@@ -2,6 +2,7 @@ import { Briefcase, Factory, FileText, ShieldAlert, Sprout, Wallet } from "lucid
 import { apdKpi } from "@/lib/apd-data";
 import type { AstKpi } from "@/lib/ast-core";
 import { Delta } from "@/components/ui/Delta";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const ICONS: Record<AstKpi["icon"], typeof Sprout> = {
   land: Sprout,
@@ -23,7 +24,7 @@ const TONES: Record<AstKpi["tone"], string> = {
 
 /** KPI strip halaman Produktivitas Aset (6 kartu). */
 export function ApdKpiStrip() {
-  return (
+  const grid = (
     <div className="grid grid-cols-6 gap-3">
       {apdKpi.map((k, i) => {
         const Icon = ICONS[k.icon];
@@ -56,6 +57,14 @@ export function ApdKpiStrip() {
           </div>
         );
       })}
+    </div>
+  );
+
+  return (
+    <div className="flex flex-col gap-1.5">
+      {/* Yield, OER, rendemen & ROA di sini adalah rata-rata konsolidasi grup. */}
+      <ScopeNote className="self-start" />
+      {grid}
     </div>
   );
 }

@@ -27,6 +27,7 @@ export function KpiCard({
   delta,
   compare,
   info,
+  badge,
   spark,
   chart,
   delay = 0,
@@ -40,6 +41,8 @@ export function KpiCard({
   compare?: string;
   /** Definisi/metodologi metrik — tampil sebagai tooltip pada ikon ⓘ. */
   info?: string;
+  /** Penanda kecil di samping label, mis. <ScopeNote /> untuk KPI konsolidasi grup. */
+  badge?: ReactNode;
   spark?: { data: number[]; color: string };
   chart?: ReactNode;
   delay?: number;
@@ -61,6 +64,7 @@ export function KpiCard({
         <span className="truncate text-[10px] font-semibold uppercase tracking-[0.05em] text-ink-500">
           {label}
         </span>
+        {badge}
         {info && (
           <span title={info} className="ml-auto shrink-0 cursor-help text-ink-400">
             <Info size={11} strokeWidth={2} />

@@ -53,6 +53,7 @@ export default function WorkforceAnalyticsPage() {
               subtitle="Distribusi Headcount per Holding/Sub Holding"
               data={headcountByOrg}
               delay={120}
+              orgDimension
             />
             <DonutBreakdown
               title="Headcount by Employment Type"

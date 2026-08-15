@@ -12,6 +12,8 @@ import {
 } from "recharts";
 import { hppTrend, hppTrendNote } from "@/lib/biaya-opex-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { inScope, ScopeEmpty } from "@/components/ui/CommodityScope";
 import { SectionHead } from "../../hc/SectionHead";
 
 // Jaws: band area = gap antara HPP dan harga jual (margin kas).
@@ -20,6 +22,10 @@ const data = hppTrend.map((p) => ({ ...p, band: [p.hppRpKg, p.hargaJualRpKg] }))
 const rp = (v: number) => `Rp ${v.toLocaleString("id-ID")}`;
 
 export function HppTrend() {
+  const { active, def } = useSubholding();
+  // HPP & harga jual di kartu ini keduanya CPO — milik PalmCo.
+  const dalamCakupan = inScope(active, "HPP CPO (sawit)");
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -30,6 +36,10 @@ export function HppTrend() {
         HPP CPO vs Harga Jual Realisasi 12 Bulan (Rp/kg) · area = margin kas
       </p>
 
+      {!dalamCakupan ? (
+        <ScopeEmpty label={def.fullLabel} />
+      ) : (
+        <>
       <div className="mt-1.5 min-h-0 w-full flex-1">
         <ResponsiveContainer width="100%" height="100%">
           <ComposedChart data={data} margin={{ top: 10, right: 10, bottom: 0, left: -8 }}>
@@ -96,6 +106,8 @@ export function HppTrend() {
         </span>
         <span className="min-w-0 truncate text-[8px] text-ink-400">{hppTrendNote}</span>
       </div>
+        </>
+      )}
     </div>
   );
 }

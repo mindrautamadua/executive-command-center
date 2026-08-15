@@ -13,6 +13,7 @@ import {
 import { solarRollout } from "@/lib/esg-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const angka = (v: number) => v.toLocaleString("id-ID", { minimumFractionDigits: 1 });
 
@@ -22,7 +23,7 @@ export function SolarRollout() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "180ms" } as React.CSSProperties}
     >
-      <SectionHead title="Rollout Solar PV Kumulatif" action="Lihat Detail" />
+      <SectionHead title="Rollout Solar PV Kumulatif" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Kapasitas Terpasang (MWp) vs Jalur Target 30 MWp pada 2028
       </p>

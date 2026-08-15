@@ -14,6 +14,7 @@ import {
 import { macCurve } from "@/lib/esg-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const angka = (v: number) => v.toLocaleString("id-ID");
 
@@ -26,7 +27,7 @@ export function MacCurve() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "150ms" } as React.CSSProperties}
     >
-      <SectionHead title="Marginal Abatement Cost per Lever" action="Lihat Detail" />
+      <SectionHead title="Marginal Abatement Cost per Lever" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Biaya Abatement (Rp ribu/tCO2e) · Diurut dari Termurah
       </p>

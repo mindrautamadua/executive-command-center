@@ -872,6 +872,142 @@ body {
 [data-theme="dark"] .delta-bad  { color: #f87171; }
 
 /* ==========================================================================
+   HASIL AUDIT DARK MODE — sapuan menyeluruh
+   Diambil dari selisih antara seluruh utility hex arbitrer yang dipakai di
+   src/components dan selektor yang sudah terpetakan di atas. Warna jenuh
+   (mis. bg-[#ef4444], bg-[#f5a524], bg-[#3b7ded]) sengaja TIDAK dipetakan —
+   itu warna data/status yang harus punya arti sama di terang maupun gelap.
+   Yang dipetakan hanya tint pucat, garis rambut, dan teks gelap yang jadi
+   salah kontras di atas latar gelap.
+   ========================================================================== */
+
+/* --- garis rambut & permukaan netral -------------------------------------- */
+[data-theme="dark"] .border-\[\#f3f6f9\] {
+  border-color: var(--border-hair);
+}
+[data-theme="dark"] .bg-\[\#fafcfe\] {
+  background-color: var(--surface-2);
+}
+[data-theme="dark"] .bg-\[\#e8edf2\] {
+  background-color: var(--surface-3);
+}
+/* Garis grid/konektor tipis yang digambar sebagai div 1px, bukan border. */
+[data-theme="dark"] .bg-\[\#dbe3ec\],
+[data-theme="dark"] .bg-\[\#d9e4f5\] {
+  background-color: var(--border-line);
+}
+/* Isi bar "belum ada data"/"rencana" — perlu tetap terbaca di kartu gelap. */
+[data-theme="dark"] .bg-\[\#cbd5e1\] {
+  background-color: rgba(148, 163, 184, 0.45);
+}
+[data-theme="dark"] .hover\:bg-\[\#eef4f0\]:hover {
+  background-color: var(--surface-3);
+}
+[data-theme="dark"] .bg-\[\#e8eef5\] {
+  background-color: rgba(148, 163, 184, 0.16);
+}
+[data-theme="dark"] .text-\[\#5b7391\] {
+  color: var(--text-3);
+}
+[data-theme="dark"] .divide-\[\#f0f3f6\] > :not([hidden]) ~ :not([hidden]) {
+  border-color: var(--border-hair);
+}
+/* Ring hover sel kalender kehadiran — navy pekat tak terlihat di gelap. */
+[data-theme="dark"] .hover\:ring-\[\#1b3a6b\]:hover {
+  --tw-ring-color: var(--text-navy);
+}
+
+/* --- tint hijau ----------------------------------------------------------- */
+[data-theme="dark"] .bg-\[\#eaf7ef\],
+[data-theme="dark"] .bg-\[\#dcf1e6\] {
+  background-color: rgba(62, 207, 131, 0.14);
+}
+[data-theme="dark"] .bg-\[\#f7fbf8\],
+[data-theme="dark"] .bg-\[\#f4faf3\] {
+  background-color: rgba(62, 207, 131, 0.1);
+}
+[data-theme="dark"] .border-\[\#e3f0e6\],
+[data-theme="dark"] .border-\[\#d9ead4\] {
+  border-color: rgba(62, 207, 131, 0.3);
+}
+[data-theme="dark"] .text-\[\#1a9c5b\],
+[data-theme="dark"] .text-\[\#22a45d\] {
+  color: #4ade80;
+}
+
+/* --- tint biru ------------------------------------------------------------ */
+[data-theme="dark"] .bg-\[\#f5f8fd\],
+[data-theme="dark"] .bg-\[\#f7faff\],
+[data-theme="dark"] .bg-\[\#f6f9fe\] {
+  background-color: rgba(111, 164, 247, 0.1);
+}
+/* Pita rentang outcome — isi biru pucat, harus tetap terlihat di gelap. */
+[data-theme="dark"] .bg-\[\#aecdf8\] {
+  background-color: rgba(111, 164, 247, 0.35);
+}
+[data-theme="dark"] .border-\[\#d3e2f8\],
+[data-theme="dark"] .border-\[\#d9e6fb\],
+[data-theme="dark"] .border-\[\#d9e4f5\] {
+  border-color: rgba(111, 164, 247, 0.3);
+}
+[data-theme="dark"] .hover\:border-\[\#2f6fe4\]:hover {
+  border-color: var(--text-blue);
+}
+[data-theme="dark"] .text-\[\#1d5bc4\],
+[data-theme="dark"] .text-\[\#1d4ed8\],
+[data-theme="dark"] .text-\[\#2456a6\],
+[data-theme="dark"] .text-\[\#2f9bf5\] {
+  color: var(--text-blue);
+}
+/* Bar navy pekat (value bridge, outcome range) hilang di atas kartu gelap. */
+[data-theme="dark"] .bg-\[\#1b3a6b\] {
+  background-color: var(--text-navy);
+}
+
+/* --- tint merah ----------------------------------------------------------- */
+[data-theme="dark"] .bg-\[\#fdf3f3\],
+[data-theme="dark"] .bg-\[\#fef7f7\] {
+  background-color: rgba(248, 113, 113, 0.1);
+}
+[data-theme="dark"] .border-\[\#f5d9d9\],
+[data-theme="dark"] .border-\[\#fbe3e3\],
+[data-theme="dark"] .border-\[\#f8d7d7\],
+[data-theme="dark"] .border-\[\#f5b5b5\] {
+  border-color: rgba(248, 113, 113, 0.3);
+}
+[data-theme="dark"] .text-\[\#b91c1c\] {
+  color: #f87171;
+}
+[data-theme="dark"] .text-\[\#c2402a\] {
+  color: #fb7185;
+}
+
+/* --- tint amber ----------------------------------------------------------- */
+[data-theme="dark"] .bg-\[\#fdf0e8\] {
+  background-color: rgba(245, 165, 36, 0.12);
+}
+[data-theme="dark"] .border-\[\#f5d9a8\] {
+  border-color: rgba(245, 165, 36, 0.3);
+}
+[data-theme="dark"] .text-\[\#a26a05\],
+[data-theme="dark"] .text-\[\#8a6100\],
+[data-theme="dark"] .text-\[\#854d0e\],
+[data-theme="dark"] .text-\[\#f59e0b\] {
+  color: #fbbf24;
+}
+[data-theme="dark"] .text-\[\#f0662d\] {
+  color: #fb923c;
+}
+
+/* --- tint ungu ------------------------------------------------------------ */
+[data-theme="dark"] .text-\[\#7c3aed\] {
+  color: #a78bfa;
+}
+
+/* Warna merek media sosial (#1877f2 Facebook, #0a66c2 LinkedIn, #e4405f
+   Instagram) sengaja dibiarkan — identitas merek, bukan token tema. */
+
+/* ==========================================================================
    SISTEM MOTION
    anim-rise: entrance kartu (fade + naik), stagger via --d (animation-delay).
    anim-grow-x: bar tumbuh dari kiri (pasang pada elemen fill bar).

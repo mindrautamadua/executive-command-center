@@ -1,13 +1,23 @@
+"use client";
+
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { unitOrganisasi } from "@/lib/kinerja-data";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { orgDim } from "../ui/OrgScope";
 
 export function KinerjaUnitOrganisasi() {
+  const { active, isFiltered, def } = useSubholding();
+  // Ranking pembanding antar unit: bar di luar subholding aktif diredupkan agar
+  // posisi unit yang dilihat terhadap unit lain tetap terbaca.
+
   return (
     <div className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3">
       <div className="flex items-start justify-between gap-2">
         <div>
           <h3 className="card-title-navy">KINERJA PER UNIT ORGANISASI</h3>
-          <p className="mt-[3px] text-[9.5px] text-ink-500">Rata-rata Overall Score</p>
+          <p className="mt-[3px] text-[9.5px] text-ink-500">
+            {isFiltered ? `Rata-rata Overall Score — unit ${def.label} disorot` : "Rata-rata Overall Score"}
+          </p>
         </div>
         <button className="select-chip whitespace-nowrap px-2.5 py-[5px] text-[9.5px] transition-colors hover:bg-[#f7f9fb]">
           Top 10 Unit <ChevronDown size={11} />
@@ -18,7 +28,8 @@ export function KinerjaUnitOrganisasi() {
         {unitOrganisasi.map((u, i) => (
           <div
             key={u.nama}
-            className="flex items-center gap-1.5"
+            className="flex items-center gap-1.5 transition-opacity"
+            style={{ opacity: orgDim(active, u.nama) }}
             title={`${u.nama}: ${u.score}`}
           >
             <span className="w-[16px] shrink-0 text-right text-[9px] text-ink-400">

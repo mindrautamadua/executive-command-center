@@ -1,12 +1,20 @@
+"use client";
+
 import { segmentPnlMatrix } from "@/lib/kps-data";
 import { fmtId } from "@/lib/keu-core";
 import { ToneBadge } from "@/components/shared/ToneBadge";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { filterBySubholding } from "@/lib/subholding";
 import { SectionHead } from "../../hc/SectionHead";
 
 const TONE_LABEL = { good: "Sehat", warn: "Membaik", bad: "Tertekan" } as const;
 
 /** Matriks P&L segmen: revenue, EBITDA, margin, ROIC + catatan naratif. */
 export function SegmentPnlMatrix() {
+  const { active, isFiltered, def } = useSubholding();
+  // `segment` (PalmCo / SGN / PTPN I) adalah dimensi subholding baris ini.
+  const rows = filterBySubholding(segmentPnlMatrix, active, (s) => s.segment);
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
@@ -14,7 +22,9 @@ export function SegmentPnlMatrix() {
     >
       <SectionHead title="Segment P&L Matrix" action="Lihat Detail" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        Pendapatan · EBITDA · Margin · ROIC per Subholding (YTD)
+        {isFiltered
+          ? `Pendapatan · EBITDA · Margin · ROIC ${def.label} (YTD)`
+          : "Pendapatan · EBITDA · Margin · ROIC per Subholding (YTD)"}
       </p>
 
       <div className="mt-2 min-h-0 flex-1">
@@ -43,7 +53,7 @@ export function SegmentPnlMatrix() {
             </tr>
           </thead>
           <tbody>
-            {segmentPnlMatrix.map((s) => (
+            {rows.map((s) => (
               <tr
                 key={s.segment}
                 className="border-b border-[#f5f8fa] transition-colors last:border-0 hover:bg-[#f5f8fa]"
@@ -81,7 +91,9 @@ export function SegmentPnlMatrix() {
       </div>
 
       <p className="mt-1 border-t border-[#f5f8fa] pt-1.5 text-[8.5px] leading-snug text-ink-500">
-        ROIC annualized; hurdle rate grup 9,5% — hanya PalmCo yang berada di atas biaya modal.
+        {isFiltered
+          ? `Baris ${def.label} dari matriks 3 subholding; ROIC annualized vs hurdle rate grup 9,5%.`
+          : "ROIC annualized; hurdle rate grup 9,5% — hanya PalmCo yang berada di atas biaya modal."}
       </p>
     </div>
   );

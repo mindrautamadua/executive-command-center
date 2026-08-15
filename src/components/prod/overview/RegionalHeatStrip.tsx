@@ -1,5 +1,9 @@
+"use client";
+
 import { regionalHeat } from "@/lib/produksi-data";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { inScope, ScopeEmpty } from "@/components/ui/CommodityScope";
 
 /** Klasifikasi capaian: ≥100% hijau, 98–100% amber, <98% merah. */
 const heatCls = (pct: number) =>
@@ -16,11 +20,19 @@ const pctLabel = (v: number) => `${v.toLocaleString("id-ID", { minimumFractionDi
 
 /** Heat strip capaian produksi TBS 7 regional PalmCo vs target YTD. */
 export function RegionalHeatStrip() {
+  const { active, def } = useSubholding();
+  // Regional 1-7 adalah regional kebun sawit -> seluruh kartu milik PalmCo.
+  const milikScope = inScope(active, "Regional 1 TBS sawit");
+
   return (
     <div className="card anim-rise px-4 pb-3.5 pt-3" style={{ "--d": "160ms" } as React.CSSProperties}>
       <SectionHead title="Regional Heat Strip" action="Lihat Detail" />
       <p className="mt-[3px] text-[9px] text-ink-500">Capaian TBS vs Target YTD — 7 Regional</p>
 
+      {!milikScope && <ScopeEmpty label={def.fullLabel} />}
+
+      {milikScope && (
+        <>
       <div className="mt-2.5 flex flex-col gap-[6px]">
         {regionalHeat.map((r) => (
           <div
@@ -54,6 +66,8 @@ export function RegionalHeatStrip() {
           <span className="h-[7px] w-[7px] rounded-full bg-[#ef4444]" /> &lt;98%
         </span>
       </div>
+        </>
+      )}
     </div>
   );
 }

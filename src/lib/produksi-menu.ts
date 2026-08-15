@@ -22,16 +22,16 @@ export const PROD_MENU_SECTIONS: DimensionMenuSection[] = [
     items: [
       { label: "Produksi Komoditas", icon: Sprout, href: "/produksi-operasi/produksi-komoditas" },
       { label: "Kinerja Pabrik", icon: Factory, href: "/produksi-operasi/kinerja-pabrik" },
-      { label: "Produktivitas Kebun", icon: LandPlot, href: "/produksi-operasi/produktivitas-kebun" },
-      { label: "Biaya Produksi", icon: Calculator, href: "/produksi-operasi/biaya-produksi" },
+      { label: "Produktivitas Kebun", icon: LandPlot, href: "/produksi-operasi/produktivitas-kebun", owner: "palmco" },
+      { label: "Biaya Produksi", icon: Calculator, href: "/produksi-operasi/biaya-produksi", owner: "palmco" },
     ],
   },
   {
     title: "Agronomi & Kemitraan",
     items: [
-      { label: "Agronomi & Replanting", icon: Shovel, href: "/produksi-operasi/agronomi-replanting" },
-      { label: "Plasma & Kemitraan", icon: Handshake, href: "/produksi-operasi/plasma-kemitraan" },
-      { label: "Panen & Logistik", icon: Truck, href: "/produksi-operasi/panen-logistik" },
+      { label: "Agronomi & Replanting", icon: Shovel, href: "/produksi-operasi/agronomi-replanting", owner: "palmco" },
+      { label: "Plasma & Kemitraan", icon: Handshake, href: "/produksi-operasi/plasma-kemitraan", owner: "palmco" },
+      { label: "Panen & Logistik", icon: Truck, href: "/produksi-operasi/panen-logistik", owner: "palmco" },
     ],
   },
   {

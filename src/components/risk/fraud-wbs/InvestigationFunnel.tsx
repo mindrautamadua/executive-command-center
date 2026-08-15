@@ -1,5 +1,6 @@
 import { investigationFunnel } from "@/lib/risk-data-detail";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 import { PALETTE } from "@/lib/chart-palette";
 
 const START = investigationFunnel[0].count;
@@ -13,7 +14,7 @@ export function InvestigationFunnel() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead title="Funnel Investigasi" />
+      <SectionHead title="Funnel Investigasi" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Konversi Laporan Masuk hingga Sanksi / Penyerahan ke APH
       </p>

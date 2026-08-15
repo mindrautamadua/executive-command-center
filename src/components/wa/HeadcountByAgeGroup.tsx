@@ -14,6 +14,7 @@ import {
 import { headcountByAge } from "@/lib/wa-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE } from "@/lib/chart-palette";
 import { SectionHead } from "../hc/SectionHead";
+import { ScopeNote } from "../ui/ScopeNote";
 
 const ribuan = (v: number) => v.toLocaleString("id-ID");
 
@@ -23,7 +24,7 @@ export function HeadcountByAgeGroup() {
       className="card anim-rise flex h-full flex-col px-4 pb-1.5 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead title="Headcount by Age Group" action="Lihat Detail" />
+      <SectionHead title="Headcount by Age Group" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">Distribusi Usia Karyawan</p>
 
       <div className="mt-1 min-h-0 w-full flex-1">

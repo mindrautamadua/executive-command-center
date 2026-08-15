@@ -1,6 +1,10 @@
+"use client";
+
 import { lateMilestones } from "@/lib/sms-data";
 import { SectionHead } from "@/components/hc/SectionHead";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { filterBySubholding } from "@/lib/subholding";
 
 const lateTone = (hari: number): BadgeTone => (hari >= 30 ? "bad" : hari >= 20 ? "warn" : "neutral");
 
@@ -9,6 +13,11 @@ const COLS =
 
 /** 19 milestone terlambat: hari keterlambatan, dampak, dan PIC. */
 export function LateMilestones() {
+  const { active, isFiltered, def } = useSubholding();
+  // `owner` (PalmCo / SGN / PTPN I / Holding) adalah dimensi subholding baris ini;
+  // baris "Holding" tidak mengacu ke satu subholding sehingga selalu tampil.
+  const rows = filterBySubholding(lateMilestones, active, (m) => m.owner);
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
@@ -16,7 +25,9 @@ export function LateMilestones() {
     >
       <SectionHead title="Milestone Terlambat" action="Lihat Semua" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        19 Milestone Terlambat dari Baseline RKAP 2026 — Diurutkan per Owner
+        {isFiltered
+          ? `${rows.length} Milestone Terlambat — Cakupan ${def.label} & Holding`
+          : "19 Milestone Terlambat dari Baseline RKAP 2026 — Diurutkan per Owner"}
       </p>
 
       <div
@@ -31,7 +42,12 @@ export function LateMilestones() {
       </div>
 
       <ul className="scroll-thin mt-1 min-h-0 flex-1 overflow-y-auto">
-        {lateMilestones.map((m) => (
+        {rows.length === 0 && (
+          <li className="py-[5px] text-[8.5px] text-ink-400">
+            Tidak ada milestone terlambat untuk cakupan ini.
+          </li>
+        )}
+        {rows.map((m) => (
           <li key={m.milestone} className={`grid ${COLS} border-b border-[#f4f7fa] py-[5px]`}>
             <span className="truncate text-[9.5px] font-bold text-ink-900" title={m.milestone}>
               {m.milestone}

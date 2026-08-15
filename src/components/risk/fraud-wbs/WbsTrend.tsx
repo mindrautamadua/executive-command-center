@@ -15,6 +15,7 @@ import {
 import { wbsChannels, wbsTrend } from "@/lib/risk-data-detail";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const TOTAL_KANAL = wbsChannels.reduce((s, c) => s + c.count, 0);
 
@@ -24,7 +25,7 @@ export function WbsTrend() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead title="Tren Laporan & Kanal Pelaporan" action="Lihat Detail" />
+      <SectionHead title="Tren Laporan & Kanal Pelaporan" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Laporan Masuk 12 Bulan Terakhir · Komposisi Kanal {TOTAL_KANAL} Laporan YTD
       </p>

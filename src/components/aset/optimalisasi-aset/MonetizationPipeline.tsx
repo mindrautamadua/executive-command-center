@@ -1,5 +1,6 @@
 import { monetizationPipeline, monetizationPipelineNote } from "@/lib/aop-data";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 import { PALETTE } from "@/lib/chart-palette";
 
 const rp = (v: number) => v.toLocaleString("id-ID");
@@ -17,7 +18,7 @@ export function MonetizationPipeline() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead title="Corong Monetisasi Aset" action="Lihat Detail" />
+      <SectionHead title="Corong Monetisasi Aset" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Nilai Aset per Tahap (Rp M) · Konversi Total 4,5%
       </p>

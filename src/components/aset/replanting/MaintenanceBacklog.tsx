@@ -18,6 +18,7 @@ import {
 } from "@/lib/arp-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
 
 const rp = (v: number) => v.toLocaleString("id-ID");
 
@@ -36,6 +37,11 @@ const FILLS = [PALETTE.red, PALETTE.amber, PALETTE.blue, PALETTE.teal, PALETTE.s
 
 /** Backlog pemeliharaan Rp 420 M menurut kategori aset. */
 export function MaintenanceBacklog() {
+  const { active } = useSubholding();
+  // Pemetaan domain: backlog jalan produksi, drainase & emplasemen kebun sawit
+  // (Regional 6–7 sebagai penyumbang terbesar) — cakupan PalmCo.
+  const outOfScope = active !== "all" && active !== "palmco";
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -43,10 +49,15 @@ export function MaintenanceBacklog() {
     >
       <SectionHead title="Backlog Pemeliharaan" action="Lihat Detail" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        Nilai Backlog per Kategori (Rp M) · Total Rp {rp(MAINTENANCE_BACKLOG_TOTAL_RP_M)} M
+        {outOfScope
+          ? "Backlog pemeliharaan kebun sawit hanya untuk PalmCo"
+          : `Nilai Backlog per Kategori (Rp M) · Total Rp ${rp(MAINTENANCE_BACKLOG_TOTAL_RP_M)} M`}
       </p>
 
-      <div className="mt-1.5 min-h-0 w-full flex-1">
+      <div
+        className="mt-1.5 min-h-0 w-full flex-1 transition-opacity"
+        style={{ opacity: outOfScope ? 0.25 : 1 }}
+      >
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={data}

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowUpRight, Radar } from "lucide-react";
 import { regChangeRadar, type RegChangePipeline } from "@/lib/risk-data-detail";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
 
 const STATUS_TONE: Record<RegChangePipeline["status"], BadgeTone> = {
@@ -20,7 +21,7 @@ export function RegulatoryChangeRadar() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead title="Regulatory Change Radar" action="Lihat Semua" />
+      <SectionHead title="Regulatory Change Radar" action="Lihat Semua" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Regulasi Baru &amp; Perubahan Aturan — Dampak dan Kesiapan Grup
       </p>

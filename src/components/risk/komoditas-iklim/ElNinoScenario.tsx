@@ -14,11 +14,16 @@ import {
 import { elNinoScenarios, kiStats } from "@/lib/risk-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
 
 const BAR_COLOR = [PALETTE.amber, "#f0662d", PALETTE.red];
 
 /** Tiga skenario El Nino H2 2026: dampak produksi & EBITDA berikut probabilitasnya. */
 export function ElNinoScenario() {
+  const { active, def } = useSubholding();
+  // Dampak El Nino dihitung atas produksi TBS (kebun sawit) — cakupan PalmCo.
+  const outOfScope = active !== "all" && active !== "palmco";
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -28,7 +33,9 @@ export function ElNinoScenario() {
         <div className="min-w-0">
           <SectionHead title="Skenario El Nino H2 2026" />
           <p className="mt-[3px] text-[9px] text-ink-500">
-            Dampak Produksi &amp; EBITDA per Skenario (Konsensus BMKG/NOAA)
+            {outOfScope
+              ? `Dampak dihitung atas produksi TBS PalmCo — di luar cakupan ${def.label}`
+              : "Dampak Produksi & EBITDA per Skenario (Konsensus BMKG/NOAA)"}
           </p>
         </div>
         <span className="shrink-0 rounded-lg bg-[#fdecec] px-2 py-1 text-center leading-tight">
@@ -39,7 +46,10 @@ export function ElNinoScenario() {
         </span>
       </div>
 
-      <div className="mt-1.5 min-h-0 flex-1">
+      <div
+        className="mt-1.5 min-h-0 flex-1 transition-opacity"
+        style={{ opacity: outOfScope ? 0.25 : 1 }}
+      >
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={elNinoScenarios} margin={{ top: 16, right: 10, bottom: 0, left: -18 }}>
             <CartesianGrid stroke={CHART_AXIS.grid} vertical={false} />
@@ -78,7 +88,10 @@ export function ElNinoScenario() {
         </ResponsiveContainer>
       </div>
 
-      <ul className="mt-1 grid grid-cols-3 gap-2">
+      <ul
+        className="mt-1 grid grid-cols-3 gap-2 transition-opacity"
+        style={{ opacity: outOfScope ? 0.25 : 1 }}
+      >
         {elNinoScenarios.map((s) => (
           <li key={s.skenario} className="rounded-lg border border-[#eef2f6] bg-[#fbfcfd] px-2 py-1.5">
             <div className="flex items-baseline justify-between gap-1">

@@ -12,6 +12,7 @@ import {
 import { pillarRadar } from "@/lib/esg-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 export function EsgPillarRadar() {
   return (
@@ -19,7 +20,7 @@ export function EsgPillarRadar() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead title="Skor 6 Pilar ESG" action="Lihat Detail" />
+      <SectionHead title="Skor 6 Pilar ESG" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Skor Pilar 0–100 vs Target Internal 2027 · komposit 72,4
       </p>

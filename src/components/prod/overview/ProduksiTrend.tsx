@@ -13,6 +13,8 @@ import {
 import { produksiBulanan } from "@/lib/produksi-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { inScope, ScopeEmpty } from "@/components/ui/CommodityScope";
 
 const SERI_LABEL: Record<string, string> = {
   tbs2026: "TBS 2026",
@@ -33,6 +35,10 @@ const jtTon = (v: number) =>
 
 /** Tren produksi bulanan TBS (bar) & CPO (line) — 2026 YTD vs 2025 penuh. */
 export function ProduksiTrend() {
+  const { active, def } = useSubholding();
+  // Seluruh seri kartu ini TBS & CPO -> milik PalmCo.
+  const milikScope = inScope(active, "TBS CPO sawit");
+
   return (
     <div
       className="card anim-rise flex flex-col px-4 pb-3 pt-3"
@@ -43,6 +49,10 @@ export function ProduksiTrend() {
         TBS Diolah &amp; CPO (jt ton) — 2026 terisi Jan–Mei (YTD) vs realisasi 2025
       </p>
 
+      {!milikScope && <ScopeEmpty label={def.fullLabel} />}
+
+      {milikScope && (
+        <>
       <div className="mt-1.5 h-[220px] w-full">
         <ResponsiveContainer width="100%" height="100%">
           <ComposedChart data={produksiBulanan} margin={{ top: 10, right: -8, bottom: 0, left: -16 }}>
@@ -109,6 +119,8 @@ export function ProduksiTrend() {
           </span>
         ))}
       </div>
+        </>
+      )}
     </div>
   );
 }

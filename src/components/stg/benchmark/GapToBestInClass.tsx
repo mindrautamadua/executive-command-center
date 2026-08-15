@@ -1,5 +1,6 @@
 import { gapToBest } from "@/lib/sbm-data";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const fmt1 = (v: number) =>
   v.toLocaleString("id-ID", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
@@ -7,14 +8,22 @@ const fmt1 = (v: number) =>
 const TOTAL = gapToBest.reduce((s, g) => s + g.potensiRpT, 0);
 const MAX = Math.max(...gapToBest.map((g) => g.potensiRpT));
 
-/** Gap PTPN ke best-in-class per area beserta potensi EBITDA tahunan. */
+/**
+ * Gap PTPN ke best-in-class per area beserta potensi EBITDA tahunan.
+ * Areanya lintas subholding (yield/HPP/OER = PalmCo, rendemen = SugarCo, hilir =
+ * grup) dan total Rp 3,1 T hanya bermakna konsolidasi — kartu tetap angka grup.
+ */
 export function GapToBestInClass() {
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "300ms" } as React.CSSProperties}
     >
-      <SectionHead title="Gap ke Best-in-Class" action="Lihat Rencana Penutupan Gap" />
+      <SectionHead
+        title="Gap ke Best-in-Class"
+        action="Lihat Rencana Penutupan Gap"
+        badge={<ScopeNote />}
+      />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Potensi EBITDA Tahunan bila Gap Tertutup · Total Rp {fmt1(TOTAL)} T
       </p>

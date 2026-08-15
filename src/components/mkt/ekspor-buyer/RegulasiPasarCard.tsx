@@ -1,4 +1,9 @@
+"use client";
+
 import { regulasiPasar, type RegulasiRow } from "@/lib/kontrak-buyer-data";
+import { filterBySubholding } from "@/lib/subholding";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { commodityScope, ScopeEmpty } from "@/components/ui/CommodityScope";
 import { SectionHead } from "@/components/hc/SectionHead";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
 
@@ -12,6 +17,13 @@ const COLS = "grid-cols-[minmax(0,0.7fr)_minmax(0,1fr)_minmax(0,1.6fr)]";
 
 /** Status regulasi pasar: DMO, pungutan ekspor, bea keluar, HET gula, EUDR. */
 export function RegulasiPasarCard() {
+  const { active, def } = useSubholding();
+  // Komoditas yang diatur menentukan pemiliknya: DMO migor & bea keluar CPO =
+  // PalmCo, HET gula = SugarCo; regulasi lintas komoditas tetap tampil.
+  const rows = filterBySubholding(regulasiPasar, active, (r) =>
+    commodityScope(`${r.regulasi} ${r.dampak}`),
+  );
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
@@ -22,6 +34,10 @@ export function RegulasiPasarCard() {
         Status kebijakan yang membatasi harga, volume, dan tujuan penjualan
       </p>
 
+      {rows.length === 0 && <ScopeEmpty label={def.fullLabel} />}
+
+      {rows.length > 0 && (
+        <>
       <div
         className={`mt-2 grid ${COLS} items-center gap-x-3 text-[8px] font-semibold uppercase tracking-[0.04em] text-ink-400`}
       >
@@ -31,7 +47,7 @@ export function RegulasiPasarCard() {
       </div>
 
       <ul className="mt-1 flex min-h-0 flex-1 flex-col justify-between gap-1">
-        {regulasiPasar.map((r) => (
+        {rows.map((r) => (
           <li
             key={r.regulasi}
             className={`grid ${COLS} items-center gap-x-3 rounded-lg border border-[#eef2f6] bg-[#fbfcfd] px-2.5 py-[5px]`}
@@ -48,6 +64,8 @@ export function RegulasiPasarCard() {
           </li>
         ))}
       </ul>
+        </>
+      )}
 
       <p className="mt-1.5 truncate text-[8px] text-ink-400">
         Kepatuhan DMO 100% menopang izin ekspor · beban pungutan &amp; bea keluar menekan net-back FOB.

@@ -10,9 +10,12 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { pipeline } from "@/lib/sbd-data";
+import { useMemo } from "react";
+import { pipeline, register } from "@/lib/sbd-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { filterBySubholding } from "@/lib/subholding";
 
 const SERIES = [
   { key: "selesai", label: "Selesai", color: PALETTE.green },
@@ -24,8 +27,39 @@ const LABELS: Record<string, string> = Object.fromEntries(SERIES.map((s) => [s.k
 
 const DATA = pipeline.map((m) => ({ ...m, total: m.selesai + m.berjalan + m.overdue }));
 
+const MONTHS = pipeline.map((m) => m.month);
+
+const STATUS_KEY = {
+  Selesai: "selesai",
+  Berjalan: "berjalan",
+  Overdue: "overdue",
+} as const;
+
 /** Pipeline keputusan per bulan berdasarkan status tindak lanjut. */
 export function DecisionPipeline() {
+  const { active, isFiltered, def } = useSubholding();
+
+  // Baris pipeline induk tidak menyimpan subholding; saat filter aktif jumlah
+  // per bulan dihitung ulang dari register (judul + PIC) agar konsisten dengan
+  // kartu register. Tanpa filter, angka induk 46 keputusan YTD dipakai apa adanya.
+  const data = useMemo(() => {
+    if (!isFiltered) return DATA;
+    const rows = filterBySubholding(register, active, (d) => `${d.title} ${d.pic}`);
+    return MONTHS.map((month) => {
+      const bulan = rows.filter((d) => d.tanggal.split(" ")[1] === month);
+      const selesai = bulan.filter((d) => STATUS_KEY[d.status] === "selesai").length;
+      const berjalan = bulan.filter((d) => STATUS_KEY[d.status] === "berjalan").length;
+      const overdue = bulan.filter((d) => STATUS_KEY[d.status] === "overdue").length;
+      return { month, selesai, berjalan, overdue, total: bulan.length };
+    });
+  }, [active, isFiltered]);
+
+  const totalAll = data.reduce((s, m) => s + m.total, 0);
+  const maxY = isFiltered
+    ? Math.max(4, Math.ceil(Math.max(...data.map((m) => m.total)) / 4) * 4)
+    : 12;
+  const ticks = [0, maxY / 4, maxY / 2, (maxY * 3) / 4, maxY];
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -35,7 +69,9 @@ export function DecisionPipeline() {
         <div className="min-w-0">
           <SectionHead title="Pipeline Keputusan" />
           <p className="mt-[3px] text-[9px] text-ink-500">
-            46 Keputusan YTD per Bulan &amp; Status Tindak Lanjut
+            {isFiltered
+              ? `${totalAll} Keputusan Terkini ${def.label} per Bulan & Status Tindak Lanjut`
+              : "46 Keputusan YTD per Bulan & Status Tindak Lanjut"}
           </p>
         </div>
         <div className="flex shrink-0 flex-wrap items-center justify-end gap-x-2 gap-y-1">
@@ -53,7 +89,7 @@ export function DecisionPipeline() {
 
       <div className="mt-1.5 min-h-0 w-full flex-1">
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={DATA} margin={{ top: 16, right: 8, bottom: 4, left: -22 }} barCategoryGap="30%">
+          <BarChart data={data} margin={{ top: 16, right: 8, bottom: 4, left: -22 }} barCategoryGap="30%">
             <CartesianGrid stroke={CHART_AXIS.grid} vertical={false} />
             <XAxis
               dataKey="month"
@@ -63,8 +99,8 @@ export function DecisionPipeline() {
               interval={0}
             />
             <YAxis
-              domain={[0, 12]}
-              ticks={[0, 3, 6, 9, 12]}
+              domain={[0, maxY]}
+              ticks={ticks}
               tickLine={false}
               axisLine={false}
               tick={{ fontSize: 8.5, fill: CHART_AXIS.tick }}

@@ -4,10 +4,14 @@ import { useState } from "react";
 import { exportExposure, exportExposureNote } from "@/lib/esg-data-detail";
 import { DonutChart } from "@/components/ui/DonutChart";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
 
 /** Donut destinasi akhir volume CPO; menyoroti eksposur Uni Eropa Rp 4,1 T. */
 export function ExportExposure() {
   const [active, setActive] = useState<number | null>(null);
+  const { active: sub, def } = useSubholding();
+  // Volume yang dipetakan adalah CPO & turunannya — komoditas sawit, PalmCo.
+  const outOfScope = sub !== "all" && sub !== "palmco";
   const data = exportExposure.map((d) => ({ name: d.name, value: d.pct, color: d.color }));
 
   return (
@@ -17,10 +21,15 @@ export function ExportExposure() {
     >
       <SectionHead title="Eksposur Ekspor per Destinasi" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        Uni Eropa 18% volume · nilai terpapar Rp 4,1 T setahun
+        {outOfScope
+          ? `Destinasi ekspor CPO & turunan milik PalmCo — di luar cakupan ${def.label}`
+          : "Uni Eropa 18% volume · nilai terpapar Rp 4,1 T setahun"}
       </p>
 
-      <div className="flex min-h-0 flex-1 items-center gap-3">
+      <div
+        className="flex min-h-0 flex-1 items-center gap-3 transition-opacity"
+        style={{ opacity: outOfScope ? 0.25 : 1 }}
+      >
         <DonutChart
           data={data}
           size={118}

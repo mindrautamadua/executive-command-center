@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, ClipboardList, Gavel } from "lucide-react";
 import { compDecision, compScenarios } from "@/lib/comp-data";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 /**
  * Total Rewards Decision Center: perbandingan scenario kompensasi
@@ -17,6 +20,7 @@ export function CompDecisionCenter() {
         <h3 className="card-title-navy flex items-center gap-1.5">
           <Gavel size={13} className="text-[#1b3a6b]" />
           Total Rewards Decision Center
+          <ScopeNote />
         </h3>
         <span className="shrink-0 text-[9px] font-semibold text-ink-400">
           Rekomendasi: {compDecision.rekomendasi}

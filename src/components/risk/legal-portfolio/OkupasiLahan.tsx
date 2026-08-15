@@ -1,5 +1,6 @@
 import { okupasiCompact } from "@/lib/risk-data-detail";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const PCT = Math.round(
   (okupasiCompact.okupasiBerperkaraRbHa / okupasiCompact.totalSengketaRbHa) * 100,
@@ -22,7 +23,7 @@ export function OkupasiLahan() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "180ms" } as React.CSSProperties}
     >
-      <SectionHead title="Okupasi Lahan Berperkara" />
+      <SectionHead title="Okupasi Lahan Berperkara" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Luas Okupasi yang Sudah Masuk Proses Litigasi
       </p>

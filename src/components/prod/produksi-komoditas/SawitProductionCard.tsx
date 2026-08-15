@@ -14,6 +14,8 @@ import {
 import { sawitWaterfall } from "@/lib/produksi-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "../../hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { inScope, ScopeEmpty } from "@/components/ui/CommodityScope";
 
 const SHORT: Record<string, string> = {
   "TBS Kebun Inti": "TBS Inti",
@@ -61,6 +63,10 @@ const jt = (v: number) =>
   v.toLocaleString("id-ID", { minimumFractionDigits: 2, maximumFractionDigits: 3 });
 
 export function SawitProductionCard() {
+  const { active, def } = useSubholding();
+  // Waterfall TBS -> CPO & Palm Kernel: seluruhnya milik PalmCo.
+  const milikScope = inScope(active, "Sawit TBS CPO");
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -71,6 +77,10 @@ export function SawitProductionCard() {
         Alur TBS Inti → Plasma → Diolah → CPO &amp; Palm Kernel (jt ton, YTD)
       </p>
 
+      {!milikScope && <ScopeEmpty label={def.fullLabel} />}
+
+      {milikScope && (
+        <>
       <div className="mt-1.5 min-h-0 w-full flex-1">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} margin={{ top: 16, right: 8, bottom: 0, left: -14 }} barCategoryGap="24%">
@@ -119,6 +129,8 @@ export function SawitProductionCard() {
       <p className="mt-1 text-[8px] leading-snug text-ink-400">
         Restan rata-rata 1,8% + reject sortasi · OER 22,4% · KER 4,6%
       </p>
+        </>
+      )}
     </div>
   );
 }

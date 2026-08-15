@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { complianceBySubholding, obligationByDomain } from "@/lib/risk-data-detail";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 import { ToneBadge } from "@/components/shared/ToneBadge";
 
 const KEPATUHAN_HREF = "/risiko-kepatuhan/kepatuhan-regulasi";
@@ -20,7 +21,7 @@ export function ComplianceSnapshot() {
       className="card anim-rise px-4 pb-3 pt-3"
       style={{ "--d": "180ms" } as React.CSSProperties}
     >
-      <SectionHead title="Compliance Snapshot" />
+      <SectionHead title="Compliance Snapshot" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Kepatuhan Regulasi Enterprise — {total} Kewajiban, 6 Domain
       </p>

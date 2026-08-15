@@ -15,6 +15,7 @@ import {
 import { sgnMillClusters, sgnMillNote } from "@/lib/kps-data";
 import { fmtId } from "@/lib/keu-core";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE, SEMANTIC } from "@/lib/chart-palette";
+import { useSubholding } from "@/components/SubholdingProvider";
 import { SectionHead } from "../../hc/SectionHead";
 
 function MultilineTick({ x, y, payload }: any) {
@@ -32,6 +33,11 @@ function MultilineTick({ x, y, payload }: any) {
 
 /** Margin EBITDA per klaster PG SGN — 11 dari 17 PG masih merugi. */
 export function SgnMillProfitability() {
+  const { active } = useSubholding();
+  // Klaster PG/mill adalah pecahan internal SugarCo (SGN) — cerminan dari
+  // Regional 1..7 yang merupakan pecahan PalmCo.
+  const outOfScope = active !== "all" && active !== "sugarco";
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -39,10 +45,20 @@ export function SgnMillProfitability() {
     >
       <SectionHead title="SGN Mill Profitability" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        Margin EBITDA per Klaster PG · 17 PG · <span className="font-bold text-[#ef4444]">11 PG merugi</span>
+        {outOfScope ? (
+          "Pecahan klaster PG hanya untuk SugarCo"
+        ) : (
+          <>
+            Margin EBITDA per Klaster PG · 17 PG ·{" "}
+            <span className="font-bold text-[#ef4444]">11 PG merugi</span>
+          </>
+        )}
       </p>
 
-      <div className="mt-1.5 min-h-0 w-full flex-1">
+      <div
+        className="mt-1.5 min-h-0 w-full flex-1 transition-opacity"
+        style={{ opacity: outOfScope ? 0.25 : 1 }}
+      >
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={sgnMillClusters} margin={{ top: 14, right: 4, bottom: 8, left: -18 }} barCategoryGap="26%">
             <CartesianGrid stroke={CHART_AXIS.grid} vertical={false} />

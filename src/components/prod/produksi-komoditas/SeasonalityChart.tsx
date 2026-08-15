@@ -12,6 +12,8 @@ import {
 import { seasonality3Tahun } from "@/lib/produksi-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "../../hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { inScope, ScopeEmpty } from "@/components/ui/CommodityScope";
 
 const SERIES = [
   { key: "y2024", label: "2024", color: PALETTE.slate },
@@ -23,6 +25,10 @@ const num = (v: number) =>
   v.toLocaleString("id-ID", { minimumFractionDigits: 3, maximumFractionDigits: 3 });
 
 export function SeasonalityChart() {
+  const { active, def } = useSubholding();
+  // Seluruh seri adalah produksi CPO -> milik PalmCo.
+  const milikScope = inScope(active, "CPO");
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -33,6 +39,10 @@ export function SeasonalityChart() {
         Produksi CPO Bulanan (jt ton) · puncak konsisten Agu–Okt
       </p>
 
+      {!milikScope && <ScopeEmpty label={def.fullLabel} />}
+
+      {milikScope && (
+        <>
       <div className="mt-1.5 min-h-0 w-full flex-1">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={seasonality3Tahun} margin={{ top: 10, right: 8, bottom: 0, left: -22 }}>
@@ -85,6 +95,8 @@ export function SeasonalityChart() {
           </span>
         ))}
       </div>
+        </>
+      )}
     </div>
   );
 }

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { komposisiRewards } from "@/lib/comp-data";
 import { DonutChart } from "../ui/DonutChart";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 export function KomposisiTotalRewards() {
   const [active, setActive] = useState<number | null>(null);
@@ -13,7 +14,7 @@ export function KomposisiTotalRewards() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "100ms" } as React.CSSProperties}
     >
-      <h3 className="card-title-navy">Komposisi Total Rewards</h3>
+      <h3 className="card-title-navy flex min-w-0 items-center gap-1.5"><span>Komposisi Total Rewards</span><ScopeNote /></h3>
       <p className="mt-[3px] text-[9.5px] text-ink-500">Berdasarkan Komponen</p>
 
       <div className="flex min-h-0 flex-1 items-center">

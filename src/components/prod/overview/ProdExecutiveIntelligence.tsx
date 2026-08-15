@@ -1,5 +1,6 @@
 import { BrainCircuit, Sparkles } from "lucide-react";
 import { prodIntelCounts, prodIntelligence, prodRecommendation } from "@/lib/produksi-data";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const SIGNAL_TONE = {
   red: {
@@ -36,6 +37,8 @@ export function ProdExecutiveIntelligence() {
           <span className="rounded bg-ptpn-greenLight px-1 py-[1px] text-[8px] font-bold normal-case tracking-normal text-ptpn-green">
             AI
           </span>
+          {/* Sintesis eksekutif bersifat lintas subholding - tetap angka grup. */}
+          <ScopeNote />
         </h3>
         <div className="flex items-center gap-3">
           {prodIntelCounts.map((c) => (

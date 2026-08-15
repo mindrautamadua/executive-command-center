@@ -1,3 +1,5 @@
+"use client";
+
 import { AlertTriangle, ArrowRight, Info, ShieldAlert, TrendingUp } from "lucide-react";
 import type { ProdInsight } from "@/lib/produksi-data";
 

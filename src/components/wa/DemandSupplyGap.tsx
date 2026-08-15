@@ -19,6 +19,7 @@ import {
   gapClosurePlan,
 } from "@/lib/wa-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
+import { ScopeNote } from "../ui/ScopeNote";
 
 const ribuan = (v: number) => v.toLocaleString("id-ID");
 
@@ -30,11 +31,14 @@ export function DemandSupplyGap() {
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
       <div className="flex items-center justify-between gap-2">
-        <h3 className="text-[10px] font-extrabold uppercase tracking-[0.05em] text-ink-900">
-          Workforce Demand vs Supply{" "}
-          <span className="font-semibold normal-case tracking-normal text-ink-400">
-            (Proyeksi 2026-2028)
+        <h3 className="flex min-w-0 items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-[0.05em] text-ink-900">
+          <span>
+            Workforce Demand vs Supply{" "}
+            <span className="font-semibold normal-case tracking-normal text-ink-400">
+              (Proyeksi 2026-2028)
+            </span>
           </span>
+          <ScopeNote />
         </h3>
         <span className="rounded bg-[#fdecec] px-2 py-[3px] text-[9px] font-bold text-[#ef4444]">
           {demandSupplyHeadline.value} · {demandSupplyHeadline.label}

@@ -1,6 +1,7 @@
 import { ArrowRight, Minus, TrendingDown, TrendingUp } from "lucide-react";
 import { levelOfScore, RISK_LEVEL_BAND, top10Risks, type TopRisk } from "@/lib/risk-data";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
 
 const LEVEL_TONE: Record<string, BadgeTone> = {
@@ -43,7 +44,7 @@ export function Top10Risks() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead title="Top 10 Risiko Korporat" action="Lihat Register" />
+      <SectionHead title="Top 10 Risiko Korporat" action="Lihat Register" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Skor Inherent → Residual, Arah Tren QoQ, dan Pemilik Risiko
       </p>

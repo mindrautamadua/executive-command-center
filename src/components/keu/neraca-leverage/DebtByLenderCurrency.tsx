@@ -5,6 +5,7 @@ import { currencyNote, debtByCurrency, debtByLender } from "@/lib/knl-data";
 import { fmtId } from "@/lib/keu-core";
 import { DonutChart } from "../../ui/DonutChart";
 import { SectionHead } from "../../hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 /** Dua donut: komposisi utang berbunga per kreditur & per mata uang. */
 export function DebtByLenderCurrency() {
@@ -19,7 +20,7 @@ export function DebtByLenderCurrency() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "300ms" } as React.CSSProperties}
     >
-      <SectionHead title="Debt by Lender & Currency" />
+      <SectionHead title="Debt by Lender & Currency" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Komposisi Utang Berbunga Rp 28,4 T per Kreditur &amp; Mata Uang
       </p>

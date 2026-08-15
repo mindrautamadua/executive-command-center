@@ -1,5 +1,10 @@
+"use client";
+
 import { revitalisasi } from "@/lib/pabrik-data";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { commodityScope, ScopeEmpty } from "@/components/ui/CommodityScope";
+import { filterBySubholding } from "@/lib/subholding";
 import { SectionHead } from "../../hc/SectionHead";
 
 const STATUS_TONE: Record<string, BadgeTone> = {
@@ -15,6 +20,10 @@ const BAR_TONE: Record<string, string> = {
 };
 
 export function CapexRevitalisasi() {
+  const { active, def } = useSubholding();
+  // Nama pabrik menentukan pemiliknya: "PG …" → SugarCo, "PKS …" → PalmCo.
+  const rows = filterBySubholding(revitalisasi, active, (r) => commodityScope(r.pabrik));
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
@@ -25,8 +34,11 @@ export function CapexRevitalisasi() {
         Progress 6 Pabrik Prioritas · Total Capex Rp 2,2 T
       </p>
 
+      {rows.length === 0 ? (
+        <ScopeEmpty label={def.fullLabel} />
+      ) : (
       <ul className="mt-2 flex min-h-0 flex-1 flex-col justify-between gap-1">
-        {revitalisasi.map((r) => (
+        {rows.map((r) => (
           <li key={r.pabrik} className="leading-[1.25]">
             <div className="flex items-center justify-between gap-2">
               <span className="flex min-w-0 items-center gap-1.5">
@@ -52,6 +64,7 @@ export function CapexRevitalisasi() {
           </li>
         ))}
       </ul>
+      )}
     </div>
   );
 }

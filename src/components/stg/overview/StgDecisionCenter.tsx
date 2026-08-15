@@ -1,6 +1,10 @@
+"use client";
+
 import { AlertCircle, AlertTriangle } from "lucide-react";
 import { stgDecisions } from "@/lib/stg-data";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { filterBySubholding } from "@/lib/subholding";
 
 const TONE = {
   red: {
@@ -19,6 +23,11 @@ const TONE = {
 
 /** Keputusan Direksi strategis yang tertunda beserta eksposur nilainya. */
 export function StgDecisionCenter() {
+  const { active } = useSubholding();
+  // Entitas penanggung jawab keputusan disebut pada judul/situasi (SGN, PTPN I);
+  // keputusan tanpa penyebutan entitas berlaku lintas cakupan.
+  const rows = filterBySubholding(stgDecisions, active, (d) => `${d.title} ${d.situation}`);
+
   return (
     <div
       className="card anim-rise px-4 pb-3.5 pt-3"
@@ -26,11 +35,17 @@ export function StgDecisionCenter() {
     >
       <SectionHead title="Strategy Decision Center" action="Lihat Semua" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        3 Keputusan Direksi Overdue — Penghambat Eksekusi RJPP
+        {rows.length} Keputusan Direksi Overdue — Penghambat Eksekusi RJPP
       </p>
 
+      {rows.length === 0 && (
+        <p className="mt-2.5 text-[9px] text-ink-500">
+          Tidak ada keputusan overdue untuk cakupan ini.
+        </p>
+      )}
+
       <div className="mt-2.5 flex flex-col gap-2">
-        {stgDecisions.map((d) => {
+        {rows.map((d) => {
           const t = TONE[d.tone];
           const Icon = t.icon;
           return (

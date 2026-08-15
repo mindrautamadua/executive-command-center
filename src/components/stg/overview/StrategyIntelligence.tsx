@@ -1,6 +1,10 @@
+"use client";
+
 import { BrainCircuit, Sparkles } from "lucide-react";
-import { initiativeCounts, scorecardScores } from "@/lib/stg-core";
+import { initiativeCounts, initiatives, scorecardScores } from "@/lib/stg-core";
 import { strategyIntelligence } from "@/lib/stg-data";
+import { filterBySubholding } from "@/lib/subholding";
+import { useSubholding } from "@/components/SubholdingProvider";
 
 const SIGNAL_TONE = {
   bad: {
@@ -20,15 +24,31 @@ const SIGNAL_TONE = {
   },
 } as const;
 
-const COUNTS = [
-  { label: "On Track", value: `${initiativeCounts.onTrack}`, cls: "text-ptpn-green" },
-  { label: "At Risk", value: `${initiativeCounts.atRisk}`, cls: "text-[#d98b06]" },
-  { label: "Off Track", value: `${initiativeCounts.offTrack}`, cls: "text-[#ef4444]" },
-];
-
 /** Sintesis eksekutif eksekusi strategi: 3 sinyal utama + rekomendasi Direksi. */
 export function StrategyIntelligence() {
   const grup = scorecardScores[0];
+  const { active, isFiltered } = useSubholding();
+  // `owner` (PalmCo / SGN / PTPN I / Holding) adalah dimensi subholding register.
+  const rows = filterBySubholding(initiatives, active, (i) => i.owner);
+  const tally = (status: string) => rows.filter((i) => i.status === status).length;
+
+  const COUNTS = [
+    {
+      label: "On Track",
+      value: `${isFiltered ? tally("On Track") : initiativeCounts.onTrack}`,
+      cls: "text-ptpn-green",
+    },
+    {
+      label: "At Risk",
+      value: `${isFiltered ? tally("At Risk") : initiativeCounts.atRisk}`,
+      cls: "text-[#d98b06]",
+    },
+    {
+      label: "Off Track",
+      value: `${isFiltered ? tally("Off Track") : initiativeCounts.offTrack}`,
+      cls: "text-[#ef4444]",
+    },
+  ];
 
   return (
     <div className="card anim-rise px-4 pb-3.5 pt-3" style={{ "--d": "30ms" } as React.CSSProperties}>

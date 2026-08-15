@@ -13,6 +13,7 @@ import {
 import { trajectory2029 } from "@/lib/svc-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const fmt = (v: number) =>
   v.toLocaleString("id-ID", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -22,7 +23,10 @@ const LABELS: Record<string, string> = {
   realisasi: "Realisasi",
 };
 
-/** Jalur kumulatif EBITDA uplift menuju Rp 12,4 T pada 2029. */
+/**
+ * Jalur kumulatif EBITDA uplift menuju Rp 12,4 T pada 2029.
+ * Trajektori RJPP hanya ditetapkan di tingkat grup — RULE B.
+ */
 export function ValueTrajectory2029() {
   return (
     <div
@@ -31,7 +35,7 @@ export function ValueTrajectory2029() {
     >
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0">
-          <SectionHead title="Trajektori Nilai 2029" />
+          <SectionHead title="Trajektori Nilai 2029" badge={<ScopeNote />} />
           <p className="mt-[3px] text-[9px] text-ink-500">
             Kumulatif EBITDA Uplift RJPP · Rp T · Posisi 2026 = YTD Mei
           </p>

@@ -3,6 +3,7 @@ import { fmtId } from "@/lib/keu-core";
 import { SEMANTIC } from "@/lib/chart-palette";
 import { ToneBadge } from "@/components/shared/ToneBadge";
 import { SectionHead } from "../../hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 /** Aging piutang usaha Rp 3,4 T (bar tersegmentasi) + top 5 debitur. */
 export function ReceivablesAging() {
@@ -11,7 +12,7 @@ export function ReceivablesAging() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "240ms" } as React.CSSProperties}
     >
-      <SectionHead title="Receivables Aging" action="Lihat Detail" />
+      <SectionHead title="Receivables Aging" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Piutang Usaha Rp 3,4 T · bucket &gt; 90 hari Rp 680 M (20%)
       </p>

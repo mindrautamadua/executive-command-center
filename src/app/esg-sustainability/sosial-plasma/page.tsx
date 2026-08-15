@@ -1,4 +1,5 @@
 import { EsgSidebar } from "@/components/esg/EsgSidebar";
+import { ScopeGuard } from "@/components/ui/ScopeGuard";
 import { DataTrustStrip } from "@/components/hc/DataTrustStrip";
 import { SosialHeader } from "@/components/esg/sosial-plasma/SosialHeader";
 import { SosialKpiStrip } from "@/components/esg/sosial-plasma/SosialKpiStrip";
@@ -21,6 +22,8 @@ export default function SosialPlasmaPage() {
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
         <SosialHeader />
 
+        <ScopeGuard owner="palmco">
+
         <div className="flex flex-col gap-3 px-5 pb-5">
           <div className="-mb-3">
             <DataTrustStrip data={esgDataTrust} />
@@ -42,6 +45,7 @@ export default function SosialPlasmaPage() {
 
           <SosialInsight />
         </div>
+        </ScopeGuard>
       </main>
     </div>
   );

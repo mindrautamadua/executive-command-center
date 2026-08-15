@@ -1,6 +1,7 @@
 import { MapPinned } from "lucide-react";
 import { hguPortfolio } from "@/lib/risk-data-detail";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const CARDS = [
   {
@@ -33,7 +34,7 @@ export function HguPortfolio() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "240ms" } as React.CSSProperties}
     >
-      <SectionHead title="Portofolio HGU" action="Lihat Aset" />
+      <SectionHead title="Portofolio HGU" action="Lihat Aset" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Status Legalitas Lahan &amp; Jatuh Tempo Hak Guna Usaha
       </p>

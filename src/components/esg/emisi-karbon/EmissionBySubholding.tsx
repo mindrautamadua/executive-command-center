@@ -14,8 +14,16 @@ import {
 import { emissionBySubholding } from "@/lib/esg-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { toSubholdingId } from "@/lib/subholding";
 
 export function EmissionBySubholding() {
+  const { active, isFiltered, def } = useSubholding();
+  // `name` (PalmCo / SugarCo (SGN) / SupportingCo) adalah dimensi subholding.
+  // Grafik pembanding porsi: batang non-aktif diredupkan agar bobot relatif
+  // terhadap grup tetap terbaca.
+  const dim = (name: string) => (!isFiltered || toSubholdingId(name) === active ? 1 : 0.25);
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -48,7 +56,7 @@ export function EmissionBySubholding() {
             />
             <Bar dataKey="pct" radius={[3, 3, 0, 0]} barSize={34}>
               {emissionBySubholding.map((d) => (
-                <Cell key={d.name} fill={d.color} />
+                <Cell key={d.name} fill={d.color} fillOpacity={dim(d.name)} />
               ))}
               <LabelList
                 dataKey="pct"
@@ -62,7 +70,9 @@ export function EmissionBySubholding() {
       </div>
 
       <p className="pb-1 text-[8px] leading-snug text-ink-400">
-        PalmCo menyumbang 78% jejak grup — prioritas program abatement tetap di sisi sawit.
+        {isFiltered
+          ? `Porsi ${def.label} disorot dalam konteks Scope 1+2 grup; subholding lain diredupkan.`
+          : "PalmCo menyumbang 78% jejak grup — prioritas program abatement tetap di sisi sawit."}
       </p>
     </div>
   );

@@ -15,6 +15,7 @@ import { pnlWaterfall } from "@/lib/kpl-data";
 import { fmtId } from "@/lib/keu-core";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "../../hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 interface WfDatum {
   name: string;
@@ -79,7 +80,7 @@ export function PnlWaterfall() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead title="P&L Waterfall (YTD)" />
+      <SectionHead title="P&L Waterfall (YTD)" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Alur Pendapatan → Laba Bersih Konsolidasi · Rp T · EBITDA = EBIT + D&amp;A Rp 1,72 T
       </p>

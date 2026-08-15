@@ -1,5 +1,10 @@
+"use client";
+
 import { Coffee, Factory, Leaf, TreePalm, Wheat } from "lucide-react";
 import { jenisUsaha } from "@/lib/produktivitas-data";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { commodityScope } from "../ui/CommodityScope";
+import { toSubholdingId } from "@/lib/subholding";
 
 const ICONS = {
   sawit: { Icon: TreePalm, chip: "tone-green" },
@@ -26,13 +31,27 @@ function IndexScale({ index }: { index: number }) {
 }
 
 export function ProduktivitasJenisUsaha() {
+  const { active, isFiltered, def } = useSubholding();
+  // Lini bisnis menentukan subholding pemiliknya (sawit → PalmCo, gula → SugarCo,
+  // karet & teh → SupportingCo). Baris di luar cakupan diredupkan agar posisi
+  // lini yang dilihat tetap terbaca terhadap lini lainnya.
+  const dim = (lini: string) => {
+    if (!isFiltered) return 1;
+    const owner = commodityScope(lini);
+    return owner && toSubholdingId(owner) === active ? 1 : 0.25;
+  };
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "180ms" } as React.CSSProperties}
     >
       <h3 className="card-title-navy">3. Produktivitas Berdasarkan Jenis Usaha</h3>
-      <p className="mt-[3px] text-[9.5px] text-ink-500">Kinerja Berdasarkan Lini Bisnis</p>
+      <p className="mt-[3px] text-[9.5px] text-ink-500">
+        {isFiltered
+          ? `Kinerja Berdasarkan Lini Bisnis — lini ${def.label} disorot`
+          : "Kinerja Berdasarkan Lini Bisnis"}
+      </p>
 
       <div className="mt-1 flex items-center border-b border-[#eef2f6] pb-[5px] text-[8.5px] font-semibold text-ink-500">
         <span className="w-[34%]">Lini Bisnis</span>
@@ -47,7 +66,8 @@ export function ProduktivitasJenisUsaha() {
           return (
             <div
               key={j.lini}
-              className="flex items-center border-b border-[#f5f8fa] py-[5px] last:border-0"
+              className="flex items-center border-b border-[#f5f8fa] py-[5px] transition-opacity last:border-0"
+              style={{ opacity: dim(j.lini) }}
             >
               <span className="flex w-[34%] items-center gap-2">
                 <span

@@ -15,6 +15,7 @@ import {
 import { marginBench, marginBenchRef } from "@/lib/sbm-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const fmt1 = (v: number) =>
   v.toLocaleString("id-ID", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
@@ -36,14 +37,18 @@ const DATA = marginBench.map((p) => ({
   isPtpn: p.isPtpn ?? false,
 }));
 
-/** EBITDA margin LTM PTPN vs 7 peer emiten + garis rata industri. */
+/**
+ * EBITDA margin LTM PTPN vs 7 peer emiten + garis rata industri.
+ * Batang PTPN adalah margin konsolidasi grup (sawit + gula + pendukung), bukan
+ * pecahan per subholding — karena itu kartu ini tetap angka grup saat difilter.
+ */
 export function MarginBenchmark() {
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead title="Benchmark EBITDA Margin" action="Lihat Detail" />
+      <SectionHead title="Benchmark EBITDA Margin" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Margin EBITDA LTM · PTPN Peringkat 2/8 · Rata Emiten {fmt1(marginBenchRef.rataEmitenPct)}%
       </p>

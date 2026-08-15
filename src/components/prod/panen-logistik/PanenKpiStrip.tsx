@@ -1,5 +1,9 @@
+"use client";
+
 import type { ProdKpi } from "@/lib/produksi-data";
 import { ProdKpiCards } from "../ProdKpiCards";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { ScopeEmpty, inScope } from "@/components/ui/CommodityScope";
 
 const panenKpi: ProdKpi[] = [
   {
@@ -53,5 +57,14 @@ const panenKpi: ProdKpi[] = [
 ];
 
 export function PanenKpiStrip() {
+  // Domain: restan, FFA, brondolan & rotasi panen TBS sawit → milik PalmCo.
+  const { active, def } = useSubholding();
+  if (!inScope(active, "TBS")) {
+    return (
+      <div className="card anim-rise flex flex-col px-4 pb-3 pt-3">
+        <ScopeEmpty label={def.fullLabel} />
+      </div>
+    );
+  }
   return <ProdKpiCards items={panenKpi} cols="grid-cols-4" />;
 }

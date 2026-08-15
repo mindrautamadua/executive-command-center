@@ -1,5 +1,8 @@
+"use client";
+
 import { ArrowLeftRight, Trophy } from "lucide-react";
 import { BENCHMARK_MAX, benchmarkEksternal, benchmarkMeta } from "@/lib/produktivitas-data";
+import { ScopeNote } from "../ui/ScopeNote";
 
 const BAR_COLOR = {
   green: "#1a9c5b",
@@ -13,7 +16,10 @@ export function BenchmarkingEksternal() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "480ms" } as React.CSSProperties}
     >
-      <h3 className="card-title-navy">8. Benchmarking Eksternal</h3>
+      <h3 className="card-title-navy flex min-w-0 items-center gap-1.5">
+        <span>8. Benchmarking Eksternal</span>
+        <ScopeNote />
+      </h3>
       <p className="mt-[3px] text-[9.5px] text-ink-500">
         Perbandingan dengan Industri Sejenis (2025)
       </p>

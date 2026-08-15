@@ -14,10 +14,16 @@ import {
 import { regionalProfitability } from "@/lib/kps-data";
 import { fmtId } from "@/lib/keu-core";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, SEMANTIC } from "@/lib/chart-palette";
+import { useSubholding } from "@/components/SubholdingProvider";
 import { SectionHead } from "../../hc/SectionHead";
 
 /** Bar horizontal EBITDA/ha 7 regional PalmCo (annualized). */
 export function RegionalProfitability() {
+  const { active } = useSubholding();
+  // Regional 1..7 adalah pecahan internal PalmCo (pabrik/PG milik SugarCo),
+  // jadi seluruh kartu ini berada di cakupan PalmCo.
+  const outOfScope = active !== "all" && active !== "palmco";
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -25,10 +31,15 @@ export function RegionalProfitability() {
     >
       <SectionHead title="Regional Profitability (PalmCo)" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        EBITDA per Hektar Tertanam · Rp juta/ha (annualized)
+        {outOfScope
+          ? "Pecahan regional hanya untuk PalmCo"
+          : "EBITDA per Hektar Tertanam · Rp juta/ha (annualized)"}
       </p>
 
-      <div className="mt-1.5 min-h-0 w-full flex-1">
+      <div
+        className="mt-1.5 min-h-0 w-full flex-1 transition-opacity"
+        style={{ opacity: outOfScope ? 0.25 : 1 }}
+      >
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={regionalProfitability}

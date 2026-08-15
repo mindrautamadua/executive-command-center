@@ -1,6 +1,9 @@
+"use client";
+
 import { ArrowRight, Award, ChevronDown, ClipboardList, Factory, GraduationCap } from "lucide-react";
 import { alignmentFlow, alignmentSignal, strategicObjective } from "@/lib/hc-data";
 import { SectionHead } from "./SectionHead";
+import { ScopeNote } from "../ui/ScopeNote";
 
 const FLOW_ICONS = {
   workforce: { Icon: ClipboardList, cls: "bg-[#e8f1fd] text-[#2f6fe4]" },
@@ -12,7 +15,7 @@ const FLOW_ICONS = {
 export function StrategicAlignment() {
   return (
     <div className="card anim-rise px-4 pb-4 pt-3" style={{ "--d": "60ms" } as React.CSSProperties}>
-      <SectionHead title="Strategic Alignment" action="Lihat Detail" />
+      <SectionHead title="Strategic Alignment" action="Lihat Detail" badge={<ScopeNote />} />
 
       <button className="mt-3 flex w-full items-center justify-between rounded-lg border border-[#e3e9ef] bg-[#f8fafc] px-3 py-2 text-left">
         <span className="leading-tight">

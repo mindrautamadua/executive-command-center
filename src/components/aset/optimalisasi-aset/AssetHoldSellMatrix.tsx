@@ -22,6 +22,8 @@ import {
 } from "@/lib/aop-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { filterBySubholding } from "@/lib/subholding";
 
 const rp = (v: number) => v.toLocaleString("id-ID");
 const num = (v: number) =>
@@ -56,15 +58,37 @@ const SHORT: Record<string, string> = {
   "Kebun Karet & Teh PTPN I": "Karet & Teh",
 };
 
-const data = holdSellMatrix.map((d) => ({ ...d, short: SHORT[d.kelompokAset] ?? d.kelompokAset }));
+const allData = holdSellMatrix.map((d) => ({
+  ...d,
+  short: SHORT[d.kelompokAset] ?? d.kelompokAset,
+}));
 
-const ringkasan = ORDER.map((q) => {
-  const rows = data.filter((d) => d.kuadran === q);
-  return { kuadran: q, jumlah: rows.length, nilaiRpM: rows.reduce((s, r) => s + r.nilaiBukuRpM, 0) };
-});
+/**
+ * Pemetaan domain: kebun sawit & PKS/hilir milik PalmCo; klaster PG (gula)
+ * milik SugarCo; kebun karet & teh PTPN I milik SupportingCo. Kelompok aset
+ * lintas subholding (lahan idle, bangunan non-inti, layanan sosial, kawasan
+ * industri) dikembalikan apa adanya sehingga tetap tampil di semua cakupan.
+ */
+const kelompokSubholding = (kelompokAset: string) => {
+  if (kelompokAset.includes("Sawit") || kelompokAset.includes("PKS")) return "PalmCo";
+  if (kelompokAset.includes("PG ")) return "SGN";
+  return kelompokAset;
+};
 
 /** Matriks Hold–Optimize–Divest: nilai strategis × imbal hasil kelompok aset. */
 export function AssetHoldSellMatrix() {
+  const { active, isFiltered, def } = useSubholding();
+  const data = filterBySubholding(allData, active, (d) => kelompokSubholding(d.kelompokAset));
+
+  const ringkasan = ORDER.map((q) => {
+    const rows = data.filter((d) => d.kuadran === q);
+    return {
+      kuadran: q,
+      jumlah: rows.length,
+      nilaiRpM: rows.reduce((s, r) => s + r.nilaiBukuRpM, 0),
+    };
+  });
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -72,7 +96,8 @@ export function AssetHoldSellMatrix() {
     >
       <SectionHead title="Matriks Hold – Optimize – Divest" action="Lihat Detail" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        Nilai Strategis (1–5) × Imbal Hasil Aset (%) · Ukuran Titik = Nilai Buku · 10 Kelompok Aset
+        Nilai Strategis (1–5) × Imbal Hasil Aset (%) · Ukuran Titik = Nilai Buku ·{" "}
+        {isFiltered ? `${data.length} Kelompok Aset ${def.label}` : "10 Kelompok Aset"}
       </p>
 
       <div className="mt-1.5 min-h-0 w-full flex-1">

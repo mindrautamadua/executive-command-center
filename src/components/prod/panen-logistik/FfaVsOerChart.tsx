@@ -13,6 +13,8 @@ import {
 import { ffaOerNote, ffaOerPoints } from "@/lib/agro-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { ScopeEmpty, inScope } from "@/components/ui/CommodityScope";
 
 const dotColor = (ffa: number) =>
   ffa > 3.5 ? PALETTE.red : ffa > 3.0 ? PALETTE.amber : PALETTE.green;
@@ -20,6 +22,10 @@ const dotColor = (ffa: number) =>
 const num = (v: number) => v.toLocaleString("id-ID", { minimumFractionDigits: 1 });
 
 export function FfaVsOerChart() {
+  // Domain: FFA & OER TBS di PKS (pabrik kelapa sawit) → milik PalmCo.
+  const { active, def } = useSubholding();
+  const luarCakupan = !inScope(active, "PKS");
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -30,6 +36,10 @@ export function FfaVsOerChart() {
         Kadar FFA TBS Masuk (%) × Rendemen CPO (%) — 12 PKS Sampel
       </p>
 
+      {luarCakupan ? (
+        <ScopeEmpty label={def.fullLabel} />
+      ) : (
+      <>
       <div className="mt-1.5 min-h-0 w-full flex-1">
         <ResponsiveContainer width="100%" height="100%">
           <ScatterChart margin={{ top: 10, right: 12, bottom: 0, left: -18 }}>
@@ -87,6 +97,8 @@ export function FfaVsOerChart() {
       </div>
 
       <p className="pb-1 text-[8px] leading-snug text-ink-400">{ffaOerNote}</p>
+      </>
+      )}
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import { ProdSidebar } from "@/components/prod/ProdSidebar";
+import { ScopeGuard } from "@/components/ui/ScopeGuard";
 import { DataTrustStrip } from "@/components/hc/DataTrustStrip";
 import { AgroHeader } from "@/components/prod/agronomi-replanting/AgroHeader";
 import { AgroKpiStrip } from "@/components/prod/agronomi-replanting/AgroKpiStrip";
@@ -19,6 +20,8 @@ export default function AgronomiReplantingPage() {
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
         <AgroHeader />
+
+        <ScopeGuard owner="palmco">
 
         <div className="flex flex-col gap-3 px-5 pb-5">
           <div className="-mb-3">
@@ -45,6 +48,7 @@ export default function AgronomiReplantingPage() {
 
           <AgroInsight />
         </div>
+        </ScopeGuard>
       </main>
     </div>
   );

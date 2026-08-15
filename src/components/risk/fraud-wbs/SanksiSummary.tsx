@@ -1,6 +1,7 @@
 import { Gavel, ShieldAlert, Timer } from "lucide-react";
 import { sanksiSummary } from "@/lib/risk-data-detail";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const ITEMS = [
   {
@@ -32,7 +33,7 @@ export function SanksiSummary() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead title="Penegakan Sanksi" />
+      <SectionHead title="Penegakan Sanksi" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Tindak Lanjut 18 Kasus Terbukti (Substantiated) YTD
       </p>

@@ -1,5 +1,6 @@
 import { Coins, Gauge, Sprout, Trophy, type LucideIcon } from "lucide-react";
 import { Delta } from "@/components/ui/Delta";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 import { sbmKpi } from "@/lib/sbm-data";
 import type { StgKpi } from "@/lib/stg-core";
 
@@ -19,7 +20,11 @@ const TONES: Record<StgKpi["tone"], string> = {
   amber: "bg-[#fdf3e0] text-[#d98b06]",
 };
 
-/** Strip 4 KPI posisi kompetitif PTPN Group. */
+/**
+ * Strip 4 KPI posisi kompetitif PTPN Group.
+ * Semua tile memakai group-baseline terhadap peer eksternal — tidak ada pecahan
+ * per subholding, sehingga angkanya tetap dan ditandai <ScopeNote /> saat difilter.
+ */
 export function SbmKpiStrip() {
   return (
     <div className="grid grid-cols-4 gap-3">
@@ -64,6 +69,7 @@ export function SbmKpiStrip() {
                   {k.compare}
                 </span>
               )}
+              <ScopeNote className="ml-auto" />
             </div>
           </div>
         );

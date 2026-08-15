@@ -1,5 +1,9 @@
+"use client";
+
 import { bottomKebun, topKebun, type KebunYield } from "@/lib/produksi-data";
 import { SectionHead } from "../../hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { inScope, ScopeEmpty } from "@/components/ui/CommodityScope";
 
 const num = (v: number) =>
   v.toLocaleString("id-ID", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
@@ -47,6 +51,10 @@ function KebunList({ title, items, tone }: { title: string; items: KebunYield[];
 }
 
 export function TopBottomKebun() {
+  const { active, def } = useSubholding();
+  // Peringkat yield TBS antar kebun sawit -> seluruh kartu milik PalmCo.
+  const milikScope = inScope(active, "kebun sawit TBS");
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
@@ -57,10 +65,14 @@ export function TopBottomKebun() {
         Yield TBS Terbaik vs Tertinggal beserta Faktor Dominan
       </p>
 
-      <div className="mt-2 flex min-h-0 flex-1 gap-3">
-        <KebunList title="Top 5 Kebun" items={topKebun} tone="good" />
-        <KebunList title="Bottom 5 Kebun" items={bottomKebun} tone="bad" />
-      </div>
+      {!milikScope && <ScopeEmpty label={def.fullLabel} />}
+
+      {milikScope && (
+        <div className="mt-2 flex min-h-0 flex-1 gap-3">
+          <KebunList title="Top 5 Kebun" items={topKebun} tone="good" />
+          <KebunList title="Bottom 5 Kebun" items={bottomKebun} tone="bad" />
+        </div>
+      )}
     </div>
   );
 }

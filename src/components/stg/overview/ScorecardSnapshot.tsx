@@ -15,6 +15,8 @@ import {
 import { scorecardSnapshot } from "@/lib/stg-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { toSubholdingId } from "@/lib/subholding";
 
 const TARGET = 85;
 
@@ -22,6 +24,14 @@ const num = (v: number) => v.toLocaleString("id-ID", { minimumFractionDigits: 1 
 
 /** Skor KPI korporat per entitas vs target RKAP 85. */
 export function ScorecardSnapshot() {
+  const { active, isFiltered } = useSubholding();
+  // Grafik pembanding: batang non-aktif diredupkan agar konteks antar
+  // subholding tetap terbaca; batang PTPN Group selalu penuh.
+  const dim = (entity: string) => {
+    const sub = toSubholdingId(entity);
+    return !isFiltered || sub === null || sub === active ? 1 : 0.25;
+  };
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -63,7 +73,11 @@ export function ScorecardSnapshot() {
             />
             <Bar dataKey="score" radius={[4, 4, 0, 0]} barSize={30}>
               {scorecardSnapshot.map((s) => (
-                <Cell key={s.entity} fill={s.score >= TARGET ? PALETTE.green : PALETTE.amber} />
+                <Cell
+                  key={s.entity}
+                  fill={s.score >= TARGET ? PALETTE.green : PALETTE.amber}
+                  fillOpacity={dim(s.entity)}
+                />
               ))}
               <LabelList
                 dataKey="score"
@@ -79,7 +93,11 @@ export function ScorecardSnapshot() {
 
       <ul className="mt-1 flex items-center justify-between gap-1">
         {scorecardSnapshot.map((s) => (
-          <li key={s.entity} className="min-w-0 flex-1 text-center text-[8px] text-ink-400">
+          <li
+            key={s.entity}
+            className="min-w-0 flex-1 text-center text-[8px] text-ink-400 transition-opacity"
+            style={{ opacity: dim(s.entity) }}
+          >
             {s.category}
           </li>
         ))}

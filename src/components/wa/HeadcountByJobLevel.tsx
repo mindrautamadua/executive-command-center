@@ -1,5 +1,8 @@
+"use client";
+
 import { headcountByJobLevel, jobLevelTotal } from "@/lib/wa-data";
 import { SectionHead } from "../hc/SectionHead";
+import { ScopeNote } from "../ui/ScopeNote";
 
 /** Piramida SVG: 6 lapis trapesium, lebar linier mengikuti posisi lapis. */
 function Pyramid() {
@@ -33,7 +36,7 @@ export function HeadcountByJobLevel() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead title="Headcount by Job Level" action="Lihat Detail" />
+      <SectionHead title="Headcount by Job Level" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">Distribusi berdasarkan Level Jabatan</p>
 
       <div className="mt-2 flex min-h-0 flex-1 items-center gap-4">

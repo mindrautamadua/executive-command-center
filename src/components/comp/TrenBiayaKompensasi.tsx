@@ -13,6 +13,7 @@ import {
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { trenBiaya } from "@/lib/comp-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 export function TrenBiayaKompensasi() {
   return (
@@ -22,7 +23,7 @@ export function TrenBiayaKompensasi() {
     >
       <div className="flex items-start justify-between gap-2">
         <div>
-          <h3 className="card-title-navy">Tren Biaya Kompensasi</h3>
+          <h3 className="card-title-navy flex min-w-0 items-center gap-1.5"><span>Tren Biaya Kompensasi</span><ScopeNote /></h3>
           <p className="mt-[3px] text-[9.5px] text-ink-500">Perbandingan 6 Bulan Terakhir</p>
         </div>
         <button className="select-chip whitespace-nowrap px-2.5 py-[5px] text-[9.5px]">

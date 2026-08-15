@@ -1,5 +1,6 @@
 import { Banknote, Percent, PiggyBank } from "lucide-react";
 import { workingCapitalImpact } from "@/lib/hilir-stok-margin-data";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 import { SectionHead } from "../../hc/SectionHead";
 
 const ROWS = [
@@ -12,14 +13,18 @@ const ROWS = [
   },
 ] as const;
 
-/** Dampak posisi inventori ke modal kerja & cash conversion cycle. */
+/**
+ * Dampak posisi inventori ke modal kerja & cash conversion cycle.
+ * Modal kerja dibukukan konsolidasi grup (lintas komoditas & subholding),
+ * tidak ada pecahan per subholding — ditandai <ScopeNote /> saat filter aktif.
+ */
 export function WorkingCapitalImpact() {
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "300ms" } as React.CSSProperties}
     >
-      <SectionHead title="Dampak Modal Kerja" />
+      <SectionHead title="Dampak Modal Kerja" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">Carrying cost inventori &amp; potensi pelepasan kas</p>
 
       <div className="mt-2 flex min-h-0 flex-1 flex-col justify-center gap-1.5">

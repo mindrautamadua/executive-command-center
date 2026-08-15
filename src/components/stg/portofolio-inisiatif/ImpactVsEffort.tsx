@@ -12,9 +12,14 @@ import {
   YAxis,
 } from "recharts";
 import { impactEffort } from "@/lib/spi-data";
-import { STATUS_COLOR } from "@/lib/stg-core";
+import { STATUS_COLOR, initiatives } from "@/lib/stg-core";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { filterBySubholding } from "@/lib/subholding";
+
+/** Pemilik tiap inisiatif — dimensi subholding titik ini (register stg-core). */
+const OWNER_BY_NAME = new Map(initiatives.map((i) => [i.name, i.owner as string]));
 
 const EFFORT_TENGAH_RP_T = 0.8;
 const IMPACT_TENGAH_RP_T = 0.45;
@@ -24,6 +29,9 @@ const rp = (v: number) =>
 
 /** Kuadran dampak (uplift 2029) × effort (investasi) untuk 28 inisiatif. */
 export function ImpactVsEffort() {
+  const { active } = useSubholding();
+  const points = filterBySubholding(impactEffort, active, (p) => OWNER_BY_NAME.get(p.name));
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -31,7 +39,7 @@ export function ImpactVsEffort() {
     >
       <SectionHead title="Impact vs Effort" action="Lihat Detail" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        Dampak EBITDA 2029 (Rp T) × Kebutuhan Investasi (Rp T) · 28 Inisiatif
+        Dampak EBITDA 2029 (Rp T) × Kebutuhan Investasi (Rp T) · {points.length} Inisiatif
       </p>
 
       <div className="mt-1.5 min-h-0 w-full flex-1">
@@ -80,8 +88,8 @@ export function ImpactVsEffort() {
                 name === "effortRpT" ? "Investasi" : "Dampak 2029",
               ]}
             />
-            <Scatter data={impactEffort} shape="circle">
-              {impactEffort.map((p) => (
+            <Scatter data={points} shape="circle">
+              {points.map((p) => (
                 <Cell key={p.name} fill={STATUS_COLOR[p.status]} fillOpacity={0.8} />
               ))}
             </Scatter>

@@ -1,6 +1,9 @@
+"use client";
+
 import { ArrowRight, CircleCheck, TriangleAlert, Info } from "lucide-react";
 import { insightKinerja } from "@/lib/kinerja-data";
 import { CoachRobot } from "./CoachRobot";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 /* chip pastel dark-mode-safe per tone insight */
 const TONE = {
@@ -17,7 +20,7 @@ export function InsightRekomendasi() {
     >
       <div className="flex items-center justify-between gap-2">
         <span className="flex items-center gap-1.5">
-          <h3 className="card-title-navy">INSIGHT &amp; REKOMENDASI AI</h3>
+          <h3 className="card-title-navy flex min-w-0 items-center gap-1.5"><span>INSIGHT &amp; REKOMENDASI AI</span><ScopeNote /></h3>
           <span className="tone-blue rounded px-1.5 py-[1px] text-[9px] font-bold">
             Beta
           </span>

@@ -1,11 +1,18 @@
+"use client";
+
 import { Gauge, Route, Truck, Wallet } from "lucide-react";
 import { armada } from "@/lib/agro-data";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { ScopeEmpty, inScope } from "@/components/ui/CommodityScope";
 import { Delta } from "@/components/ui/Delta";
 
 const rp = (v: number) => `Rp ${v.toLocaleString("id-ID")}`;
 
 export function ArmadaLogistik() {
+  // Domain: armada angkut TBS kebun sawit ke PKS → milik PalmCo.
+  const { active, def } = useSubholding();
+  const luarCakupan = !inScope(active, "angkut TBS");
   const gapPct =
     Math.round(((armada.biayaAngkutRpTon - armada.targetBiayaRpTon) / armada.targetBiayaRpTon) * 1000) / 10;
   return (
@@ -16,6 +23,10 @@ export function ArmadaLogistik() {
       <SectionHead title="Armada & Logistik TBS" action="Lihat Detail" />
       <p className="mt-[3px] text-[9px] text-ink-500">Utilisasi Armada Angkut &amp; Biaya per Ton</p>
 
+      {luarCakupan ? (
+        <ScopeEmpty label={def.fullLabel} />
+      ) : (
+      <>
       <div className="mt-2.5 grid grid-cols-2 gap-x-3 gap-y-2.5">
         <div className="flex items-start gap-2">
           <Truck size={13} strokeWidth={1.9} className="mt-[1px] shrink-0 text-ink-400" />
@@ -76,6 +87,8 @@ export function ArmadaLogistik() {
       </div>
 
       <p className="mt-auto pt-2 text-[8px] leading-snug text-ink-400">{armada.note}</p>
+      </>
+      )}
     </div>
   );
 }

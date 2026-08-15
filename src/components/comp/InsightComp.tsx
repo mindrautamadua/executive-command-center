@@ -1,6 +1,9 @@
+"use client";
+
 import { ArrowRight, BadgeCheck, Info, TrendingUp, TriangleAlert } from "lucide-react";
 import { compInsight } from "@/lib/comp-data";
 import { CoachRobot } from "../kinerja/CoachRobot";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const ICONS = {
   trend: TrendingUp,
@@ -16,7 +19,7 @@ export function InsightComp() {
       style={{ "--d": "640ms" } as React.CSSProperties}
     >
       <div className="flex items-center gap-1.5">
-        <h3 className="card-title-navy">Insight &amp; Rekomendasi AI</h3>
+        <h3 className="card-title-navy flex min-w-0 items-center gap-1.5"><span>Insight &amp; Rekomendasi AI</span><ScopeNote /></h3>
         <span className="rounded bg-[#dbe9fb] px-1.5 py-[1px] text-[9px] font-bold leading-none text-[#2f6fe4]">
           Beta
         </span>

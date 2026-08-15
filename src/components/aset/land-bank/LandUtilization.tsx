@@ -5,6 +5,7 @@ import { landUtilization } from "@/lib/alb-data";
 import { PALETTE } from "@/lib/chart-palette";
 import { DonutChart } from "@/components/ui/DonutChart";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const num = (v: number) =>
   v.toLocaleString("id-ID", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
@@ -27,7 +28,7 @@ export function LandUtilization() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "150ms" } as React.CSSProperties}
     >
-      <SectionHead title="Utilisasi Lahan" action="Lihat Detail" />
+      <SectionHead title="Utilisasi Lahan" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">Penggunaan Fisik Land Bank (rb ha)</p>
 
       <div className="flex min-h-0 flex-1 items-center gap-3">

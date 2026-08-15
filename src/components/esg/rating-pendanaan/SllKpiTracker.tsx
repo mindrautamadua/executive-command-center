@@ -2,6 +2,7 @@ import { sllKpis } from "@/lib/esg-data-detail";
 import type { SllKpi } from "@/lib/esg-data-detail";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const STATUS_TONE: Record<SllKpi["status"], BadgeTone> = {
   Tercapai: "good",
@@ -16,7 +17,7 @@ export function SllKpiTracker() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead title="SLL KPI Tracker" action="Lihat Detail" />
+      <SectionHead title="SLL KPI Tracker" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Sustainability-Linked Loan Rp 6,5 T · 3 KPI Terverifikasi
       </p>

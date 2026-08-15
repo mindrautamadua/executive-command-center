@@ -4,6 +4,7 @@ import {
   Bar,
   BarChart,
   CartesianGrid,
+  Cell,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -12,6 +13,8 @@ import {
 import { bySubholding } from "@/lib/asg-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { toSubholdingId } from "@/lib/subholding";
 
 const num = (v: number) =>
   v.toLocaleString("id-ID", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
@@ -25,6 +28,12 @@ const SERIES = [
 
 /** Areal sengketa per subholding, di-stack menurut tipe sengketa (rb ha). */
 export function SengketaBySubholding() {
+  const { active, isFiltered, def } = useSubholding();
+  // `subholding` adalah dimensi subholding kolom ini; kolom di luar cakupan
+  // diredupkan agar porsinya terhadap 82,4 rb ha grup tetap terbaca.
+  const dim = (subholding: string) =>
+    !isFiltered || toSubholdingId(subholding) === active ? 1 : 0.25;
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -32,7 +41,9 @@ export function SengketaBySubholding() {
     >
       <SectionHead title="Sengketa per Subholding" action="Lihat Detail" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        Areal Sengketa per Subholding &amp; Tipe (rb ha) · total 82,4 rb ha
+        {isFiltered
+          ? `Areal Sengketa ${def.label} menurut Tipe (rb ha) · dari 82,4 rb ha grup`
+          : "Areal Sengketa per Subholding & Tipe (rb ha) · total 82,4 rb ha"}
       </p>
 
       <div className="mt-1.5 min-h-0 w-full flex-1">
@@ -68,7 +79,11 @@ export function SengketaBySubholding() {
                 fill={s.color}
                 barSize={44}
                 radius={i === SERIES.length - 1 ? [2, 2, 0, 0] : undefined}
-              />
+              >
+                {bySubholding.map((row) => (
+                  <Cell key={row.subholding} fillOpacity={dim(row.subholding)} />
+                ))}
+              </Bar>
             ))}
           </BarChart>
         </ResponsiveContainer>

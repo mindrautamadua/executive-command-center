@@ -1,5 +1,8 @@
+"use client";
+
 import { Sigma } from "lucide-react";
 import { komponenScore, overallScore, scoreDriver } from "@/lib/kinerja-data";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 /** "Why 87,6?" — formula SMK: Job 45% + Behavior 25% + Corporate 30% = Overall. */
 export function DekomposisiScore() {
@@ -7,7 +10,7 @@ export function DekomposisiScore() {
     <div className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3">
       <div className="flex items-start justify-between gap-2">
         <div>
-          <h3 className="card-title-navy">SCORE DECOMPOSITION</h3>
+          <h3 className="card-title-navy flex min-w-0 items-center gap-1.5"><span>SCORE DECOMPOSITION</span><ScopeNote /></h3>
           <p className="mt-[3px] text-[9.5px] text-ink-500">
             Job 45% + Behavior 25% + Corporate 30% = Overall
           </p>

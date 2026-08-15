@@ -1,6 +1,7 @@
 import { AlertCircle, AlertTriangle, CheckCircle2, Sparkles } from "lucide-react";
 import { kskDecisions, type KskDecision } from "@/lib/ksk-data";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const TONE: Record<
   KskDecision["tone"],
@@ -32,7 +33,7 @@ export function KskDecisionCenter() {
       className="card anim-rise flex h-full flex-col px-4 pb-3.5 pt-3"
       style={{ "--d": "360ms" } as React.CSSProperties}
     >
-      <SectionHead title="BOD Decision Center" action="Lihat Semua" />
+      <SectionHead title="BOD Decision Center" action="Lihat Semua" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Keputusan Berbasis Skenario yang Menunggu Persetujuan BOD
       </p>

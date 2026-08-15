@@ -14,6 +14,7 @@ import { monthlyTrack } from "@/lib/kba-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { fmtRpT } from "@/lib/keu-core";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const LABEL: Record<string, string> = {
   plan: "RKAP Bulanan",
@@ -28,7 +29,7 @@ export function MonthlyBudgetTrack() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "180ms" } as React.CSSProperties}
     >
-      <SectionHead title="Monthly Budget Track" />
+      <SectionHead title="Monthly Budget Track" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Pendapatan Bulanan Plan vs Aktual + Kumulatif 2026 (Rp T)
       </p>

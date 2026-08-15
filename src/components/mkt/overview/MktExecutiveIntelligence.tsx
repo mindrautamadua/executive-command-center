@@ -1,5 +1,6 @@
 import { BrainCircuit, Sparkles } from "lucide-react";
 import { mktIntelligence } from "@/lib/pemasaran-data";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const SIGNAL_TONE = {
   red: {
@@ -36,6 +37,8 @@ export function MktExecutiveIntelligence() {
           <span className="rounded bg-ptpn-greenLight px-1 py-[1px] text-[8px] font-bold normal-case tracking-normal text-ptpn-green">
             AI
           </span>
+          {/* Sintesis naratif disusun di level grup — tidak dipecah per subholding. */}
+          <ScopeNote />
         </h3>
         <div className="flex items-center gap-3">
           {mktIntelligence.counts.map((c) => (

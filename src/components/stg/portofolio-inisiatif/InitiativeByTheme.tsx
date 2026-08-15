@@ -11,17 +11,32 @@ import {
   YAxis,
 } from "recharts";
 import { initiativeByTheme } from "@/lib/spi-data";
-import { STATUS_COLOR } from "@/lib/stg-core";
+import { STATUS_COLOR, initiatives } from "@/lib/stg-core";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { filterBySubholding } from "@/lib/subholding";
 
-const data = initiativeByTheme.map((r) => ({
-  ...r,
-  short: r.theme.replace("Operational Excellence", "Ops Excellence").replace(" & Dekarbonisasi", ""),
-}));
+const short = (theme: string) =>
+  theme.replace("Operational Excellence", "Ops Excellence").replace(" & Dekarbonisasi", "");
 
 /** Distribusi status 28 inisiatif pada 5 tema RJPP. */
 export function InitiativeByTheme() {
+  const { active } = useSubholding();
+  // `owner` (PalmCo / SGN / PTPN I / Holding) adalah dimensi subholding register.
+  const rows = filterBySubholding(initiatives, active, (i) => i.owner);
+  const data = initiativeByTheme.map((r) => {
+    const ofTheme = rows.filter((i) => i.theme === r.theme);
+    return {
+      theme: r.theme,
+      onTrack: ofTheme.filter((i) => i.status === "On Track").length,
+      atRisk: ofTheme.filter((i) => i.status === "At Risk").length,
+      offTrack: ofTheme.filter((i) => i.status === "Off Track").length,
+      short: short(r.theme),
+    };
+  });
+  const total = rows.length;
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -29,7 +44,7 @@ export function InitiativeByTheme() {
     >
       <SectionHead title="Inisiatif per Tema" action="Lihat Detail" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        Komposisi Status Eksekusi per Tema RJPP · 28 Inisiatif
+        Komposisi Status Eksekusi per Tema RJPP · {total} Inisiatif
       </p>
 
       <div className="mt-1.5 min-h-0 w-full flex-1">

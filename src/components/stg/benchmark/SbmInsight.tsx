@@ -1,6 +1,7 @@
 import { ArrowRight, CircleAlert, Info, Sparkles, TrendingUp, TriangleAlert } from "lucide-react";
 import { sbmInsights, sbmSources } from "@/lib/sbm-data";
 import type { StgInsight } from "@/lib/stg-core";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const TONES: Record<StgInsight["tone"], { bg: string; icon: string; title: string }> = {
   good: { bg: "bg-ptpn-greenLight", icon: "text-ptpn-green", title: "text-ptpn-green" },
@@ -28,7 +29,8 @@ export function SbmInsight() {
           Insight &amp; Rekomendasi{" "}
           <span className="font-semibold normal-case tracking-normal text-ink-400">
             (Decision-grade)
-          </span>
+          </span>{" "}
+          <ScopeNote />
         </h3>
         <button className="flex shrink-0 items-center gap-1.5 rounded-lg border border-[#e3e9ef] bg-white px-3 py-[6px] text-[9.5px] font-semibold text-ink-700 transition-colors hover:border-ptpn-green hover:text-ptpn-green">
           Lihat Semua Insight <ArrowRight size={11} />

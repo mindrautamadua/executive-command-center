@@ -5,6 +5,7 @@ import { revenueByCommodity } from "@/lib/kpl-data";
 import { fmtId } from "@/lib/keu-core";
 import { DonutChart } from "../../ui/DonutChart";
 import { SectionHead } from "../../hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 /** Donut porsi pendapatan per komoditas (CPO 58% dominan). */
 export function RevenueByCommodity() {
@@ -16,7 +17,7 @@ export function RevenueByCommodity() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "300ms" } as React.CSSProperties}
     >
-      <SectionHead title="Revenue by Commodity" />
+      <SectionHead title="Revenue by Commodity" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">Porsi Pendapatan YTD per Komoditas</p>
 
       <div className="flex min-h-0 flex-1 items-center gap-3">

@@ -1,4 +1,5 @@
 import { competitorBench } from "@/lib/hilir-stok-margin-data";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 import { SectionHead } from "../../hc/SectionHead";
 
 const num = (v: number, d = 1) =>
@@ -11,7 +12,8 @@ export function CompetitorBenchmark() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead title="Competitor Benchmark" action="Lihat Detail" />
+      {/* Baris PTPN dibandingkan sebagai satu grup terhadap emiten peer. */}
+      <SectionHead title="Competitor Benchmark" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         ASP, Yield &amp; Margin CPO vs Emiten Sawit (estimasi publik YTD)
       </p>

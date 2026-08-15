@@ -14,6 +14,7 @@ import {
 import { emissionTrajectory } from "@/lib/esg-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const angka = (v: number) => v.toLocaleString("id-ID", { minimumFractionDigits: 2 });
 
@@ -23,7 +24,7 @@ export function EmissionTrajectory() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "90ms" } as React.CSSProperties}
     >
-      <SectionHead title="Jalur Dekarbonisasi menuju -30%" action="Lihat Detail" />
+      <SectionHead title="Jalur Dekarbonisasi menuju -30%" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Intensitas Emisi tCO2e/ton CPO · Aktual vs Jalur Target 2019–2030
       </p>

@@ -13,6 +13,7 @@ import {
 } from "recharts";
 import { driversIndex } from "@/lib/produktivitas-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE, SEMANTIC } from "@/lib/chart-palette";
+import { ScopeNote } from "../ui/ScopeNote";
 
 const koma = (v: number) => v.toFixed(1).replace(".", ",");
 
@@ -67,7 +68,10 @@ export function DriversProduktivitas() {
       className="card anim-rise flex h-full flex-col px-4 pb-2 pt-3"
       style={{ "--d": "360ms" } as React.CSSProperties}
     >
-      <h3 className="card-title-navy">6. Drivers of Productivity (YTD)</h3>
+      <h3 className="card-title-navy flex min-w-0 items-center gap-1.5">
+        <span>6. Drivers of Productivity (YTD)</span>
+        <ScopeNote />
+      </h3>
       <p className="mt-[3px] text-[9.5px] text-ink-500">
         Faktor Pendorong Perubahan Productivity Index
       </p>

@@ -1,3 +1,5 @@
+"use client";
+
 import {
   HeartPulse,
   RefreshCw,
@@ -9,6 +11,7 @@ import {
 import { hcKpi } from "@/lib/hc-data";
 import { Delta } from "../ui/Delta";
 import { MetricInfo } from "../ui/MetricInfo";
+import { ScopeNote } from "../ui/ScopeNote";
 
 const ICONS = {
   users: Users,
@@ -28,6 +31,11 @@ const TONES: Record<string, string> = {
   amber: "bg-[#fdf3e0] text-[#d98b06]",
 };
 
+/**
+ * Enam KPI strategis HC. Seluruh angka adalah agregat grup (headcount 70.142 dst.)
+ * dan belum punya pecahan per subholding di sumber data, sehingga tetap utuh saat
+ * filter aktif dan ditandai <ScopeNote />.
+ */
 export function HcKpiStrip() {
   return (
     <div className="grid grid-cols-6 gap-3">
@@ -51,9 +59,10 @@ export function HcKpiStrip() {
               >
                 <Icon size={14} strokeWidth={1.9} />
               </span>
-              <span className="text-[9.5px] font-semibold leading-[1.25] text-ink-500">
+              <span className="min-w-0 text-[9.5px] font-semibold leading-[1.25] text-ink-500">
                 {k.label}
               </span>
+              <ScopeNote />
             </div>
             <div className="mt-2.5 text-[22px] font-extrabold leading-none tracking-[-0.01em] text-ink-900">
               {k.value}

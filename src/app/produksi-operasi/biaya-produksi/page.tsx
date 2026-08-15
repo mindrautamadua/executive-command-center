@@ -1,4 +1,5 @@
 import { ProdSidebar } from "@/components/prod/ProdSidebar";
+import { ScopeGuard } from "@/components/ui/ScopeGuard";
 import { DataTrustStrip } from "@/components/hc/DataTrustStrip";
 import { BppHeader } from "@/components/prod/biaya-produksi/BppHeader";
 import { BppKpiStrip } from "@/components/prod/biaya-produksi/BppKpiStrip";
@@ -20,6 +21,8 @@ export default function BiayaProduksiPage() {
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
         <BppHeader />
 
+        <ScopeGuard owner="palmco">
+
         <div className="flex flex-col gap-3 px-5 pb-5">
           <div className="-mb-3">
             <DataTrustStrip data={prodDataTrust} />
@@ -40,6 +43,7 @@ export default function BiayaProduksiPage() {
 
           <BppInsight />
         </div>
+        </ScopeGuard>
       </main>
     </div>
   );

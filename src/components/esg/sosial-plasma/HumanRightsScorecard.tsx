@@ -1,6 +1,7 @@
 import { humanRights } from "@/lib/esg-data-detail";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const STATUS_TONE: Record<string, BadgeTone> = {
   Terpenuhi: "good",
@@ -20,7 +21,7 @@ export function HumanRightsScorecard() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead title="Human Rights Scorecard" action="Lihat Detail" />
+      <SectionHead title="Human Rights Scorecard" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Indikator HAM Material bagi NDPE &amp; Rating ESG
       </p>

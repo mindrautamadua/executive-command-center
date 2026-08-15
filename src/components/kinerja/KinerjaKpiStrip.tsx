@@ -1,3 +1,5 @@
+"use client";
+
 import {
   ClipboardCheck,
   UsersRound,
@@ -8,6 +10,7 @@ import {
 } from "lucide-react";
 import { kinerjaKpi } from "@/lib/kinerja-data";
 import { KpiCard } from "../ui/KpiCard";
+import { ScopeNote } from "../ui/ScopeNote";
 
 const ICONS = {
   score: ClipboardCheck,
@@ -29,6 +32,7 @@ export function KinerjaKpiStrip() {
             icon={<Icon size={13} strokeWidth={1.9} />}
             tone={k.tone}
             label={k.label}
+            badge={<ScopeNote />}
             value={k.unit ? `${k.value}${k.unit}` : k.value}
             delta={
               k.delta && k.trend

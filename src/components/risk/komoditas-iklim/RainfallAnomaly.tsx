@@ -13,6 +13,16 @@ import {
 import { rainfallAnomaly, type RainfallAnomaly as RainfallRow } from "@/lib/risk-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import type { SubholdingId } from "@/lib/subholding";
+
+/**
+ * Pemetaan komoditas → subholding untuk baris regional: Regional 1–6 adalah
+ * kebun sawit (PalmCo), sedangkan Regional 7 ditandai "Jawa (tebu)" pada data
+ * sehingga masuk cakupan SugarCo.
+ */
+const OWNER_BY_REGIONAL: Record<string, SubholdingId> = { "Regional 7": "sugarco" };
+const ownerOf = (regional: string): SubholdingId => OWNER_BY_REGIONAL[regional] ?? "palmco";
 
 const STATUS_COLOR: Record<RainfallRow["status"], string> = {
   Normal: PALETTE.green,
@@ -35,6 +45,14 @@ const LEGEND: RainfallRow["status"][] = ["Normal", "Waspada", "Defisit"];
 
 /** Anomali curah hujan 3 bulan terakhir vs normal, per regional operasional. */
 export function RainfallAnomalyChart() {
+  const { active, isFiltered, def } = useSubholding();
+  const scoped = isFiltered
+    ? rainfallAnomaly.filter((r) => ownerOf(r.regional) === active)
+    : rainfallAnomaly;
+  // SupportingCo (karet & teh) tidak punya pecahan regional pada data ini.
+  const outOfScope = scoped.length === 0;
+  const rows = outOfScope ? rainfallAnomaly : scoped;
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2 pt-3"
@@ -42,12 +60,19 @@ export function RainfallAnomalyChart() {
     >
       <SectionHead title="Anomali Curah Hujan per Regional" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        Deviasi 3 Bulan Terakhir vs Normal — Ambang Merah ≤ -15%
+        {outOfScope
+          ? `Pecahan regional curah hujan belum tersedia untuk ${def.label}`
+          : isFiltered
+            ? `Deviasi 3 Bulan Terakhir vs Normal — regional ${def.label}`
+            : "Deviasi 3 Bulan Terakhir vs Normal — Ambang Merah ≤ -15%"}
       </p>
 
-      <div className="mt-1.5 min-h-0 w-full flex-1">
+      <div
+        className="mt-1.5 min-h-0 w-full flex-1 transition-opacity"
+        style={{ opacity: outOfScope ? 0.25 : 1 }}
+      >
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={rainfallAnomaly} margin={{ top: 12, right: 14, bottom: 0, left: -18 }}>
+          <LineChart data={rows} margin={{ top: 12, right: 14, bottom: 0, left: -18 }}>
             <CartesianGrid stroke={CHART_AXIS.grid} vertical={false} />
             <ReferenceLine y={0} stroke={CHART_AXIS.axis} />
             <ReferenceLine

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { benchmarkGaji } from "@/lib/comp-data";
 import { PALETTE, SEQ_BLUE } from "@/lib/chart-palette";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const num = (v: number) => v.toLocaleString("id-ID", { maximumFractionDigits: 1 });
 
@@ -26,7 +27,7 @@ export function BenchmarkGaji() {
     >
       <div className="flex items-start justify-between gap-2">
         <div>
-          <h3 className="card-title-navy">Perbandingan Benchmark Gaji</h3>
+          <h3 className="card-title-navy flex min-w-0 items-center gap-1.5"><span>Perbandingan Benchmark Gaji</span><ScopeNote /></h3>
           <p className="mt-[3px] text-[9.5px] text-ink-500">Rata-rata Gaji per Level vs Market</p>
         </div>
         <span className="mt-[2px] shrink-0 text-[9px] text-ink-400">(Rp Juta)</span>

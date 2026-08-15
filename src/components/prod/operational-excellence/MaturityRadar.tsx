@@ -11,6 +11,7 @@ import {
 } from "recharts";
 import { OPEX_MATURITY_TARGET, opexMaturity } from "@/lib/biaya-opex-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 import { SectionHead } from "@/components/hc/SectionHead";
 
 const radarData = opexMaturity.map((r) => ({
@@ -25,7 +26,8 @@ export function MaturityRadar() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead title="Maturity OPEX per Regional" action="Lihat Detail" />
+      {/* Skor maturitas program OPEX bersifat enterprise, belum dipecah per subholding. */}
+      <SectionHead title="Maturity OPEX per Regional" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Skor Maturitas 1–5 vs Target 2026: {OPEX_MATURITY_TARGET.toLocaleString("id-ID")}
       </p>

@@ -1,10 +1,16 @@
+"use client";
+
 import {
   salesByKomoditas,
   salesByKomoditasTotal,
   type SalesRow,
 } from "@/lib/pemasaran-data";
+import { filterBySubholding } from "@/lib/subholding";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { commodityScope, ScopeEmpty } from "@/components/ui/CommodityScope";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const statusOf = (pct: number): { label: string; tone: BadgeTone } =>
   pct >= 100
@@ -27,6 +33,11 @@ const TREN: Record<SalesRow["tren"], { glyph: string; cls: string }> = {
 
 /** Tabel penjualan per komoditas: volume, ASP, nilai, capaian RKAP YTD. */
 export function SalesByKomoditasTable() {
+  const { active, def } = useSubholding();
+  // CPO/PK & PKO → PalmCo, gula & tetes → SugarCo, karet & teh → SupportingCo;
+  // produk hilir & lainnya lintas komoditas sehingga tetap tampil.
+  const rows = filterBySubholding(salesByKomoditas, active, (r) => commodityScope(r.komoditas));
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
@@ -46,8 +57,10 @@ export function SalesByKomoditasTable() {
         <span className="text-right">Status</span>
       </div>
 
+      {rows.length === 0 && <ScopeEmpty label={def.fullLabel} />}
+
       <ul className="mt-1 flex min-h-0 flex-1 flex-col justify-between gap-[3px]">
-        {salesByKomoditas.map((r) => {
+        {rows.map((r) => {
           const st = statusOf(r.rkapPct);
           const tren = TREN[r.tren];
           return (
@@ -83,9 +96,11 @@ export function SalesByKomoditasTable() {
         })}
       </ul>
 
+      {/* Total & capaian RKAP hanya tersedia pada level konsolidasi grup. */}
       <div className="mt-1.5 flex items-center justify-between rounded-lg bg-[#eef2f6] px-2.5 py-[5px]">
-        <span className="text-[8.5px] font-extrabold uppercase tracking-[0.04em] text-ink-500">
+        <span className="flex items-center gap-1.5 text-[8.5px] font-extrabold uppercase tracking-[0.04em] text-ink-500">
           Total
+          <ScopeNote />
         </span>
         <span className="flex items-center gap-2">
           <span className="text-[9.5px] font-extrabold text-ink-900">

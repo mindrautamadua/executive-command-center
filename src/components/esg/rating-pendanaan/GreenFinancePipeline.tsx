@@ -1,6 +1,7 @@
 import { Leaf } from "lucide-react";
 import { greenPipeline } from "@/lib/esg-data-detail";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 /** Pipeline instrumen pendanaan hijau: green bond, KUR plasma, refinancing SLL. */
 export function GreenFinancePipeline() {
@@ -9,7 +10,7 @@ export function GreenFinancePipeline() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead title="Green Finance Pipeline" action="Lihat Detail" />
+      <SectionHead title="Green Finance Pipeline" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Instrumen Pendanaan Berkelanjutan dalam Persiapan
       </p>

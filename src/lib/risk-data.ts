@@ -550,7 +550,7 @@ export interface RiskMover {
 
 export const riskMovers: RiskMover[] = [
   { name: "El Nino H2 2026", arah: "naik", dari: "Tinggi", ke: "Ekstrem", catatan: "Probabilitas BMKG/NOAA naik ke 62%" },
-  { name: "Serangan siber ERP/OT", arah: "naik", dari: "Tinggi", ke: "Ekstrem", catatan: "Insiden phishing meningkat; patch SLA 88%" },
+  { name: "Serangan siber ERP/OT", arah: "naik", dari: "Tinggi", ke: "Ekstrem", catatan: "Insiden phishing meningkat; patch SLA 78%" },
   { name: "Likuiditas SGN musim giling", arah: "turun", dari: "Ekstrem", ke: "Tinggi", catatan: "Fasilitas modal kerja committed Rp 2,4 T efektif" },
   { name: "Fraud pengadaan", arah: "turun", dari: "Tinggi", ke: "Tinggi", catatan: "Skor turun 14→12; e-procurement fase 2 live" },
   { name: "Kesiapan EUDR", arah: "baru", ke: "Tinggi", catatan: "Masuk register Q2; due diligence geolokasi 78/100" },
@@ -627,7 +627,7 @@ export const topRiskDetail: TopRiskDetail[] = [
     name: "Serangan siber pada ERP & sistem operasional",
     category: "Operasional",
     level: "Ekstrem",
-    deskripsi: "Insiden phishing naik; patch compliance 88% vs SLA ≥95% (limit breach). Downtime ERP >48 jam mengganggu penjualan & payroll.",
+    deskripsi: "Insiden phishing naik; patch compliance 78% vs SLA ≥95% (limit breach). Downtime ERP >48 jam mengganggu penjualan & payroll.",
     kri: "Patch SLA < 95% · insiden P1 > 0",
     mitigasi: "Program uplift keamanan TI, asuransi cyber (line baru 2026), tabletop exercise BOD.",
     due: "Sep 2026",
@@ -776,8 +776,8 @@ export const appetiteGauges: AppetiteGauge[] = [
     kategori: "Operasional",
     metric: "Cyber patch compliance",
     limitLabel: "≥ 95% dalam SLA",
-    aktualLabel: "88%",
-    utilisasiPct: 107,
+    aktualLabel: "78%",
+    utilisasiPct: 122,
     status: "Breach",
   },
   {
@@ -837,7 +837,7 @@ export const breachLog: BreachLogRow[] = [
   {
     limit: "Cyber patch SLA",
     kategori: "Operasional",
-    deviasi: "Patch compliance 88% vs limit ≥ 95%",
+    deviasi: "Patch compliance 78% vs limit ≥ 95%",
     sejak: "Apr 2026",
     tindakLanjut: "Sprint patching 90 hari + segmentasi jaringan OT",
     eskalasi: "Unit",

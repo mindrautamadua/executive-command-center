@@ -1,5 +1,8 @@
+"use client";
+
 import { RefreshCcw } from "lucide-react";
 import { continuousPerformance, feedbackFrequency } from "@/lib/kinerja-data";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 /** KPI ritme continuous performance: check-in, 1:1, goal update, coaching. */
 export function ContinuousPerformance() {
@@ -7,7 +10,7 @@ export function ContinuousPerformance() {
     <div className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3">
       <div className="flex items-start justify-between gap-2">
         <div>
-          <h3 className="card-title-navy">CONTINUOUS PERFORMANCE</h3>
+          <h3 className="card-title-navy flex min-w-0 items-center gap-1.5"><span>CONTINUOUS PERFORMANCE</span><ScopeNote /></h3>
           <p className="mt-[3px] text-[9.5px] text-ink-500">
             Ritme Goal → Check-in → Feedback → Coaching
           </p>

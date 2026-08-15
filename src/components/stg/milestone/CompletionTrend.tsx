@@ -13,15 +13,19 @@ import {
 import { completionTrend } from "@/lib/sms-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
-/** Milestone selesai kumulatif: rencana vs aktual 2026. */
+/**
+ * Milestone selesai kumulatif: rencana vs aktual 2026.
+ * Deret kumulatif hanya tersedia di tingkat grup (tanpa pecahan owner) — RULE B.
+ */
 export function CompletionTrend() {
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "300ms" } as React.CSSProperties}
     >
-      <SectionHead title="Completion Trend 2026" action="Lihat Detail" />
+      <SectionHead title="Completion Trend 2026" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Milestone Selesai Kumulatif — Rencana vs Aktual (Target FY 142)
       </p>

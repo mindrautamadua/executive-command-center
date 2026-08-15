@@ -12,6 +12,7 @@ import {
 import { workingCapitalTrend } from "@/lib/kas-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "../../hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const SERIES = [
   { key: "dpo", label: "DPO", color: PALETTE.green },
@@ -26,7 +27,7 @@ export function WorkingCapitalTrend() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "180ms" } as React.CSSProperties}
     >
-      <SectionHead title="Working Capital Trend" />
+      <SectionHead title="Working Capital Trend" badge={<ScopeNote />} />
       <div className="mt-[3px] flex items-center justify-between gap-2">
         <p className="text-[9px] text-ink-500">DSO · DPO · DIO 12 Bulan (hari) · CCC 18 hari</p>
         <div className="flex shrink-0 items-center gap-2.5">

@@ -1,6 +1,11 @@
+"use client";
+
 import { AlertCircle, AlertTriangle, CheckCircle2 } from "lucide-react";
 import { mktDecisions } from "@/lib/pemasaran-data";
+import { filterBySubholding } from "@/lib/subholding";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { commodityScope, ScopeEmpty } from "@/components/ui/CommodityScope";
 
 const TONE = {
   red: {
@@ -25,15 +30,24 @@ const TONE = {
 
 /** Keputusan komersial yang menunggu persetujuan BOD. */
 export function MktBodDecisionCenter() {
+  const { active, def } = useSubholding();
+  // Komoditas pada judul/uraian menentukan pemilik keputusan (mis. biodiesel →
+  // PalmCo); keputusan lintas komoditas tetap tampil di semua cakupan.
+  const decisions = filterBySubholding(mktDecisions, active, (d) =>
+    commodityScope(`${d.title} ${d.text}`),
+  );
+
   return (
     <div className="card anim-rise px-4 pb-3.5 pt-3" style={{ "--d": "120ms" } as React.CSSProperties}>
       <SectionHead title="BOD Decision Center" action="Lihat Semua" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        {mktDecisions.length} keputusan menunggu persetujuan
+        {decisions.length} keputusan menunggu persetujuan
       </p>
 
+      {decisions.length === 0 && <ScopeEmpty label={def.fullLabel} />}
+
       <div className="mt-2.5 flex flex-col gap-2">
-        {mktDecisions.map((d) => {
+        {decisions.map((d) => {
           const t = TONE[d.tone];
           const Icon = t.icon;
           return (

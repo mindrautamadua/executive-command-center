@@ -1,4 +1,8 @@
+"use client";
+
 import { tenderKpbn } from "@/lib/kontrak-buyer-data";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { inScope, ScopeEmpty } from "@/components/ui/CommodityScope";
 import { SectionHead } from "@/components/hc/SectionHead";
 import { ToneBadge } from "@/components/shared/ToneBadge";
 
@@ -6,6 +10,10 @@ const rp = (v: number) => v.toLocaleString("id-ID");
 
 /** Rekap 6 tender KPBN terakhir: harga dasar vs terbentuk & premium. */
 export function TenderKpbnCard() {
+  const { active, def } = useSubholding();
+  // Tender KPBN memperdagangkan CPO & PK — seluruhnya domain PalmCo.
+  const luarCakupan = !inScope(active, "CPO PK");
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
@@ -16,6 +24,10 @@ export function TenderKpbnCard() {
         Harga dasar vs harga terbentuk 6 tender terakhir (CPO, Rp/kg)
       </p>
 
+      {luarCakupan && <ScopeEmpty label={def.fullLabel} />}
+
+      {!luarCakupan && (
+        <>
       <div className="mt-2 grid grid-cols-[minmax(0,1fr)_52px_64px_64px_70px] items-center gap-x-2 text-[8px] font-semibold uppercase tracking-[0.04em] text-ink-400">
         <span>Tanggal</span>
         <span className="text-right">Volume</span>
@@ -46,6 +58,8 @@ export function TenderKpbnCard() {
           </li>
         ))}
       </ul>
+        </>
+      )}
 
       <p className="mt-1.5 truncate text-[8px] text-ink-400">
         Premium terbentuk menguat: +Rp 50-85/kg (April) → +Rp 120/kg (akhir Mei).

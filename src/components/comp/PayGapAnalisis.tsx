@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { payGapPerLevel, payGapRingkas, payGapWarna } from "@/lib/comp-data";
 import { Delta } from "../ui/Delta";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 /* skala global (Rp juta) agar antar level sebanding — dihitung dari data + headroom 5% */
 const MAX = Math.max(...payGapPerLevel.map((r) => Math.max(r.lakiLaki, r.perempuan))) * 1.05;
@@ -39,7 +40,7 @@ export function PayGapAnalisis() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "280ms" } as React.CSSProperties}
     >
-      <h3 className="card-title-navy">Analisis Kesenjangan Gaji (Pay Gap)</h3>
+      <h3 className="card-title-navy flex min-w-0 items-center gap-1.5"><span>Analisis Kesenjangan Gaji (Pay Gap)</span><ScopeNote /></h3>
       <p className="mt-[3px] text-[9.5px] text-ink-500">Rata-rata Gaji berdasarkan Gender</p>
 
       <div className="flex min-h-0 flex-1 gap-2.5">

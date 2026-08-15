@@ -4,6 +4,7 @@ import { useState } from "react";
 import { AlertCircle, AlertTriangle, CheckCircle2, Sparkles } from "lucide-react";
 import { esgDecisions } from "@/lib/esg-data";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const TABS = [
   { label: "Perlu Keputusan", count: esgDecisions.length },
@@ -37,7 +38,7 @@ export function EsgBodDecisionCenter() {
 
   return (
     <div className="card anim-rise px-4 pb-3.5 pt-3" style={{ "--d": "120ms" } as React.CSSProperties}>
-      <SectionHead title="BOD Decision Center" action="Lihat Semua" />
+      <SectionHead title="BOD Decision Center" action="Lihat Semua" badge={<ScopeNote />} />
 
       <div className="mt-2.5 flex items-center gap-4 border-b border-[#f0f3f6]">
         {TABS.map((t, i) => (

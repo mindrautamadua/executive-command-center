@@ -12,10 +12,15 @@ import {
   YAxis,
   ZAxis,
 } from "recharts";
-import { STATUS_COLOR } from "@/lib/stg-core";
+import { STATUS_COLOR, initiatives } from "@/lib/stg-core";
 import { portfolioBubbles } from "@/lib/stg-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { filterBySubholding } from "@/lib/subholding";
+
+/** Pemilik tiap inisiatif — dimensi subholding bubble (register stg-core). */
+const OWNER_BY_NAME = new Map(initiatives.map((i) => [i.name, i.owner as string]));
 
 const rp = (v: number) =>
   `Rp ${v.toLocaleString("id-ID", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} T`;
@@ -28,6 +33,9 @@ const LEGEND = [
 
 /** Peta portofolio 28 inisiatif: progres × dampak, ukuran bubble = investasi. */
 export function InitiativePortfolioMap() {
+  const { active } = useSubholding();
+  const bubbles = filterBySubholding(portfolioBubbles, active, (b) => OWNER_BY_NAME.get(b.name));
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -35,7 +43,8 @@ export function InitiativePortfolioMap() {
     >
       <SectionHead title="Initiative Portfolio Map" action="Lihat Detail" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        Dampak (EBITDA Uplift 2029) × Progres Fisik · Ukuran = Kebutuhan Investasi · 28 Inisiatif
+        Dampak (EBITDA Uplift 2029) × Progres Fisik · Ukuran = Kebutuhan Investasi ·{" "}
+        {bubbles.length} Inisiatif
       </p>
 
       <div className="mt-1.5 min-h-0 w-full flex-1">
@@ -76,8 +85,8 @@ export function InitiativePortfolioMap() {
                 return [rp(v), "Investasi"];
               }}
             />
-            <Scatter data={portfolioBubbles} shape="circle">
-              {portfolioBubbles.map((b) => (
+            <Scatter data={bubbles} shape="circle">
+              {bubbles.map((b) => (
                 <Cell key={b.name} fill={STATUS_COLOR[b.status]} fillOpacity={0.55} />
               ))}
             </Scatter>

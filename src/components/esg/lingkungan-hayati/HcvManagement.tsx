@@ -1,7 +1,10 @@
+"use client";
+
 import { hcvAreas } from "@/lib/esg-data-detail";
 import type { HcvArea } from "@/lib/esg-data-detail";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
 
 const PATROLI_TONE: Record<HcvArea["patroli"], BadgeTone> = {
   "Rutin (bulanan)": "good",
@@ -13,6 +16,10 @@ const TOTAL = hcvAreas.reduce((s, a) => s + a.luasRbHa, 0);
 
 /** Kawasan High Conservation Value per regional: luas, patroli, dan temuan. */
 export function HcvManagement() {
+  const { active, def } = useSubholding();
+  // Kawasan HCV dipetakan per Regional 1–7 (kebun sawit) — cakupan PalmCo.
+  const outOfScope = active !== "all" && active !== "palmco";
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
@@ -20,11 +27,20 @@ export function HcvManagement() {
     >
       <SectionHead title="Pengelolaan Kawasan HCV" action="Lihat Detail" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        {TOTAL.toLocaleString("id-ID", { minimumFractionDigits: 1 })} rb ha Dikelola · 128 Spesies
-        Dilindungi Teridentifikasi
+        {outOfScope ? (
+          `Kawasan HCV dipetakan per regional kebun sawit PalmCo — di luar cakupan ${def.label}`
+        ) : (
+          <>
+            {TOTAL.toLocaleString("id-ID", { minimumFractionDigits: 1 })} rb ha Dikelola · 128
+            Spesies Dilindungi Teridentifikasi
+          </>
+        )}
       </p>
 
-      <div className="mt-2 min-h-0 flex-1 overflow-hidden">
+      <div
+        className="mt-2 min-h-0 flex-1 overflow-hidden transition-opacity"
+        style={{ opacity: outOfScope ? 0.25 : 1 }}
+      >
         <table className="w-full border-collapse">
           <thead>
             <tr className="border-b border-[#eef2f6] text-[8.5px] font-semibold text-ink-500">

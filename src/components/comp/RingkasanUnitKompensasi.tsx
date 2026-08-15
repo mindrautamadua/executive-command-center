@@ -1,6 +1,10 @@
+"use client";
+
 import { ArrowRight } from "lucide-react";
 import { unitKompensasi } from "@/lib/comp-data";
 import { PALETTE } from "@/lib/chart-palette";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { orgDim } from "../ui/OrgScope";
 
 const HEAD = [
   "Unit Organisasi",
@@ -23,12 +27,19 @@ const RASIO_MIN = 60;
 const RASIO_MAX = 75;
 
 export function RingkasanUnitKompensasi() {
+  const { active, isFiltered, def } = useSubholding();
+  // Tabel pembanding antar entitas: baris di luar subholding aktif diredupkan
+  // agar posisi relatif biaya, rata-rata gaji dan pay equity tetap terbaca.
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "520ms" } as React.CSSProperties}
     >
       <h3 className="card-title-navy">Ringkasan Kompensasi per Unit Organisasi</h3>
+      {isFiltered && (
+        <p className="mt-[3px] text-[9px] text-ink-500">Unit {def.label} disorot</p>
+      )}
 
       <table className="mt-2 w-full">
         <thead>
@@ -49,7 +60,8 @@ export function RingkasanUnitKompensasi() {
           {unitKompensasi.map((r, ri) => (
             <tr
               key={r.unit}
-              className="border-b border-[#f4f7fa] last:border-0"
+              className="border-b border-[#f4f7fa] transition-opacity last:border-0"
+              style={{ opacity: orgDim(active, r.unit) }}
             >
               <td className="whitespace-nowrap px-2 py-[6px] text-[9.5px] text-ink-900">
                 {r.unit}

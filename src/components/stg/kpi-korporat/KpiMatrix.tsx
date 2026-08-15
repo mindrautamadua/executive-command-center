@@ -1,6 +1,10 @@
+"use client";
+
 import { kpiMatrix, type Rag } from "@/lib/skc-data";
 import { SectionHead } from "@/components/hc/SectionHead";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { filterBySubholding } from "@/lib/subholding";
 
 const RAG_TONE: Record<Rag, BadgeTone> = {
   green: "good",
@@ -22,14 +26,21 @@ const SCORE_CLASS: Record<Rag, string> = {
 
 /** Matriks 32 KPI korporat: target, aktual, skor, dan status RAG. */
 export function KpiMatrix() {
+  const { active } = useSubholding();
+  // Nama KPI menyebut entitas bila spesifik (mis. "EBITDA Margin SGN");
+  // KPI tanpa penyebutan entitas adalah KPI group dan tetap tampil.
+  const rows = filterBySubholding(kpiMatrix, active, (k) => k.name);
+  const tally = (rag: Rag) => rows.filter((k) => k.rag === rag).length;
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "180ms" } as React.CSSProperties}
     >
-      <SectionHead title="Matriks 32 KPI Korporat" action="Unduh Matriks" />
+      <SectionHead title={`Matriks ${rows.length} KPI Korporat`} action="Unduh Matriks" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        21 Hijau · 7 Kuning · 4 Merah — Target vs Aktual YTD Mei 2026
+        {tally("green")} Hijau · {tally("amber")} Kuning · {tally("red")} Merah — Target vs Aktual
+        YTD Mei 2026
       </p>
 
       <div className="scroll-thin mt-1.5 min-h-0 flex-1 overflow-y-auto">
@@ -45,7 +56,7 @@ export function KpiMatrix() {
             </tr>
           </thead>
           <tbody>
-            {kpiMatrix.map((k) => (
+            {rows.map((k) => (
               <tr key={`${k.perspective}-${k.name}`} className="align-middle">
                 <td className="border-b border-[#f3f6f9] py-[5px] pr-2 text-[8.5px] font-bold leading-snug text-ink-900">
                   {k.name}

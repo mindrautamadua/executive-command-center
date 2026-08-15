@@ -1,5 +1,6 @@
 import type { ProdInsight } from "@/lib/produksi-data";
 import { ProdInsightGrid } from "../ProdInsightGrid";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 /** Insight kebun — narasi dari protasTrend, gapAnalysis, regionalYield & topKebun. */
 const items: ProdInsight[] = [
@@ -26,5 +27,11 @@ const items: ProdInsight[] = [
 ];
 
 export function KebunInsight() {
-  return <ProdInsightGrid items={items} cols="grid-cols-4" />;
+  // Narasi insight disusun di level grup - tandai konsolidasi.
+  return (
+    <div className="flex flex-col gap-1">
+      <ScopeNote className="self-end" />
+      <ProdInsightGrid items={items} cols="grid-cols-4" />
+    </div>
+  );
 }

@@ -17,6 +17,7 @@ import {
 } from "@/lib/krk-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const rpKg = (v: number) => `Rp ${v.toLocaleString("id-ID")}/kg`;
 
@@ -26,7 +27,7 @@ export function CommodityPriceExposure() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead title="Commodity Price Exposure" />
+      <SectionHead title="Commodity Price Exposure" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Harga CPO &amp; Gula 24 Bulan (Rp/kg) — garis putus: asumsi RKAP CPO 13.500
       </p>

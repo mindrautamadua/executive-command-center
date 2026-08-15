@@ -13,6 +13,7 @@ import {
 import { yieldBench } from "@/lib/sbm-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
 
 const fmt1 = (v: number) =>
   v.toLocaleString("id-ID", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
@@ -39,8 +40,16 @@ const LABELS: Record<string, string> = {
   oerPct: "OER (%)",
 };
 
-/** Yield TBS & OER PTPN vs 5 peer emiten dan rata-rata Malaysia. */
+/**
+ * Yield TBS & OER PTPN vs 5 peer emiten dan rata-rata Malaysia.
+ * Entri PTPN pada grafik ini adalah kinerja kebun sawit — wilayah PalmCo.
+ * Baris peer eksternal tidak pernah disaring: menghapusnya merusak benchmark.
+ */
 export function YieldBenchmark() {
+  const { active, isFiltered } = useSubholding();
+  // Batang PTPN diredupkan bila cakupan aktif bukan PalmCo (sawit).
+  const dim = (isPtpn: boolean) => (!isFiltered || !isPtpn || active === "palmco" ? 1 : 0.25);
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -50,7 +59,7 @@ export function YieldBenchmark() {
         <div className="min-w-0">
           <SectionHead title="Benchmark Yield & OER" />
           <p className="mt-[3px] text-[9px] text-ink-500">
-            Yield TBS (ton/ha/thn) &amp; OER (%) · PTPN 21,9 / 22,4%
+            Yield TBS (ton/ha/thn) &amp; OER (%) · PTPN 21,9 / 22,4% (PalmCo)
           </p>
         </div>
         <div className="flex shrink-0 items-center gap-2.5">
@@ -97,12 +106,20 @@ export function YieldBenchmark() {
             />
             <Bar dataKey="yieldTbs" radius={[3, 3, 0, 0]} maxBarSize={16}>
               {DATA.map((d) => (
-                <Cell key={d.full} fill={d.isPtpn ? PALETTE.green : PALETTE.greenSoft} />
+                <Cell
+                  key={d.full}
+                  fill={d.isPtpn ? PALETTE.green : PALETTE.greenSoft}
+                  fillOpacity={dim(d.isPtpn)}
+                />
               ))}
             </Bar>
             <Bar dataKey="oerPct" radius={[3, 3, 0, 0]} maxBarSize={16}>
               {DATA.map((d) => (
-                <Cell key={d.full} fill={d.isPtpn ? PALETTE.blue : PALETTE.blueSoft} />
+                <Cell
+                  key={d.full}
+                  fill={d.isPtpn ? PALETTE.blue : PALETTE.blueSoft}
+                  fillOpacity={dim(d.isPtpn)}
+                />
               ))}
             </Bar>
           </BarChart>

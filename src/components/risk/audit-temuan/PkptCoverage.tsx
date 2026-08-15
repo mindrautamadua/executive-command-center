@@ -1,5 +1,6 @@
 import { pkptCoverage } from "@/lib/risk-data-detail";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const SISA = pkptCoverage.auditableUnits - pkptCoverage.audited;
 
@@ -21,7 +22,7 @@ export function PkptCoverage() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "180ms" } as React.CSSProperties}
     >
-      <SectionHead title="Cakupan PKPT" />
+      <SectionHead title="Cakupan PKPT" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">Realisasi Program Kerja Pengawasan Tahunan</p>
 
       <div className="mt-3 flex items-baseline gap-1">

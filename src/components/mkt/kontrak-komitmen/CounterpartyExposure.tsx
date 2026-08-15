@@ -1,4 +1,9 @@
+"use client";
+
 import { counterpartyExposure } from "@/lib/kontrak-buyer-data";
+import { filterBySubholding } from "@/lib/subholding";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { commodityScope, ScopeEmpty } from "@/components/ui/CommodityScope";
 import { SectionHead } from "@/components/hc/SectionHead";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
 
@@ -12,6 +17,13 @@ const RATING_TONE: Record<string, BadgeTone> = {
 
 /** Eksposur outstanding per counterparty + rating internal. */
 export function CounterpartyExposure() {
+  const { active, def } = useSubholding();
+  // Catatan eksposur menyebut komoditas yang mendasari (mis. penugasan gula =
+  // SugarCo); counterparty lintas komoditas tetap tampil di semua cakupan.
+  const rows = filterBySubholding(counterpartyExposure, active, (c) =>
+    commodityScope(`${c.counterparty} ${c.catatan}`),
+  );
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
@@ -22,6 +34,10 @@ export function CounterpartyExposure() {
         Piutang &amp; delivery in-transit per counterparty (rating internal)
       </p>
 
+      {rows.length === 0 && <ScopeEmpty label={def.fullLabel} />}
+
+      {rows.length > 0 && (
+        <>
       <div className="mt-2 grid grid-cols-[minmax(0,1fr)_60px_44px_minmax(0,1.15fr)] items-center gap-x-2 text-[8px] font-semibold uppercase tracking-[0.04em] text-ink-400">
         <span>Counterparty</span>
         <span className="text-right">Eksposur</span>
@@ -30,7 +46,7 @@ export function CounterpartyExposure() {
       </div>
 
       <ul className="mt-1 flex min-h-0 flex-1 flex-col justify-between gap-1">
-        {counterpartyExposure.map((c) => (
+        {rows.map((c) => (
           <li
             key={c.counterparty}
             className="grid grid-cols-[minmax(0,1fr)_60px_44px_minmax(0,1.15fr)] items-center gap-x-2 rounded-lg border border-[#eef2f6] bg-[#fbfcfd] px-2.5 py-[5px]"
@@ -48,6 +64,8 @@ export function CounterpartyExposure() {
           </li>
         ))}
       </ul>
+        </>
+      )}
 
       <p className="mt-1.5 truncate text-[8px] text-ink-400">
         Total eksposur Rp 6,22 T · 37 counterparty · limit individual di luar top-5 &lt; Rp 150 M.

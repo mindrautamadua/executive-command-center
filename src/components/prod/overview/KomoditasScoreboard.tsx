@@ -1,6 +1,11 @@
+"use client";
+
 import { komoditasScoreboard } from "@/lib/produksi-data";
 import { SectionHead } from "@/components/hc/SectionHead";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { filterBySubholding } from "@/lib/subholding";
+import { commodityScope, ScopeEmpty } from "@/components/ui/CommodityScope";
 
 const STATUS_TONE: Record<string, BadgeTone> = {
   "On Track": "good",
@@ -18,6 +23,14 @@ const pct = (v: number) => v.toLocaleString("id-ID", { minimumFractionDigits: 1 
 
 /** Scoreboard capaian produksi 5 komoditas vs target YTD. */
 export function KomoditasScoreboard() {
+  const { active, def } = useSubholding();
+
+  // Baris punya dimensi komoditas: TBS/CPO = PalmCo, Gula = SugarCo,
+  // Karet & Teh = SupportingCo.
+  const rows = filterBySubholding(komoditasScoreboard, active, (k) =>
+    commodityScope(k.komoditas),
+  );
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3.5 pt-3"
@@ -34,8 +47,10 @@ export function KomoditasScoreboard() {
         <span className="text-center">Status</span>
       </div>
 
+      {rows.length === 0 && <ScopeEmpty label={def.fullLabel} />}
+
       <ul className="flex min-h-0 flex-1 flex-col justify-around gap-y-1 py-1">
-        {komoditasScoreboard.map((k) => (
+        {rows.map((k) => (
           <li key={k.komoditas} className="shrink-0">
             <div className="grid grid-cols-[minmax(0,1fr)_44px_44px_44px_64px] items-center gap-x-2">
               <span className="min-w-0">

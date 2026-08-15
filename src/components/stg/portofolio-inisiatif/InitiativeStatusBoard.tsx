@@ -1,7 +1,11 @@
+"use client";
+
 import { statusBoard } from "@/lib/spi-data";
 import type { InitiativeStatus } from "@/lib/stg-core";
 import { SectionHead } from "@/components/hc/SectionHead";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { filterBySubholding } from "@/lib/subholding";
 
 const STATUS_TONE: Record<InitiativeStatus, BadgeTone> = {
   "On Track": "good",
@@ -20,6 +24,10 @@ const COLS =
 
 /** Papan status 10 inisiatif prioritas: progres, status, milestone berikutnya. */
 export function InitiativeStatusBoard() {
+  const { active } = useSubholding();
+  // `owner` (PalmCo / SGN / PTPN I / Holding) adalah dimensi subholding baris ini.
+  const rows = filterBySubholding(statusBoard, active, (r) => r.owner);
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
@@ -27,7 +35,7 @@ export function InitiativeStatusBoard() {
     >
       <SectionHead title="Initiative Status Board" action="Lihat Semua" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        10 Inisiatif Prioritas — Progres Fisik, Status &amp; Milestone Berikutnya
+        {rows.length} Inisiatif Prioritas — Progres Fisik, Status &amp; Milestone Berikutnya
       </p>
 
       <div
@@ -41,8 +49,12 @@ export function InitiativeStatusBoard() {
         <span>Milestone Berikutnya</span>
       </div>
 
+      {rows.length === 0 && (
+        <p className="mt-2 text-[9px] text-ink-500">Tidak ada inisiatif untuk cakupan ini.</p>
+      )}
+
       <ul className="mt-1 flex min-h-0 flex-1 flex-col justify-between">
-        {statusBoard.map((r) => (
+        {rows.map((r) => (
           <li key={r.id} className={`grid ${COLS} border-b border-[#f4f7fa] py-[5px]`}>
             <span className="text-[8.5px] font-bold text-ink-400">{r.id}</span>
             <span className="truncate text-[9.5px] font-bold text-ink-900" title={r.name}>

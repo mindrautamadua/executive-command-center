@@ -4,6 +4,7 @@ import {
   Bar,
   BarChart,
   CartesianGrid,
+  Cell,
   LabelList,
   ResponsiveContainer,
   Tooltip,
@@ -12,10 +13,15 @@ import {
 } from "recharts";
 import { utilisasiByJenis } from "@/lib/pabrik-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { inScope } from "@/components/ui/CommodityScope";
 import { SectionHead } from "../../hc/SectionHead";
 
+// Jenis pabrik menentukan pemilik subholding: PKS (sawit) → PalmCo,
+// PG (gula) → SugarCo, pabrik karet & teh → SupportingCo.
 const data = utilisasiByJenis.map((u) => ({
   name: `${u.jenis} · ${u.unit}`,
+  jenis: u.jenis,
   utilisasi: u.utilisasiPct,
   target: u.targetPct,
 }));
@@ -24,6 +30,8 @@ const pct = (v: number) =>
   `${v.toLocaleString("id-ID", { minimumFractionDigits: 1, maximumFractionDigits: 1 })}%`;
 
 export function UtilisasiByJenis() {
+  const { active } = useSubholding();
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -60,7 +68,16 @@ export function UtilisasiByJenis() {
               ]}
               contentStyle={CHART_TOOLTIP_STYLE}
             />
+            {/* Grafik pembanding: batang di luar cakupan diredupkan, bukan dihapus,
+                supaya posisi relatif antar jenis pabrik tetap terbaca. */}
             <Bar dataKey="utilisasi" fill={PALETTE.green} radius={[3, 3, 0, 0]}>
+              {data.map((d) => (
+                <Cell
+                  key={d.name}
+                  fill={PALETTE.green}
+                  fillOpacity={inScope(active, d.jenis) ? 1 : 0.25}
+                />
+              ))}
               <LabelList
                 dataKey="utilisasi"
                 position="top"
@@ -69,7 +86,15 @@ export function UtilisasiByJenis() {
                 style={{ fontSize: 7.5, fill: "var(--text-1)", fontWeight: 700 }}
               />
             </Bar>
-            <Bar dataKey="target" fill={PALETTE.slate} fillOpacity={0.45} radius={[3, 3, 0, 0]} />
+            <Bar dataKey="target" fill={PALETTE.slate} fillOpacity={0.45} radius={[3, 3, 0, 0]}>
+              {data.map((d) => (
+                <Cell
+                  key={d.name}
+                  fill={PALETTE.slate}
+                  fillOpacity={inScope(active, d.jenis) ? 0.45 : 0.11}
+                />
+              ))}
+            </Bar>
           </BarChart>
         </ResponsiveContainer>
       </div>

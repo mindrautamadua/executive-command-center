@@ -1,10 +1,20 @@
+"use client";
+
 import { CircleCheck, CircleX } from "lucide-react";
 import { stokVsHarga } from "@/lib/hilir-stok-margin-data";
 import { ToneBadge } from "@/components/shared/ToneBadge";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { ScopeEmpty, inScope } from "@/components/ui/CommodityScope";
 import { SectionHead } from "../../hc/SectionHead";
 
-/** Keputusan tahan/lepas stok CPO vs level harga spot. */
+/**
+ * Keputusan tahan/lepas stok CPO vs level harga spot KPBN.
+ * Stok CPO dan harga CPO → seluruh kartu milik PalmCo.
+ */
 export function StokVsHargaCard() {
+  const { active, def } = useSubholding();
+  const relevan = inScope(active, "CPO");
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
@@ -12,9 +22,13 @@ export function StokVsHargaCard() {
     >
       <div className="flex items-center justify-between gap-2">
         <SectionHead title="Stok vs Harga: Tahan / Lepas" className="min-w-0 flex-1" />
-        <ToneBadge label={stokVsHarga.posisi} tone="good" />
+        {relevan && <ToneBadge label={stokVsHarga.posisi} tone="good" />}
       </div>
 
+      {!relevan && <ScopeEmpty label={def.fullLabel} />}
+
+      {relevan && (
+      <>
       <div className="mt-2 grid grid-cols-2 gap-2">
         <div className="rounded-lg border border-[#eef2f6] bg-[#fbfcfd] px-2.5 py-2">
           <div className="text-[8px] font-semibold uppercase tracking-[0.04em] text-ink-400">
@@ -57,6 +71,8 @@ export function StokVsHargaCard() {
           );
         })}
       </div>
+      </>
+      )}
     </div>
   );
 }

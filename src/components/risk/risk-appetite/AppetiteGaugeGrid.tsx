@@ -4,6 +4,7 @@ import { PolarAngleAxis, RadialBar, RadialBarChart, ResponsiveContainer } from "
 import { appetiteGauges, type AppetiteStatus } from "@/lib/risk-data";
 import { PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
 
 const STATUS_COLOR: Record<AppetiteStatus, string> = {
@@ -59,7 +60,7 @@ export function AppetiteGaugeGrid() {
       className="card anim-rise px-4 pb-3.5 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead title="Utilisasi Limit per Kategori" action="Lihat 28 Limit" />
+      <SectionHead title="Utilisasi Limit per Kategori" action="Lihat 28 Limit" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Aktual vs Limit Risk Appetite — Utilisasi &gt; 100% Berarti Breach
       </p>

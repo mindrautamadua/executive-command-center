@@ -6,6 +6,7 @@ import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 import { legalCaseByType } from "@/lib/risk-data-detail";
 import { CHART_TOOLTIP_STYLE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const TOTAL = legalCaseByType.reduce((s, r) => s + r.count, 0);
 
@@ -15,7 +16,7 @@ export function LegalCaseByType() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead title="Perkara per Jenis" />
+      <SectionHead title="Perkara per Jenis" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Komposisi {TOTAL} Perkara Aktif Lintas Forum Peradilan
       </p>

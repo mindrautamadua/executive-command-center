@@ -1,4 +1,8 @@
+"use client";
+
 import { pabrikLeagueBottom, pabrikLeagueTop, type PabrikUnit } from "@/lib/pabrik-data";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { inScope, ScopeEmpty } from "@/components/ui/CommodityScope";
 import { SectionHead } from "../../hc/SectionHead";
 
 const num = (v: number) =>
@@ -47,6 +51,10 @@ function LeagueList({ title, items, tone }: { title: string; items: PabrikUnit[]
 }
 
 export function PabrikLeagueTable() {
+  const { active, def } = useSubholding();
+  // Seluruh kartu ini milik PalmCo: peringkat PKS berbasis OER sawit.
+  const dalamCakupan = inScope(active, "PKS (sawit)");
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
@@ -57,10 +65,14 @@ export function PabrikLeagueTable() {
         Top &amp; Bottom 5 PKS berdasarkan OER &amp; Utilisasi · spread OER 3,4 ppt
       </p>
 
-      <div className="mt-2 flex min-h-0 flex-1 gap-3">
-        <LeagueList title="Top 5 PKS" items={pabrikLeagueTop} tone="good" />
-        <LeagueList title="Bottom 5 PKS" items={pabrikLeagueBottom} tone="bad" />
-      </div>
+      {!dalamCakupan ? (
+        <ScopeEmpty label={def.fullLabel} />
+      ) : (
+        <div className="mt-2 flex min-h-0 flex-1 gap-3">
+          <LeagueList title="Top 5 PKS" items={pabrikLeagueTop} tone="good" />
+          <LeagueList title="Bottom 5 PKS" items={pabrikLeagueBottom} tone="bad" />
+        </div>
+      )}
     </div>
   );
 }

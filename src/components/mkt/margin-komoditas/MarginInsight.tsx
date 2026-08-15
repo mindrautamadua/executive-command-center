@@ -1,6 +1,16 @@
 import { marginInsights } from "@/lib/hilir-stok-margin-data";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 import { MktInsightGrid } from "../MktInsightGrid";
 
+/**
+ * Narasi insight ditulis pada level grup (lintas komoditas & subholding),
+ * sehingga tidak ikut filter — cukup ditandai <ScopeNote /> saat filter aktif.
+ */
 export function MarginInsight() {
-  return <MktInsightGrid items={marginInsights} cols="grid-cols-3" />;
+  return (
+    <div className="flex flex-col gap-1.5">
+      <ScopeNote className="self-start" />
+      <MktInsightGrid items={marginInsights} cols="grid-cols-3" />
+    </div>
+  );
 }

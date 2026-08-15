@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronLeft, LayoutGrid } from "lucide-react";
 import { PtpnLogo } from "../PtpnLogo";
+import { useSubholding } from "@/components/SubholdingProvider";
 import type {
   DimensionDataTrust,
   DimensionMenuItem,
@@ -19,7 +20,16 @@ interface Props {
   dimensionLabel?: string;
 }
 
-function MenuRow({ item, on }: { item: DimensionMenuItem; on: boolean }) {
+function MenuRow({
+  item,
+  on,
+  outOfScope,
+}: {
+  item: DimensionMenuItem;
+  on: boolean;
+  /** Halaman milik subholding lain dari cakupan filter aktif. */
+  outOfScope?: boolean;
+}) {
   const { label, icon: Icon, href, badge } = item;
   const base =
     "mb-[2px] flex w-full items-center gap-2.5 rounded-lg px-2.5 py-[7px] text-left text-[10.5px] transition-colors";
@@ -51,7 +61,8 @@ function MenuRow({ item, on }: { item: DimensionMenuItem; on: boolean }) {
   return (
     <Link
       href={href}
-      className={`${base} ${
+      title={outOfScope ? "Data halaman ini di luar cakupan subholding aktif" : undefined}
+      className={`${base} ${outOfScope ? "opacity-40" : ""} ${
         on
           ? "bg-ptpn-greenLight font-semibold text-ptpn-green"
           : "font-medium text-ink-500 hover:bg-[#f5f8fa]"
@@ -68,6 +79,7 @@ function MenuRow({ item, on }: { item: DimensionMenuItem; on: boolean }) {
  */
 export function DimensionSidebar({ sections, dataTrust, active, dimensionLabel }: Props) {
   const pathname = usePathname();
+  const { active: scope } = useSubholding();
 
   return (
     <aside className="flex h-full w-[200px] shrink-0 flex-col border-r border-[#e9eef3] bg-white">
@@ -114,6 +126,7 @@ export function DimensionSidebar({ sections, dataTrust, active, dimensionLabel }
                 key={item.label}
                 item={item}
                 on={item.label === active || (!!item.href && item.href === pathname)}
+                outOfScope={scope !== "all" && !!item.owner && item.owner !== scope}
               />
             ))}
           </div>

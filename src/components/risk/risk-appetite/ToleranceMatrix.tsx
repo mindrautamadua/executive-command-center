@@ -1,5 +1,6 @@
 import { toleranceMatrix, type ToleranceStatement } from "@/lib/risk-data";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
 
 const APPETITE_TONE: Record<ToleranceStatement["appetite"], BadgeTone> = {
@@ -15,7 +16,7 @@ export function ToleranceMatrix() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "240ms" } as React.CSSProperties}
     >
-      <SectionHead title="Tolerance Matrix" action="Unduh Pernyataan" />
+      <SectionHead title="Tolerance Matrix" action="Unduh Pernyataan" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Pernyataan Risk Appetite per Kategori — Disetujui Dekom Feb 2026
       </p>

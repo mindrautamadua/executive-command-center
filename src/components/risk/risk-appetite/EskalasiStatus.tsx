@@ -1,6 +1,7 @@
 import { ChevronRight } from "lucide-react";
 import { eskalasiPath } from "@/lib/risk-data";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const LEVEL_CLS = [
   "border-[#d3e2f8] bg-[#f5f8fd] text-[#2f6fe4]",
@@ -16,7 +17,7 @@ export function EskalasiStatus() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "300ms" } as React.CSSProperties}
     >
-      <SectionHead title="Jalur Eskalasi Komite Risiko" />
+      <SectionHead title="Jalur Eskalasi Komite Risiko" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Pemicu, Forum Pengambil Keputusan, dan SLA Tiap Tingkat
       </p>

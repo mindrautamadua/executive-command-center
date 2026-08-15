@@ -1,10 +1,18 @@
+"use client";
+
 import { costPerRegional, HPP_CPO_RP_KG } from "@/lib/biaya-opex-data";
 import { ToneBadge } from "@/components/shared/ToneBadge";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { inScope, ScopeEmpty } from "@/components/ui/CommodityScope";
 import { SectionHead } from "../../hc/SectionHead";
 
 const rp = (v: number) => `Rp ${v.toLocaleString("id-ID")}`;
 
 export function CostPerRegional() {
+  const { active, def } = useSubholding();
+  // Regional 1–7 adalah struktur kebun sawit dan HPP-nya HPP CPO — milik PalmCo.
+  const dalamCakupan = inScope(active, "Regional 1 (sawit)");
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
@@ -15,6 +23,10 @@ export function CostPerRegional() {
         HPP CPO 7 Regional (Rp/kg) · rata-rata grup {rp(HPP_CPO_RP_KG)} · outlier = deviasi &gt;5%
       </p>
 
+      {!dalamCakupan ? (
+        <ScopeEmpty label={def.fullLabel} />
+      ) : (
+        <>
       <div className="mt-2 grid grid-cols-[64px_72px_minmax(0,1fr)_58px] items-center gap-x-2 text-[8px] font-semibold uppercase tracking-[0.04em] text-ink-400">
         <span>Regional</span>
         <span className="text-right">HPP /kg</span>
@@ -50,6 +62,8 @@ export function CostPerRegional() {
           </li>
         ))}
       </ul>
+        </>
+      )}
     </div>
   );
 }

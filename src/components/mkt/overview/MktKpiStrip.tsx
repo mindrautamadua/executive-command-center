@@ -1,5 +1,10 @@
+"use client";
+
 import { Banknote, Factory, Package, Percent, Ship, Tag } from "lucide-react";
 import { mktKpi } from "@/lib/pemasaran-data";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { commodityScope, inScope } from "@/components/ui/CommodityScope";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 import { Delta } from "@/components/ui/Delta";
 
 const ICONS = {
@@ -21,15 +26,27 @@ const TONES: Record<string, string> = {
 };
 
 export function MktKpiStrip() {
+  const { active } = useSubholding();
+
   return (
     <div className="grid grid-cols-6 gap-3">
       {mktKpi.map((k, i) => {
         const Icon = ICONS[k.icon];
+        // Tile terikat komoditas (CPO → PalmCo, gula → SugarCo, karet/teh →
+        // SupportingCo) diredupkan bila di luar cakupan; tile konsolidasi grup
+        // (nilai penjualan, margin blended) tetap penuh dan ditandai ScopeNote.
+        const owner = commodityScope(`${k.label} ${k.sub}`);
+        const dim = !!owner && !inScope(active, owner);
         return (
           <div
             key={k.label}
             className="card anim-rise px-3 pb-3 pt-3"
-            style={{ "--d": `${40 * i}ms` } as React.CSSProperties}
+            style={
+              {
+                "--d": `${40 * i}ms`,
+                opacity: dim ? 0.25 : undefined,
+              } as React.CSSProperties
+            }
           >
             <div className="flex items-center gap-2">
               <span
@@ -43,6 +60,7 @@ export function MktKpiStrip() {
               >
                 {k.label}
               </span>
+              {!owner && <ScopeNote />}
             </div>
             <div className="mt-2.5 whitespace-nowrap text-[19px] font-extrabold leading-none tracking-[-0.01em] text-ink-900">
               {k.value}

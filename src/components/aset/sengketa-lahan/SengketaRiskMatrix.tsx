@@ -15,6 +15,7 @@ import { asgRiskMatrix } from "@/lib/asg-data";
 import type { AstRiskLevel } from "@/lib/ast-core";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const LEVEL_COLOR: Record<AstRiskLevel, string> = {
   Ekstrem: PALETTE.red,
@@ -38,7 +39,7 @@ export function SengketaRiskMatrix() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "180ms" } as React.CSSProperties}
     >
-      <SectionHead title="Matriks Risiko Sengketa" action="Lihat Detail" />
+      <SectionHead title="Matriks Risiko Sengketa" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Probabilitas × Dampak (skala 1–5) · 6 risiko utama
       </p>

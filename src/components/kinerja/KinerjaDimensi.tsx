@@ -13,6 +13,7 @@ import {
 } from "recharts";
 import { dimensi } from "@/lib/kinerja-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const data = dimensi.map((d) => ({
   dim: d.short,
@@ -30,7 +31,7 @@ export function KinerjaDimensi() {
     >
       <div className="flex items-start justify-between gap-2">
         <div>
-          <h3 className="card-title-navy">KINERJA BERDASARKAN DIMENSI</h3>
+          <h3 className="card-title-navy flex min-w-0 items-center gap-1.5"><span>KINERJA BERDASARKAN DIMENSI</span><ScopeNote /></h3>
           <p className="mt-[3px] text-[9.5px] text-ink-500">
             Rata-rata Score per Dimensi — Q2 vs Q1 2026
           </p>

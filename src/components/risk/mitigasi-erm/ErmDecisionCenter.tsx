@@ -4,6 +4,7 @@ import { useState } from "react";
 import { AlertCircle, AlertTriangle } from "lucide-react";
 import { ermDecisions } from "@/lib/risk-data-detail";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const TABS = [
   { label: "Butuh Keputusan", count: ermDecisions.length },
@@ -35,7 +36,7 @@ export function ErmDecisionCenter() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead title="ERM Decision Center" action="Lihat Semua" />
+      <SectionHead title="ERM Decision Center" action="Lihat Semua" badge={<ScopeNote />} />
 
       <div className="mt-2 flex items-center gap-4 border-b border-[#f0f3f6]">
         {TABS.map((t, i) => (

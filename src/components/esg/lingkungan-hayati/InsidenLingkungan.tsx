@@ -1,6 +1,7 @@
 import { CheckCircle2, TriangleAlert } from "lucide-react";
 import { insidenList } from "@/lib/esg-data-detail";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 /** Dua insiden lingkungan signifikan YTD — keduanya telah selesai ditangani. */
 export function InsidenLingkungan() {
@@ -9,7 +10,7 @@ export function InsidenLingkungan() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead title="Insiden Lingkungan Signifikan" action="Lihat Semua" />
+      <SectionHead title="Insiden Lingkungan Signifikan" action="Lihat Semua" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         {insidenList.length} insiden YTD · seluruhnya selesai ditangani
       </p>

@@ -4,6 +4,7 @@ import {
   Bar,
   BarChart,
   CartesianGrid,
+  Cell,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -13,6 +14,8 @@ import { landBankComposition } from "@/lib/ast-data";
 import { LAND_BANK_TOTAL_RB_HA } from "@/lib/ast-core";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { toSubholdingId } from "@/lib/subholding";
 
 const num = (v: number) =>
   v.toLocaleString("id-ID", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
@@ -27,6 +30,13 @@ const SERIES = [
 
 /** Komposisi land bank per subholding (rb ha), stacked per peruntukan. */
 export function LandBankComposition() {
+  const { active, isFiltered, def } = useSubholding();
+  // `subholding` (PalmCo / SGN (Lahan Tebu) / PTPN I) adalah dimensi subholding
+  // kolom ini. Grafik pembanding: kolom non-aktif diredupkan agar porsi antar
+  // subholding tetap terbaca terhadap total grup.
+  const dim = (subholding: string) =>
+    !isFiltered || toSubholdingId(subholding) === active ? 1 : 0.25;
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -34,7 +44,9 @@ export function LandBankComposition() {
     >
       <SectionHead title="Komposisi Land Bank" action="Lihat Detail" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        Penguasaan Lahan per Subholding (rb ha) · total {num(LAND_BANK_TOTAL_RB_HA)} rb ha
+        {isFiltered
+          ? `Penguasaan Lahan ${def.label} dalam konteks grup (rb ha)`
+          : `Penguasaan Lahan per Subholding (rb ha) · total ${num(LAND_BANK_TOTAL_RB_HA)} rb ha`}
       </p>
 
       <div className="mt-1.5 min-h-0 w-full flex-1">
@@ -70,7 +82,11 @@ export function LandBankComposition() {
                 fill={s.color}
                 barSize={46}
                 radius={i === SERIES.length - 1 ? [2, 2, 0, 0] : undefined}
-              />
+              >
+                {landBankComposition.map((row) => (
+                  <Cell key={row.subholding} fillOpacity={dim(row.subholding)} />
+                ))}
+              </Bar>
             ))}
           </BarChart>
         </ResponsiveContainer>

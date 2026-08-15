@@ -17,6 +17,8 @@ import {
 import { Lightbulb } from "lucide-react";
 import { biayaVsIndex } from "@/lib/produktivitas-data";
 import { CATEGORICAL, CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE, SEMANTIC } from "@/lib/chart-palette";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { orgDim } from "../ui/OrgScope";
 
 const ribuan = (v: number) => v.toLocaleString("id-ID");
 
@@ -32,6 +34,10 @@ const QUADRANTS = [
 ] as const;
 
 export function ProduktivitasBiaya() {
+  const { active, isFiltered, def } = useSubholding();
+  // Peta posisi antar entitas: bubble di luar subholding aktif diredupkan agar
+  // kuadran tempat entitas tersebut berada tetap punya konteks pembanding.
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
@@ -40,6 +46,7 @@ export function ProduktivitasBiaya() {
       <h3 className="card-title-navy">4. Productivity Opportunity Map</h3>
       <p className="mt-[3px] text-[9.5px] text-ink-500">
         Labor Cost per Ton vs Productivity Index · ukuran bubble = headcount
+        {isFiltered ? ` · ${def.label} disorot` : ""}
       </p>
 
       <div className="mt-1 min-h-0 w-full flex-1">
@@ -112,7 +119,11 @@ export function ProduktivitasBiaya() {
             />
             <Scatter data={biayaVsIndex} fillOpacity={0.85}>
               {biayaVsIndex.map((d, i) => (
-                <Cell key={d.unit} fill={CATEGORICAL[i % CATEGORICAL.length]} />
+                <Cell
+                  key={d.unit}
+                  fill={CATEGORICAL[i % CATEGORICAL.length]}
+                  fillOpacity={0.85 * orgDim(active, d.unit)}
+                />
               ))}
               <LabelList
                 dataKey="unit"

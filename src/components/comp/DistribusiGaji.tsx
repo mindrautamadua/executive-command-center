@@ -13,6 +13,7 @@ import {
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { distribusiGaji } from "@/lib/comp-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 /* skala sumbu Y mengikuti data: dibulatkan ke atas kelipatan 10 */
 const yMax = Math.ceil(Math.max(...distribusiGaji.map((d) => d.value)) / 10) * 10;
@@ -26,7 +27,7 @@ export function DistribusiGaji() {
     >
       <div className="flex items-start justify-between gap-2">
         <div>
-          <h3 className="card-title-navy">Distribusi Gaji (Posisi di Rentang Gaji)</h3>
+          <h3 className="card-title-navy flex min-w-0 items-center gap-1.5"><span>Distribusi Gaji (Posisi di Rentang Gaji)</span><ScopeNote /></h3>
           <p className="mt-[3px] text-[9.5px] text-ink-500">Berdasarkan Persentil</p>
         </div>
         <button className="select-chip whitespace-nowrap px-2.5 py-[5px] text-[9.5px]">

@@ -1,6 +1,10 @@
+"use client";
+
 import { varianceHeatmap, type RkapLine } from "@/lib/kba-data";
 import { fmtId } from "@/lib/keu-core";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { toSubholdingId } from "@/lib/subholding";
 
 const LINI: RkapLine[] = ["Pendapatan", "EBITDA", "Laba Bersih", "Opex", "Capex"];
 const SEGMENTS = ["PalmCo", "SGN", "PTPN I"] as const;
@@ -15,6 +19,12 @@ const cellOf = (segment: string, lini: RkapLine) =>
   varianceHeatmap.find((c) => c.segment === segment && c.lini === lini);
 
 export function VarianceHeatmap() {
+  const { active, isFiltered } = useSubholding();
+  // Matriks pembanding: baris subholding non-aktif diredupkan agar deviasi
+  // subholding terpilih tetap terbaca relatif terhadap yang lain.
+  const dim = (segment: string) =>
+    !isFiltered || toSubholdingId(segment) === active ? 1 : 0.25;
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
@@ -40,7 +50,11 @@ export function VarianceHeatmap() {
         </div>
 
         {SEGMENTS.map((seg) => (
-          <div key={seg} className="grid grid-cols-[64px_repeat(5,minmax(0,1fr))] gap-1.5">
+          <div
+            key={seg}
+            className="grid grid-cols-[64px_repeat(5,minmax(0,1fr))] gap-1.5 transition-opacity"
+            style={{ opacity: dim(seg) }}
+          >
             <span className="flex items-center text-[9px] font-bold text-ink-900">{seg}</span>
             {LINI.map((l) => {
               const cell = cellOf(seg, l);

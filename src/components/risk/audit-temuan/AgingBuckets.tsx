@@ -14,6 +14,7 @@ import {
 import { agingBuckets } from "@/lib/risk-data-detail";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const TOTAL = agingBuckets.reduce((s, b) => s + b.count, 0);
 
@@ -23,7 +24,7 @@ export function AgingBuckets() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead title="Aging Temuan Terbuka" />
+      <SectionHead title="Aging Temuan Terbuka" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Umur {TOTAL} Temuan Terbuka Lintas Sumber per 31 Mei 2026
       </p>

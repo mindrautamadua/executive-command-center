@@ -1,6 +1,10 @@
+"use client";
+
 import { topDrivers } from "@/lib/svc-data";
 import { SectionHead } from "@/components/hc/SectionHead";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { filterBySubholding } from "@/lib/subholding";
 
 const fmt = (v: number) =>
   v.toLocaleString("id-ID", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -13,6 +17,10 @@ function progressTone(pct: number): { tone: BadgeTone; label: string; bar: strin
 
 /** 8 inisiatif kontributor nilai terbesar: target 2029 vs realisasi YTD. */
 export function TopValueDrivers() {
+  const { active, isFiltered, def } = useSubholding();
+  // `owner` (PalmCo / SGN / PTPN I) adalah dimensi subholding inisiatif ini.
+  const rows = filterBySubholding(topDrivers, active, (d) => d.owner);
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -20,7 +28,9 @@ export function TopValueDrivers() {
     >
       <SectionHead title="Kontributor Nilai Terbesar" action="Lihat 28 Inisiatif" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        8 Inisiatif dengan Target Uplift 2029 Tertinggi · Konversi Realisasi YTD 2026
+        {isFiltered
+          ? `${rows.length} Inisiatif ${def.label} dari 8 Target Uplift 2029 Tertinggi · Konversi Realisasi YTD 2026`
+          : "8 Inisiatif dengan Target Uplift 2029 Tertinggi · Konversi Realisasi YTD 2026"}
       </p>
 
       <div className="scroll-thin mt-1.5 min-h-0 flex-1 overflow-y-auto">
@@ -37,7 +47,14 @@ export function TopValueDrivers() {
             </tr>
           </thead>
           <tbody>
-            {topDrivers.map((d) => {
+            {rows.length === 0 && (
+              <tr>
+                <td colSpan={7} className="py-[6px] text-[8.5px] text-ink-400">
+                  Tidak ada inisiatif untuk cakupan ini.
+                </td>
+              </tr>
+            )}
+            {rows.map((d) => {
               const pct = (d.realisasiYtdRpT / d.target2029RpT) * 100;
               const t = progressTone(pct);
               return (

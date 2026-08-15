@@ -1,4 +1,5 @@
 import { kontrakMaturity } from "@/lib/kontrak-buyer-data";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 import { SectionHead } from "@/components/hc/SectionHead";
 
 const MAX_KONTRAK = Math.max(...kontrakMaturity.map((m) => m.kontrak));
@@ -10,7 +11,8 @@ export function KontrakMaturityLadder() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "90ms" } as React.CSSProperties}
     >
-      <SectionHead title="Maturity Kontrak" action="Lihat Detail" />
+      {/* Jadwal delivery direkap lintas komoditas — angka konsolidasi grup. */}
+      <SectionHead title="Maturity Kontrak" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Jadwal delivery 214 kontrak aktif per kuartal
       </p>

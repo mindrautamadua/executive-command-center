@@ -1,6 +1,7 @@
 import { marketRisks, type MktRiskLevel } from "@/lib/pemasaran-data";
 import { SectionHead } from "@/components/hc/SectionHead";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const LEVEL_TONE: Record<MktRiskLevel, BadgeTone> = {
   High: "bad",
@@ -28,7 +29,8 @@ export function MarketRiskRadar() {
       className="card anim-rise flex h-full flex-col px-4 pb-3.5 pt-3"
       style={{ "--d": "80ms" } as React.CSSProperties}
     >
-      <SectionHead title="Market Risk Radar" action="Lihat Semua" />
+      {/* Risiko pasar dinilai di level grup (enterprise), bukan per subholding. */}
+      <SectionHead title="Market Risk Radar" action="Lihat Semua" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Matrix Kemungkinan × Dampak — 6 Risiko Utama Pasar &amp; Komersial
       </p>

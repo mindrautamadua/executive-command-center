@@ -1,6 +1,10 @@
+"use client";
+
 import { certMatrix } from "@/lib/esg-data";
 import { SectionHead } from "@/components/hc/SectionHead";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { filterBySubholding } from "@/lib/subholding";
 
 const STATUS_TONE: Record<string, BadgeTone> = {
   "On-track": "good",
@@ -19,6 +23,10 @@ function heatCls(ratio: number) {
 const pct = (v: number) => `${v.toLocaleString("id-ID", { minimumFractionDigits: 1 })}%`;
 
 export function CertMatrix() {
+  const { active, isFiltered, def } = useSubholding();
+  // `subholding` (PalmCo / SupportingCo / SGN) adalah dimensi subholding baris.
+  const rows = filterBySubholding(certMatrix, active, (r) => r.subholding);
+
   return (
     <div
       className="card anim-rise flex h-full min-h-0 flex-col px-4 pb-2.5 pt-3"
@@ -26,7 +34,9 @@ export function CertMatrix() {
     >
       <SectionHead title="Matriks Sertifikasi Subholding × Skema" action="Lihat Detail" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        Unit Tersertifikasi &amp; % Areal · Basis 76 Unit Kebun/PKS
+        {isFiltered
+          ? `Skema sertifikasi ${def.label} · Basis 76 Unit Kebun/PKS`
+          : "Unit Tersertifikasi & % Areal · Basis 76 Unit Kebun/PKS"}
       </p>
 
       <div className="scroll-thin mt-2 min-h-0 flex-1 overflow-y-auto">
@@ -54,7 +64,7 @@ export function CertMatrix() {
             </tr>
           </thead>
           <tbody>
-            {certMatrix.map((r) => {
+            {rows.map((r) => {
               const ratio = r.certified / r.total;
               return (
                 <tr key={`${r.subholding}-${r.skema}`} className="border-b border-[#f4f7fa]">
@@ -84,8 +94,9 @@ export function CertMatrix() {
       </div>
 
       <p className="pt-1.5 text-[8px] leading-snug text-ink-400">
-        SGN memakai ISO 14001 di luar basis 76 unit sawit; RSPO SupportingCo (2/18) menjadi titik
-        terlemah portofolio.
+        {isFiltered
+          ? `Menampilkan ${rows.length} baris skema milik ${def.label}; basis unit tetap mengacu portofolio sertifikasi grup.`
+          : "SGN memakai ISO 14001 di luar basis 76 unit sawit; RSPO SupportingCo (2/18) menjadi titik terlemah portofolio."}
       </p>
     </div>
   );

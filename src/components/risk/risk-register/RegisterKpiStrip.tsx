@@ -1,3 +1,5 @@
+"use client";
+
 import { CircleCheck, Layers, ShieldAlert, TriangleAlert } from "lucide-react";
 import { registerKpi } from "@/lib/risk-data";
 import { RiskKpiCards, type RiskKpiCardItem } from "../RiskKpiCards";

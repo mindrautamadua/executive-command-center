@@ -12,6 +12,8 @@ import {
 import { segmentFinancials, fmtRpT } from "@/lib/keu-core";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { toSubholdingId } from "@/lib/subholding";
 
 const SEGMENT_COLOR: Record<string, string> = {
   PalmCo: PALETTE.green,
@@ -32,6 +34,13 @@ const data = [
 ];
 
 export function SegmentContribution() {
+  const { active, isFiltered, def } = useSubholding();
+  // `segment` (PalmCo / SGN / PTPN I) adalah dimensi subholding seri ini.
+  // Grafik pembanding: seri non-aktif diredupkan agar porsi antar subholding
+  // tetap terbaca, alih-alih menyisakan satu tumpukan tunggal.
+  const dim = (segment: string) =>
+    !isFiltered || toSubholdingId(segment) === active ? 1 : 0.25;
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -39,7 +48,9 @@ export function SegmentContribution() {
     >
       <SectionHead title="Segment Contribution" action="Lihat Detail" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        Pendapatan &amp; EBITDA per Subholding, YTD (Rp T)
+        {isFiltered
+          ? `Pendapatan & EBITDA ${def.label} dalam konteks grup, YTD (Rp T)`
+          : "Pendapatan & EBITDA per Subholding, YTD (Rp T)"}
       </p>
 
       <div className="mt-1.5 min-h-0 w-full flex-1">
@@ -74,6 +85,7 @@ export function SegmentContribution() {
                 dataKey={s.segment}
                 stackId="a"
                 fill={SEGMENT_COLOR[s.segment]}
+                fillOpacity={dim(s.segment)}
                 barSize={44}
                 radius={i === segmentFinancials.length - 1 ? [2, 2, 0, 0] : undefined}
               />
@@ -84,7 +96,11 @@ export function SegmentContribution() {
 
       <div className="mb-1 flex items-center justify-center gap-4">
         {segmentFinancials.map((s) => (
-          <span key={s.segment} className="flex items-center gap-1.5 text-[8.5px] text-ink-500">
+          <span
+            key={s.segment}
+            className="flex items-center gap-1.5 text-[8.5px] text-ink-500 transition-opacity"
+            style={{ opacity: dim(s.segment) }}
+          >
             <span
               className="h-[7px] w-[7px] rounded-full"
               style={{ background: SEGMENT_COLOR[s.segment] }}

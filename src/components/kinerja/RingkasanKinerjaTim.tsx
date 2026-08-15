@@ -1,7 +1,11 @@
+"use client";
+
 import { BarChart3, UserRound } from "lucide-react";
 import { kinerjaTim } from "@/lib/kinerja-data";
 import { SEMANTIC } from "@/lib/chart-palette";
 import { Delta } from "../ui/Delta";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { orgDim } from "../ui/OrgScope";
 
 const HEAD = [
   "Tim / Departemen",
@@ -54,11 +58,17 @@ function DistribusiBar({
 }
 
 export function RingkasanKinerjaTim() {
+  const { active, isFiltered, def } = useSubholding();
+  // Tiap tim melekat pada unit organisasinya; tim di luar subholding aktif
+  // diredupkan agar sebaran score antar tim tetap punya konteks pembanding.
+
   return (
     <div className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3">
       <h3 className="card-title-navy">RINGKASAN KINERJA TIM</h3>
       <p className="mt-[3px] text-[9.5px] text-ink-500">
-        Performa Tim berdasarkan Rata-rata Score
+        {isFiltered
+          ? `Performa Tim berdasarkan Rata-rata Score — tim ${def.label} disorot`
+          : "Performa Tim berdasarkan Rata-rata Score"}
       </p>
 
       <table className="mt-2 w-full">
@@ -80,7 +90,8 @@ export function RingkasanKinerjaTim() {
           {kinerjaTim.map((r, i) => (
             <tr
               key={r.tim}
-              className="border-b border-[#f4f7fa] transition-colors last:border-0 hover:bg-[#f7f9fb]"
+              className="border-b border-[#f4f7fa] transition-[background-color,opacity] last:border-0 hover:bg-[#f7f9fb]"
+              style={{ opacity: orgDim(active, r.unit) }}
             >
               <td className="whitespace-nowrap px-2 py-[6px] text-[10px] text-ink-900">
                 {r.tim}

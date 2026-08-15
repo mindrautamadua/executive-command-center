@@ -4,6 +4,7 @@ import { useState } from "react";
 import { RotateCcw } from "lucide-react";
 import { assumptions } from "@/lib/ksk-data";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const fmtVal = (v: number) =>
   v.toLocaleString("id-ID", { maximumFractionDigits: 2 });
@@ -20,7 +21,7 @@ export function ScenarioAssumptionsPanel() {
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
       <div className="flex items-center justify-between gap-2">
-        <SectionHead title="Panel Asumsi" className="flex-1" />
+        <SectionHead title="Panel Asumsi" className="flex-1" badge={<ScopeNote />} />
         <button
           onClick={() => setValues(assumptions.map((a) => a.baseValue))}
           className="flex shrink-0 items-center gap-1 text-[8.5px] font-semibold text-ink-500 transition-colors hover:text-ptpn-green"

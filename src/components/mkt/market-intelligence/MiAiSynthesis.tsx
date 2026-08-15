@@ -1,4 +1,5 @@
 import { Sparkles } from "lucide-react";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const COMMANDS = [
   { cmd: "WHY", label: "Mengapa konsensus CPO 30 hari berubah bullish?" },
@@ -20,6 +21,8 @@ export function MiAiSynthesis() {
           <span className="rounded bg-ptpn-greenLight px-1 py-[1px] text-[8px] font-bold normal-case tracking-normal text-ptpn-green">
             AI
           </span>
+          {/* Sintesis disusun atas seluruh sinyal grup — bukan per subholding. */}
+          <ScopeNote />
         </h3>
         <button className="flex shrink-0 cursor-pointer items-center gap-1 text-[9.5px] font-semibold text-ptpn-green hover:underline">
           Buka Copilot →

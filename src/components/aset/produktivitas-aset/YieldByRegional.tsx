@@ -20,6 +20,7 @@ import {
 } from "@/lib/apd-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
 
 const num = (v: number) =>
   v.toLocaleString("id-ID", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
@@ -31,6 +32,10 @@ const data = yieldByRegional.map((r) => ({
 
 /** Yield TBS per regional (bar horizontal) terhadap benchmark swasta 24,0 t/ha. */
 export function YieldByRegional() {
+  const { active } = useSubholding();
+  // Pemetaan domain: yield TBS kebun sawit Regional 1–7 seluruhnya milik PalmCo.
+  const outOfScope = active !== "all" && active !== "palmco";
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -38,11 +43,20 @@ export function YieldByRegional() {
     >
       <SectionHead title="Yield TBS per Regional" action="Lihat Detail" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        Ton TBS/Ha · Grup {num(YIELD_GRUP_TON_HA)} · Benchmark Swasta{" "}
-        {num(YIELD_BENCHMARK_TON_HA)}
+        {outOfScope ? (
+          "Pecahan yield per regional hanya untuk PalmCo"
+        ) : (
+          <>
+            Ton TBS/Ha · Grup {num(YIELD_GRUP_TON_HA)} · Benchmark Swasta{" "}
+            {num(YIELD_BENCHMARK_TON_HA)}
+          </>
+        )}
       </p>
 
-      <div className="mt-1.5 min-h-0 w-full flex-1">
+      <div
+        className="mt-1.5 min-h-0 w-full flex-1 transition-opacity"
+        style={{ opacity: outOfScope ? 0.25 : 1 }}
+      >
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={data}

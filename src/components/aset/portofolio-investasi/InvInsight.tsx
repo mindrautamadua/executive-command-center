@@ -1,6 +1,7 @@
 import { ArrowRight, Lightbulb } from "lucide-react";
 import { invInsights } from "@/lib/inv-data";
 import type { AstInsight } from "@/lib/ast-core";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const TONES: Record<AstInsight["tone"], { bg: string; icon: string; title: string }> = {
   green: { bg: "bg-ptpn-greenLight", icon: "text-ptpn-green", title: "text-ptpn-green" },
@@ -21,7 +22,8 @@ export function InvInsight() {
           Insight &amp; Rekomendasi{" "}
           <span className="font-semibold normal-case tracking-normal text-ink-400">
             (Decision-grade)
-          </span>
+          </span>{" "}
+          <ScopeNote className="align-middle normal-case tracking-normal" />
         </h3>
         <button className="flex shrink-0 items-center gap-1.5 rounded-lg border border-[#e3e9ef] bg-white px-3 py-[6px] text-[9.5px] font-semibold text-ink-700 transition-colors hover:border-ptpn-green hover:text-ptpn-green">
           Lihat Semua Insight <ArrowRight size={11} />

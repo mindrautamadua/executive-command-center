@@ -12,6 +12,8 @@ import {
 import { scoreTrend } from "@/lib/skc-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { toSubholdingId } from "@/lib/subholding";
 
 const SERIES = [
   { key: "group", label: "PTPN Group", color: PALETTE.green, width: 2.2 },
@@ -24,6 +26,14 @@ const LABELS: Record<string, string> = Object.fromEntries(SERIES.map((s) => [s.k
 
 /** Tren skor komposit 8 kuartal — Group vs 3 subholding. */
 export function ScoreTrend() {
+  const { active, isFiltered } = useSubholding();
+  // Garis pembanding: seri subholding non-aktif diredupkan agar divergensi tetap
+  // terbaca; garis PTPN Group selalu penuh.
+  const dim = (label: string) => {
+    const sub = toSubholdingId(label);
+    return !isFiltered || sub === null || sub === active ? 1 : 0.25;
+  };
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -38,7 +48,11 @@ export function ScoreTrend() {
         </div>
         <div className="flex shrink-0 flex-wrap items-center justify-end gap-x-2.5 gap-y-1">
           {SERIES.map((s) => (
-            <span key={s.key} className="flex items-center gap-1">
+            <span
+              key={s.key}
+              className="flex items-center gap-1 transition-opacity"
+              style={{ opacity: dim(s.label) }}
+            >
               <span
                 className="h-[7px] w-[7px] shrink-0 rounded-full"
                 style={{ backgroundColor: s.color }}
@@ -79,6 +93,7 @@ export function ScoreTrend() {
                 dataKey={s.key}
                 stroke={s.color}
                 strokeWidth={s.width}
+                strokeOpacity={dim(s.label)}
                 dot={false}
                 activeDot={{ r: 3.5 }}
               />

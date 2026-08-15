@@ -1,4 +1,8 @@
+"use client";
+
 import type { ProdKpi } from "@/lib/produksi-data";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { inScope, ScopeEmpty } from "@/components/ui/CommodityScope";
 import { ProdKpiCards } from "../ProdKpiCards";
 
 /** KPI biaya — diturunkan dari hppKomponen, hppTrend, hppBenchmark & efisiensiInisiatif. */
@@ -78,5 +82,11 @@ const items: ProdKpi[] = [
 ];
 
 export function BppKpiStrip() {
+  const { active, def } = useSubholding();
+  // Seluruh KPI strip ini bertumpu pada HPP & margin CPO per kg — milik PalmCo.
+  const dalamCakupan = inScope(active, "HPP CPO (sawit)");
+
+  if (!dalamCakupan) return <ScopeEmpty label={def.fullLabel} />;
+
   return <ProdKpiCards items={items} cols="grid-cols-6" />;
 }

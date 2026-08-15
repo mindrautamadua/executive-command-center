@@ -1,16 +1,20 @@
 import { downstreamProgress } from "@/lib/stf-data";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const barCls = (v: number) => (v >= 50 ? "bg-ptpn-green" : v >= 30 ? "bg-[#3b7ded]" : "bg-[#f5a524]");
 
-/** Progres onstream kapasitas hilirisasi (refinery, migor kemasan, bioetanol). */
+/**
+ * Progres onstream kapasitas hilirisasi (refinery, migor kemasan, bioetanol).
+ * Baris lini produk tidak membawa label subholding — angka tetap grup, RULE B.
+ */
 export function DownstreamProgress() {
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "180ms" } as React.CSSProperties}
     >
-      <SectionHead title="Progres Hilirisasi" action="Lihat Detail" />
+      <SectionHead title="Progres Hilirisasi" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         % Kapasitas Onstream terhadap Kapasitas Desain &amp; Target Onstream Penuh
       </p>

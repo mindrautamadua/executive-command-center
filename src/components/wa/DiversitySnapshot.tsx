@@ -1,7 +1,10 @@
+"use client";
+
 import { Accessibility, Handshake, Hourglass, PersonStanding, UserRound } from "lucide-react";
 import { diversityNote, diversityTiles } from "@/lib/wa-data";
 import { Delta } from "../ui/Delta";
 import { SectionHead } from "../hc/SectionHead";
+import { ScopeNote } from "../ui/ScopeNote";
 
 const ICONS = {
   female: PersonStanding,
@@ -23,7 +26,7 @@ export function DiversitySnapshot() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "180ms" } as React.CSSProperties}
     >
-      <SectionHead title="Diversity Snapshot" action="Lihat Detail" />
+      <SectionHead title="Diversity Snapshot" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">Keragaman Workforce</p>
 
       <div className="mt-2.5 grid min-h-0 flex-1 grid-cols-4 gap-2">

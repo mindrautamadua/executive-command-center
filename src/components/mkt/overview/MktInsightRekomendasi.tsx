@@ -1,5 +1,6 @@
 import { AlertCircle, AlertTriangle, ArrowRight, CheckCircle2, TrendingUp } from "lucide-react";
 import { mktInsights, type MktInsight } from "@/lib/pemasaran-data";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const ICONS: Record<MktInsight["tone"], typeof TrendingUp> = {
   red: AlertCircle,
@@ -26,7 +27,9 @@ export function MktInsightRekomendasi() {
           Insight &amp; Rekomendasi{" "}
           <span className="font-semibold normal-case tracking-normal text-ink-400">
             (Decision-grade)
-          </span>
+          </span>{" "}
+          {/* Narasi insight ditulis di level grup — tidak dipecah per subholding. */}
+          <ScopeNote />
         </h3>
         <button className="flex shrink-0 items-center gap-1.5 rounded-lg border border-[#e3e9ef] bg-white px-3 py-[6px] text-[9.5px] font-semibold text-ink-700 transition-colors hover:border-ptpn-green hover:text-ptpn-green">
           Lihat Semua Insight <ArrowRight size={11} />

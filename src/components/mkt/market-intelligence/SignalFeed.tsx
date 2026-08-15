@@ -1,4 +1,9 @@
+"use client";
+
 import { signalFeed, type MiSignal } from "@/lib/hilir-stok-margin-data";
+import { filterBySubholding } from "@/lib/subholding";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { commodityScope, ScopeEmpty } from "@/components/ui/CommodityScope";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
 import { SectionHead } from "../../hc/SectionHead";
 
@@ -10,6 +15,13 @@ const TONE: Record<MiSignal["tone"], BadgeTone> = {
 
 /** Feed sinyal pasar terprioritas dampak (kebijakan, cuaca, supply-demand). */
 export function SignalFeed() {
+  const { active, def } = useSubholding();
+  // Sinyal terikat komoditas yang dibahas: sawit/CPO = PalmCo, gula = SugarCo;
+  // sinyal makro tanpa komoditas tetap relevan untuk semua cakupan.
+  const rows = filterBySubholding(signalFeed, active, (s) =>
+    commodityScope(`${s.judul} ${s.dampak} ${s.sumber}`),
+  );
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
@@ -17,11 +29,14 @@ export function SignalFeed() {
     >
       <SectionHead title="Signal Feed" action="Lihat Semua Sinyal" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        {signalFeed.length} sinyal prioritas dari 18 sinyal aktif · diurutkan terbaru
+        {rows.length} sinyal prioritas dari 18 sinyal aktif · diurutkan terbaru
       </p>
 
+      {rows.length === 0 ? (
+        <ScopeEmpty label={def.fullLabel} />
+      ) : (
       <ul className="scroll-thin mt-2 flex min-h-0 flex-1 flex-col gap-1.5 overflow-y-auto pr-1">
-        {signalFeed.map((s) => (
+        {rows.map((s) => (
           <li
             key={s.judul}
             className="rounded-lg border border-[#eef2f6] bg-[#fbfcfd] px-2.5 py-1.5"
@@ -42,6 +57,7 @@ export function SignalFeed() {
           </li>
         ))}
       </ul>
+      )}
     </div>
   );
 }

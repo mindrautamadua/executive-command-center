@@ -1,6 +1,11 @@
+"use client";
+
 import type { ProdKpi } from "@/lib/produksi-data";
 import { komoditasScoreboard } from "@/lib/produksi-data";
 import { ProdKpiCards } from "../ProdKpiCards";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { filterBySubholding } from "@/lib/subholding";
+import { commodityScope, ScopeEmpty } from "@/components/ui/CommodityScope";
 
 const ICONS: ProdKpi["icon"][] = ["tbs", "cpo", "gula", "karet", "tbs"];
 const TONES: ProdKpi["tone"][] = ["green", "blue", "teal", "pink", "amber"];
@@ -23,5 +28,12 @@ const items: ProdKpi[] = komoditasScoreboard.map((k, i) => ({
 }));
 
 export function PkomKpiStrip() {
-  return <ProdKpiCards items={items} cols="grid-cols-5" />;
+  const { active, def } = useSubholding();
+
+  // Tiap KPI = satu komoditas: TBS/CPO = PalmCo, Gula = SugarCo,
+  // Karet & Teh = SupportingCo.
+  const rows = filterBySubholding(items, active, (k) => commodityScope(k.metric));
+  if (rows.length === 0) return <ScopeEmpty label={def.fullLabel} />;
+
+  return <ProdKpiCards items={rows} cols="grid-cols-5" />;
 }

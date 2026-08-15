@@ -3,6 +3,7 @@ import { deadlineTimeline } from "@/lib/esg-data-detail";
 import type { EudrMilestone } from "@/lib/esg-data-detail";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const STATUS: Record<
   EudrMilestone["status"],
@@ -20,7 +21,7 @@ export function DeadlineTimeline() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead title="Timeline Tenggat EUDR" action="Lihat Detail" />
+      <SectionHead title="Timeline Tenggat EUDR" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Milestone Regulasi &amp; Target Internal Kesiapan Dosier
       </p>

@@ -19,6 +19,8 @@ import {
 } from "@/lib/produksi-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "../../hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { inScope, ScopeEmpty } from "@/components/ui/CommodityScope";
 
 const num = (v: number) =>
   v.toLocaleString("id-ID", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
@@ -30,6 +32,10 @@ const data = regionalYield.map((r) => ({
 }));
 
 export function YieldByRegional() {
+  const { active, def } = useSubholding();
+  // Yield TBS Regional 1-7 = kebun sawit -> seluruh kartu milik PalmCo.
+  const milikScope = inScope(active, "Regional 1 TBS sawit");
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -40,7 +46,10 @@ export function YieldByRegional() {
         t/ha annualized · garis: rata-rata grup 21,9 &amp; benchmark swasta 24,0
       </p>
 
-      <div className="mt-1.5 min-h-0 w-full flex-1">
+      {!milikScope && <ScopeEmpty label={def.fullLabel} />}
+
+      {milikScope && (
+        <div className="mt-1.5 min-h-0 w-full flex-1">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={data}
@@ -117,6 +126,7 @@ export function YieldByRegional() {
           </BarChart>
         </ResponsiveContainer>
       </div>
+      )}
     </div>
   );
 }

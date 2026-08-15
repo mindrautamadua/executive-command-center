@@ -1,6 +1,7 @@
 import { CheckCircle2, FlaskConical } from "lucide-react";
 import { stressCase } from "@/lib/ksk-data";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 export function StressTestCase() {
   return (
@@ -8,7 +9,7 @@ export function StressTestCase() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "240ms" } as React.CSSProperties}
     >
-      <SectionHead title="Stress Test Case" />
+      <SectionHead title="Stress Test Case" badge={<ScopeNote />} />
       <p className="mt-[3px] flex items-center gap-1.5 text-[9px] text-ink-500">
         <FlaskConical size={10} className="shrink-0 text-[#d98b06]" />
         {stressCase.title}

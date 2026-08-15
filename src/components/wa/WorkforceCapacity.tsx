@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import { BookText, Gauge } from "lucide-react";
 import { workforceCapacity } from "@/lib/wa-data";
+import { ScopeNote } from "../ui/ScopeNote";
 
 /** Kapasitas efektif workforce vs FTE teoritis + faktor pengurangnya. */
 export function WorkforceCapacity() {
@@ -12,11 +15,14 @@ export function WorkforceCapacity() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <h3 className="text-[10px] font-extrabold uppercase tracking-[0.05em] text-ink-900">
-        Workforce Capacity{" "}
-        <span className="font-semibold normal-case tracking-normal text-ink-400">
-          (Effective vs Theoretical)
+      <h3 className="flex min-w-0 items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-[0.05em] text-ink-900">
+        <span>
+          Workforce Capacity{" "}
+          <span className="font-semibold normal-case tracking-normal text-ink-400">
+            (Effective vs Theoretical)
+          </span>
         </span>
+        <ScopeNote />
       </h3>
 
       <div className="mt-2 flex items-center gap-3">

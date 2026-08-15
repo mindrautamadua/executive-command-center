@@ -14,6 +14,7 @@ import { leverageTrend, NET_DEBT_EBITDA_COVENANT } from "@/lib/knl-data";
 import { fmtId } from "@/lib/keu-core";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "../../hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const SERIES = [
   { key: "netDebtEbitda", label: "Net Debt/EBITDA", color: PALETTE.green },
@@ -27,7 +28,7 @@ export function LeverageTrend() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "180ms" } as React.CSSProperties}
     >
-      <SectionHead title="Leverage Trend" />
+      <SectionHead title="Leverage Trend" badge={<ScopeNote />} />
       <div className="mt-[3px] flex items-center justify-between gap-2">
         <p className="text-[9px] text-ink-500">DER &amp; Net Debt/EBITDA (x)</p>
         <div className="flex shrink-0 items-center gap-2.5">

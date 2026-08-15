@@ -13,6 +13,7 @@ import {
 import { limitTrend } from "@/lib/risk-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 /** Tren utilisasi limit 6 bulan: jumlah breach dan near-limit per bulan. */
 export function LimitTrend() {
@@ -21,7 +22,7 @@ export function LimitTrend() {
       className="card anim-rise flex h-full flex-col px-4 pb-2 pt-3"
       style={{ "--d": "180ms" } as React.CSSProperties}
     >
-      <SectionHead title="Tren Utilisasi Limit" />
+      <SectionHead title="Tren Utilisasi Limit" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Breach &amp; Near-Limit 6 Bulan Terakhir (dari 28 Limit)
       </p>

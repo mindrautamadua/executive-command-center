@@ -1,5 +1,8 @@
+"use client";
+
 import { Banknote, Coins, Gauge, Layers, Percent, TrendingUp } from "lucide-react";
 import { KeuKpiGrid, type KeuKpiItem } from "../KeuKpiGrid";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const ITEMS: KeuKpiItem[] = [
   {
@@ -71,5 +74,12 @@ const ITEMS: KeuKpiItem[] = [
 ];
 
 export function KplKpiStrip() {
-  return <KeuKpiGrid items={ITEMS} cols={6} />;
+  // P&L KPI di sini seluruhnya angka konsolidasi grup — tidak ada pecahan
+  // subholding, jadi hanya ditandai saat filter aktif.
+  return (
+    <div className="flex flex-col gap-1.5">
+      <ScopeNote className="self-start" />
+      <KeuKpiGrid items={ITEMS} cols={6} />
+    </div>
+  );
 }

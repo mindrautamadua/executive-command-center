@@ -1,17 +1,31 @@
+"use client";
+
 import { wasteCircularity } from "@/lib/esg-data-detail";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
 
 /** Tingkat pemanfaatan limbah utama: tankos, cangkang, dan POME. */
 export function WasteCircularity() {
+  const { active, def } = useSubholding();
+  // Tankos, cangkang, dan POME adalah limbah proses PKS (sawit) — cakupan PalmCo.
+  const outOfScope = active !== "all" && active !== "palmco";
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "180ms" } as React.CSSProperties}
     >
       <SectionHead title="Sirkularitas Limbah" />
-      <p className="mt-[3px] text-[9px] text-ink-500">% Volume Termanfaatkan per Jalur Limbah</p>
+      <p className="mt-[3px] text-[9px] text-ink-500">
+        {outOfScope
+          ? `Jalur limbah tankos/cangkang/POME khas PKS sawit — di luar cakupan ${def.label}`
+          : "% Volume Termanfaatkan per Jalur Limbah"}
+      </p>
 
-      <div className="mt-2 flex min-h-0 flex-1 flex-col justify-between">
+      <div
+        className="mt-2 flex min-h-0 flex-1 flex-col justify-between transition-opacity"
+        style={{ opacity: outOfScope ? 0.25 : 1 }}
+      >
         {wasteCircularity.map((w) => (
           <div key={w.jalur}>
             <div className="flex items-baseline justify-between gap-2">

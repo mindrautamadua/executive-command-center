@@ -13,6 +13,7 @@ import {
 import { millUtilization, millUtilizationNote } from "@/lib/afs-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
 
 const num = (v: number) =>
   v.toLocaleString("id-ID", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
@@ -24,6 +25,11 @@ const data = millUtilization.map((m) => ({
 
 /** Kapasitas terpasang vs efektif per regional + garis utilisasi terhadap target. */
 export function MillUtilization() {
+  const { active } = useSubholding();
+  // Pemetaan domain: PKS mengolah TBS sawit di Regional 1–7 — seluruh kartu ini
+  // berada di cakupan PalmCo.
+  const outOfScope = active !== "all" && active !== "palmco";
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -31,10 +37,15 @@ export function MillUtilization() {
     >
       <SectionHead title="Kapasitas & Utilisasi PKS" action="Lihat Detail" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        Kapasitas Terpasang vs Efektif (ton TBS/jam) &amp; Utilisasi per Regional
+        {outOfScope
+          ? "Kapasitas & utilisasi PKS hanya untuk PalmCo"
+          : "Kapasitas Terpasang vs Efektif (ton TBS/jam) & Utilisasi per Regional"}
       </p>
 
-      <div className="mt-1.5 min-h-0 w-full flex-1">
+      <div
+        className="mt-1.5 min-h-0 w-full flex-1 transition-opacity"
+        style={{ opacity: outOfScope ? 0.25 : 1 }}
+      >
         <ResponsiveContainer width="100%" height="100%">
           <ComposedChart data={data} margin={{ top: 12, right: -6, bottom: 0, left: -18 }}>
             <CartesianGrid stroke={CHART_AXIS.grid} vertical={false} />

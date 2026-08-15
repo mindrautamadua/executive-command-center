@@ -13,6 +13,7 @@ import { capexByCategory } from "@/lib/kcx-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { fmtRpT } from "@/lib/keu-core";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 interface TickProps {
   x?: number;
@@ -45,7 +46,7 @@ export function CapexByCategory() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead title="Capex per Kategori" />
+      <SectionHead title="Capex per Kategori" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Plafon RKAP FY vs Realisasi YTD per Kategori (Rp T)
       </p>

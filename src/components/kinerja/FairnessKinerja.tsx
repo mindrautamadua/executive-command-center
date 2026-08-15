@@ -1,5 +1,8 @@
+"use client";
+
 import { ShieldCheck } from "lucide-react";
 import { fairnessKinerja, fairnessNote } from "@/lib/kinerja-data";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const STATUS = {
   ok: { dot: "bg-ptpn-green", badge: "bg-ptpn-greenLight text-ptpn-green", label: "Within" },
@@ -12,7 +15,7 @@ export function FairnessKinerja() {
     <div className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3">
       <div className="flex items-start justify-between gap-2">
         <div>
-          <h3 className="card-title-navy">PERFORMANCE FAIRNESS</h3>
+          <h3 className="card-title-navy flex min-w-0 items-center gap-1.5"><span>PERFORMANCE FAIRNESS</span><ScopeNote /></h3>
           <p className="mt-[3px] text-[9.5px] text-ink-500">
             Indikator Keadilan Penilaian vs Ambang
           </p>

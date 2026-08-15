@@ -14,6 +14,7 @@ import { liquidityRunway, MINIMUM_CASH_RPT, runwayNote } from "@/lib/kas-data";
 import { fmtId } from "@/lib/keu-core";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "../../hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 /** Proyeksi kas mingguan 13 minggu vs ambang minimum cash Rp 3,5 T. */
 export function LiquidityRunway() {
@@ -22,7 +23,7 @@ export function LiquidityRunway() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead title="Liquidity Runway 13 Minggu" />
+      <SectionHead title="Liquidity Runway 13 Minggu" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Proyeksi Saldo Kas Mingguan vs Minimum Cash Rp {fmtId(MINIMUM_CASH_RPT, 1)} T
       </p>

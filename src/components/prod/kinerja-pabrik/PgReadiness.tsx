@@ -1,3 +1,5 @@
+"use client";
+
 import {
   PG_JAM_BERHENTI_TARGET_PCT,
   PG_OVERALL_RECOVERY_TARGET_PCT,
@@ -5,12 +7,18 @@ import {
   pgReadinessNote,
 } from "@/lib/pabrik-data";
 import { ToneBadge } from "@/components/shared/ToneBadge";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { inScope, ScopeEmpty } from "@/components/ui/CommodityScope";
 import { SectionHead } from "../../hc/SectionHead";
 
 const num = (v: number) =>
   v.toLocaleString("id-ID", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 
 export function PgReadiness() {
+  const { active, def } = useSubholding();
+  // Seluruh kartu ini milik SugarCo: 17 pabrik gula (PG) & musim giling.
+  const dalamCakupan = inScope(active, "PG (pabrik gula)");
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
@@ -21,6 +29,10 @@ export function PgReadiness() {
         Jam Berhenti Giling (target ≤10%) &amp; Overall Recovery (target ≥80%)
       </p>
 
+      {!dalamCakupan ? (
+        <ScopeEmpty label={def.fullLabel} />
+      ) : (
+        <>
       <div className="mt-2 grid grid-cols-[minmax(0,1.4fr)_58px_58px_56px] items-center gap-x-2 pr-2 text-[8px] font-semibold uppercase tracking-[0.04em] text-ink-400">
         <span>Pabrik Gula</span>
         <span className="text-right">Berhenti</span>
@@ -73,6 +85,8 @@ export function PgReadiness() {
       </ul>
 
       <p className="mt-1.5 line-clamp-2 text-[8px] leading-snug text-ink-400">{pgReadinessNote}</p>
+        </>
+      )}
     </div>
   );
 }

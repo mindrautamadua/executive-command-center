@@ -13,6 +13,7 @@ import {
 import { psrProgress } from "@/lib/esg-data-detail";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
 
 const data = psrProgress.map((r) => ({
   ...r,
@@ -23,6 +24,11 @@ const ha = (v: number) => `${v.toLocaleString("id-ID", { minimumFractionDigits: 
 
 /** Realisasi kumulatif PSR plasma per regional terhadap target program. */
 export function PsrProgress() {
+  const { active, def } = useSubholding();
+  // PSR (Peremajaan Sawit Rakyat) hanya untuk kebun sawit plasma di Regional
+  // 1–7 — seluruh kartu berada di cakupan PalmCo.
+  const outOfScope = active !== "all" && active !== "palmco";
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -30,10 +36,15 @@ export function PsrProgress() {
     >
       <SectionHead title="Progres PSR per Regional" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        Realisasi Kumulatif vs Target · Total 14,2 rb ha
+        {outOfScope
+          ? `PSR adalah program sawit rakyat PalmCo — di luar cakupan ${def.label}`
+          : "Realisasi Kumulatif vs Target · Total 14,2 rb ha"}
       </p>
 
-      <div className="mt-1.5 min-h-0 w-full flex-1">
+      <div
+        className="mt-1.5 min-h-0 w-full flex-1 transition-opacity"
+        style={{ opacity: outOfScope ? 0.25 : 1 }}
+      >
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={data}

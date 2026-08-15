@@ -1,5 +1,8 @@
+"use client";
+
 import { Scale } from "lucide-react";
 import { equityBridge, equityRemediasi } from "@/lib/comp-data";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 /**
  * Pay Equity Decision Intelligence: bridge unadjusted → adjusted →
@@ -17,6 +20,7 @@ export function PayEquityRemediation() {
         <h3 className="card-title-navy flex items-center gap-1.5">
           <Scale size={13} className="text-[#1b3a6b]" />
           Pay Equity → Remediation
+          <ScopeNote />
         </h3>
         <span className="shrink-0 rounded px-1.5 py-[2px] text-[8px] font-bold leading-none tone-amber">
           Targeted review required

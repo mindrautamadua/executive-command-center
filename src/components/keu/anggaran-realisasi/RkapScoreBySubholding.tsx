@@ -14,6 +14,8 @@ import { rkapScore } from "@/lib/kba-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { fmtId } from "@/lib/keu-core";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { toSubholdingId } from "@/lib/subholding";
 
 const PRORATA = 41.7;
 
@@ -39,6 +41,12 @@ const data = LINI.map((l) => ({
 }));
 
 export function RkapScoreBySubholding() {
+  const { active, isFiltered } = useSubholding();
+  // Grafik pembanding: seri subholding non-aktif diredupkan agar posisi relatif
+  // antar subholding tetap terbaca. `segment` adalah dimensi subholdingnya.
+  const dim = (segment: string) =>
+    !isFiltered || toSubholdingId(segment) === active ? 1 : 0.25;
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -85,16 +93,38 @@ export function RkapScoreBySubholding() {
                 fill: "var(--chart-tick)",
               }}
             />
-            <Bar dataKey="PalmCo" fill={SEG_COLOR.PalmCo} radius={[2, 2, 0, 0]} maxBarSize={14} />
-            <Bar dataKey="SGN" fill={SEG_COLOR.SGN} radius={[2, 2, 0, 0]} maxBarSize={14} />
-            <Bar dataKey="PTPN I" fill={SEG_COLOR["PTPN I"]} radius={[2, 2, 0, 0]} maxBarSize={14} />
+            <Bar
+              dataKey="PalmCo"
+              fill={SEG_COLOR.PalmCo}
+              fillOpacity={dim("PalmCo")}
+              radius={[2, 2, 0, 0]}
+              maxBarSize={14}
+            />
+            <Bar
+              dataKey="SGN"
+              fill={SEG_COLOR.SGN}
+              fillOpacity={dim("SGN")}
+              radius={[2, 2, 0, 0]}
+              maxBarSize={14}
+            />
+            <Bar
+              dataKey="PTPN I"
+              fill={SEG_COLOR["PTPN I"]}
+              fillOpacity={dim("PTPN I")}
+              radius={[2, 2, 0, 0]}
+              maxBarSize={14}
+            />
           </BarChart>
         </ResponsiveContainer>
       </div>
 
       <div className="flex items-center justify-center gap-4 pb-1">
         {rkapScore.map((s) => (
-          <span key={s.segment} className="flex items-center gap-1.5 text-[8.5px] text-ink-500">
+          <span
+            key={s.segment}
+            className="flex items-center gap-1.5 text-[8.5px] text-ink-500 transition-opacity"
+            style={{ opacity: dim(s.segment) }}
+          >
             <span
               className="h-[7px] w-[7px] rounded-[2px]"
               style={{ background: SEG_COLOR[s.segment] }}

@@ -2,8 +2,11 @@
 
 import { useState } from "react";
 import { revenueByKomoditas } from "@/lib/pemasaran-data";
+import { filterBySubholding } from "@/lib/subholding";
 import { DonutChart } from "@/components/ui/DonutChart";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { commodityScope, ScopeEmpty } from "@/components/ui/CommodityScope";
 
 const fmtRpT = (v: number) =>
   `Rp ${v.toLocaleString("id-ID", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} T`;
@@ -11,7 +14,11 @@ const fmtRpT = (v: number) =>
 /** Komposisi nilai penjualan YTD per komoditas (donut + legend nilai). */
 export function RevenueByKomoditas() {
   const [active, setActive] = useState<number | null>(null);
-  const total = revenueByKomoditas.reduce((s, d) => s + d.value, 0);
+  const { active: scope, def } = useSubholding();
+  // CPO/PK & PKO → PalmCo, gula & tetes → SugarCo, karet & teh → SupportingCo;
+  // produk hilir & lainnya tidak terikat komoditas sehingga tetap tampil.
+  const slices = filterBySubholding(revenueByKomoditas, scope, (c) => commodityScope(c.name));
+  const total = slices.reduce((s, d) => s + d.value, 0);
 
   return (
     <div
@@ -23,18 +30,24 @@ export function RevenueByKomoditas() {
         Komposisi Nilai Penjualan YTD per Komoditas
       </p>
 
+      {slices.length === 0 && <ScopeEmpty label={def.fullLabel} />}
+
+      {slices.length > 0 && (
       <div className="flex min-h-0 flex-1 items-center gap-3">
         <DonutChart
-          data={revenueByKomoditas}
+          data={slices}
           size={150}
           thickness={25}
-          centerValue="19,9"
+          centerValue={total.toLocaleString("id-ID", {
+            minimumFractionDigits: 1,
+            maximumFractionDigits: 1,
+          })}
           centerCaption="Rp Triliun"
           valueFormatter={fmtRpT}
           onHover={setActive}
         />
         <div className="min-w-0 flex-1">
-          {revenueByKomoditas.map((c, i) => (
+          {slices.map((c, i) => (
             <div
               key={c.name}
               className="flex items-center gap-1.5 py-[3px] transition-opacity"
@@ -60,6 +73,7 @@ export function RevenueByKomoditas() {
           ))}
         </div>
       </div>
+      )}
     </div>
   );
 }

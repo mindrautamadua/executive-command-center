@@ -1,5 +1,6 @@
 import { hhi } from "@/lib/kontrak-buyer-data";
 import { PALETTE } from "@/lib/chart-palette";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 import { SectionHead } from "@/components/hc/SectionHead";
 import { ToneBadge } from "@/components/shared/ToneBadge";
 
@@ -36,7 +37,8 @@ export function BuyerConcentrationGauge() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "90ms" } as React.CSSProperties}
     >
-      <SectionHead title="Konsentrasi Buyer (HHI)" action="Lihat Detail" />
+      {/* HHI dihitung atas seluruh portofolio buyer grup — indeks tingkat enterprise. */}
+      <SectionHead title="Konsentrasi Buyer (HHI)" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Herfindahl–Hirschman Index atas share nilai per buyer
       </p>

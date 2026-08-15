@@ -1,6 +1,8 @@
+"use client";
+
 import { Sparkles } from "lucide-react";
 import { criticalSkills, skillsNote } from "@/lib/hc-data";
-import { SectionHead } from "./SectionHead";
+import { ScopeNote } from "../ui/ScopeNote";
 
 const STATUS = {
   critical: { label: "Shortage Kritis", pill: "bg-[#fdecec] text-[#ef4444]", bar: "#ef4444" },
@@ -21,11 +23,14 @@ export function SkillsIntelligence() {
   return (
     <div className="card anim-rise px-4 pb-3.5 pt-3" style={{ "--d": "170ms" } as React.CSSProperties}>
       <div className="flex items-center justify-between gap-2">
-        <h3 className="text-[10px] font-extrabold uppercase tracking-[0.05em] text-ink-900">
-          Skills Intelligence{" "}
-          <span className="font-semibold normal-case tracking-normal text-ink-400">
-            (Supply vs Demand 2028)
+        <h3 className="flex min-w-0 items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-[0.05em] text-ink-900">
+          <span>
+            Skills Intelligence{" "}
+            <span className="font-semibold normal-case tracking-normal text-ink-400">
+              (Supply vs Demand 2028)
+            </span>
           </span>
+          <ScopeNote />
         </h3>
       </div>
 

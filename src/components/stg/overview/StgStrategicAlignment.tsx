@@ -1,6 +1,7 @@
 import { stgAlignment } from "@/lib/stg-data";
 import type { InitiativeStatus } from "@/lib/stg-core";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
 
 const STATUS_TONE: Record<InitiativeStatus, BadgeTone> = {
@@ -19,7 +20,7 @@ const BAR_CLS: Record<InitiativeStatus, string> = {
 export function StgStrategicAlignment() {
   return (
     <div className="card anim-rise px-4 pb-3.5 pt-3" style={{ "--d": "60ms" } as React.CSSProperties}>
-      <SectionHead title="Strategic Alignment" action="Lihat Detail" />
+      <SectionHead title="Strategic Alignment" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">5 Sasaran Strategis RJPP 2025-2029</p>
 
       <ul className="mt-2 flex flex-col gap-1.5">

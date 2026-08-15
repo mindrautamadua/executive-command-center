@@ -14,6 +14,7 @@ import {
 import { valueBridge } from "@/lib/svc-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const fmt = (v: number) =>
   v.toLocaleString("id-ID", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -69,14 +70,17 @@ function MultilineTick({ x, y, payload }: { x?: number; y?: number; payload?: { 
   );
 }
 
-/** Waterfall sumber nilai: 5 pengungkit mengalir ke realisasi Rp 1,86 T YTD. */
+/**
+ * Waterfall sumber nilai: 5 pengungkit mengalir ke realisasi Rp 1,86 T YTD.
+ * Jembatan hanya bermakna di tingkat grup (tanpa pecahan subholding) — RULE B.
+ */
 export function ValueBridge() {
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead title="Value Bridge — Sumber Nilai" action="Lihat Detail" />
+      <SectionHead title="Value Bridge — Sumber Nilai" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Kontribusi Pengungkit terhadap EBITDA Uplift YTD · Rp T
       </p>

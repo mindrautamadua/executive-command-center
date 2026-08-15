@@ -1,6 +1,7 @@
 import { CloudRain } from "lucide-react";
 import { parametricPilot } from "@/lib/risk-data-detail";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 import { ToneBadge } from "@/components/shared/ToneBadge";
 
 /** Pilot asuransi parametrik indeks curah hujan (transfer risiko iklim). */
@@ -10,7 +11,7 @@ export function ParametricPilot() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead title="Pilot Asuransi Parametrik Iklim" action="Lihat Skema" />
+      <SectionHead title="Pilot Asuransi Parametrik Iklim" action="Lihat Skema" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Transfer Risiko Berbasis Indeks Curah Hujan — {parametricPilot.length} Regional Pilot
       </p>

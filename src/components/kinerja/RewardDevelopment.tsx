@@ -1,5 +1,8 @@
+"use client";
+
 import { Award, BookOpen } from "lucide-react";
 import { developmentLinkage, rewardLinkage } from "@/lib/kinerja-data";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 function Kolom({
   icon,
@@ -37,7 +40,7 @@ export function RewardDevelopment() {
   return (
     <div className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3">
       <div>
-        <h3 className="card-title-navy">PERFORMANCE → REWARD & DEVELOPMENT</h3>
+        <h3 className="card-title-navy flex min-w-0 items-center gap-1.5"><span>PERFORMANCE → REWARD & DEVELOPMENT</span><ScopeNote /></h3>
         <p className="mt-[3px] text-[9.5px] text-ink-500">
           Konsekuensi Rating: Merit, Bonus, Promosi, Pengembangan
         </p>

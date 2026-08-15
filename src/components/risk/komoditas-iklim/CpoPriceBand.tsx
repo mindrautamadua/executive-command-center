@@ -16,6 +16,7 @@ import {
 import { cpoPriceBand, kiStats } from "@/lib/risk-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
 
 const RKAP = kiStats.asumsiRkapCpoRpKg;
 const BAND_LOW = Math.round(RKAP * 0.9);
@@ -28,6 +29,10 @@ const rupiah = (v: number) => `Rp ${v.toLocaleString("id-ID")}`;
  * dibandingkan band asumsi RKAP ±10%.
  */
 export function CpoPriceBand() {
+  const { active, def } = useSubholding();
+  // Harga CPO adalah eksposur komoditas sawit — cakupan PalmCo.
+  const outOfScope = active !== "all" && active !== "palmco";
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2 pt-3"
@@ -35,11 +40,20 @@ export function CpoPriceBand() {
     >
       <SectionHead title="Harga CPO — Aktual, Forward Curve & Band RKAP" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        24 Bulan Aktual KPBN vs Asumsi RKAP {rupiah(RKAP)}/kg (Band ±10%) · Rata-rata YTD{" "}
-        {rupiah(kiStats.cpoAvgYtdRpKg)}/kg
+        {outOfScope ? (
+          `Eksposur harga CPO melekat pada PalmCo — di luar cakupan ${def.label}`
+        ) : (
+          <>
+            24 Bulan Aktual KPBN vs Asumsi RKAP {rupiah(RKAP)}/kg (Band ±10%) · Rata-rata YTD{" "}
+            {rupiah(kiStats.cpoAvgYtdRpKg)}/kg
+          </>
+        )}
       </p>
 
-      <div className="mt-1.5 min-h-0 w-full flex-1">
+      <div
+        className="mt-1.5 min-h-0 w-full flex-1 transition-opacity"
+        style={{ opacity: outOfScope ? 0.25 : 1 }}
+      >
         <ResponsiveContainer width="100%" height="100%">
           <ComposedChart data={cpoPriceBand} margin={{ top: 10, right: 14, bottom: 0, left: 2 }}>
             <CartesianGrid stroke={CHART_AXIS.grid} vertical={false} />

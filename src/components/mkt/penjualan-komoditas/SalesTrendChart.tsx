@@ -13,6 +13,9 @@ import {
 import { penjualanBulanan } from "@/lib/pemasaran-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { inScope } from "@/components/ui/CommodityScope";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 function LegendDot({ color, label }: { color: string; label: string }) {
   return (
@@ -24,12 +27,17 @@ function LegendDot({ color, label }: { color: string; label: string }) {
 }
 
 export function SalesTrendChart() {
+  // Bar nilai = konsolidasi grup (ditandai ScopeNote); garis volume CPO milik
+  // PalmCo sehingga diredupkan bila cakupan aktif bukan PalmCo.
+  const { active } = useSubholding();
+  const volOpacity = inScope(active, "CPO") ? 1 : 0.25;
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead title="Tren Penjualan Bulanan" action="Lihat Detail" />
+      <SectionHead title="Tren Penjualan Bulanan" action="Lihat Detail" badge={<ScopeNote />} />
       <div className="mt-[3px] flex items-center justify-between gap-2">
         <p className="text-[9px] text-ink-500">
           Nilai penjualan (Rp T, bar) &amp; volume CPO (rb ton, garis) — 2026 vs 2025
@@ -111,6 +119,7 @@ export function SalesTrendChart() {
               strokeWidth={1.4}
               strokeDasharray="4 3"
               dot={false}
+              opacity={volOpacity}
             />
             <Line
               yAxisId="vol"
@@ -121,6 +130,7 @@ export function SalesTrendChart() {
               strokeWidth={1.8}
               dot={{ r: 2 }}
               activeDot={{ r: 3.5 }}
+              opacity={volOpacity}
             />
           </ComposedChart>
         </ResponsiveContainer>

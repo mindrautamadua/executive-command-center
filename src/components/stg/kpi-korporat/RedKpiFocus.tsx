@@ -1,9 +1,17 @@
+"use client";
+
 import { CircleAlert } from "lucide-react";
 import { redFocus } from "@/lib/skc-data";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { filterBySubholding } from "@/lib/subholding";
 
 /** Fokus 4 KPI merah: gap, akar masalah, aksi, dan pemilik. */
 export function RedKpiFocus() {
+  const { active } = useSubholding();
+  // `owner` (PIC) menyebut entitas, mis. "Dir. Produksi SGN".
+  const rows = filterBySubholding(redFocus, active, (r) => r.owner);
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -11,12 +19,15 @@ export function RedKpiFocus() {
     >
       <SectionHead title="Fokus KPI Merah" action="Lihat Recovery Plan" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        4 KPI Merah — Akar Masalah &amp; Aksi Perbaikan Terjadwal
+        {rows.length} KPI Merah — Akar Masalah &amp; Aksi Perbaikan Terjadwal
       </p>
 
       <div className="scroll-thin mt-1.5 min-h-0 flex-1 overflow-y-auto pr-1">
+        {rows.length === 0 && (
+          <p className="text-[9px] text-ink-500">Tidak ada KPI merah untuk cakupan ini.</p>
+        )}
         <div className="grid grid-cols-2 gap-2">
-          {redFocus.map((r) => (
+          {rows.map((r) => (
             <div key={r.name} className="rounded-lg border border-[#f5d9d9] bg-[#fdecec] p-2">
               <div className="flex items-start gap-1.5">
                 <CircleAlert size={11} strokeWidth={2} className="mt-[1px] shrink-0 text-[#ef4444]" />

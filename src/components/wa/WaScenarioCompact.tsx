@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowRight, Star } from "lucide-react";
 import { scenarioRows } from "@/lib/hc-data";
+import { ScopeNote } from "../ui/ScopeNote";
 
 /** Ringkasan skenario workforce 2028; simulasi interaktif di Scenario Simulation. */
 export function WaScenarioCompact() {
@@ -10,11 +13,14 @@ export function WaScenarioCompact() {
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
       <div className="flex items-center justify-between gap-2">
-        <h3 className="text-[10px] font-extrabold uppercase tracking-[0.05em] text-ink-900">
-          Workforce Scenarios{" "}
-          <span className="font-semibold normal-case tracking-normal text-ink-400">
-            (Horizon 2028)
+        <h3 className="flex min-w-0 items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-[0.05em] text-ink-900">
+          <span>
+            Workforce Scenarios{" "}
+            <span className="font-semibold normal-case tracking-normal text-ink-400">
+              (Horizon 2028)
+            </span>
           </span>
+          <ScopeNote />
         </h3>
         <Link
           href="/scenario-simulation"

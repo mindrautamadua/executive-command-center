@@ -1,5 +1,6 @@
 import { stageFunnel } from "@/lib/risk-data-detail";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 import { PALETTE } from "@/lib/chart-palette";
 
 const TOTAL = stageFunnel.reduce((s, r) => s + r.count, 0);
@@ -21,7 +22,7 @@ export function CaseStageFunnel() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead title="Tahapan Perkara" />
+      <SectionHead title="Tahapan Perkara" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Posisi {TOTAL} Perkara Aktif: Mediasi hingga Eksekusi Putusan
       </p>

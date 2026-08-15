@@ -1,6 +1,5 @@
 import { RadioTower, RefreshCcw } from "lucide-react";
 import { PLAN_STATUS_STYLE, planVsActual, reforecastNote } from "@/lib/wp-data";
-import { SectionHead } from "../hc/SectionHead";
 
 /**
  * Workforce Plan Control Tower: Plan → Actual → Variance → Driver →

@@ -7,6 +7,7 @@ import { PALETTE } from "@/lib/chart-palette";
 import { fmtId } from "@/lib/keu-core";
 import { DonutChart } from "@/components/ui/DonutChart";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const donutData = [
   { name: "Bunga Tetap", value: interestSplit.fixedPct, color: PALETTE.green },
@@ -21,7 +22,7 @@ export function InterestRateExposure() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "240ms" } as React.CSSProperties}
     >
-      <SectionHead title="Interest Rate Exposure" />
+      <SectionHead title="Interest Rate Exposure" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Komposisi Utang Berbunga Rp 28,4 T — Tetap vs Mengambang
       </p>

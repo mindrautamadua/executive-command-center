@@ -1,6 +1,9 @@
+"use client";
+
 import { ArrowRight, Lightbulb } from "lucide-react";
 import { arpInsights } from "@/lib/arp-data";
 import type { AstInsight } from "@/lib/ast-core";
+import { useSubholding } from "@/components/SubholdingProvider";
 
 const TONES: Record<AstInsight["tone"], { bg: string; icon: string; title: string }> = {
   green: { bg: "bg-ptpn-greenLight", icon: "text-ptpn-green", title: "text-ptpn-green" },
@@ -11,6 +14,10 @@ const TONES: Record<AstInsight["tone"], { bg: string; icon: string; title: strin
 
 /** Kartu Insight & Rekomendasi halaman Replanting & Pemeliharaan. */
 export function ArpInsight() {
+  const { active } = useSubholding();
+  // Seluruh insight halaman ini membahas replanting sawit — cakupan PalmCo.
+  const outOfScope = active !== "all" && active !== "palmco";
+
   return (
     <div
       className="card anim-rise px-4 pb-3.5 pt-3"
@@ -28,7 +35,10 @@ export function ArpInsight() {
         </button>
       </div>
 
-      <div className="mt-2.5 grid grid-cols-5 gap-3">
+      <div
+        className="mt-2.5 grid grid-cols-5 gap-3 transition-opacity"
+        style={{ opacity: outOfScope ? 0.25 : 1 }}
+      >
         {arpInsights.map((ins) => {
           const tone = TONES[ins.tone];
           return (

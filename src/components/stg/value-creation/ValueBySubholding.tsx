@@ -4,6 +4,7 @@ import {
   Bar,
   BarChart,
   CartesianGrid,
+  Cell,
   LabelList,
   ResponsiveContainer,
   Tooltip,
@@ -13,6 +14,8 @@ import {
 import { bySubholding } from "@/lib/svc-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { toSubholdingId } from "@/lib/subholding";
 
 const fmt = (v: number) =>
   v.toLocaleString("id-ID", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -27,8 +30,17 @@ const SERIES = [
 
 const LABELS: Record<string, string> = Object.fromEntries(SERIES.map((s) => [s.key, s.label]));
 
+// `entity` (PalmCo / SGN / PTPN I / Holding) adalah dimensi subholding batang ini.
+const DATA = bySubholding.map((r) => ({ ...r, sub: toSubholdingId(r.entity) }));
+
 /** Realisasi nilai per subholding, ditumpuk per pengungkit. */
 export function ValueBySubholding() {
+  const { active, isFiltered } = useSubholding();
+  // Grafik pembanding: batang non-aktif diredupkan agar kontribusi antar entitas
+  // tetap terbaca; batang "Holding" ikut diredupkan saat filter aktif.
+  const dim = (sub: ReturnType<typeof toSubholdingId>) =>
+    !isFiltered || sub === active ? 1 : 0.25;
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -57,7 +69,7 @@ export function ValueBySubholding() {
       <div className="mt-1.5 min-h-0 w-full flex-1">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
-            data={bySubholding}
+            data={DATA}
             margin={{ top: 16, right: 6, bottom: 4, left: -18 }}
             barCategoryGap="30%"
           >
@@ -92,6 +104,9 @@ export function ValueBySubholding() {
                 maxBarSize={44}
                 radius={i === SERIES.length - 1 ? [3, 3, 0, 0] : undefined}
               >
+                {DATA.map((d) => (
+                  <Cell key={d.entity} fillOpacity={dim(d.sub)} />
+                ))}
                 {i === SERIES.length - 1 && (
                   <LabelList
                     dataKey="totalRpT"

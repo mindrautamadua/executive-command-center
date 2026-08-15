@@ -1,3 +1,5 @@
+"use client";
+
 import { CloudRain, Droplets, ShieldCheck, TrendingDown, Wheat } from "lucide-react";
 import { kiKpi } from "@/lib/risk-data";
 import { RiskKpiCards, type RiskKpiCardItem } from "../RiskKpiCards";

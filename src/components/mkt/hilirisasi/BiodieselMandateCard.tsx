@@ -11,12 +11,18 @@ import {
 } from "recharts";
 import { biodieselMandate, biodieselSummary } from "@/lib/hilir-stok-margin-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { inScope, ScopeEmpty } from "@/components/ui/CommodityScope";
 import { SectionHead } from "../../hc/SectionHead";
 
 const num = (v: number) =>
   v.toLocaleString("id-ID", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 
 export function BiodieselMandateCard() {
+  const { active, def } = useSubholding();
+  // Mandat B40 disalurkan lewat FAME berbasis CPO — seluruhnya domain PalmCo.
+  const luarCakupan = !inScope(active, "biodiesel FAME");
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -33,6 +39,9 @@ export function BiodieselMandateCard() {
         kL
       </p>
 
+      {luarCakupan ? (
+        <ScopeEmpty label={def.fullLabel} />
+      ) : (
       <div className="mt-1.5 min-h-0 w-full flex-1">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={biodieselMandate} margin={{ top: 8, right: 8, bottom: 0, left: -26 }} barCategoryGap="28%">
@@ -63,6 +72,7 @@ export function BiodieselMandateCard() {
           </BarChart>
         </ResponsiveContainer>
       </div>
+      )}
 
       <div className="mt-1 flex items-center gap-3">
         <span className="flex items-center gap-1.5 text-[8px] font-semibold text-ink-500">

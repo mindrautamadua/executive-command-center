@@ -1,7 +1,11 @@
+"use client";
+
 import { programs } from "@/lib/stf-data";
 import type { InitiativeStatus } from "@/lib/stg-core";
 import { SectionHead } from "@/components/hc/SectionHead";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { filterBySubholding } from "@/lib/subholding";
 
 const STATUS_TONE: Record<InitiativeStatus, BadgeTone> = {
   "On Track": "good",
@@ -20,6 +24,11 @@ const rp = (v: number) =>
 
 /** Kesehatan 6 program transformasi: health score, progres, benefit, sponsor. */
 export function TransformationHealthGrid() {
+  const { active, isFiltered, def } = useSubholding();
+  // `sponsor` menyebut subholding pengampu (mis. "Direktur Utama SGN"); sponsor
+  // tingkat Holding lintas-grup sehingga programnya tetap tampil di semua cakupan.
+  const rows = filterBySubholding(programs, active, (p) => p.sponsor);
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
@@ -27,11 +36,18 @@ export function TransformationHealthGrid() {
     >
       <SectionHead title="Transformation Health" action="Lihat Detail" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        6 Program Transformasi — Health Index, Progres Fisik &amp; Benefit YTD
+        {isFiltered
+          ? `${rows.length} Program Relevan ${def.label} — Health Index, Progres Fisik & Benefit YTD`
+          : "6 Program Transformasi — Health Index, Progres Fisik & Benefit YTD"}
       </p>
 
       <div className="mt-2 grid min-h-0 flex-1 grid-cols-3 grid-rows-2 gap-2">
-        {programs.map((p) => (
+        {rows.length === 0 && (
+          <p className="text-[8.5px] text-ink-400">
+            Tidak ada program transformasi untuk cakupan ini.
+          </p>
+        )}
+        {rows.map((p) => (
           <div
             key={p.name}
             className="flex min-w-0 flex-col rounded-lg border border-[#eef2f6] bg-[#fbfcfd] px-2.5 py-2"

@@ -1,11 +1,21 @@
+"use client";
+
 import { priceTicker } from "@/lib/pemasaran-data";
 import { PALETTE } from "@/lib/chart-palette";
+import { filterBySubholding } from "@/lib/subholding";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { commodityScope, ScopeEmpty } from "@/components/ui/CommodityScope";
 import { Delta } from "@/components/ui/Delta";
 import { Sparkline } from "@/components/ui/Sparkline";
 
 /** Papan harga 6 komoditas: spot, rata-rata YTD, delta vs Des 2025, tren 12 bulan. */
 export function PriceTickerBoard() {
+  const { active, def } = useSubholding();
+  // Komoditas menentukan pemilik: CPO/PKO → PalmCo, gula/tetes → SugarCo,
+  // karet & teh → SupportingCo.
+  const rows = filterBySubholding(priceTicker, active, (p) => commodityScope(p.komoditas));
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
@@ -16,6 +26,10 @@ export function PriceTickerBoard() {
         Harga Spot per 31 Mei 2026 — Delta vs Akhir Des 2025, Tren 12 Bulan
       </p>
 
+      {rows.length === 0 && <ScopeEmpty label={def.fullLabel} />}
+
+      {rows.length > 0 && (
+        <>
       <div className="mt-2 grid grid-cols-[minmax(0,1fr)_88px_92px_64px_96px] items-center gap-x-2 border-b border-[#f0f3f6] pb-1.5 text-[8px] font-bold uppercase tracking-[0.05em] text-ink-400">
         <span>Komoditas</span>
         <span className="text-right">Spot</span>
@@ -25,7 +39,7 @@ export function PriceTickerBoard() {
       </div>
 
       <div className="flex min-h-0 flex-1 flex-col justify-between divide-y divide-[#f0f3f6]">
-        {priceTicker.map((p) => (
+        {rows.map((p) => (
           <div
             key={p.komoditas}
             className="grid grid-cols-[minmax(0,1fr)_88px_92px_64px_96px] items-center gap-x-2 py-[7px]"
@@ -62,6 +76,8 @@ export function PriceTickerBoard() {
           </div>
         ))}
       </div>
+        </>
+      )}
     </div>
   );
 }

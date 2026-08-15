@@ -1,10 +1,19 @@
+"use client";
+
 import { CalendarClock } from "lucide-react";
 import { criticalPath } from "@/lib/sms-data";
 import { SectionHead } from "@/components/hc/SectionHead";
 import { ToneBadge } from "@/components/shared/ToneBadge";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { filterBySubholding } from "@/lib/subholding";
 
 /** 7 milestone kritis dengan jatuh tempo ≤30 hari. */
 export function CriticalPath30Days() {
+  const { active, isFiltered, def } = useSubholding();
+  // `pic` menyebut subholding pemilik (mis. "Dir. Produksi SGN"); PIC tingkat
+  // Holding tidak mengacu ke satu subholding sehingga selalu tampil.
+  const rows = filterBySubholding(criticalPath, active, (c) => c.pic);
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
@@ -12,11 +21,18 @@ export function CriticalPath30Days() {
     >
       <SectionHead title="Critical Path ≤30 Hari" action="Lihat Semua" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        7 Milestone Kritis Jatuh Tempo s.d. 30 Juni 2026
+        {isFiltered
+          ? `${rows.length} Milestone Kritis — Cakupan ${def.label} & Holding`
+          : "7 Milestone Kritis Jatuh Tempo s.d. 30 Juni 2026"}
       </p>
 
       <ul className="mt-2 flex min-h-0 flex-1 flex-col justify-between gap-1">
-        {criticalPath.map((c) => (
+        {rows.length === 0 && (
+          <li className="text-[8.5px] text-ink-400">
+            Tidak ada milestone kritis untuk cakupan ini.
+          </li>
+        )}
+        {rows.map((c) => (
           <li
             key={c.milestone}
             className={`rounded-lg border px-2.5 py-[6px] ${

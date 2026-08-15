@@ -28,7 +28,7 @@ export const ASET_MENU_SECTIONS: DimensionMenuSection[] = [
     items: [
       { label: "Fasilitas Produksi", icon: Factory, href: "/aset-investasi/fasilitas-produksi" },
       { label: "Produktivitas Aset", icon: TrendingUp, href: "/aset-investasi/produktivitas-aset" },
-      { label: "Replanting & Pemeliharaan", icon: Sprout, href: "/aset-investasi/replanting" },
+      { label: "Replanting & Pemeliharaan", icon: Sprout, href: "/aset-investasi/replanting", owner: "palmco" },
     ],
   },
   {

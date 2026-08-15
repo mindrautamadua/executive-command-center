@@ -12,7 +12,10 @@ import {
 import { replantingNote, replantingRoadmap } from "@/lib/agro-data";
 import type { ReplantingPlan } from "@/lib/agro-data";
 import { CATEGORICAL, CHART_AXIS, CHART_TOOLTIP_STYLE } from "@/lib/chart-palette";
+import { filterBySubholding } from "@/lib/subholding";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { ScopeEmpty, commodityScope } from "@/components/ui/CommodityScope";
 
 const YEARS: { tahun: string; key: keyof ReplantingPlan }[] = [
   { tahun: "2026", key: "target2026Ha" },
@@ -23,15 +26,22 @@ const YEARS: { tahun: string; key: keyof ReplantingPlan }[] = [
 ];
 
 /** Pivot: satu baris per tahun, kolom per regional (stacked). */
-const roadmapByYear = YEARS.map(({ tahun, key }) => {
-  const row: Record<string, string | number> = { tahun };
-  for (const r of replantingRoadmap) row[r.regional] = r[key] as number;
-  return row;
-});
+function pivot(rows: ReplantingPlan[]) {
+  return YEARS.map(({ tahun, key }) => {
+    const row: Record<string, string | number> = { tahun };
+    for (const r of rows) row[r.regional] = r[key] as number;
+    return row;
+  });
+}
 
 const ribuan = (v: number) => v.toLocaleString("id-ID");
 
 export function ReplantingRoadmap() {
+  // Domain: Regional 1–7 adalah wilayah kebun sawit → milik PalmCo.
+  const { active, def } = useSubholding();
+  const rows = filterBySubholding(replantingRoadmap, active, (r) => commodityScope(r.regional));
+  const roadmapByYear = pivot(rows);
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -42,6 +52,10 @@ export function ReplantingRoadmap() {
         Target Tanam Ulang per Regional (Ha) — Total 88.000 Ha 5 Tahun
       </p>
 
+      {rows.length === 0 ? (
+        <ScopeEmpty label={def.fullLabel} />
+      ) : (
+      <>
       <div className="mt-1.5 min-h-0 w-full flex-1">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={roadmapByYear} margin={{ top: 8, right: 4, bottom: 0, left: -8 }}>
@@ -64,14 +78,14 @@ export function ReplantingRoadmap() {
               formatter={(v: number, name: string) => [`${ribuan(v)} ha`, name]}
               itemSorter={() => 0}
             />
-            {replantingRoadmap.map((r, i) => (
+            {rows.map((r, i) => (
               <Bar
                 key={r.regional}
                 dataKey={r.regional}
                 stackId="roadmap"
                 fill={CATEGORICAL[i]}
                 barSize={26}
-                radius={i === replantingRoadmap.length - 1 ? [3, 3, 0, 0] : undefined}
+                radius={i === rows.length - 1 ? [3, 3, 0, 0] : undefined}
               />
             ))}
           </BarChart>
@@ -79,6 +93,8 @@ export function ReplantingRoadmap() {
       </div>
 
       <p className="pb-1 text-[8px] leading-snug text-ink-400">{replantingNote}</p>
+      </>
+      )}
     </div>
   );
 }

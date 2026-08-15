@@ -1,5 +1,6 @@
 import { AlertCircle, AlertTriangle, ArrowRight, CheckCircle2, TrendingUp } from "lucide-react";
 import { prodInsights, type ProdInsight } from "@/lib/produksi-data";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const ICONS: Record<ProdInsight["tone"], typeof TrendingUp> = {
   red: AlertCircle,
@@ -26,7 +27,9 @@ export function ProdInsightRekomendasi() {
           Insight &amp; Rekomendasi{" "}
           <span className="font-semibold normal-case tracking-normal text-ink-400">
             (Decision-grade)
-          </span>
+          </span>{" "}
+          {/* Narasi rekomendasi disusun di level grup - tandai konsolidasi. */}
+          <ScopeNote />
         </h3>
         <button className="flex shrink-0 items-center gap-1.5 rounded-lg border border-[#e3e9ef] bg-white px-3 py-[6px] text-[9.5px] font-semibold text-ink-700 transition-colors hover:border-ptpn-green hover:text-ptpn-green">
           Lihat Semua Insight <ArrowRight size={11} />

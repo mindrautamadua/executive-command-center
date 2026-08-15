@@ -13,6 +13,7 @@ import {
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { rasioKinerja, rasioTren } from "@/lib/comp-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 export function RasioKinerja() {
   return (
@@ -22,7 +23,7 @@ export function RasioKinerja() {
     >
       <div className="flex items-start justify-between gap-2">
         <div>
-          <h3 className="card-title-navy">Rasio Kompensasi terhadap Kinerja</h3>
+          <h3 className="card-title-navy flex min-w-0 items-center gap-1.5"><span>Rasio Kompensasi terhadap Kinerja</span><ScopeNote /></h3>
           <p className="mt-[3px] text-[9.5px] text-ink-500">
             Total Rewards Ratio vs Performance Score
           </p>

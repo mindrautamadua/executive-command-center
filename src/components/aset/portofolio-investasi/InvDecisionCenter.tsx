@@ -4,6 +4,7 @@ import { useState } from "react";
 import { AlertCircle, AlertTriangle, CheckCircle2, Sparkles } from "lucide-react";
 import { INV_DECISION_PROYEK, INV_DECISION_TOTAL_RP_T, invDecisions } from "@/lib/inv-data";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const TABS = [
   { label: "Perlu Keputusan", count: invDecisions.length },
@@ -41,7 +42,7 @@ export function InvDecisionCenter() {
       className="card anim-rise px-4 pb-3.5 pt-3"
       style={{ "--d": "200ms" } as React.CSSProperties}
     >
-      <SectionHead title="BOD Decision Center" action="Lihat Semua" />
+      <SectionHead title="BOD Decision Center" action="Lihat Semua" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Proposal Menunggu Persetujuan:{" "}
         <span className="font-bold text-ink-900">

@@ -13,6 +13,7 @@ import {
 } from "recharts";
 import { opexImpactWaterfall } from "@/lib/biaya-opex-data";
 import { CATEGORICAL, CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 import { SectionHead } from "@/components/hc/SectionHead";
 
 /** Waterfall: base transparan + nilai kumulatif per workstream, ditutup total. */
@@ -32,7 +33,8 @@ export function ImpactWaterfall() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead title="Impact Waterfall EBITDA" action="Lihat Detail" />
+      {/* Dampak EBITDA program OPEX dihitung agregat grup per workstream. */}
+      <SectionHead title="Impact Waterfall EBITDA" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Dampak YTD per Workstream (Rp M) — Biaya Rp 412 M + Uplift Volume Rp 268 M
       </p>

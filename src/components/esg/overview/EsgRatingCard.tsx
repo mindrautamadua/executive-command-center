@@ -4,6 +4,7 @@ import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "rec
 import { esgRating } from "@/lib/esg-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 import { Delta } from "@/components/ui/Delta";
 
 const angka = (v: number) => v.toLocaleString("id-ID", { minimumFractionDigits: 1 });
@@ -14,7 +15,7 @@ const selisih = esgRating.score - first;
 export function EsgRatingCard() {
   return (
     <div className="card anim-rise px-4 pb-3.5 pt-3" style={{ "--d": "60ms" } as React.CSSProperties}>
-      <SectionHead title="Rating ESG Eksternal" action="Lihat Detail" />
+      <SectionHead title="Rating ESG Eksternal" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">{esgRating.agency}</p>
 
       <div className="mt-2.5 flex items-end justify-between gap-2">

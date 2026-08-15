@@ -1,3 +1,5 @@
+"use client";
+
 import {
   INV_HURDLE_RATE_PCT,
   TOP_PROJECTS_NILAI_RP_T,
@@ -8,6 +10,8 @@ import {
 import { SectionHead } from "@/components/hc/SectionHead";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
 import { PALETTE } from "@/lib/chart-palette";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { filterBySubholding } from "@/lib/subholding";
 
 const num = (v: number) =>
   v.toLocaleString("id-ID", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
@@ -26,15 +30,32 @@ const STATUS_BAR: Record<ProjectStatus, string> = {
 
 /** Delapan proyek terbesar: progress fisik, IRR, status & penanda PSN. */
 export function TopProjects() {
+  const { active, isFiltered, def } = useSubholding();
+  // Nama proyek menyebut subholding pelaksananya (SGN, PalmCo, PTPN I); proyek
+  // lintas subholding (mis. ERP grup, biogas 18 PKS) tetap tampil.
+  const rows = filterBySubholding(topProjects, active, (p) => p.nama);
+  const nilaiRows = +rows.reduce((s, p) => s + p.nilaiRpT, 0).toFixed(1);
+
   return (
     <div
       className="card anim-rise flex h-full min-h-0 flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead title="8 Proyek Terbesar" action="Lihat Semua" />
+      <SectionHead
+        title={isFiltered ? `Proyek Terbesar — ${def.label}` : "8 Proyek Terbesar"}
+        action="Lihat Semua"
+      />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        Rp {num(TOP_PROJECTS_NILAI_RP_T)} T · {num(TOP_PROJECTS_PORSI_PCT)}% Pipeline · Hurdle Rate{" "}
-        {num(INV_HURDLE_RATE_PCT)}%
+        {isFiltered ? (
+          <>
+            {rows.length} proyek · Rp {num(nilaiRows)} T · Hurdle Rate {num(INV_HURDLE_RATE_PCT)}%
+          </>
+        ) : (
+          <>
+            Rp {num(TOP_PROJECTS_NILAI_RP_T)} T · {num(TOP_PROJECTS_PORSI_PCT)}% Pipeline · Hurdle
+            Rate {num(INV_HURDLE_RATE_PCT)}%
+          </>
+        )}
       </p>
 
       <div className="scroll-thin mt-2 min-h-0 flex-1 overflow-y-auto pr-1">
@@ -62,7 +83,7 @@ export function TopProjects() {
             </tr>
           </thead>
           <tbody>
-            {topProjects.map((p) => (
+            {rows.map((p) => (
               <tr key={p.id} className="border-b border-[#f4f7fa]">
                 <td className="py-[7px] pr-2">
                   <div className="flex items-center gap-1.5">
@@ -110,8 +131,9 @@ export function TopProjects() {
       </div>
 
       <p className="pt-1.5 text-[8px] leading-snug text-ink-400">
-        Lima dari enam proyek strategis nasional berada di daftar ini; hanya Kawasan Industri PTPN I
-        yang ber-IRR di bawah hurdle rate sekaligus berstatus terlambat.
+        {isFiltered
+          ? `Termasuk proyek lintas subholding yang juga menyentuh ${def.label}; nilai grup penuh Rp ${num(TOP_PROJECTS_NILAI_RP_T)} T.`
+          : "Lima dari enam proyek strategis nasional berada di daftar ini; hanya Kawasan Industri PTPN I yang ber-IRR di bawah hurdle rate sekaligus berstatus terlambat."}
       </p>
     </div>
   );

@@ -11,6 +11,8 @@ import {
 } from "recharts";
 import { marginTrend } from "@/lib/hilir-stok-margin-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { inScope } from "@/components/ui/CommodityScope";
 import { SectionHead } from "../../hc/SectionHead";
 
 const SERIES = [
@@ -23,7 +25,16 @@ const SERIES = [
 const pct = (v: number) =>
   `${v.toLocaleString("id-ID", { minimumFractionDigits: 1, maximumFractionDigits: 1 })}%`;
 
+/**
+ * Tren margin per komoditas. Komoditas menentukan pemilik subholding:
+ * CPO → PalmCo, gula → SugarCo, karet → SupportingCo; produk hilir tidak
+ * terikat satu subholding sehingga selalu tampil penuh. Seri di luar cakupan
+ * diredupkan (bukan dihapus) supaya grafik perbandingan tetap terbaca.
+ */
 export function MarginTrendChart() {
+  const { active } = useSubholding();
+  const opacity = (label: string) => (inScope(active, label) ? 1 : 0.25);
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -66,6 +77,7 @@ export function MarginTrendChart() {
                 dataKey={s.key}
                 stroke={s.color}
                 strokeWidth={s.key === "cpo" ? 2 : 1.5}
+                strokeOpacity={opacity(s.label)}
                 dot={false}
                 activeDot={{ r: 3.5 }}
               />
@@ -76,7 +88,11 @@ export function MarginTrendChart() {
 
       <div className="mt-1 flex items-center gap-3">
         {SERIES.map((s) => (
-          <span key={s.key} className="flex items-center gap-1.5 text-[8px] font-semibold text-ink-500">
+          <span
+            key={s.key}
+            className="flex items-center gap-1.5 text-[8px] font-semibold text-ink-500"
+            style={{ opacity: opacity(s.label) }}
+          >
             <span className="h-[3px] w-[14px] rounded-full" style={{ background: s.color }} />
             {s.label}
           </span>

@@ -1,4 +1,5 @@
 import { AsetSidebar } from "@/components/aset/AsetSidebar";
+import { ScopeGuard } from "@/components/ui/ScopeGuard";
 import { DataTrustStrip } from "@/components/hc/DataTrustStrip";
 import { ArpHeader } from "@/components/aset/replanting/ArpHeader";
 import { ArpKpiStrip } from "@/components/aset/replanting/ArpKpiStrip";
@@ -19,6 +20,8 @@ export default function ReplantingPage() {
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
         <ArpHeader />
+
+        <ScopeGuard owner="palmco">
 
         <div className="flex flex-col gap-3 px-5 pb-5">
           <div className="-mb-3">
@@ -43,6 +46,7 @@ export default function ReplantingPage() {
 
           <ArpInsight />
         </div>
+        </ScopeGuard>
       </main>
     </div>
   );

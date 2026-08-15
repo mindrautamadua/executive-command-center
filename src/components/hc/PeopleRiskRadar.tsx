@@ -5,6 +5,7 @@ import { ChevronDown } from "lucide-react";
 import { riskRadar, topRisks, type RiskSeverity } from "@/lib/hc-data";
 import { PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "./SectionHead";
+import { ScopeNote } from "../ui/ScopeNote";
 import { WhyDrivers } from "./WhyDrivers";
 
 const SEVERITY: Record<RiskSeverity, string> = {
@@ -115,7 +116,7 @@ export function PeopleRiskRadar() {
       className="card anim-rise flex h-full flex-col px-4 pb-3.5 pt-3"
       style={{ "--d": "80ms" } as React.CSSProperties}
     >
-      <SectionHead title="People Risk Radar" action="Lihat Semua" />
+      <SectionHead title="People Risk Radar" action="Lihat Semua" badge={<ScopeNote />} />
 
       <div className="mt-1 flex min-h-0 flex-1 items-stretch gap-3">
         <div className="flex min-w-0 flex-[54] flex-col">

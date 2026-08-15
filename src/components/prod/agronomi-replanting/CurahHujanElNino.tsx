@@ -16,7 +16,12 @@ import {
 import { CURAH_HUJAN_ANOMALI_PCT, curahHujanBulanan, ensoIndex } from "@/lib/agro-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
+/**
+ * Curah hujan & ENSO adalah paparan iklim lintas komoditas (sawit, tebu, karet,
+ * teh) — angkanya konsolidasi grup dan tidak ikut filter subholding.
+ */
 export function CurahHujanElNino() {
   return (
     <div
@@ -24,7 +29,12 @@ export function CurahHujanElNino() {
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
       <div className="flex items-center justify-between gap-2">
-        <SectionHead title="Curah Hujan & Sinyal El Nino" className="flex-1" action="Lihat Detail" />
+        <SectionHead
+          title="Curah Hujan & Sinyal El Nino"
+          className="flex-1"
+          action="Lihat Detail"
+          badge={<ScopeNote />}
+        />
       </div>
       <p className="mt-[3px] text-[9px] text-ink-500">
         Aktual vs Normal Klimatologis 12 Bulan (mm) · Anomali{" "}

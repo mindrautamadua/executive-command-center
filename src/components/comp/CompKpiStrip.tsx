@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Coins, HandCoins, PieChart, Sparkles, ShieldPlus, Scale } from "lucide-react";
 import { compKpi } from "@/lib/comp-data";
 import { KpiCard } from "../ui/KpiCard";
+import { ScopeNote } from "../ui/ScopeNote";
 
 const ICONS = {
   biaya: Coins,
@@ -44,6 +45,11 @@ function MiniRing({ pct, color }: { pct: number; color: string }) {
   );
 }
 
+/**
+ * Enam KPI total rewards. Seluruhnya agregat grup (total biaya, rata-rata gaji,
+ * pay equity index) tanpa pecahan per subholding di sumber data; pecahan per unit
+ * organisasi tersedia di kartu "Ringkasan Kompensasi per Unit Organisasi".
+ */
 export function CompKpiStrip() {
   return (
     <div className="grid grid-cols-6 gap-3">
@@ -55,6 +61,7 @@ export function CompKpiStrip() {
             icon={<Icon size={13} strokeWidth={1.9} />}
             tone={k.tone}
             label={k.label}
+            badge={<ScopeNote />}
             value={k.value}
             delta={{ value: k.delta, trend: k.trend }}
             compare={k.compare}

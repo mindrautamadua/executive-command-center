@@ -4,6 +4,7 @@ import {
   Bar,
   BarChart,
   CartesianGrid,
+  Cell,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -12,8 +13,21 @@ import {
 import { DOWNTIME_TOTAL_JAM, downtimeByCause, downtimeNote } from "@/lib/afs-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { toSubholdingId } from "@/lib/subholding";
 
 const ribuan = (v: number) => v.toLocaleString("id-ID");
+
+/**
+ * Pemetaan domain: PKS (sawit) milik PalmCo, PG (gula) milik SugarCo,
+ * pabrik karet & teh milik SupportingCo (PTPN I).
+ */
+const JENIS_SUBHOLDING: Record<string, string> = {
+  "PKS (36 unit)": "PalmCo",
+  "PG (17 unit)": "SGN",
+  "Pabrik Karet (9 unit)": "PTPN I",
+  "Pabrik Teh (5 unit)": "PTPN I",
+};
 
 const SERIES = [
   { key: "mekanikalJam", label: "Mekanikal", color: PALETTE.red },
@@ -30,6 +44,10 @@ const data = downtimeByCause.map((d) => ({
 
 /** Downtime YTD per jenis pabrik, di-stack menurut penyebab (jam). */
 export function DowntimeAnalysis() {
+  const { active, isFiltered } = useSubholding();
+  const dim = (jenis: string) =>
+    !isFiltered || toSubholdingId(JENIS_SUBHOLDING[jenis]) === active ? 1 : 0.25;
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -74,7 +92,11 @@ export function DowntimeAnalysis() {
                 fill={s.color}
                 barSize={40}
                 radius={i === SERIES.length - 1 ? [2, 2, 0, 0] : undefined}
-              />
+              >
+                {data.map((d) => (
+                  <Cell key={d.jenis} fillOpacity={dim(d.jenis)} />
+                ))}
+              </Bar>
             ))}
           </BarChart>
         </ResponsiveContainer>

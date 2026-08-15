@@ -15,11 +15,22 @@ import {
 import { digitalMaturity } from "@/lib/stf-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { toSubholdingId } from "@/lib/subholding";
 
 const TARGET_ADOPSI_PCT = 80;
 
+// `entity` (Holding / PalmCo / PTPN I / SGN) adalah dimensi subholding batang ini.
+const DATA = digitalMaturity.map((d) => ({ ...d, sub: toSubholdingId(d.entity) }));
+
 /** Adopsi digital per subholding vs target 80% (label maturitas 1-5). */
 export function DigitalMaturity() {
+  const { active, isFiltered } = useSubholding();
+  // Grafik pembanding: batang non-aktif diredupkan agar posisi relatif terhadap
+  // target 80% tetap terbaca; batang "Holding" ikut diredupkan saat filter aktif.
+  const dim = (sub: ReturnType<typeof toSubholdingId>) =>
+    !isFiltered || sub === active ? 1 : 0.25;
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -32,7 +43,7 @@ export function DigitalMaturity() {
 
       <div className="mt-1.5 min-h-0 w-full flex-1">
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={digitalMaturity} margin={{ top: 18, right: 14, bottom: 0, left: -18 }}>
+          <BarChart data={DATA} margin={{ top: 18, right: 14, bottom: 0, left: -18 }}>
             <CartesianGrid stroke={CHART_AXIS.grid} vertical={false} />
             <XAxis
               dataKey="entity"
@@ -61,10 +72,11 @@ export function DigitalMaturity() {
               strokeWidth={1.2}
             />
             <Bar dataKey="adoptionPct" radius={[4, 4, 0, 0]} barSize={28}>
-              {digitalMaturity.map((d) => (
+              {DATA.map((d) => (
                 <Cell
                   key={d.entity}
                   fill={d.adoptionPct >= TARGET_ADOPSI_PCT ? PALETTE.green : PALETTE.amber}
+                  fillOpacity={dim(d.sub)}
                 />
               ))}
               <LabelList
@@ -80,8 +92,12 @@ export function DigitalMaturity() {
       </div>
 
       <ul className="mt-1 flex items-center justify-between gap-1">
-        {digitalMaturity.map((d) => (
-          <li key={d.entity} className="min-w-0 flex-1 text-center text-[8px] text-ink-400">
+        {DATA.map((d) => (
+          <li
+            key={d.entity}
+            className="min-w-0 flex-1 text-center text-[8px] text-ink-400 transition-opacity"
+            style={{ opacity: dim(d.sub) }}
+          >
             Maturity {d.maturity.toLocaleString("id-ID", { minimumFractionDigits: 1 })}/5
           </li>
         ))}

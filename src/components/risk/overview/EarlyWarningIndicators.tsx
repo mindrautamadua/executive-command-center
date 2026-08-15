@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowUpRight, Minus, Siren, TrendingDown, TrendingUp } from "lucide-react";
 import { earlyWarnings, type EarlyWarningKri } from "@/lib/risk-data";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
 
 const STATUS_TONE: Record<EarlyWarningKri["status"], BadgeTone> = {
@@ -34,7 +35,7 @@ export function EarlyWarningIndicators() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "240ms" } as React.CSSProperties}
     >
-      <SectionHead title="Early Warning Indicators (KRI)" />
+      <SectionHead title="Early Warning Indicators (KRI)" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Sinyal Prekursor Sebelum Risiko Terealisasi — 1 Merah · 3 Kuning · 2 Hijau
       </p>

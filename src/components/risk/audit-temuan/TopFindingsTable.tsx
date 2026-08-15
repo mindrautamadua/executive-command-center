@@ -1,5 +1,6 @@
 import { topFindings, topFindingStats } from "@/lib/risk-data-detail";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
 
 const STATUS_TONE: Record<string, BadgeTone> = {
@@ -16,7 +17,7 @@ export function TopFindingsTable() {
     >
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0">
-          <SectionHead title="Temuan Bernilai Terbesar" action="Lihat Semua Temuan" />
+          <SectionHead title="Temuan Bernilai Terbesar" action="Lihat Semua Temuan" badge={<ScopeNote />} />
           <p className="mt-[3px] text-[9px] text-ink-500">
             Nilai Temuan Total {topFindingStats.nilaiTotal} · Disetor Kembali{" "}
             <span className="font-bold text-ptpn-green">{topFindingStats.disetorKembali}</span>

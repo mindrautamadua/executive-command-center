@@ -1,7 +1,12 @@
+"use client";
+
 import { opexInitiatives } from "@/lib/biaya-opex-data";
 import type { OpexInitiative } from "@/lib/biaya-opex-data";
 import { SectionHead } from "@/components/hc/SectionHead";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { commodityScope, ScopeEmpty } from "@/components/ui/CommodityScope";
+import { filterBySubholding } from "@/lib/subholding";
 
 const STATUS_TONE: Record<OpexInitiative["status"], BadgeTone> = {
   Hijau: "good",
@@ -16,6 +21,14 @@ const BAR_TONE: Record<OpexInitiative["status"], string> = {
 };
 
 export function InitiativePortfolio() {
+  const { active, def } = useSubholding();
+  // Program OPEX umumnya lintas komoditas; hanya inisiatif yang menyebut unit
+  // komoditas (mis. "36 PKS", "losses PKS", "logistik TBS" → PalmCo) yang ikut
+  // disaring, sisanya tetap tampil di semua cakupan.
+  const rows = filterBySubholding(opexInitiatives, active, (ini) =>
+    commodityScope(`${ini.inisiatif} ${ini.workstream}`),
+  );
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -26,6 +39,9 @@ export function InitiativePortfolio() {
         12 Inisiatif Terbesar (Dampak Rp 680 M YTD) — Status RAG per Mei 2026
       </p>
 
+      {rows.length === 0 ? (
+        <ScopeEmpty label={def.fullLabel} />
+      ) : (
       <div className="scroll-thin mt-1.5 min-h-0 flex-1 overflow-y-auto">
         <table className="w-full border-separate border-spacing-0">
           <thead className="sticky top-0 bg-[var(--surface)]">
@@ -39,7 +55,7 @@ export function InitiativePortfolio() {
             </tr>
           </thead>
           <tbody>
-            {opexInitiatives.map((ini) => (
+            {rows.map((ini) => (
               <tr key={ini.inisiatif} className="align-middle">
                 <td className="border-b border-[#f3f6f9] py-[5px] pr-2 text-[8.5px] font-bold leading-snug text-ink-900">
                   {ini.inisiatif}
@@ -74,6 +90,7 @@ export function InitiativePortfolio() {
           </tbody>
         </table>
       </div>
+      )}
     </div>
   );
 }

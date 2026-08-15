@@ -13,6 +13,7 @@ import {
 import { capacityGap, capacityGapNote, capacityVsSupply } from "@/lib/afs-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
 
 const num = (v: number) =>
   v.toLocaleString("id-ID", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
@@ -24,6 +25,13 @@ const data = capacityVsSupply.map((p) => ({
 }));
 
 export function CapacityVsSupply() {
+  const { active, isFiltered } = useSubholding();
+  // Pemetaan domain: kurva sawit/TBS milik PalmCo, kurva tebu/gula milik SugarCo.
+  const dim = (komoditas: "sawit" | "tebu") => {
+    if (!isFiltered) return 1;
+    return active === (komoditas === "sawit" ? "palmco" : "sugarco") ? 1 : 0.25;
+  };
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -71,6 +79,8 @@ export function CapacityVsSupply() {
               strokeWidth={1.3}
               strokeDasharray="4 3"
               fill="url(#afs-gap-fill)"
+              strokeOpacity={dim("sawit")}
+              fillOpacity={dim("sawit")}
               dot={false}
             />
             <Line
@@ -79,7 +89,8 @@ export function CapacityVsSupply() {
               dataKey="kapasitasSawitJtTon"
               stroke={PALETTE.green}
               strokeWidth={1.8}
-              dot={{ r: 2.2, fill: PALETTE.green, strokeWidth: 0 }}
+              strokeOpacity={dim("sawit")}
+              dot={{ r: 2.2, fill: PALETTE.green, strokeWidth: 0, fillOpacity: dim("sawit") }}
               activeDot={{ r: 4 }}
             />
             <Line
@@ -89,7 +100,8 @@ export function CapacityVsSupply() {
               stroke={PALETTE.greenSoft}
               strokeWidth={1.6}
               strokeDasharray="5 4"
-              dot={{ r: 2, fill: PALETTE.greenSoft, strokeWidth: 0 }}
+              strokeOpacity={dim("sawit")}
+              dot={{ r: 2, fill: PALETTE.greenSoft, strokeWidth: 0, fillOpacity: dim("sawit") }}
             />
             <Line
               name="Kapasitas PG"
@@ -97,7 +109,8 @@ export function CapacityVsSupply() {
               dataKey="kapasitasTebuJtTon"
               stroke={PALETTE.blue}
               strokeWidth={1.8}
-              dot={{ r: 2.2, fill: PALETTE.blue, strokeWidth: 0 }}
+              strokeOpacity={dim("tebu")}
+              dot={{ r: 2.2, fill: PALETTE.blue, strokeWidth: 0, fillOpacity: dim("tebu") }}
               activeDot={{ r: 4 }}
             />
             <Line
@@ -107,7 +120,8 @@ export function CapacityVsSupply() {
               stroke={PALETTE.blueSoft}
               strokeWidth={1.6}
               strokeDasharray="5 4"
-              dot={{ r: 2, fill: PALETTE.blueSoft, strokeWidth: 0 }}
+              strokeOpacity={dim("tebu")}
+              dot={{ r: 2, fill: PALETTE.blueSoft, strokeWidth: 0, fillOpacity: dim("tebu") }}
             />
           </ComposedChart>
         </ResponsiveContainer>
@@ -115,7 +129,11 @@ export function CapacityVsSupply() {
 
       <div className="mb-1 flex items-center justify-center gap-4">
         {capacityGap.map((g) => (
-          <span key={g.komoditas} className="flex items-center gap-1.5 text-[8px] text-ink-500">
+          <span
+            key={g.komoditas}
+            className="flex items-center gap-1.5 text-[8px] text-ink-500 transition-opacity"
+            style={{ opacity: dim(g.komoditas.startsWith("Sawit") ? "sawit" : "tebu") }}
+          >
             <span className="font-semibold text-ink-700">{g.komoditas}</span>
             gap {num(g.gap2026JtTon)} → {num(g.gap2030JtTon)} jt ton
           </span>

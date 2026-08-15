@@ -14,7 +14,10 @@ import {
 } from "recharts";
 import { HARVEST_STANDAR_HARI, harvestCycle } from "@/lib/agro-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
+import { filterBySubholding } from "@/lib/subholding";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { ScopeEmpty, commodityScope } from "@/components/ui/CommodityScope";
 
 const barColor = (hari: number) =>
   hari <= HARVEST_STANDAR_HARI ? PALETTE.green : hari <= 8 ? PALETTE.amber : PALETTE.red;
@@ -22,6 +25,10 @@ const barColor = (hari: number) =>
 const hari = (v: number) => `${v.toLocaleString("id-ID", { minimumFractionDigits: 1 })} hari`;
 
 export function HarvestCycleCard() {
+  // Domain: rotasi panen TBS di Regional 1–7 kebun sawit → milik PalmCo.
+  const { active, def } = useSubholding();
+  const rows = filterBySubholding(harvestCycle, active, (r) => commodityScope(r.regional));
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -32,9 +39,13 @@ export function HarvestCycleCard() {
         Interval Panen Aktual vs Standar {HARVEST_STANDAR_HARI} Hari
       </p>
 
+      {rows.length === 0 ? (
+        <ScopeEmpty label={def.fullLabel} />
+      ) : (
+      <>
       <div className="mt-1.5 min-h-0 w-full flex-1">
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={harvestCycle} margin={{ top: 14, right: 10, bottom: 0, left: -24 }}>
+          <BarChart data={rows} margin={{ top: 14, right: 10, bottom: 0, left: -24 }}>
             <CartesianGrid stroke={CHART_AXIS.grid} vertical={false} />
             <XAxis
               dataKey="regional"
@@ -69,7 +80,7 @@ export function HarvestCycleCard() {
               }}
             />
             <Bar dataKey="rotasiHari" barSize={24} radius={[4, 4, 0, 0]}>
-              {harvestCycle.map((r) => (
+              {rows.map((r) => (
                 <Cell key={r.regional} fill={barColor(r.rotasiHari)} />
               ))}
               <LabelList
@@ -87,6 +98,8 @@ export function HarvestCycleCard() {
         Regional 5–7 rotasi 8,2–8,9 hari — kekurangan pemanen &amp; jalan produksi rusak; link ke
         program mekanisasi OPEX.
       </p>
+      </>
+      )}
     </div>
   );
 }

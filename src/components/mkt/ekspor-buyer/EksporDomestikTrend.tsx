@@ -11,6 +11,7 @@ import {
 } from "recharts";
 import { eksporDomestikTrend } from "@/lib/kontrak-buyer-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 import { SectionHead } from "@/components/hc/SectionHead";
 
 function LegendDot({ color, label }: { color: string; label: string }) {
@@ -29,7 +30,8 @@ export function EksporDomestikTrend() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead title="Tren Ekspor vs Domestik" action="Lihat Detail" />
+      {/* Volume bauran pasar dilaporkan konsolidasi grup — tanpa pecahan subholding. */}
+      <SectionHead title="Tren Ekspor vs Domestik" action="Lihat Detail" badge={<ScopeNote />} />
       <div className="mt-[3px] flex items-center justify-between gap-2">
         <p className="text-[9px] text-ink-500">
           Volume CPO per pasar, 12 bulan terakhir (rb ton, stacked)

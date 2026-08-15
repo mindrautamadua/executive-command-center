@@ -1,6 +1,9 @@
+"use client";
+
 import { Target } from "lucide-react";
 import { p4pRingkas, rewardByPerformance, rewardMisalignment } from "@/lib/comp-data";
 import { PALETTE } from "@/lib/chart-palette";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 /**
  * Pay-for-Performance Effectiveness: rata-rata total rewards & merit per rating,
@@ -18,6 +21,7 @@ export function PayForPerformance() {
         <h3 className="card-title-navy flex items-center gap-1.5">
           <Target size={13} className="text-[#1b3a6b]" />
           Pay-for-Performance Effectiveness
+          <ScopeNote />
         </h3>
         <span className="shrink-0 text-[9px] font-semibold text-ink-400">{p4pRingkas.korelasi}</span>
       </div>

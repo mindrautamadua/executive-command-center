@@ -1,3 +1,5 @@
+"use client";
+
 import { Droplets, Factory, Gauge, Plug, Truck } from "lucide-react";
 import { emisiKpi } from "@/lib/esg-data";
 import { EsgKpiCards, type EsgKpiCardItem } from "../EsgKpiCards";

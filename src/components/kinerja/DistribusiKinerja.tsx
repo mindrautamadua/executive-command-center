@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ChevronRight } from "lucide-react";
 import { distribusiKinerja } from "@/lib/kinerja-data";
 import { DonutChart } from "../ui/DonutChart";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 /* nilai tengah donat diturunkan dari data (total karyawan dinilai) */
 const donutData = distribusiKinerja.map((d) => ({
@@ -17,7 +18,7 @@ export function DistribusiKinerja() {
 
   return (
     <div className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3">
-      <h3 className="card-title-navy">DISTRIBUSI KINERJA</h3>
+      <h3 className="card-title-navy flex min-w-0 items-center gap-1.5"><span>DISTRIBUSI KINERJA</span><ScopeNote /></h3>
       <p className="mt-[3px] text-[9.5px] text-ink-500">Berdasarkan Kategori</p>
 
       <div className="flex min-h-0 flex-1 items-center">

@@ -1,9 +1,14 @@
+"use client";
+
 import { BrainCircuit, Sparkles } from "lucide-react";
 import {
   financeIntelCounts,
   financeIntelligence,
   financeRecommendation,
 } from "@/lib/keu-data";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { filterBySubholding } from "@/lib/subholding";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const SIGNAL_TONE = {
   red: {
@@ -31,6 +36,11 @@ const COUNT_TONE = {
 
 /** Lapisan sintesis eksekutif keuangan: sinyal kritis + satu rekomendasi utama. */
 export function FinanceIntelligence() {
+  const { active } = useSubholding();
+  // Sebagian sinyal menyebut subholding pada judulnya (mis. "SGN Drag Margin
+  // Grup"); sinyal tanpa penyebutan berlaku untuk semua cakupan dan tetap tampil.
+  const signals = filterBySubholding(financeIntelligence, active, (s) => s.title);
+
   return (
     <div className="card anim-rise px-4 pb-3.5 pt-3" style={{ "--d": "30ms" } as React.CSSProperties}>
       <div className="flex items-center justify-between gap-2">
@@ -42,6 +52,8 @@ export function FinanceIntelligence() {
           </span>
         </h3>
         <div className="flex items-center gap-3">
+          {/* Hitungan sinyal tetap tingkat grup meski daftar sinyal menyesuaikan filter. */}
+          <ScopeNote />
           {financeIntelCounts.map((c) => (
             <span key={c.label} className="flex items-baseline gap-1">
               <span className={`text-[11px] font-extrabold leading-none ${COUNT_TONE[c.tone]}`}>
@@ -54,7 +66,7 @@ export function FinanceIntelligence() {
       </div>
 
       <div className="mt-2.5 grid grid-cols-4 gap-2">
-        {financeIntelligence.map((s) => {
+        {signals.map((s) => {
           const t = SIGNAL_TONE[s.tone];
           return (
             <div key={s.no} className={`rounded-xl border px-3 pb-2.5 pt-2.5 ${t.wrap}`}>

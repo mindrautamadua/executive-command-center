@@ -2,6 +2,7 @@ import { astAlignment } from "@/lib/ast-data";
 import type { AstAlignmentTarget } from "@/lib/ast-data";
 import { SectionHead } from "@/components/hc/SectionHead";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const num = (v: number) =>
   v.toLocaleString("id-ID", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
@@ -22,7 +23,7 @@ const BADGE: Record<AstAlignmentTarget["tone"], { label: string; tone: BadgeTone
 export function AstStrategicAlignment() {
   return (
     <div className="card anim-rise px-4 pb-4 pt-3" style={{ "--d": "60ms" } as React.CSSProperties}>
-      <SectionHead title="Strategic Alignment" action="Lihat Detail" />
+      <SectionHead title="Strategic Alignment" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">Realisasi YTD vs Target RKAP 2026</p>
 
       <div className="mt-3 flex flex-col gap-3">

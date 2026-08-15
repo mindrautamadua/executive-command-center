@@ -1,3 +1,5 @@
+"use client";
+
 import { Gauge } from "lucide-react";
 import {
   compaDistribusi,
@@ -5,6 +7,7 @@ import {
   rangePosition,
   strukturRisiko,
 } from "@/lib/comp-data";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 function statusTone(status: string) {
   if (status === "Above Market") return "tone-blue";
@@ -27,6 +30,7 @@ export function CompaRangePanel() {
         <h3 className="card-title-navy flex items-center gap-1.5">
           <Gauge size={13} className="text-[#1b3a6b]" />
           Compa-Ratio &amp; Range Positioning
+          <ScopeNote />
         </h3>
         <span className="shrink-0 text-[9px] font-semibold text-ink-400">
           Compa = Actual Pay / Market P50

@@ -1,4 +1,5 @@
 import { ProdSidebar } from "@/components/prod/ProdSidebar";
+import { ScopeGuard } from "@/components/ui/ScopeGuard";
 import { DataTrustStrip } from "@/components/hc/DataTrustStrip";
 import { KebunHeader } from "@/components/prod/produktivitas-kebun/KebunHeader";
 import { KebunKpiStrip } from "@/components/prod/produktivitas-kebun/KebunKpiStrip";
@@ -20,6 +21,8 @@ export default function ProduktivitasKebunPage() {
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
         <KebunHeader />
 
+        <ScopeGuard owner="palmco">
+
         <div className="flex flex-col gap-3 px-5 pb-5">
           <div className="-mb-3">
             <DataTrustStrip data={prodDataTrust} />
@@ -40,6 +43,7 @@ export default function ProduktivitasKebunPage() {
 
           <KebunInsight />
         </div>
+        </ScopeGuard>
       </main>
     </div>
   );

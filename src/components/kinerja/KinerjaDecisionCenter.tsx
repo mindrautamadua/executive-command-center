@@ -4,6 +4,7 @@ import { useState } from "react";
 import { AlertCircle, AlertTriangle, CheckCircle2 } from "lucide-react";
 import { kinerjaDecisions, kinerjaDecisionTabs } from "@/lib/kinerja-data";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const TONE = {
   red: {
@@ -32,7 +33,7 @@ export function KinerjaDecisionCenter() {
 
   return (
     <div className="card anim-rise px-4 pb-3.5 pt-3" style={{ "--d": "150ms" } as React.CSSProperties}>
-      <SectionHead title="Performance Decision Center" action="Lihat Semua" />
+      <SectionHead title="Performance Decision Center" action="Lihat Semua" badge={<ScopeNote />} />
 
       <div className="mt-2.5 flex items-center gap-4 border-b border-[#f0f3f6]">
         {kinerjaDecisionTabs.map((t, i) => (

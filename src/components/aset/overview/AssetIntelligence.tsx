@@ -1,5 +1,6 @@
 import { BrainCircuit, Sparkles } from "lucide-react";
 import { assetIntelligence, astIntelCounts, astRecommendation } from "@/lib/ast-data";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const SIGNAL_TONE = {
   red: { wrap: "border-[#f6d5d5] bg-[#fdf5f5]", dot: "bg-[#ef4444]", impact: "text-[#ef4444]" },
@@ -24,6 +25,7 @@ export function AssetIntelligence() {
           <span className="rounded bg-ptpn-greenLight px-1 py-[1px] text-[8px] font-bold normal-case tracking-normal text-ptpn-green">
             AI
           </span>
+          <ScopeNote className="normal-case tracking-normal" />
         </h3>
         <div className="flex items-center gap-3">
           {astIntelCounts.map((c) => (

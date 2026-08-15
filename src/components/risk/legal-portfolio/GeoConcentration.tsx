@@ -14,6 +14,7 @@ import {
 import { geoConcentration } from "@/lib/risk-data-detail";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 const TOTAL = geoConcentration.reduce((s, r) => s + r.count, 0);
 
@@ -23,7 +24,7 @@ export function GeoConcentration() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead title="Konsentrasi Geografis" />
+      <SectionHead title="Konsentrasi Geografis" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Sebaran {TOTAL} Perkara Aktif per Provinsi
       </p>

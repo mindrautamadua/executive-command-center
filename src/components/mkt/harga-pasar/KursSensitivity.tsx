@@ -1,5 +1,6 @@
 import { kursSensitivity, kursSensitivityNote } from "@/lib/harga-outlook-data";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { ScopeNote } from "@/components/ui/ScopeNote";
 
 /** Sensitivitas kurs ±5% & harga CPO ±10% terhadap pendapatan/EBITDA FY. */
 export function KursSensitivity() {
@@ -8,7 +9,8 @@ export function KursSensitivity() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "150ms" } as React.CSSProperties}
     >
-      <SectionHead title="Sensitivitas Kurs & Harga" action="Lihat Detail" />
+      {/* Dampak pendapatan/EBITDA dihitung di level FY konsolidasi grup. */}
+      <SectionHead title="Sensitivitas Kurs & Harga" action="Lihat Detail" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Dampak skenario terhadap Pendapatan &amp; EBITDA FY 2026
       </p>

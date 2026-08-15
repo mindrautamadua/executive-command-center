@@ -14,11 +14,17 @@ import {
 import { gulaGiling } from "@/lib/produksi-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "../../hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { inScope, ScopeEmpty } from "@/components/ui/CommodityScope";
 
 const num = (v: number, d = 2) =>
   v.toLocaleString("id-ID", { minimumFractionDigits: d, maximumFractionDigits: d });
 
 export function GulaGilingCard() {
+  const { active, def } = useSubholding();
+  // Tebu, rendemen & musim giling -> seluruh kartu milik SugarCo.
+  const milikScope = inScope(active, "Tebu gula musim giling");
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -29,6 +35,10 @@ export function GulaGilingCard() {
         Tebu Digiling (jt ton) &amp; Rendemen (%) Mei–Nov · Mei = realisasi, sisanya proyeksi RKAP
       </p>
 
+      {!milikScope && <ScopeEmpty label={def.fullLabel} />}
+
+      {milikScope && (
+        <>
       <div className="mt-1.5 min-h-0 w-full flex-1">
         <ResponsiveContainer width="100%" height="100%">
           <ComposedChart data={gulaGiling} margin={{ top: 16, right: -8, bottom: 0, left: -18 }}>
@@ -114,6 +124,8 @@ export function GulaGilingCard() {
       <p className="mt-1 text-[8px] leading-snug text-ink-400">
         FY: tebu 10,5 jt ton · gula 780 rb ton · rendemen rata-rata 7,45%
       </p>
+        </>
+      )}
     </div>
   );
 }

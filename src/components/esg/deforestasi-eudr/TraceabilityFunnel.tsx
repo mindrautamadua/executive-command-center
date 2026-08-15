@@ -13,11 +13,19 @@ import {
 import { traceabilityFunnel } from "@/lib/esg-data-detail";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
+import { useSubholding } from "@/components/SubholdingProvider";
+import { filterBySubholding } from "@/lib/subholding";
 
 const pct = (v: number) => `${v.toLocaleString("id-ID", { maximumFractionDigits: 1 })}%`;
 
 /** Funnel ketertelusuran TTB (ke PKS) → TTP (ke kebun) per sumber pasokan. */
 export function TraceabilityFunnel() {
+  const { active, isFiltered, def } = useSubholding();
+  // `sumber` menyebut subholding pemilik pasokan inti (PalmCo/SupportingCo);
+  // baris "Plasma & pihak ketiga" tidak terikat subholding sehingga selalu
+  // tampil sebagai pembanding rantai pasok.
+  const rows = filterBySubholding(traceabilityFunnel, active, (r) => r.sumber);
+
   return (
     <div
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
@@ -25,13 +33,15 @@ export function TraceabilityFunnel() {
     >
       <SectionHead title="Traceability Funnel" />
       <p className="mt-[3px] text-[9px] text-ink-500">
-        TTB → TTP per Sumber Pasokan · TTP Grup 92,4%
+        {isFiltered
+          ? `Sumber pasokan ${def.label} & non-inti · TTP Grup 92,4%`
+          : "TTB → TTP per Sumber Pasokan · TTP Grup 92,4%"}
       </p>
 
       <div className="mt-1.5 min-h-0 w-full flex-1">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
-            data={traceabilityFunnel}
+            data={rows}
             margin={{ top: 10, right: 10, bottom: 0, left: -14 }}
             barCategoryGap="28%"
           >
