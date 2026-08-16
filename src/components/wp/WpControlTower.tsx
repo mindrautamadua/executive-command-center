@@ -21,7 +21,7 @@ export function WpControlTower() {
         </span>
       </div>
 
-      <div className="mt-2.5 grid min-h-0 flex-1 grid-cols-4 gap-2.5">
+      <div className="mt-2.5 grid min-h-0 flex-1 grid-cols-1 gap-2.5 sm:grid-cols-2 xl:grid-cols-4">
         {planVsActual.map((r) => {
           const st = PLAN_STATUS_STYLE[r.status];
           const negatif = r.varians.startsWith("-");

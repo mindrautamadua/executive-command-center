@@ -97,7 +97,7 @@ export function ModuleHeader({
 }) {
   return (
     <>
-      <header className="flex items-center gap-4 border-b border-[#eef2f6] px-5 pb-3.5 pt-3.5">
+      <header className="flex flex-wrap items-center gap-4 gap-y-2 border-b border-[#eef2f6] px-5 pb-3.5 pt-3.5">
         <div className="flex min-w-0 shrink-0 items-center gap-2.5">
           {icon && (
             <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#e8f1fd] text-[#1b3a6b]">

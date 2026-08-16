@@ -20,12 +20,20 @@ import { WorkforceRiskOverlay } from "@/components/wp/WorkforceRiskOverlay";
 import { WpControlTower } from "@/components/wp/WpControlTower";
 import { WpFootnote } from "@/components/wp/WpFootnote";
 import { wpQuote } from "@/lib/wp-data";
+import type { Viewport } from "next";
 
 export const metadata = { title: "Workforce Planning — PTPN Group" };
 
+// Halaman ini sudah fluid-responsive; override viewport fixed-canvas global.
+export const viewport: Viewport = {
+  themeColor: "#0e1420",
+  width: "device-width",
+  initialScale: 1,
+};
+
 export default function WorkforcePlanningPage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <SdmSidebar active="Workforce Planning" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -34,40 +42,40 @@ export default function WorkforcePlanningPage() {
         <div className="flex flex-col gap-3 px-5 pb-5">
           <WpKpiStrip />
 
-          <div className="grid h-[268px] grid-cols-[minmax(0,32fr)_minmax(0,33fr)_minmax(0,35fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[268px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,32fr)_minmax(0,33fr)_minmax(0,35fr)]">
             <HeadcountProjection />
             <KebutuhanJenjang />
             <KebutuhanFungsi />
           </div>
 
-          <div className="grid h-[236px] grid-cols-[minmax(0,40fr)_minmax(0,26fr)_minmax(0,34fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[236px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,40fr)_minmax(0,26fr)_minmax(0,34fr)]">
             <BusinessDemandDrivers />
             <WorkforceCapacity />
             <WorkforceRebalancing />
           </div>
 
-          <div className="grid h-[258px] grid-cols-[minmax(0,32fr)_minmax(0,34fr)_minmax(0,34fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[258px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,32fr)_minmax(0,34fr)_minmax(0,34fr)]">
             <GapTalentaKritis />
             <SumberPemenuhan />
             <SupplyDemandBalance />
           </div>
 
-          <div className="grid h-[240px] grid-cols-[minmax(0,56fr)_minmax(0,44fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[240px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,56fr)_minmax(0,44fr)]">
             <SkillGap4B />
             <WorkforceWaterfall />
           </div>
 
-          <div className="grid h-[248px] grid-cols-[minmax(0,64fr)_minmax(0,36fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid grid-cols-1 gap-3 xl:auto-rows-[248px] xl:grid-cols-[minmax(0,64fr)_minmax(0,36fr)]">
             <ScenarioPlanning />
             <RekomendasiStrategis />
           </div>
 
-          <div className="grid h-[230px] grid-cols-[minmax(0,68fr)_minmax(0,32fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid grid-cols-1 gap-3 xl:auto-rows-[230px] xl:grid-cols-[minmax(0,68fr)_minmax(0,32fr)]">
             <ScenarioDecisionMatrix />
             <WorkforceRiskOverlay />
           </div>
 
-          <div className="grid h-[224px] grid-cols-1 grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid grid-cols-1 gap-3 xl:auto-rows-[224px]">
             <WpControlTower />
           </div>
 

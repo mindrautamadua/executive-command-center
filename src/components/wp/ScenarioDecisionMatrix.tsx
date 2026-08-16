@@ -36,8 +36,8 @@ export function ScenarioDecisionMatrix() {
         </span>
       </div>
 
-      <div className="mt-2 min-h-0 flex-1 overflow-hidden">
-        <table className="w-full table-fixed">
+      <div className="scroll-thin mt-2 min-h-0 flex-1 overflow-x-auto xl:overflow-hidden">
+        <table className="w-full min-w-[720px] table-fixed">
           <thead>
             <tr className="text-[8px] font-semibold uppercase tracking-[0.03em] text-ink-400">
               <th className="w-[13%] pb-1 text-left font-semibold">Skenario</th>

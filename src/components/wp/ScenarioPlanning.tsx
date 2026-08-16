@@ -90,7 +90,7 @@ export function ScenarioPlanning() {
         </button>
       </div>
 
-      <div className="mt-2.5 grid min-h-0 flex-1 grid-cols-4 gap-3">
+      <div className="mt-2.5 grid min-h-0 flex-1 grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
         {scenarios.map((s) => (
           <ScenarioCard key={s.code} s={s} />
         ))}
