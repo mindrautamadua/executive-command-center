@@ -1,6 +1,6 @@
 // Naikkan versi setiap kali shell aplikasi berubah (mis. menu/sidebar) agar
 // cache lama dibuang saat service worker baru aktif.
-const CACHE_NAME = "ecc-cache-v2";
+const CACHE_NAME = "ecc-cache-v3";
 const OFFLINE_URL = "/";
 
 // Precache halaman utama + aset statis dasar.
