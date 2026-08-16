@@ -27,7 +27,7 @@ export function LitigasiKpiStrip() {
           <ScopeNote />
         </div>
       )}
-      <div className="grid grid-cols-6 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3">
         {litigasiKpi.map((k, i) => (
           <div
             key={k.label}

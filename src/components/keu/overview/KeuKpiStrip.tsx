@@ -26,7 +26,7 @@ export function KeuKpiStrip() {
     <div className="flex flex-col gap-1.5">
       {/* KPI strip memakai angka konsolidasi grup — tandai saat filter aktif. */}
       <ScopeNote className="self-start" />
-      <div className="grid grid-cols-6 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3">
         {keuKpi.map((k, i) => {
           const Icon = ICONS[k.icon];
           return (

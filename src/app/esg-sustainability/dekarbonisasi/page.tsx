@@ -15,7 +15,7 @@ export const metadata = { title: "Program Dekarbonisasi — PTPN Group" };
 
 export default function DekarbonisasiPage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <EsgSidebar active="Program Dekarbonisasi" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -28,16 +28,16 @@ export default function DekarbonisasiPage() {
 
           <DekarbKpiStrip />
 
-          <div className="grid h-[250px] grid-cols-[minmax(0,1fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[250px] grid-cols-1 gap-3">
             <AbatementWaterfall />
           </div>
 
-          <div className="grid h-[250px] grid-cols-[minmax(0,68fr)_minmax(0,32fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[250px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,68fr)_minmax(0,32fr)]">
             <ProgramPortfolio />
             <BiogasList />
           </div>
 
-          <div className="grid h-[230px] grid-cols-[minmax(0,50fr)_minmax(0,50fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[230px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,50fr)_minmax(0,50fr)]">
             <MacCurve />
             <SolarRollout />
           </div>

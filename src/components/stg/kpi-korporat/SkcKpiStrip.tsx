@@ -32,7 +32,7 @@ export function SkcKpiStrip() {
   };
 
   return (
-    <div className="grid grid-cols-5 gap-3">
+    <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3">
       {skcKpi.map((k, i) => {
         const Icon = ICONS[k.icon] ?? Gauge;
         return (

@@ -36,7 +36,7 @@ export function EvaluasiKpiStrip() {
           <ScopeNote />
         </div>
       )}
-      <div className="grid grid-cols-5 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3">
         {evaluasiKpi.map((k, i) => {
           const Icon = ICONS[i] ?? Gauge;
           return (

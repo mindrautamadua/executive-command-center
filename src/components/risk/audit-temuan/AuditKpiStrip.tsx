@@ -22,7 +22,7 @@ export function AuditKpiStrip() {
           <ScopeNote />
         </div>
       )}
-      <div className="grid grid-cols-5 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3">
         {auditKpi.map((k, i) => (
           <div
             key={k.label}

@@ -33,7 +33,7 @@ const BADGES: { Icon: typeof Banknote; cls: string }[] = [
  */
 export function KpiStrip() {
   return (
-    <div className="grid grid-cols-7 gap-3">
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-3">
       {kpiStrip.map((k, i) => {
         const { Icon, cls } = BADGES[i % BADGES.length];
         return (

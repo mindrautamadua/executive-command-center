@@ -15,7 +15,7 @@ export const metadata = { title: "Manajemen Kontrak — PTPN Group" };
 
 export default function KontrakPage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <HkmSidebar active="Manajemen Kontrak" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -28,17 +28,17 @@ export default function KontrakPage() {
 
           <KontrakKpiStrip />
 
-          <div className="grid h-[250px] grid-cols-[minmax(0,42fr)_minmax(0,58fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[250px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,42fr)_minmax(0,58fr)]">
             <ContractByType />
             <ContractValueTop />
           </div>
 
-          <div className="grid h-[240px] grid-cols-[minmax(0,58fr)_minmax(0,42fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[240px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,58fr)_minmax(0,42fr)]">
             <ExpiryTimeline />
             <RenewalPipeline />
           </div>
 
-          <div className="grid h-[240px] grid-cols-[minmax(0,56fr)_minmax(0,44fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[240px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,56fr)_minmax(0,44fr)]">
             <RiskClauseWatch />
             <ReviewSlaTrend />
           </div>

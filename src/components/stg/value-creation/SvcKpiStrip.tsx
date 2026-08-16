@@ -22,7 +22,7 @@ const TONES: Record<StgKpi["tone"], string> = {
 /** Strip 4 KPI realisasi & target value creation. */
 export function SvcKpiStrip() {
   return (
-    <div className="grid grid-cols-4 gap-3">
+    <div className="grid grid-cols-2 xl:grid-cols-4 gap-3">
       {svcKpi.map((k, i) => {
         const Icon = ICONS[k.icon] ?? Gem;
         return (

@@ -15,7 +15,7 @@ export const metadata = { title: "Kepatuhan Regulasi — PTPN Group" };
 
 export default function KepatuhanRegulasiPage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <RiskSidebar active="Kepatuhan Regulasi" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -29,19 +29,19 @@ export default function KepatuhanRegulasiPage() {
           <KepKpiStrip />
 
           {/* Peta kewajiban & pipeline regulasi */}
-          <div className="grid h-[250px] grid-cols-[minmax(0,48fr)_minmax(0,52fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[250px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,48fr)_minmax(0,52fr)]">
             <ObligationByDomain />
             <RegulatoryChangeRadar />
           </div>
 
           {/* Kewajiban pasar domestik & legalitas lahan */}
-          <div className="grid h-[240px] grid-cols-[minmax(0,52fr)_minmax(0,48fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[240px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,52fr)_minmax(0,48fr)]">
             <DmoDpoTracker />
             <HguPortfolio />
           </div>
 
           {/* Kinerja kepatuhan per entitas & sanksi */}
-          <div className="grid h-[225px] grid-cols-[minmax(0,55fr)_minmax(0,45fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[225px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,55fr)_minmax(0,45fr)]">
             <ComplianceBySubholding />
             <SanctionLog />
           </div>

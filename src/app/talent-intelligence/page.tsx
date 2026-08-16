@@ -20,7 +20,7 @@ export const metadata = { title: "Talent Intelligence — PTPN Group" };
 
 export default function TalentIntelligencePage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <SdmSidebar active="Talent Intelligence" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -54,7 +54,7 @@ export default function TalentIntelligencePage() {
               <TalentMobilityOverview />
             </div>
 
-            <div className="grid h-[260px] grid-cols-[minmax(0,34fr)_minmax(0,32fr)_minmax(0,34fr)] grid-rows-[minmax(0,1fr)] gap-3">
+            <div className="grid auto-rows-[260px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,34fr)_minmax(0,32fr)_minmax(0,34fr)]">
               <TrenTalenta />
               <TalentIntelligenceIndex />
               <HeatmapUnitKerja />

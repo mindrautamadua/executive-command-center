@@ -16,7 +16,7 @@ export const metadata = { title: "Top Talent by Potential — Talent Intelligenc
 
 export default function TopTalentPage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <SdmSidebar active="Talent Intelligence" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -31,7 +31,7 @@ export default function TopTalentPage() {
         <div className="flex flex-col gap-3 px-5 pb-5 pt-3">
           <DetailKpiStrip items={topTalentKpi} />
 
-          <div className="grid h-[212px] grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[212px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)]">
             <BarListCard
               title="HiPo per Entitas"
               subtitle="Jumlah talenta HiPo dan porsinya terhadap talenta entitas"
@@ -70,7 +70,7 @@ export default function TopTalentPage() {
             />
           </div>
 
-          <div className="grid grid-cols-[minmax(0,1fr)_248px] items-start gap-3">
+          <div className="grid grid-cols-1 items-start gap-3 xl:grid-cols-[minmax(0,1fr)_248px]">
             <DetailTable
               title="Peringkat Talenta Berpotensi Tertinggi"
               subtitle="18 talenta dengan skor potensi tertinggi hasil kalibrasi panel talent review 2026"

@@ -23,7 +23,7 @@ export const metadata = { title: "Employee Engagement — PTPN Group" };
 
 export default function EmployeeEngagementPage() {
   return (
-    <div className="flex h-screen min-w-[1360px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <SdmSidebar
         assistantCard="coach"
         assistantTitle="AI Engagement Assistant"
@@ -37,40 +37,40 @@ export default function EmployeeEngagementPage() {
         <div className="mx-5 mb-4 flex flex-col gap-3">
           <EngagementKpiStrip />
 
-          <div className="grid h-[268px] grid-cols-[minmax(0,373fr)_minmax(0,415fr)_minmax(0,495fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[268px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,373fr)_minmax(0,415fr)_minmax(0,495fr)]">
             <EngagementOverview />
             <TrenEngagement />
             <EnpsTrend />
           </div>
 
-          <div className="grid h-[250px] grid-cols-[minmax(0,373fr)_minmax(0,370fr)_minmax(0,540fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[250px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,373fr)_minmax(0,370fr)_minmax(0,540fr)]">
             <EngagementUnit />
             <EngagementDemografi />
             <FaktorEngagement />
           </div>
 
-          <div className="grid h-[252px] grid-cols-[minmax(0,46fr)_minmax(0,54fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[252px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,46fr)_minmax(0,54fr)]">
             <EngagementDriverModel />
             <ManagerIntelligence />
           </div>
 
-          <div className="grid h-[248px] grid-cols-[minmax(0,52fr)_minmax(0,48fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[248px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,52fr)_minmax(0,48fr)]">
             <EngagementOutcomeLink />
             <EngagementRiskMatrix />
           </div>
 
-          <div className="grid h-[240px] grid-cols-[minmax(0,50fr)_minmax(0,50fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[240px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,50fr)_minmax(0,50fr)]">
             <VoiceOfEmployee />
             <CapacityDiagnosis />
           </div>
 
-          <div className="grid h-[228px] grid-cols-[minmax(0,440fr)_minmax(0,348fr)_minmax(0,495fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[228px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,440fr)_minmax(0,348fr)_minmax(0,495fr)]">
             <KomentarSentimen />
             <PartisipasiSurvey />
             <InsightEngagement />
           </div>
 
-          <div className="grid h-[236px] grid-rows-[minmax(0,1fr)]">
+          <div className="grid auto-rows-[236px] grid-cols-1">
             <EngagementActionEngine />
           </div>
 

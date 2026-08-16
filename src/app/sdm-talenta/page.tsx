@@ -19,7 +19,7 @@ export const metadata = { title: "HC Executive Command Center — PTPN Group" };
 
 export default function SdmTalentaPage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <SdmSidebar active="Executive Overview" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -31,7 +31,7 @@ export default function SdmTalentaPage() {
             Key Strategic KPI
           </h2>
 
-          <div className="grid grid-cols-[minmax(0,1fr)_330px] items-start gap-3">
+          <div className="grid grid-cols-1 items-start gap-3 xl:grid-cols-[minmax(0,1fr)_330px]">
             {/* kolom utama */}
             <div className="flex min-w-0 flex-col gap-3">
               <HcKpiStrip />

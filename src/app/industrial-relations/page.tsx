@@ -24,7 +24,7 @@ export const metadata = { title: "Industrial Relations — PTPN Group" };
 
 export default function IndustrialRelationsPage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <SdmSidebar active="Industrial Relations" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -35,31 +35,31 @@ export default function IndustrialRelationsPage() {
 
           <IrDisruptionBanner />
 
-          <div className="grid h-[300px] grid-cols-[minmax(0,32fr)_minmax(0,34fr)_minmax(0,34fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[300px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,32fr)_minmax(0,34fr)_minmax(0,34fr)]">
             <CaseCategoryBreakdown />
             <IrCaseTrend />
             <IrEarlyWarning />
           </div>
 
-          <div className="grid h-[310px] grid-cols-[minmax(0,38fr)_minmax(0,27fr)_minmax(0,35fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[310px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,38fr)_minmax(0,27fr)_minmax(0,35fr)]">
             <CaseSeverity />
             <CaseAging />
             <RepeatRootCause />
           </div>
 
-          <div className="grid h-[300px] grid-cols-[minmax(0,31fr)_minmax(0,35fr)_minmax(0,34fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[300px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,31fr)_minmax(0,35fr)_minmax(0,34fr)]">
             <CaseResolution />
             <IrCompliance />
             <UnionRelationsHealth />
           </div>
 
-          <div className="grid h-[330px] grid-cols-[minmax(0,37fr)_minmax(0,28fr)_minmax(0,35fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[330px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,37fr)_minmax(0,28fr)_minmax(0,35fr)]">
             <RegionIrIndex />
             <TopIrIssues />
             <IrAiIntelligence />
           </div>
 
-          <div className="grid h-[300px] grid-cols-[minmax(0,37fr)_minmax(0,29fr)_minmax(0,34fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[300px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,37fr)_minmax(0,29fr)_minmax(0,34fr)]">
             <IrBusinessImpact />
             <IrCostLegal />
             <CrossModuleSignals />

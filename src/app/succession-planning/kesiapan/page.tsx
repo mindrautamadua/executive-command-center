@@ -18,7 +18,7 @@ export const metadata = { title: "Distribusi Kesiapan Kandidat — Succession Pl
 
 export default function KesiapanDetailPage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <SdmSidebar active="Succession" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -33,7 +33,7 @@ export default function KesiapanDetailPage() {
         <div className="flex flex-col gap-3 px-5 pb-5 pt-3">
           <DetailKpiStrip items={kesiapanKpi} />
 
-          <div className="grid h-[254px] grid-cols-[minmax(0,32fr)_minmax(0,40fr)_minmax(0,28fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[254px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,32fr)_minmax(0,40fr)_minmax(0,28fr)]">
             <TiDonutCard
               title="Komposisi Kesiapan Kandidat"
               subtitle="Jumlah kandidat pada tiap tahap kesiapan"
@@ -70,7 +70,7 @@ export default function KesiapanDetailPage() {
             />
           </div>
 
-          <div className="grid grid-cols-[minmax(0,1fr)_248px] items-start gap-3">
+          <div className="grid grid-cols-1 items-start gap-3 xl:grid-cols-[minmax(0,1fr)_248px]">
             <DetailTable
               title="Rincian Tahap Kesiapan"
               subtitle="Populasi, mutu kandidat, dan intervensi pengembangan tiap tahap"

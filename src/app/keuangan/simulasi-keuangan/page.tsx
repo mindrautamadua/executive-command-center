@@ -16,7 +16,7 @@ export const metadata = { title: "Simulasi Keuangan — PTPN Group" };
 
 export default function SimulasiKeuanganPage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <KeuSidebar active="Simulasi Keuangan" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -30,19 +30,19 @@ export default function SimulasiKeuanganPage() {
           <KskKpiStrip />
 
           {/* Asumsi & perbandingan skenario */}
-          <div className="grid h-[250px] grid-cols-[minmax(0,36fr)_minmax(0,64fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[250px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,36fr)_minmax(0,64fr)]">
             <ScenarioAssumptionsPanel />
             <ScenarioComparison />
           </div>
 
           {/* Sensitivitas driver & stress test */}
-          <div className="grid h-[240px] grid-cols-[minmax(0,52fr)_minmax(0,48fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[240px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,52fr)_minmax(0,48fr)]">
             <SensitivityTornadoFin />
             <StressTestCase />
           </div>
 
           {/* Rentang hasil probabilistik */}
-          <div className="grid h-[245px] grid-cols-[minmax(0,1fr)] grid-rows-[minmax(0,1fr)]">
+          <div className="grid auto-rows-[245px] grid-cols-1">
             <EbitdaOutcomeRange />
           </div>
 

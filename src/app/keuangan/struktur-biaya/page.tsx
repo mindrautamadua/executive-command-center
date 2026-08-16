@@ -14,7 +14,7 @@ export const metadata = { title: "Struktur Biaya & HPP — PTPN Group" };
 
 export default function StrukturBiayaPage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <KeuSidebar active="Struktur Biaya & HPP" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -27,12 +27,12 @@ export default function StrukturBiayaPage() {
 
           <KsbKpiStrip />
 
-          <div className="grid h-[245px] grid-cols-[minmax(0,42fr)_minmax(0,58fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[245px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,42fr)_minmax(0,58fr)]">
             <CostStructureBreakdown />
             <UnitCostTrend />
           </div>
 
-          <div className="grid h-[235px] grid-cols-[minmax(0,36fr)_minmax(0,32fr)_minmax(0,32fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[235px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,36fr)_minmax(0,32fr)_minmax(0,32fr)]">
             <CostPerRegional />
             <FertilizerFuelExposure />
             <CostSavingPrograms />

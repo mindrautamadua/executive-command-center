@@ -22,7 +22,7 @@ export function ErmKpiStrip() {
           <ScopeNote />
         </div>
       )}
-      <div className="grid grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 xl:grid-cols-4 gap-3">
         {ermKpi.map((k, i) => (
           <div
             key={k.label}

@@ -23,7 +23,7 @@ export const metadata = { title: "Scenario Simulation — PTPN Group" };
 
 export default function ScenarioSimulationPage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <SdmSidebar active="Scenario Simulation" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -32,35 +32,35 @@ export default function ScenarioSimulationPage() {
         <div className="flex flex-col gap-3 px-5 pb-5">
           <SsKpiStrip />
 
-          <div className="grid h-[255px] grid-cols-[minmax(0,40fr)_minmax(0,30fr)_minmax(0,30fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[255px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,40fr)_minmax(0,30fr)_minmax(0,30fr)]">
             <ScenarioManager />
             <ImpactComparison />
             <HeadcountProjection />
           </div>
 
-          <div className="grid h-[250px] grid-cols-[minmax(0,31fr)_minmax(0,33fr)_minmax(0,36fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[250px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,31fr)_minmax(0,33fr)_minmax(0,36fr)]">
             <ScenarioAssumptions />
             <FinancialImpact />
             <TalentImpactSummary />
           </div>
 
-          <div className="grid h-[250px] grid-cols-[minmax(0,36fr)_minmax(0,33fr)_minmax(0,31fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[250px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,36fr)_minmax(0,33fr)_minmax(0,31fr)]">
             <ValueCreationBridge />
             <SensitivityTornado />
             <OutcomeRange />
           </div>
 
-          <div className="grid h-[260px] grid-cols-[minmax(0,33fr)_minmax(0,36fr)_minmax(0,31fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[260px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,33fr)_minmax(0,36fr)_minmax(0,31fr)]">
             <ExecutionFeasibility />
             <StressScenario />
             <GoalSeekPanel />
           </div>
 
-          <div className="grid h-[235px] grid-rows-[minmax(0,1fr)]">
+          <div className="grid auto-rows-[235px] grid-cols-1">
             <SsDecisionCenter />
           </div>
 
-          <div className="grid h-[225px] grid-cols-[minmax(0,36fr)_minmax(0,32fr)_minmax(0,32fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[225px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,36fr)_minmax(0,32fr)_minmax(0,32fr)]">
             <SsInsightRekomendasi />
             <NextBestAction />
             <ModelConfidenceRisk />

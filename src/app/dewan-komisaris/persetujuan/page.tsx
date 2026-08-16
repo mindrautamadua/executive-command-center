@@ -14,7 +14,7 @@ export const metadata = { title: "Persetujuan & Kewenangan — PTPN Group" };
 
 export default function PersetujuanPage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <DekSidebar active="Persetujuan & Kewenangan" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -27,16 +27,16 @@ export default function PersetujuanPage() {
 
           <PersetujuanKpiStrip />
 
-          <div className="grid h-[300px] grid-cols-[minmax(0,58fr)_minmax(0,42fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[300px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,58fr)_minmax(0,42fr)]">
             <ApprovalRegister />
             <PendingDetail />
           </div>
 
-          <div className="grid h-[260px] grid-cols-[minmax(0,1fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[260px] grid-cols-1 gap-3">
             <AuthorityMatrix />
           </div>
 
-          <div className="grid h-[240px] grid-cols-[minmax(0,58fr)_minmax(0,42fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[240px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,58fr)_minmax(0,42fr)]">
             <ResponseTimeTrend />
             <ApprovalByCategory />
           </div>

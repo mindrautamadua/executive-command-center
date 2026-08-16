@@ -29,7 +29,7 @@ const STATUS_TONE = {
 
 export default function ExecutiveSignalsPage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <SdmSidebar active="Talent Intelligence" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -44,7 +44,7 @@ export default function ExecutiveSignalsPage() {
         <div className="flex flex-col gap-3 px-5 pb-5 pt-3">
           <DetailKpiStrip items={execKpi} />
 
-          <div className="grid grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 gap-3 xl:grid-cols-4">
             {execSignalDetail.map((s, i) => {
               const t = SIGNAL_TONE[s.tone];
               return (
@@ -95,7 +95,7 @@ export default function ExecutiveSignalsPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-[minmax(0,1fr)_248px] items-start gap-3">
+          <div className="grid grid-cols-1 items-start gap-3 xl:grid-cols-[minmax(0,1fr)_248px]">
             <div className="flex min-w-0 flex-col gap-3">
               <DetailTable
                 title="Register Sinyal & Tindak Lanjut"

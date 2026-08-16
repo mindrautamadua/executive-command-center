@@ -16,7 +16,7 @@ export const metadata = { title: "Evaluasi Kinerja Direksi — PTPN Group" };
 
 export default function EvaluasiDireksiPage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <DekSidebar active="Evaluasi Kinerja Direksi" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -31,17 +31,17 @@ export default function EvaluasiDireksiPage() {
 
           <EvaluasiSumber />
 
-          <div className="grid h-[240px] grid-cols-[minmax(0,40fr)_minmax(0,60fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[240px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,40fr)_minmax(0,60fr)]">
             <CollectiveScorecard />
             <ByDirektorat />
           </div>
 
-          <div className="grid h-[260px] grid-cols-[minmax(0,58fr)_minmax(0,42fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[260px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,58fr)_minmax(0,42fr)]">
             <RedKpiWatch />
             <ScoreTrend />
           </div>
 
-          <div className="grid h-[230px] grid-cols-[minmax(0,45fr)_minmax(0,55fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[230px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,45fr)_minmax(0,55fr)]">
             <ReportingCompliance />
             <EvaluationCalendar />
           </div>

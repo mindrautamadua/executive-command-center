@@ -14,7 +14,7 @@ export const metadata = { title: "Land Bank & HGU — PTPN Group" };
 
 export default function LandBankPage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <AsetSidebar active="Land Bank & HGU" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -27,12 +27,12 @@ export default function LandBankPage() {
 
           <AlbKpiStrip />
 
-          <div className="grid h-[250px] grid-cols-[minmax(0,44fr)_minmax(0,56fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[250px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,44fr)_minmax(0,56fr)]">
             <LandBySubholding />
             <HguExpiryTimeline />
           </div>
 
-          <div className="grid h-[240px] grid-cols-[minmax(0,32fr)_minmax(0,30fr)_minmax(0,38fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[240px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,32fr)_minmax(0,30fr)_minmax(0,38fr)]">
             <HguStatusFunnel />
             <LandUtilization />
             <RegionalLandTable />

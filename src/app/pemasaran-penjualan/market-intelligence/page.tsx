@@ -14,7 +14,7 @@ export const metadata = { title: "Market Intelligence — PTPN Group" };
 
 export default function MarketIntelligencePage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <MktSidebar active="Market Intelligence" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -27,17 +27,17 @@ export default function MarketIntelligencePage() {
 
           <MiKpiStrip />
 
-          <div className="grid h-[300px] grid-cols-[minmax(0,58fr)_minmax(0,42fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[300px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,58fr)_minmax(0,42fr)]">
             <SignalFeed />
             <MiAiSynthesis />
           </div>
 
-          <div className="grid h-[240px] grid-cols-[minmax(0,55fr)_minmax(0,45fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[240px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,55fr)_minmax(0,45fr)]">
             <CompetitorBenchmark />
             <GlobalSupplyDemand />
           </div>
 
-          <div className="grid h-[195px] grid-cols-[minmax(0,1fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[195px] grid-cols-1 gap-3">
             <PolicyWatchCard />
           </div>
 

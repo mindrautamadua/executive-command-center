@@ -52,7 +52,7 @@ function MiniRing({ pct, color }: { pct: number; color: string }) {
  */
 export function CompKpiStrip() {
   return (
-    <div className="grid grid-cols-6 gap-3">
+    <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3">
       {compKpi.map((k, i) => {
         const Icon = ICONS[k.icon];
         return (

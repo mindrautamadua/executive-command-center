@@ -18,7 +18,7 @@ const SHARE_TONE: Record<string, string> = {
 /** Enam KPI ringkas registri risiko: total, sebaran level, dan skor rata-rata. */
 export function AllRisksKpiStrip() {
   return (
-    <div className="grid grid-cols-6 gap-3">
+    <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3">
       {allRisksKpi.map((k, i) => (
         <div
           key={k.label}

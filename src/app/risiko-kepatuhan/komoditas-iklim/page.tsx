@@ -16,7 +16,7 @@ export const metadata = { title: "Risiko Komoditas & Iklim — PTPN Group" };
 
 export default function KomoditasIklimPage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <RiskSidebar active="Risiko Komoditas & Iklim" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -30,19 +30,19 @@ export default function KomoditasIklimPage() {
           <KiKpiStrip />
 
           {/* Eksposur harga & skenario iklim */}
-          <div className="grid h-[250px] grid-cols-[minmax(0,58fr)_minmax(0,42fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[250px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,58fr)_minmax(0,42fr)]">
             <CpoPriceBand />
             <ElNinoScenario />
           </div>
 
           {/* Anomali iklim & sensitivitas komoditas */}
-          <div className="grid h-[240px] grid-cols-[minmax(0,38fr)_minmax(0,62fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[240px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,38fr)_minmax(0,62fr)]">
             <RainfallAnomalyChart />
             <CommodityScenarioTable />
           </div>
 
           {/* Risiko gula, adaptasi, dan keputusan mitigasi */}
-          <div className="grid h-[230px] grid-cols-[minmax(0,28fr)_minmax(0,38fr)_minmax(0,34fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[230px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,28fr)_minmax(0,38fr)_minmax(0,34fr)]">
             <SugarImportRisk />
             <ClimateAdaptasi />
             <KiDecisionCenter />

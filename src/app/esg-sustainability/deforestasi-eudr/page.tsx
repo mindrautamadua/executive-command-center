@@ -15,7 +15,7 @@ export const metadata = { title: "Deforestasi, NDPE & EUDR — PTPN Group" };
 
 export default function DeforestasiEudrPage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <EsgSidebar active="Deforestasi & EUDR" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -28,18 +28,18 @@ export default function DeforestasiEudrPage() {
 
           <EudrKpiStrip />
 
-          <div className="grid h-[250px] grid-cols-[minmax(0,38fr)_minmax(0,32fr)_minmax(0,30fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[250px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,38fr)_minmax(0,32fr)_minmax(0,30fr)]">
             <EudrReadinessGauge />
             <TraceabilityFunnel />
             <ExportExposure />
           </div>
 
-          <div className="grid h-[250px] grid-cols-[minmax(0,58fr)_minmax(0,42fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[250px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,58fr)_minmax(0,42fr)]">
             <SatelliteAlertLog />
             <NdpeGrievanceTracker />
           </div>
 
-          <div className="grid h-[215px] grid-cols-[minmax(0,1fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[215px] grid-cols-1 gap-3">
             <DeadlineTimeline />
           </div>
 

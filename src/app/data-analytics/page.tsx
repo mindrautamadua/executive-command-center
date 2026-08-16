@@ -18,7 +18,7 @@ export const metadata = { title: "Data & Analytics — PTPN Group" };
 
 export default function DataAnalyticsPage() {
   return (
-    <div className="flex h-screen min-w-[1360px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <SdmSidebar
         active="Data & Analytics"
         assistantCard="coach"
@@ -33,25 +33,25 @@ export default function DataAnalyticsPage() {
         <div className="mx-5 mb-4 flex flex-col gap-3">
           <DataKpiStrip />
 
-          <div className="grid h-[250px] grid-cols-[minmax(0,375fr)_minmax(0,450fr)_minmax(0,470fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[250px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,375fr)_minmax(0,450fr)_minmax(0,470fr)]">
             <DataQualityOverview />
             <TrenDataQuality />
             <KelengkapanDomain />
           </div>
 
-          <div className="grid h-[255px] grid-cols-[minmax(0,470fr)_minmax(0,355fr)_minmax(0,470fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[255px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,470fr)_minmax(0,355fr)_minmax(0,470fr)]">
             <SumberDataTerhubung />
             <AnomalyDetection />
             <PerbandinganUnit />
           </div>
 
-          <div className="grid h-[235px] grid-cols-[minmax(0,470fr)_minmax(0,355fr)_minmax(0,470fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[235px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,470fr)_minmax(0,355fr)_minmax(0,470fr)]">
             <DataReconciliation />
             <ElemenKritis />
             <DqIncidents />
           </div>
 
-          <div className="grid h-[225px] grid-cols-[minmax(0,470fr)_minmax(0,355fr)_minmax(0,470fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[225px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,470fr)_minmax(0,355fr)_minmax(0,470fr)]">
             <DataToDecision />
             <TopInsightData />
             <GovernanceStatus />

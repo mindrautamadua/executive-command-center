@@ -17,7 +17,7 @@ export const metadata = { title: "Talent Intelligence Index — Talent Intellige
 
 export default function TalentIndexPage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <SdmSidebar active="Talent Intelligence" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -32,7 +32,7 @@ export default function TalentIndexPage() {
         <div className="flex flex-col gap-3 px-5 pb-5 pt-3">
           <DetailKpiStrip items={indexKpi} />
 
-          <div className="grid h-[248px] grid-cols-[minmax(0,36fr)_minmax(0,32fr)_minmax(0,32fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[248px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,36fr)_minmax(0,32fr)_minmax(0,32fr)]">
             <TiTrendCard
               title="Tren Index (6 Semester)"
               subtitle="Garis putus-putus = target korporat 2027 (80)"
@@ -72,7 +72,7 @@ export default function TalentIndexPage() {
             />
           </div>
 
-          <div className="grid grid-cols-[minmax(0,1fr)_248px] items-start gap-3">
+          <div className="grid grid-cols-1 items-start gap-3 xl:grid-cols-[minmax(0,1fr)_248px]">
             <DetailTable
               title="Penyusun Tiap Komponen"
               subtitle="Metrik pembentuk skor, capaian saat ini, dan selisih ke target komponen"

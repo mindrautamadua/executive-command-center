@@ -22,7 +22,7 @@ const dec = (v: number) => v.toString().replace(".", ",");
 
 export default function TalentDevelopmentPage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <SdmSidebar active="Talent Intelligence" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -42,7 +42,7 @@ export default function TalentDevelopmentPage() {
             note="Kontribusi terestimasi, bukan ROI kausal — atribusi penuh membutuhkan model evaluasi dampak (fase berikutnya)."
           />
 
-          <div className="grid h-[236px] grid-cols-[minmax(0,36fr)_minmax(0,32fr)_minmax(0,32fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[236px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,36fr)_minmax(0,32fr)_minmax(0,32fr)]">
             <TiTrendCard
               title="Realisasi Investasi Bulanan"
               subtitle="Investasi development (Rp miliar) dan jumlah peserta per bulan"
@@ -80,7 +80,7 @@ export default function TalentDevelopmentPage() {
             />
           </div>
 
-          <div className="grid grid-cols-[minmax(0,1fr)_248px] items-start gap-3">
+          <div className="grid grid-cols-1 items-start gap-3 xl:grid-cols-[minmax(0,1fr)_248px]">
             <DetailTable
               title="Efektivitas Fokus Pengembangan"
               subtitle="Serapan biaya, penyelesaian, dan hasil tiap fokus program"

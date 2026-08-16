@@ -15,7 +15,7 @@ export const metadata = { title: "Biaya Produksi & Cost Leadership — PTPN Grou
 
 export default function BiayaProduksiPage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <ProdSidebar active="Biaya Produksi" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -30,12 +30,12 @@ export default function BiayaProduksiPage() {
 
           <BppKpiStrip />
 
-          <div className="grid h-[250px] grid-cols-[minmax(0,42fr)_minmax(0,58fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[250px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,42fr)_minmax(0,58fr)]">
             <HppWaterfall />
             <HppTrend />
           </div>
 
-          <div className="grid h-[240px] grid-cols-[minmax(0,27fr)_minmax(0,41fr)_minmax(0,32fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[240px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,27fr)_minmax(0,41fr)_minmax(0,32fr)]">
             <HppBenchmark />
             <CostPerRegional />
             <EfisiensiInisiatif />

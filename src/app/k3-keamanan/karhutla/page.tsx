@@ -17,7 +17,7 @@ export const metadata = { title: "Kebakaran Lahan & Tanggap Darurat — PTPN Gro
 
 export default function KarhutlaPage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <HseSidebar active="Kebakaran Lahan & Tanggap Darurat" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -30,18 +30,18 @@ export default function KarhutlaPage() {
 
           <KarhutlaKpiStrip />
 
-          <div className="grid h-[250px] grid-cols-[minmax(0,56fr)_minmax(0,44fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[250px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,56fr)_minmax(0,44fr)]">
             <HotspotTrend />
             <FireByRegional />
           </div>
 
-          <div className="grid h-[240px] grid-cols-[minmax(0,30fr)_minmax(0,44fr)_minmax(0,26fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[240px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,30fr)_minmax(0,44fr)_minmax(0,26fr)]">
             <FireCauses />
             <ResponseCapability />
             <PreparednessLevel />
           </div>
 
-          <div className="grid h-[230px] grid-cols-[minmax(0,50fr)_minmax(0,50fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[230px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,50fr)_minmax(0,50fr)]">
             <EmergencyDrills />
             <CommunityFirePartnership />
           </div>

@@ -25,7 +25,7 @@ const TONES: Record<AstKpi["tone"], string> = {
 /** KPI strip halaman Portofolio Investasi (6 kartu). */
 export function InvKpiStrip() {
   const grid = (
-    <div className="grid grid-cols-6 gap-3">
+    <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3">
       {invKpi.map((k, i) => {
         const Icon = ICONS[k.icon];
         return (

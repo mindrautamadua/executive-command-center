@@ -25,7 +25,7 @@ export const metadata = { title: "Kinerja Karyawan — PTPN Group" };
 
 export default function KinerjaKaryawanPage() {
   return (
-    <div className="flex h-screen min-w-[1360px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <SdmSidebar assistantCard="coach" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -36,41 +36,41 @@ export default function KinerjaKaryawanPage() {
 
           <KinerjaIntelligence />
 
-          <div className="grid h-[272px] grid-cols-[minmax(0,405fr)_minmax(0,415fr)_minmax(0,475fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[272px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,405fr)_minmax(0,415fr)_minmax(0,475fr)]">
             <DistribusiKinerja />
             <TrendOverallScore />
             <KinerjaDimensi />
           </div>
 
-          <div className="grid h-[240px] grid-cols-[minmax(0,340fr)_minmax(0,480fr)_minmax(0,475fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[240px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,340fr)_minmax(0,480fr)_minmax(0,475fr)]">
             <KinerjaUnitOrganisasi />
             <KinerjaLevelJabatan />
             <PencapaianTarget />
           </div>
 
-          <div className="grid h-[240px] grid-cols-[minmax(0,52fr)_minmax(0,48fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[240px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,52fr)_minmax(0,48fr)]">
             <KalibrasiRating />
             <FairnessKinerja />
           </div>
 
           <RisikoKinerjaRadar />
 
-          <div className="grid h-[240px] grid-cols-[minmax(0,46fr)_minmax(0,54fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[240px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,46fr)_minmax(0,54fr)]">
             <DekomposisiScore />
             <KonversiTalenta />
           </div>
 
-          <div className="grid h-[248px] grid-cols-[minmax(0,50fr)_minmax(0,50fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[248px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,50fr)_minmax(0,50fr)]">
             <GoalAlignment />
             <ContinuousPerformance />
           </div>
 
-          <div className="grid h-[224px] grid-cols-[minmax(0,46fr)_minmax(0,54fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[224px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,46fr)_minmax(0,54fr)]">
             <Signal360 />
             <RewardDevelopment />
           </div>
 
-          <div className="grid h-[228px] grid-cols-[minmax(0,830fr)_minmax(0,475fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[228px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,830fr)_minmax(0,475fr)]">
             <RingkasanKinerjaTim />
             <InsightRekomendasi />
           </div>

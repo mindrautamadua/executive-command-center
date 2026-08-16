@@ -13,7 +13,7 @@ const TONES: Record<string, string> = {
 
 export function KcxKpiStrip() {
   return (
-    <div className="grid grid-cols-4 gap-3">
+    <div className="grid grid-cols-2 xl:grid-cols-4 gap-3">
       {kcxKpi.map((k, i) => {
         const Icon = ICONS[i % ICONS.length];
         return (

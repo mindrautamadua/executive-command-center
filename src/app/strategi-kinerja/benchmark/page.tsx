@@ -14,7 +14,7 @@ export const metadata = { title: "Benchmark Industri — PTPN Group" };
 
 export default function BenchmarkPage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <StgSidebar active="Benchmark Industri" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -27,17 +27,17 @@ export default function BenchmarkPage() {
 
           <SbmKpiStrip />
 
-          <div className="grid h-[240px] grid-cols-[minmax(0,50fr)_minmax(0,50fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[240px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,50fr)_minmax(0,50fr)]">
             <MarginBenchmark />
             <YieldBenchmark />
           </div>
 
-          <div className="grid h-[235px] grid-cols-[minmax(0,54fr)_minmax(0,46fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[235px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,54fr)_minmax(0,46fr)]">
             <CostPositionCurve />
             <SugarBenchmark />
           </div>
 
-          <div className="grid h-[230px] grid-cols-[minmax(0,1fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[230px] grid-cols-1 gap-3">
             <GapToBestInClass />
           </div>
 

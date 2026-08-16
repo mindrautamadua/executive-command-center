@@ -14,7 +14,7 @@ const TONES: Record<string, string> = {
 
 export function KrkKpiStrip() {
   return (
-    <div className="grid grid-cols-5 gap-3">
+    <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3">
       {krkKpi.map((k, i) => {
         const Icon = ICONS[i % ICONS.length];
         return (

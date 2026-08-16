@@ -14,7 +14,7 @@ export const metadata = { title: "Portofolio Inisiatif — PTPN Group" };
 
 export default function PortofolioInisiatifPage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <StgSidebar active="Portofolio Inisiatif" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -27,17 +27,17 @@ export default function PortofolioInisiatifPage() {
 
           <SpiKpiStrip />
 
-          <div className="grid h-[250px] grid-cols-[minmax(0,38fr)_minmax(0,62fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[250px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,38fr)_minmax(0,62fr)]">
             <InitiativeByTheme />
             <InitiativeStatusBoard />
           </div>
 
-          <div className="grid h-[250px] grid-cols-[minmax(0,45fr)_minmax(0,55fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[250px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,45fr)_minmax(0,55fr)]">
             <ImpactVsEffort />
             <InitiativeFunding />
           </div>
 
-          <div className="grid h-[250px] grid-cols-[minmax(0,1fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[250px] grid-cols-1 gap-3">
             <AtRiskInitiatives />
           </div>
 

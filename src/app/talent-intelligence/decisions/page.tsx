@@ -48,7 +48,7 @@ const num = (v: number) => v.toLocaleString("id-ID");
 
 export default function TalentDecisionsPage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <SdmSidebar active="Talent Intelligence" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -117,7 +117,7 @@ export default function TalentDecisionsPage() {
             })}
           </div>
 
-          <div className="grid grid-cols-[minmax(0,1fr)_248px] items-start gap-3">
+          <div className="grid grid-cols-1 items-start gap-3 xl:grid-cols-[minmax(0,1fr)_248px]">
             <div className="flex min-w-0 flex-col gap-3">
               <DetailTable
                 title="Register Keputusan Talenta"

@@ -14,7 +14,7 @@ export const metadata = { title: "Stok & Posisi Inventori — PTPN Group" };
 
 export default function StokInventoriPage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <MktSidebar active="Stok & Inventori" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -27,12 +27,12 @@ export default function StokInventoriPage() {
 
           <StokKpiStrip />
 
-          <div className="grid h-[250px] grid-cols-[minmax(0,58fr)_minmax(0,42fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[250px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,58fr)_minmax(0,42fr)]">
             <StokTrendChart />
             <StokByLokasi />
           </div>
 
-          <div className="grid h-[255px] grid-cols-[minmax(0,36fr)_minmax(0,37fr)_minmax(0,27fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[255px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,36fr)_minmax(0,37fr)_minmax(0,27fr)]">
             <AgingInventory />
             <StokVsHargaCard />
             <WorkingCapitalImpact />

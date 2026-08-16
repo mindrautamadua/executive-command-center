@@ -18,7 +18,7 @@ export const metadata = { title: "Learning & Development — PTPN Group" };
 
 export default function LearningDevelopmentPage() {
   return (
-    <div className="flex h-screen min-w-[1360px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <SdmSidebar />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -27,24 +27,24 @@ export default function LearningDevelopmentPage() {
         <div className="mx-5 mb-4 flex flex-col gap-3">
           <LndKpiStrip />
 
-          <div className="grid h-[280px] grid-cols-[minmax(0,380fr)_minmax(0,473fr)_minmax(0,450fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[280px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,380fr)_minmax(0,473fr)_minmax(0,450fr)]">
             <DistribusiKompetensi />
             <TrenJamPelatihan />
             <LearningValueChain />
           </div>
 
-          <div className="grid h-[256px] grid-cols-[minmax(0,865fr)_minmax(0,450fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[256px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,865fr)_minmax(0,450fr)]">
             <SkillGapClosure />
             <LearningRoi />
           </div>
 
-          <div className="grid h-[208px] grid-cols-[minmax(0,380fr)_minmax(0,473fr)_minmax(0,450fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[208px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,380fr)_minmax(0,473fr)_minmax(0,450fr)]">
             <ProgramTipe />
             <TopProgram />
             <PersonalizedLearning />
           </div>
 
-          <div className="grid h-[262px] grid-cols-[minmax(0,523fr)_minmax(0,318fr)_minmax(0,454fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[262px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,523fr)_minmax(0,318fr)_minmax(0,454fr)]">
             <EffectivenessUnit />
             <TopInstruktur />
             <InsightLnd />

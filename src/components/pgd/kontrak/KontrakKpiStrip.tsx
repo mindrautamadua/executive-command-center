@@ -15,7 +15,7 @@ const TONES: Record<string, string> = {
 /** KPI strip halaman Kontrak Pengadaan (6 kartu). */
 export function KontrakKpiStrip() {
   const grid = (
-    <div className="grid grid-cols-6 gap-3">
+    <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3">
       {kontrakKpi.map((k, i) => (
         <div
           key={k.label}

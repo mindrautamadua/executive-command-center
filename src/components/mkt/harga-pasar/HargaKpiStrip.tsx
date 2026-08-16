@@ -90,7 +90,7 @@ export function HargaKpiStrip() {
   const { active } = useSubholding();
 
   return (
-    <div className="grid grid-cols-5 gap-3">
+    <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3">
       {items.map((k, i) => {
         const Icon = k.icon;
         // CPO → PalmCo, gula → SugarCo, karet → SupportingCo; kurs berlaku grup.

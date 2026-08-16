@@ -90,7 +90,7 @@ export function JualKpiStrip() {
   const { active } = useSubholding();
 
   return (
-    <div className="grid grid-cols-5 gap-3">
+    <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3">
       {items.map((k, i) => {
         const Icon = k.icon;
         // Tile terikat komoditas (CPO → PalmCo) diredupkan di luar cakupan;

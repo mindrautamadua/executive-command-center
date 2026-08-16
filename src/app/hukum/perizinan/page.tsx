@@ -15,7 +15,7 @@ export const metadata = { title: "Perizinan & Lisensi — PTPN Group" };
 
 export default function PerizinanPage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <HkmSidebar active="Perizinan & Lisensi" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -28,17 +28,17 @@ export default function PerizinanPage() {
 
           <PerizinanKpiStrip />
 
-          <div className="grid h-[250px] grid-cols-[minmax(0,40fr)_minmax(0,60fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[250px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,40fr)_minmax(0,60fr)]">
             <PermitByDomain />
             <ExpiryCalendar />
           </div>
 
-          <div className="grid h-[240px] grid-cols-[minmax(0,36fr)_minmax(0,64fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[240px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,36fr)_minmax(0,64fr)]">
             <RenewalFunnel />
             <PermitRiskMatrix />
           </div>
 
-          <div className="grid h-[240px] grid-cols-[minmax(0,58fr)_minmax(0,42fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[240px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,58fr)_minmax(0,42fr)]">
             <ComplianceByRegion />
             <SanctionLog />
           </div>

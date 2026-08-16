@@ -15,7 +15,7 @@ export const metadata = { title: "Agronomi & Replanting — PTPN Group" };
 
 export default function AgronomiReplantingPage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <ProdSidebar active="Agronomi & Replanting" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -31,18 +31,18 @@ export default function AgronomiReplantingPage() {
           <AgroKpiStrip />
 
           {/* Profil umur + roadmap replanting: tuas yield terbesar */}
-          <div className="grid h-[250px] grid-cols-[minmax(0,56fr)_minmax(0,44fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[250px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,56fr)_minmax(0,44fr)]">
             <AgeProfileChart />
             <ReplantingRoadmap />
           </div>
 
           {/* Input agronomi & iklim */}
-          <div className="grid h-[240px] grid-cols-[minmax(0,38fr)_minmax(0,62fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[240px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,38fr)_minmax(0,62fr)]">
             <PemupukanCard />
             <CurahHujanElNino />
           </div>
 
-          <div className="grid h-[215px] grid-cols-1 grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[215px] grid-cols-1 gap-3">
             <DampakIklimSimulasi />
           </div>
 

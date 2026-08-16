@@ -31,7 +31,7 @@ const ICONS = {
  */
 export function ProduktivitasKpiStrip() {
   return (
-    <div className="grid grid-cols-7 gap-3">
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-3">
       {produktivitasKpi.map((k, i) => {
         const Icon = ICONS[k.icon];
         return (

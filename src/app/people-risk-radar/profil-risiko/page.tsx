@@ -18,7 +18,7 @@ export const metadata = { title: "Profil Risiko People — People Risk Radar —
 
 export default function ProfilRisikoPage() {
   return (
-    <div className="flex h-screen min-w-[1360px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <SdmSidebar active="People Risk Radar" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -33,7 +33,7 @@ export default function ProfilRisikoPage() {
         <div className="flex flex-col gap-3 px-5 pb-5 pt-3">
           <DetailKpiStrip items={profilKpi} />
 
-          <div className="grid h-[254px] grid-cols-[minmax(0,36fr)_minmax(0,36fr)_minmax(0,28fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[254px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,36fr)_minmax(0,36fr)_minmax(0,28fr)]">
             <BarListCard
               title="Skor Seluruh Risiko"
               subtitle="Register people risk, urut dari skor tertinggi"
@@ -80,7 +80,7 @@ export default function ProfilRisikoPage() {
             />
           </div>
 
-          <div className="grid grid-cols-[minmax(0,1fr)_248px] items-start gap-3">
+          <div className="grid grid-cols-1 items-start gap-3 xl:grid-cols-[minmax(0,1fr)_248px]">
             <DetailTable
               title="Register Risiko People"
               subtitle="Skor, velocity, kategori, pemilik risiko, dan treatment yang berjalan"

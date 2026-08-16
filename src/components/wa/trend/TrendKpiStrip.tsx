@@ -11,7 +11,7 @@ const TONE: Record<string, string> = {
 /** Enam KPI ringkas tren headcount: posisi, laju, arus, dan proyeksi. */
 export function TrendKpiStrip() {
   return (
-    <div className="grid grid-cols-6 gap-3">
+    <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3">
       {trendKpi.map((k, i) => (
         <div
           key={k.label}

@@ -32,7 +32,7 @@ const ITEMS = [
 /** Ringkasan populasi direktori — konteks sebelum pencarian dipersempit. */
 export function DirektoriStats() {
   return (
-    <div className="grid grid-cols-5 gap-3">
+    <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3">
       {ITEMS.map(({ label, value, icon: Icon, tone }) => (
         <div key={label} className="card anim-rise flex items-center gap-2.5 px-3.5 py-2.5">
           <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-xl ${tone}`}>

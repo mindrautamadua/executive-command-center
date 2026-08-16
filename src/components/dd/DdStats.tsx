@@ -17,7 +17,7 @@ const TONES: Record<DdStat["tone"], string> = {
 
 export function DdStats() {
   return (
-    <div className="grid grid-cols-4 gap-3">
+    <div className="grid grid-cols-2 xl:grid-cols-4 gap-3">
       {ddStats.map((s, i) => {
         const Icon = ICONS[s.icon];
         return (

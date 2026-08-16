@@ -19,7 +19,7 @@ export const metadata = { title: "Organisasi & Jabatan — PTPN Group" };
 
 export default function OrganisasiJabatanPage() {
   return (
-    <div className="flex h-screen min-w-[1360px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <SdmSidebar
         active="Organisasi & Jabatan"
         assistantPlaceholder="Tanya tentang struktur organisasi, span of control, atau analisis jabatan..."
@@ -31,7 +31,7 @@ export default function OrganisasiJabatanPage() {
         <div className="mx-5 mb-4 flex flex-col gap-3">
           <RingkasanOrganisasi />
 
-          <div className="grid h-[378px] grid-cols-[minmax(0,532fr)_minmax(0,375fr)_minmax(0,372fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[378px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,532fr)_minmax(0,375fr)_minmax(0,372fr)]">
             <StrukturOrganisasi />
             <DistribusiUnit />
             <div className="flex min-h-0 flex-col gap-3">
@@ -40,20 +40,20 @@ export default function OrganisasiJabatanPage() {
             </div>
           </div>
 
-          <div className="grid h-[232px] grid-cols-[minmax(0,302fr)_minmax(0,270fr)_minmax(0,330fr)_minmax(0,372fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[232px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,302fr)_minmax(0,270fr)_minmax(0,330fr)_minmax(0,372fr)]">
             <SpanOfControl />
             <TingkatOrganisasi />
             <StatusPengisian />
             <PerubahanOrganisasi />
           </div>
 
-          <div className="grid h-[248px] grid-cols-[minmax(0,452fr)_minmax(0,417fr)_minmax(0,420fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[248px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,452fr)_minmax(0,417fr)_minmax(0,420fr)]">
             <OrgHealthScore />
             <LayerDensitas />
             <EfisiensiBiaya />
           </div>
 
-          <div className="grid h-[195px] grid-cols-[minmax(0,917fr)_minmax(0,372fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[195px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,917fr)_minmax(0,372fr)]">
             <MappingJabatanKritis />
             <OrgInsightAi />
           </div>

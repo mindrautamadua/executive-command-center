@@ -27,7 +27,7 @@ const TONES: Record<StgKpi["tone"], string> = {
  */
 export function SbmKpiStrip() {
   return (
-    <div className="grid grid-cols-4 gap-3">
+    <div className="grid grid-cols-2 xl:grid-cols-4 gap-3">
       {sbmKpi.map((k, i) => {
         const Icon = ICONS[k.icon] ?? Trophy;
         return (

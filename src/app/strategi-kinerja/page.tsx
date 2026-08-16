@@ -17,7 +17,7 @@ export const metadata = { title: "Strategy Executive Command Center — PTPN Gro
 
 export default function StrategiKinerjaPage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <StgSidebar active="Executive Overview" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -26,16 +26,16 @@ export default function StrategiKinerjaPage() {
         <div className="px-5 pb-5">
           <DataTrustStrip data={stgDataTrust} />
 
-          <div className="grid grid-cols-[minmax(0,1fr)_330px] items-start gap-3">
+          <div className="grid grid-cols-1 items-start gap-3 xl:grid-cols-[minmax(0,1fr)_330px]">
             {/* kolom utama */}
             <div className="flex min-w-0 flex-col gap-3">
               <StgKpiStrip />
               <StrategyIntelligence />
-              <div className="grid h-[260px] grid-cols-[minmax(0,56fr)_minmax(0,44fr)] grid-rows-[minmax(0,1fr)] gap-3">
+              <div className="grid auto-rows-[260px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,56fr)_minmax(0,44fr)]">
                 <InitiativePortfolioMap />
                 <ScorecardSnapshot />
               </div>
-              <div className="grid h-[250px] grid-cols-[minmax(0,44fr)_minmax(0,56fr)] grid-rows-[minmax(0,1fr)] gap-3">
+              <div className="grid auto-rows-[250px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,44fr)_minmax(0,56fr)]">
                 <ExecutionRiskRadar />
                 <ValueCreationTrend />
               </div>

@@ -15,7 +15,7 @@ export const metadata = { title: "Rekomendasi & Tindak Lanjut — PTPN Group" };
 
 export default function RekomendasiPage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <DekSidebar active="Rekomendasi & Tindak Lanjut" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -28,16 +28,16 @@ export default function RekomendasiPage() {
 
           <RekomendasiKpiStrip />
 
-          <div className="grid h-[250px] grid-cols-[minmax(0,60fr)_minmax(0,40fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[250px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,60fr)_minmax(0,40fr)]">
             <RecommendationRegister />
             <ByDirektorat />
           </div>
 
-          <div className="grid h-[250px] grid-cols-[minmax(0,1fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[250px] grid-cols-1 gap-3">
             <OverdueDetail />
           </div>
 
-          <div className="grid h-[240px] grid-cols-[minmax(0,30fr)_minmax(0,30fr)_minmax(0,40fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[240px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,30fr)_minmax(0,30fr)_minmax(0,40fr)]">
             <ByTheme />
             <AgingBuckets />
             <ClosureTrend />

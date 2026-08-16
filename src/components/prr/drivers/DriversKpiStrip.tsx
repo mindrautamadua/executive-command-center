@@ -11,7 +11,7 @@ const TONE: Record<string, string> = {
 /** Enam KPI ringkas registri driver: jumlah, arah, konsentrasi, dan kontrol. */
 export function DriversKpiStrip() {
   return (
-    <div className="grid grid-cols-6 gap-3">
+    <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3">
       {driversKpi.map((k, i) => (
         <div
           key={k.label}

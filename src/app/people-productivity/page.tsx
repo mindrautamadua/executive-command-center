@@ -16,7 +16,7 @@ export const metadata = { title: "People Productivity — PTPN Group" };
 
 export default function PeopleProductivityPage() {
   return (
-    <div className="flex h-screen min-w-[1360px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <SdmSidebar />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -27,19 +27,19 @@ export default function PeopleProductivityPage() {
 
           <ProduktivitasIntelligence />
 
-          <div className="grid h-[300px] grid-cols-[minmax(0,430fr)_minmax(0,430fr)_minmax(0,440fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[300px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,430fr)_minmax(0,430fr)_minmax(0,440fr)]">
             <ProduktivitasTrend />
             <ProduktivitasUnitKerja />
             <ProduktivitasJenisUsaha />
           </div>
 
-          <div className="grid h-[300px] grid-cols-[minmax(0,375fr)_minmax(0,455fr)_minmax(0,470fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[300px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,375fr)_minmax(0,455fr)_minmax(0,470fr)]">
             <ProduktivitasBiaya />
             <BreakdownProduktivitas />
             <DriversProduktivitas />
           </div>
 
-          <div className="grid h-[176px] grid-cols-[minmax(0,720fr)_minmax(0,580fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[176px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,720fr)_minmax(0,580fr)]">
             <InsightProduktivitas />
             <BenchmarkingEksternal />
           </div>

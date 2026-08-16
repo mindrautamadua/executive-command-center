@@ -14,7 +14,7 @@ export const metadata = { title: "Plasma & Kemitraan — PTPN Group" };
 
 export default function PlasmaKemitraanPage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <ProdSidebar active="Plasma & Kemitraan" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -30,13 +30,13 @@ export default function PlasmaKemitraanPage() {
           <PlasmaKpiStrip />
 
           {/* Pasokan & yield gap plasma */}
-          <div className="grid h-[250px] grid-cols-[minmax(0,52fr)_minmax(0,48fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[250px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,52fr)_minmax(0,48fr)]">
             <IntiVsPlasmaChart />
             <PlasmaYieldGap />
           </div>
 
           {/* PSR & risiko kemitraan */}
-          <div className="grid h-[235px] grid-cols-[minmax(0,36fr)_minmax(0,64fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[235px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,36fr)_minmax(0,64fr)]">
             <PsrProgress />
             <KemitraanRisiko />
           </div>

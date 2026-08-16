@@ -14,7 +14,7 @@ export const metadata = { title: "Hilirisasi & Produk Turunan — PTPN Group" };
 
 export default function HilirisasiPage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <MktSidebar active="Hilirisasi" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -27,17 +27,17 @@ export default function HilirisasiPage() {
 
           <HilirKpiStrip />
 
-          <div className="grid h-[255px] grid-cols-[minmax(0,58fr)_minmax(0,42fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[255px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,58fr)_minmax(0,42fr)]">
             <HilirRevenueTrend />
             <MarginUpliftChart />
           </div>
 
-          <div className="grid h-[245px] grid-cols-[minmax(0,55fr)_minmax(0,45fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[245px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,55fr)_minmax(0,45fr)]">
             <ProdukTurunanTable />
             <BiodieselMandateCard />
           </div>
 
-          <div className="grid h-[205px] grid-cols-[minmax(0,1fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[205px] grid-cols-1 gap-3">
             <RefineryPipeline />
           </div>
 

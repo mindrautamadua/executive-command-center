@@ -23,7 +23,7 @@ export const metadata = { title: "Compensation & Benefits — PTPN Group" };
 
 export default function CompensationBenefitsPage() {
   return (
-    <div className="flex h-screen min-w-[1360px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <SdmSidebar
         assistantCard="coach"
         assistantTitle="AI Comp Assistant"
@@ -37,35 +37,35 @@ export default function CompensationBenefitsPage() {
         <div className="mx-5 mb-4 flex flex-col gap-3">
           <CompKpiStrip />
 
-          <div className="grid h-[266px] grid-cols-[minmax(0,380fr)_minmax(0,450fr)_minmax(0,457fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[266px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,380fr)_minmax(0,450fr)_minmax(0,457fr)]">
             <KomposisiTotalRewards />
             <TrenBiayaKompensasi />
             <BenchmarkGaji />
           </div>
 
-          <div className="grid h-[230px] grid-cols-[minmax(0,380fr)_minmax(0,308fr)_minmax(0,307fr)_minmax(0,283fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[230px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,380fr)_minmax(0,308fr)_minmax(0,307fr)_minmax(0,283fr)]">
             <PayGapAnalisis />
             <DistribusiGaji />
             <RealisasiKenaikanGaji />
             <KomposisiBenefits />
           </div>
 
-          <div className="grid h-[236px] grid-cols-[minmax(0,58fr)_minmax(0,42fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[236px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,58fr)_minmax(0,42fr)]">
             <CompaRangePanel />
             <PayEquityRemediation />
           </div>
 
-          <div className="grid h-[240px] grid-cols-[minmax(0,36fr)_minmax(0,32fr)_minmax(0,32fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[240px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,36fr)_minmax(0,32fr)_minmax(0,32fr)]">
             <PayForPerformance />
             <PeopleCostEfficiency />
             <CriticalTalentCompRisk />
           </div>
 
-          <div className="grid h-[228px] grid-rows-[minmax(0,1fr)]">
+          <div className="grid auto-rows-[228px] grid-cols-1">
             <CompDecisionCenter />
           </div>
 
-          <div className="grid h-[216px] grid-cols-[minmax(0,495fr)_minmax(0,328fr)_minmax(0,468fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[216px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,495fr)_minmax(0,328fr)_minmax(0,468fr)]">
             <RingkasanUnitKompensasi />
             <RasioKinerja />
             <InsightComp />

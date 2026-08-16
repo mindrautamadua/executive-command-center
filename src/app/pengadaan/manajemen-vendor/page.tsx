@@ -15,7 +15,7 @@ export const metadata = { title: "Manajemen Vendor — PTPN Group" };
 
 export default function ManajemenVendorPage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <PgdSidebar active="Manajemen Vendor" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -28,17 +28,17 @@ export default function ManajemenVendorPage() {
 
           <VendorKpiStrip />
 
-          <div className="grid h-[250px] grid-cols-[minmax(0,42fr)_minmax(0,58fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[250px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,42fr)_minmax(0,58fr)]">
             <VendorSegmentation />
             <VendorPerformance />
           </div>
 
-          <div className="grid h-[250px] grid-cols-[minmax(0,58fr)_minmax(0,42fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[250px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,58fr)_minmax(0,42fr)]">
             <VendorConcentration />
             <VendorRiskWatch />
           </div>
 
-          <div className="grid h-[215px] grid-cols-[minmax(0,56fr)_minmax(0,44fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[215px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,56fr)_minmax(0,44fr)]">
             <VendorOnboarding />
             <LocalVendorMix />
           </div>

@@ -6,7 +6,7 @@ export const metadata = { title: "Profil Karyawan — PTPN Group" };
 
 export default function ProfilKaryawanPage() {
   return (
-    <div className="flex h-screen min-w-[1360px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <SdmSidebar
         spotlightCard
         updatedStamp

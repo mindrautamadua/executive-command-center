@@ -16,7 +16,7 @@ export const metadata = { title: "ESG & Sustainability — PTPN Group" };
 
 export default function EsgSustainabilityPage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <EsgSidebar active="Executive Overview" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -25,16 +25,16 @@ export default function EsgSustainabilityPage() {
         <div className="px-5 pb-5">
           <DataTrustStrip data={esgDataTrust} />
 
-          <div className="grid grid-cols-[minmax(0,1fr)_330px] items-start gap-3">
+          <div className="grid grid-cols-1 items-start gap-3 xl:grid-cols-[minmax(0,1fr)_330px]">
             {/* kolom utama */}
             <div className="flex min-w-0 flex-col gap-3">
               <EsgKpiStrip />
               <EsgIntelligence />
-              <div className="grid h-[250px] grid-cols-[minmax(0,44fr)_minmax(0,56fr)] grid-rows-[minmax(0,1fr)] gap-3">
+              <div className="grid auto-rows-[250px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,44fr)_minmax(0,56fr)]">
                 <EsgPillarRadar />
                 <EmissionTrajectory />
               </div>
-              <div className="grid h-[215px] grid-cols-[minmax(0,1fr)] grid-rows-[minmax(0,1fr)] gap-3">
+              <div className="grid auto-rows-[215px] grid-cols-1 gap-3">
                 <CertCoverageCompact />
               </div>
               <EsgAlerts />

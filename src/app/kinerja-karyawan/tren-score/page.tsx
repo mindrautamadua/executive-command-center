@@ -17,7 +17,7 @@ export const metadata = { title: "Tren Overall Score — Kinerja Karyawan — PT
 
 export default function TrenOverallScoreDetailPage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <SdmSidebar active="Performance" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -32,7 +32,7 @@ export default function TrenOverallScoreDetailPage() {
         <div className="flex flex-col gap-3 px-5 pb-5 pt-3">
           <DetailKpiStrip items={trenKpi} />
 
-          <div className="grid h-[254px] grid-cols-[minmax(0,62fr)_minmax(0,38fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[254px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,62fr)_minmax(0,38fr)]">
             <TiTrendCard
               title="Tren Overall Score vs Target"
               subtitle="Skor grup, unit tertinggi, dan unit terendah per bulan"
@@ -62,7 +62,7 @@ export default function TrenOverallScoreDetailPage() {
             />
           </div>
 
-          <div className="grid grid-cols-[minmax(0,1fr)_248px] items-start gap-3">
+          <div className="grid grid-cols-1 items-start gap-3 xl:grid-cols-[minmax(0,1fr)_248px]">
             <DetailTable
               title="Rekap Bulanan Overall Score"
               subtitle="Skor, pergerakan, dan posisi terhadap target grup tiap bulan"

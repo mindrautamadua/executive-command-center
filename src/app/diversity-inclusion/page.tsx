@@ -19,7 +19,7 @@ export const metadata = { title: "Diversity, Equity & Inclusion — PTPN Group" 
 
 export default function DiversityInclusionPage() {
   return (
-    <div className="flex h-screen min-w-[1360px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <SdmSidebar
         assistantCard="coach"
         assistantTitle="AI Insight"
@@ -34,28 +34,28 @@ export default function DiversityInclusionPage() {
           <DiKpiStrip />
 
           {/* D — Representation: siapa yang terwakili */}
-          <div className="grid h-[262px] grid-cols-[minmax(0,366fr)_minmax(0,452fr)_minmax(0,442fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[262px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,366fr)_minmax(0,452fr)_minmax(0,442fr)]">
             <KomposisiGender />
             <TrenPerempuanManajemen />
             <PiramidaPopulasi />
           </div>
 
           {/* Leadership pipeline: leakage, trajectory target, dan disabilitas */}
-          <div className="grid h-[252px] grid-cols-[minmax(0,452fr)_minmax(0,404fr)_minmax(0,404fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[252px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,452fr)_minmax(0,404fr)_minmax(0,404fr)]">
             <GenderLeadershipFunnel />
             <TargetTrajectory />
             <KaryawanDisabilitas />
           </div>
 
           {/* E — Equity: kesempatan, gaji, dan pipeline talenta perempuan */}
-          <div className="grid h-[232px] grid-cols-[minmax(0,452fr)_minmax(0,404fr)_minmax(0,404fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[232px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,452fr)_minmax(0,404fr)_minmax(0,404fr)]">
             <EquityOfOpportunity />
             <GenderPayGap />
             <FemaleTalentPipeline />
           </div>
 
           {/* I & O — Inclusion per unit, akuntabilitas, dan intelligence */}
-          <div className="grid h-[240px] grid-cols-[minmax(0,366fr)_minmax(0,428fr)_minmax(0,466fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[240px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,366fr)_minmax(0,428fr)_minmax(0,466fr)]">
             <DeiRiskMatrix />
             <DeiActionTracker />
             <InsightDi />

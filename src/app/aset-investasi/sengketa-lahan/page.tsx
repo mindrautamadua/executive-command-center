@@ -15,7 +15,7 @@ export const metadata = { title: "Sengketa Lahan — PTPN Group" };
 
 export default function SengketaLahanPage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <AsetSidebar active="Sengketa Lahan" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -28,13 +28,13 @@ export default function SengketaLahanPage() {
 
           <AsgKpiStrip />
 
-          <div className="grid h-[250px] grid-cols-[minmax(0,30fr)_minmax(0,36fr)_minmax(0,34fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[250px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,30fr)_minmax(0,36fr)_minmax(0,34fr)]">
             <SengketaByType />
             <SengketaBySubholding />
             <ResolutionTrend />
           </div>
 
-          <div className="grid h-[250px] grid-cols-[minmax(0,56fr)_minmax(0,44fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[250px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,56fr)_minmax(0,44fr)]">
             <TopDisputeCases />
             <SengketaRiskMatrix />
           </div>

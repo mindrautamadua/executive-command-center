@@ -30,7 +30,7 @@ const TONES: Record<string, string> = {
 
 export function IrKpiStrip() {
   return (
-    <div className="grid grid-cols-6 gap-3">
+    <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3">
       {irKpi.map((k, i) => {
         const Icon = ICONS[k.icon];
         return (

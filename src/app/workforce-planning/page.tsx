@@ -20,16 +20,8 @@ import { WorkforceRiskOverlay } from "@/components/wp/WorkforceRiskOverlay";
 import { WpControlTower } from "@/components/wp/WpControlTower";
 import { WpFootnote } from "@/components/wp/WpFootnote";
 import { wpQuote } from "@/lib/wp-data";
-import type { Viewport } from "next";
 
 export const metadata = { title: "Workforce Planning — PTPN Group" };
-
-// Halaman ini sudah fluid-responsive; override viewport fixed-canvas global.
-export const viewport: Viewport = {
-  themeColor: "#0e1420",
-  width: "device-width",
-  initialScale: 1,
-};
 
 export default function WorkforcePlanningPage() {
   return (

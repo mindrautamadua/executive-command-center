@@ -15,7 +15,7 @@ const TONES: Record<string, string> = {
 /** KPI strip halaman TKDN & Integritas (5 kartu). */
 export function TkdnKpiStrip() {
   const grid = (
-    <div className="grid grid-cols-5 gap-3">
+    <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3">
       {tkdnKpi.map((k, i) => (
         <div
           key={k.label}

@@ -16,7 +16,7 @@ export const metadata = { title: "Korporasi & Anak Usaha — PTPN Group" };
 
 export default function KorporasiPage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <HkmSidebar active="Korporasi & Anak Usaha" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -29,17 +29,17 @@ export default function KorporasiPage() {
 
           <KorporasiKpiStrip />
 
-          <div className="grid h-[280px] grid-cols-[minmax(0,58fr)_minmax(0,42fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[280px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,58fr)_minmax(0,42fr)]">
             <EntityPortfolio />
             <ShareholdingMap />
           </div>
 
-          <div className="grid h-[260px] grid-cols-[minmax(0,50fr)_minmax(0,50fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[260px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,50fr)_minmax(0,50fr)]">
             <CorporateActions />
             <RupsCalendar />
           </div>
 
-          <div className="grid h-[250px] grid-cols-[minmax(0,58fr)_minmax(0,42fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[250px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,58fr)_minmax(0,42fr)]">
             <GovernanceDocs />
             <ComplianceReporting />
           </div>

@@ -21,7 +21,7 @@ export const metadata = { title: "People Risk Radar — PTPN Group" };
 
 export default function PeopleRiskRadarPage() {
   return (
-    <div className="flex h-screen min-w-[1360px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <SdmSidebar active="People Risk Radar" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -30,25 +30,25 @@ export default function PeopleRiskRadarPage() {
         <div className="flex flex-col gap-3 px-5 pb-5">
           <PrrKpiStrip />
 
-          <div className="grid h-[340px] grid-cols-[minmax(0,33fr)_minmax(0,32fr)_minmax(0,35fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[340px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,33fr)_minmax(0,32fr)_minmax(0,35fr)]">
             <RiskRadarChart />
             <RiskSummary />
             <TopRisks />
           </div>
 
-          <div className="grid h-[280px] grid-cols-[minmax(0,40fr)_minmax(0,31fr)_minmax(0,29fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[280px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,40fr)_minmax(0,31fr)_minmax(0,29fr)]">
             <RiskTrend />
             <RiskHeatmapOrg />
             <TopRiskDrivers />
           </div>
 
-          <div className="grid h-[300px] grid-cols-[minmax(0,31fr)_minmax(0,32fr)_minmax(0,37fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[300px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,31fr)_minmax(0,32fr)_minmax(0,37fr)]">
             <EarlyWarnings />
             <ControlEffectiveness />
             <RekomendasiTindakan />
           </div>
 
-          <div className="grid h-[290px] grid-cols-[minmax(0,33fr)_minmax(0,34fr)_minmax(0,33fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[290px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,33fr)_minmax(0,34fr)_minmax(0,33fr)]">
             <RiskInterdependency />
             <ExposureByBusiness />
             <ScenarioImpact />

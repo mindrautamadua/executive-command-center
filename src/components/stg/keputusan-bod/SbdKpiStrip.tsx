@@ -36,7 +36,7 @@ export function SbdKpiStrip() {
   const overdueRows = filterBySubholding(overdueDetail, active, (d) => `${d.title} ${d.pic}`);
 
   return (
-    <div className="grid grid-cols-5 gap-3">
+    <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3">
       {sbdKpi.map((k, i) => {
         const Icon = ICONS[k.icon] ?? Gavel;
         // Tile Overdue mengikuti cakupan; delta bulanan tidak dapat diturunkan

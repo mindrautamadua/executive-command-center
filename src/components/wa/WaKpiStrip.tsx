@@ -41,7 +41,7 @@ const TONES: Record<string, string> = {
  */
 export function WaKpiStrip() {
   return (
-    <div className="grid grid-cols-8 gap-3">
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8 gap-3">
       {waKpi.map((k, i) => {
         const Icon = ICONS[k.icon];
         return (

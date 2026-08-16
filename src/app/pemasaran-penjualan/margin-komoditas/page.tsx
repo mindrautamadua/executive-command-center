@@ -14,7 +14,7 @@ export const metadata = { title: "Margin & Profitabilitas Komoditas — PTPN Gro
 
 export default function MarginKomoditasPage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <MktSidebar active="Margin Komoditas" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -27,17 +27,17 @@ export default function MarginKomoditasPage() {
 
           <MarginKpiStrip />
 
-          <div className="grid h-[260px] grid-cols-[minmax(0,55fr)_minmax(0,45fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[260px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,55fr)_minmax(0,45fr)]">
             <MarginWaterfall />
             <MarginTrendChart />
           </div>
 
-          <div className="grid h-[250px] grid-cols-[minmax(0,55fr)_minmax(0,45fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[250px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,55fr)_minmax(0,45fr)]">
             <MarginMatrix />
             <MarginBySubholding />
           </div>
 
-          <div className="grid h-[280px] grid-cols-[minmax(0,1fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[280px] grid-cols-1 gap-3">
             <KomoditasMerugi />
           </div>
 

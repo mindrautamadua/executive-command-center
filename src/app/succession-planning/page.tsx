@@ -23,7 +23,7 @@ export const metadata = { title: "Succession Planning — PTPN Group" };
 
 export default function SuccessionPlanningPage() {
   return (
-    <div className="flex h-screen min-w-[1360px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <SdmSidebar
         assistantCard="coach"
         assistantTitle="AI Succession Assistant"
@@ -37,36 +37,36 @@ export default function SuccessionPlanningPage() {
         <div className="mx-5 mb-4 flex flex-col gap-3">
           <SuksesiKpiStrip />
 
-          <div className="grid h-[296px] grid-cols-[minmax(0,360fr)_minmax(0,435fr)_minmax(0,482fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[296px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,360fr)_minmax(0,435fr)_minmax(0,482fr)]">
             <NineBoxGrid />
             <PosisiKritisTabel />
             <PipelineKepemimpinan />
           </div>
 
-          <div className="grid h-[218px] grid-cols-[minmax(0,360fr)_minmax(0,435fr)_minmax(0,482fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[218px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,360fr)_minmax(0,435fr)_minmax(0,482fr)]">
             <TalentPoolFungsi />
             <TrenBenchStrength />
             <DistribusiKesiapan />
           </div>
 
-          <div className="grid h-[240px] grid-cols-[minmax(0,505fr)_minmax(0,300fr)_minmax(0,472fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[240px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,505fr)_minmax(0,300fr)_minmax(0,472fr)]">
             <RencanaAksi />
             <KandidatSiapSekarang />
             <InsightSuksesi />
           </div>
 
-          <div className="grid h-[196px] grid-cols-[minmax(0,435fr)_minmax(0,842fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[196px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,435fr)_minmax(0,842fr)]">
             <EmergencyCoverage />
             <BodDecisionCenter />
           </div>
 
-          <div className="grid h-[212px] grid-cols-[minmax(0,460fr)_minmax(0,375fr)_minmax(0,442fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[212px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,460fr)_minmax(0,375fr)_minmax(0,442fr)]">
             <KnowledgeTransfer />
             <SuccessorConcentration />
             <DiversityPipeline />
           </div>
 
-          <div className="grid h-[178px] grid-cols-[minmax(0,842fr)_minmax(0,435fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[178px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,842fr)_minmax(0,435fr)]">
             <ExternalBench />
             <TrenSuksesi />
           </div>

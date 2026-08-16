@@ -25,7 +25,7 @@ const TONES: Record<AstKpi["tone"], string> = {
 /** KPI strip halaman Optimalisasi Aset (6 kartu). */
 export function AopKpiStrip() {
   const grid = (
-    <div className="grid grid-cols-6 gap-3">
+    <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3">
       {aopKpi.map((k, i) => {
         const Icon = ICONS[k.icon];
         return (

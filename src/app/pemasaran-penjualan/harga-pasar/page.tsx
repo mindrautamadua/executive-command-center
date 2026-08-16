@@ -14,7 +14,7 @@ export const metadata = { title: "Harga Pasar & Outlook — PTPN Group" };
 
 export default function HargaPasarPage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <MktSidebar active="Harga & Outlook" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -27,16 +27,16 @@ export default function HargaPasarPage() {
 
           <HargaKpiStrip />
 
-          <div className="grid h-[250px] grid-cols-[minmax(0,62fr)_minmax(0,38fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[250px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,62fr)_minmax(0,38fr)]">
             <CpoPriceChart />
             <PriceDriversCard />
           </div>
 
-          <div className="grid h-[230px] grid-cols-[minmax(0,1fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[230px] grid-cols-1 gap-3">
             <GulaKaretPriceChart />
           </div>
 
-          <div className="grid h-[225px] grid-cols-[minmax(0,56fr)_minmax(0,44fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[225px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,56fr)_minmax(0,44fr)]">
             <OutlookKonsensus />
             <KursSensitivity />
           </div>

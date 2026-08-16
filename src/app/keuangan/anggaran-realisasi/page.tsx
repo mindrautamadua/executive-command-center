@@ -14,7 +14,7 @@ export const metadata = { title: "Anggaran vs Realisasi — PTPN Group" };
 
 export default function AnggaranRealisasiPage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <KeuSidebar active="Anggaran vs Realisasi" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -28,13 +28,13 @@ export default function AnggaranRealisasiPage() {
           <KbaKpiStrip />
 
           {/* Sumber deviasi & rapor per subholding */}
-          <div className="grid h-[245px] grid-cols-[minmax(0,52fr)_minmax(0,48fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[245px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,52fr)_minmax(0,48fr)]">
             <BudgetVarianceWaterfall />
             <RkapScoreBySubholding />
           </div>
 
           {/* Disiplin bulanan & peta deviasi */}
-          <div className="grid h-[240px] grid-cols-[minmax(0,55fr)_minmax(0,45fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[240px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,55fr)_minmax(0,45fr)]">
             <MonthlyBudgetTrack />
             <VarianceHeatmap />
           </div>

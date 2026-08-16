@@ -20,7 +20,7 @@ const ICONS = {
 
 export function AbsensiKpiStrip() {
   return (
-    <div className="grid grid-cols-6 gap-3">
+    <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3">
       {absensiKpi.map((k, i) => {
         const Icon = ICONS[k.icon];
         return (

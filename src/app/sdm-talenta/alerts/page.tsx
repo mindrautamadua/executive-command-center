@@ -19,7 +19,7 @@ const LEVEL_TONE = { Kritikal: "red", Perhatian: "amber", Informasi: "slate" } a
 
 export default function AlertsPage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <SdmSidebar active="Executive Overview" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -66,7 +66,7 @@ export default function AlertsPage() {
             </div>
           </div>
 
-          <div className="grid grid-cols-[minmax(0,1fr)_330px] items-start gap-3">
+          <div className="grid grid-cols-1 items-start gap-3 xl:grid-cols-[minmax(0,1fr)_330px]">
             <div className="card anim-rise px-4 pb-3.5 pt-3" style={{ "--d": "120ms" } as React.CSSProperties}>
               <h3 className="text-[10px] font-extrabold uppercase tracking-[0.05em] text-ink-900">
                 Pembacaan Eksekutif

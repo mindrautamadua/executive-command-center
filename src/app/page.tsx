@@ -40,11 +40,11 @@ export default function Page() {
         <KpiStrip />
 
         <SectionLabel>Operasi &amp; Kinerja Regional</SectionLabel>
-        <div className="grid grid-cols-[minmax(0,1fr)_330px] items-start gap-3">
+        <div className="grid grid-cols-1 items-start gap-3 xl:grid-cols-[minmax(0,1fr)_330px]">
           {/* kolom utama */}
           <div className="flex min-w-0 flex-col gap-3">
             <div
-              className="anim-rise grid grid-cols-[minmax(0,58fr)_minmax(0,42fr)] items-stretch gap-3"
+              className="anim-rise grid grid-cols-1 items-stretch gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,58fr)_minmax(0,42fr)]"
               style={{ "--d": "60ms" } as React.CSSProperties}
             >
               <IndonesiaMap />
@@ -52,7 +52,7 @@ export default function Page() {
             </div>
 
             <div
-              className="anim-rise grid grid-cols-3 items-stretch gap-3"
+              className="anim-rise grid grid-cols-1 items-stretch gap-3 md:grid-cols-2 xl:grid-cols-3"
               style={{ "--d": "120ms" } as React.CSSProperties}
             >
               <OperasionalCard />
@@ -61,7 +61,7 @@ export default function Page() {
             </div>
 
             <div
-              className="anim-rise grid h-[248px] grid-cols-[minmax(0,40fr)_minmax(0,30fr)_minmax(0,30fr)] grid-rows-[minmax(0,1fr)] gap-3"
+              className="anim-rise grid auto-rows-[248px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,40fr)_minmax(0,30fr)_minmax(0,30fr)]"
               style={{ "--d": "180ms" } as React.CSSProperties}
             >
               <TrendKeuangan />
@@ -70,7 +70,7 @@ export default function Page() {
             </div>
 
             <div
-              className="anim-rise grid h-[150px] grid-cols-[minmax(0,58fr)_minmax(0,42fr)] grid-rows-[minmax(0,1fr)] gap-3"
+              className="anim-rise grid auto-rows-[150px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,58fr)_minmax(0,42fr)]"
               style={{ "--d": "240ms" } as React.CSSProperties}
             >
               <KpiStrategis />

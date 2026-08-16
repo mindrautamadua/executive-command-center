@@ -15,7 +15,7 @@ export const metadata = { title: "Optimalisasi Aset — PTPN Group" };
 
 export default function OptimalisasiAsetPage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <AsetSidebar active="Optimalisasi Aset" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -28,17 +28,17 @@ export default function OptimalisasiAsetPage() {
 
           <AopKpiStrip />
 
-          <div className="grid h-[250px] grid-cols-[minmax(0,60fr)_minmax(0,40fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[250px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,60fr)_minmax(0,40fr)]">
             <IdleAssetInventory />
             <MonetizationPipeline />
           </div>
 
-          <div className="grid h-[240px] grid-cols-[minmax(0,46fr)_minmax(0,54fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[240px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,46fr)_minmax(0,54fr)]">
             <PartnershipDeals />
             <OptimizationValueBridge />
           </div>
 
-          <div className="grid h-[250px] grid-cols-[minmax(0,1fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[250px] grid-cols-1 gap-3">
             <AssetHoldSellMatrix />
           </div>
 

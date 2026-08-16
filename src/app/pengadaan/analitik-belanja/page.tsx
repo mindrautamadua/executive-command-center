@@ -15,7 +15,7 @@ export const metadata = { title: "Analitik Belanja — PTPN Group" };
 
 export default function AnalitikBelanjaPage() {
   return (
-    <div className="flex h-screen min-w-[1440px] overflow-hidden bg-[var(--bg-app)]">
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
       <PgdSidebar active="Analitik Belanja" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
@@ -28,18 +28,18 @@ export default function AnalitikBelanjaPage() {
 
           <BelanjaKpiStrip />
 
-          <div className="grid h-[250px] grid-cols-[minmax(0,38fr)_minmax(0,36fr)_minmax(0,26fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[250px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,38fr)_minmax(0,36fr)_minmax(0,26fr)]">
             <SpendByCategory />
             <SpendBySubholding />
             <SpendByType />
           </div>
 
-          <div className="grid h-[240px] grid-cols-[minmax(0,1fr)_minmax(0,1fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[240px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
             <SpendPareto />
             <MaverickSpend />
           </div>
 
-          <div className="grid h-[215px] grid-cols-[minmax(0,1fr)] grid-rows-[minmax(0,1fr)] gap-3">
+          <div className="grid auto-rows-[215px] grid-cols-1 gap-3">
             <PaymentTermsProfile />
           </div>
 
