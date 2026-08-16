@@ -6,8 +6,10 @@ import { ProdExecutiveIntelligence } from "@/components/prod/overview/ProdExecut
 import { ProdRiskRadar } from "@/components/prod/overview/ProdRiskRadar";
 import { KomoditasScoreboard } from "@/components/prod/overview/KomoditasScoreboard";
 import { ProduksiTrend } from "@/components/prod/overview/ProduksiTrend";
+import { GulaGilingTrend } from "@/components/prod/overview/GulaGilingTrend";
 import { ProdBodDecisionCenter } from "@/components/prod/overview/ProdBodDecisionCenter";
 import { RegionalHeatStrip } from "@/components/prod/overview/RegionalHeatStrip";
+import { GulaPgReadiness } from "@/components/prod/overview/GulaPgReadiness";
 import { ProdInsightRekomendasi } from "@/components/prod/overview/ProdInsightRekomendasi";
 import { prodDataTrust } from "@/lib/produksi-data";
 
@@ -33,7 +35,10 @@ export default function ProduksiOperasiPage() {
                 <ProdRiskRadar />
                 <KomoditasScoreboard />
               </div>
-              <ProduksiTrend />
+              <div className="grid grid-cols-1 items-stretch gap-3 lg:grid-cols-2">
+                <ProduksiTrend />
+                <GulaGilingTrend />
+              </div>
               <ProdInsightRekomendasi />
             </div>
 
@@ -41,6 +46,7 @@ export default function ProduksiOperasiPage() {
             <div className="flex min-w-0 flex-col gap-3">
               <ProdBodDecisionCenter />
               <RegionalHeatStrip />
+              <GulaPgReadiness />
             </div>
           </div>
         </div>

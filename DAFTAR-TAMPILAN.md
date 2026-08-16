@@ -991,8 +991,10 @@ Semua halaman detail memakai KPI Strip + panel **Catatan Analitik** dan **Defini
 - **Production Risk Radar** — matriks kemungkinan × dampak 6 risiko utama produksi.
 - **Komoditas Scoreboard** — realisasi vs target YTD per komoditas dengan bar capaian.
 - **Tren Produksi Bulanan** — composed chart TBS diolah & CPO (jt ton), 2026 Jan–Mei vs realisasi 2025.
+- **Kinerja Giling Gula** — composed chart tebu digiling (bar, jt ton) & produksi gula (line, rb ton) Mei–Nov + baris statistik (Gula YTD, Capaian, Rendemen, Target FY); scope SugarCo.
 - **BOD Decision Center** (rail kanan) — keputusan produksi menunggu persetujuan.
 - **Regional Heat Strip** (rail kanan) — heat capaian TBS vs target YTD 7 regional.
+- **Giling Gula — Kesiapan 17 PG** (rail kanan) — 3 tile ringkas (jam berhenti, recovery, PG merah) + 5 PG jam berhenti tertinggi; scope SugarCo.
 - **Insight & Rekomendasi (Decision-grade)** — 4 insight produksi.
 
 ## `/produksi-operasi/produksi-komoditas`
@@ -1014,13 +1016,16 @@ Semua halaman detail memakai KPI Strip + panel **Catatan Analitik** dan **Defini
 - **Insight & Rekomendasi (Decision-grade)**.
 
 ## `/produksi-operasi/kinerja-pabrik`
-- **KPI Strip (5 kartu)** — Pabrik Aktif, Utilisasi PKS, Losses CPO, Downtime Tak Terencana, Throughput PKS.
+- **KPI Strip (6 kartu)** — Pabrik Aktif, Utilisasi PKS, Losses CPO, Downtime Tak Terencana, Throughput PKS, Recovery PG.
 - **Utilisasi per Jenis Pabrik** — bar chart utilisasi vs target RKAP (36 PKS, 17 PG, 9 karet, 5 teh).
 - **Downtime Pareto** — Pareto jam downtime tak terencana YTD per penyebab + kurva kumulatif.
 - **Losses Breakdown CPO** — losses aktual vs norma per komponen (% terhadap TBS).
 - **PKS League Table** — Top 5 & Bottom 5 PKS berdasarkan OER dan utilisasi.
 - **Kesiapan 17 Pabrik Gula** — jam berhenti giling (target ≤10%) & overall recovery (target ≥80%) per PG.
 - **Capex Revitalisasi** — progress 6 pabrik prioritas, total capex Rp 2,2 T.
+- **PG League Table** — Top 5 & Bottom 5 PG berdasarkan overall recovery & jam berhenti giling (spread 9,8 ppt); scope SugarCo.
+- **Downtime Pareto PG** — Pareto jam berhenti giling per penyebab (bulan pertama giling, total 1.870 jam) + kurva kumulatif; scope SugarCo.
+- **Losses Breakdown Gula** — kehilangan gula % pol tebu aktual vs norma per komponen (tetes, ampas, blotong, tak terhitung; total 2,24% vs 2,09%); scope SugarCo.
 - **Insight & Rekomendasi (Decision-grade)**.
 
 ## `/produksi-operasi/panen-logistik`

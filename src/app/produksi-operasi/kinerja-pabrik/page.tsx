@@ -7,6 +7,9 @@ import { DowntimePareto } from "@/components/prod/kinerja-pabrik/DowntimePareto"
 import { LossesBreakdown } from "@/components/prod/kinerja-pabrik/LossesBreakdown";
 import { PabrikLeagueTable } from "@/components/prod/kinerja-pabrik/PabrikLeagueTable";
 import { PgReadiness } from "@/components/prod/kinerja-pabrik/PgReadiness";
+import { PgLeagueTable } from "@/components/prod/kinerja-pabrik/PgLeagueTable";
+import { PgDowntimePareto } from "@/components/prod/kinerja-pabrik/PgDowntimePareto";
+import { GulaLossesBreakdown } from "@/components/prod/kinerja-pabrik/GulaLossesBreakdown";
 import { CapexRevitalisasi } from "@/components/prod/kinerja-pabrik/CapexRevitalisasi";
 import { PabInsight } from "@/components/prod/kinerja-pabrik/PabInsight";
 import { prodDataTrust } from "@/lib/produksi-data";
@@ -38,6 +41,13 @@ export default function KinerjaPabrikPage() {
             <PabrikLeagueTable />
             <PgReadiness />
             <CapexRevitalisasi />
+          </div>
+
+          {/* baris gula: kinerja giling 17 PG */}
+          <div className="grid auto-rows-[235px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,36fr)_minmax(0,36fr)_minmax(0,28fr)]">
+            <PgLeagueTable />
+            <PgDowntimePareto />
+            <GulaLossesBreakdown />
           </div>
 
           <PabInsight />

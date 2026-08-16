@@ -70,6 +70,18 @@ export const pabKpi: ProdKpi[] = [
     tone: "teal",
     metric: "Throughput Agregat PKS",
   },
+  {
+    label: "Recovery PG",
+    value: "77,4%",
+    sub: "Target ≥80,0% · 17 PG",
+    delta: "-2,6 ppt",
+    trend: "down",
+    deltaTone: "bad",
+    compare: "vs Target Giling",
+    icon: "gula",
+    tone: "pink",
+    metric: "Overall Recovery PG",
+  },
 ];
 
 /* ── 2. Utilisasi per Jenis Pabrik ────────────────────────────────── */
@@ -216,6 +228,28 @@ export const pgReadiness: PgUnit[] = [
 
 export const pgReadinessNote =
   "Rata-rata jam berhenti giling 11,3% (target ≤10%) dan overall recovery 77,4% (target ≥80%) pada bulan pertama giling — 7 PG merah menentukan capaian FY gula 780 rb ton.";
+
+/* ── 6b. Gula: losses & downtime PG (bulan pertama giling) ────────── */
+
+/** Kehilangan gula (% pol terhadap tebu) — aktual vs norma teknis. */
+export const gulaLosses: LossKomponen[] = [
+  { komponen: "Kehilangan di Tetes", aktualPct: 1.52, normaPct: 1.45 },
+  { komponen: "Kehilangan di Ampas", aktualPct: 0.49, normaPct: 0.45 },
+  { komponen: "Kehilangan di Blotong", aktualPct: 0.05, normaPct: 0.04 },
+  { komponen: "Tak Terhitung", aktualPct: 0.18, normaPct: 0.15 },
+];
+
+export const gulaLossesNote =
+  "Total kehilangan 2,24% pol tebu vs norma 2,09% — kehilangan di tetes terbesar; kualitas masakan & kristalisasi jadi fokus jelang puncak giling Jul–Sep.";
+
+/** Pareto jam berhenti giling 17 PG (Mei, bulan pertama giling). */
+export const pgDowntimePareto: DowntimePenyebab[] = [
+  { penyebab: "Gilingan & Mekanikal", jam: 640, pct: 34, kumulatifPct: 34 },
+  { penyebab: "Kekurangan Tebu", jam: 505, pct: 27, kumulatifPct: 61 },
+  { penyebab: "Boiler & Uap", jam: 355, pct: 19, kumulatifPct: 80 },
+  { penyebab: "Listrik / Turbin", jam: 220, pct: 12, kumulatifPct: 92 },
+  { penyebab: "Lainnya", jam: 150, pct: 8, kumulatifPct: 100 },
+];
 
 /* ── 7. Program Revitalisasi (6 pabrik) ───────────────────────────── */
 
