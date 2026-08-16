@@ -193,7 +193,7 @@ function DimensiKolom({ d }: { d: (typeof hpiBemDiagnostic.dimensi)[number] }) {
 
 function InterpretasiPanel() {
   return (
-    <div className="w-full shrink-0 rounded-xl bg-[#fdf9f1] p-3 xl:w-[240px]">
+    <div className="w-full min-w-0 rounded-xl bg-[#fdf9f1] p-3 md:flex-1 xl:w-[240px] xl:flex-none xl:shrink-0 xl:order-3">
       <div className="flex items-center gap-1.5 text-[9.5px] font-bold text-ink-900">
         <Lightbulb size={12} className="text-[#d97706]" /> Interpretasi Utama
       </div>
@@ -230,29 +230,34 @@ function DiagnosticCard() {
         <Info size={11} className="text-ink-400" />
       </h3>
       <div className="flex flex-col gap-4 pt-3 xl:flex-row xl:items-start">
-        <div className="flex shrink-0 flex-col items-center xl:self-start">
-          <DonutSkor />
-          <span className="mt-2 rounded-md bg-ptpn-greenLight px-2.5 py-[3px] text-[8.5px] font-bold text-ptpn-greenDark">
-            {hpiBemDiagnostic.status}
-          </span>
-          <div className="mt-3 text-center leading-tight">
-            <div className="text-[8px] text-ink-400">Tanggal Assessment</div>
-            <div className="mt-[2px] text-[8.5px] font-bold text-ink-900">
-              {hpiBemDiagnostic.tanggal}
-            </div>
-            <div className="mt-1.5 text-[8px] text-ink-400">Assessed By</div>
-            <div className="mt-[2px] text-[8.5px] font-bold text-ink-900">
-              {hpiBemDiagnostic.assessor}
+        {/* Di tablet: donut dan interpretasi berdampingan; di xl wrapper melebur
+            (contents) dan urutan asli donut-sel-interpretasi dipulihkan via order. */}
+        <div className="flex flex-col gap-4 md:flex-row md:items-start xl:contents">
+          <div className="flex shrink-0 flex-col items-center xl:order-1 xl:self-start">
+            <DonutSkor />
+            <span className="mt-2 rounded-md bg-ptpn-greenLight px-2.5 py-[3px] text-[8.5px] font-bold text-ptpn-greenDark">
+              {hpiBemDiagnostic.status}
+            </span>
+            <div className="mt-3 text-center leading-tight">
+              <div className="text-[8px] text-ink-400">Tanggal Assessment</div>
+              <div className="mt-[2px] text-[8.5px] font-bold text-ink-900">
+                {hpiBemDiagnostic.tanggal}
+              </div>
+              <div className="mt-1.5 text-[8px] text-ink-400">Assessed By</div>
+              <div className="mt-[2px] text-[8.5px] font-bold text-ink-900">
+                {hpiBemDiagnostic.assessor}
+              </div>
             </div>
           </div>
+          <InterpretasiPanel />
         </div>
-        <div className="min-w-0 flex-1 space-y-2.5 rounded-xl border border-[#f1f4f8] p-3.5">
+        <div className="min-w-0 flex-1 space-y-2.5 rounded-xl border border-[#f1f4f8] p-3.5 xl:order-2">
           {KELOMPOK.map((k) => (
             <div key={k}>
               <div className="text-[8px] font-bold uppercase tracking-[0.05em] text-ink-400">
                 {k}
               </div>
-              <div className="mt-1.5 grid grid-cols-1 gap-2.5 sm:grid-cols-2 xl:grid-cols-3">
+              <div className="mt-1.5 grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
                 {hpiBemDiagnostic.dimensi
                   .filter((d) => d.kelompok === k)
                   .map((d) => (
@@ -262,7 +267,6 @@ function DiagnosticCard() {
             </div>
           ))}
         </div>
-        <InterpretasiPanel />
       </div>
     </div>
   );
@@ -274,7 +278,7 @@ const ROOT_CAUSE_IKON = [Database, Recycle, Sprout];
 
 function RootCauseCard() {
   return (
-    <div className="card flex flex-col px-4 pb-4 pt-3.5">
+    <div className="card flex flex-col px-4 pb-4 pt-3.5 lg:order-1">
       <h3 className="flex items-center gap-1.5 text-[11px] font-bold text-ink-900">
         2. ROOT CAUSE ANALYSIS <Info size={11} className="text-ink-400" />
       </h3>
@@ -343,7 +347,7 @@ function RootCauseCard() {
 
 function IntervensiCard() {
   return (
-    <div className="card flex flex-col px-4 pb-4 pt-3.5">
+    <div className="card flex flex-col px-4 pb-4 pt-3.5 lg:order-3 lg:col-span-2 xl:order-2 xl:col-span-1">
       <h3 className="text-[11px] font-bold text-ink-900">
         3. INTERVENSI &amp; ACTION PLAN
       </h3>
@@ -577,7 +581,7 @@ function TrenChart() {
 
 function ProyeksiCard() {
   return (
-    <div className="card flex flex-col px-4 pb-4 pt-3.5">
+    <div className="card flex flex-col px-4 pb-4 pt-3.5 lg:order-2 xl:order-3">
       <h3 className="text-[11px] font-bold text-ink-900">
         4. PERFORMANCE PROJECTION
       </h3>
@@ -613,7 +617,7 @@ export function TabHpiBem() {
         <RingkasanGapCard />
         <DiagnosticCard />
       </div>
-      <div className="grid grid-cols-1 gap-3 xl:grid-cols-[minmax(0,420fr)_minmax(0,600fr)_minmax(0,380fr)]">
+      <div className="grid grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,420fr)_minmax(0,600fr)_minmax(0,380fr)]">
         <RootCauseCard />
         <IntervensiCard />
         <ProyeksiCard />
