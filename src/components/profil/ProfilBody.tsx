@@ -16,6 +16,9 @@ import { BackfillCard } from "./BackfillCard";
 import { KepatuhanCard } from "./KepatuhanCard";
 import { EngagementWellbeingCard } from "./EngagementWellbeingCard";
 import { KompensasiPosisiCard } from "./KompensasiPosisiCard";
+import { TalentReviewCard } from "./TalentReviewCard";
+import { MentorSponsorCard } from "./MentorSponsorCard";
+import { Feedback360Card } from "./Feedback360Card";
 import { InformasiJabatan } from "./InformasiJabatan";
 import { TalentPotential } from "./TalentPotential";
 import { KompetensiUtama } from "./KompetensiUtama";
@@ -63,6 +66,11 @@ function Overview() {
         <EngagementWellbeingCard />
         <KompensasiPosisiCard />
       </div>
+      <div className="grid grid-cols-[minmax(0,600fr)_minmax(0,460fr)] gap-3">
+        <TalentReviewCard />
+        <MentorSponsorCard />
+      </div>
+      <Feedback360Card />
       <div className="grid grid-cols-3 gap-3">
         <KompetensiUtama />
         <PelatihanSertifikasi />

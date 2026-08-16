@@ -389,3 +389,106 @@ export const jobProfileDefs = [
   { term: "Akuntabilitas", text: "Hasil utama yang dipertanggungjawabkan jabatan, dari kamus jabatan PTPN." },
   { term: "Sumber", text: "Kamus jabatan & profil suksesi — Talent Management System, per 31 Mei 2026." },
 ];
+
+/* ── Perbandingan kandidat suksesi Afdeling Manager ──────── */
+
+export const perbandinganKpi: DetailKpi[] = [
+  { label: "Posisi Target", value: "AM", suffix: "Afdeling Manager", delta: "1 lowongan 2027", trend: "flat", tone: "neutral", compare: "Kebun Tanah Jawa / Regional 1" },
+  { label: "Kandidat di Pool", value: "3", delta: "hasil komite Mar 2026", trend: "flat", tone: "neutral", compare: "seluruhnya internal Regional 1" },
+  { label: "Succession Fit Tertinggi", value: "92", suffix: "%", delta: "Rizky Putra", trend: "up", tone: "green", compare: "kandidat lain 88% & 76%" },
+  { label: "Ready Now", value: "1", suffix: "kandidat", delta: "Andi Prasetyo", trend: "flat", tone: "amber", compare: "Rizky siap 1–2 tahun" },
+  { label: "Rekomendasi Komite", value: "Rizky", delta: "primary successor", trend: "flat", tone: "green", compare: "Andi sebagai cadangan siap pakai" },
+];
+
+export interface KandidatBanding {
+  nama: string;
+  jabatan: string;
+  seed: number;
+  utama?: boolean;
+  nilai: Record<string, string>;
+  tone: Record<string, "green" | "amber" | "red" | "slate">;
+}
+
+export const dimensiBanding = [
+  { key: "performance", label: "Performance (FY 2025)" },
+  { key: "potential", label: "Potential" },
+  { key: "leadership", label: "Leadership (asesmen)" },
+  { key: "peopleMath", label: "People Math Score" },
+  { key: "readiness", label: "Readiness" },
+  { key: "mobility", label: "Mobilitas" },
+  { key: "pengalaman", label: "Pengalaman Lintas Unit" },
+  { key: "fit", label: "Succession Fit" },
+];
+
+export const kandidatBanding: KandidatBanding[] = [
+  {
+    nama: "Rizky Putra",
+    jabatan: "Asisten Afdeling — Kebun Tanah Jawa",
+    seed: 9,
+    utama: true,
+    nilai: {
+      performance: "4,8 / 5,0",
+      potential: "High",
+      leadership: "4,6",
+      peopleMath: "87",
+      readiness: "1–2 tahun",
+      mobility: "High — bersedia relokasi",
+      pengalaman: "Belum (rotasi Q1 2027)",
+      fit: "92%",
+    },
+    tone: {
+      performance: "green", potential: "green", leadership: "green", peopleMath: "green",
+      readiness: "amber", mobility: "green", pengalaman: "amber", fit: "green",
+    },
+  },
+  {
+    nama: "Andi Prasetyo",
+    jabatan: "Asisten Afdeling Senior — Kebun Dolok Ilir",
+    seed: 31,
+    nilai: {
+      performance: "4,6 / 5,0",
+      potential: "High",
+      leadership: "4,8",
+      peopleMath: "84",
+      readiness: "Ready Now",
+      mobility: "Medium — preferensi Regional 1",
+      pengalaman: "2 kebun",
+      fit: "88%",
+    },
+    tone: {
+      performance: "green", potential: "green", leadership: "green", peopleMath: "green",
+      readiness: "green", mobility: "amber", pengalaman: "green", fit: "green",
+    },
+  },
+  {
+    nama: "Maya Lestari",
+    jabatan: "Asisten Afdeling — Kebun Bah Jambi",
+    seed: 22,
+    nilai: {
+      performance: "4,7 / 5,0",
+      potential: "Medium",
+      leadership: "4,4",
+      peopleMath: "81",
+      readiness: "2–3 tahun",
+      mobility: "High — bersedia relokasi",
+      pengalaman: "1 kebun",
+      fit: "76%",
+    },
+    tone: {
+      performance: "green", potential: "amber", leadership: "amber", peopleMath: "amber",
+      readiness: "amber", mobility: "green", pengalaman: "amber", fit: "amber",
+    },
+  },
+];
+
+export const perbandinganNotes: DetailNote[] = [
+  { title: "Rizky unggul menyeluruh", detail: "Fit tertinggi (92%), performance & People Math terbaik; satu-satunya kelemahan relatif: belum lintas unit — sudah dijadwalkan Q1 2027.", tone: "green" },
+  { title: "Andi opsi cepat", detail: "Ready Now dengan leadership tertinggi (4,8); cocok bila posisi harus diisi sebelum 2027, dengan trade-off potensi jangka panjang.", tone: "blue" },
+  { title: "Maya dikembangkan dulu", detail: "Trajectory baik tapi butuh 2–3 tahun; tetap dipertahankan di pool untuk lowongan berikutnya.", tone: "amber" },
+];
+
+export const perbandinganDefs = [
+  { term: "Succession Fit", text: "Kecocokan komposit terhadap profil jabatan target, dihitung mesin People Math dan dikalibrasi komite." },
+  { term: "Pool", text: "Daftar kandidat resmi hasil sidang komite suksesi; urutan bukan penetapan final." },
+  { term: "Sumber", text: "Komite Talenta Regional 1 — Mar 2026; Talent Management System." },
+];

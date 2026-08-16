@@ -1357,6 +1357,7 @@ export const kepatuhanDisiplin = {
     { label: "Pelanggaran Etika / WBS", value: "Nihil", ok: true },
     { label: "Deklarasi Konflik Kepentingan", value: "Lengkap — 2026", ok: true },
     { label: "Temuan Audit Terkait", value: "Nihil", ok: true },
+    { label: "Fit-to-Work (MCU Feb 2026)", value: "Fit — berlaku s.d. Feb 2027", ok: true },
   ],
   verifikasi: "Clear untuk promosi — diverifikasi Bagian SDM & Kepatuhan, 28 Mei 2026",
 } as const;
@@ -1386,4 +1387,77 @@ export const kompensasiPosisi = {
   implikasi:
     "Ruang kenaikan tersedia dalam range saat promosi; risiko retensi dari sisi kompensasi rendah–sedang.",
   privasi: "Nominal tidak ditampilkan; akses penuh melalui modul HC Compensation.",
+} as const;
+
+/* ── Riwayat keputusan komite talenta ────────────────────── */
+
+export const talentReview = {
+  nextReview: "Talent Review berikutnya: Komite Talenta Regional 1 — Des 2026",
+  keputusan: [
+    {
+      tanggal: "Mar 2026",
+      forum: "Komite Talenta Regional 1",
+      keputusan:
+        "Menetapkan status High Potential (siklus ke-2 berturut) dengan Succession Fit 92% untuk Afdeling Manager.",
+      tindakLanjut: "Rotasi pengayaan lintas unit diusulkan mulai Q1 2027",
+    },
+    {
+      tanggal: "Okt 2025",
+      forum: "Kalibrasi Kinerja Kebun Tanah Jawa",
+      keputusan: "Skor kinerja FY 2025 dikukuhkan 4,8 — peringkat #2 dari 18 asisten afdeling.",
+      tindakLanjut: "Diajukan sebagai kandidat Best Employee kebun",
+    },
+    {
+      tanggal: "Feb 2025",
+      forum: "Komite Suksesi Kebun",
+      keputusan: "Dimasukkan ke succession pool Afdeling Manager (readiness 1–2 tahun).",
+      tindakLanjut: "IDP kepemimpinan strategis disusun & disetujui",
+    },
+  ],
+} as const;
+
+/* ── Umpan balik 360° (tema teragregasi & anonim) ────────── */
+
+export const feedback360 = {
+  siklus: "Siklus Mar 2025 · 11 responden (1 atasan, 4 rekan sejawat, 6 bawahan)",
+  tema: [
+    {
+      sumber: "Atasan",
+      kutipan:
+        "Paling bisa diandalkan saat musim panen puncak; keputusan lapangan cepat dan berbasis data.",
+      tone: "green",
+    },
+    {
+      sumber: "Rekan Sejawat",
+      kutipan:
+        "Kolaboratif dan terbuka berbagi praktik efisiensi; kadang masih terlalu fokus pada afdelingnya sendiri.",
+      tone: "blue",
+    },
+    {
+      sumber: "Bawahan",
+      kutipan:
+        "Turun langsung ke lapangan dan membina; diharapkan lebih tegas terhadap mandor senior yang lambat berubah.",
+      tone: "amber",
+    },
+  ],
+  catatan: "Kutipan merupakan tema teragregasi dan dianonimkan; jawaban individual tidak dibuka.",
+} as const;
+
+/* ── Mentor, sponsor & mentee ────────────────────────────── */
+
+export const mentorSponsor = {
+  mentor: {
+    nama: "Ahmad Fauzi",
+    peran: "Afdeling Manager — mentor formal sejak 2024, sesi bulanan",
+    seed: 3,
+  },
+  sponsor: {
+    nama: "Ir. Bambang Siregar",
+    peran: "GM Kebun Tanah Jawa — sponsor di komite talenta",
+    seed: 17,
+  },
+  mentee: [
+    { nama: "Dedi Kurniawan", peran: "Asisten Mandor — kandidat backfill", seed: 14 },
+    { nama: "2 asisten batch 2024", peran: "Program orientasi asisten baru", seed: 26 },
+  ],
 } as const;

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowLeft, Download, MoreHorizontal } from "lucide-react";
+import { ArrowLeft, FileText, MoreHorizontal } from "lucide-react";
 
 export function ProfilTopbar() {
   return (
@@ -14,10 +14,13 @@ export function ProfilTopbar() {
       <h1 className="text-[13px] font-bold text-ink-900">Profil Karyawan</h1>
 
       <div className="ml-auto flex items-center gap-2">
-        <button className="flex items-center gap-1.5 rounded-lg border border-[#e3e9ef] bg-white px-3 py-[7px] text-[10.5px] font-semibold text-ink-700 shadow-card transition-colors hover:bg-[#f5f8fa]">
-          <Download size={12} className="text-ink-500" />
-          Export PDF
-        </button>
+        <Link
+          href="/sdm-talenta/profil-karyawan/talent-brief"
+          className="flex items-center gap-1.5 rounded-lg bg-ptpn-green px-3 py-[7px] text-[10.5px] font-semibold text-white shadow-pill transition-opacity hover:opacity-90"
+        >
+          <FileText size={12} />
+          Generate Talent Brief
+        </Link>
         <button
           className="flex h-[30px] w-[30px] items-center justify-center rounded-lg border border-[#e3e9ef] bg-white text-ink-500 shadow-card transition-colors hover:bg-[#f5f8fa]"
           aria-label="Menu lainnya"
