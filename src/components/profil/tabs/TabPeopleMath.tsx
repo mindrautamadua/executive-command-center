@@ -158,7 +158,7 @@ function PositioningChart() {
           fill="#1a9c5b"
         />
         {/* Titik dekat sudut kanan-atas — label ditaruh di kiri agar tidak terpotong. */}
-        <text x={-9} y={3} fontSize={7.5} fontWeight={700} fill="#1a9c5b" textAnchor="end">
+        <text x={-4} y={16} fontSize={7.5} fontWeight={700} fill="#1a9c5b" textAnchor="end">
           {peopleMathPosisi.nama}
         </text>
       </g>
@@ -188,8 +188,8 @@ function CoreCard() {
   return (
     <div className="card flex flex-col px-4 pb-3.5 pt-3.5">
       <h3 className="text-[11px] font-bold text-ink-900">1. CORE (2 Score Utama)</h3>
-      <div className="flex min-h-0 flex-1 items-center gap-4 pt-2">
-        <div className="grid w-[290px] shrink-0 grid-cols-2 gap-3">
+      <div className="flex min-h-0 flex-1 flex-col gap-4 pt-2 md:flex-row md:items-center">
+        <div className="grid w-full shrink-0 grid-cols-2 gap-3 md:w-[290px]">
           {peopleMathCore.map((c) => (
             <div
               key={c.label}
@@ -319,7 +319,7 @@ function PeopleFactorsCard() {
       <h3 className="text-[11px] font-bold text-ink-900">
         2. PEOPLE FACTORS (19 Derivative Scores)
       </h3>
-      <div className="grid min-h-0 flex-1 grid-cols-[minmax(0,380fr)_minmax(0,560fr)] items-center gap-4 pt-2">
+      <div className="grid min-h-0 flex-1 grid-cols-1 items-center gap-4 pt-2 lg:grid-cols-[minmax(0,380fr)_minmax(0,560fr)]">
         <RadarChart />
         <div>
           <div className="flex items-center justify-between pb-2">
@@ -331,7 +331,7 @@ function PeopleFactorsCard() {
               Lihat Semua <ArrowRight size={11} />
             </Link>
           </div>
-          <div className="grid grid-cols-3 gap-2">
+          <div className="grid grid-cols-2 gap-2 md:grid-cols-3">
             {peopleMathDimensi.map((d) => (
               <DimensiCard key={d.label} d={d} />
             ))}
@@ -464,7 +464,7 @@ function TalentDecisionCard() {
   return (
     <div className="card px-4 pb-4 pt-3.5">
       <h3 className="text-[11px] font-bold text-ink-900">4. PEOPLE MATH × TALENT DECISION</h3>
-      <div className="grid grid-cols-[minmax(0,300fr)_minmax(0,620fr)_minmax(0,300fr)_minmax(0,380fr)] gap-5 pt-3">
+      <div className="grid grid-cols-1 gap-5 pt-3 md:grid-cols-2 xl:grid-cols-[minmax(0,300fr)_minmax(0,620fr)_minmax(0,300fr)_minmax(0,380fr)]">
         {/* Talent Summary */}
         <div>
           <div className="text-[10px] font-bold text-ink-900">Talent Summary</div>
@@ -569,9 +569,9 @@ function TalentDecisionCard() {
 export function TabPeopleMath() {
   return (
     <div className="space-y-3">
-      <div className="grid grid-cols-[minmax(0,1130fr)_minmax(0,400fr)] gap-3">
+      <div className="grid grid-cols-1 gap-3 xl:grid-cols-[minmax(0,1130fr)_minmax(0,400fr)]">
         <div className="flex flex-col gap-3">
-          <div className="grid grid-cols-[minmax(0,430fr)_minmax(0,700fr)] gap-3">
+          <div className="grid grid-cols-1 gap-3 xl:grid-cols-[minmax(0,430fr)_minmax(0,700fr)]">
             <ScoreOverallCard />
             <CoreCard />
           </div>

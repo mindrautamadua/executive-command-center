@@ -1,4 +1,11 @@
-import { Database, Info, Lightbulb, Recycle, Sprout, Target } from "lucide-react";
+import {
+  Database,
+  Info,
+  Lightbulb,
+  Recycle,
+  Sprout,
+  Target,
+} from "lucide-react";
 import {
   HPI_BEM_KATEGORI_STYLE,
   hpiBemDiagnostic,
@@ -36,12 +43,17 @@ function BarSkor({
     <div>
       <div className="text-[9px] text-ink-500">{label}</div>
       <div className="mt-1 flex items-baseline gap-1">
-        <span className="text-[22px] font-extrabold leading-none text-ink-900">{skor}</span>
+        <span className="text-[22px] font-extrabold leading-none text-ink-900">
+          {skor}
+        </span>
         <span className="text-[9px] text-ink-400">{maks}</span>
       </div>
       <div className="mt-1.5 flex items-center gap-2">
         <div className="h-[5px] min-w-0 flex-1 overflow-hidden rounded-full bg-[#eef2f6]">
-          <div className="h-full rounded-full bg-ptpn-green" style={{ width: `${pct}%` }} />
+          <div
+            className="h-full rounded-full bg-ptpn-green"
+            style={{ width: `${pct}%` }}
+          />
         </div>
         <span className="text-[8.5px] font-bold text-ink-900">{pct}%</span>
       </div>
@@ -60,14 +72,20 @@ function RingkasanGapCard() {
         <BarSkor {...hpiBemGap.potensial} />
       </div>
       <div className="mt-4 rounded-xl border border-[#fde9d2] bg-[#fef8f0] px-3 py-3">
-        <div className="text-[9px] font-semibold text-[#b45309]">Performance Gap</div>
+        <div className="text-[9px] font-semibold text-[#b45309]">
+          Performance Gap
+        </div>
         <div className="mt-1 flex items-baseline gap-1.5">
           <span className="text-[22px] font-extrabold leading-none text-[#d97706]">
             {hpiBemGap.gap.pct}
           </span>
-          <span className="text-[9px] font-semibold text-[#b45309]">{hpiBemGap.gap.level}</span>
+          <span className="text-[9px] font-semibold text-[#b45309]">
+            {hpiBemGap.gap.level}
+          </span>
         </div>
-        <p className="mt-1.5 text-[8.5px] leading-snug text-ink-500">{hpiBemGap.gap.catatan}</p>
+        <p className="mt-1.5 text-[8.5px] leading-snug text-ink-500">
+          {hpiBemGap.gap.catatan}
+        </p>
       </div>
     </div>
   );
@@ -83,7 +101,14 @@ function DonutSkor() {
   return (
     <div className="relative shrink-0" style={{ width: size, height: size }}>
       <svg width={size} height={size} className="-rotate-90">
-        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#eef2f6" strokeWidth={stroke} />
+        <circle
+          cx={size / 2}
+          cy={size / 2}
+          r={r}
+          fill="none"
+          stroke="#eef2f6"
+          strokeWidth={stroke}
+        />
         <circle
           cx={size / 2}
           cy={size / 2}
@@ -96,7 +121,9 @@ function DonutSkor() {
         />
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center leading-none">
-        <span className="text-[8px] font-semibold tracking-wide text-ink-400">HPI BEM SCORE</span>
+        <span className="text-[8px] font-semibold tracking-wide text-ink-400">
+          HPI BEM SCORE
+        </span>
         <span className="mt-1 text-[30px] font-extrabold text-ptpn-green">
           {hpiBemDiagnostic.skor}
         </span>
@@ -117,17 +144,25 @@ function DimensiKolom({ d }: { d: (typeof hpiBemDiagnostic.dimensi)[number] }) {
           {d.inisial}
         </span>
         <div className="min-w-0 leading-tight">
-          <div className="truncate text-[10px] font-bold text-ink-900">{d.label}</div>
+          <div className="truncate text-[10px] font-bold text-ink-900">
+            {d.label}
+          </div>
           <div className="truncate text-[8px] text-ink-500">{d.sub}</div>
         </div>
       </div>
       <div className="mt-2 flex items-baseline gap-1">
-        <span className={`text-[22px] font-extrabold leading-none ${tone.text}`}>{d.skor}</span>
+        <span
+          className={`text-[22px] font-extrabold leading-none ${tone.text}`}
+        >
+          {d.skor}
+        </span>
         <span className="text-[9px] text-ink-400">/100</span>
       </div>
       <span
         className={`mt-1.5 inline-block rounded-md px-2 py-[3px] text-[8px] font-bold ${
-          d.status === "Good" ? "bg-ptpn-greenLight text-ptpn-greenDark" : "bg-[#fef4e3] text-[#b45309]"
+          d.status === "Good"
+            ? "bg-ptpn-greenLight text-ptpn-greenDark"
+            : "bg-[#fef4e3] text-[#b45309]"
         }`}
       >
         {d.status}
@@ -136,8 +171,12 @@ function DimensiKolom({ d }: { d: (typeof hpiBemDiagnostic.dimensi)[number] }) {
         {d.rincian.map((r) => (
           <div key={r.label}>
             <div className="flex items-center justify-between">
-              <span className="truncate text-[8.5px] text-ink-500">{r.label}</span>
-              <span className="text-[8.5px] font-bold text-ink-900">{r.skor}</span>
+              <span className="truncate text-[8.5px] text-ink-500">
+                {r.label}
+              </span>
+              <span className="text-[8.5px] font-bold text-ink-900">
+                {r.skor}
+              </span>
             </div>
             <div className="mt-[3px] h-[3px] overflow-hidden rounded-full bg-[#eef2f6]">
               <div
@@ -154,7 +193,7 @@ function DimensiKolom({ d }: { d: (typeof hpiBemDiagnostic.dimensi)[number] }) {
 
 function InterpretasiPanel() {
   return (
-    <div className="w-[240px] shrink-0 rounded-xl bg-[#fdf9f1] p-3">
+    <div className="w-full shrink-0 rounded-xl bg-[#fdf9f1] p-3 xl:w-[240px]">
       <div className="flex items-center gap-1.5 text-[9.5px] font-bold text-ink-900">
         <Lightbulb size={12} className="text-[#d97706]" /> Interpretasi Utama
       </div>
@@ -190,8 +229,8 @@ function DiagnosticCard() {
         1. HPI BEM DIAGNOSTIC — BEHAVIOR ENGINEERING MODEL (6 SEL){" "}
         <Info size={11} className="text-ink-400" />
       </h3>
-      <div className="flex items-start gap-4 pt-3">
-        <div className="flex shrink-0 flex-col items-center">
+      <div className="flex flex-col gap-4 pt-3 xl:flex-row xl:items-start">
+        <div className="flex shrink-0 flex-col items-center xl:self-start">
           <DonutSkor />
           <span className="mt-2 rounded-md bg-ptpn-greenLight px-2.5 py-[3px] text-[8.5px] font-bold text-ptpn-greenDark">
             {hpiBemDiagnostic.status}
@@ -213,7 +252,7 @@ function DiagnosticCard() {
               <div className="text-[8px] font-bold uppercase tracking-[0.05em] text-ink-400">
                 {k}
               </div>
-              <div className="mt-1.5 grid grid-cols-3 gap-2.5">
+              <div className="mt-1.5 grid grid-cols-1 gap-2.5 sm:grid-cols-2 xl:grid-cols-3">
                 {hpiBemDiagnostic.dimensi
                   .filter((d) => d.kelompok === k)
                   .map((d) => (
@@ -240,17 +279,24 @@ function RootCauseCard() {
         2. ROOT CAUSE ANALYSIS <Info size={11} className="text-ink-400" />
       </h3>
       <div className="mt-2.5 min-h-0 flex-1 rounded-xl border border-[#f1f4f8] p-3">
-        <div className="text-[9.5px] font-bold text-ink-900">Akar Masalah Utama (Top 3)</div>
+        <div className="text-[9.5px] font-bold text-ink-900">
+          Akar Masalah Utama (Top 3)
+        </div>
         <div className="mt-2 space-y-2.5">
           {hpiBemRootCause.items.map((item, i) => {
             const Ikon = ROOT_CAUSE_IKON[i] ?? Database;
             return (
-              <div key={item.judul} className="flex items-start gap-2.5 border-b border-[#f6f8fa] pb-2.5 last:border-b-0 last:pb-0">
+              <div
+                key={item.judul}
+                className="flex items-start gap-2.5 border-b border-[#f6f8fa] pb-2.5 last:border-b-0 last:pb-0"
+              >
                 <span className="mt-[1px] flex h-[26px] w-[26px] shrink-0 items-center justify-center rounded-lg bg-[#e8f0fe] text-[#3b7ded]">
                   <Ikon size={13} />
                 </span>
                 <div className="min-w-0 flex-1">
-                  <div className="text-[9px] font-bold text-ink-900">{item.judul}</div>
+                  <div className="text-[9px] font-bold text-ink-900">
+                    {item.judul}
+                  </div>
                   <p className="mt-[3px] text-[8.5px] leading-snug text-ink-500">
                     {item.deskripsi}
                   </p>
@@ -259,13 +305,19 @@ function RootCauseCard() {
                   <div className="text-[8px] text-ink-400">Dampak</div>
                   <div
                     className={`mt-[2px] text-[8.5px] font-bold ${
-                      item.dampak === "High" ? "text-[#dc2626]" : "text-[#b45309]"
+                      item.dampak === "High"
+                        ? "text-[#dc2626]"
+                        : "text-[#b45309]"
                     }`}
                   >
                     {item.dampak}
                   </div>
-                  <div className="mt-1 text-[8px] text-ink-400">Est. Impact</div>
-                  <div className="mt-[2px] text-[8.5px] font-bold text-ink-900">{item.impact}</div>
+                  <div className="mt-1 text-[8px] text-ink-400">
+                    Est. Impact
+                  </div>
+                  <div className="mt-[2px] text-[8.5px] font-bold text-ink-900">
+                    {item.impact}
+                  </div>
                 </div>
               </div>
             );
@@ -292,49 +344,61 @@ function RootCauseCard() {
 function IntervensiCard() {
   return (
     <div className="card flex flex-col px-4 pb-4 pt-3.5">
-      <h3 className="text-[11px] font-bold text-ink-900">3. INTERVENSI &amp; ACTION PLAN</h3>
-      <div className="mt-2.5 grid grid-cols-[minmax(0,1fr)_86px_86px_58px_78px] gap-2 border-b border-[#f1f4f8] pb-1.5 text-[8px] font-semibold text-ink-500">
-        <span>Intervensi yang Direkomendasikan</span>
-        <span>Kategori BEM</span>
-        <span>Owner</span>
-        <span>Target</span>
-        <span className="text-right">Est. Impact</span>
-      </div>
-      <div className="min-h-0 flex-1 divide-y divide-[#f6f8fa]">
-        {hpiBemIntervensi.items.map((item) => {
-          const tone = HPI_BEM_KATEGORI_STYLE[item.kategori];
-          return (
-            <div
-              key={item.judul}
-              className="grid grid-cols-[minmax(0,1fr)_86px_86px_58px_78px] items-center gap-2 py-2"
-            >
-              <div className="min-w-0">
-                <div className="text-[9px] font-bold text-ink-900">{item.judul}</div>
-                <p className="mt-[2px] text-[8px] leading-snug text-ink-500">{item.deskripsi}</p>
-              </div>
-              <span
-                className={`justify-self-start rounded-md px-2 py-[3px] text-[8px] font-bold ${tone ?? "tone-slate"}`}
+      <h3 className="text-[11px] font-bold text-ink-900">
+        3. INTERVENSI &amp; ACTION PLAN
+      </h3>
+      <div className="scroll-thin -mx-1 min-w-0 overflow-x-auto px-1">
+        <div className="mt-2.5 grid min-w-[560px] grid-cols-[minmax(0,1fr)_86px_86px_58px_78px] gap-2 border-b border-[#f1f4f8] pb-1.5 text-[8px] font-semibold text-ink-500">
+          <span>Intervensi yang Direkomendasikan</span>
+          <span>Kategori BEM</span>
+          <span>Owner</span>
+          <span>Target</span>
+          <span className="text-right">Est. Impact</span>
+        </div>
+        <div className="min-h-0 flex-1 divide-y divide-[#f6f8fa] min-w-[560px]">
+          {hpiBemIntervensi.items.map((item) => {
+            const tone = HPI_BEM_KATEGORI_STYLE[item.kategori];
+            return (
+              <div
+                key={item.judul}
+                className="grid grid-cols-[minmax(0,1fr)_86px_86px_58px_78px] items-center gap-2 py-2"
               >
-                {item.kategori}
-              </span>
-              <span className="text-[8.5px] text-ink-700">{item.owner}</span>
-              <span className="text-[8.5px] text-ink-700">{item.target}</span>
-              <span className="text-right text-[8.5px] font-bold text-ptpn-greenDark">
-                {item.impact}
-              </span>
-            </div>
-          );
-        })}
+                <div className="min-w-0">
+                  <div className="text-[9px] font-bold text-ink-900">
+                    {item.judul}
+                  </div>
+                  <p className="mt-[2px] text-[8px] leading-snug text-ink-500">
+                    {item.deskripsi}
+                  </p>
+                </div>
+                <span
+                  className={`justify-self-start rounded-md px-2 py-[3px] text-[8px] font-bold ${tone ?? "tone-slate"}`}
+                >
+                  {item.kategori}
+                </span>
+                <span className="text-[8.5px] text-ink-700">{item.owner}</span>
+                <span className="text-[8.5px] text-ink-700">{item.target}</span>
+                <span className="text-right text-[8.5px] font-bold text-ptpn-greenDark">
+                  {item.impact}
+                </span>
+              </div>
+            );
+          })}
+        </div>
       </div>
       <div className="flex items-center justify-end gap-3 border-t border-[#f1f4f8] pt-2">
-        <span className="text-[9px] font-bold text-ink-900">Total Est. Impact</span>
+        <span className="text-[9px] font-bold text-ink-900">
+          Total Est. Impact
+        </span>
         <span className="text-[12px] font-extrabold text-ptpn-greenDark">
           {hpiBemIntervensi.total}
         </span>
       </div>
       <div className="mt-2.5 flex items-start gap-2 rounded-lg bg-[#eef4ff] px-3 py-2">
         <Info size={11} className="mt-[1px] shrink-0 text-[#3b7ded]" />
-        <p className="text-[8.5px] leading-snug text-ink-700">{hpiBemIntervensi.catatan}</p>
+        <p className="text-[8.5px] leading-snug text-ink-700">
+          {hpiBemIntervensi.catatan}
+        </p>
       </div>
     </div>
   );
@@ -353,14 +417,28 @@ function ProyeksiChart() {
   const min = 3.5;
   const max = 5.0;
   const x = (i: number) => padL + (i / (data.length - 1)) * (W - padL - padR);
-  const y = (v: number) => padT + (1 - (v - min) / (max - min)) * (H - padT - padB);
+  const y = (v: number) =>
+    padT + (1 - (v - min) / (max - min)) * (H - padT - padB);
   const pts = data.map((d, i) => ({ ...d, x: x(i), y: y(d.nilai) }));
   return (
     <svg viewBox={`0 0 ${W} ${H}`} className="w-full">
       {[3.5, 4.0, 4.5, 5.0].map((v) => (
         <g key={v}>
-          <line x1={padL} y1={y(v)} x2={W - padR} y2={y(v)} stroke="#eef2f6" strokeWidth={1} />
-          <text x={padL - 5} y={y(v) + 2.5} textAnchor="end" fontSize={7} fill="#9ca3af">
+          <line
+            x1={padL}
+            y1={y(v)}
+            x2={W - padR}
+            y2={y(v)}
+            stroke="#eef2f6"
+            strokeWidth={1}
+          />
+          <text
+            x={padL - 5}
+            y={y(v) + 2.5}
+            textAnchor="end"
+            fontSize={7}
+            fill="#9ca3af"
+          >
             {v.toFixed(1)}
           </text>
         </g>
@@ -379,11 +457,31 @@ function ProyeksiChart() {
       ))}
       {pts.map((p) => (
         <g key={p.label}>
-          <circle cx={p.x} cy={p.y} r={3.2} fill={p.target ? "#fff" : "#1a9c5b"} stroke="#1a9c5b" strokeWidth={1.8} />
-          <text x={p.x} y={p.y - 8} textAnchor="middle" fontSize={8.5} fontWeight={800} fill="#111827">
+          <circle
+            cx={p.x}
+            cy={p.y}
+            r={3.2}
+            fill={p.target ? "#fff" : "#1a9c5b"}
+            stroke="#1a9c5b"
+            strokeWidth={1.8}
+          />
+          <text
+            x={p.x}
+            y={p.y - 8}
+            textAnchor="middle"
+            fontSize={8.5}
+            fontWeight={800}
+            fill="#111827"
+          >
             {p.nilai.toFixed(1)}
           </text>
-          <text x={p.x} y={H - 4} textAnchor="middle" fontSize={7} fill="#6b7280">
+          <text
+            x={p.x}
+            y={H - 4}
+            textAnchor="middle"
+            fontSize={7}
+            fill="#6b7280"
+          >
             {p.label}
           </text>
         </g>
@@ -415,21 +513,60 @@ function TrenChart() {
       </defs>
       {[0, 25, 50, 75, 100].map((v) => (
         <g key={v}>
-          <line x1={padL} y1={y(v)} x2={W - padR} y2={y(v)} stroke="#eef2f6" strokeWidth={1} />
-          <text x={padL - 5} y={y(v) + 2.5} textAnchor="end" fontSize={7} fill="#9ca3af">
+          <line
+            x1={padL}
+            y1={y(v)}
+            x2={W - padR}
+            y2={y(v)}
+            stroke="#eef2f6"
+            strokeWidth={1}
+          />
+          <text
+            x={padL - 5}
+            y={y(v) + 2.5}
+            textAnchor="end"
+            fontSize={7}
+            fill="#9ca3af"
+          >
             {v}
           </text>
         </g>
       ))}
       <polygon points={area} fill="url(#hpiBemTrenFill)" />
-      <polyline points={line} fill="none" stroke="#1a9c5b" strokeWidth={1.8} strokeLinejoin="round" />
+      <polyline
+        points={line}
+        fill="none"
+        stroke="#1a9c5b"
+        strokeWidth={1.8}
+        strokeLinejoin="round"
+      />
       {pts.map((p) => (
         <g key={p.label}>
-          <circle cx={p.x} cy={p.y} r={3} fill="#fff" stroke="#1a9c5b" strokeWidth={1.8} />
-          <text x={p.x} y={p.y - 7} textAnchor="middle" fontSize={8} fontWeight={700} fill="#374151">
+          <circle
+            cx={p.x}
+            cy={p.y}
+            r={3}
+            fill="#fff"
+            stroke="#1a9c5b"
+            strokeWidth={1.8}
+          />
+          <text
+            x={p.x}
+            y={p.y - 7}
+            textAnchor="middle"
+            fontSize={8}
+            fontWeight={700}
+            fill="#374151"
+          >
             {p.skor}
           </text>
-          <text x={p.x} y={H - 4} textAnchor="middle" fontSize={7} fill="#6b7280">
+          <text
+            x={p.x}
+            y={H - 4}
+            textAnchor="middle"
+            fontSize={7}
+            fill="#6b7280"
+          >
             {p.label}
           </text>
         </g>
@@ -441,7 +578,9 @@ function TrenChart() {
 function ProyeksiCard() {
   return (
     <div className="card flex flex-col px-4 pb-4 pt-3.5">
-      <h3 className="text-[11px] font-bold text-ink-900">4. PERFORMANCE PROJECTION</h3>
+      <h3 className="text-[11px] font-bold text-ink-900">
+        4. PERFORMANCE PROJECTION
+      </h3>
       <div className="mt-2 text-[9px] font-semibold text-ink-500">
         Proyeksi Peningkatan Performance
       </div>
@@ -449,13 +588,17 @@ function ProyeksiCard() {
       <p className="mt-1 text-[8px] leading-snug text-ink-500">
         {hpiBemProyeksi.performanceCatatan}
       </p>
-      <div className="mt-3 text-[9px] font-semibold text-ink-500">Trend HPI BEM Score</div>
+      <div className="mt-3 text-[9px] font-semibold text-ink-500">
+        Trend HPI BEM Score
+      </div>
       <div className="min-h-0 flex-1">
         <TrenChart />
       </div>
       <div className="mt-2 flex items-start gap-2 rounded-lg bg-ptpn-greenLight px-3 py-2">
         <Sprout size={11} className="mt-[1px] shrink-0 text-ptpn-green" />
-        <p className="text-[8.5px] leading-snug text-ink-700">{hpiBemProyeksi.trenCatatan}</p>
+        <p className="text-[8.5px] leading-snug text-ink-700">
+          {hpiBemProyeksi.trenCatatan}
+        </p>
       </div>
     </div>
   );
@@ -466,11 +609,11 @@ function ProyeksiCard() {
 export function TabHpiBem() {
   return (
     <div className="space-y-3">
-      <div className="grid grid-cols-[minmax(0,260fr)_minmax(0,1280fr)] gap-3">
+      <div className="grid grid-cols-1 gap-3 lg:grid-cols-[minmax(0,260fr)_minmax(0,1280fr)]">
         <RingkasanGapCard />
         <DiagnosticCard />
       </div>
-      <div className="grid grid-cols-[minmax(0,420fr)_minmax(0,600fr)_minmax(0,380fr)] gap-3">
+      <div className="grid grid-cols-1 gap-3 xl:grid-cols-[minmax(0,420fr)_minmax(0,600fr)_minmax(0,380fr)]">
         <RootCauseCard />
         <IntervensiCard />
         <ProyeksiCard />
@@ -478,7 +621,8 @@ export function TabHpiBem() {
       <div className="card flex items-center gap-2 px-4 py-2.5">
         <Recycle size={13} className="shrink-0 text-ptpn-green" />
         <p className="text-[8.5px] text-ink-700">
-          <span className="font-bold text-ptpn-greenDark">HPI BEM</span> {hpiBemFooter}
+          <span className="font-bold text-ptpn-greenDark">HPI BEM</span>{" "}
+          {hpiBemFooter}
         </p>
       </div>
     </div>
