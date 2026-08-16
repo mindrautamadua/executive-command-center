@@ -252,6 +252,7 @@ body {
   color: #a3e635;
 }
 [data-theme="dark"] .text-\[\#7c5cf0\],
+[data-theme="dark"] .text-\[\#7c4fe0\],
 [data-theme="dark"] .text-\[\#8b5cf6\] {
   color: #a78bfa;
 }
@@ -378,11 +379,15 @@ body {
 [data-theme="dark"] .hover\:bg-\[\#f7f9fb\]:hover,
 [data-theme="dark"] .hover\:bg-\[\#f2f5f8\]:hover,
 [data-theme="dark"] .hover\:bg-\[\#f1f5f8\]:hover,
+[data-theme="dark"] .hover\:bg-\[\#f8fbfd\]:hover,
 [data-theme="dark"] .hover\:bg-\[\#f4f7f9\]:hover {
   background-color: var(--surface-3);
 }
 [data-theme="dark"] .hover\:bg-white:hover {
   background-color: var(--surface-2);
+}
+[data-theme="dark"] .hover\:bg-\[\#fef2f2\]:hover {
+  background-color: rgba(248, 113, 113, 0.16);
 }
 
 /* --- hasil audit dark mode: kelas hex yang belum terpetakan --------------- */
@@ -496,6 +501,7 @@ body {
 [data-theme="dark"] .bg-\[\#f1ecfd\],
 [data-theme="dark"] .bg-\[\#f2ecfb\],
 [data-theme="dark"] .bg-\[\#f3eefd\],
+[data-theme="dark"] .bg-\[\#f3effd\],
 [data-theme="dark"] .bg-\[\#edeaf8\] {
   background-color: rgba(167, 139, 250, 0.16);
 }
@@ -1114,4 +1120,15 @@ html.js-reveal .anim-fade:not([data-in-view]) {
   .card:hover {
     transform: none;
   }
+}
+
+/* tint terang tambahan hasil audit dark mode */
+[data-theme="dark"] .bg-\[\#eef7ea\] {
+  background-color: rgba(62, 207, 131, 0.14);
+}
+[data-theme="dark"] .bg-\[\#f1f4f7\] {
+  background-color: var(--surface-2);
+}
+[data-theme="dark"] .bg-\[\#fdf0e2\] {
+  background-color: rgba(245, 165, 36, 0.16);
 }
