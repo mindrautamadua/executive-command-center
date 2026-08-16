@@ -356,3 +356,36 @@ export const peopleFactorsDefs = [
   { term: "Benchmark G7", text: "Rata-rata kohort grade yang sama di Regional 1 pada siklus berjalan." },
   { term: "Sumber", text: "Mesin People Math — Talent Management System, siklus 2025." },
 ];
+
+/* ── Job Profile & Target Role ───────────────────────────── */
+
+export const jobProfileKpi: DetailKpi[] = [
+  { label: "Role Fit Jabatan Ini", value: "94", suffix: "%", delta: "3 pt", trend: "up", tone: "green", compare: "vs asesmen 2024" },
+  { label: "Akuntabilitas Dikuasai", value: "4", suffix: "dari 5", delta: "RKAP berkembang", trend: "flat", tone: "neutral", compare: "jabatan Asisten Afdeling" },
+  { label: "Syarat Jabatan Terpenuhi", value: "4", suffix: "dari 5", delta: "1 dalam proses", trend: "flat", tone: "amber", compare: "siklus RKAP penuh Q4 2026" },
+  { label: "Fit Jabatan Target", value: "92", suffix: "%", delta: "Afdeling Manager", trend: "up", tone: "green", compare: "Succession Fit komite talenta" },
+  { label: "Syarat Target Terpenuhi", value: "5", suffix: "dari 8", delta: "3 dalam proses", trend: "up", tone: "amber", compare: "profil jabatan Afdeling Manager" },
+];
+
+export const targetRoleRows = [
+  { syarat: "Grade minimum G8", kategori: "Struktural", status: "Proses", keterangan: "Saat ini G7; kenaikan seiring promosi" },
+  { syarat: "Kompetensi manajerial ≥ 4,0 seluruh item", kategori: "Kompetensi", status: "Proses", keterangan: "2 item tersisa, proyeksi tuntas Q4 2026" },
+  { syarat: "Kompetensi teknis kebun ≥ 4,2", kategori: "Kompetensi", status: "Terpenuhi", keterangan: "Aktual 4,8 — jauh di atas ambang" },
+  { syarat: "Sertifikasi BNSP Manajer Kebun Madya", kategori: "Sertifikasi", status: "Terpenuhi", keterangan: "Dikantongi Nov 2024" },
+  { syarat: "Sertifikasi AK3U aktif", kategori: "Sertifikasi", status: "Terpenuhi", keterangan: "Berlaku s.d. Mei 2026 — resertifikasi terjadwal" },
+  { syarat: "Pengalaman memimpin ≥ 2 asisten/mandor senior", kategori: "Pengalaman", status: "Terpenuhi", keterangan: "Mentor 3 asisten batch 2024" },
+  { syarat: "Memimpin 1 siklus RKAP afdeling penuh", kategori: "Pengalaman", status: "Proses", keterangan: "Siklus RKAP 2027 dimulai Sep 2026" },
+  { syarat: "Eksposur lintas unit/kebun", kategori: "Pengalaman", status: "Belum", keterangan: "Rotasi pengayaan diusulkan Q1 2027" },
+];
+
+export const jobProfileNotes: DetailNote[] = [
+  { title: "Hampir penuh di jabatan sekarang", detail: "4 dari 5 akuntabilitas dikuasai; RKAP jadi satu-satunya area berkembang dan sudah difasilitasi penugasan siklus 2027.", tone: "green" },
+  { title: "Jalur ke Afdeling Manager jelas", detail: "5 dari 8 syarat target terpenuhi; 3 sisanya semuanya sudah punya rencana dengan tanggal (kompetensi Q4 2026, RKAP Sep 2026, rotasi Q1 2027).", tone: "blue" },
+  { title: "Ketergantungan pada rotasi", detail: "Eksposur lintas unit satu-satunya syarat berstatus Belum — konsisten dengan Primary Talent Risk.", tone: "amber" },
+];
+
+export const jobProfileDefs = [
+  { term: "Role Fit", text: "Kecocokan kompetensi + pengalaman aktual terhadap tuntutan jabatan, dihitung mesin People Math." },
+  { term: "Akuntabilitas", text: "Hasil utama yang dipertanggungjawabkan jabatan, dari kamus jabatan PTPN." },
+  { term: "Sumber", text: "Kamus jabatan & profil suksesi — Talent Management System, per 31 Mei 2026." },
+];

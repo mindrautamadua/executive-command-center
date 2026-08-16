@@ -9,6 +9,7 @@ import { RekomendasiHcCard } from "./RekomendasiHcCard";
 import { PerformanceTrajectoryCard } from "./PerformanceTrajectoryCard";
 import { CareerVelocityCard } from "./CareerVelocityCard";
 import { PeopleIntelligenceCard } from "./PeopleIntelligenceCard";
+import { JobProfileCard } from "./JobProfileCard";
 import { InformasiJabatan } from "./InformasiJabatan";
 import { TalentPotential } from "./TalentPotential";
 import { KompetensiUtama } from "./KompetensiUtama";
@@ -43,6 +44,7 @@ function Overview() {
         <PeopleIntelligenceCard />
         <RekomendasiHcCard />
       </div>
+      <JobProfileCard />
       <div className="grid grid-cols-3 gap-3">
         <KompetensiUtama />
         <PelatihanSertifikasi />

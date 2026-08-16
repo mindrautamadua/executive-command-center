@@ -1288,3 +1288,26 @@ export const dataQualityBreakdown = [
   { label: "Timeliness", value: "95%" },
   { label: "Consistency", value: "97%" },
 ];
+
+/* ── Job Profile (jabatan saat ini) ──────────────────────── */
+
+export const jobProfile = {
+  peran: "Asisten Afdeling — Afdeling I, Kebun Tanah Jawa",
+  tujuan:
+    "Mengelola operasi produksi, tim panen, dan biaya Afdeling I (±1.240 ha TM) untuk mencapai target produksi dengan standar kualitas, biaya, dan K3.",
+  roleFit: "94%",
+  akuntabilitas: [
+    { label: "Pencapaian produksi & yield TBS afdeling", status: "Dikuasai" },
+    { label: "Pengendalian biaya panen & pemeliharaan", status: "Dikuasai" },
+    { label: "Kepemimpinan 4 mandor & ±120 pekerja panen", status: "Dikuasai" },
+    { label: "Kualitas sortasi & pengendalian ALB", status: "Dikuasai" },
+    { label: "Perencanaan anggaran afdeling (RKAP)", status: "Berkembang" },
+  ],
+  syarat: [
+    { label: "Kompetensi teknis ≥ 4,0 (standar grade G7)", terpenuhi: true },
+    { label: "Sertifikasi Ahli K3 Umum (AK3U)", terpenuhi: true },
+    { label: "Sertifikasi BNSP Manajer Kebun Madya", terpenuhi: true },
+    { label: "Pengalaman lapangan ≥ 3 tahun", terpenuhi: true },
+    { label: "Memimpin 1 siklus RKAP penuh", terpenuhi: false },
+  ],
+} as const;
