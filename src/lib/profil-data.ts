@@ -1199,6 +1199,8 @@ export const talentSignal = [
   { label: "Critical Role Fit", value: "High", tone: "green" },
   { label: "Succession Risk", value: "Low", tone: "green" },
   { label: "Mobility", value: "High", tone: "green" },
+  { label: "Talent Confidence", value: "87%", tone: "green" },
+  { label: "Succession Fit", value: "92%", tone: "green" },
 ] as const;
 
 export const executiveAssessment =
@@ -1229,3 +1231,60 @@ export const hcActions = [
   { kategori: "Career", aksi: "Target jabatan berikutnya: Afdeling Manager (12–24 bulan).", status: "Aktif" },
   { kategori: "Retention", aksi: "Pertahankan prioritas retensi; tinjau paket saat promosi.", status: "Aktif" },
 ] as const;
+
+/* ── Fase 2: Trajectory, Velocity, Capability, Intelligence ── */
+
+export const performanceTrajectory = {
+  points: [
+    { tahun: "2021", skor: 3.9 },
+    { tahun: "2022", skor: 4.1 },
+    { tahun: "2023", skor: 4.3 },
+    { tahun: "2024", skor: 4.4 },
+    { tahun: "2025", skor: 4.8 },
+  ],
+  label: "Accelerating",
+  delta: "+0,4 YoY",
+  readiness: "Leadership Readiness 72% → 86%",
+};
+
+export const careerVelocity = {
+  promosi: "3 promosi",
+  rentang: "8,4 tahun",
+  rataRata: "2,1 thn per jenjang",
+  trajectory: "Accelerating",
+  pembanding: "Lebih cepat dari median kohort MT 2018 (2 promosi)",
+  nextRole: "Afdeling Manager",
+};
+
+export const capabilityProfile = {
+  strengths: [
+    { label: "Manajemen Kebun", skor: "4,8" },
+    { label: "Kerja Sama Tim", skor: "4,7" },
+    { label: "Kepemimpinan", skor: "4,6" },
+  ],
+  gaps: [
+    { label: "Analitik Data Operasional", skor: "3,8" },
+    { label: "Manajemen Perubahan", skor: "3,7" },
+  ],
+  criticalGap: "Kepemimpinan Strategis — prasyarat utama jabatan Afdeling Manager",
+};
+
+export const peopleIntelligence = {
+  evidence: [
+    { label: "Performance Evidence", value: "4,8 / 5,0 — konsisten 5 tahun naik", sumber: "SMK" },
+    { label: "Capability Evidence", value: "Leadership 4,6 · Manajemen Kebun 4,8", sumber: "Asesmen" },
+    { label: "People Math", value: "87/100 — eksekusi kuat, orientasi people tinggi", sumber: "People Math" },
+    { label: "HPI BEM", value: "Potensi kepemimpinan tinggi, learning agility 85", sumber: "HPI" },
+  ],
+  interpretation:
+    "Profil perilaku dan bukti kinerja selaras kuat dengan jalur kepemimpinan operasional. Pola eksekusi, orientasi tim, dan learning agility mendukung transisi ke peran manajerial; pengambilan keputusan strategis menjadi area pengembangan utama.",
+  recommendation: "Direkomendasikan sebagai suksesor Afdeling Manager — siap 1–2 tahun.",
+};
+
+/** Rincian Data Quality Score untuk popover Data Trust. */
+export const dataQualityBreakdown = [
+  { label: "Completeness", value: "98%" },
+  { label: "Accuracy", value: "96%" },
+  { label: "Timeliness", value: "95%" },
+  { label: "Consistency", value: "97%" },
+];

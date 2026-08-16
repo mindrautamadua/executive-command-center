@@ -6,6 +6,9 @@ import { ProfilTabs } from "./ProfilTabs";
 import { RingkasanKinerja } from "./RingkasanKinerja";
 import { TalentRiskCard } from "./TalentRiskCard";
 import { RekomendasiHcCard } from "./RekomendasiHcCard";
+import { PerformanceTrajectoryCard } from "./PerformanceTrajectoryCard";
+import { CareerVelocityCard } from "./CareerVelocityCard";
+import { PeopleIntelligenceCard } from "./PeopleIntelligenceCard";
 import { InformasiJabatan } from "./InformasiJabatan";
 import { TalentPotential } from "./TalentPotential";
 import { KompetensiUtama } from "./KompetensiUtama";
@@ -31,8 +34,13 @@ function Overview() {
         <InformasiJabatan />
         <TalentPotential />
       </div>
-      <div className="grid grid-cols-[minmax(0,380fr)_minmax(0,680fr)] gap-3">
+      <div className="grid grid-cols-[minmax(0,400fr)_minmax(0,320fr)_minmax(0,340fr)] gap-3">
+        <PerformanceTrajectoryCard />
+        <CareerVelocityCard />
         <TalentRiskCard />
+      </div>
+      <div className="grid grid-cols-[minmax(0,560fr)_minmax(0,500fr)] gap-3">
+        <PeopleIntelligenceCard />
         <RekomendasiHcCard />
       </div>
       <div className="grid grid-cols-3 gap-3">
