@@ -31,7 +31,7 @@ export function SubholdingFilter({ width = "200px" }: { width?: string }) {
   }, [open]);
 
   return (
-    <div ref={ref} className="relative" style={{ width }}>
+    <div ref={ref} className="relative w-full min-w-0 shrink" style={{ maxWidth: width }}>
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}

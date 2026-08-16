@@ -41,12 +41,12 @@ export function SelectBox({
 
   return (
     <button
-      className="flex items-center justify-between rounded-lg border border-[#e3e9ef] bg-white px-3 py-1.5 text-left shadow-card"
-      style={{ width }}
+      className="flex w-full min-w-0 shrink items-center justify-between rounded-lg border border-[#e3e9ef] bg-white px-3 py-1.5 text-left shadow-card"
+      style={{ maxWidth: width }}
     >
-      <span className="leading-tight">
-        <span className="block text-[8.5px] font-medium text-ink-400">{label}</span>
-        <span className="mt-[2px] block text-[11px] font-bold text-ink-900">{value}</span>
+      <span className="min-w-0 leading-tight">
+        <span className="block truncate text-[8.5px] font-medium text-ink-400">{label}</span>
+        <span className="mt-[2px] block truncate text-[11px] font-bold text-ink-900">{value}</span>
       </span>
       <ChevronDown size={13} className="ml-2 shrink-0 text-ink-400" />
     </button>
@@ -97,30 +97,30 @@ export function ModuleHeader({
 }) {
   return (
     <>
-      <header className="flex flex-wrap items-center gap-4 gap-y-2 border-b border-[#eef2f6] px-5 pb-3.5 pt-3.5">
-        <div className="flex min-w-0 shrink-0 items-center gap-2.5">
+      <header className="flex items-center gap-4 border-b border-[#eef2f6] px-5 pb-3.5 pt-3.5">
+        <div className="flex min-w-0 shrink items-center gap-2.5">
           {icon && (
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#e8f1fd] text-[#1b3a6b]">
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#e8f1fd] text-[#1b3a6b]">
               {icon}
             </span>
           )}
           <div className="min-w-0">
-            <div className="flex items-center gap-2">
-              <h1 className="text-[20px] font-extrabold leading-none tracking-[-0.01em] text-[#1b3a6b]">
+            <div className="flex min-w-0 items-center gap-2">
+              <h1 className="truncate text-[20px] font-extrabold leading-none tracking-[-0.01em] text-[#1b3a6b]">
                 {title}
               </h1>
               {titleExtra}
             </div>
-            <p className="mt-[5px] text-[10.5px] font-semibold text-ink-500">{subtitle}</p>
+            <p className="mt-[5px] truncate text-[10.5px] font-semibold text-ink-500">{subtitle}</p>
           </div>
         </div>
 
-        <div className="ml-auto flex shrink-0 items-center gap-3">
+        <div className="ml-auto flex min-w-0 shrink items-center gap-3">
           {controls}
 
           <ThemeToggle />
           <button
-            className="relative text-ink-500 transition-colors hover:text-ptpn-green"
+            className="relative shrink-0 text-ink-500 transition-colors hover:text-ptpn-green"
             aria-label="Notifikasi"
           >
             <Bell size={18} strokeWidth={1.7} />
@@ -129,13 +129,14 @@ export function ModuleHeader({
             </span>
           </button>
 
-          <div className="flex items-center gap-2.5">
+          <div className="flex shrink-0 items-center gap-2.5">
             <PersonAvatar seed={0} size={36} className="ring-2 ring-[#e6ecf2]" />
-            <div className="leading-tight">
+            {/* Identitas teks disembunyikan di bawah xl agar header tetap satu baris di tablet. */}
+            <div className="hidden leading-tight xl:block">
               <div className="text-[11px] font-bold text-ink-900">Direktur Utama</div>
               <div className="text-[9.5px] text-ink-500">BOD</div>
             </div>
-            <ChevronDown size={13} className="text-ink-400" />
+            <ChevronDown size={13} className="hidden text-ink-400 xl:block" />
           </div>
         </div>
       </header>
