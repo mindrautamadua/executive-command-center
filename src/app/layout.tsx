@@ -31,10 +31,10 @@ export const metadata: Metadata = {
   },
 };
 
-// Layout desain fixed 1360px; viewport width mengikuti supaya tablet auto-fit tanpa pan.
+// Halaman modul terlebar didesain fixed 1440px; viewport mengikuti supaya tablet auto-fit tanpa pan.
 export const viewport: Viewport = {
   themeColor: "#0e1420",
-  width: 1360,
+  width: 1440,
 };
 
 // Dijalankan sebelum paint pertama supaya tema tidak berkedip saat reload.
