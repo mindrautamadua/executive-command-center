@@ -48,7 +48,7 @@ export const jabatanSaatIni = [
   { label: "Atasan Langsung", value: "Ahmad Fauzi", sub: "Afdeling Manager", icon: "user" },
   { label: "Lokasi Kerja", value: "Kebun Tanah Jawa", icon: "mapPin" },
   { label: "Grade", value: "G7", icon: "award" },
-  { label: "Tenure di Jabatan Ini", value: "2 tahun 4 bulan", icon: "clock" },
+  { label: "Tenure di Jabatan Ini", value: "3 tahun 4 bulan", icon: "clock" },
 ];
 
 /* Nine-box: baris = potensial (tinggi → rendah), kolom = kinerja (rendah → tinggi). */
@@ -103,7 +103,7 @@ export const riwayatJabatan = [
     jabatan: "Asisten Afdeling",
     unit: "Kebun Tanah Jawa, PTPN IV Regional 1",
     periode: "Jan 2023 - Sekarang",
-    durasi: "2 thn 4 bln",
+    durasi: "3 thn 4 bln",
     aktif: true,
   },
   {
@@ -123,10 +123,10 @@ export const riwayatJabatan = [
 ];
 
 export const penghargaan = [
-  { nama: "Best Employee - Kebun Tanah Jawa", unit: "PTPN IV Regional 1", tahun: "2024" },
-  { nama: "Inisiator Program Efisiensi", unit: "PTPN IV Regional 1", tahun: "2023" },
-  { nama: "Karyawan Teladan", unit: "PTPN IV Regional 1", tahun: "2022" },
-  { nama: "Kontributor Data Produksi Terbaik", unit: "Kebun Tanah Jawa", tahun: "2021" },
+  { nama: "Best Employee - Kebun Tanah Jawa", unit: "PTPN IV Regional 1", tahun: "2024", dampak: "Skor kinerja #1 · capaian KPI 104%" },
+  { nama: "Inisiator Program Efisiensi", unit: "PTPN IV Regional 1", tahun: "2023", dampak: "Penghematan ±Rp 1,2 M/tahun" },
+  { nama: "Karyawan Teladan", unit: "PTPN IV Regional 1", tahun: "2022", dampak: "Zero accident 24 bulan" },
+  { nama: "Kontributor Data Produksi Terbaik", unit: "Kebun Tanah Jawa", tahun: "2021", dampak: "Akurasi pelaporan 99,4%" },
 ];
 
 /* ── Tab: Informasi Pribadi ──────────────────────────────── */
@@ -240,7 +240,7 @@ export const pekerjaanSaatIni = [
   { label: "Atasan Langsung", value: "Ahmad Fauzi", sub: "Afdeling Manager", icon: "user" },
   { label: "Tipe Karyawan", value: "Karyawan Tetap", icon: "idCard" },
   { label: "Tanggal Mulai Jabatan", value: "1 Jan 2023", icon: "calendar" },
-  { label: "Masa Kerja di Jabatan", value: "2 tahun 4 bulan", icon: "clock" },
+  { label: "Masa Kerja di Jabatan", value: "3 tahun 4 bulan", icon: "clock" },
   { label: "Grade", value: "G7", icon: "award" },
   { label: "Level Jabatan", value: "Officer", icon: "layers" },
   { label: "Status Probation", value: "Selesai (1 Jan 2023 - 30 Jun 2023)", icon: "checkCircle" },
@@ -285,8 +285,8 @@ export const ringkasanMasaKerja = {
   masaPerusahaan: "7 tahun 7 bulan",
   segmen: [
     { label: "Masa Kerja di Perusahaan", value: "7 thn 7 bln", bulan: 91, warna: "#1a9c5b" },
-    { label: "Masa Kerja di Jabatan", value: "2 thn 4 bln", bulan: 28, warna: "#3b7ded" },
-    { label: "Masa Kerja di Unit", value: "2 thn 4 bln", bulan: 28, warna: "#f5a524" },
+    { label: "Masa Kerja di Jabatan", value: "3 thn 4 bln", bulan: 40, warna: "#3b7ded" },
+    { label: "Masa Kerja di Unit", value: "3 thn 4 bln", bulan: 40, warna: "#f5a524" },
   ],
 };
 
@@ -1240,6 +1240,7 @@ export const performanceTrajectory = {
   ],
   label: "Accelerating",
   delta: "+0,4 YoY",
+  rataRata3Thn: "+0,23/thn (rata-rata 3 tahun terakhir)",
   readiness: "Leadership Readiness 72% → 86%",
 };
 
@@ -1263,6 +1264,11 @@ export const capabilityProfile = {
     { label: "Manajemen Perubahan", skor: "3,7" },
   ],
   criticalGap: "Kepemimpinan Strategis — prasyarat utama jabatan Afdeling Manager",
+  gapToRole: {
+    label: "Capability vs profil Afdeling Manager",
+    current: "84%",
+    gap: "gap 16% — proyeksi tertutup Q4 2026",
+  },
 };
 
 export const peopleIntelligence = {
@@ -1525,3 +1531,10 @@ export const similarTalent = {
   skor: "84%",
   teks: "Profil serupa dengan 3 Afdeling Manager berkinerja terbaik Regional 1 saat mereka menjabat Asisten Afdeling — pola trajectory kinerja, People Math, usia, dan jalur karier.",
 } as const;
+
+/* ── Dampak pelatihan ke kompetensi (learning -> capability) ── */
+
+export const dampakPelatihan = [
+  { program: "Basic Leadership Program", kompetensi: "Kepemimpinan", dari: "4,1", ke: "4,6" },
+  { program: "Good Agricultural Practices", kompetensi: "Agronomi", dari: "4,2", ke: "4,8" },
+] as const;

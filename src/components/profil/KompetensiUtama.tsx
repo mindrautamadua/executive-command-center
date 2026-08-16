@@ -46,6 +46,18 @@ export function KompetensiUtama() {
           <span className="font-bold text-ink-900">Critical gap untuk next role: </span>
           {capabilityProfile.criticalGap}
         </p>
+
+        <div className="mt-2 flex items-center justify-between rounded-lg border border-[#eef2f6] px-2.5 py-[6px]">
+          <span className="min-w-0 text-[8.5px] text-ink-500">
+            {capabilityProfile.gapToRole.label}
+          </span>
+          <span className="shrink-0 text-right text-[9.5px] font-extrabold text-ink-900">
+            {capabilityProfile.gapToRole.current}
+            <span className="ml-1 text-[8px] font-semibold text-[#c07c05]">
+              {capabilityProfile.gapToRole.gap}
+            </span>
+          </span>
+        </div>
       </div>
 
       <Link

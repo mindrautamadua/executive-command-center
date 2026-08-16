@@ -11,7 +11,7 @@ export function ProfilTopbar() {
         <ArrowLeft size={14} />
         Direktori Karyawan
       </Link>
-      <h1 className="text-[13px] font-bold text-ink-900">Profil Karyawan</h1>
+      <h1 className="text-[13px] font-bold text-ink-900">Talent Intelligence Profile</h1>
 
       <div className="ml-auto flex items-center gap-2">
         <Link

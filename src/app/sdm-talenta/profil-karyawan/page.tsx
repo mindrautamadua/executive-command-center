@@ -2,7 +2,7 @@ import { SdmSidebar } from "@/components/sdm/SdmSidebar";
 import { ProfilTopbar } from "@/components/profil/ProfilTopbar";
 import { ProfilBody } from "@/components/profil/ProfilBody";
 
-export const metadata = { title: "Profil Karyawan — PTPN Group" };
+export const metadata = { title: "Talent Intelligence Profile — PTPN Group" };
 
 export default function ProfilKaryawanPage() {
   return (

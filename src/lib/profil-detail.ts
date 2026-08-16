@@ -190,19 +190,19 @@ export const riwayatJabatanKpi: DetailKpi[] = [
   { label: "Total Masa Kerja", value: "8", suffix: "thn 4 bln", delta: "sejak Jan 2018", trend: "flat", tone: "neutral", compare: "seluruhnya di PTPN IV" },
   { label: "Jumlah Jabatan", value: "4", delta: "1 unit kerja", trend: "flat", tone: "neutral", compare: "seluruhnya Kebun Tanah Jawa" },
   { label: "Promosi", value: "3", delta: "terakhir Jan 2023", trend: "flat", tone: "green", compare: "rata-rata 20 bulan/promosi" },
-  { label: "Tenure Jabatan Ini", value: "2", suffix: "thn 4 bln", delta: "Asisten Afdeling", trend: "flat", tone: "neutral", compare: "median promosi grade G7: 3 thn" },
+  { label: "Tenure Jabatan Ini", value: "3", suffix: "thn 4 bln", delta: "Asisten Afdeling", trend: "flat", tone: "neutral", compare: "median promosi grade G7: 3 thn" },
   { label: "Mobilitas Lintas Unit", value: "0", delta: "area pengembangan", trend: "flat", tone: "amber", compare: "syarat lunak jabatan manajer" },
 ];
 
 export const riwayatJabatanRows = [
-  { jabatan: "Asisten Afdeling", unit: "Kebun Tanah Jawa, Regional 1", grade: "G7", periode: "Jan 2023 – Sekarang", durasi: "2 thn 4 bln", jenis: "Promosi", atasan: "Ahmad Fauzi (Afdeling Manager)" },
+  { jabatan: "Asisten Afdeling", unit: "Kebun Tanah Jawa, Regional 1", grade: "G7", periode: "Jan 2023 – Sekarang", durasi: "3 thn 4 bln", jenis: "Promosi", atasan: "Ahmad Fauzi (Afdeling Manager)" },
   { jabatan: "Asisten Mandor", unit: "Kebun Tanah Jawa, Regional 1", grade: "G6", periode: "Jan 2021 – Des 2022", durasi: "2 thn", jenis: "Promosi", atasan: "Budi Hartono (Asisten Afdeling)" },
   { jabatan: "Mandor Panen", unit: "Kebun Tanah Jawa, Regional 1", grade: "G5", periode: "Jul 2019 – Des 2020", durasi: "1 thn 6 bln", jenis: "Promosi", atasan: "Budi Hartono (Asisten Afdeling)" },
   { jabatan: "Management Trainee (Planter)", unit: "Kebun Tanah Jawa, Regional 1", grade: "G4", periode: "Jan 2018 – Jun 2019", durasi: "1 thn 6 bln", jenis: "Rekrutmen MT", atasan: "Rudi Simanjuntak (Afdeling Manager)" },
 ];
 
 export const riwayatDurasi: BarRow[] = [
-  { label: "Asisten Afdeling (aktif)", value: 28, valueLabel: "28 bln", color: "#1a9c5b" },
+  { label: "Asisten Afdeling (aktif)", value: 40, valueLabel: "40 bln", color: "#1a9c5b" },
   { label: "Asisten Mandor", value: 24, valueLabel: "24 bln" },
   { label: "Mandor Panen", value: 18, valueLabel: "18 bln" },
   { label: "Management Trainee", value: 18, valueLabel: "18 bln" },

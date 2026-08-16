@@ -61,8 +61,13 @@ export function TalentPotential() {
         {/* Ringkasan kategori */}
         <div className="min-w-0 space-y-3 leading-tight">
           <div>
-            <div className="text-[9px] text-ink-500">Kategori</div>
-            <div className="mt-[2px] text-[11px] font-bold text-[#16a34a]">{nineBox.kategori}</div>
+            <div className="text-[9px] text-ink-500">Posisi 9-Box</div>
+            <div className="mt-[2px] text-[11px] font-bold text-[#16a34a]">
+              Box 9 — High Potential / High Performer
+            </div>
+            <div className="mt-[3px] text-[8.5px] font-semibold text-ink-500">
+              Performance 4,8 / 5,0 × Potential High
+            </div>
           </div>
           <div>
             <div className="text-[9px] text-ink-500">Kandidat Siap</div>

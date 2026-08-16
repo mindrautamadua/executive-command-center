@@ -64,6 +64,7 @@ export function PerformanceTrajectoryCard() {
           Trajectory: {performanceTrajectory.label} ↑
         </span>
         <span className="text-[9px] font-bold text-ink-900">{performanceTrajectory.delta}</span>
+        <span className="text-[8.5px] text-ink-500">{performanceTrajectory.rataRata3Thn}</span>
         <span className="text-[8.5px] text-ink-500">{performanceTrajectory.readiness}</span>
       </div>
     </div>

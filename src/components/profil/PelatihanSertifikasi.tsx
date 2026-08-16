@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { ArrowRight, FileBadge } from "lucide-react";
-import { pelatihan } from "@/lib/profil-data";
+import { ArrowRight, FileBadge, TrendingUp } from "lucide-react";
+import { dampakPelatihan, pelatihan } from "@/lib/profil-data";
 
 export function PelatihanSertifikasi() {
   return (
@@ -20,6 +20,24 @@ export function PelatihanSertifikasi() {
             <span className="shrink-0 text-[8.5px] text-ink-500">{p.tanggal}</span>
           </div>
         ))}
+      </div>
+
+      {/* Learning -> capability: bukti pelatihan menaikkan kompetensi. */}
+      <div className="mt-2 rounded-lg bg-[#f5f8fa] px-2.5 py-2">
+        <div className="text-[8px] font-extrabold uppercase tracking-[0.05em] text-ink-400">
+          Dampak ke Kompetensi
+        </div>
+        <div className="mt-1 space-y-1">
+          {dampakPelatihan.map((d) => (
+            <div key={d.program} className="flex items-center justify-between gap-2 text-[8.5px]">
+              <span className="min-w-0 truncate text-ink-700">{d.program}</span>
+              <span className="flex shrink-0 items-center gap-1 font-bold text-ptpn-greenDark">
+                <TrendingUp size={9} strokeWidth={2.2} />
+                {d.kompetensi} {d.dari} → {d.ke}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
 
       <Link

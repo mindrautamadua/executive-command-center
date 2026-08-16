@@ -15,7 +15,12 @@ export function Penghargaan() {
             </span>
             <div className="min-w-0 flex-1 leading-tight">
               <div className="truncate text-[10px] font-bold text-ink-900">{p.nama}</div>
-              <div className="mt-[2px] text-[8.5px] text-ink-500">{p.unit}</div>
+              <div className="mt-[2px] truncate text-[8.5px] text-ink-500">{p.unit}</div>
+              {p.dampak && (
+                <div className="mt-[2px] truncate text-[8.5px] font-semibold text-ptpn-greenDark">
+                  Impact: {p.dampak}
+                </div>
+              )}
             </div>
             <span className="shrink-0 text-[9px] text-ink-500">{p.tahun}</span>
           </div>

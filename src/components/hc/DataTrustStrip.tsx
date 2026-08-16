@@ -28,9 +28,32 @@ export function DataTrustStrip({ data = dataTrust }: { data?: typeof dataTrust }
         Data Trust
       </span>
 
-      <div className="flex items-center gap-1.5 rounded bg-[#eef2f6] px-2 py-[3px]">
+      {/* Hover menjelaskan beda periode data vs waktu sinkronisasi sistem. */}
+      <div className="group relative flex cursor-help items-center gap-1.5 rounded bg-[#eef2f6] px-2 py-[3px]">
         <span className="text-[8.5px] text-ink-500">Data as-of</span>
-        <span className="text-[9.5px] font-bold text-ink-900">{data.asOf}</span>
+        <span className="text-[9.5px] font-bold text-ink-900 underline decoration-dotted decoration-[#c6cfd8] underline-offset-2">
+          {data.asOf}
+        </span>
+        <div className="invisible absolute left-0 top-full z-30 mt-1.5 w-[230px] rounded-xl border border-[#e3e9ef] bg-white p-3 opacity-0 shadow-cardHover transition-opacity duration-150 group-hover:visible group-hover:opacity-100">
+          <div className="space-y-1.5 text-[9px]">
+            <div className="flex justify-between gap-2">
+              <span className="text-ink-500">Data effective date</span>
+              <span className="font-bold text-ink-900">{data.asOf}</span>
+            </div>
+            <div className="flex justify-between gap-2">
+              <span className="text-ink-500">System synchronization</span>
+              <span className="font-bold text-ink-900">{data.lastRefresh}</span>
+            </div>
+            <div className="flex justify-between gap-2">
+              <span className="text-ink-500">Source</span>
+              <span className="font-bold text-ink-900">{data.sources.slice(0, 2).join(", ")}</span>
+            </div>
+          </div>
+          <p className="mt-1.5 border-t border-[#eef2f6] pt-1.5 text-[8px] leading-snug text-ink-400">
+            Angka dashboard merepresentasikan periode bisnis s.d. tanggal efektif; sinkronisasi
+            sistem berjalan lebih sering tanpa mengubah periode data.
+          </p>
+        </div>
       </div>
 
       <div className="flex items-center gap-1.5">
