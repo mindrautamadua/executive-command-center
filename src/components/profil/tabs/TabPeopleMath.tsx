@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   ArrowRight,
   Book,
@@ -323,9 +324,12 @@ function PeopleFactorsCard() {
         <div>
           <div className="flex items-center justify-between pb-2">
             <span className="text-[10px] font-bold text-ink-900">Detail per Dimensi</span>
-            <button className="link-more inline-flex items-center gap-1">
+            <Link
+              href="/sdm-talenta/profil-karyawan/people-factors"
+              className="link-more inline-flex items-center gap-1"
+            >
               Lihat Semua <ArrowRight size={11} />
-            </button>
+            </Link>
           </div>
           <div className="grid grid-cols-3 gap-2">
             {peopleMathDimensi.map((d) => (

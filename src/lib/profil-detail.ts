@@ -322,3 +322,37 @@ export const rekomendasiDefs = [
   { term: "Prioritas", text: "Tinggi = gap ≥ 2 atau prasyarat jabatan target; Sedang = gap 1 relevan suksesi; Rendah = pelengkap." },
   { term: "Sumber", text: "Individual Development Plan (IDP) 2026 — Talent Management System." },
 ];
+
+/* ── People Factors (People Math) ────────────────────────── */
+
+export const peopleFactorsKpi: DetailKpi[] = [
+  { label: "People Math Score", value: "87", suffix: "/100", delta: "3 pt", trend: "up", tone: "green", compare: "vs siklus 2024 (84)" },
+  { label: "Faktor Turunan Dinilai", value: "19", delta: "8 dimensi utama", trend: "flat", tone: "neutral", compare: "formula People Math (21 skor)" },
+  { label: "Kekuatan (skor ≥ 88)", value: "7", suffix: "faktor", delta: "2", trend: "up", tone: "green", compare: "terbanyak di Leadership" },
+  { label: "Area Pantau (skor < 85)", value: "3", suffix: "faktor", delta: "-1", trend: "up", tone: "amber", compare: "Inisiatif, Umpan Balik, Kolaborasi" },
+  { label: "Persentil Kohort", value: "P90", delta: "5 pt", trend: "up", tone: "green", compare: "asisten afdeling grade G7 Regional 1" },
+];
+
+/** Rata-rata kohort grade G7 per dimensi — pembanding tabel faktor. */
+export const peopleFactorsBenchmark: Record<string, number> = {
+  Leadership: 82,
+  Character: 84,
+  Motivation: 81,
+  Skill: 82,
+  Knowledge: 80,
+  "Learning Agility": 79,
+  "Job Fit": 83,
+  "Environment Fit": 81,
+};
+
+export const peopleFactorsNotes: DetailNote[] = [
+  { title: "Kekuatan menonjol: Leadership", detail: "Ketiga faktor (Nagih, Nata, Nuntun) di atas 89 — tertinggi di kohort; fondasi utama rekomendasi suksesi Afdeling Manager.", tone: "green" },
+  { title: "Tiga faktor di bawah 85", detail: "Inisiatif (84), Terbuka thd Umpan Balik (84), dan Tim & Kolaborasi (83) — selaras dengan gap IDP; intervensi mentoring sudah berjalan.", tone: "amber" },
+  { title: "Skor naik konsisten", detail: "People Math Score naik 84 → 87 dalam satu siklus; kenaikan terbesar di Learning Agility (+4).", tone: "blue" },
+];
+
+export const peopleFactorsDefs = [
+  { term: "Derivative Score", text: "Skor turunan per faktor (0–100) hasil agregasi asesmen, kinerja, dan umpan balik multi-sumber." },
+  { term: "Benchmark G7", text: "Rata-rata kohort grade yang sama di Regional 1 pada siklus berjalan." },
+  { term: "Sumber", text: "Mesin People Math — Talent Management System, siklus 2025." },
+];
