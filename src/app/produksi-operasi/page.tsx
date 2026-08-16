@@ -29,7 +29,7 @@ export default function ProduksiOperasiPage() {
             <div className="flex min-w-0 flex-col gap-3">
               <ProdKpiStrip />
               <ProdExecutiveIntelligence />
-              <div className="grid grid-cols-[minmax(0,52fr)_minmax(0,48fr)] items-stretch gap-3">
+              <div className="grid grid-cols-1 items-stretch gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,52fr)_minmax(0,48fr)]">
                 <ProdRiskRadar />
                 <KomoditasScoreboard />
               </div>

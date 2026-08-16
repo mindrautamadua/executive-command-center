@@ -33,7 +33,7 @@ const TONES: Record<string, string> = {
 
 export function PmKpiStrip() {
   return (
-    <div className="grid grid-cols-[repeat(7,minmax(0,1fr))_minmax(0,1.35fr)] gap-3">
+    <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-[repeat(7,minmax(0,1fr))_minmax(0,1.35fr)]">
       {pmKpi.map((k, i) => {
         const Icon = ICONS[k.icon];
         return (

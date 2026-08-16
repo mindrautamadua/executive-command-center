@@ -32,24 +32,24 @@ export default function TalentIntelligencePage() {
 
             <ExecutiveTalentIntelligence />
 
-            <div className="grid grid-cols-[minmax(0,35fr)_minmax(0,30fr)_minmax(0,35fr)] items-stretch gap-3">
+            <div className="grid grid-cols-1 items-stretch gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,35fr)_minmax(0,30fr)_minmax(0,35fr)]">
               <TalentPortfolioBox />
               <TalentPipelineReadiness />
               <TopTalentPotential />
             </div>
 
-            <div className="grid grid-cols-[minmax(0,34fr)_minmax(0,32fr)_minmax(0,34fr)] items-stretch gap-3">
+            <div className="grid grid-cols-1 items-stretch gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,34fr)_minmax(0,32fr)_minmax(0,34fr)]">
               <TalentRiskOverview />
               <TalentAttributesInsight />
               <CriticalRoleCoverage />
             </div>
 
-            <div className="grid grid-cols-[minmax(0,60fr)_minmax(0,40fr)] items-stretch gap-3">
+            <div className="grid grid-cols-1 items-stretch gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,60fr)_minmax(0,40fr)]">
               <RoleTalentMatch />
               <TalentDecisions />
             </div>
 
-            <div className="grid grid-cols-[minmax(0,60fr)_minmax(0,40fr)] items-stretch gap-3">
+            <div className="grid grid-cols-1 items-stretch gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,60fr)_minmax(0,40fr)]">
               <TalentDevelopmentFocus />
               <TalentMobilityOverview />
             </div>

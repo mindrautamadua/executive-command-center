@@ -31,13 +31,13 @@ export default function PeopleMathHpiPage() {
 
           <PmIntelligence />
 
-          <div className="grid grid-cols-[minmax(0,30fr)_minmax(0,36fr)_minmax(0,34fr)] gap-3">
+          <div className="grid grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,30fr)_minmax(0,36fr)_minmax(0,34fr)]">
             <DimensionScoreCard />
             <HpiBemOverviewCard />
             <PerformanceGapCard />
           </div>
 
-          <div className="grid grid-cols-[minmax(0,38fr)_minmax(0,62fr)] gap-3">
+          <div className="grid grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,38fr)_minmax(0,62fr)]">
             <ProfileClusterCard />
             <RootCauseCard />
           </div>

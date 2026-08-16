@@ -34,7 +34,7 @@ export default function AlertsPage() {
         <div className="flex flex-col gap-3 px-5 pb-5 pt-3">
           <DetailKpiStrip items={alertKpi} />
 
-          <div className="grid grid-cols-[minmax(0,68fr)_minmax(0,32fr)] items-start gap-3">
+          <div className="grid grid-cols-1 items-start gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,68fr)_minmax(0,32fr)]">
             <DetailTable
               title="Register Alert Aktif"
               subtitle="12 alert — angka yang sama dengan lencana notifikasi di header"

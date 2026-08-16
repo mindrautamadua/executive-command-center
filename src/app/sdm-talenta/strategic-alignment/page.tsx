@@ -74,7 +74,7 @@ export default function StrategicAlignmentPage() {
             </div>
           </div>
 
-          <div className="grid grid-cols-[minmax(0,64fr)_minmax(0,36fr)] items-start gap-3">
+          <div className="grid grid-cols-1 items-start gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,64fr)_minmax(0,36fr)]">
             <DetailTable
               title="Rantai Alignment per Regional"
               subtitle="Kebutuhan vs pemenuhan, kapabilitas, kinerja, dan outcome produktivitas — YTD 2026"

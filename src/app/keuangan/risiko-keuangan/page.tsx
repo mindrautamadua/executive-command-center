@@ -41,7 +41,7 @@ export default function RisikoKeuanganPage() {
           </div>
 
           {/* Register risiko & keputusan mitigasi */}
-          <div className="grid grid-cols-[minmax(0,56fr)_minmax(0,44fr)] gap-3">
+          <div className="grid grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,56fr)_minmax(0,44fr)]">
             <TopFinancialRisks />
             <KrkDecisionCenter />
           </div>

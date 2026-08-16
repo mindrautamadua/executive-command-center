@@ -17,7 +17,7 @@ export default function AiHrAssistantPage() {
         <AiHrHeader />
 
         <div className="flex flex-col gap-3 px-5 pb-5 pt-4">
-          <div className="grid grid-cols-[minmax(0,66fr)_minmax(0,34fr)] items-start gap-3">
+          <div className="grid grid-cols-1 items-start gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,66fr)_minmax(0,34fr)]">
             <ChatPanel />
             <div className="flex flex-col gap-3">
               <InsightSummary />
