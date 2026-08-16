@@ -34,7 +34,7 @@ export function SeasonalityChart() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead title="Seasonality CPO 3 Tahun" action="Lihat Detail" />
+      <SectionHead title="Seasonality CPO 3 Tahun" action="Lihat Detail" href="/produksi-operasi/produksi-komoditas/detail#seasonality" />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Produksi CPO Bulanan (jt ton) · puncak konsisten Agu–Okt
       </p>

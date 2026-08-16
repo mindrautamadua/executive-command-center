@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { kompetensi } from "@/lib/profil-data";
 
@@ -23,9 +24,12 @@ export function KompetensiUtama() {
         ))}
       </div>
 
-      <button className="mt-2 flex items-center gap-1 text-[10px] font-semibold text-ptpn-greenDark hover:underline">
+      <Link
+        href="/sdm-talenta/profil-karyawan/kompetensi"
+        className="mt-2 flex items-center gap-1 text-[10px] font-semibold text-ptpn-greenDark hover:underline"
+      >
         Lihat semua kompetensi <ArrowRight size={11} />
-      </button>
+      </Link>
     </div>
   );
 }

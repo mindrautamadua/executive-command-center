@@ -13,7 +13,6 @@ import {
   FileText,
   HeartPulse,
   ShieldCheck,
-  Pencil,
   Info,
   Linkedin,
   Instagram,
@@ -47,16 +46,10 @@ const ICONS: Record<string, LucideIcon> = {
   shield: ShieldCheck,
 };
 
-function CardHeader({ title, editable = true }: { title: string; editable?: boolean }) {
+function CardHeader({ title }: { title: string }) {
   return (
     <div className="mb-3 flex items-center justify-between">
       <h3 className="text-[11px] font-bold text-ink-900">{title}</h3>
-      {editable && (
-        <button className="flex items-center gap-1 rounded-lg border border-[#e3e9ef] bg-white px-2 py-[3px] text-[9px] font-semibold text-[#2563c9] transition-colors hover:bg-[#f5f8fa]">
-          <Pencil size={9} strokeWidth={2.2} />
-          Edit
-        </button>
-      )}
     </div>
   );
 }
@@ -172,7 +165,7 @@ function InformasiTambahan() {
 function Catatan() {
   return (
     <div className="card px-4 pb-4 pt-3.5">
-      <CardHeader title="Catatan" editable={false} />
+      <CardHeader title="Catatan" />
       <div className="flex items-center gap-2 rounded-lg bg-[#f5f8fa] px-3 py-2.5">
         <Info size={12} className="shrink-0 text-[#2563c9]" strokeWidth={1.8} />
         <p className="text-[9.5px] text-ink-500">Tidak ada catatan tambahan.</p>

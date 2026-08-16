@@ -43,7 +43,7 @@ export function GulaGilingTrend() {
       className="card anim-rise flex flex-col px-4 pb-3 pt-3"
       style={{ "--d": "140ms" } as React.CSSProperties}
     >
-      <SectionHead title="Kinerja Giling Gula" action="Lihat Detail" />
+      <SectionHead title="Kinerja Giling Gula" action="Lihat Detail" href="/produksi-operasi/produksi-komoditas/detail#gula" />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Tebu Digiling (jt ton) &amp; Produksi Gula (rb ton) Mei–Nov — Mei realisasi, sisanya proyeksi RKAP
       </p>

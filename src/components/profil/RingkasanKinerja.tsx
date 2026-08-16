@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { TrendingUp } from "lucide-react";
 import { kinerja } from "@/lib/profil-data";
 
@@ -46,9 +47,12 @@ export function RingkasanKinerja() {
         </div>
       </div>
 
-      <button className="w-full rounded-lg border border-[#e3e9ef] py-[7px] text-[10px] font-semibold text-ink-700 transition-colors hover:bg-[#f5f8fa]">
+      <Link
+        href="/sdm-talenta/profil-karyawan/kinerja"
+        className="block w-full rounded-lg border border-[#e3e9ef] py-[7px] text-center text-[10px] font-semibold text-ink-700 transition-colors hover:bg-[#f5f8fa]"
+      >
         Lihat Detail Kinerja
-      </button>
+      </Link>
     </div>
   );
 }

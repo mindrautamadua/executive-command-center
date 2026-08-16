@@ -1006,6 +1006,17 @@ Semua halaman detail memakai KPI Strip + panel **Catatan Analitik** dan **Defini
 - **Karet & Teh Bulanan** — line chart produksi karet dan teh Jan–Mei 2026.
 - **Insight & Rekomendasi (Decision-grade)**.
 
+Semua tombol "Lihat Detail" kartu di halaman ini menaut ke anchor halaman detail di bawah.
+
+## `/produksi-operasi/produksi-komoditas/detail` (mockup)
+- **Header detail** — tautan kembali, judul, penanda "Mockup — angka ilustratif" + Data Trust Strip.
+- **Target vs Realisasi YTD** (#target) — tabel 5 komoditas: target FY/YTD, realisasi, capaian %, status pill, catatan.
+- **Sawit Production Waterfall** (#sawit) — tabel langkah alur volume: TBS inti + plasma − restan → TBS diolah → CPO & PK, tipe Masukan/Keluaran/Total.
+- **Kurva Musim Giling Gula** (#gula) — tabel per bulan giling Mei–Nov: tebu, rendemen, gula, status Realisasi/Proyeksi + baris Total FY.
+- **Seasonality CPO 3 Tahun** (#seasonality) — tabel 12 bulan CPO 2024–2026 + kolom YoY (pill).
+- **Karet & Teh Bulanan** (#karet-teh) — tabel produksi karet & teh Jan–Mei + baris Total YTD.
+- **Catatan Analitik** + **Definisi & Sumber** — dua panel catatan penutup.
+
 ## `/produksi-operasi/produktivitas-kebun`
 - **KPI Strip (6 kartu)** — Yield TBS Grup, Gap vs Benchmark, Luas Tertanam Inti, Areal Tua/Renta, Replanting YTD, Regional Terbaik.
 - **Yield TBS per Regional** — bar chart t/ha annualized, garis rata-rata grup 21,9 & benchmark swasta 24,0.

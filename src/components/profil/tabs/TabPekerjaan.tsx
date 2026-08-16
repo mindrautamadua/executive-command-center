@@ -13,7 +13,6 @@ import {
   Map,
   MapPin,
   Network,
-  Pencil,
   Shield,
   Sun,
   Timer,
@@ -101,14 +100,7 @@ function IconRow({
 function InformasiPekerjaan() {
   return (
     <div className="card flex flex-col px-4 pb-4 pt-3.5">
-      <CardTitle
-        title="Informasi Pekerjaan Saat Ini"
-        action={
-          <button className="flex items-center gap-1 rounded-md border border-[#e3e9ef] bg-white px-2 py-[4px] text-[9px] font-semibold text-ink-500 hover:bg-[#f5f8fa]">
-            <Pencil size={9} strokeWidth={1.8} /> Edit
-          </button>
-        }
-      />
+      <CardTitle title="Informasi Pekerjaan Saat Ini" />
       <div className="mt-2.5 flex min-h-0 flex-1 flex-col justify-around gap-[9px]">
         {pekerjaanSaatIni.map((it) => (
           <IconRow key={it.label} item={it} />

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ArrowRight, Briefcase } from "lucide-react";
 import { riwayatJabatan } from "@/lib/profil-data";
 
@@ -47,9 +48,12 @@ export function RiwayatJabatan() {
         ))}
       </div>
 
-      <button className="mt-1 flex items-center gap-1 text-[10px] font-semibold text-ptpn-greenDark hover:underline">
+      <Link
+        href="/sdm-talenta/profil-karyawan/riwayat-jabatan"
+        className="mt-1 flex items-center gap-1 text-[10px] font-semibold text-ptpn-greenDark hover:underline"
+      >
         Lihat semua riwayat jabatan <ArrowRight size={11} />
-      </button>
+      </Link>
     </div>
   );
 }

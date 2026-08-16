@@ -33,7 +33,7 @@ export function TargetVsRealisasiMatrix() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead title="Target vs Realisasi YTD" action="Lihat Detail" />
+      <SectionHead title="Target vs Realisasi YTD" action="Lihat Detail" href="/produksi-operasi/produksi-komoditas/detail#target" />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Capaian 5 Komoditas terhadap Target YTD Mei 2026
       </p>

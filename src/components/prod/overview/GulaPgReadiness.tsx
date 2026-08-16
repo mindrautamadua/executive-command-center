@@ -36,7 +36,7 @@ export function GulaPgReadiness() {
       className="card anim-rise px-4 pb-3 pt-3"
       style={{ "--d": "160ms" } as React.CSSProperties}
     >
-      <SectionHead title="Giling Gula — Kesiapan 17 PG" action="Lihat Detail" />
+      <SectionHead title="Giling Gula — Kesiapan 17 PG" action="Lihat Detail" href="/produksi-operasi/kinerja-pabrik/detail#pg" />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Jam berhenti giling (target ≤{PG_JAM_BERHENTI_TARGET_PCT}%) &amp; overall recovery (target ≥
         {PG_OVERALL_RECOVERY_TARGET_PCT}%)

@@ -72,7 +72,7 @@ export function SawitProductionCard() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead title="Sawit Production Waterfall" action="Lihat Detail" />
+      <SectionHead title="Sawit Production Waterfall" action="Lihat Detail" href="/produksi-operasi/produksi-komoditas/detail#sawit" />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Alur TBS Inti → Plasma → Diolah → CPO &amp; Palm Kernel (jt ton, YTD)
       </p>

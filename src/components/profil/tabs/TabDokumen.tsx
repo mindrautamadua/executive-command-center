@@ -2,9 +2,7 @@ import {
   ArrowRight,
   Briefcase,
   ChartColumnIncreasing,
-  ChevronDown,
   CircleAlert,
-  CloudUpload,
   Download,
   Eye,
   FileCheck2,
@@ -193,74 +191,6 @@ function KategoriDokumenCard() {
   );
 }
 
-/* ── Upload Dokumen Baru ────────────────────────────────── */
-
-function UploadDokumenCard() {
-  return (
-    <div className="card px-4 pb-4 pt-3.5">
-      <h3 className="text-[11px] font-bold text-ink-900">Upload Dokumen Baru</h3>
-      <div className="mt-3 grid grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-3">
-        <button className="flex flex-col items-center justify-center rounded-xl border border-dashed border-[#c9d4df] bg-[#fafcfd] px-3 py-5 text-center transition-colors hover:border-ptpn-green hover:bg-ptpn-greenLight/30">
-          <span className="flex h-[38px] w-[38px] items-center justify-center rounded-full bg-[#eef3f8] text-ink-500">
-            <CloudUpload size={17} strokeWidth={1.7} />
-          </span>
-          <span className="mt-2 text-[9.5px] font-bold text-ink-900">Unggah Dokumen</span>
-          <span className="mt-[3px] text-[8.5px] text-ink-500">Klik atau drag &amp; drop file di sini</span>
-          <span className="mt-2 text-[8px] leading-relaxed text-ink-400">
-            Maks. ukuran file 10MB. Format yang didukung: PDF, JPG, PNG, DOC, DOCX.
-          </span>
-        </button>
-
-        <div className="flex flex-col gap-2.5">
-          <div className="grid grid-cols-2 gap-2.5">
-            <label className="block">
-              <span className="text-[8.5px] font-semibold text-ink-700">Kategori</span>
-              <span className="relative mt-1 block">
-                <select
-                  defaultValue=""
-                  className="w-full appearance-none rounded-lg border border-[#e3e9ef] bg-white px-2.5 py-[7px] pr-7 text-[9px] text-ink-900 focus:border-ptpn-green focus:outline-none focus:ring-2 focus:ring-ptpn-green/25"
-                >
-                  <option value="" disabled>
-                    Pilih Kategori
-                  </option>
-                  {kategoriDokumen.map((k) => (
-                    <option key={k.nama} value={k.nama}>
-                      {k.nama}
-                    </option>
-                  ))}
-                </select>
-                <ChevronDown
-                  size={11}
-                  className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-ink-400"
-                />
-              </span>
-            </label>
-            <label className="block">
-              <span className="text-[8.5px] font-semibold text-ink-700">Nama Dokumen</span>
-              <input
-                type="text"
-                placeholder="Contoh: Ijazah S1"
-                className="mt-1 w-full rounded-lg border border-[#e3e9ef] bg-white px-2.5 py-[7px] text-[9px] text-ink-900 placeholder:text-ink-400 focus:border-ptpn-green focus:outline-none focus:ring-2 focus:ring-ptpn-green/25"
-              />
-            </label>
-          </div>
-          <label className="block">
-            <span className="text-[8.5px] font-semibold text-ink-700">Deskripsi (Opsional)</span>
-            <input
-              type="text"
-              placeholder="Tambahkan deskripsi dokumen"
-              className="mt-1 w-full rounded-lg border border-[#e3e9ef] bg-white px-2.5 py-[7px] text-[9px] text-ink-900 placeholder:text-ink-400 focus:border-ptpn-green focus:outline-none focus:ring-2 focus:ring-ptpn-green/25"
-            />
-          </label>
-          <button className="mt-auto w-full rounded-lg bg-gradient-to-r from-[#3fae63] to-[#1a9c5b] py-[8px] text-[9.5px] font-semibold text-white shadow-pill transition-opacity hover:opacity-90">
-            Unggah Dokumen
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 /* ── Informasi & Ketentuan ──────────────────────────────── */
 
 const KETENTUAN_ICONS: LucideIcon[] = [ShieldCheck, FileCheck2, Lock, CircleAlert];
@@ -309,10 +239,7 @@ export function TabDokumen() {
       </div>
       <div className="grid grid-cols-[minmax(0,790fr)_minmax(0,730fr)] gap-3">
         <KategoriDokumenCard />
-        <div className="space-y-3">
-          <UploadDokumenCard />
-          <KetentuanDokumenCard />
-        </div>
+        <KetentuanDokumenCard />
       </div>
     </div>
   );

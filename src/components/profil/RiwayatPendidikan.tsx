@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ArrowRight, GraduationCap } from "lucide-react";
 import { pendidikan } from "@/lib/profil-data";
 
@@ -20,9 +21,12 @@ export function RiwayatPendidikan() {
         </div>
       </div>
 
-      <button className="mt-2 flex items-center gap-1 text-[10px] font-semibold text-ptpn-greenDark hover:underline">
+      <Link
+        href="/sdm-talenta/profil-karyawan/riwayat-pendidikan"
+        className="mt-2 flex items-center gap-1 text-[10px] font-semibold text-ptpn-greenDark hover:underline"
+      >
         Lihat riwayat pendidikan <ArrowRight size={11} />
-      </button>
+      </Link>
     </div>
   );
 }

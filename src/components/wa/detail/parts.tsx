@@ -26,7 +26,11 @@ const TONE: Record<string, string> = {
 /** Strip KPI seragam untuk halaman detail (5-6 kartu). */
 export function DetailKpiStrip({ items }: { items: DetailKpi[] }) {
   return (
-    <div className={`grid gap-3 ${items.length === 5 ? "grid-cols-5" : "grid-cols-6"}`}>
+    <div
+      className={`grid grid-cols-2 gap-3 md:grid-cols-3 ${
+        items.length === 5 ? "xl:grid-cols-5" : "xl:grid-cols-6"
+      }`}
+    >
       {items.map((k, i) => (
         <div
           key={k.label}

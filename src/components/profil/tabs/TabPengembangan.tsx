@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   ArrowRight,
   BarChart3,
@@ -10,7 +11,6 @@ import {
   GraduationCap,
   Info,
   LineChart,
-  Plus,
   Presentation,
   Settings2,
   ShieldCheck,
@@ -251,9 +251,9 @@ function SkillsGapCard() {
     <div className="card flex flex-col px-4 pb-3.5 pt-3.5">
       <div className="flex items-center justify-between">
         <h3 className="text-[11px] font-bold text-ink-900">Kesenjangan Kompetensi (Skills Gap)</h3>
-        <button className="link-more inline-flex items-center gap-1">
+        <Link href="/sdm-talenta/profil-karyawan/kompetensi" className="link-more inline-flex items-center gap-1">
           Lihat Detail <ArrowRight size={11} />
-        </button>
+        </Link>
       </div>
       <table className="mt-2.5 w-full">
         <thead>
@@ -284,9 +284,9 @@ function SkillsGapCard() {
         </tbody>
       </table>
       <div className="mt-auto pt-2">
-        <button className="link-more inline-flex items-center gap-1">
+        <Link href="/sdm-talenta/profil-karyawan/rekomendasi-pengembangan" className="link-more inline-flex items-center gap-1">
           Lihat rekomendasi pengembangan <ArrowRight size={11} />
-        </button>
+        </Link>
       </div>
     </div>
   );
@@ -432,12 +432,7 @@ function JalurKarierCard() {
 function CatatanCard() {
   return (
     <div className="card flex flex-col px-4 pb-4 pt-3.5">
-      <div className="flex items-center justify-between">
-        <h3 className="text-[11px] font-bold text-ink-900">Catatan Pengembangan</h3>
-        <button className="inline-flex items-center gap-1 rounded-lg border border-[#e3e9ef] px-2.5 py-[5px] text-[9px] font-semibold text-ink-700 transition-colors hover:bg-[#f5f8fa]">
-          <Plus size={11} /> Tambah Catatan
-        </button>
-      </div>
+      <h3 className="text-[11px] font-bold text-ink-900">Catatan Pengembangan</h3>
       <div className="mt-3 space-y-3">
         {catatanPengembangan.map((c) => (
           <div key={c.tanggal} className="rounded-xl bg-[#f8fafc] px-3.5 py-3">

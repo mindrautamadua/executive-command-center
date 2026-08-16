@@ -82,7 +82,7 @@ export function KaretTehCard() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "180ms" } as React.CSSProperties}
     >
-      <SectionHead title="Karet & Teh Bulanan" action="Lihat Detail" />
+      <SectionHead title="Karet & Teh Bulanan" action="Lihat Detail" href="/produksi-operasi/produksi-komoditas/detail#karet-teh" />
       <p className="mt-[3px] text-[9px] text-ink-500">Produksi Jan–Mei 2026 (rb ton)</p>
 
       {!milikScope && <ScopeEmpty label={def.fullLabel} />}

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ArrowRight, Trophy } from "lucide-react";
 import { penghargaan } from "@/lib/profil-data";
 
@@ -21,9 +22,12 @@ export function Penghargaan() {
         ))}
       </div>
 
-      <button className="mt-2 flex items-center gap-1 text-[10px] font-semibold text-ptpn-greenDark hover:underline">
+      <Link
+        href="/sdm-talenta/profil-karyawan/penghargaan"
+        className="mt-2 flex items-center gap-1 text-[10px] font-semibold text-ptpn-greenDark hover:underline"
+      >
         Lihat semua penghargaan <ArrowRight size={11} />
-      </button>
+      </Link>
     </div>
   );
 }

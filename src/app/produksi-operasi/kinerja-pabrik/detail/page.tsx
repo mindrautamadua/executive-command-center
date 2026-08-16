@@ -1,6 +1,12 @@
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
 import { ProdSidebar } from "@/components/prod/ProdSidebar";
+import {
+  DetailCard,
+  DetailHeader,
+  DetailNotes,
+  Pill,
+  TD,
+  TH,
+} from "@/components/prod/detail/parts";
 import { DataTrustStrip } from "@/components/hc/DataTrustStrip";
 import { prodDataTrust } from "@/lib/produksi-data";
 import {
@@ -25,50 +31,6 @@ export const metadata = { title: "Detail Kinerja Pabrik & Utilisasi — PTPN Gro
 const num = (v: number, d = 1) =>
   v.toLocaleString("id-ID", { minimumFractionDigits: d, maximumFractionDigits: d });
 
-/* ── elemen kecil bersama halaman detail (mockup) ─────────────────── */
-
-function Pill({ tone, children }: { tone: "good" | "warn" | "bad"; children: React.ReactNode }) {
-  const cls =
-    tone === "good"
-      ? "bg-emerald-500/10 text-emerald-600"
-      : tone === "warn"
-        ? "bg-amber-500/10 text-amber-600"
-        : "bg-red-500/10 text-red-600";
-  return (
-    <span className={`inline-block rounded-full px-2 py-[2px] text-[8px] font-bold ${cls}`}>
-      {children}
-    </span>
-  );
-}
-
-function DetailCard({
-  id,
-  title,
-  subtitle,
-  children,
-  note,
-}: {
-  id: string;
-  title: string;
-  subtitle: string;
-  children: React.ReactNode;
-  note?: string;
-}) {
-  return (
-    <section id={id} className="card scroll-mt-4 px-4 pb-3 pt-3">
-      <h3 className="text-[10px] font-extrabold uppercase tracking-[0.05em] text-ink-900">
-        {title}
-      </h3>
-      <p className="mt-[3px] text-[9px] text-ink-500">{subtitle}</p>
-      <div className="mt-2 overflow-x-auto">{children}</div>
-      {note && <p className="mt-2 text-[8px] leading-snug text-ink-400">{note}</p>}
-    </section>
-  );
-}
-
-const TH = "px-2 py-1.5 text-left text-[8px] font-extrabold uppercase tracking-[0.04em] text-ink-400";
-const TD = "px-2 py-1.5 text-[9px] text-ink-700 border-t border-[var(--border-hair)]";
-
 /* ── halaman ──────────────────────────────────────────────────────── */
 
 export default function KinerjaPabrikDetailPage() {
@@ -80,29 +42,12 @@ export default function KinerjaPabrikDetailPage() {
       <ProdSidebar active="Kinerja Pabrik" />
 
       <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
-        {/* header detail */}
-        <div className="px-5 pt-4">
-          <Link
-            href="/produksi-operasi/kinerja-pabrik"
-            className="flex items-center gap-1 text-[9.5px] font-semibold text-ptpn-green hover:underline"
-          >
-            <ArrowLeft size={11} /> Kembali ke Kinerja Pabrik
-          </Link>
-          <div className="mt-1.5 flex flex-wrap items-baseline justify-between gap-2">
-            <div>
-              <h1 className="text-[17px] font-extrabold text-ink-900">
-                Kinerja Pabrik &amp; Utilisasi — Detail
-              </h1>
-              <p className="mt-0.5 text-[9.5px] text-ink-500">
-                Rincian per unit di balik kartu ringkas · 64 pabrik aktif (36 PKS · 17 PG · 9 Karet
-                · 5 Teh) · data per 31 Mei 2026 (YTD)
-              </p>
-            </div>
-            <span className="text-[8.5px] font-semibold text-amber-600">
-              Mockup — angka ilustratif konsisten dengan kartu ringkas
-            </span>
-          </div>
-        </div>
+        <DetailHeader
+          backHref="/produksi-operasi/kinerja-pabrik"
+          backLabel="Kembali ke Kinerja Pabrik"
+          title="Kinerja Pabrik & Utilisasi — Detail"
+          subtitle="Rincian per unit di balik kartu ringkas · 64 pabrik aktif (36 PKS · 17 PG · 9 Karet · 5 Teh) · data per 31 Mei 2026 (YTD)"
+        />
 
         <div className="flex flex-col gap-3 px-5 pb-5 pt-3">
           <div className="-mb-3">
@@ -383,44 +328,18 @@ export default function KinerjaPabrikDetailPage() {
             </table>
           </DetailCard>
 
-          {/* catatan & definisi */}
-          <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
-            <section className="card px-4 pb-3 pt-3">
-              <h3 className="text-[10px] font-extrabold uppercase tracking-[0.05em] text-ink-900">
-                Catatan Analitik
-              </h3>
-              <ul className="mt-2 space-y-1.5 text-[9px] leading-snug text-ink-600">
-                <li>
-                  · Downtime mekanikal (38%) terkonsentrasi pada 9 PKS berumur &gt;25 tahun —
-                  beririsan dengan daftar Bottom 5 OER.
-                </li>
-                <li>
-                  · 7 PG merah menyumbang 68% jam berhenti giling grup; jendela perbaikan sebelum
-                  puncak giling Jul–Sep sangat pendek.
-                </li>
-                <li>
-                  · Kehilangan gula di tetes 1,52% di atas norma — kualitas masakan &amp;
-                  kristalisasi jadi pengungkit recovery terbesar.
-                </li>
-              </ul>
-            </section>
-            <section className="card px-4 pb-3 pt-3">
-              <h3 className="text-[10px] font-extrabold uppercase tracking-[0.05em] text-ink-900">
-                Definisi &amp; Sumber
-              </h3>
-              <ul className="mt-2 space-y-1.5 text-[9px] leading-snug text-ink-600">
-                <li>· OER = CPO / TBS diolah; norma losses mengacu standar teknis internal.</li>
-                <li>
-                  · Jam berhenti giling = % jam berhenti terhadap jam giling tersedia; overall
-                  recovery = gula dihasilkan / pol tebu.
-                </li>
-                <li>
-                  · Sumber: laporan harian pabrik (SAP PM &amp; MES), konsolidasi Divisi Operasional
-                  — mockup, angka ilustratif.
-                </li>
-              </ul>
-            </section>
-          </div>
+          <DetailNotes
+            analitik={[
+              "Downtime mekanikal (38%) terkonsentrasi pada 9 PKS berumur >25 tahun — beririsan dengan daftar Bottom 5 OER.",
+              "7 PG merah menyumbang 68% jam berhenti giling grup; jendela perbaikan sebelum puncak giling Jul–Sep sangat pendek.",
+              "Kehilangan gula di tetes 1,52% di atas norma — kualitas masakan & kristalisasi jadi pengungkit recovery terbesar.",
+            ]}
+            definisi={[
+              "OER = CPO / TBS diolah; norma losses mengacu standar teknis internal.",
+              "Jam berhenti giling = % jam berhenti terhadap jam giling tersedia; overall recovery = gula dihasilkan / pol tebu.",
+              "Sumber: laporan harian pabrik (SAP PM & MES), konsolidasi Divisi Operasional — mockup, angka ilustratif.",
+            ]}
+          />
         </div>
       </main>
     </div>

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   ArrowRight,
   Check,
@@ -284,9 +285,9 @@ function PerilakuMenonjolCard() {
           </div>
         </div>
       </div>
-      <button className="link-more inline-flex items-center gap-1 pt-2">
+      <Link href="/sdm-talenta/profil-karyawan/rekomendasi-pengembangan" className="link-more inline-flex items-center gap-1 pt-2">
         Lihat rekomendasi pengembangan <ArrowRight size={11} />
-      </button>
+      </Link>
     </div>
   );
 }

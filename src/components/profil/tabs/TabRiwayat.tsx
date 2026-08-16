@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ArrowRight, Briefcase, FileBadge, GraduationCap, Trophy } from "lucide-react";
 import {
   informasiKepegawaianTambahan,
@@ -16,12 +17,19 @@ const RATING_TONE: Record<string, string> = {
   Cukup: "tone-amber",
 };
 
-function LinkMore({ label }: { label: string }) {
+function LinkMore({ label, href }: { label: string; href?: string }) {
+  const cls = "link-more inline-flex items-center gap-1";
   return (
     <div className="mt-auto pt-2.5">
-      <button className="link-more inline-flex items-center gap-1">
-        {label} <ArrowRight size={11} />
-      </button>
+      {href ? (
+        <Link href={href} className={cls}>
+          {label} <ArrowRight size={11} />
+        </Link>
+      ) : (
+        <button className={cls}>
+          {label} <ArrowRight size={11} />
+        </button>
+      )}
     </div>
   );
 }
@@ -66,7 +74,7 @@ function RiwayatJabatanCard() {
           </div>
         ))}
       </div>
-      <LinkMore label="Lihat semua riwayat jabatan" />
+      <LinkMore label="Lihat semua riwayat jabatan" href="/sdm-talenta/profil-karyawan/riwayat-jabatan" />
     </div>
   );
 }
@@ -120,7 +128,7 @@ function RiwayatPendidikanCard() {
           </div>
         ))}
       </div>
-      <LinkMore label="Lihat semua riwayat pendidikan" />
+      <LinkMore label="Lihat semua riwayat pendidikan" href="/sdm-talenta/profil-karyawan/riwayat-pendidikan" />
     </div>
   );
 }
@@ -148,7 +156,7 @@ function PelatihanSertifikasiCard() {
           </div>
         ))}
       </div>
-      <LinkMore label="Lihat semua pelatihan & sertifikasi" />
+      <LinkMore label="Lihat semua pelatihan & sertifikasi" href="/sdm-talenta/profil-karyawan/pelatihan-sertifikasi" />
     </div>
   );
 }
@@ -190,7 +198,7 @@ function PenilaianKinerjaCard() {
           })}
         </tbody>
       </table>
-      <LinkMore label="Lihat semua riwayat kinerja" />
+      <LinkMore label="Lihat semua riwayat kinerja" href="/sdm-talenta/profil-karyawan/kinerja" />
     </div>
   );
 }
@@ -215,7 +223,7 @@ function PenghargaanCard() {
           </div>
         ))}
       </div>
-      <LinkMore label="Lihat semua penghargaan" />
+      <LinkMore label="Lihat semua penghargaan" href="/sdm-talenta/profil-karyawan/penghargaan" />
     </div>
   );
 }
@@ -247,7 +255,7 @@ function MutasiPenugasanCard() {
           ))}
         </tbody>
       </table>
-      <LinkMore label="Lihat semua mutasi & penugasan" />
+      <LinkMore label="Lihat semua mutasi & penugasan" href="/sdm-talenta/profil-karyawan/mutasi-penugasan" />
     </div>
   );
 }
@@ -282,7 +290,7 @@ function PerubahanDataCard() {
           ))}
         </tbody>
       </table>
-      <LinkMore label="Lihat semua perubahan data" />
+      <LinkMore label="Lihat semua perubahan data" href="/sdm-talenta/profil-karyawan/perubahan-data" />
     </div>
   );
 }

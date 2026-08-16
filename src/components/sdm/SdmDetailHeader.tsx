@@ -12,6 +12,8 @@ export function SdmDetailHeader({
   subtitle,
   stat,
   breadcrumb,
+  backHref = "/sdm-talenta",
+  backLabel = "HC Command Center",
 }: {
   icon: ReactNode;
   title: string;
@@ -20,6 +22,9 @@ export function SdmDetailHeader({
   stat: string;
   /** Bagian setelah "SDM & Talenta /" pada breadcrumb. */
   breadcrumb: string;
+  /** Override tautan kembali; default ke overview SDM & Talenta. */
+  backHref?: string;
+  backLabel?: string;
 }) {
   return (
     <ModuleHeader
@@ -28,11 +33,11 @@ export function SdmDetailHeader({
       subtitle={subtitle}
       titleExtra={
         <Link
-          href="/sdm-talenta"
+          href={backHref}
           className="flex items-center gap-1 rounded-lg border border-[#e3e9ef] px-2 py-[3px] text-[9px] font-semibold text-ink-500 transition-colors hover:bg-[#f5f8fa]"
         >
           <ChevronLeft size={11} />
-          HC Command Center
+          {backLabel}
         </Link>
       }
       controls={
