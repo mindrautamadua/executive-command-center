@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowDown, ArrowRight, BrainCircuit, Sparkles } from "lucide-react";
-import { peopleIntelligence } from "@/lib/profil-data";
+import { peopleIntelligence, similarTalent } from "@/lib/profil-data";
 
 /**
  * Sintesis People Intelligence: bukti (performance, capability, People Math,
@@ -41,6 +41,16 @@ export function PeopleIntelligenceCard() {
         </div>
         <p className="mt-1 text-[9.5px] leading-[1.55] text-ink-900">
           {peopleIntelligence.interpretation}
+        </p>
+      </div>
+
+      <div className="mt-2 flex items-start gap-2 rounded-xl border border-[#eef2f6] px-3 py-2">
+        <span className="shrink-0 rounded-md bg-[#f3effd] px-2 py-[3px] text-[9.5px] font-extrabold text-[#7c4fe0]">
+          {similarTalent.skor}
+        </span>
+        <p className="text-[8.5px] leading-snug text-ink-700">
+          <span className="font-bold text-ink-900">Pola talenta serupa: </span>
+          {similarTalent.teks}
         </p>
       </div>
 

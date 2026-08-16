@@ -25,16 +25,12 @@ export const profil = {
 };
 
 export const TABS = [
-  "Overview",
-  "Informasi Pribadi",
-  "Pekerjaan",
-  "Kinerja",
-  "Kompetensi",
-  "Pengembangan",
-  "People Math",
-  "HPI BEM",
-  "Riwayat",
-  "Dokumen",
+  "Executive Overview",
+  "Performance & Capability",
+  "People Intelligence",
+  "Career & Succession",
+  "Development",
+  "Records",
 ];
 
 export const kinerja = {
@@ -1460,4 +1456,72 @@ export const mentorSponsor = {
     { nama: "Dedi Kurniawan", peran: "Asisten Mandor — kandidat backfill", seed: 14 },
     { nama: "2 asisten batch 2024", peran: "Program orientasi asisten baru", seed: 26 },
   ],
+} as const;
+
+/* ── Decision Support: skenario keputusan ────────────────── */
+
+export const decisionScenarios = [
+  {
+    label: "Promosikan Q1 2027",
+    tag: "Direkomendasikan",
+    tone: "green",
+    dampak: [
+      "Backfill aman — Dedi Kurniawan Ready Now",
+      "Seluruh syarat tuntas: RKAP Sep 2026, kompetensi Q4 2026",
+      "Kenaikan masih dalam range grade (compa-ratio 0,95)",
+    ],
+  },
+  {
+    label: "Tunda ke 2028",
+    tag: "Berisiko",
+    tone: "amber",
+    dampak: [
+      "Tenure jabatan >4 thn — melewati median promosi kohort",
+      "Risiko retensi naik; engagement bisa tergerus",
+      "Kandidat cadangan (Andi) berpeluang diambil unit lain",
+    ],
+  },
+  {
+    label: "Promosikan sekarang (2026)",
+    tag: "Tidak disarankan",
+    tone: "red",
+    dampak: [
+      "3 dari 8 syarat jabatan target belum tuntas",
+      "Belum pernah memimpin siklus RKAP penuh",
+      "Risiko gagal di siklus anggaran pertama tinggi",
+    ],
+  },
+] as const;
+
+/* ── Delta sejak review terakhir ─────────────────────────── */
+
+export const deltaSinceReview = {
+  sejak: "Sejak Komite Talenta Mar 2026",
+  items: [
+    { label: "People Math Score", dari: "84", ke: "87", baik: true },
+    { label: "Leadership Readiness", dari: "72%", ke: "86%", baik: true },
+    { label: "Engagement Score", dari: "82", ke: "86", baik: true },
+    { label: "Progress IDP 2026", dari: "40%", ke: "65%", baik: true },
+    { label: "Readiness Risk", dari: "Medium", ke: "Medium — menunggu RKAP Sep 2026", baik: false },
+  ],
+} as const;
+
+/* ── Nilai finansial talenta ─────────────────────────────── */
+
+export const costOfLoss = {
+  estimasi: "Rp 1,8–2,5 M",
+  rincian: [
+    "Rekrutmen & seleksi pengganti eksternal",
+    "Ramp-up 12–18 bulan hingga produktivitas setara",
+    "Potensi penurunan yield afdeling selama transisi",
+  ],
+  investasiRetensi: "±Rp 150 jt/tahun",
+  rasio: "Rasio biaya kehilangan vs retensi ≈ 14 : 1",
+} as const;
+
+/* ── Pola talenta serupa ─────────────────────────────────── */
+
+export const similarTalent = {
+  skor: "84%",
+  teks: "Profil serupa dengan 3 Afdeling Manager berkinerja terbaik Regional 1 saat mereka menjabat Asisten Afdeling — pola trajectory kinerja, People Math, usia, dan jalur karier.",
 } as const;
