@@ -11,10 +11,10 @@ export const profil = {
   meta: {
     statusKaryawan: "Karyawan Tetap",
     sejak: "Sejak 12 Jan 2018",
-    nik: "1801123400987001",
-    ttl: "Medan, 12 Mar 1994",
+    nik: "1801 •••• •••• 7001",
+    ttl: "Medan, •• ••• 1994",
     email: "rizky.putra@ptpn4.co.id",
-    telepon: "0812-3456-7890",
+    telepon: "0812-••••-7890",
   },
   singkat: {
     usia: "31 tahun",
@@ -147,12 +147,12 @@ export const dataPribadi = {
   ],
   kanan: [
     { icon: "mapPin", label: "Tempat Lahir", value: "Medan" },
-    { icon: "calendar", label: "Tanggal Lahir", value: "12 Maret 1994" },
+    { icon: "calendar", label: "Tanggal Lahir", value: "•• Maret 1994" },
     { icon: "clock", label: "Usia", value: "31 tahun" },
     { icon: "droplet", label: "Golongan Darah", value: "O" },
-    { icon: "file", label: "NPWP", value: "12.345.678.9-123.000" },
-    { icon: "heartPulse", label: "No. BPJS\nKesehatan", value: "0001234567890" },
-    { icon: "shield", label: "No. BPJS\nKetenagakerjaan", value: "1901234567890001" },
+    { icon: "file", label: "NPWP", value: "12.•••.•••.9-123.000" },
+    { icon: "heartPulse", label: "No. BPJS\nKesehatan", value: "0001 •••• ••890" },
+    { icon: "shield", label: "No. BPJS\nKetenagakerjaan", value: "1901 •••• •••• 0001" },
   ],
 };
 
@@ -160,33 +160,33 @@ export const kontakAlamat = {
   alamat: [
     {
       judul: "Alamat Domisili",
-      baris: ["Jl. Merdeka No. 45", "Pematang Siantar, Sumatera Utara 21111", "Indonesia"],
+      baris: ["Jl. M•••••• No. ••", "Pematang Siantar, Sumatera Utara 21111", "Indonesia"],
     },
     {
       judul: "Alamat KTP",
-      baris: ["Jl. Merdeka No. 45", "Pematang Siantar, Sumatera Utara 21111", "Indonesia"],
+      baris: ["Jl. M•••••• No. ••", "Pematang Siantar, Sumatera Utara 21111", "Indonesia"],
     },
   ],
   kontak: [
-    { label: "Email Pribadi", value: "rizky.putra94@gmail.com" },
-    { label: "No. Handphone", value: "0812-3456-7890", badge: "WhatsApp" },
-    { label: "No. Telepon Rumah", value: "(0622) 123456" },
+    { label: "Email Pribadi", value: "r••••.putra94@gmail.com" },
+    { label: "No. Handphone", value: "0812-••••-7890", badge: "WhatsApp" },
+    { label: "No. Telepon Rumah", value: "(0622) ••••56" },
   ],
 };
 
 export const dokumenIdentitas = [
-  { label: "Nomor KTP", value: "1273041203940001" },
-  { label: "Nomor SIM", value: "1203-9403-000123" },
-  { label: "Paspor", value: "C7234567" },
-  { label: "No. Kartu Keluarga", value: "1273041203940001" },
+  { label: "Nomor KTP", value: "1273 •••• •••• 0001" },
+  { label: "Nomor SIM", value: "1203-••••-•••123" },
+  { label: "Paspor", value: "C7••••67" },
+  { label: "No. Kartu Keluarga", value: "1273 •••• •••• 0001" },
   { label: "No. Kartu Prakerja", value: "-" },
 ];
 
 export const kontakDarurat = [
   { label: "Nama", value: "Siti Aisyah" },
   { label: "Hubungan", value: "Istri" },
-  { label: "No. Handphone", value: "0813-9876-5432" },
-  { label: "Alamat", value: "Jl. Merdeka No. 45, Pematang Siantar, Sumatera Utara 21111" },
+  { label: "No. Handphone", value: "0813-••••-5432" },
+  { label: "Alamat", value: "Jl. M•••••• No. ••, Pematang Siantar, Sumatera Utara" },
 ];
 
 export const informasiTambahan = {
@@ -271,8 +271,8 @@ export const kompensasiBenefit = [
   { label: "Skala Gaji", value: "G7 - Officer", icon: "wallet" },
   { label: "Tunjangan Jabatan", value: "Asisten Afdeling", icon: "badgeCheck" },
   { label: "Tunjangan Lokasi", value: "Wilayah 1", icon: "mapPin" },
-  { label: "BPJS Kesehatan", value: "Aktif - 0001 2345 6789", icon: "heartPulse" },
-  { label: "BPJS Ketenagakerjaan", value: "Aktif - 1902 3456 7890", icon: "shield" },
+  { label: "BPJS Kesehatan", value: "Aktif - 0001 •••• 6789", icon: "heartPulse" },
+  { label: "BPJS Ketenagakerjaan", value: "Aktif - 1902 •••• 7890", icon: "shield" },
 ];
 
 export const strukturOrganisasi = [
@@ -679,9 +679,9 @@ export const riwayatPerubahanData = [
 ];
 
 export const informasiKepegawaianTambahan = [
-  { label: "Nomor NPWP", value: "12.345.678.9-123.000" },
-  { label: "No. BPJS Kesehatan", value: "0001234567890" },
-  { label: "No. BPJS Ketenagakerjaan", value: "1901234567890001" },
+  { label: "Nomor NPWP", value: "12.•••.•••.9-123.000" },
+  { label: "No. BPJS Kesehatan", value: "0001 •••• ••890" },
+  { label: "No. BPJS Ketenagakerjaan", value: "1901 •••• •••• 0001" },
   { label: "Tanggal Bergabung Perusahaan", value: "12 Jan 2018" },
   { label: "Masa Kerja di Perusahaan", value: "7 tahun 7 bulan" },
 ];
@@ -1189,3 +1189,43 @@ export const hpiBemProyeksi = {
 
 export const hpiBemFooter =
   "adalah proses berkelanjutan. Review dan update dilakukan minimal setiap 6 bulan atau ketika ada perubahan signifikan pada peran / lingkungan kerja.";
+
+/* ── Executive Talent Card (hero) ────────────────────────── */
+
+export const talentSignal = [
+  { label: "Performance", value: "4,8 / 5,0", tone: "green" },
+  { label: "Potential", value: "High", tone: "green" },
+  { label: "Readiness", value: "1–2 Tahun", tone: "amber" },
+  { label: "Critical Role Fit", value: "High", tone: "green" },
+  { label: "Succession Risk", value: "Low", tone: "green" },
+  { label: "Mobility", value: "High", tone: "green" },
+] as const;
+
+export const executiveAssessment =
+  "Eksekutor operasional yang kuat dengan potensi kepemimpinan tinggi. Direkomendasikan masuk pipeline suksesi Afdeling Manager dalam 12–24 bulan; area pengembangan utama: kepemimpinan strategis.";
+
+/** Ringkas identitas di bawah nama: grade · usia · tenure · pendidikan. */
+export const heroRingkas = "G7 · 31 tahun · Tenure 8 thn 4 bln · S1 Agronomi";
+
+/* ── Talent Risk ─────────────────────────────────────────── */
+
+export const talentRisk = {
+  items: [
+    { label: "Flight Risk", level: "Low" },
+    { label: "Succession Risk", level: "Low" },
+    { label: "Critical Skill Risk", level: "Medium" },
+    { label: "Retention Risk", level: "Low" },
+    { label: "Readiness Risk", level: "Medium" },
+  ],
+  primary: "Kesenjangan pengalaman kepemimpinan lintas unit",
+} as const;
+
+/* ── Recommended HC Actions ──────────────────────────────── */
+
+export const hcActions = [
+  { kategori: "Succession", aksi: "Masukkan ke succession pool Afdeling Manager Regional 1.", status: "Disetujui komite" },
+  { kategori: "Development", aksi: "Tugaskan Strategic Leadership Development Program (Q4 2026).", status: "Dijadwalkan" },
+  { kategori: "Mobility", aksi: "Pertimbangkan penugasan lintas kebun/regional dalam 12 bulan.", status: "Diusulkan" },
+  { kategori: "Career", aksi: "Target jabatan berikutnya: Afdeling Manager (12–24 bulan).", status: "Aktif" },
+  { kategori: "Retention", aksi: "Pertahankan prioritas retensi; tinjau paket saat promosi.", status: "Aktif" },
+] as const;

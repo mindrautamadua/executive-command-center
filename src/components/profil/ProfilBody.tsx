@@ -4,6 +4,8 @@ import { useState } from "react";
 import { ProfilHero } from "./ProfilHero";
 import { ProfilTabs } from "./ProfilTabs";
 import { RingkasanKinerja } from "./RingkasanKinerja";
+import { TalentRiskCard } from "./TalentRiskCard";
+import { RekomendasiHcCard } from "./RekomendasiHcCard";
 import { InformasiJabatan } from "./InformasiJabatan";
 import { TalentPotential } from "./TalentPotential";
 import { KompetensiUtama } from "./KompetensiUtama";
@@ -28,6 +30,10 @@ function Overview() {
         <RingkasanKinerja />
         <InformasiJabatan />
         <TalentPotential />
+      </div>
+      <div className="grid grid-cols-[minmax(0,380fr)_minmax(0,680fr)] gap-3">
+        <TalentRiskCard />
+        <RekomendasiHcCard />
       </div>
       <div className="grid grid-cols-3 gap-3">
         <KompetensiUtama />
