@@ -3,6 +3,7 @@
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { komposisiKaryawan, sdmKonteks, sdmKpi } from "@/lib/data";
+import { peopleCapability } from "@/lib/ceo-data";
 import { CHART_TOOLTIP_STYLE } from "@/lib/chart-palette";
 import { Delta } from "./ui/Delta";
 import { DetailLink } from "./DetailLink";
@@ -45,6 +46,30 @@ export function KinerjaSdm() {
       */}
       <div className="mt-1.5 truncate text-[8.5px] text-ink-400" title={sdmKonteks}>
         {sdmKonteks}
+      </div>
+
+      {/*
+        People capability, bukan statistik HR: posisi kritikal mana yang
+        mengancam eksekusi strategi bila suksesinya tidak siap.
+      */}
+      <div className="mt-1.5 rounded-lg bg-[#fdf5f5] px-2 py-1.5">
+        <div className="text-[8px] font-extrabold uppercase tracking-[0.05em] text-[#ef4444]">
+          Risiko Suksesi Posisi Kritikal
+        </div>
+        <div className="mt-[3px] flex flex-col gap-[2px]">
+          {peopleCapability.criticalPositions.map((p) => (
+            <div key={p.position} className="flex items-center gap-1.5">
+              <span
+                className={`h-[6px] w-[6px] shrink-0 rounded-full ${
+                  p.tone === "red" ? "bg-[#ef4444]" : "bg-[#f5a524]"
+                }`}
+              />
+              <span className="truncate text-[8.5px] text-ink-700" title={p.position}>
+                {p.position}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
 
       <div className="mt-1.5 text-[9px] font-medium text-ink-500">

@@ -15,6 +15,10 @@ import { KinerjaSdm } from "@/components/KinerjaSdm";
 import { KpiStrategis } from "@/components/KpiStrategis";
 import { AnalitikPrediktif } from "@/components/AnalitikPrediktif";
 import { AiInsight } from "@/components/AiInsight";
+import { CeoMorningBrief } from "@/components/CeoMorningBrief";
+import { CeoDecisionQueue } from "@/components/CeoDecisionQueue";
+import { CeoValueCreation } from "@/components/CeoValueCreation";
+import { EnterpriseRiskValue } from "@/components/EnterpriseRiskValue";
 
 /** Kepala seksi kecil bergaya HC ECC, memisahkan kelompok kartu. */
 function SectionLabel({ children }: { children: React.ReactNode }) {
@@ -36,8 +40,24 @@ export default function Page() {
       <div className="px-5 pb-5">
         <DataTrustStrip />
 
+        <CeoMorningBrief />
+
         <SectionLabel>Key Strategic KPI</SectionLabel>
         <KpiStrip />
+
+        <SectionLabel>Keputusan &amp; Penciptaan Nilai</SectionLabel>
+        <div className="grid grid-cols-1 items-stretch gap-3 xl:grid-cols-[minmax(0,1fr)_330px]">
+          <div
+            className="anim-rise grid min-w-0 grid-cols-1 items-stretch gap-3 lg:grid-cols-2"
+            style={{ "--d": "40ms" } as React.CSSProperties}
+          >
+            <CeoValueCreation />
+            <EnterpriseRiskValue />
+          </div>
+          <div className="anim-rise min-w-0" style={{ "--d": "70ms" } as React.CSSProperties}>
+            <CeoDecisionQueue />
+          </div>
+        </div>
 
         <SectionLabel>Operasi &amp; Kinerja Regional</SectionLabel>
         <div className="grid grid-cols-1 items-start gap-3 xl:grid-cols-[minmax(0,1fr)_330px]">

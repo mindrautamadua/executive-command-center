@@ -13,6 +13,8 @@ import {
   Scale,
   HardHat,
   Eye,
+  Gavel,
+  TrendingUp,
   type LucideIcon,
 } from "lucide-react";
 
@@ -79,6 +81,38 @@ export const NAV_SECTIONS: NavSection[] = [
       { label: "Risiko & Kepatuhan", href: "/risiko-kepatuhan", icon: ShieldCheck, ready: true },
       { label: "Hukum", href: "/hukum", icon: Scale, ready: true },
       { label: "ESG & Sustainability", href: "/esg-sustainability", icon: Leaf, ready: true },
+    ],
+  },
+];
+
+/**
+ * Menu Mode CEO: tujuh pintu sesuai cara CEO berpikir (keputusan, nilai,
+ * risiko, strategi, orang, pasar) — bukan struktur direktorat. Semua item
+ * menunjuk halaman yang sudah ada; mode ini hanya mengubah pintu masuknya.
+ */
+export const CEO_NAV_SECTIONS: NavSection[] = [
+  {
+    items: [{ label: "Overview", href: "/", icon: Home, ready: true }],
+  },
+  {
+    title: "Mode CEO",
+    items: [
+      {
+        label: "Keputusan",
+        href: "/strategi-kinerja/keputusan-bod",
+        icon: Gavel,
+        ready: true,
+      },
+      {
+        label: "Nilai",
+        href: "/strategi-kinerja/value-creation",
+        icon: TrendingUp,
+        ready: true,
+      },
+      { label: "Risiko", href: "/risiko-kepatuhan", icon: ShieldCheck, ready: true },
+      { label: "Strategi", href: "/strategi-kinerja", icon: LineChart, ready: true },
+      { label: "Talenta", href: "/sdm-talenta", icon: Users, ready: true },
+      { label: "Pasar", href: "/pemasaran-penjualan", icon: ShoppingBag, ready: true },
     ],
   },
 ];

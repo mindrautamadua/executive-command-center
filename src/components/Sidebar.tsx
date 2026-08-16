@@ -5,15 +5,18 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import { PtpnLogo } from "./PtpnLogo";
-import { NAV_SECTIONS } from "@/lib/nav";
+import { CEO_NAV_SECTIONS, NAV_SECTIONS } from "@/lib/nav";
 import { dataTrust } from "@/lib/hc-data";
 import { useSidebarCollapsed } from "@/components/shared/useSidebarCollapsed";
+import { useNavMode, type NavMode } from "@/components/shared/useNavMode";
 
 export function Sidebar() {
   const pathname = usePathname();
   const navRef = useRef<HTMLElement>(null);
   const [pill, setPill] = useState<{ top: number; height: number } | null>(null);
   const { collapsed, toggle } = useSidebarCollapsed();
+  const { mode, set: setMode } = useNavMode();
+  const sections = mode === "ceo" ? CEO_NAV_SECTIONS : NAV_SECTIONS;
 
   // Pill hijau meluncur mengikuti item aktif, diukur ulang saat rute berubah.
   useLayoutEffect(() => {
@@ -26,7 +29,7 @@ export function Sidebar() {
     measure();
     window.addEventListener("resize", measure);
     return () => window.removeEventListener("resize", measure);
-  }, [pathname, collapsed]);
+  }, [pathname, collapsed, mode]);
 
   return (
     <aside
@@ -49,6 +52,31 @@ export function Sidebar() {
         )}
       </div>
 
+      {/* mode navigasi: CEO (tujuh pintu keputusan) vs fungsional (per dimensi) */}
+      {!collapsed && (
+        <div className="mx-3 mb-1.5 flex rounded-lg bg-[#f0f3f6] p-[3px]">
+          {(
+            [
+              { id: "ceo", label: "CEO" },
+              { id: "fungsional", label: "Fungsional" },
+            ] as { id: NavMode; label: string }[]
+          ).map((m) => (
+            <button
+              key={m.id}
+              type="button"
+              onClick={() => setMode(m.id)}
+              className={`flex-1 rounded-md py-[5px] text-[9px] font-bold transition-colors ${
+                mode === m.id
+                  ? "bg-white text-ptpn-green shadow-card"
+                  : "text-ink-500 hover:text-ink-700"
+              }`}
+            >
+              {m.label}
+            </button>
+          ))}
+        </div>
+      )}
+
       {/* nav */}
       <nav ref={navRef} className="scroll-thin relative flex-1 overflow-y-auto px-3 pb-2">
         {pill && (
@@ -58,7 +86,7 @@ export function Sidebar() {
             style={{ transform: `translateY(${pill.top}px)`, height: pill.height }}
           />
         )}
-        {NAV_SECTIONS.map((section, si) => (
+        {sections.map((section, si) => (
           <div key={section.title ?? si}>
             {section.title &&
               (collapsed ? (

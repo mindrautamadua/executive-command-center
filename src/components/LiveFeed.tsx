@@ -19,8 +19,12 @@ function Items() {
 export function LiveFeed() {
   return (
     <div className="flex h-[36px] items-center border-t border-[#e9eef3] bg-white">
-      <div className="relative flex h-full shrink-0 items-center bg-gradient-to-r from-[#7ed957] to-[#1a9c5b] pl-5 pr-7 text-[10px] font-bold tracking-[0.05em] text-white">
-        LIVE FEED
+      {/* Marquee & tinggi bar tidak diubah — hanya label yang menjelaskan perannya. */}
+      <div className="relative flex h-full shrink-0 items-center gap-1.5 bg-gradient-to-r from-[#7ed957] to-[#1a9c5b] pl-5 pr-7 text-[10px] font-bold tracking-[0.05em] text-white">
+        MARKET PULSE
+        <span className="rounded bg-white/20 px-1 py-[1px] text-[7.5px] font-bold tracking-[0.06em]">
+          LIVE
+        </span>
         <span className="absolute -right-[10px] top-0 h-full w-[20px] skew-x-[-14deg] bg-[#1a9c5b]" />
       </div>
 

@@ -4,9 +4,10 @@ Dokumen ini merangkum seluruh halaman aplikasi beserta card/section/chart yang d
 
 Pola umum yang berulang di hampir semua halaman:
 
-- **Sidebar navigasi** (Sidebar utama, SdmSidebar untuk modul SDM, atau DimensionSidebar untuk dimensi non-SDM).
+- **Sidebar navigasi** (Sidebar utama, SdmSidebar untuk modul SDM, atau DimensionSidebar untuk dimensi non-SDM) — bisa diciutkan/diperlebar user (tombol Ciutkan Menu, tersimpan di localStorage); footer sidebar memuat panel data-trust (Data as-of, Last Refresh, Data Quality Score). Sidebar utama punya toggle dua mode navigasi (CEO vs Fungsional, tersimpan di localStorage).
 - **Header halaman** — judul, subjudul, dan filter (Periode, Subholding/Level Organisasi).
-- **Data Trust Strip** — strip tipis status kepercayaan data (data as-of, last refresh, cakupan, sumber).
+- **Data Trust Strip** — strip tipis status kepercayaan data (data as-of, last refresh, cakupan, sumber); angka Quality dan Data as-of punya popover rincian (Completeness/Accuracy/Timeliness/Consistency dan effective date vs system synchronization).
+- Seluruh halaman fluid-responsive (grid reflow 1 → 2 → komposisi penuh pada breakpoint `lg`/`xl`) dan mendukung mode dark.
 - **KPI Strip** — deretan kartu metrik utama dengan nilai, delta, dan sparkline.
 - Card **Insight & Rekomendasi (Decision-grade)** di bagian bawah halaman dimensi.
 - Halaman drill-down SDM memakai panel samping **Catatan Analitik** dan **Definisi & Sumber**.
@@ -15,13 +16,19 @@ Pola umum yang berulang di hampir semua halaman:
 
 # 1. Dashboard Utama (`/`)
 
-- **Data Trust** — strip indikator kepercayaan data (Data Trust Index, as-of date, cakupan sumber).
+Urutan seksi: Data Trust → CEO Morning Brief → "Key Strategic KPI" → "Keputusan & Penciptaan Nilai" (kolom utama: Value Creation + Enterprise Risk-to-Value; rail kanan: Antrian Keputusan CEO) → "Operasi & Kinerja Regional" (konten lama, tidak berubah).
+
+- **Data Trust** — strip indikator kepercayaan data; pill navy "Data Bisnis Per <tanggal>" dibuat dominan di posisi pertama, Refresh Sistem diturunkan jadi metrik sekunder (hierarki periode bisnis vs sinkronisasi sistem).
+- **CEO Morning Brief** — band full-width: lampu status 5 area (Keuangan/Operasi/Strategi/SDM/Risiko) dengan micro-note, "3 Hal yang Berubah", "3 Keputusan Diperlukan" (sumber sama dengan Strategy Decision Center), dan satu hal yang dipantau.
 - **Key Strategic KPI (KPI Strip)** — 7 kartu KPI korporat (Pendapatan Konsolidasi, EBITDA, Laba Bersih, ROA, dll.) dengan sparkline + delta vs RKAP.
+- **Value Creation** — headline Rp 1,86 T / target FY Rp 4,2 T (44%), mini area chart realisasi vs jalur target, dan dekomposisi driver (hijau) vs leakage (merah) berbentuk bar list.
+- **Enterprise Risk-to-Value** — top 5 risiko enterprise dikonversi ke eksposur rupiah; tiap baris membawa likelihood, pemilik, dan tindakan.
+- **Antrian Keputusan CEO** — rail kanan seksi Keputusan & Penciptaan Nilai; versi ringkas Strategy Decision Center (judul + pill eksposur + badge overdue + satu baris keputusan) dengan tautan ke `/strategi-kinerja/keputusan-bod`.
 - **Sebaran Operasi Grup** — peta Indonesia interaktif dengan pewarnaan choropleth Pendapatan YTD per regional.
 - **Kinerja Regional** — tabel/bar list peringkat kinerja per regional.
 - **Operasional Grup** — kartu metrik operasional grup (produksi, utilisasi, dll.).
 - **Komoditas Utama** — breakdown kinerja per komoditas (sawit, gula, karet, teh).
-- **Kinerja SDM** — ringkasan metrik people (headcount, produktivitas, turnover) sebagai jembatan ke modul SDM.
+- **Kinerja SDM** — ringkasan metrik people (headcount, produktivitas, turnover) sebagai jembatan ke modul SDM; ditambah blok "Risiko Suksesi Posisi Kritikal" (3 posisi dengan tone merah/amber).
 - **Trend Kinerja Keuangan** — line/composed chart tren pendapatan & laba bulanan.
 - **Komposisi (YTD 2026)** — donut komposisi penjualan per segmen.
 - **Kinerja Produksi** — bar chart realisasi produksi vs target.
@@ -29,8 +36,8 @@ Pola umum yang berulang di hampir semua halaman:
 - **Analitik Prediktif** — kartu proyeksi/forecast ringkas.
 - **Alert & Notifikasi Strategis** — rail kanan, daftar alert lintas fungsi berjenjang severitas.
 - **Inisiatif Strategis** — daftar inisiatif korporat + status progres.
-- **Intelijen Eksekutif** — feed berita & informasi eksternal relevan.
-- **AI Insight / Dasar Perhitungan** — panel insight AI naratif dengan toggle penjelasan basis perhitungan.
+- **External Signals** — sinyal eksternal (Regulasi/Pasar/Iklim/Korporat) dengan chip kategori, angka dampak, dan baris implikasi "Artinya bagi PTPN: …" per item.
+- **AI Insight / Dasar Perhitungan** — panel insight AI naratif dengan toggle penjelasan basis perhitungan; view rincian ditambah "Jembatan Ekonomi" (volume → pendapatan → EBITDA → pajak → laba bersih) serta blok Asumsi & Bukti (AI decision copilot).
 
 ---
 
@@ -85,19 +92,32 @@ Pola umum yang berulang di hampir semua halaman:
 - **Statistik Direktori (5 kartu)** — Total Karyawan, Karyawan Tetap, Karyawan Perempuan, Rising Star, Rata-rata Kinerja.
 - **Pencarian & Tabel Karyawan** — panel pencarian + filter (Unit, Lokasi, Fungsi, Grade, Status, Kategori Talenta), pengurutan, dan tabel karyawan (Nama, NIK, Jabatan, Fungsi, Unit, Lokasi Kerja, Grade, dst.).
 
-## `/sdm-talenta/profil-karyawan`
+## `/sdm-talenta/profil-karyawan` — Talent Intelligence Profile
 
-Kartu hero profil + tab. Card per tab:
+Hero **Executive Talent Card**: identitas + badge taxonomy 3 dimensi (Segmen Rising Star · Status High Potential · Suksesi Ready 1–2 Thn), data sensitif ter-masking, panel **Talent Signal** (8 sinyal termasuk Talent Confidence 87% & Succession Fit 92%), dan strip **Executive Assessment**. Topbar memuat tombol **Generate Talent Brief**. Navigasi 6 domain (decision layer + evidence layer):
 
-- **Tab Overview** — Ringkasan Kinerja 2025, Informasi Jabatan Saat Ini, Talent & Potential (9-box), Kompetensi Utama, Pelatihan & Sertifikasi, Riwayat Pendidikan, Riwayat Jabatan, Penghargaan.
-- **Tab Kinerja** — Ringkasan Kinerja 2025, Skor Kinerja per Komponen, Tren Kinerja 5 Tahun Terakhir, Pencapaian KPI 2025, Feedback & Catatan Penilaian, Riwayat Penilaian Kinerja, Penghargaan & Apresiasi.
-- **Tab Kompetensi** — Ringkasan Kompetensi, Kompetensi Inti Perusahaan, Kompetensi Teknis (Fungsional), Pemetaan Kompetensi (Role Mapping), Kompetensi Perilaku yang Menonjol, Sertifikasi & Pelatihan Relevan, Rencana Pengembangan Kompetensi, Rekomendasi Pengembangan.
-- **Tab Pengembangan** — Ringkasan Pengembangan, Rencana Pengembangan (IDP Aktif), Riwayat Pelatihan, Kesenjangan Kompetensi (Skills Gap), Rekomendasi Pelatihan & Learning, Sertifikasi yang Dimiliki, Jalur Karier & Pengembangan, Catatan Pengembangan.
-- **Tab People Math** — CORE (2 Score Utama), People Math Insight, People Math × Talent Decision.
-- **Tab HPI BEM** — Intervensi & Action Plan, Performance Projection.
-- **Tab Riwayat** — Riwayat Jabatan, Pendidikan, Pelatihan & Sertifikasi, Penilaian Kinerja, Penghargaan, Mutasi & Penugasan, Perubahan Data Kepegawaian, Informasi Tambahan.
-- **Tab Dokumen** — Ringkasan Dokumen, Dokumen Terbaru, Kategori Dokumen, Upload Dokumen Baru, Informasi & Ketentuan Dokumen.
-- Tab lain: Informasi Pribadi, Pekerjaan.
+- **01 Executive Overview** — Ringkasan Kinerja 2025, Informasi Jabatan Saat Ini, Talent & Potential (9-box dengan label koordinat "Box 9"), Performance Trajectory (chart 5 siklus + rata-rata kenaikan 3 thn), Talent Risk (5 indikator + Primary Risk), Perubahan Sejak Review (delta), Skenario Keputusan promosi (3 opsi + konsekuensi), Nilai Finansial Talenta (cost of loss vs retensi), People Intelligence (evidence → AI interpretation → pola talenta serupa 84% → rekomendasi), Recommended HC Actions (5 aksi + status).
+- **02 Performance & Capability** — Business Impact FY 2025 (yield, biaya panen, produksi, zero accident), Capability Profile (strengths / development gap / critical gap / gap-to-role 84%), Umpan Balik 360° (3 tema anonim), lalu detail Kinerja & detail Kompetensi (eks tab lama).
+- **03 People Intelligence** — People Math (Score Overall, CORE + People Math Positioning, People Factors radar + dimensi, Insight, Talent Decision) dan HPI BEM (Ringkasan Performance Gap, Diagnostic 6 sel BEM, Root Cause Analysis, Intervensi & Action Plan, Performance Projection).
+- **04 Career & Succession** — Riwayat Jabatan, Career Velocity, Aspirasi & Mobilitas, Job Profile (akuntabilitas + syarat jabatan + Role Fit 94%), Riwayat Keputusan Komite Talenta (+ link perbandingan kandidat), Backfill Coverage, Kepatuhan & Disiplin (termasuk Fit-to-Work/MCU), Engagement & Wellbeing, Posisi Kompensasi (compa-ratio, tanpa nominal).
+- **05 Development** — Pelatihan & Sertifikasi (dengan blok Dampak ke Kompetensi), Mentor & Sponsor, rencana & riwayat pengembangan (IDP, skills gap, jalur karier, catatan).
+- **06 Records** — Riwayat Pendidikan, Penghargaan (dengan baris impact), Informasi Pribadi, Pekerjaan, Riwayat Kepegawaian, Dokumen.
+
+Halaman detail drill-down profil (semua pola SdmDetailHeader + Detail KPI Strip + tabel + Catatan Analitik/Definisi):
+
+- `/sdm-talenta/profil-karyawan/kinerja` — rincian 9 KPI berbobot FY 2025 + tren skor.
+- `/sdm-talenta/profil-karyawan/kompetensi` — peta 12 kompetensi vs standar grade G7.
+- `/sdm-talenta/profil-karyawan/pelatihan-sertifikasi` — riwayat pelatihan + registri sertifikasi & masa berlaku.
+- `/sdm-talenta/profil-karyawan/penghargaan` — registri penghargaan + tingkat + dasar prestasi.
+- `/sdm-talenta/profil-karyawan/riwayat-pendidikan` — pendidikan formal & non-gelar.
+- `/sdm-talenta/profil-karyawan/riwayat-jabatan` — kronologi jabatan + durasi per jenjang.
+- `/sdm-talenta/profil-karyawan/mutasi-penugasan` — registri SK mutasi & penugasan khusus.
+- `/sdm-talenta/profil-karyawan/perubahan-data` — jejak audit perubahan data kepegawaian.
+- `/sdm-talenta/profil-karyawan/rekomendasi-pengembangan` — rencana IDP pola 70:20:10 per gap.
+- `/sdm-talenta/profil-karyawan/people-factors` — derivative scores People Math per faktor vs benchmark kohort (urut skor tertinggi).
+- `/sdm-talenta/profil-karyawan/job-profile` — akuntabilitas jabatan saat ini + 8 syarat jabatan target.
+- `/sdm-talenta/profil-karyawan/perbandingan-talenta` — matriks 3 kandidat succession pool pada 8 dimensi keputusan.
+- `/sdm-talenta/profil-karyawan/talent-brief` — Executive Talent Brief 1 halaman printable (kop PTPN, talent signal, strengths/priorities, risk, rekomendasi suksesi, HC actions) + tombol Cetak/Simpan PDF.
 
 ---
 
@@ -1871,9 +1891,9 @@ Semua halaman diawali Data Trust Strip dan diakhiri card Insight & Rekomendasi (
 
 # Elemen UI Global
 
-- Sidebar navigasi (utama, SdmSidebar, DimensionSidebar per dimensi).
+- Sidebar navigasi (utama, SdmSidebar, DimensionSidebar per dimensi); sidebar utama punya toggle dua mode: **CEO** (tujuh pintu: Overview, Keputusan, Nilai, Risiko, Strategi, Talenta, Pasar — menunjuk halaman eksisting) vs **Fungsional** (struktur dimensi lengkap), tersimpan di localStorage.
 - Header standar modul (ModuleHeader) dengan filter Periode dan Subholding/Level Organisasi.
-- Live Feed / marquee informasi berjalan.
+- Live Feed / marquee informasi berjalan — label "MARKET PULSE · LIVE"; marquee, maskot, dan ukuran bar tetap.
 - Maskot robot.
 - Toggle tema (terang/gelap).
 - Logo PTPN.

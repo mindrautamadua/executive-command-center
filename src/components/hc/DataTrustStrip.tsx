@@ -28,10 +28,16 @@ export function DataTrustStrip({ data = dataTrust }: { data?: typeof dataTrust }
         Data Trust
       </span>
 
-      {/* Hover menjelaskan beda periode data vs waktu sinkronisasi sistem. */}
-      <div className="group relative flex cursor-help items-center gap-1.5 rounded bg-[#eef2f6] px-2 py-[3px]">
-        <span className="text-[8.5px] text-ink-500">Data as-of</span>
-        <span className="text-[9.5px] font-bold text-ink-900 underline decoration-dotted decoration-[#c6cfd8] underline-offset-2">
+      {/*
+        Periode bisnis dibuat paling dominan di strip: tanpa hierarki tegas,
+        pembaca menganggap "refresh Agustus" berarti "data Agustus" — padahal
+        angka mewakili periode s.d. tanggal efektif. Hover menjelaskan bedanya.
+      */}
+      <div className="group relative flex cursor-help items-center gap-1.5 rounded bg-[#1b3a6b] px-2 py-[3px]">
+        <span className="text-[8px] font-bold uppercase tracking-[0.05em] text-[#b9c7dd]">
+          Data Bisnis Per
+        </span>
+        <span className="text-[10px] font-extrabold uppercase tracking-[0.02em] text-white underline decoration-dotted decoration-[#5f7396] underline-offset-2">
           {data.asOf}
         </span>
         <div className="invisible absolute left-0 top-full z-30 mt-1.5 w-[230px] rounded-xl border border-[#e3e9ef] bg-white p-3 opacity-0 shadow-cardHover transition-opacity duration-150 group-hover:visible group-hover:opacity-100">
@@ -61,8 +67,8 @@ export function DataTrustStrip({ data = dataTrust }: { data?: typeof dataTrust }
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-ptpn-green opacity-60" />
           <span className="relative inline-flex h-[7px] w-[7px] rounded-full bg-ptpn-green" />
         </span>
-        <span className="text-[8.5px] text-ink-500">Last Refresh</span>
-        <span className="text-[9.5px] font-semibold text-ink-900">{data.lastRefresh}</span>
+        <span className="text-[8.5px] text-ink-500">Refresh Sistem</span>
+        <span className="text-[8.5px] font-medium text-ink-500">{data.lastRefresh}</span>
       </div>
 
       <Metric icon={Gauge} label="Coverage" value={data.coverage} />

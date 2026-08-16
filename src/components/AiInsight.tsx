@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { X, ArrowRight, ArrowLeft } from "lucide-react";
 import { aiInsight } from "@/lib/data";
+import { aiCopilot, aiInsightBridge } from "@/lib/ceo-data";
 
 function RobotMascot() {
   return (
@@ -64,14 +65,59 @@ export function AiInsight() {
       <div className="relative flex h-full flex-col overflow-hidden rounded-xl border border-[#dbeff0] bg-gradient-to-br from-[#eefaf7] via-[#f2fbf8] to-[#e6f4fb] px-3.5 pb-2 pt-2.5 shadow-card">
         <h3 className="card-title text-[#0e8f7e]">DASAR PERHITUNGAN</h3>
 
-        <ol className="scroll-thin mt-1 min-h-0 flex-1 space-y-[3px] overflow-y-auto pr-1">
-          {aiInsight.rantai.map((baris, i) => (
-            <li key={baris} className="flex gap-1.5 text-[9px] leading-[1.35] text-ink-700">
-              <span className="shrink-0 font-bold text-[#0e8f7e]">{i + 1}.</span>
-              <span>{baris}</span>
-            </li>
-          ))}
-        </ol>
+        <div className="scroll-thin mt-1 min-h-0 flex-1 overflow-y-auto pr-1">
+          <ol className="space-y-[3px]">
+            {aiInsight.rantai.map((baris, i) => (
+              <li key={baris} className="flex gap-1.5 text-[9px] leading-[1.35] text-ink-700">
+                <span className="shrink-0 font-bold text-[#0e8f7e]">{i + 1}.</span>
+                <span>{baris}</span>
+              </li>
+            ))}
+          </ol>
+
+          {/* Jembatan ekonomi: dari volume sampai laba bersih, baris per baris. */}
+          <div className="mt-1.5 border-t border-[#d5ece7] pt-1">
+            <div className="text-[8px] font-extrabold uppercase tracking-[0.05em] text-[#0e8f7e]">
+              Jembatan Ekonomi
+            </div>
+            <div className="mt-[3px] space-y-[2px]">
+              {aiInsightBridge.map((b) => (
+                <div key={b.label} className="flex items-center justify-between gap-2">
+                  <span className="truncate text-[8.5px] text-ink-500">{b.label}</span>
+                  <span className="shrink-0 text-[8.5px] font-bold tabular-nums text-ink-900">
+                    {b.value}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Rekomendasi tanpa asumsi & bukti akan ditolak pada pertanyaan kedua. */}
+          <div className="mt-1.5 border-t border-[#d5ece7] pt-1">
+            <div className="text-[8px] font-extrabold uppercase tracking-[0.05em] text-[#0e8f7e]">
+              Asumsi
+            </div>
+            <ul className="mt-[3px] space-y-[2px]">
+              {aiCopilot.assumptions.map((a) => (
+                <li key={a} className="flex gap-1 text-[8.5px] leading-[1.35] text-ink-500">
+                  <span className="shrink-0 text-[#0e8f7e]">·</span>
+                  {a}
+                </li>
+              ))}
+            </ul>
+            <div className="mt-1 text-[8px] font-extrabold uppercase tracking-[0.05em] text-[#0e8f7e]">
+              Bukti
+            </div>
+            <ul className="mt-[3px] space-y-[2px]">
+              {aiCopilot.evidence.map((e) => (
+                <li key={e} className="flex gap-1 text-[8.5px] leading-[1.35] text-ink-500">
+                  <span className="shrink-0 text-[#0e8f7e]">·</span>
+                  {e}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
 
         <p className="mt-1 text-[9px] text-ink-400">Keyakinan: {aiInsight.keyakinan}</p>
 
