@@ -60,7 +60,7 @@ export function PabrikLeagueTable() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead title="PKS League Table" action="Lihat Detail" />
+      <SectionHead title="PKS League Table" action="Lihat Detail" href="/produksi-operasi/kinerja-pabrik/detail#pks" />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Top &amp; Bottom 5 PKS berdasarkan OER &amp; Utilisasi · spread OER 3,4 ppt
       </p>

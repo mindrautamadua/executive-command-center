@@ -1028,6 +1028,18 @@ Semua halaman detail memakai KPI Strip + panel **Catatan Analitik** dan **Defini
 - **Losses Breakdown Gula** — kehilangan gula % pol tebu aktual vs norma per komponen (tetes, ampas, blotong, tak terhitung; total 2,24% vs 2,09%); scope SugarCo.
 - **Insight & Rekomendasi (Decision-grade)**.
 
+Semua tombol "Lihat Detail" kartu di halaman ini menaut ke anchor halaman detail di bawah.
+
+## `/produksi-operasi/kinerja-pabrik/detail` (mockup)
+- **Header detail** — tautan kembali, judul, penanda "Mockup — angka ilustratif" + Data Trust Strip.
+- **Utilisasi per Jenis Pabrik** (#utilisasi) — tabel 4 jenis pabrik: unit, kapasitas terpasang, utilisasi vs target, gap (pill), catatan.
+- **Register PKS — Top & Bottom 5** (#pks) — tabel peringkat OER & utilisasi 10 dari 36 PKS dengan pill status.
+- **Register 17 Pabrik Gula** (#pg) — tabel lengkap 17 PG: jam berhenti, overall recovery, status Merah/Waspada/Sehat, urut jam berhenti.
+- **Rincian Downtime** (#downtime) — dua tabel Pareto berdampingan: konsolidasi PKS+PG (6.400 jam YTD) & giling 17 PG (1.870 jam).
+- **Rincian Losses** (#losses) — dua tabel berdampingan: losses CPO (% TBS) & kehilangan gula (% pol tebu), aktual vs norma + status.
+- **Program Capex Revitalisasi** (#capex) — tabel 6 pabrik prioritas: lingkup, capex, progress bar, target, status.
+- **Catatan Analitik** + **Definisi & Sumber** — dua panel catatan penutup.
+
 ## `/produksi-operasi/panen-logistik`
 - **KPI Strip (4 kartu)** — Restan TBS, FFA TBS Masuk, Brondolan Terkutip, Rotasi Panen.
 - **Restan TBS per Regional** — line chart % TBS tidak terangkut <24 jam vs norma.

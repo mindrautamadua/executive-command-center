@@ -20,7 +20,7 @@ export function LossesBreakdown() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead title="Losses Breakdown CPO" action="Lihat Detail" />
+      <SectionHead title="Losses Breakdown CPO" action="Lihat Detail" href="/produksi-operasi/kinerja-pabrik/detail#losses" />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Aktual vs Norma per Komponen (% terhadap TBS) · Total 1,58% vs norma 1,65%
       </p>

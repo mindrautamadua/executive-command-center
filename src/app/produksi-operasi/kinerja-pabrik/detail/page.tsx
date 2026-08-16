@@ -1,0 +1,428 @@
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
+import { ProdSidebar } from "@/components/prod/ProdSidebar";
+import { DataTrustStrip } from "@/components/hc/DataTrustStrip";
+import { prodDataTrust } from "@/lib/produksi-data";
+import {
+  utilisasiByJenis,
+  downtimePareto,
+  pgDowntimePareto,
+  lossesBreakdown,
+  gulaLosses,
+  pabrikLeagueTop,
+  pabrikLeagueBottom,
+  pgReadiness,
+  pgReadinessNote,
+  gulaLossesNote,
+  lossesNote,
+  revitalisasi,
+  PG_JAM_BERHENTI_TARGET_PCT,
+  PG_OVERALL_RECOVERY_TARGET_PCT,
+} from "@/lib/pabrik-data";
+
+export const metadata = { title: "Detail Kinerja Pabrik & Utilisasi — PTPN Group" };
+
+const num = (v: number, d = 1) =>
+  v.toLocaleString("id-ID", { minimumFractionDigits: d, maximumFractionDigits: d });
+
+/* ── elemen kecil bersama halaman detail (mockup) ─────────────────── */
+
+function Pill({ tone, children }: { tone: "good" | "warn" | "bad"; children: React.ReactNode }) {
+  const cls =
+    tone === "good"
+      ? "bg-emerald-500/10 text-emerald-600"
+      : tone === "warn"
+        ? "bg-amber-500/10 text-amber-600"
+        : "bg-red-500/10 text-red-600";
+  return (
+    <span className={`inline-block rounded-full px-2 py-[2px] text-[8px] font-bold ${cls}`}>
+      {children}
+    </span>
+  );
+}
+
+function DetailCard({
+  id,
+  title,
+  subtitle,
+  children,
+  note,
+}: {
+  id: string;
+  title: string;
+  subtitle: string;
+  children: React.ReactNode;
+  note?: string;
+}) {
+  return (
+    <section id={id} className="card scroll-mt-4 px-4 pb-3 pt-3">
+      <h3 className="text-[10px] font-extrabold uppercase tracking-[0.05em] text-ink-900">
+        {title}
+      </h3>
+      <p className="mt-[3px] text-[9px] text-ink-500">{subtitle}</p>
+      <div className="mt-2 overflow-x-auto">{children}</div>
+      {note && <p className="mt-2 text-[8px] leading-snug text-ink-400">{note}</p>}
+    </section>
+  );
+}
+
+const TH = "px-2 py-1.5 text-left text-[8px] font-extrabold uppercase tracking-[0.04em] text-ink-400";
+const TD = "px-2 py-1.5 text-[9px] text-ink-700 border-t border-[var(--border-hair)]";
+
+/* ── halaman ──────────────────────────────────────────────────────── */
+
+export default function KinerjaPabrikDetailPage() {
+  const pgSorted = [...pgReadiness].sort((a, b) => b.jamBerhentiPct - a.jamBerhentiPct);
+  const totalCapex = revitalisasi.reduce((a, r) => a + r.capexRpM, 0);
+
+  return (
+    <div className="flex h-screen min-w-0 overflow-hidden bg-[var(--bg-app)]">
+      <ProdSidebar active="Kinerja Pabrik" />
+
+      <main className="scroll-thin min-w-0 flex-1 overflow-y-auto">
+        {/* header detail */}
+        <div className="px-5 pt-4">
+          <Link
+            href="/produksi-operasi/kinerja-pabrik"
+            className="flex items-center gap-1 text-[9.5px] font-semibold text-ptpn-green hover:underline"
+          >
+            <ArrowLeft size={11} /> Kembali ke Kinerja Pabrik
+          </Link>
+          <div className="mt-1.5 flex flex-wrap items-baseline justify-between gap-2">
+            <div>
+              <h1 className="text-[17px] font-extrabold text-ink-900">
+                Kinerja Pabrik &amp; Utilisasi — Detail
+              </h1>
+              <p className="mt-0.5 text-[9.5px] text-ink-500">
+                Rincian per unit di balik kartu ringkas · 64 pabrik aktif (36 PKS · 17 PG · 9 Karet
+                · 5 Teh) · data per 31 Mei 2026 (YTD)
+              </p>
+            </div>
+            <span className="text-[8.5px] font-semibold text-amber-600">
+              Mockup — angka ilustratif konsisten dengan kartu ringkas
+            </span>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-3 px-5 pb-5 pt-3">
+          <div className="-mb-3">
+            <DataTrustStrip data={prodDataTrust} />
+          </div>
+
+          {/* 1. utilisasi per jenis */}
+          <DetailCard
+            id="utilisasi"
+            title="Utilisasi per Jenis Pabrik"
+            subtitle="Kapasitas terpasang, utilisasi aktual vs target RKAP per jenis pabrik"
+          >
+            <table className="w-full min-w-[520px] border-collapse">
+              <thead>
+                <tr>
+                  <th className={TH}>Jenis Pabrik</th>
+                  <th className={TH}>Unit</th>
+                  <th className={TH}>Kapasitas Terpasang</th>
+                  <th className={TH}>Utilisasi</th>
+                  <th className={TH}>Target</th>
+                  <th className={TH}>Gap</th>
+                  <th className={TH}>Catatan</th>
+                </tr>
+              </thead>
+              <tbody>
+                {utilisasiByJenis.map((u) => {
+                  const gap = u.utilisasiPct - u.targetPct;
+                  return (
+                    <tr key={u.jenis}>
+                      <td className={`${TD} font-bold text-ink-900`}>{u.jenis}</td>
+                      <td className={TD}>{u.unit}</td>
+                      <td className={TD}>{u.kapasitas}</td>
+                      <td className={`${TD} font-bold`}>{num(u.utilisasiPct)}%</td>
+                      <td className={TD}>{num(u.targetPct)}%</td>
+                      <td className={TD}>
+                        <Pill tone={gap >= 0 ? "good" : gap > -8 ? "warn" : "bad"}>
+                          {gap >= 0 ? "+" : ""}
+                          {num(gap)} ppt
+                        </Pill>
+                      </td>
+                      <td className={`${TD} text-ink-400`}>{u.note ?? "—"}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </DetailCard>
+
+          {/* 2. register PKS */}
+          <DetailCard
+            id="pks"
+            title="Register PKS — Top & Bottom 5"
+            subtitle="Peringkat OER & utilisasi per PKS · menampilkan 10 dari 36 PKS"
+            note="Spread OER 3,4 ppt antara PKS terbaik dan terburuk — menaikkan 5 PKS terbawah ke rata-rata grup setara ± Rp 180 M/bln pada volume puncak."
+          >
+            <table className="w-full min-w-[520px] border-collapse">
+              <thead>
+                <tr>
+                  <th className={TH}>#</th>
+                  <th className={TH}>PKS</th>
+                  <th className={TH}>Regional</th>
+                  <th className={TH}>OER</th>
+                  <th className={TH}>Utilisasi</th>
+                  <th className={TH}>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[...pabrikLeagueTop, ...pabrikLeagueBottom].map((p, i) => {
+                  const top = i < pabrikLeagueTop.length;
+                  return (
+                    <tr key={p.pabrik}>
+                      <td className={TD}>{top ? i + 1 : 32 + (i - pabrikLeagueTop.length)}</td>
+                      <td className={`${TD} font-bold text-ink-900`}>{p.pabrik}</td>
+                      <td className={TD}>{p.regional}</td>
+                      <td className={`${TD} font-bold`}>{num(p.oerPct)}%</td>
+                      <td className={TD}>{num(p.utilisasiPct)}%</td>
+                      <td className={TD}>
+                        <Pill tone={top ? "good" : "bad"}>{top ? "Top 5" : "Bottom 5"}</Pill>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </DetailCard>
+
+          {/* 3. register 17 PG */}
+          <DetailCard
+            id="pg"
+            title="Register 17 Pabrik Gula"
+            subtitle={`Jam berhenti giling (target ≤${PG_JAM_BERHENTI_TARGET_PCT}%) & overall recovery (target ≥${PG_OVERALL_RECOVERY_TARGET_PCT}%) · urut jam berhenti tertinggi`}
+            note={pgReadinessNote}
+          >
+            <table className="w-full min-w-[520px] border-collapse">
+              <thead>
+                <tr>
+                  <th className={TH}>#</th>
+                  <th className={TH}>Pabrik Gula</th>
+                  <th className={TH}>Wilayah</th>
+                  <th className={TH}>Jam Berhenti</th>
+                  <th className={TH}>Overall Recovery</th>
+                  <th className={TH}>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {pgSorted.map((p, i) => {
+                  const merah =
+                    p.jamBerhentiPct > PG_JAM_BERHENTI_TARGET_PCT &&
+                    p.overallRecoveryPct < PG_OVERALL_RECOVERY_TARGET_PCT;
+                  const hijau =
+                    p.jamBerhentiPct <= PG_JAM_BERHENTI_TARGET_PCT &&
+                    p.overallRecoveryPct >= PG_OVERALL_RECOVERY_TARGET_PCT;
+                  return (
+                    <tr key={p.pg}>
+                      <td className={TD}>{i + 1}</td>
+                      <td className={`${TD} font-bold text-ink-900`}>{p.pg}</td>
+                      <td className={TD}>{p.wilayah}</td>
+                      <td className={`${TD} font-bold`}>{num(p.jamBerhentiPct)}%</td>
+                      <td className={`${TD} font-bold`}>{num(p.overallRecoveryPct)}%</td>
+                      <td className={TD}>
+                        <Pill tone={merah ? "bad" : hijau ? "good" : "warn"}>
+                          {merah ? "Merah" : hijau ? "Sehat" : "Waspada"}
+                        </Pill>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </DetailCard>
+
+          {/* 4. downtime */}
+          <DetailCard
+            id="downtime"
+            title="Rincian Downtime"
+            subtitle="Pareto penyebab: downtime tak terencana konsolidasi (6.400 jam YTD) & jam berhenti giling 17 PG (1.870 jam, Mei)"
+          >
+            <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+              {(
+                [
+                  ["Konsolidasi PKS + PG (YTD)", downtimePareto],
+                  ["Giling 17 PG (bulan pertama)", pgDowntimePareto],
+                ] as const
+              ).map(([label, rows]) => (
+                <div key={label}>
+                  <div className="text-[8.5px] font-extrabold uppercase tracking-[0.04em] text-ink-400">
+                    {label}
+                  </div>
+                  <table className="mt-1 w-full border-collapse">
+                    <thead>
+                      <tr>
+                        <th className={TH}>Penyebab</th>
+                        <th className={TH}>Jam</th>
+                        <th className={TH}>Porsi</th>
+                        <th className={TH}>Kumulatif</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {rows.map((d) => (
+                        <tr key={d.penyebab}>
+                          <td className={`${TD} font-bold text-ink-900`}>{d.penyebab}</td>
+                          <td className={TD}>{d.jam.toLocaleString("id-ID")}</td>
+                          <td className={TD}>{d.pct}%</td>
+                          <td className={TD}>{d.kumulatifPct}%</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              ))}
+            </div>
+          </DetailCard>
+
+          {/* 5. losses */}
+          <DetailCard
+            id="losses"
+            title="Rincian Losses"
+            subtitle="Losses CPO (% terhadap TBS) & kehilangan gula (% pol tebu) — aktual vs norma per komponen"
+          >
+            <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+              {(
+                [
+                  ["Losses CPO · total 1,58% vs norma 1,65%", lossesBreakdown, lossesNote],
+                  ["Kehilangan Gula · total 2,24% vs norma 2,09%", gulaLosses, gulaLossesNote],
+                ] as const
+              ).map(([label, rows, catatan]) => (
+                <div key={label}>
+                  <div className="text-[8.5px] font-extrabold uppercase tracking-[0.04em] text-ink-400">
+                    {label}
+                  </div>
+                  <table className="mt-1 w-full border-collapse">
+                    <thead>
+                      <tr>
+                        <th className={TH}>Komponen</th>
+                        <th className={TH}>Aktual</th>
+                        <th className={TH}>Norma</th>
+                        <th className={TH}>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {rows.map((l) => (
+                        <tr key={l.komponen}>
+                          <td className={`${TD} font-bold text-ink-900`}>{l.komponen}</td>
+                          <td className={TD}>{num(l.aktualPct, 2)}%</td>
+                          <td className={TD}>{num(l.normaPct, 2)}%</td>
+                          <td className={TD}>
+                            <Pill tone={l.aktualPct > l.normaPct ? "bad" : "good"}>
+                              {l.aktualPct > l.normaPct ? "Di atas norma" : "Terkendali"}
+                            </Pill>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                  <p className="mt-1.5 text-[8px] leading-snug text-ink-400">{catatan}</p>
+                </div>
+              ))}
+            </div>
+          </DetailCard>
+
+          {/* 6. capex revitalisasi */}
+          <DetailCard
+            id="capex"
+            title="Program Capex Revitalisasi"
+            subtitle={`6 pabrik prioritas · total capex Rp ${totalCapex.toLocaleString("id-ID")} M — bagian RKAP capex pabrik`}
+          >
+            <table className="w-full min-w-[560px] border-collapse">
+              <thead>
+                <tr>
+                  <th className={TH}>Pabrik</th>
+                  <th className={TH}>Lingkup</th>
+                  <th className={TH}>Capex (Rp M)</th>
+                  <th className={TH}>Progress</th>
+                  <th className={TH}>Target</th>
+                  <th className={TH}>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {revitalisasi.map((r) => (
+                  <tr key={r.pabrik}>
+                    <td className={`${TD} font-bold text-ink-900`}>{r.pabrik}</td>
+                    <td className={`${TD} text-ink-500`}>{r.lingkup}</td>
+                    <td className={TD}>{r.capexRpM.toLocaleString("id-ID")}</td>
+                    <td className={TD}>
+                      <div className="flex items-center gap-2">
+                        <div className="h-[6px] w-[90px] overflow-hidden rounded-full bg-[var(--surface-3)]">
+                          <div
+                            className={`h-full rounded-full ${
+                              r.status === "Terlambat"
+                                ? "bg-red-500"
+                                : r.status === "Waspada"
+                                  ? "bg-amber-500"
+                                  : "bg-ptpn-green"
+                            }`}
+                            style={{ width: `${r.progressPct}%` }}
+                          />
+                        </div>
+                        <span className="text-[8.5px] font-bold">{r.progressPct}%</span>
+                      </div>
+                    </td>
+                    <td className={TD}>{r.target}</td>
+                    <td className={TD}>
+                      <Pill
+                        tone={
+                          r.status === "On Track"
+                            ? "good"
+                            : r.status === "Waspada"
+                              ? "warn"
+                              : "bad"
+                        }
+                      >
+                        {r.status}
+                      </Pill>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </DetailCard>
+
+          {/* catatan & definisi */}
+          <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
+            <section className="card px-4 pb-3 pt-3">
+              <h3 className="text-[10px] font-extrabold uppercase tracking-[0.05em] text-ink-900">
+                Catatan Analitik
+              </h3>
+              <ul className="mt-2 space-y-1.5 text-[9px] leading-snug text-ink-600">
+                <li>
+                  · Downtime mekanikal (38%) terkonsentrasi pada 9 PKS berumur &gt;25 tahun —
+                  beririsan dengan daftar Bottom 5 OER.
+                </li>
+                <li>
+                  · 7 PG merah menyumbang 68% jam berhenti giling grup; jendela perbaikan sebelum
+                  puncak giling Jul–Sep sangat pendek.
+                </li>
+                <li>
+                  · Kehilangan gula di tetes 1,52% di atas norma — kualitas masakan &amp;
+                  kristalisasi jadi pengungkit recovery terbesar.
+                </li>
+              </ul>
+            </section>
+            <section className="card px-4 pb-3 pt-3">
+              <h3 className="text-[10px] font-extrabold uppercase tracking-[0.05em] text-ink-900">
+                Definisi &amp; Sumber
+              </h3>
+              <ul className="mt-2 space-y-1.5 text-[9px] leading-snug text-ink-600">
+                <li>· OER = CPO / TBS diolah; norma losses mengacu standar teknis internal.</li>
+                <li>
+                  · Jam berhenti giling = % jam berhenti terhadap jam giling tersedia; overall
+                  recovery = gula dihasilkan / pol tebu.
+                </li>
+                <li>
+                  · Sumber: laporan harian pabrik (SAP PM &amp; MES), konsolidasi Divisi Operasional
+                  — mockup, angka ilustratif.
+                </li>
+              </ul>
+            </section>
+          </div>
+        </div>
+      </main>
+    </div>
+  );
+}

@@ -29,7 +29,7 @@ export function CapexRevitalisasi() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "180ms" } as React.CSSProperties}
     >
-      <SectionHead title="Capex Revitalisasi" action="Lihat Detail" />
+      <SectionHead title="Capex Revitalisasi" action="Lihat Detail" href="/produksi-operasi/kinerja-pabrik/detail#capex" />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Progress 6 Pabrik Prioritas · Total Capex Rp 2,2 T
       </p>

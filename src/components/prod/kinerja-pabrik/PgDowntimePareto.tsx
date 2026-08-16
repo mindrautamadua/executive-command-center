@@ -29,7 +29,7 @@ export function PgDowntimePareto() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
-      <SectionHead title="Downtime Pareto PG" action="Lihat Detail" />
+      <SectionHead title="Downtime Pareto PG" action="Lihat Detail" href="/produksi-operasi/kinerja-pabrik/detail#downtime" />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Jam Berhenti Giling per Penyebab (Mei, bulan pertama) · 61% dari 2 penyebab teratas
       </p>

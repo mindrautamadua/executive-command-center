@@ -25,7 +25,7 @@ export function DowntimePareto() {
       style={{ "--d": "120ms" } as React.CSSProperties}
     >
       {/* Jam downtime dicatat gabungan PKS + PG tanpa pecahan subholding — angka tetap konsolidasi. */}
-      <SectionHead title="Downtime Pareto" action="Lihat Detail" badge={<ScopeNote />} />
+      <SectionHead title="Downtime Pareto" action="Lihat Detail" href="/produksi-operasi/kinerja-pabrik/detail#downtime" badge={<ScopeNote />} />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Jam Downtime Tak Terencana YTD per Penyebab · 64% dari 2 penyebab teratas
       </p>

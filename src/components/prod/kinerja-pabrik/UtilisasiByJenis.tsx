@@ -37,7 +37,7 @@ export function UtilisasiByJenis() {
       className="card anim-rise flex h-full flex-col px-4 pb-2.5 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead title="Utilisasi per Jenis Pabrik" action="Lihat Detail" />
+      <SectionHead title="Utilisasi per Jenis Pabrik" action="Lihat Detail" href="/produksi-operasi/kinerja-pabrik/detail#utilisasi" />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Utilisasi Kapasitas vs Target RKAP (%) · 36 PKS · 17 PG · 9 Karet · 5 Teh
       </p>

@@ -63,7 +63,7 @@ export function PgLeagueTable() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "60ms" } as React.CSSProperties}
     >
-      <SectionHead title="PG League Table" action="Lihat Detail" />
+      <SectionHead title="PG League Table" action="Lihat Detail" href="/produksi-operasi/kinerja-pabrik/detail#pg" />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Top &amp; Bottom 5 PG berdasarkan Overall Recovery &amp; Jam Berhenti · spread 9,8 ppt
       </p>

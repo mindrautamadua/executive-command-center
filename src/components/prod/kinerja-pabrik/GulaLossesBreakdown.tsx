@@ -20,7 +20,7 @@ export function GulaLossesBreakdown() {
       className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3"
       style={{ "--d": "180ms" } as React.CSSProperties}
     >
-      <SectionHead title="Losses Breakdown Gula" action="Lihat Detail" />
+      <SectionHead title="Losses Breakdown Gula" action="Lihat Detail" href="/produksi-operasi/kinerja-pabrik/detail#losses" />
       <p className="mt-[3px] text-[9px] text-ink-500">
         Aktual vs Norma per Komponen (% pol tebu) · Total 2,24% vs norma 2,09%
       </p>
