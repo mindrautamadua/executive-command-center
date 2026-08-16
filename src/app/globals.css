@@ -1059,18 +1059,20 @@ body {
 }
 
 /* Scroll-reveal: MotionEnhancer memasang html.js-reveal lalu menandai elemen
-   .in-view via IntersectionObserver. Tanpa JS, kelas html tidak terpasang
-   sehingga animasi jalan normal saat mount (fallback aman). */
-html.js-reveal .anim-rise:not(.in-view),
-html.js-reveal .anim-grow-x:not(.in-view),
-html.js-reveal .anim-draw:not(.in-view),
-html.js-reveal .anim-fade:not(.in-view) {
+   data-in-view via IntersectionObserver. Dipakai data attribute (bukan class)
+   agar mutasi DOM tidak memicu hydration mismatch pada className React.
+   Tanpa JS, kelas html tidak terpasang sehingga animasi jalan normal saat
+   mount (fallback aman). */
+html.js-reveal .anim-rise:not([data-in-view]),
+html.js-reveal .anim-grow-x:not([data-in-view]),
+html.js-reveal .anim-draw:not([data-in-view]),
+html.js-reveal .anim-fade:not([data-in-view]) {
   animation-play-state: paused;
 }
 
 /* Setelah entrance selesai, fill-mode dilepas agar transform hover (lift kartu)
    tidak kalah oleh animation-fill-mode: both. */
-.anim-done {
+[data-anim-done] {
   animation: none;
 }
 
