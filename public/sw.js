@@ -1,18 +1,19 @@
 // Naikkan versi setiap kali shell aplikasi berubah (mis. menu/sidebar) agar
 // cache lama dibuang saat service worker baru aktif.
-const CACHE_NAME = "ecc-cache-v3";
+const CACHE_NAME = "ecc-cache-v4";
 const OFFLINE_URL = "/";
 
 // Precache halaman utama + aset statis dasar.
 const PRECACHE_URLS = ["/", "/icons/icon-192.png", "/icons/icon-512.png"];
 
 self.addEventListener("install", (event) => {
-  event.waitUntil(
-    caches
-      .open(CACHE_NAME)
-      .then((cache) => cache.addAll(PRECACHE_URLS))
-      .then(() => self.skipWaiting())
-  );
+  // Tidak langsung skipWaiting: SW baru menunggu sampai user menekan
+  // "Perbarui Sekarang" (atau hitung mundur habis) di notifikasi in-app.
+  event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(PRECACHE_URLS)));
+});
+
+self.addEventListener("message", (event) => {
+  if (event.data === "SKIP_WAITING") self.skipWaiting();
 });
 
 self.addEventListener("activate", (event) => {
