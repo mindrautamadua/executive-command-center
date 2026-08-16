@@ -10,6 +10,12 @@ import { PerformanceTrajectoryCard } from "./PerformanceTrajectoryCard";
 import { CareerVelocityCard } from "./CareerVelocityCard";
 import { PeopleIntelligenceCard } from "./PeopleIntelligenceCard";
 import { JobProfileCard } from "./JobProfileCard";
+import { BusinessImpactCard } from "./BusinessImpactCard";
+import { AspirasiMobilitasCard } from "./AspirasiMobilitasCard";
+import { BackfillCard } from "./BackfillCard";
+import { KepatuhanCard } from "./KepatuhanCard";
+import { EngagementWellbeingCard } from "./EngagementWellbeingCard";
+import { KompensasiPosisiCard } from "./KompensasiPosisiCard";
 import { InformasiJabatan } from "./InformasiJabatan";
 import { TalentPotential } from "./TalentPotential";
 import { KompetensiUtama } from "./KompetensiUtama";
@@ -45,6 +51,18 @@ function Overview() {
         <RekomendasiHcCard />
       </div>
       <JobProfileCard />
+      <div className="grid grid-cols-[minmax(0,640fr)_minmax(0,420fr)] gap-3">
+        <BusinessImpactCard />
+        <AspirasiMobilitasCard />
+      </div>
+      <div className="grid grid-cols-[minmax(0,560fr)_minmax(0,500fr)] gap-3">
+        <BackfillCard />
+        <KepatuhanCard />
+      </div>
+      <div className="grid grid-cols-[minmax(0,460fr)_minmax(0,600fr)] gap-3">
+        <EngagementWellbeingCard />
+        <KompensasiPosisiCard />
+      </div>
       <div className="grid grid-cols-3 gap-3">
         <KompetensiUtama />
         <PelatihanSertifikasi />

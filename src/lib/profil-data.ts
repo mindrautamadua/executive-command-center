@@ -1311,3 +1311,79 @@ export const jobProfile = {
     { label: "Memimpin 1 siklus RKAP penuh", terpenuhi: false },
   ],
 } as const;
+
+/* ── Business Impact individu ────────────────────────────── */
+
+export const businessImpact = {
+  items: [
+    { label: "Yield TBS Afdeling", value: "22,1", satuan: "ton/ha", vsTarget: "+3% vs target", peer: "Peer kebun: 20,6", tone: "green" },
+    { label: "Biaya Panen", value: "112", satuan: "Rp/kg", vsTarget: "-5% vs target", peer: "Peer kebun: Rp 121", tone: "green" },
+    { label: "Produksi TBS 2025", value: "32.450", satuan: "ton", vsTarget: "104% dari target", peer: "#1 dari 4 afdeling", tone: "green" },
+    { label: "Zero Accident", value: "24", satuan: "bulan", vsTarget: "0 LTI berturut", peer: "Terpanjang di kebun", tone: "green" },
+  ],
+  highlight:
+    "Program efisiensi pupuk yang diinisiasinya menghemat ±Rp 1,2 M/tahun tanpa penurunan yield — diadopsi 2 afdeling lain.",
+  sumber: "SAP Produksi & laporan operasional kebun, FY 2025",
+} as const;
+
+/* ── Aspirasi karier & mobilitas ─────────────────────────── */
+
+export const aspirasiMobilitas = {
+  aspirasi: "Afdeling Manager → Manajer Kebun (10 tahun)",
+  jalur: "Manajerial — Operasional Kebun",
+  relokasi: "Bersedia",
+  cakupanRelokasi: "Seluruh wilayah Sumatera; preferensi Regional 1–2",
+  kendala: "Tidak ada kendala keluarga; anak belum usia sekolah",
+  wawancara: "Career conversation terakhir: Feb 2026, oleh Ahmad Fauzi (atasan langsung)",
+} as const;
+
+/* ── Backfill posisi saat ini ────────────────────────────── */
+
+export const backfill = {
+  posisi: "Asisten Afdeling — Afdeling I, Kebun Tanah Jawa",
+  status: "Aman",
+  kandidat: [
+    { nama: "Dedi Kurniawan", jabatan: "Asisten Mandor — Afdeling I", readiness: "Ready Now", seed: 14 },
+    { nama: "Rina Sari", jabatan: "Asisten Mandor — Afdeling II", readiness: "Siap 1 tahun", seed: 21 },
+  ],
+  catatan: "Promosi Rizky tidak menimbulkan kekosongan kritis; kedua kandidat sudah dalam program pembinaan mandor.",
+} as const;
+
+/* ── Kepatuhan & disiplin ────────────────────────────────── */
+
+export const kepatuhanDisiplin = {
+  items: [
+    { label: "Surat Peringatan (SP)", value: "Nihil", ok: true },
+    { label: "Pelanggaran Etika / WBS", value: "Nihil", ok: true },
+    { label: "Deklarasi Konflik Kepentingan", value: "Lengkap — 2026", ok: true },
+    { label: "Temuan Audit Terkait", value: "Nihil", ok: true },
+  ],
+  verifikasi: "Clear untuk promosi — diverifikasi Bagian SDM & Kepatuhan, 28 Mei 2026",
+} as const;
+
+/* ── Engagement & wellbeing (level agregat, bukan jawaban survey) ── */
+
+export const engagementWellbeing = {
+  indikator: [
+    { label: "Engagement Score", value: "86 / 100", level: "Tinggi", tone: "green" },
+    { label: "eNPS", value: "Promoter", level: "+", tone: "green" },
+    { label: "Utilisasi Cuti", value: "9 dari 12 hari", level: "Sehat", tone: "green" },
+    { label: "Intensitas Lembur", value: "Dalam batas wajar", level: "Normal", tone: "green" },
+    { label: "Indikasi Burnout", value: "Tidak terindikasi", level: "Rendah", tone: "green" },
+  ],
+  sumber: "Pulse Survey Apr 2026 (partisipasi penuh) & data kehadiran HRIS",
+  privasi:
+    "Ditampilkan sebagai level agregat sesuai kebijakan privasi; jawaban survey individual tidak dibuka.",
+} as const;
+
+/* ── Posisi kompensasi (rasio, tanpa nominal) ────────────── */
+
+export const kompensasiPosisi = {
+  compaRatio: "0,95",
+  posisiRange: "Kuartil 2 dalam range grade G7",
+  vsPasar: "-4% vs median pasar perkebunan nasional",
+  kenaikanTerakhir: "Jan 2026 — siklus merit tahunan",
+  implikasi:
+    "Ruang kenaikan tersedia dalam range saat promosi; risiko retensi dari sisi kompensasi rendah–sedang.",
+  privasi: "Nominal tidak ditampilkan; akses penuh melalui modul HC Compensation.",
+} as const;
