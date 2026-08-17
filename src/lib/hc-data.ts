@@ -200,6 +200,13 @@ export const execSignals: ExecSignal[] = [
 export const execRecommendation =
   "Prioritaskan internal mobility + accelerated leadership development sebelum external hiring. Potensi saving Rp 12,6 M.";
 
+/** Metadata analitik rekomendasi eksekutif HC — lihat shared/AiMeta. */
+export const execRecommendationMeta = {
+  jenis: "Rekomendasi",
+  confidencePct: 76,
+  evidence: "127 kandidat internal eligible · 18 suksesor Ready Now · benchmark biaya external hiring",
+} as const;
+
 /* ── 3. Strategic Alignment ───────────────────────────────────────── */
 
 export const strategicObjective = "Meningkatkan Produktivitas & Efisiensi Operasional";
@@ -578,7 +585,7 @@ export const hcAlerts: HcAlert[] = [
 /* ── 13. HC Intelligence Copilot ──────────────────────────────────── */
 
 export const copilotGreeting =
-  "Good morning, Pak Direktur Utama 👋 Tanyakan apa saja tentang People, Talent & Workforce.";
+  "Good morning, Pak Denaldy 👋 Tanyakan apa saja tentang People, Talent & Workforce.";
 
 /** Quick command bergaya decision copilot: verb intelijen + pertanyaan konkret. */
 export const copilotCommands = [

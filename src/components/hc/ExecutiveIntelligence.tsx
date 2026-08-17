@@ -1,8 +1,9 @@
 "use client";
 
 import { BrainCircuit, Sparkles } from "lucide-react";
-import { execIntelCounts, execRecommendation, execSignals } from "@/lib/hc-data";
+import { execIntelCounts, execRecommendation, execRecommendationMeta, execSignals } from "@/lib/hc-data";
 import { ScopeNote } from "../ui/ScopeNote";
+import { AiMeta } from "@/components/shared/AiMeta";
 
 const SIGNAL_TONE = {
   red: {
@@ -73,6 +74,7 @@ export function ExecutiveIntelligence() {
           <span className="font-bold text-ptpn-green">Executive Recommendation: </span>
           {execRecommendation}
         </p>
+        <AiMeta {...execRecommendationMeta} />
       </div>
     </div>
   );

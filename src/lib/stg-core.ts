@@ -71,6 +71,8 @@ export interface StgInsight {
   title: string;
   text: string;
   tone: "good" | "warn" | "bad" | "info";
+  /** Metadata analitik (jenis klaim, keyakinan, bukti) — lihat shared/AiMeta. */
+  meta?: import("@/components/shared/AiMeta").AiMetaInfo;
 }
 
 /* ── Status inisiatif ─────────────────────────────────────────────── */

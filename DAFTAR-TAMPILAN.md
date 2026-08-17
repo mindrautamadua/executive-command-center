@@ -9,7 +9,7 @@ Pola umum yang berulang di hampir semua halaman:
 - **Data Trust Strip** — strip tipis status kepercayaan data (data as-of, last refresh, cakupan, sumber); angka Quality dan Data as-of punya popover rincian (Completeness/Accuracy/Timeliness/Consistency dan effective date vs system synchronization).
 - Seluruh halaman fluid-responsive (grid reflow 1 → 2 → komposisi penuh pada breakpoint `lg`/`xl`) dan mendukung mode dark.
 - **KPI Strip** — deretan kartu metrik utama dengan nilai, delta, dan sparkline.
-- Card **Insight & Rekomendasi (Decision-grade)** di bagian bawah halaman dimensi.
+- Card **Insight & Rekomendasi (Decision-grade)** di bagian bawah halaman dimensi; insight utama (overview Strategi/Keuangan/Risiko + Executive Intelligence HC) membawa metadata analitik `AiMeta`: badge jenis klaim (Korelasi/Kausal/Prediksi/Rekomendasi), keyakinan %, dan sumber bukti.
 - Halaman drill-down SDM memakai panel samping **Catatan Analitik** dan **Definisi & Sumber**.
 
 ---
@@ -1367,6 +1367,7 @@ Semua halaman diawali Data Trust Strip dan diakhiri card Insight & Rekomendasi (
 - **Register Keputusan** — tabel 14 keputusan terkini (PIC, batas waktu, status).
 - **Keputusan per Klasifikasi** — komposisi 46 keputusan YTD.
 - **Agenda Rapat Mendatang** — agenda rapat Direksi & Komisaris + kesiapan materi.
+- **Decision Outcome** — closed loop keputusan yang sudah dieksekusi: tanggal diputus, expected vs actual impact, pill variance, dan lesson learned (3 sampel dari 31 keputusan selesai; penghematan pengadaan selaras group-baseline).
 - **Insight & Rekomendasi (Decision-grade)**.
 
 ## `/strategi-kinerja/kpi-korporat`
@@ -1892,7 +1893,7 @@ Semua halaman diawali Data Trust Strip dan diakhiri card Insight & Rekomendasi (
 # Elemen UI Global
 
 - Sidebar navigasi (utama, SdmSidebar, DimensionSidebar per dimensi); sidebar utama punya toggle dua mode: **CEO** (tujuh pintu: Overview, Keputusan, Nilai, Risiko, Strategi, Talenta, Pasar — menunjuk halaman eksisting) vs **Fungsional** (struktur dimensi lengkap), tersimpan di localStorage.
-- Header standar modul (ModuleHeader) dengan filter Periode dan Subholding/Level Organisasi.
+- Header standar modul (ModuleHeader) dengan filter Periode dan Subholding/Level Organisasi; identitas pengguna = Denaldy Mulino Mauna, Direktur Utama, dengan foto resmi dari ptpn.id (aset lokal `public/direktur-utama-avatar.png`, crop dari `public/direktur-utama.png`).
 - Live Feed / marquee informasi berjalan — label "MARKET PULSE · PER 14 AGU"; tiap instrumen berlabel basis harga (YTD Avg / Spot); marquee, maskot, dan ukuran bar tetap.
 - Maskot robot.
 - Toggle tema (terang/gelap).

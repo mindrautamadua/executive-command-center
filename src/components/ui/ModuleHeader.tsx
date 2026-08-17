@@ -3,7 +3,6 @@
 import type { ReactNode } from "react";
 import { Bell, CalendarDays, ChevronDown, Download } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { PersonAvatar } from "@/components/ui/PersonAvatar";
 import { SubholdingFilter } from "@/components/ui/SubholdingFilter";
 import { ScopeBanner } from "@/components/ui/ScopeNote";
 
@@ -130,11 +129,20 @@ export function ModuleHeader({
           </button>
 
           <div className="flex shrink-0 items-center gap-2.5">
-            <PersonAvatar seed={0} size={36} className="ring-2 ring-[#e6ecf2]" />
+            {/* Foto resmi Dirut dari ptpn.id (dewan-direksi), disimpan lokal di public/. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/direktur-utama-avatar.png"
+              alt="Denaldy Mulino Mauna"
+              width={36}
+              height={36}
+              className="shrink-0 rounded-full bg-slate-200 object-cover ring-2 ring-[#e6ecf2]"
+              style={{ width: 36, height: 36 }}
+            />
             {/* Identitas teks disembunyikan di bawah xl agar header tetap satu baris di tablet. */}
             <div className="hidden leading-tight xl:block">
-              <div className="text-[11px] font-bold text-ink-900">Direktur Utama</div>
-              <div className="text-[9.5px] text-ink-500">BOD</div>
+              <div className="text-[11px] font-bold text-ink-900">Denaldy Mulino Mauna</div>
+              <div className="text-[9.5px] text-ink-500">Direktur Utama</div>
             </div>
             <ChevronDown size={13} className="hidden text-ink-400 xl:block" />
           </div>

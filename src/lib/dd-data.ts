@@ -134,7 +134,8 @@ export const ddEntries: DdEntry[] = [
   {
     term: "Revenue per Employee",
     category: "Produktivitas",
-    definition: "Pendapatan perusahaan per karyawan setara penuh waktu, disajikan dalam Rp juta",
+    definition:
+      "Pendapatan perusahaan per karyawan aktif pada tanggal cut-off, disajikan dalam Rp juta (bukan basis FTE)",
     formula: "Pendapatan YTD (Rp) / headcount aktif — angka grup dari group-baseline (Rp 24,6 T / 70.142)",
     source: "SAP FI-CO",
     frequency: "Bulanan",

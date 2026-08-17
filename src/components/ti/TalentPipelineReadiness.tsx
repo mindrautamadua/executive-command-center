@@ -27,16 +27,16 @@ export function TalentPipelineReadiness() {
               }
             >
               <span
-                className={`text-[10px] font-bold leading-none ${
-                  i === 3 ? "text-ink-700" : "text-white"
-                }`}
+                className={`text-[10px] font-bold leading-none ${i === 3 ? "" : "text-white"}`}
+                style={i === 3 ? { color: "#334155" } : undefined}
               >
                 {s.label}
               </span>
               <span
                 className={`mt-[3px] text-[9px] font-semibold leading-none ${
-                  i === 3 ? "text-ink-500" : "text-white/85"
+                  i === 3 ? "" : "text-white/85"
                 }`}
+                style={i === 3 ? { color: "#475569" } : undefined}
               >
                 {s.value} ({s.pct})
               </span>

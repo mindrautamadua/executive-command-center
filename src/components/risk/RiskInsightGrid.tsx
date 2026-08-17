@@ -1,5 +1,6 @@
 import { ArrowRight, Lightbulb, Sparkles } from "lucide-react";
 import type { RiskInsight } from "@/lib/risk-data";
+import { AiMeta } from "@/components/shared/AiMeta";
 
 /**
  * Kartu Insight & Rekomendasi dimensi Risiko & Kepatuhan (mirror MktInsightGrid /
@@ -37,6 +38,7 @@ export function RiskInsightGrid({ items, cols }: { items: RiskInsight[]; cols: s
                   <span className="font-bold text-ptpn-green">Rekomendasi:</span> {ins.rekomendasi}
                 </span>
               </p>
+              {ins.meta && <AiMeta {...ins.meta} />}
             </div>
           </div>
         ))}

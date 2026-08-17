@@ -62,6 +62,8 @@ export const levelOfScore = (score: number): RiskLevel =>
 export interface RiskInsight {
   insight: string;
   rekomendasi: string;
+  /** Metadata analitik (jenis klaim, keyakinan, bukti) — lihat shared/AiMeta. */
+  meta?: import("@/components/shared/AiMeta").AiMetaInfo;
 }
 
 /** KPI kecil per halaman detail (di bawah header). */
@@ -440,18 +442,33 @@ export const riskInsights: RiskInsight[] = [
       "ERI 64/100 membaik 2 pts QoQ, tetapi dua risiko ekstrem (harga CPO & El Nino) berkorelasi — bila keduanya terealisasi bersamaan, dampak EBITDA melebihi Rp 4 T.",
     rekomendasi:
       "Perlakukan hedging CPO dan asuransi parametrik sebagai satu paket keputusan mitigasi, bukan dua usulan terpisah.",
+    meta: {
+      jenis: "Korelasi",
+      confidencePct: 76,
+      evidence: "Korelasi historis harga CPO × curah hujan · skenario gabungan ERM",
+    },
   },
   {
     insight:
       "Kategori Keuangan (residual 66) dan Kepatuhan (54) melampaui appetite masing-masing (50 & 45) — dua-duanya digerakkan risiko harga dan sengketa HGU.",
     rekomendasi:
       "Prioritaskan 23 perpanjangan HGU berjalan; tiap sertifikat yang selesai menurunkan residual kategori Kepatuhan.",
+    meta: {
+      jenis: "Kausal",
+      confidencePct: 82,
+      evidence: "Register risiko per kategori · driver residual teridentifikasi",
+    },
   },
   {
     insight:
       "6 KRI early warning: 1 merah (limit breach) dan 3 kuning — semuanya leading indicator risiko top-10, belum ada yang lagging.",
     rekomendasi:
       "Review KRI bulanan di Komite Risiko; turunkan ambang eskalasi restan TBS dari 2,0% ke 1,9% selama musim kering.",
+    meta: {
+      jenis: "Prediksi",
+      confidencePct: 70,
+      evidence: "Status 6 KRI vs ambang · pola eskalasi musim kering",
+    },
   },
 ];
 

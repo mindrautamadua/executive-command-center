@@ -275,6 +275,58 @@ export const stgDecisions: StgDecision[] = [
   },
 ];
 
+/* ── 8b. Decision Outcome — closed loop ───────────────────────────── */
+
+export interface DecisionOutcome {
+  title: string;
+  /** Tanggal keputusan disahkan Direksi. */
+  decided: string;
+  /** Dampak yang dijanjikan saat keputusan diambil. */
+  expected: string;
+  /** Realisasi dampak sampai tanggal potong data. */
+  actual: string;
+  /** Selisih realisasi vs janji (label siap tampil, mis. "-18%"). */
+  variance: string;
+  tone: "good" | "warn" | "bad";
+  lesson: string;
+}
+
+/**
+ * Keputusan Direksi yang sudah dieksekusi, diukur ulang terhadap janjinya.
+ * Menutup loop Sense → Decide → Execute → Measure → Learn; sampel dari
+ * 31 keputusan selesai (STRATEGI.keputusanSelesai). Penghematan pengadaan
+ * selaras PENGADAAN di group-baseline (realisasi 386 M vs target FY 850 M).
+ */
+export const decisionOutcomes: DecisionOutcome[] = [
+  {
+    title: "Sentralisasi Pengadaan Group",
+    decided: "12 Jan 2026",
+    expected: "Penghematan Rp 850 M FY26",
+    actual: "Rp 386 M YTD Mei (45% target, run-rate on-track)",
+    variance: "+2% vs prorata",
+    tone: "good",
+    lesson: "Kategori spend terbesar dinegosiasi lebih dulu — front-load kategori strategis.",
+  },
+  {
+    title: "Divestasi Aset Non-Core Tahap 0",
+    decided: "28 Okt 2025",
+    expected: "Cash release Rp 0,90 T",
+    actual: "Rp 0,74 T terealisasi",
+    variance: "-18%",
+    tone: "warn",
+    lesson: "Valuasi KJPP harus final sebelum keputusan — dua aset mundur karena penilaian ulang.",
+  },
+  {
+    title: "Percepatan Replanting Sawit 2025",
+    decided: "15 Feb 2025",
+    expected: "60 rb ha tertanam ulang",
+    actual: "52 rb ha (87%)",
+    variance: "-13%",
+    tone: "warn",
+    lesson: "Kesiapan bibit & jendela cuaca jadi critical path — amankan kontrak bibit H-6 bulan.",
+  },
+];
+
 /* ── 9. Alerts ────────────────────────────────────────────────────── */
 
 export interface StgAlert {
@@ -313,15 +365,30 @@ export const stgInsights: StgInsight[] = [
     title: "Prioritaskan unblocking Swasembada Gula",
     text: "3 keputusan struktural (restrukturisasi PG, perluasan areal, kemitraan bioetanol) menahan 5 inisiatif senilai Rp 2,6 T uplift. Jadikan agenda tunggal Radirsus Q3.",
     tone: "bad",
+    meta: {
+      jenis: "Rekomendasi",
+      confidencePct: 80,
+      evidence: "Register 28 inisiatif · aging keputusan BOD · milestone tracker",
+    },
   },
   {
     title: "Realokasi pendanaan ke inisiatif ber-run-rate tinggi",
     text: "Efisiensi biaya & yield menyumbang 59% value creation YTD dengan investasi terkecil — layak menyerap gap alokasi sebelum capex hilirisasi tahap II.",
     tone: "info",
+    meta: {
+      jenis: "Rekomendasi",
+      confidencePct: 74,
+      evidence: "Dekomposisi value creation YTD · alokasi investasi per tema",
+    },
   },
   {
     title: "Kunci momentum hilirisasi",
     text: "Refinery & minyak goreng ahead of plan; amankan komitmen offtake dan jadwal komisioning agar benefit masuk sebelum musim harga lemah Q4.",
     tone: "good",
+    meta: {
+      jenis: "Prediksi",
+      confidencePct: 68,
+      evidence: "Progres fisik vs rencana · pola musiman harga CPO Q4",
+    },
   },
 ];

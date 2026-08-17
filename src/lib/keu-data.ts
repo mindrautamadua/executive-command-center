@@ -347,6 +347,8 @@ export const keuAlerts: KeuAlert[] = [
 export interface KeuInsight {
   insight: string;
   rekomendasi: string;
+  /** Metadata analitik (jenis klaim, keyakinan, bukti) — lihat shared/AiMeta. */
+  meta?: import("@/components/shared/AiMeta").AiMetaInfo;
 }
 
 export const keuInsights: KeuInsight[] = [
@@ -355,17 +357,32 @@ export const keuInsights: KeuInsight[] = [
       "Laba bersih 48,2% RKAP jauh di atas prorata — kualitas laba ditopang operasional (EBITDA), bukan item non-recurring.",
     rekomendasi:
       "Pertahankan disiplin biaya; hindari revisi target ke bawah agar momentum FY 101% RKAP terjaga.",
+    meta: {
+      jenis: "Kausal",
+      confidencePct: 84,
+      evidence: "Dekomposisi laba GL · rekonsiliasi EBITDA vs non-recurring",
+    },
   },
   {
     insight:
       "Kas Rp 7,9 T = 2,3x minimum cash, namun 60% terkonsentrasi di PalmCo sementara kebutuhan capex terbesar H2 ada di SGN.",
     rekomendasi:
       "Optimalkan cash pooling antar subholding sebelum menarik fasilitas kredit baru.",
+    meta: {
+      jenis: "Rekomendasi",
+      confidencePct: 78,
+      evidence: "Posisi kas per subholding · jadwal capex H2",
+    },
   },
   {
     insight:
       "Sensitivitas harga CPO ±Rp 1.000/kg setara ±Rp 1,9 T EBITDA setahun — risiko tunggal terbesar terhadap RKAP.",
     rekomendasi:
       "Eksekusi program lindung nilai CPO bertahap hingga 20% volume produksi H2 2026.",
+    meta: {
+      jenis: "Prediksi",
+      confidencePct: 72,
+      evidence: "Model sensitivitas volume belum terjual × pergerakan harga",
+    },
   },
 ];

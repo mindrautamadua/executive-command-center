@@ -1,8 +1,10 @@
 import { ArrowRight, Landmark, Sparkles, TrendingUp, TriangleAlert } from "lucide-react";
+import { AiMeta, type AiMetaInfo } from "@/components/shared/AiMeta";
 
 export interface KeuInsightItem {
   insight: string;
   rekomendasi: string;
+  meta?: AiMetaInfo;
 }
 
 const ICONS = [TrendingUp, TriangleAlert, Landmark];
@@ -52,6 +54,7 @@ export function KeuInsight({ items }: { items: KeuInsightItem[] }) {
                     {ins.rekomendasi}
                   </span>
                 </p>
+                {ins.meta && <AiMeta {...ins.meta} />}
               </div>
             </div>
           );
