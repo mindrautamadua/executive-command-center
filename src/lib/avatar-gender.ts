@@ -30,9 +30,13 @@ export function genderFromName(nama: string): AvatarGender {
   return "pria";
 }
 
-/** Jumlah pasfoto lokal per gender di public/avatars/. */
-export const AVATAR_POOL = 6;
+/**
+ * Jumlah pasfoto lokal per gender di public/avatars/. Sengaja bilangan prima
+ * dan coprima dengan siklus daftar nama depan (24) di direktori — kalau tidak,
+ * semua "Agus"/"Ahmad" (seed berjarak kelipatan 24) jatuh ke foto yang sama.
+ */
+export const AVATAR_POOL = 13;
 
-/** Path pasfoto lokal deterministik dari gender + seed. */
+/** Path pasfoto lokal deterministik dari gender + seed; ×7 menyebar seed berdekatan. */
 export const avatarPath = (gender: AvatarGender, seed: number) =>
-  `/avatars/${gender}-${(Math.abs(seed) % AVATAR_POOL) + 1}.jpg`;
+  `/avatars/${gender}-${((Math.abs(seed) * 7) % AVATAR_POOL) + 1}.jpg`;

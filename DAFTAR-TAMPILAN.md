@@ -1897,7 +1897,7 @@ Semua halaman diawali Data Trust Strip dan diakhiri card Insight & Rekomendasi (
 - Header standar modul (ModuleHeader) dengan filter Periode dan Subholding/Level Organisasi; identitas pengguna = Denaldy Mulino Mauna, Direktur Utama, dengan foto resmi dari ptpn.id (aset lokal `public/direktur-utama-avatar.png`, crop dari `public/direktur-utama.png`).
 - Live Feed / marquee informasi berjalan — label "MARKET PULSE · PER 14 AGU"; tiap instrumen berlabel basis harga (YTD Avg / Spot); marquee, maskot, dan ukuran bar tetap.
 - Maskot robot.
-- Avatar karyawan (PersonAvatar) — pasfoto berwajah Indonesia/Asia dari pool lokal `public/avatars/` (6 pria + 6 wanita, tanpa layanan eksternal); gender foto diturunkan dari nama via heuristik nama Indonesia (`avatar-gender.ts`) sehingga foto selalu selaras jenis kelamin nama; gender di direktori karyawan juga diturunkan dari nama; fallback ilustrasi SVG bila foto gagal dimuat.
+- Avatar karyawan (PersonAvatar) — pasfoto profesional gaya kantoran berwajah Indonesia/Asia, AI-generated (bukan orang nyata, sumber dataset 100k-faces/generated.photos), dari pool lokal `public/avatars/` (13 pria + 13 wanita, 256px); gender foto diturunkan dari nama via heuristik nama Indonesia (`avatar-gender.ts`); indeks foto = (seed × 7) mod 13 — 13 prima & coprima siklus 24 nama depan direktori sehingga karyawan bernama depan sama selalu dapat foto berbeda; gender direktori juga diturunkan dari nama; fallback ilustrasi SVG.
 - Toggle tema (terang/gelap).
 - Logo PTPN.
 - Dukungan PWA (service worker).
