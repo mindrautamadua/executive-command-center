@@ -176,6 +176,20 @@ export function AiInsight() {
             <span className="rounded bg-[#0e8f7e] px-1.5 py-[2px] font-bold text-white">
               {aiCopilot.status}
             </span>
+            {/* Masa berlaku rekomendasi — lewat tanggal ini tanpa keputusan,
+                status bergeser ke Needs Revalidation. */}
+            <span className="rounded bg-white/70 px-1.5 py-[2px] font-semibold text-ink-500">
+              Dibuat {aiCopilot.generated} · berlaku s.d. {aiCopilot.validThrough}
+            </span>
+            <span
+              className={`rounded px-1.5 py-[2px] font-bold ${
+                aiCopilot.validityStatus === "Active"
+                  ? "bg-ptpn-greenLight text-ptpn-green"
+                  : "bg-[#fdf3e0] text-[#d98b06]"
+              }`}
+            >
+              {aiCopilot.validityStatus}
+            </span>
           </div>
         </div>
 

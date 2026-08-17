@@ -141,7 +141,11 @@ export function DataTrustStrip({ data = dataTrust }: { data?: typeof dataTrust }
         const trusted = skorMin >= 85;
         const eligibility =
           trustPct >= 90
-            ? { label: "Decision Eligible", cls: "bg-ptpn-greenLight text-ptpn-green" }
+            ? trusted
+              ? { label: "Decision Eligible", cls: "bg-ptpn-greenLight text-ptpn-green" }
+              : // Trust tinggi tapi ada komponen governance < 85%: tetap eligible,
+                // dengan catatan — bukan hijau polos.
+                { label: "Decision Eligible · with caution", cls: "bg-[#fdf3e0] text-[#d98b06]" }
             : trustPct >= 80
               ? { label: "Analysis Only", cls: "bg-[#fdf3e0] text-[#d98b06]" }
               : { label: "Validate Before Decision", cls: "bg-[#fdecec] text-[#ef4444]" };

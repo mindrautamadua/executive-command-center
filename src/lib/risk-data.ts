@@ -440,7 +440,7 @@ export const riskDecisions: RiskDecision[] = [
 export const riskInsights: RiskInsight[] = [
   {
     insight:
-      "ERI 64/100 membaik 2 pts QoQ, tetapi dua risiko ekstrem (harga CPO & El Nino) berkorelasi — bila keduanya terealisasi bersamaan, dampak EBITDA melebihi Rp 4 T.",
+      "ERI 64/100 membaik 2 pts QoQ, tetapi dua risiko ekstrem (harga CPO & El Nino) berkorelasi — standalone masing-masing -Rp 1,9 T EBITDA; skenario gabungan ERM Rp 4,2 T karena interaksi harga×volume (+Rp 0,4 T di atas penjumlahan sederhana): kekeringan menekan produksi justru saat volume unhedged terpapar harga.",
     rekomendasi:
       "Perlakukan hedging CPO dan asuransi parametrik sebagai satu paket keputusan mitigasi, bukan dua usulan terpisah.",
     meta: {

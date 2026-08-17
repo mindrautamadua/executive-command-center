@@ -24,6 +24,7 @@ import { ExploreDisclosure } from "@/components/ExploreDisclosure";
 import { PerformanceNarrative } from "@/components/PerformanceNarrative";
 import { CpoMarketCard } from "@/components/CpoMarketCard";
 import { ImpactChainCard } from "@/components/ImpactChainCard";
+import { ExecutiveTension } from "@/components/ExecutiveTension";
 
 /** Kepala seksi kecil bergaya HC ECC, memisahkan kelompok kartu. */
 function SectionLabel({ children }: { children: React.ReactNode }) {
@@ -96,6 +97,7 @@ export default function Page() {
         <SectionLabel>Key Strategic KPI</SectionLabel>
         <KpiStrip />
         <PerformanceNarrative />
+        <ExecutiveTension />
         <div
           className="anim-rise mt-3 grid grid-cols-1 items-stretch gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,58fr)_minmax(0,42fr)]"
           style={{ "--d": "60ms" } as React.CSSProperties}

@@ -106,10 +106,16 @@ export const financeIntelCounts = [
 export const financeIntelligence: FinanceSignal[] = [
   {
     no: "01",
-    title: "EBITDA di Atas Prorata RKAP",
-    text: "EBITDA YTD Rp 6,82 T (44,9% RKAP) di atas prorata 41,7%, ditopang harga CPO KPBN yang menguat ke Rp 13.680/kg dan efisiensi biaya panen-angkut.",
+    title: "EBITDA di Atas RKAP YTD",
+    /*
+     * Basis surplus WAJIB RKAP YTD phased (Rp 6,60 T — sama dengan KPI strip
+     * homepage), bukan prorata FY 41,7% (basis kalender rata): dua basis
+     * dengan label sama pernah menghasilkan +0,52 T vs +0,22 T di dua kartu.
+     * Prorata boleh disebut sebagai konteks, jangan jadi basis angka dampak.
+     */
+    text: "EBITDA YTD Rp 6,82 T vs RKAP YTD phased Rp 6,60 T (+3,3%); vs prorata kalender 41,7% bahkan 3,2 pts lebih tinggi. Ditopang harga CPO KPBN Rp 13.680/kg dan efisiensi biaya panen-angkut.",
     impactLabel: "Surplus vs RKAP YTD",
-    impactValue: "+Rp 0,52 T",
+    impactValue: "+Rp 0,22 T",
     tone: "green",
   },
   {

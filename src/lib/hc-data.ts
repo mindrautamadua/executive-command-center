@@ -415,7 +415,14 @@ export const productivityRows: ProductivityRow[] = [
   { indikator: "Productivity Index (Base 100)", ytd: "112", yoy: "5,2%", yoyTrend: "up", yoyTone: "good", target: "115" },
 ];
 
-export const productivityNote = "Produktivitas membaik di atas target. Pertahankan momentum!";
+/**
+ * Narasi wajib bisa ditelusuri ke tabel di atasnya: finansial (Revenue/EBITDA
+ * per employee, labor cost) di atas target, tetapi fisik (CPO 14,1 vs 14,5;
+ * TBS 63,0 vs 64,5; index 112 vs 115) masih di bawah — "produktivitas di atas
+ * target" polos adalah overclaim yang tertolak di baris ketiga tabel sendiri.
+ */
+export const productivityNote =
+  "Produktivitas finansial di atas target (revenue & EBITDA per employee, labor cost); produktivitas fisik masih di bawah target (CPO/TBS per employee, index 112 vs 115) — momentum ditopang harga & efisiensi biaya, bukan volume.";
 
 /* ── 8. Scenario Simulation ───────────────────────────────────────── */
 

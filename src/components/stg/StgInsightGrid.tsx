@@ -1,7 +1,7 @@
 import { ArrowRight, CircleAlert, CircleCheck, Info, TriangleAlert } from "lucide-react";
 import type { StgInsight } from "@/lib/stg-core";
 import { ScopeNote } from "@/components/ui/ScopeNote";
-import { AiMeta } from "@/components/shared/AiMeta";
+import { AiMeta, InsightGradeLabel } from "@/components/shared/AiMeta";
 
 const TONES: Record<StgInsight["tone"], { bg: string; icon: string; title: string }> = {
   good: { bg: "bg-ptpn-greenLight", icon: "text-ptpn-green", title: "text-ptpn-green" },
@@ -27,10 +27,7 @@ export function StgInsightGrid({ items, cols }: { items: StgInsight[]; cols: str
       <div className="flex items-center justify-between gap-2">
         <h3 className="flex min-w-0 items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-[0.05em] text-ink-900">
           <span>
-            Insight &amp; Rekomendasi{" "}
-            <span className="font-semibold normal-case tracking-normal text-ink-400">
-              (Decision-grade)
-            </span>
+            Insight &amp; Rekomendasi <InsightGradeLabel decisionGrade={items.every((i) => i.meta)} />
           </span>
           <ScopeNote />
         </h3>

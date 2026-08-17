@@ -241,6 +241,11 @@ export interface StgDecision {
   decision: string;
   exposure: string;
   due: string;
+  /**
+   * Decision Value at Risk: konsekuensi ekonomi per bulan penundaan —
+   * mengubah "overdue 34 hari" dari umur administratif menjadi biaya.
+   */
+  delayCost: string;
   tone: "red" | "amber";
 }
 
@@ -253,6 +258,8 @@ export const stgDecisions: StgDecision[] = [
     decision: "Putuskan skema restrukturisasi (konsolidasi giling vs cold shutdown) per PG.",
     exposure: "Rp 0,32 T/thn",
     due: "Overdue 34 hari",
+    // Rp 0,32 T/thn nilai tertahan ÷ 12 bulan.
+    delayCost: "± Rp 27 M/bulan tertahan",
     tone: "red",
   },
   {
@@ -262,6 +269,8 @@ export const stgDecisions: StgDecision[] = [
     decision: "Setujui long-list aset divestasi tahap I dan mandat eksekusi.",
     exposure: "Rp 1,4 T",
     due: "Overdue 21 hari",
+    // Opportunity cost dana revitalisasi: Rp 1,4 T × ~8%/thn ÷ 12.
+    delayCost: "± Rp 9 M/bulan opportunity cost",
     tone: "red",
   },
   {
@@ -271,6 +280,8 @@ export const stgDecisions: StgDecision[] = [
     decision: "Setujui struktur kemitraan & alokasi feedstock bioetanol.",
     exposure: "Rp 1,1 T",
     due: "Overdue 12 hari",
+    // Risiko jendela term sheet: tiap bulan tunda menggeser COD & alokasi tetes 2027.
+    delayCost: "Risiko jendela mitra — COD mundur per bulan tunda",
     tone: "amber",
   },
 ];

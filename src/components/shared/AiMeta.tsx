@@ -43,3 +43,25 @@ export function AiMeta({ jenis, confidencePct, evidence }: AiMetaInfo) {
     </span>
   );
 }
+
+/**
+ * Label mutu insight yang DITURUNKAN dari kelengkapan governance, bukan
+ * branding: "(Decision-grade)" hanya bila SEMUA insight di kartu membawa
+ * meta (jenis klaim + confidence/evidence); kurang dari itu label jujur
+ * "(Analytical Insight)". Label tidak boleh menjanjikan mutu yang tidak
+ * dibawa datanya.
+ */
+export function InsightGradeLabel({ decisionGrade }: { decisionGrade: boolean }) {
+  return (
+    <span
+      className="cursor-help font-semibold normal-case tracking-normal text-ink-400"
+      title={
+        decisionGrade
+          ? "Decision-grade: setiap insight membawa jenis klaim, confidence, dan evidence — memenuhi standar minimum untuk dipakai memutus."
+          : "Analytical Insight: belum semua insight membawa jenis klaim + confidence + evidence; pakai sebagai bahan analisis, bukan dasar keputusan langsung."
+      }
+    >
+      ({decisionGrade ? "Decision-grade" : "Analytical Insight"})
+    </span>
+  );
+}

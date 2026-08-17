@@ -53,9 +53,22 @@ export function CeoMorningBrief() {
           </div>
           <ol className="mt-1.5 space-y-[4px]">
             {ceoMorningBrief.changed.map((c, i) => (
-              <li key={c} className="flex gap-1.5 text-[8.5px] leading-[1.4] text-ink-700">
+              <li key={c.text} className="flex gap-1.5 text-[8.5px] leading-[1.4] text-ink-700">
                 <span className="shrink-0 font-bold text-ink-400">{i + 1}.</span>
-                <span>{c}</span>
+                <span>
+                  {c.text}{" "}
+                  {/* Materialitas relatif: seberapa besar vs enterprise, bukan
+                      hanya angka absolut. */}
+                  <span
+                    className={`ml-0.5 inline-flex items-center gap-1 whitespace-nowrap rounded px-1 py-[1px] text-[7px] font-bold uppercase tracking-[0.03em] ${
+                      c.materiality.level === "High"
+                        ? "bg-[#fdecec] text-[#ef4444]"
+                        : "bg-[#fdf3e0] text-[#d98b06]"
+                    }`}
+                  >
+                    {c.materiality.level} · {c.materiality.basis}
+                  </span>
+                </span>
               </li>
             ))}
           </ol>

@@ -1,5 +1,5 @@
 import { ArrowRight, Landmark, Sparkles, TrendingUp, TriangleAlert } from "lucide-react";
-import { AiMeta, type AiMetaInfo } from "@/components/shared/AiMeta";
+import { AiMeta, InsightGradeLabel, type AiMetaInfo } from "@/components/shared/AiMeta";
 
 export interface KeuInsightItem {
   insight: string;
@@ -25,9 +25,7 @@ export function KeuInsight({ items }: { items: KeuInsightItem[] }) {
       <div className="flex items-center justify-between gap-2">
         <h3 className="text-[10px] font-extrabold uppercase tracking-[0.05em] text-ink-900">
           Insight &amp; Rekomendasi{" "}
-          <span className="font-semibold normal-case tracking-normal text-ink-400">
-            (Decision-grade)
-          </span>
+          <InsightGradeLabel decisionGrade={items.every((i) => i.meta)} />
         </h3>
         <button className="flex shrink-0 items-center gap-1.5 rounded-lg border border-[#e3e9ef] bg-white px-3 py-[6px] text-[9.5px] font-semibold text-ink-700 transition-colors hover:border-ptpn-green hover:text-ptpn-green">
           Lihat Semua Insight <ArrowRight size={11} />

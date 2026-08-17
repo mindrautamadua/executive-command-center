@@ -80,11 +80,30 @@ export const ceoMorningBrief = {
     },
   ] satisfies CeoTrafficLight[],
 
-  /** Tiga hal yang berubah sejak brief sebelumnya. */
+  /**
+   * Tiga hal yang berubah sejak brief sebelumnya. Tiap perubahan membawa
+   * basis materialitas (% EBITDA YTD) — angka absolut saja tidak menjawab
+   * "seberapa besar ini relatif terhadap enterprise?".
+   */
   changed: [
-    `Eksposur volatilitas harga CPO naik ke ±${rpM(bandVolatilitasRpM)} (volume belum terjual ${volumeCpoBelumTerjual.toLocaleString("id-ID", { minimumFractionDigits: 2 })} jt ton)`,
-    `Gap produksi Regional 4 melebar — pendapatan tertunda ${rpM(gapProduksiRpM)}`,
-    "Refinery hilirisasi ahead of plan: progres 58% vs rencana 52%",
+    {
+      text: `Eksposur volatilitas harga CPO naik ke ±${rpM(bandVolatilitasRpM)} (volume belum terjual ${volumeCpoBelumTerjual.toLocaleString("id-ID", { minimumFractionDigits: 2 })} jt ton)`,
+      materiality: {
+        level: "High" as const,
+        basis: `${((bandVolatilitasRpM / (KEUANGAN.ebitdaYtd * 1_000)) * 100).toLocaleString("id-ID", { maximumFractionDigits: 1 })}% EBITDA YTD`,
+      },
+    },
+    {
+      text: `Gap produksi Regional 4 melebar — pendapatan tertunda ${rpM(gapProduksiRpM)}`,
+      materiality: {
+        level: "Medium" as const,
+        basis: `${(((gapProduksiRpM * KEUANGAN.ebitdaMarginPct) / 100 / (KEUANGAN.ebitdaYtd * 1_000)) * 100).toLocaleString("id-ID", { maximumFractionDigits: 1 })}% EBITDA YTD`,
+      },
+    },
+    {
+      text: "Refinery hilirisasi ahead of plan: progres 58% vs rencana 52%",
+      materiality: { level: "Medium" as const, basis: "hilir ≈ 25% EBITDA grup" },
+    },
   ],
 
   /** Satu hal yang paling perlu dipantau CEO. */
@@ -126,6 +145,48 @@ export const performanceNarrative = {
     gapProduksiRpM,
   )} delayed revenue).`,
 };
+
+/* ── 1b2. Executive Tension: headline vs kontradiksinya ───────────── */
+
+export interface ExecutiveTension {
+  domain: string;
+  good: string;
+  concern: string;
+  decision: string;
+}
+
+/**
+ * Contradiction detection: tiap domain menyandingkan headline yang bagus
+ * dengan underlying yang tertekan — "jangan baca headline tanpa
+ * kontradiksinya". KPI sehat + eksekusi tertinggal adalah dua fakta yang
+ * harus dibaca bersama, bukan dipilih salah satu.
+ */
+export const executiveTensions: ExecutiveTension[] = [
+  {
+    domain: "Strategi",
+    good: "Skor KPI korporat 87,4 — Baik",
+    concern: "Milestone 40,8% vs plan 47,9% — eksekusi tertinggal",
+    decision: "Tuntaskan 3 keputusan overdue penghambat eksekusi",
+  },
+  {
+    domain: "Keuangan",
+    good: "EBITDA +Rp 0,22 T di atas RKAP YTD",
+    concern: "Capex 32,1% vs prorata 41,7% · replanting 26,9% — kapasitas earning masa depan",
+    decision: "Akselerasi capex replanting + eksekusi refinancing",
+  },
+  {
+    domain: "SDM",
+    good: "Produktivitas finansial di atas target",
+    concern: "Produktivitas fisik di bawah target (index 112 vs 115)",
+    decision: "Intervensi produktivitas fisik — mulai Regional 4",
+  },
+  {
+    domain: "Risiko",
+    good: "ERI 64/100 membaik 2 pts QoQ",
+    concern: "Limit breach naik 2→4 · skenario gabungan CPO×El Niño Rp 4,2 T",
+    decision: "Putuskan paket hedging + asuransi parametrik",
+  },
+];
 
 /* ── 1c. Posisi Pasar CPO: ASP vs spot → keputusan hedge ──────────── */
 
@@ -488,6 +549,15 @@ export const aiCopilot = {
   reversibility: "Reversible — program operasional, tanpa capex permanen",
   owner: "Direktorat Operasional",
   deadline: "29 Agu 2026",
+  /**
+   * Temporal integrity: rekomendasi punya masa berlaku, bukan teks abadi.
+   * Lewat validThrough tanpa keputusan, status wajib bergeser ke
+   * "Needs Revalidation" — rekomendasi stale lebih berbahaya daripada
+   * tidak ada rekomendasi.
+   */
+  generated: "13 Agu 2026",
+  validThrough: "29 Agu 2026",
+  validityStatus: "Active" as "Active" | "Needs Revalidation" | "Superseded",
   decisionRequired: false,
   status: "Open" as const,
   assumptions: [

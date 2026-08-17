@@ -67,9 +67,13 @@ export function CeoDecisionQueue() {
                 <span className="font-bold text-ink-900">Keputusan: </span>
                 {d.decision}
               </p>
-              <div className="mt-1.5 flex items-center gap-1.5 text-[8.5px] font-semibold text-ink-400">
+              <div className="mt-1.5 flex flex-wrap items-center gap-1.5 text-[8.5px] font-semibold text-ink-400">
                 <span className="rounded bg-[#ef4444] px-1.5 py-[1px] text-[7.5px] font-bold uppercase tracking-[0.04em] text-white">
                   {d.due}
+                </span>
+                {/* Decision Value at Risk: delay = biaya, bukan sekadar umur. */}
+                <span className="rounded bg-[#fdf3e0] px-1.5 py-[1px] text-[7.5px] font-bold text-[#d98b06]">
+                  {d.delayCost}
                 </span>
               </div>
               <DecisionActions id={d.title} />
