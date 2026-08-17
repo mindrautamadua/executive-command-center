@@ -47,10 +47,13 @@ export default function ExecutiveGuidePage() {
 
       {/* executive reading journey */}
       <GuideCard>
-        <GuideTitle kicker="Halaman terpenting">Executive Reading Journey</GuideTitle>
+        <GuideTitle kicker="Halaman terpenting">Executive Management Loop</GuideTitle>
         <p className="mb-3 text-[9.5px] leading-relaxed text-ink-500">
           Sembilan pertanyaan yang sama untuk membaca dashboard mana pun — dari perubahan sampai
-          outcome keputusan. Setiap langkah membawa Anda ke bagian dashboard terkait.
+          outcome keputusan. Setiap langkah membawa Anda ke bagian dashboard terkait. Versi
+          ringkasnya adalah <span className="font-bold text-ink-700">Executive Scan</span> (Baca
+          60 Detik): enam langkah pertama, berhenti di keputusan &amp; aksi — loop penuh ini
+          melanjutkannya sampai <span className="font-bold text-ink-700">outcome</span>.
         </p>
         <div className="mx-auto max-w-[560px]">
           <FlowList

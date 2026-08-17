@@ -20,6 +20,7 @@ import { CeoMorningBrief } from "@/components/CeoMorningBrief";
 import { CeoDecisionQueue } from "@/components/CeoDecisionQueue";
 import { CeoValueCreation } from "@/components/CeoValueCreation";
 import { EnterpriseRiskValue } from "@/components/EnterpriseRiskValue";
+import { ExploreDisclosure } from "@/components/ExploreDisclosure";
 
 /** Kepala seksi kecil bergaya HC ECC, memisahkan kelompok kartu. */
 function SectionLabel({ children }: { children: React.ReactNode }) {
@@ -99,7 +100,7 @@ export default function Page() {
           <KinerjaRegional />
         </div>
 
-        <LayerBand n={3} code="Explore" question="Intelijen mendalam per domain." />
+        <ExploreDisclosure>
         <div className="grid grid-cols-1 items-start gap-3 xl:grid-cols-[minmax(0,1fr)_330px]">
           {/* kolom utama */}
           <div className="flex min-w-0 flex-col gap-3">
@@ -149,6 +150,7 @@ export default function Page() {
             </div>
           </div>
         </div>
+        </ExploreDisclosure>
       </div>
     </AppShell>
   );

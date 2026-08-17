@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { AlertCircle, AlertTriangle, ArrowRight } from "lucide-react";
 import { ceoDecisions } from "@/lib/ceo-data";
+import { decisionOutcomes, outcomeCoverage } from "@/lib/stg-data";
 import { SectionHead } from "@/components/hc/SectionHead";
 import { useSubholding } from "@/components/SubholdingProvider";
 import { filterBySubholding } from "@/lib/subholding";
@@ -75,6 +76,43 @@ export function CeoDecisionQueue() {
             </div>
           );
         })}
+      </div>
+
+      {/*
+        Loop tidak berhenti di "keputusan diambil": dua outcome terakhir tampil
+        di sini supaya "keputusan terbukti benar/meleset" jadi objek eksekutif
+        di homepage, bukan hanya di Decision Register.
+      */}
+      <div className="mt-2.5 border-t border-[#eef2f6] pt-2">
+        <div className="flex items-center justify-between gap-2">
+          <span className="text-[8.5px] font-extrabold uppercase tracking-[0.05em] text-ink-500">
+            Outcome Keputusan Terakhir
+          </span>
+          <span className="shrink-0 rounded bg-[#eef2f6] px-1.5 py-[1px] text-[7.5px] font-bold text-ink-500">
+            {outcomeCoverage.measured}/{outcomeCoverage.totalDone} terukur
+          </span>
+        </div>
+        <div className="mt-1.5 flex flex-col gap-1">
+          {decisionOutcomes.slice(0, 2).map((o) => (
+            <div key={o.title} className="flex items-center gap-1.5">
+              <span
+                className={`h-[6px] w-[6px] shrink-0 rounded-full ${
+                  o.tone === "good"
+                    ? "bg-ptpn-green"
+                    : o.tone === "warn"
+                      ? "bg-[#f5a524]"
+                      : "bg-[#ef4444]"
+                }`}
+              />
+              <span className="min-w-0 flex-1 truncate text-[8.5px] text-ink-700" title={o.title}>
+                {o.title}
+              </span>
+              <span className="shrink-0 text-[8.5px] font-bold tabular-nums text-ink-900">
+                {o.variance}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
 
       <Link

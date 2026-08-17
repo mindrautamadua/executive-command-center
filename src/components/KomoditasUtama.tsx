@@ -13,7 +13,15 @@ export function KomoditasUtama() {
       <div className="flex items-baseline justify-between">
         <h3 className="card-title whitespace-nowrap">KOMODITAS UTAMA</h3>
         <div className="flex shrink-0 items-baseline gap-2">
-          <span className="text-[9px] text-ink-400">(Harga regional · YTD 2026)</span>
+          {/* "Referensi regional" eksplisit: harga per regional ≠ ASP grup di KPI
+              (rata-rata tertimbang 5 regional) — tanpa label ini keduanya
+              terbaca bertentangan (mis. R1 Rp 12.744 vs ASP Rp 12.482). */}
+          <span
+            className="cursor-help text-[9px] text-ink-400 underline decoration-dotted decoration-[#c6cfd8] underline-offset-2"
+            title="Harga referensi per regional, bukan ASP grup. ASP CPO di Key Strategic KPI adalah rata-rata tertimbang 5 regional — kedua angka tidak bertentangan."
+          >
+            (Referensi regional · YTD 2026)
+          </span>
           <DetailLink href="/produksi-operasi" />
         </div>
       </div>

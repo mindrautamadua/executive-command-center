@@ -221,6 +221,22 @@ export function AiInsight() {
               {aiInsight.dampak}
             </span>
           </p>
+          {/*
+            Prinsip governance guide (Evidence → Assumption → Confidence) tampil
+            di muka card, bukan hanya di balik klik — rekomendasi tanpa badge
+            keyakinan terbaca sebagai fakta.
+          */}
+          <div className="mt-[4px] flex flex-wrap items-center gap-1">
+            <span className="rounded bg-[#0e8f7e]/10 px-1.5 py-[2px] text-[8px] font-bold text-[#0e8f7e]">
+              Confidence {aiCopilot.confidencePct}%
+            </span>
+            <span className="rounded bg-white/70 px-1.5 py-[2px] text-[8px] font-bold text-ink-500">
+              Bukti {aiCopilot.evidence.length}
+            </span>
+            <span className="rounded bg-white/70 px-1.5 py-[2px] text-[8px] font-bold text-ink-500">
+              Asumsi {aiCopilot.assumptions.length}
+            </span>
+          </div>
         </div>
       </div>
 

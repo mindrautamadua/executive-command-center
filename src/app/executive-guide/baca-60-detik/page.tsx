@@ -23,10 +23,12 @@ export default function Baca60DetikPage() {
       <div className="grid grid-cols-1 gap-3 xl:grid-cols-[minmax(0,58fr)_minmax(0,42fr)]">
         {/* enam langkah */}
         <GuideCard>
-          <GuideTitle kicker="Start here">Enam Langkah, 60 Detik</GuideTitle>
+          <GuideTitle kicker="Executive Scan · Start here">Enam Langkah, 60 Detik</GuideTitle>
           <p className="mb-3 text-[9.5px] leading-relaxed text-ink-500">
             Baca homepage selalu dengan urutan yang sama. Kalau ada yang menarik perhatian:
-            drill down. Kalau tidak: selesai — 60 detik cukup.
+            drill down. Kalau tidak: selesai — 60 detik cukup. Ini <span className="font-bold text-ink-700">Executive
+            Scan</span>: versi ringkas dari Executive Management Loop 9 langkah — scan berhenti
+            di keputusan &amp; aksi, loop penuh berlanjut sampai outcome keputusan diukur.
           </p>
           <FlowList
             items={sixtySecondRead.map((s) => ({
