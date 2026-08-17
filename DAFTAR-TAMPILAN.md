@@ -1887,6 +1887,18 @@ Menu khusus di sidebar utama (kedua mode navigasi, tepat di bawah Overview). Buk
 
 ---
 
+# 21b. Enterprise Map (`/enterprise-map`)
+
+Menu di sidebar utama, kedua mode navigasi (grup atas, di bawah Executive Guide). "How the Enterprise Works" — PTPN sebagai satu sistem penciptaan nilai, bukan kumpulan dashboard per fungsi. Kerangka: Sidebar utama + ModuleHeader Tipe A. Semua angka node ditarik dari `group-baseline` (via `enterprise-map-data.ts`) sehingga tidak pernah beda dari modul yang dirujuk; tiap node klik menaut ke modulnya — map sekaligus navigasi alternatif.
+
+- **Lingkungan Eksternal** — 4 chip kekuatan yang tidak dikendalikan PTPN tetapi menggerakkan rantai: Pasar (CPO spot vs ASP YTD), Regulasi (pungutan ekspor), Iklim (El Niño 62%), Kurs (USD/IDR spot).
+- **Rantai Nilai Inti** — 9 node vertikal berpanah: Strategi (28 inisiatif · KPI 87,4) → Alokasi Kapital (capex 32,1% RKAP) → Operasi (64/67 pabrik · utilisasi PKS) → Produksi (CPO 0,99 jt ton · OER) → Penjualan & Pasar (Rp 19,9 T · ASP) → Pendapatan (Rp 24,6 T) → EBITDA (Rp 6,82 T · 27,7%) → Kas (Rp 7,9 T · leverage) → **Value Creation** (Rp 1,86 T netto, node aksen hijau); tiap node memuat metrik + satu kalimat peran sistemiknya.
+- **Rail Enabler** (kiri) — People (70.142 · suksesi 68%) & Teknologi (68 aplikasi inti): memperkuat seluruh rantai.
+- **Rail Control** (kanan) — Risiko (4 ekstrem), Tata Kelola (3 keputusan overdue), Hukum (eksposur Rp 4,2 T), ESG: menjaga nilai tidak bocor.
+- **Cara Membaca Map Ini** — 3 catatan sistemik: gangguan hulu merambat ke hilir (contoh Regional 4 → Rp 374 M), enabler bekerja di semua node sekaligus (12 posisi kritikal kosong = risiko eksekusi lintas node), control layer menentukan nilai yang selamat (3 keputusan overdue menahan ± Rp 2,82 T).
+
+---
+
 # 22. Halaman Pendukung
 
 ## `/data-analytics`

@@ -16,6 +16,7 @@ import {
   Eye,
   Gavel,
   TrendingUp,
+  Network,
   type LucideIcon,
 } from "lucide-react";
 
@@ -42,6 +43,7 @@ export const NAV_SECTIONS: NavSection[] = [
     items: [
       { label: "Overview", href: "/", icon: Home, ready: true },
       { label: "Executive Guide", href: "/executive-guide", icon: BookOpen, ready: true },
+      { label: "Enterprise Map", href: "/enterprise-map", icon: Network, ready: true },
     ],
   },
   {
@@ -99,6 +101,7 @@ export const CEO_NAV_SECTIONS: NavSection[] = [
     items: [
       { label: "Overview", href: "/", icon: Home, ready: true },
       { label: "Executive Guide", href: "/executive-guide", icon: BookOpen, ready: true },
+      { label: "Enterprise Map", href: "/enterprise-map", icon: Network, ready: true },
     ],
   },
   {
