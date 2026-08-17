@@ -1,35 +1,44 @@
 "use client";
 
 import { useState } from "react";
+import { avatarPath, genderFromName, type AvatarGender } from "@/lib/avatar-gender";
 
 const SKIN = ["#e0ac69", "#c68642", "#f1c27d", "#d8a05a", "#b97a4a"];
 const HAIR = ["#2b2118", "#3b2b1d", "#1f1a15", "#4a3421"];
 const SHIRT = ["#2a3b52", "#1f4e79", "#37474f", "#3d5a80", "#4a4e69", "#2f5d50"];
 
-/** Jumlah varian pasfoto dummy yang tersedia di layanan pravatar.cc. */
-const PHOTO_COUNT = 70;
-
 /**
- * Avatar orang deterministik dari `seed` — memakai pasfoto dummy.
- * Bila foto gagal dimuat (mis. offline), otomatis jatuh balik ke ilustrasi SVG.
+ * Avatar orang deterministik dari `seed` — memakai pasfoto Indonesia dari
+ * pool lokal public/avatars/ (bukan layanan eksternal). Beri `name` bila
+ * nama orangnya tampil di sebelah avatar: gender foto diturunkan dari nama
+ * sehingga foto dan nama tidak pernah bertentangan. Tanpa `name`, gender
+ * mengikuti paritas seed (ganjil = wanita, sama dengan ilustrasi fallback).
+ * Bila foto gagal dimuat, jatuh balik ke ilustrasi SVG.
  */
 export function PersonAvatar({
   seed = 0,
   size = 32,
+  name,
   className = "",
 }: {
   seed?: number;
   size?: number;
+  /** Nama orang yang ditampilkan bersama avatar — penentu gender foto. */
+  name?: string;
   className?: string;
 }) {
   const [photoFailed, setPhotoFailed] = useState(false);
-  const photoId = (Math.abs(seed) % PHOTO_COUNT) + 1;
+  const gender: AvatarGender = name
+    ? genderFromName(name)
+    : seed % 2 === 1
+      ? "wanita"
+      : "pria";
 
   if (!photoFailed) {
     return (
       // eslint-disable-next-line @next/next/no-img-element
       <img
-        src={`https://i.pravatar.cc/150?img=${photoId}`}
+        src={avatarPath(gender, seed)}
         alt=""
         width={size}
         height={size}

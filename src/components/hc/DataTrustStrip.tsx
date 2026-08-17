@@ -121,10 +121,29 @@ export function DataTrustStrip({ data = dataTrust }: { data?: typeof dataTrust }
         </div>
       </div>
 
-      <div className="ml-auto flex shrink-0 items-center gap-1.5 text-ptpn-green">
-        <Activity size={11} strokeWidth={1.9} />
-        <span className="text-[8.5px] font-semibold">Healthy</span>
-      </div>
+      {/*
+        Status diturunkan dari komponen trust terendah, bukan hardcode:
+        domain dengan lineage/certification < 85% tidak boleh berlabel
+        "Healthy" polos — itu yang membuat Trust Index bermakna.
+      */}
+      {(() => {
+        const skorMin = Math.min(
+          ...(data.qualityBreakdown ?? dataQualityBreakdown).map((d) => parseInt(d.value)),
+        );
+        const sehat = skorMin >= 85;
+        return (
+          <div
+            className={`ml-auto flex shrink-0 items-center gap-1.5 ${
+              sehat ? "text-ptpn-green" : "text-[#d98b06]"
+            }`}
+          >
+            <Activity size={11} strokeWidth={1.9} />
+            <span className="text-[8.5px] font-semibold">
+              {sehat ? "Healthy" : "Governance Attention"}
+            </span>
+          </div>
+        );
+      })()}
     </div>
   );
 }

@@ -41,6 +41,7 @@ export function ProfilHero() {
         <div className="flex items-start gap-5">
           <PersonAvatar
             seed={profil.seed}
+            name={profil.nama}
             size={92}
             className="ring-4 ring-[#eef5f0]"
           />

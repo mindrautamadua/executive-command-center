@@ -227,7 +227,7 @@ export function DirektoriSearch() {
               <tr key={k.id} className="border-b border-[#f3f6f9] hover:bg-[#f8fbfd]">
                 <td className="max-w-[210px] px-2 py-[7px]">
                   <div className="flex items-center gap-2">
-                    <PersonAvatar seed={k.seed} size={26} />
+                    <PersonAvatar seed={k.seed} size={26} name={k.nama} />
                     <span className="min-w-0">
                       <span className="block truncate text-[9.5px] font-semibold text-ink-900" title={k.nama}>
                         {k.nama}

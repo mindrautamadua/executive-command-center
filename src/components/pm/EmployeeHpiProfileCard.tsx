@@ -21,7 +21,7 @@ export function EmployeeHpiProfileCard() {
       <div className="mt-2.5 grid grid-cols-[minmax(0,270fr)_minmax(0,150fr)_minmax(0,430fr)_minmax(0,260fr)_minmax(0,330fr)] items-stretch gap-4">
         {/* Identitas */}
         <div className="flex items-center gap-3">
-          <PersonAvatar seed={4} size={58} className="ring-2 ring-[#e6ecf2]" />
+          <PersonAvatar seed={4} size={58} name={contohProfil.nama} className="ring-2 ring-[#e6ecf2]" />
           <div className="min-w-0 leading-tight">
             <div className="text-[12.5px] font-extrabold text-ink-900">{p.nama}</div>
             <div className="mt-[3px] text-[9.5px] text-ink-500">{p.jabatan}</div>

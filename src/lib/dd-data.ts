@@ -10,8 +10,8 @@
 
 /** Rekapitulasi sertifikasi seluruh katalog; total harus sama dengan jumlah ketiganya. */
 export const ddGovernance = {
-  // +4 metrik korporat (Value Creation, Pendapatan, EBITDA, ASP CPO).
-  certified: 122,
+  // +5 metrik korporat (Value Creation, Pendapatan, EBITDA, ASP CPO, Penjualan).
+  certified: 123,
   provisional: 7,
   deprecated: 3,
 } as const;
@@ -31,7 +31,7 @@ export interface DdCategory {
 }
 
 export const ddCategories: DdCategory[] = [
-  { name: "Korporat & Nilai", count: 4, color: "#1b3a6b" },
+  { name: "Korporat & Nilai", count: 5, color: "#1b3a6b" },
   { name: "Demografi & Headcount", count: 24, color: "#1a9c5b" },
   { name: "Produktivitas", count: 19, color: "#3b7ded" },
   { name: "Biaya SDM", count: 16, color: "#f5a524" },
@@ -288,6 +288,22 @@ export const ddEntries: DdEntry[] = [
     certifiedBy: "Komite Audit",
     certifiedAt: "30 Jun 2026",
     validation: "Marjin blended = rata-rata tertimbang marjin segmen (KOMPOSISI_SEGMEN)",
+  },
+  {
+    term: "Total Penjualan Komoditas",
+    category: "Korporat & Nilai",
+    definition:
+      "Nilai penjualan komoditas fisik YTD — subset pendapatan konsolidasi, TIDAK termasuk pendapatan hilir non-komoditas, jasa, dan lain-lain",
+    formula:
+      "Σ penjualan CPO/PK/gula/karet/teh (Rp 19,9 T); + pendapatan lain-lain Rp 4,7 T = Pendapatan Konsolidasi Rp 24,6 T",
+    source: "SAP SD",
+    frequency: "Bulanan",
+    owner: "Direktorat Pemasaran",
+    status: "Certified",
+    trust: 96,
+    certifiedBy: "Komite Pemasaran",
+    certifiedAt: "30 Jun 2026",
+    validation: "Jembatan penjualan → pendapatan konsolidasi rekonsil dengan eliminasi tercatat",
   },
   {
     term: "ASP CPO",

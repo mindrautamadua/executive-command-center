@@ -347,7 +347,7 @@ export const karhutlaDecisions: HseDecision[] = [
     context:
       "Probabilitas El Nino H2 62% dan pola historis (91 dari 214 hotspot pada Jul–Sep) menempatkan kuartal berjalan sebagai jendela risiko tertinggi; kecukupan alat Regional 3 dan 6 baru 68% dan 66%.",
     rekomendasi:
-      "Aktifkan status Siaga grup per 1 Juli 2026, mobilisasi regu lintas regional ke Regional 3, 5, 6, dan siapkan anggaran tanggap darurat Rp 18 M.",
+      "Status Siaga grup aktif sejak 1 Juli 2026 — pertahankan mobilisasi regu lintas regional di Regional 3, 5, 6 dan pastikan anggaran tanggap darurat Rp 18 M tetap tersedia hingga akhir musim kering.",
     due: "Q3 2026",
   },
   {
@@ -369,7 +369,7 @@ export const karhutlaInsights: HseInsight[] = [
     insight:
       "Regional 3, 5, dan 6 menyumbang 152 dari 214 hotspot (71%), 13 dari 18 kejadian, dan 108 dari 142 ha luas terbakar — namun justru memiliki kecukupan peralatan terendah (66–72%).",
     rekomendasi:
-      "Realokasi peralatan dan tambahan 18 menara pantau ke tiga regional tersebut sebelum Juli 2026; jangan sebar merata.",
+      "Realokasi peralatan dan 18 menara pantau tambahan ke tiga regional tersebut — target awal Juli 2026 terlewat, selesaikan sebelum puncak hotspot September; jangan sebar merata.",
   },
   {
     insight:

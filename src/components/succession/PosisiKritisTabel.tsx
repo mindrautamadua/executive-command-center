@@ -68,7 +68,7 @@ function FitModal({ posisi, onClose }: { posisi: PosisiKritis; onClose: () => vo
           {kandidat?.map((k) => (
             <div key={k.nama} className="rounded-xl border border-[#eef2f6] px-3.5 py-3">
               <div className="flex items-center gap-2.5">
-                <PersonAvatar seed={k.seed} size={32} className="ring-1 ring-[#eef2f6]" />
+                <PersonAvatar seed={k.seed} size={32} name={k.nama} className="ring-1 ring-[#eef2f6]" />
                 <div className="min-w-0 leading-tight">
                   <div className="truncate text-[10.5px] font-bold text-ink-900">
                     {k.nama}

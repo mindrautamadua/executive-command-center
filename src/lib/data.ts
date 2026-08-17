@@ -662,12 +662,20 @@ export const kpiStrategis = [
  * proyeksi yang sama juga muncul sebagai "Proy. FY" pada kartu KPI, jadi
  * keduanya harus bersumber dari satu angka.
  */
+/**
+ * Proyeksi bukan single-point: tiap forecast membawa rentang (P10–P90) dan
+ * keyakinan model, supaya CEO membaca "Rp 59,1 T ± ketidakpastian", bukan
+ * angka pasti. Rentang produksi/pendapatan lebih lebar dari laba karena
+ * driver utamanya (harga CPO, El Niño) berada di luar kendali.
+ */
 export const analitikPrediktif = [
   {
     label: "Proyeksi Produksi CPO 2026",
     value: PROYEKSI_FY.produksiCpoJtTon.toLocaleString("id-ID", { minimumFractionDigits: 2 }),
     unit: "Juta Ton",
     delta: "6,8% vs 2025",
+    range: "2,41–2,60 jt ton",
+    confidencePct: 78,
     color: "#22a45d",
     series: [20, 24, 22, 28, 26, 32, 30, 36, 34, 40, 44, 48],
   },
@@ -675,6 +683,8 @@ export const analitikPrediktif = [
     label: "Proyeksi Pendapatan 2026",
     value: `Rp ${PROYEKSI_FY.pendapatanRpT.toLocaleString("id-ID", { minimumFractionDigits: 1 })} T`,
     delta: "9,0% vs 2025",
+    range: "Rp 56,8–61,7 T",
+    confidencePct: 82,
     color: "#2f9bf5",
     series: [24, 22, 27, 25, 31, 29, 35, 33, 39, 37, 43, 47],
   },
@@ -682,6 +692,8 @@ export const analitikPrediktif = [
     label: "Proyeksi Laba Bersih 2026",
     value: `Rp ${PROYEKSI_FY.labaBersihRpT.toLocaleString("id-ID", { minimumFractionDigits: 1 })} T`,
     delta: "10,2% vs 2025",
+    range: "Rp 5,7–6,8 T",
+    confidencePct: 76,
     color: "#8b5cf6",
     series: [18, 22, 20, 26, 24, 30, 28, 34, 32, 38, 42, 46],
   },

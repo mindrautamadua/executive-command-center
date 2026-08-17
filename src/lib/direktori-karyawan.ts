@@ -4,6 +4,8 @@
  * di server dan client selalu identik.
  * ---------------------------------------------------------- */
 
+import { genderFromName } from "./avatar-gender";
+
 export type StatusKaryawan = "Karyawan Tetap" | "Kontrak (PKWT)" | "Calon Karyawan";
 export type TalentBadge = "Rising Star" | "Core Contributor" | "Solid Performer" | "Needs Support";
 
@@ -123,7 +125,9 @@ function buatKaryawan(i: number): Karyawan {
     lokasi,
     grade: jab.grade,
     status,
-    gender: i % 3 === 1 ? "Perempuan" : "Laki-laki",
+    // Gender diturunkan dari nama, bukan modulo indeks — supaya "Siti"
+    // tidak pernah tercatat Laki-laki dan foto selalu selaras nama.
+    gender: genderFromName(nama) === "wanita" ? "Perempuan" : "Laki-laki",
     pendidikan: PENDIDIKAN[(i * 3) % PENDIDIKAN.length],
     usia,
     masaKerja,

@@ -27,7 +27,7 @@ export function SuccessorConcentration() {
       <div className="flex min-h-0 flex-1 flex-col justify-around pt-1">
         {successorConcentration.top.map((t) => (
           <div key={t.nama} className="flex items-center gap-2.5">
-            <PersonAvatar seed={t.seed} size={26} className="ring-1 ring-[#eef2f6]" />
+            <PersonAvatar seed={t.seed} size={26} name={t.nama} className="ring-1 ring-[#eef2f6]" />
             <div className="min-w-0 leading-tight">
               <div className="truncate text-[9.5px] font-semibold text-ink-900">
                 {t.nama}

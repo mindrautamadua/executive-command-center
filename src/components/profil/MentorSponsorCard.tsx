@@ -15,7 +15,7 @@ function PersonRow({
 }) {
   return (
     <div className="flex items-center gap-2.5 rounded-xl border border-[#eef2f6] px-3 py-2">
-      <PersonAvatar seed={seed} size={28} />
+      <PersonAvatar seed={seed} size={28} name={nama} />
       <div className="min-w-0 flex-1 leading-tight">
         <div className="flex items-center gap-1.5">
           <span className="truncate text-[9.5px] font-bold text-ink-900">{nama}</span>

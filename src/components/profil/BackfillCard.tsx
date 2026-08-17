@@ -33,7 +33,7 @@ export function BackfillCard() {
             key={k.nama}
             className="flex items-center gap-2.5 rounded-xl border border-[#eef2f6] px-3 py-2"
           >
-            <PersonAvatar seed={k.seed} size={28} />
+            <PersonAvatar seed={k.seed} size={28} name={k.nama} />
             <div className="min-w-0 flex-1 leading-tight">
               <div className="truncate text-[9.5px] font-bold text-ink-900">{k.nama}</div>
               <div className="mt-[2px] truncate text-[8.5px] text-ink-500">{k.jabatan}</div>

@@ -22,7 +22,7 @@ export function TopInstruktur() {
             key={it.nama}
             className="-mx-1.5 flex items-center gap-2 rounded-lg px-1.5 py-[3px] transition-colors hover:bg-[#f5f8fa]"
           >
-            <PersonAvatar seed={i + 2} size={26} />
+            <PersonAvatar seed={i + 2} size={26} name={it.nama} />
             <div className="min-w-0 flex-1 leading-[1.25]">
               <div className="truncate text-[9.5px] font-semibold text-ink-900">{it.nama}</div>
               <div className="truncate text-[8.5px] text-ink-500">{it.bidang}</div>

@@ -18,7 +18,7 @@ Pola umum yang berulang di hampir semua halaman:
 
 Urutan seksi: Data Trust → CEO Morning Brief → "Key Strategic KPI" → "Keputusan & Penciptaan Nilai" (kolom utama: Value Creation + Enterprise Risk-to-Value; rail kanan: Antrian Keputusan CEO) → "Operasi & Kinerja Regional" (konten lama, tidak berubah).
 
-- **Data Trust** — strip indikator kepercayaan data berlabel domain ("Data Trust · Korporat"; halaman lain: Strategi/Keuangan/Risiko/Human Capital dengan skor & rincian quality per domain); pill navy "Data Bisnis Per <tanggal>" dominan di posisi pertama, Refresh Sistem sekunder; popover memuat 4 lapisan waktu (data bisnis as-of, sinkronisasi sistem, pasar & intelijen live, model forecast run); rincian quality bergelar "Data Trust Index — <domain>" dengan 7 komponen (Completeness/Accuracy/Timeliness/Consistency/Reconciliation/Certification/Lineage) per domain; label strip "Trust".
+- **Data Trust** — strip indikator kepercayaan data berlabel domain ("Data Trust · Korporat"; halaman lain: Strategi/Keuangan/Risiko/Human Capital dengan skor & rincian quality per domain); pill navy "Data Bisnis Per <tanggal>" dominan di posisi pertama, Refresh Sistem sekunder; popover memuat 4 lapisan waktu (data bisnis as-of, sinkronisasi sistem, pasar & intelijen live, model forecast run); rincian quality bergelar "Data Trust Index — <domain>" dengan 7 komponen (Completeness/Accuracy/Timeliness/Consistency/Reconciliation/Certification/Lineage) per domain; label strip "Trust"; status kanan diturunkan dari komponen terendah — min ≥85% = "Healthy" (hijau), di bawahnya = "Governance Attention" (amber, mis. domain Risiko dengan Lineage 82%).
 - **CEO Morning Brief** — band full-width: lampu status 5 area (Keuangan/Operasi/Strategi/SDM/Risiko) dengan micro-note, "3 Hal yang Berubah", "3 Keputusan Diperlukan" (sumber sama dengan Strategy Decision Center), dan satu hal yang dipantau; tanggal berlabel "Brief terakhir · <hari, tanggal>" agar tidak terbaca sebagai brief hari ini.
 - **Key Strategic KPI (KPI Strip)** — 7 kartu KPI korporat (Pendapatan Konsolidasi, EBITDA, Laba Bersih, ROA, dll.) dengan sparkline + delta vs RKAP.
 - **Value Creation** — headline Rp 1,86 T / target FY Rp 4,2 T (44%), mini area chart realisasi vs jalur target, dan dekomposisi 5 driver (hijau, termasuk Harga & bauran penjualan) vs 2 leakage (merah); caption "Bruto − leakage = netto" dihitung dari daftar driver dan guard rekonsiliasi di ceo-data memblok build bila netto ≠ headline baseline.
@@ -30,10 +30,10 @@ Urutan seksi: Data Trust → CEO Morning Brief → "Key Strategic KPI" → "Kepu
 - **Komoditas Utama** — breakdown kinerja per komoditas (sawit, gula, karet, teh).
 - **Kinerja SDM** — ringkasan metrik people (headcount, produktivitas, turnover) sebagai jembatan ke modul SDM; ditambah blok "Risiko Suksesi Posisi Kritikal" (3 posisi dengan tone merah/amber).
 - **Trend Kinerja Keuangan** — line/composed chart tren pendapatan & laba bulanan.
-- **Komposisi (YTD 2026)** — donut komposisi penjualan per segmen.
+- **Komposisi (YTD 2026)** — donut komposisi penjualan per segmen; label pusat "Penjualan Komoditas Rp 19,90 T" + baris jembatan "+ hilir/jasa & lain-lain Rp 4,70 T = konsolidasi Rp 24,60 T" (rekonsiliasi Penjualan vs Pendapatan, entri kamus "Total Penjualan Komoditas").
 - **Kinerja Produksi** — bar chart realisasi produksi vs target.
 - **KPI Strategis** — daftar progres KPI strategis korporat berbentuk progress bar.
-- **Analitik Prediktif** — kartu proyeksi/forecast ringkas.
+- **Analitik Prediktif** — kartu proyeksi/forecast ringkas; tiap proyeksi membawa rentang P10–P90 dan keyakinan % (bukan single-point estimate).
 - **Alert & Notifikasi Strategis** — rail kanan, daftar alert lintas fungsi berjenjang severitas.
 - **Inisiatif Strategis** — daftar inisiatif korporat + status progres.
 - **External Signals** — sinyal eksternal (Regulasi/Pasar/Iklim/Korporat) dengan chip kategori, angka dampak, dan baris implikasi "Artinya bagi PTPN: …" per item.
@@ -1897,6 +1897,7 @@ Semua halaman diawali Data Trust Strip dan diakhiri card Insight & Rekomendasi (
 - Header standar modul (ModuleHeader) dengan filter Periode dan Subholding/Level Organisasi; identitas pengguna = Denaldy Mulino Mauna, Direktur Utama, dengan foto resmi dari ptpn.id (aset lokal `public/direktur-utama-avatar.png`, crop dari `public/direktur-utama.png`).
 - Live Feed / marquee informasi berjalan — label "MARKET PULSE · PER 14 AGU"; tiap instrumen berlabel basis harga (YTD Avg / Spot); marquee, maskot, dan ukuran bar tetap.
 - Maskot robot.
+- Avatar karyawan (PersonAvatar) — pasfoto berwajah Indonesia/Asia dari pool lokal `public/avatars/` (6 pria + 6 wanita, tanpa layanan eksternal); gender foto diturunkan dari nama via heuristik nama Indonesia (`avatar-gender.ts`) sehingga foto selalu selaras jenis kelamin nama; gender di direktori karyawan juga diturunkan dari nama; fallback ilustrasi SVG bila foto gagal dimuat.
 - Toggle tema (terang/gelap).
 - Logo PTPN.
 - Dukungan PWA (service worker).

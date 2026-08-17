@@ -322,8 +322,8 @@ export interface HkmAlert {
 
 export const hkmAlerts: HkmAlert[] = [
   {
-    title: "3 Kontrak Payung Kritikal Jatuh Tempo Juli",
-    text: "Kontrak payung pupuk, angkutan CPO, dan jasa keamanan (agregat Rp 1,84 T/tahun) berakhir 31 Juli 2026 dan belum masuk tahap persetujuan perpanjangan.",
+    title: "3 Kontrak Payung Kritikal Kedaluwarsa Sejak 31 Juli",
+    text: "Kontrak payung pupuk, angkutan CPO, dan jasa keamanan (agregat Rp 1,84 T/tahun) berakhir 31 Juli 2026 tanpa persetujuan perpanjangan — unit kini beroperasi lewat perpanjangan darurat.",
     time: "Hari ini",
     tone: "red",
     href: "/hukum/kontrak",
@@ -359,9 +359,9 @@ export const hkmDecisions: HkmDecision[] = [
     impact: "High Impact",
     tone: "red",
     context:
-      "Kontrak payung pupuk, angkutan CPO, dan jasa keamanan berakhir 31 Juli 2026. Tanpa keputusan, unit terpaksa penunjukan langsung darurat dengan risiko harga dan temuan audit.",
+      "Kontrak payung pupuk, angkutan CPO, dan jasa keamanan berakhir 31 Juli 2026 tanpa keputusan perpanjangan — unit kini memakai penunjukan langsung darurat dengan risiko harga dan temuan audit.",
     rekomendasi:
-      "Setujui perpanjangan 12 bulan dengan klausul penyesuaian harga terindeks, sambil menjalankan tender terbuka untuk periode berikutnya.",
+      "Eskalasi: sahkan perpanjangan 12 bulan dengan klausul harga terindeks pada Radirsus terdekat, sambil menjalankan tender terbuka untuk periode berikutnya.",
     due: "Jul 2026",
   },
   {

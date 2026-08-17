@@ -17,7 +17,12 @@ const MODE = {
   pendapatan: {
     tab: "Pendapatan",
     data: komposisiPenjualan,
-    pusatLabel: "Total Penjualan",
+    /**
+     * Penjualan komoditas ≠ pendapatan konsolidasi (Rp 24,6 T): selisih
+     * Rp 4,7 T adalah pendapatan hilir non-komoditas, jasa, dan lain-lain.
+     * Tanpa penjelasan ini CEO wajar bertanya "kenapa 19,9 vs 24,6?".
+     */
+    pusatLabel: "Penjualan Komoditas",
     pusatNilai: "Rp 19,90 T",
   },
   ebitda: {
@@ -132,6 +137,15 @@ export function KomposisiPenjualan() {
           ))}
         </div>
       </div>
+
+      {mode === "pendapatan" && (
+        <p
+          className="truncate text-[8px] text-ink-400"
+          title="Penjualan komoditas Rp 19,90 T + pendapatan hilir/jasa & lain-lain Rp 4,70 T = pendapatan konsolidasi Rp 24,60 T"
+        >
+          + hilir/jasa &amp; lain-lain Rp 4,70 T = konsolidasi Rp 24,60 T
+        </p>
+      )}
 
       <button className="mt-1 flex items-center gap-1 text-[10px] font-semibold text-[#2f9bf5] hover:underline">
         Lihat detail <ArrowRight size={11} />

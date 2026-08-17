@@ -245,7 +245,7 @@ export const committeeFindings: DekCommitteeFinding[] = [
     uraian:
       "Peta suksesi manajemen kunci belum lengkap untuk seluruh posisi kritikal; sebagian posisi hanya memiliki satu kandidat berkategori siap.",
     permintaan:
-      "Komite meminta pemutakhiran peta suksesi beserta rencana pengembangan kandidat sebelum rapat Juli 2026.",
+      "Tenggat rapat Juli 2026 terlewat tanpa pemutakhiran lengkap — Komite meminta peta suksesi final beserta rencana pengembangan kandidat disajikan pada rapat Komite berikutnya.",
     href: "/succession-planning",
     hrefLabel: "Succession Planning",
     tone: "amber",

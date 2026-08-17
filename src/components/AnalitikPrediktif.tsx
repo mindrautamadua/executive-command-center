@@ -26,6 +26,10 @@ export function AnalitikPrediktif() {
               )}
             </div>
             <Delta value={a.delta} trend="up" size={9.5} className="mt-1" />
+            {/* Rentang P10–P90 + keyakinan — forecast bukan angka pasti. */}
+            <div className="mt-[3px] truncate text-[8px] text-ink-400" title={`Rentang ${a.range} · keyakinan ${a.confidencePct}%`}>
+              {a.range} · {a.confidencePct}%
+            </div>
             <div className="-mx-1 mt-auto">
               <Sparkline data={a.series} color={a.color} height={16} />
             </div>

@@ -418,7 +418,7 @@ export const hseInsights: HseInsight[] = [
     insight:
       "Probabilitas El Nino H2 62% ditambah cakupan menara pantau yang belum merata membuat proyeksi luas terbakar FY dapat melampaui 142 ha YTD bila kapasitas respons tidak ditambah.",
     rekomendasi:
-      "Percepat pengadaan menara pantau & embung serta perluas kelompok Masyarakat Peduli Api sebelum Juli 2026.",
+      "Jendela persiapan Juli sudah lewat — percepat pengadaan menara pantau & embung yang tersisa dan perluas Masyarakat Peduli Api selagi puncak musim kering berlangsung.",
   },
   {
     insight:
