@@ -92,6 +92,8 @@ export const riskDataTrust = {
     { label: "Accuracy", value: "96%" },
     { label: "Timeliness", value: "87%" },
     { label: "Consistency", value: "91%" },
+    { label: "Reconciliation", value: "90%" },
+    { label: "Certification", value: "85%" },
   ],
 };
 
@@ -951,7 +953,7 @@ export const appetiteInsights: RiskInsight[] = [
     insight:
       "2 breach telah melewati SLA remediasi 60 hari (HPP CPO sejak Jan, piutang plasma sejak Feb) — sesuai jalur eskalasi wajib naik ke Direksi.",
     rekomendasi:
-      "Agendakan keduanya pada rapat Direksi Juli 2026 dengan opsi keputusan yang sudah dikuantifikasi.",
+      "Jadwal eskalasi Juli 2026 telah terlewat — agendakan pada Radirsus terdekat sebagai item overdue dengan opsi keputusan yang sudah dikuantifikasi.",
   },
 ];
 

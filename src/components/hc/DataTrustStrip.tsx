@@ -92,7 +92,7 @@ export function DataTrustStrip({ data = dataTrust }: { data?: typeof dataTrust }
         </span>
         <div className="invisible absolute left-0 top-full z-30 mt-1.5 w-[190px] rounded-xl border border-[#e3e9ef] bg-white p-3 opacity-0 shadow-cardHover transition-opacity duration-150 group-hover:visible group-hover:opacity-100">
           <div className="text-[8.5px] font-extrabold uppercase tracking-[0.05em] text-ink-500">
-            Data Quality{data.domain ? ` — ${data.domain}` : ""}
+            Data Trust Index{data.domain ? ` — ${data.domain}` : ""}
           </div>
           {/* Rincian milik domain ini; default HC hanya fallback lama. */}
           <div className="mt-1.5 space-y-1.5">

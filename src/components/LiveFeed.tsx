@@ -9,6 +9,9 @@ function Items() {
         <span key={f.label} className="flex items-center gap-1.5 whitespace-nowrap">
           <span className="text-[10.5px] text-ink-500">{f.label}:</span>
           <span className="text-[10.5px] font-bold text-ink-900">{f.value}</span>
+          <span className="rounded bg-[#eef2f6] px-1 py-[1px] text-[7.5px] font-bold uppercase tracking-[0.03em] text-ink-400">
+            {f.jenis}
+          </span>
           <Delta value={f.delta} trend={f.trend} size={10} />
         </span>
       ))}
@@ -22,8 +25,10 @@ export function LiveFeed() {
       {/* Marquee & tinggi bar tidak diubah — hanya label yang menjelaskan perannya. */}
       <div className="relative flex h-full shrink-0 items-center gap-1.5 bg-gradient-to-r from-[#7ed957] to-[#1a9c5b] pl-5 pr-7 text-[10px] font-bold tracking-[0.05em] text-white">
         MARKET PULSE
+        {/* Bukan "LIVE": harga komoditas di feed adalah rata-rata YTD; tiap
+            instrumen membawa label basis harganya sendiri. */}
         <span className="rounded bg-white/20 px-1 py-[1px] text-[7.5px] font-bold tracking-[0.06em]">
-          LIVE
+          PER 14 AGU
         </span>
         <span className="absolute -right-[10px] top-0 h-full w-[20px] skew-x-[-14deg] bg-[#1a9c5b]" />
       </div>

@@ -3,7 +3,13 @@
 import { useState } from "react";
 import { X, ArrowRight, ArrowLeft } from "lucide-react";
 import { aiInsight } from "@/lib/data";
-import { aiCopilot, aiInsightBridge } from "@/lib/ceo-data";
+import { aiCopilot, aiInsightBridge, aiScenarios } from "@/lib/ceo-data";
+
+const SCENARIO_DOT = {
+  green: "bg-[#22a45d]",
+  amber: "bg-[#f5a524]",
+  red: "bg-[#ef4444]",
+} as const;
 
 function RobotMascot() {
   return (
@@ -116,6 +122,24 @@ export function AiInsight() {
                 </li>
               ))}
             </ul>
+          </div>
+
+          {/* Skenario hasil: eksekusi penuh / sebagian / tanpa intervensi. */}
+          <div className="mt-1.5 border-t border-[#d5ece7] pt-1">
+            <div className="text-[8px] font-extrabold uppercase tracking-[0.05em] text-[#0e8f7e]">
+              Skenario
+            </div>
+            <div className="mt-[3px] space-y-[2px]">
+              {aiScenarios.map((s) => (
+                <div key={s.label} className="flex items-center gap-1.5">
+                  <span className={`h-[6px] w-[6px] shrink-0 rounded-full ${SCENARIO_DOT[s.tone]}`} />
+                  <span className="min-w-0 flex-1 truncate text-[8.5px] text-ink-500" title={s.label}>
+                    {s.label}
+                  </span>
+                  <span className="shrink-0 text-[8.5px] font-bold text-ink-900">{s.value}</span>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Sensitivitas, alternatif, reversibility — rekomendasi harus bisa diadu. */}

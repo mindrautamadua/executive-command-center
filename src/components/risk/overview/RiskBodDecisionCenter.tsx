@@ -1,6 +1,7 @@
 import { AlertCircle, AlertTriangle, Sparkles } from "lucide-react";
 import { riskDecisions, type RiskDecision } from "@/lib/risk-data";
 import { decisionAging } from "@/lib/decision-aging";
+import { DecisionActions } from "@/components/shared/DecisionActions";
 import { SectionHead } from "@/components/hc/SectionHead";
 import { ScopeNote } from "@/components/ui/ScopeNote";
 
@@ -79,6 +80,7 @@ export function RiskBodDecisionCenter({
                   );
                 })()}
               </div>
+              <DecisionActions id={d.title} />
             </div>
           );
         })}

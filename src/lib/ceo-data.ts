@@ -248,6 +248,29 @@ const potensiUtilisasiRpM = nilaiRpM(
   hargaGrup.CPO,
 );
 
+/**
+ * Skenario hasil rekomendasi: apa yang terjadi bila dieksekusi penuh,
+ * sebagian, atau tidak sama sekali — melengkapi rantai
+ * Evidence → Reasoning → Recommendation → Scenario → Decision.
+ */
+export const aiScenarios: { label: string; value: string; tone: CeoTone }[] = [
+  {
+    label: "Gap tertutup penuh (12 bln)",
+    value: `+${rpM((gapProduksiCpo * 12 / 5) * hargaGrup.CPO * marjinLabaBersih)} laba`,
+    tone: "green",
+  },
+  {
+    label: "Tertutup 50%",
+    value: `+${rpM(((gapProduksiCpo * 12) / 5) * hargaGrup.CPO * marjinLabaBersih * 0.5)} laba`,
+    tone: "amber",
+  },
+  {
+    label: "Tanpa intervensi",
+    value: "Rp 0 · kebocoran berlanjut",
+    tone: "red",
+  },
+];
+
 /** Blok copilot: rekomendasi harus membawa asumsi & bukti, bukan hanya angka. */
 export const aiCopilot = {
   /**

@@ -52,6 +52,8 @@ export const coreDataTrust = {
     { label: "Accuracy", value: "96%" },
     { label: "Timeliness", value: "95%" },
     { label: "Consistency", value: "97%" },
+    { label: "Reconciliation", value: "97%" },
+    { label: "Certification", value: "94%" },
   ],
 };
 
@@ -686,10 +688,17 @@ export const analitikPrediktif = [
  * Delta ditulis sebagai besaran tanpa tanda; arah naik/turun dibawa oleh
  * `trend` dan dirender sebagai segitiga oleh komponen `Delta`.
  */
-const tickerMetrik = (label: string, id: MetricId) => {
+/**
+ * `jenis` menandai basis harga tiap instrumen. Tanpa label ini, marquee
+ * "Market Pulse" membuat rata-rata YTD terbaca sebagai harga spot hari ini —
+ * ambiguitas yang merusak kepercayaan begitu pembaca membandingkannya dengan
+ * spot KPBN di External Signals.
+ */
+const tickerMetrik = (label: string, id: MetricId, jenis: "YTD Avg" | "Spot") => {
   const perubahan = metricChange(id);
   return {
     label,
+    jenis,
     value: formatMetric(id),
     delta: perubahan?.value ?? "—",
     trend: (perubahan?.trend ?? "up") as Trend,
@@ -697,14 +706,15 @@ const tickerMetrik = (label: string, id: MetricId) => {
 };
 
 export const liveFeed = [
-  tickerMetrik("CPO", "hargaCpo"),
-  tickerMetrik("PK", "hargaPk"),
-  tickerMetrik("Karet", "hargaKaret"),
-  tickerMetrik("Tebu", "hargaTebu"),
-  tickerMetrik("Kurs: USD/IDR", "kursUsdIdr"),
+  tickerMetrik("CPO", "hargaCpo", "YTD Avg"),
+  tickerMetrik("PK", "hargaPk", "YTD Avg"),
+  tickerMetrik("Karet", "hargaKaret", "YTD Avg"),
+  tickerMetrik("Tebu", "hargaTebu", "YTD Avg"),
+  tickerMetrik("Kurs: USD/IDR", "kursUsdIdr", "Spot"),
   {
     // Brent tidak dikutip di halaman lain, jadi tidak masuk registri metrik.
     label: "Brent Oil",
+    jenis: "Spot" as const,
     value: `$${PEMASARAN.brentUsdBarel.toLocaleString("id-ID", { minimumFractionDigits: 2 })}`,
     delta: "0,35%",
     trend: "down" as Trend,

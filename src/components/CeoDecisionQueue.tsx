@@ -6,6 +6,7 @@ import { ceoDecisions } from "@/lib/ceo-data";
 import { SectionHead } from "@/components/hc/SectionHead";
 import { useSubholding } from "@/components/SubholdingProvider";
 import { filterBySubholding } from "@/lib/subholding";
+import { DecisionActions } from "@/components/shared/DecisionActions";
 
 const TONE = {
   red: {
@@ -70,6 +71,7 @@ export function CeoDecisionQueue() {
                   {d.due}
                 </span>
               </div>
+              <DecisionActions id={d.title} />
             </div>
           );
         })}

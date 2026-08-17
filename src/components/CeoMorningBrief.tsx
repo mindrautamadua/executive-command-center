@@ -20,8 +20,13 @@ export function CeoMorningBrief() {
         <h3 className="text-[10px] font-extrabold uppercase tracking-[0.05em] text-ink-900">
           CEO Morning Brief
         </h3>
+        {/*
+          Diberi label "Brief terakhir", bukan tanggal telanjang: tanpa itu
+          pembaca menganggap ini brief pagi hari ini, padahal brief mengikuti
+          refresh sistem terakhir.
+        */}
         <span className="text-[8.5px] font-semibold text-ink-400">
-          {hariDashboard}, {tanggalDashboard}
+          Brief terakhir · {hariDashboard}, {tanggalDashboard}
         </span>
       </div>
 
