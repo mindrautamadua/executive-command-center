@@ -294,6 +294,10 @@ export interface DecisionOutcome {
   title: string;
   /** Tanggal keputusan disahkan Direksi. */
   decided: string;
+  /** Pemilik eksekusi — journal tanpa owner bukan akuntabilitas. */
+  owner: string;
+  /** Asumsi kunci saat keputusan diambil — diuji ulang saat outcome diukur. */
+  assumption: string;
   /** Dampak yang dijanjikan saat keputusan diambil. */
   expected: string;
   /** Realisasi dampak sampai tanggal potong data. */
@@ -317,6 +321,8 @@ export const decisionOutcomes: DecisionOutcome[] = [
     id: "DEC-2026-004",
     title: "Sentralisasi Pengadaan Group",
     decided: "12 Jan 2026",
+    owner: "Direktorat Pengadaan Holding",
+    assumption: "Konsolidasi volume 4 kategori terbesar tercapai dalam 2 kuartal",
     expected: "Penghematan Rp 850 M FY26",
     actual: "Rp 386 M YTD Mei (45% target, run-rate on-track)",
     variance: "+2% vs prorata",
@@ -328,6 +334,8 @@ export const decisionOutcomes: DecisionOutcome[] = [
     id: "DEC-2025-038",
     title: "Divestasi Aset Non-Core Tahap 0",
     decided: "28 Okt 2025",
+    owner: "Direktorat Keuangan Holding",
+    assumption: "Valuasi KJPP final untuk seluruh batch sebelum eksekusi",
     expected: "Cash release Rp 0,90 T",
     actual: "Rp 0,74 T terealisasi",
     variance: "-18%",
@@ -339,6 +347,8 @@ export const decisionOutcomes: DecisionOutcome[] = [
     id: "DEC-2025-007",
     title: "Percepatan Replanting Sawit 2025",
     decided: "15 Feb 2025",
+    owner: "Direktorat Produksi PalmCo",
+    assumption: "Pasokan bibit tersertifikasi & jendela tanam basah normal",
     expected: "60 rb ha tertanam ulang",
     actual: "52 rb ha (87%)",
     variance: "-13%",

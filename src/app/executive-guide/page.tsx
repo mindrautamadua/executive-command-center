@@ -21,7 +21,7 @@ export default function ExecutiveGuidePage() {
         </p>
       </GuideCard>
 
-      {/* empat pintu masuk */}
+      {/* pintu masuk per bab */}
       <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
         {guideLandingCards.map((c) => (
           <Link key={c.num} href={c.href} className="group">

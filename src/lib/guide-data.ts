@@ -33,6 +33,8 @@ export const GUIDE_PAGES: GuidePage[] = [
   { label: "Warna & Trust", href: "/executive-guide/warna-dan-trust" },
   { label: "Cara Memutuskan", href: "/executive-guide/cara-memutuskan" },
   { label: "Literasi AI", href: "/executive-guide/literasi-ai" },
+  { label: "Pertanyaan Eksekutif", href: "/executive-guide/pertanyaan-eksekutif" },
+  { label: "Kasus Eksekutif", href: "/executive-guide/kasus-eksekutif" },
 ];
 
 export const GUIDE_TAGLINE =
@@ -81,6 +83,20 @@ export const guideLandingCards: GuideLandingCard[] = [
     title: "Literasi Keputusan & AI",
     desc: "Membedakan information, signal, insight, risk, recommendation, decision — dan cara membaca rekomendasi AI.",
     href: "/executive-guide/literasi-ai",
+  },
+  {
+    num: "05",
+    tag: "CHALLENGE",
+    title: "Pertanyaan Eksekutif",
+    desc: "Question Engine: 5 situasi × 8 pertanyaan yang harus diajukan sebelum menerima rekomendasi — dashboard menjawab, eksekutif bertanya.",
+    href: "/executive-guide/pertanyaan-eksekutif",
+  },
+  {
+    num: "06",
+    tag: "PRACTICE",
+    title: "Kasus Eksekutif",
+    desc: "Learning mode: kasus dari data real dashboard, tulis reasoning Anda dulu, baru bandingkan dengan Executive Analysis.",
+    href: "/executive-guide/kasus-eksekutif",
   },
 ];
 

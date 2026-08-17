@@ -4,6 +4,11 @@ import { useState } from "react";
 import { X, ArrowRight, ArrowLeft } from "lucide-react";
 import { aiInsight } from "@/lib/data";
 import { aiCopilot, aiInsightBridge, aiScenarios } from "@/lib/ceo-data";
+import { questionSets } from "@/lib/question-engine-data";
+import Link from "next/link";
+
+/** Set pertanyaan konteks "Rekomendasi AI" dari Question Engine. */
+const AI_CHALLENGE = questionSets.find((s) => s.context.startsWith("Rekomendasi AI"));
 
 const SCENARIO_DOT = {
   green: "bg-[#22a45d]",
@@ -72,6 +77,29 @@ export function AiInsight() {
         <h3 className="card-title text-[#0e8f7e]">DASAR PERHITUNGAN</h3>
 
         <div className="scroll-thin mt-1 min-h-0 flex-1 overflow-y-auto pr-1">
+          {/* Executive Challenge: sistem melatih bertanya sebelum menerima
+              rekomendasi — Question Engine konteks "Rekomendasi AI". */}
+          {AI_CHALLENGE && (
+            <details className="mb-1.5 rounded-lg border border-[#d5ece7] bg-white/60 px-2 py-1.5">
+              <summary className="cursor-pointer text-[8.5px] font-extrabold uppercase tracking-[0.05em] text-[#0e8f7e]">
+                Executive Challenge — tanyakan dulu sebelum menerima
+              </summary>
+              <ol className="mt-1 space-y-[2px]">
+                {AI_CHALLENGE.questions.map((q, i) => (
+                  <li key={q} className="flex gap-1 text-[8.5px] leading-[1.35] text-ink-600">
+                    <span className="shrink-0 font-bold text-[#0e8f7e]">{i + 1}.</span>
+                    {q}
+                  </li>
+                ))}
+              </ol>
+              <Link
+                href="/executive-guide/pertanyaan-eksekutif"
+                className="mt-1 inline-block text-[8px] font-bold text-[#0e8f7e] hover:underline"
+              >
+                Buka Question Engine lengkap →
+              </Link>
+            </details>
+          )}
           <ol className="space-y-[3px]">
             {aiInsight.rantai.map((baris, i) => (
               <li key={baris} className="flex gap-1.5 text-[9px] leading-[1.35] text-ink-700">
@@ -193,8 +221,29 @@ export function AiInsight() {
           </div>
         </div>
 
-        <p className="mt-1 text-[9px] text-ink-400">
-          Keyakinan: {aiCopilot.confidencePct}% · {aiInsight.keyakinan}
+        {/* Confidence dipecah: data ≠ model ≠ kausal ≠ rekomendasi — angka
+            gabungan menyembunyikan mata rantai terlemah. */}
+        <div className="mt-1 flex flex-wrap items-center gap-1">
+          <span className="text-[8px] font-bold uppercase tracking-[0.04em] text-ink-400">
+            Keyakinan
+          </span>
+          {aiCopilot.confidenceBreakdown.map((c) => (
+            <span
+              key={c.label}
+              className={`rounded px-1 py-[1px] text-[7.5px] font-bold ${
+                c.pct >= 85
+                  ? "bg-ptpn-greenLight text-ptpn-green"
+                  : c.pct >= 65
+                    ? "bg-[#e8f1fd] text-[#2f6fe4]"
+                    : "bg-[#fdf3e0] text-[#d98b06]"
+              }`}
+            >
+              {c.label} {c.pct}%
+            </span>
+          ))}
+        </div>
+        <p className="mt-[3px] text-[9px] text-ink-400">
+          Gabungan: {aiCopilot.confidencePct}% · {aiInsight.keyakinan}
         </p>
 
         <button

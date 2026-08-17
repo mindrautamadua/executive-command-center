@@ -224,10 +224,11 @@ export interface ImpactChain {
 }
 
 /**
- * Rantai dampak isu material: informasi yang sama dengan External Signals,
- * Risk-to-Value, alert, dan AI Insight — tetapi disatukan menjadi satu rantai
- * kausal per isu, sehingga Direksi membaca sebab-akibatnya sekali jalan,
- * bukan merekonstruksinya dari empat kartu terpisah.
+ * Rantai dampak isu material — 10 tahap penuh: Sinyal → Driver → Efek Bisnis
+ * → Efek Finansial → Risiko → Konsekuensi Strategis → Opsi → Keputusan →
+ * Owner → Outcome. Informasi yang sama dengan External Signals, Risk-to-Value,
+ * alert, dan AI Insight — disatukan jadi satu rantai kausal per isu, lintas
+ * domain (pasar→keuangan, iklim→produksi, people→operasi, hukum→aset).
  */
 export const impactChains: ImpactChain[] = [
   {
@@ -235,10 +236,14 @@ export const impactChains: ImpactChain[] = [
     tone: "red",
     steps: [
       { stage: "Sinyal", label: `Spot KPBN Rp ${PEMASARAN.cpoKpbnSpotRpKg.toLocaleString("id-ID")} — premium atas ASP YTD` },
-      { stage: "Dampak", label: `Volume belum terjual ${volumeCpoBelumTerjual.toLocaleString("id-ID", { minimumFractionDigits: 2 })} jt ton` },
-      { stage: "Risiko", label: `Sensitivitas ± ${rpM(bandVolatilitasRpM)} (±5% harga)` },
-      { stage: "Rekomendasi", label: "Kunci harga sebagian volume Q4 selagi premium bertahan" },
-      { stage: "Keputusan", label: "Direktorat Pemasaran · tenggat 22 Agu 2026" },
+      { stage: "Driver", label: "Pengetatan suplai global + permintaan biodiesel" },
+      { stage: "Efek Bisnis", label: `Volume belum terjual ${volumeCpoBelumTerjual.toLocaleString("id-ID", { minimumFractionDigits: 2 })} jt ton terpapar pergerakan harga` },
+      { stage: "Efek Finansial", label: `Sensitivitas ± ${rpM(bandVolatilitasRpM)} (±5% harga) · tiap Rp 100/kg = ${rpM(sensitivitasHargaCpoRpM)}` },
+      { stage: "Risiko", label: "Ekstrem — berkorelasi dengan El Niño (skenario gabungan Rp 4,2 T)" },
+      { stage: "Konsekuensi Strategis", label: "Proyeksi pendapatan FY Rp 59,1 T bergantung pada asumsi ASP" },
+      { stage: "Opsi", label: "A. Hedge sebagian Q4 · B. Naikkan forward cover ke 38% · C. Tanpa aksi" },
+      { stage: "Keputusan", label: "Kunci harga sebagian volume Q4 selagi premium bertahan" },
+      { stage: "Owner", label: "Direktorat Pemasaran · tenggat 22 Agu 2026" },
       { stage: "Outcome", label: "Belum diukur — masuk siklus outcome setelah eksekusi" },
     ],
   },
@@ -247,11 +252,63 @@ export const impactChains: ImpactChain[] = [
     tone: "amber",
     steps: [
       { stage: "Sinyal", label: `Produksi CPO −${(gapProduksiCpo * 1_000).toLocaleString("id-ID", { maximumFractionDigits: 0 })} rb ton vs RKAP YTD` },
-      { stage: "Dampak", label: `Pendapatan tertunda ${rpM(gapProduksiRpM)} · EBITDA ${rpM((gapProduksiRpM * KEUANGAN.ebitdaMarginPct) / 100)} (YTD)` },
+      { stage: "Driver", label: "Rotasi panen terganggu + utilisasi PKS di bawah target" },
+      { stage: "Efek Bisnis", label: "Volume regional −2,3% vs 2025 — satu-satunya regional negatif" },
+      { stage: "Efek Finansial", label: `Pendapatan tertunda ${rpM(gapProduksiRpM)} · EBITDA ${rpM((gapProduksiRpM * KEUANGAN.ebitdaMarginPct) / 100)} (YTD)` },
       { stage: "Risiko", label: "Delayed revenue berlanjut bila rotasi panen tidak pulih" },
-      { stage: "Rekomendasi", label: "Audit rotasi panen & utilisasi PKS — potensi laba disetahunkan Rp 107 M" },
-      { stage: "Keputusan", label: "Direktorat Operasional · tenggat 29 Agu 2026" },
+      { stage: "Konsekuensi Strategis", label: "Regional Head 4 kosong (posisi kritikal) — eksekusi pemulihan tanpa pemimpin tetap" },
+      { stage: "Opsi", label: "A. Audit rotasi + utilisasi · B. Realokasi TBS antar-PKS · C. Percepat pengisian Regional Head" },
+      { stage: "Keputusan", label: "Audit rotasi panen & utilisasi PKS — potensi laba disetahunkan Rp 107 M" },
+      { stage: "Owner", label: "Direktorat Operasional · tenggat 29 Agu 2026" },
       { stage: "Outcome", label: "Monitoring bulanan gap vs RKAP" },
+    ],
+  },
+  {
+    issue: "El Niño H2",
+    tone: "red",
+    steps: [
+      { stage: "Sinyal", label: `BMKG/NOAA: probabilitas El Niño H2 naik ke ${RISIKO.elNinoProbabilitasPct}%` },
+      { stage: "Driver", label: "Defisit air kebun — curah hujan di bawah normal" },
+      { stage: "Efek Bisnis", label: "Yield TBS terancam; skenario moderat memangkas produksi H2 −6%" },
+      { stage: "Efek Finansial", label: "EBITDA −Rp 1,9 T (skenario moderat)" },
+      { stage: "Risiko", label: "Ekstrem — berkorelasi dengan harga CPO (gabungan Rp 4,2 T)" },
+      { stage: "Konsekuensi Strategis", label: "Target produksi RJPP 2027 perlu diuji ulang skenario kering" },
+      { stage: "Opsi", label: "A. Water management 34 kebun · B. Perluas asuransi parametrik ke 6 regional · C. Revisi outlook H2" },
+      { stage: "Keputusan", label: "Paket mitigasi: hedging CPO + asuransi parametrik sebagai satu keputusan" },
+      { stage: "Owner", label: "Direktorat Produksi + Pemasaran · sebelum musim kering" },
+      { stage: "Outcome", label: "Mitigasi baru mencakup 34 kebun; parametrik masih pilot 2 regional" },
+    ],
+  },
+  {
+    issue: "Risiko talenta kritikal",
+    tone: "amber",
+    steps: [
+      { stage: "Sinyal", label: `${SDM.posisiKritikalKosong} posisi kritikal kosong · cakupan suksesi ${SDM.cakupanSuksesiPct}%` },
+      { stage: "Driver", label: "Pipeline suksesi tipis di operasi gula & regional" },
+      { stage: "Efek Bisnis", label: "Regional Head 4 & Head of Sugar Operations kosong — kapasitas eksekusi turun" },
+      { stage: "Efek Finansial", label: `Terhubung ke gap Regional 4 (${rpM(gapProduksiRpM)}) & pemulihan margin SGN` },
+      { stage: "Risiko", label: "Kegagalan eksekusi program pemulihan tanpa kepemimpinan tetap" },
+      { stage: "Konsekuensi Strategis", label: "Restrukturisasi 11 PG & swasembada gula butuh pemimpin operasional kuat" },
+      { stage: "Opsi", label: "A. Promosi internal (18 Ready Now) · B. External hiring · C. Interim assignment" },
+      { stage: "Keputusan", label: "Isi 3 posisi kritikal teratas ≤60 hari" },
+      { stage: "Owner", label: "Direktorat SDM + Direktur Utama subholding" },
+      { stage: "Outcome", label: "Belum diukur — tracking pengisian posisi per bulan" },
+    ],
+  },
+  {
+    issue: "Perkara hukum & lahan (HGU)",
+    tone: "amber",
+    steps: [
+      { stage: "Sinyal", label: `Eksposur perkara Rp ${RISIKO.eksposurLegalRpT.toLocaleString("id-ID", { minimumFractionDigits: 1 })} T · ${RISIKO.perkaraAktif} perkara aktif` },
+      { stage: "Driver", label: "Sengketa lahan & perpanjangan HGU menunggu instansi" },
+      { stage: "Efek Bisnis", label: "Kepastian areal produksi & agunan pembiayaan terganggu" },
+      { stage: "Efek Finansial", label: "Eksposur maksimum Rp 4,2 T (bukan expected loss) + biaya perkara" },
+      { stage: "Risiko", label: "Kehilangan hak kelola + hambatan kepatuhan EUDR/traceability" },
+      { stage: "Konsekuensi Strategis", label: "Areal replanting & ekspansi tebu bergantung kepastian lahan" },
+      { stage: "Opsi", label: "A. Prioritaskan perkara bernilai terbesar · B. Percepat perpanjangan HGU kritikal · C. Mediasi konflik plasma" },
+      { stage: "Keputusan", label: "Prioritaskan perkara aktif bernilai terbesar + task force HGU" },
+      { stage: "Owner", label: "Direktorat Hukum · reviu bulanan Direksi" },
+      { stage: "Outcome", label: "Belum diukur — baseline nilai perkara ditutup per kuartal" },
     ],
   },
 ];
@@ -539,6 +596,17 @@ export const aiCopilot = {
    * analis, bukan skor model; ditampilkan agar bisa ditantang, bukan dipercaya buta.
    */
   confidencePct: 72,
+  /**
+   * Pecahan confidence: yakin pada data ≠ yakin pada inferensi kausal ≠
+   * yakin pada rekomendasi. Satu angka gabungan menyembunyikan bahwa mata
+   * rantai terlemah (kausal, rekomendasi) jauh di bawah kualitas datanya.
+   */
+  confidenceBreakdown: [
+    { label: "Data", pct: 94 },
+    { label: "Model", pct: 72 },
+    { label: "Kausal", pct: 61 },
+    { label: "Rekomendasi", pct: 58 },
+  ],
   sensitivity: `±10 rb ton volume ≈ ±${rpM(sensitivitasVolumeRpM)} laba bersih; ±Rp 100/kg ASP ≈ ±Rp 9 M pada volume gap`,
   alternative: `Alternatif: naikkan utilisasi PKS ${PRODUKSI.utilisasiPksPct.toLocaleString(
     "id-ID",

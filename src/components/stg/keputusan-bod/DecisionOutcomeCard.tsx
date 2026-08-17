@@ -27,7 +27,8 @@ export function DecisionOutcomeCard() {
         </span>
       </div>
       <p className="mt-[3px] text-[9px] text-ink-500">
-        Expected → Actual → Variance → Why → Lesson dari keputusan yang sudah dieksekusi
+        Executive Decision Journal — Asumsi → Expected → Actual → Variance → Why → Lesson per
+        keputusan ber-ID: memori institusional cara Direksi memutus
       </p>
 
       <div className="scroll-thin mt-2 flex min-h-0 flex-1 flex-col gap-2 overflow-y-auto pr-1">
@@ -54,6 +55,10 @@ export function DecisionOutcomeCard() {
               <div className="mt-1 grid grid-cols-[52px_minmax(0,1fr)] gap-x-2 gap-y-[2px] text-[8.5px]">
                 <span className="text-ink-400">Diputus</span>
                 <span className="font-semibold text-ink-700">{d.decided}</span>
+                <span className="text-ink-400">Owner</span>
+                <span className="font-semibold text-ink-700">{d.owner}</span>
+                <span className="text-ink-400">Asumsi</span>
+                <span className="font-semibold text-ink-700">{d.assumption}</span>
                 <span className="text-ink-400">Expected</span>
                 <span className="font-semibold text-ink-700">{d.expected}</span>
                 <span className="text-ink-400">Actual</span>
