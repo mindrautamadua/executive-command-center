@@ -25,7 +25,7 @@ export function DataTrustStrip({ data = dataTrust }: { data?: typeof dataTrust }
   return (
     <div className="card anim-rise mb-3 flex items-center gap-4 px-4 py-2">
       <span className="text-[8.5px] font-extrabold uppercase tracking-[0.05em] text-ink-400">
-        Data Trust
+        Data Trust{data.domain ? ` · ${data.domain}` : ""}
       </span>
 
       {/*
@@ -40,15 +40,24 @@ export function DataTrustStrip({ data = dataTrust }: { data?: typeof dataTrust }
         <span className="text-[10px] font-extrabold uppercase tracking-[0.02em] text-white underline decoration-dotted decoration-[#5f7396] underline-offset-2">
           {data.asOf}
         </span>
-        <div className="invisible absolute left-0 top-full z-30 mt-1.5 w-[230px] rounded-xl border border-[#e3e9ef] bg-white p-3 opacity-0 shadow-cardHover transition-opacity duration-150 group-hover:visible group-hover:opacity-100">
+        <div className="invisible absolute left-0 top-full z-30 mt-1.5 w-[248px] rounded-xl border border-[#e3e9ef] bg-white p-3 opacity-0 shadow-cardHover transition-opacity duration-150 group-hover:visible group-hover:opacity-100">
+          {/* Empat lapisan waktu: historis, sistem, pasar live, dan model forecast. */}
           <div className="space-y-1.5 text-[9px]">
             <div className="flex justify-between gap-2">
-              <span className="text-ink-500">Data effective date</span>
+              <span className="text-ink-500">Data bisnis (as-of)</span>
               <span className="font-bold text-ink-900">{data.asOf}</span>
             </div>
             <div className="flex justify-between gap-2">
-              <span className="text-ink-500">System synchronization</span>
+              <span className="text-ink-500">Sinkronisasi sistem</span>
               <span className="font-bold text-ink-900">{data.lastRefresh}</span>
+            </div>
+            <div className="flex justify-between gap-2">
+              <span className="text-ink-500">Pasar &amp; intelijen (live)</span>
+              <span className="font-bold text-ink-900">s.d. 15 Agu 2026</span>
+            </div>
+            <div className="flex justify-between gap-2">
+              <span className="text-ink-500">Model forecast (run)</span>
+              <span className="font-bold text-ink-900">13 Agu 2026</span>
             </div>
             <div className="flex justify-between gap-2">
               <span className="text-ink-500">Source</span>
@@ -56,8 +65,9 @@ export function DataTrustStrip({ data = dataTrust }: { data?: typeof dataTrust }
             </div>
           </div>
           <p className="mt-1.5 border-t border-[#eef2f6] pt-1.5 text-[8px] leading-snug text-ink-400">
-            Angka dashboard merepresentasikan periode bisnis s.d. tanggal efektif; sinkronisasi
-            sistem berjalan lebih sering tanpa mengubah periode data.
+            Angka kinerja merepresentasikan periode bisnis s.d. tanggal efektif. Sinkronisasi
+            sistem, feed pasar, dan model forecast berjalan lebih sering tanpa mengubah
+            periode data kinerja.
           </p>
         </div>
       </div>
@@ -82,10 +92,11 @@ export function DataTrustStrip({ data = dataTrust }: { data?: typeof dataTrust }
         </span>
         <div className="invisible absolute left-0 top-full z-30 mt-1.5 w-[190px] rounded-xl border border-[#e3e9ef] bg-white p-3 opacity-0 shadow-cardHover transition-opacity duration-150 group-hover:visible group-hover:opacity-100">
           <div className="text-[8.5px] font-extrabold uppercase tracking-[0.05em] text-ink-500">
-            Rincian Data Quality
+            Data Quality{data.domain ? ` — ${data.domain}` : ""}
           </div>
+          {/* Rincian milik domain ini; default HC hanya fallback lama. */}
           <div className="mt-1.5 space-y-1.5">
-            {dataQualityBreakdown.map((d) => (
+            {(data.qualityBreakdown ?? dataQualityBreakdown).map((d) => (
               <div key={d.label} className="flex items-center justify-between gap-2">
                 <span className="text-[9px] text-ink-500">{d.label}</span>
                 <span className="text-[9.5px] font-bold text-ink-900">{d.value}</span>

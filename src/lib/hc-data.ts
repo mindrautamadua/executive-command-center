@@ -1,9 +1,23 @@
-import { BASELINE_TRUST } from "./group-baseline";
+import { BASELINE_TRUST, KEUANGAN, RKAP_YTD, SDM } from "./group-baseline";
 import type { DimensionDataTrust } from "./dimension-menu";
 /**
  * Data statis halaman HC Executive Command Center (/sdm-talenta).
- * Periode acuan: Mei 2026 (YTD).
+ * Periode acuan: Mei 2026 (YTD). Metrik yang dikutip lintas halaman
+ * (produktivitas, turnover, engagement) diturunkan dari group-baseline —
+ * satu definisi, satu formula, satu angka di semua halaman.
  */
+
+/** Format angka gaya Indonesia dengan 1 desimal. */
+const id1 = (n: number) => n.toLocaleString("id-ID", { maximumFractionDigits: 1 });
+
+/** Pendapatan per karyawan YTD (Rp juta) — formula sama dengan dashboard "/". */
+const pendapatanPerKaryawanJt = (KEUANGAN.pendapatanYtd * 1_000_000) / SDM.karyawanAktif;
+const rkapPendapatanPerKaryawanJt = (RKAP_YTD.pendapatanRpT * 1_000_000) / SDM.karyawanAktif;
+const ebitdaPerKaryawanJt = (KEUANGAN.ebitdaYtd * 1_000_000) / SDM.karyawanAktif;
+const rkapEbitdaPerKaryawanJt = (RKAP_YTD.ebitdaRpT * 1_000_000) / SDM.karyawanAktif;
+
+/** Indeks engagement 0-100 = skor survei (skala 1-5) × 20 — satu instrumen. */
+const engagementIndex = SDM.engagementSkor * 20;
 
 /* ── 0a. Konteks Organisasi (drill-down) ──────────────────────────── */
 
@@ -37,6 +51,13 @@ export const dataTrust: DimensionDataTrust = {
   coverage: "97,8%",
   quality: "96,4%",
   sources: ["SAP HCM", "IHCMS", "Payroll", "LMS", "e-Rekrutmen"],
+  domain: "Human Capital",
+  qualityBreakdown: [
+    { label: "Completeness", value: "98%" },
+    { label: "Accuracy", value: "96%" },
+    { label: "Timeliness", value: "95%" },
+    { label: "Consistency", value: "97%" },
+  ],
 };
 
 /* ── 1. Key Strategic KPI ─────────────────────────────────────────── */
@@ -70,9 +91,9 @@ export const hcKpi: HcKpi[] = [
   },
   {
     label: "People Productivity",
-    value: "1,18",
-    sub: "Revenue / Employee (M Rp)",
-    delta: "6,7%",
+    value: id1(pendapatanPerKaryawanJt),
+    sub: "Revenue / Employee YTD (Jt Rp)",
+    delta: "7,0%",
     trend: "up",
     deltaTone: "good",
     compare: "vs Mei 2025",
@@ -82,9 +103,9 @@ export const hcKpi: HcKpi[] = [
   },
   {
     label: "Engagement Index",
-    value: "78,4",
-    sub: "Kategori: Healthy",
-    delta: "3,2 pts",
+    value: id1(engagementIndex),
+    sub: "Indeks 0-100 · survei 4,21/5",
+    delta: "2,6 pts",
     trend: "up",
     deltaTone: "good",
     compare: "vs Mei 2025",
@@ -94,9 +115,9 @@ export const hcKpi: HcKpi[] = [
   },
   {
     label: "Turnover Rate",
-    value: "6,8%",
+    value: `${SDM.turnoverPct.toLocaleString("id-ID", { minimumFractionDigits: 2 })}%`,
     sub: "YTD",
-    delta: "-1,3 pts",
+    delta: "-0,4 pts",
     trend: "down",
     deltaTone: "good",
     compare: "vs Mei 2025",
@@ -262,7 +283,7 @@ export const topRisks: TopRisk[] = [
     severity: "Medium",
     score: 58,
     drivers: [
-      { label: "Turnover tenure 2-4 tahun 11,4%", weight: 40 },
+      { label: "Turnover tenure 2-4 tahun 4,8% (2× rata-rata grup)", weight: 40 },
       { label: "Compensation percentile < P50 pasar", weight: 35 },
       { label: "Manager effectiveness rendah di 8 unit", weight: 25 },
     ],
@@ -374,10 +395,11 @@ export interface ProductivityRow {
 }
 
 export const productivityRows: ProductivityRow[] = [
-  { indikator: "Revenue / Employee (M Rp)", ytd: "1,18", yoy: "6,7%", yoyTrend: "up", yoyTone: "good", target: "1,25" },
-  { indikator: "EBITDA / Employee (M Rp)", ytd: "326", yoy: "5,3%", yoyTrend: "up", yoyTone: "good", target: "345" },
-  { indikator: "Production (Ton) / Employee", ytd: "64,3", yoy: "7,1%", yoyTrend: "up", yoyTone: "good", target: "66,0" },
-  { indikator: "TBS (Ton) / Employee", ytd: "74,8", yoy: "6,5%", yoyTrend: "up", yoyTone: "good", target: "76,0" },
+  // Target = beban RKAP YTD per karyawan; aktual di atas target selaras pendapatan di atas RKAP.
+  { indikator: "Revenue / Employee (Jt Rp)", ytd: id1(pendapatanPerKaryawanJt), yoy: "7,0%", yoyTrend: "up", yoyTone: "good", target: id1(rkapPendapatanPerKaryawanJt) },
+  { indikator: "EBITDA / Employee (Jt Rp)", ytd: id1(ebitdaPerKaryawanJt), yoy: "5,3%", yoyTrend: "up", yoyTone: "good", target: id1(rkapEbitdaPerKaryawanJt) },
+  { indikator: "Produksi CPO (Ton) / Employee", ytd: "14,1", yoy: "7,1%", yoyTrend: "up", yoyTone: "good", target: "14,5" },
+  { indikator: "TBS (Ton) / Employee", ytd: "63,0", yoy: "6,5%", yoyTrend: "up", yoyTone: "good", target: "64,5" },
   { indikator: "Labor Cost / Ton (Rp)", ytd: "176.420", yoy: "-3,4%", yoyTrend: "down", yoyTone: "bad", target: "180.000" },
   { indikator: "Labor Cost / Revenue (%)", ytd: "9,7%", yoy: "-0,6 pts", yoyTrend: "down", yoyTone: "bad", target: "10,0%" },
   { indikator: "Productivity Index (Base 100)", ytd: "112", yoy: "5,2%", yoyTrend: "up", yoyTone: "good", target: "115" },
@@ -521,7 +543,7 @@ export interface HcAlert {
 export const hcAlerts: HcAlert[] = [
   {
     title: "Risiko Turnover Tinggi",
-    text: "Turnover di PTPN IV Regional 2 melebihi ambang batas (6,5%).",
+    text: "Turnover di PTPN IV Regional 2 mencapai 4,2% — melebihi ambang batas regional 3,5% (rata-rata grup 2,45%).",
     time: "Today",
     tone: "red",
   },

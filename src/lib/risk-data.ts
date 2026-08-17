@@ -85,6 +85,14 @@ export const riskDataTrust = {
   coverage: "93,6%",
   quality: "92,2%",
   sources: ["ERM System", "e-Audit", "WBS", "Legal Tracker"],
+  domain: "Risiko",
+  // Timeliness terendah se-grup: register risiko & status perkara diinput manual.
+  qualityBreakdown: [
+    { label: "Completeness", value: "95%" },
+    { label: "Accuracy", value: "96%" },
+    { label: "Timeliness", value: "87%" },
+    { label: "Consistency", value: "91%" },
+  ],
 };
 
 /* ── KPI Strip ────────────────────────────────────────────────────── */

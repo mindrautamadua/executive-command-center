@@ -1,5 +1,6 @@
 import { AlertCircle, AlertTriangle, Sparkles } from "lucide-react";
 import { riskDecisions, type RiskDecision } from "@/lib/risk-data";
+import { decisionAging } from "@/lib/decision-aging";
 import { SectionHead } from "@/components/hc/SectionHead";
 import { ScopeNote } from "@/components/ui/ScopeNote";
 
@@ -67,7 +68,16 @@ export function RiskBodDecisionCenter({
                 <span className={`shrink-0 rounded px-1.5 py-[2px] text-[8px] font-bold ${t.pill}`}>
                   {d.exposure}
                 </span>
-                <span className="text-[8.5px] font-semibold text-ink-400">Due: {d.due}</span>
+                {(() => {
+                  const aging = decisionAging(d.due);
+                  return aging.overdue ? (
+                    <span className="rounded bg-[#ef4444] px-1.5 py-[1px] text-[7.5px] font-bold uppercase tracking-[0.04em] text-white">
+                      {aging.label}
+                    </span>
+                  ) : (
+                    <span className="text-[8.5px] font-semibold text-ink-400">{aging.label}</span>
+                  );
+                })()}
               </div>
             </div>
           );

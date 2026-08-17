@@ -235,8 +235,38 @@ export const aiInsightBridge: { label: string; value: string }[] = [
   { label: "Laba bersih", value: `+${rpM(potensiLabaRpM)}` },
 ];
 
+/** Dampak laba per pergerakan volume 10 rb ton (juta ton = 0,01). */
+const sensitivitasVolumeRpM = nilaiRpM(0.01, hargaGrup.CPO) * marjinLabaBersih;
+
+/** Alternatif: naikkan utilisasi PKS ke 85% (formula sama dengan intelijen data.ts). */
+const targetUtilisasiPks = 85;
+const tambahanTbsUtilisasi =
+  (PRODUKSI.tbsDiolahYtdJtTon * (targetUtilisasiPks - PRODUKSI.utilisasiPksPct)) /
+  PRODUKSI.utilisasiPksPct;
+const potensiUtilisasiRpM = nilaiRpM(
+  (tambahanTbsUtilisasi * PRODUKSI.oerPct) / 100,
+  hargaGrup.CPO,
+);
+
 /** Blok copilot: rekomendasi harus membawa asumsi & bukti, bukan hanya angka. */
 export const aiCopilot = {
+  /**
+   * Keyakinan gabungan kelengkapan bukti & stabilitas asumsi — ditetapkan
+   * analis, bukan skor model; ditampilkan agar bisa ditantang, bukan dipercaya buta.
+   */
+  confidencePct: 72,
+  sensitivity: `±10 rb ton volume ≈ ±${rpM(sensitivitasVolumeRpM)} laba bersih; ±Rp 100/kg ASP ≈ ±Rp 9 M pada volume gap`,
+  alternative: `Alternatif: naikkan utilisasi PKS ${PRODUKSI.utilisasiPksPct.toLocaleString(
+    "id-ID",
+    { minimumFractionDigits: 1 },
+  )}% → ${targetUtilisasiPks}% — potensi pendapatan ${rpM(potensiUtilisasiRpM)} (laba ±${rpM(
+    potensiUtilisasiRpM * marjinLabaBersih,
+  )})`,
+  reversibility: "Reversible — program operasional, tanpa capex permanen",
+  owner: "Direktorat Operasional",
+  deadline: "29 Agu 2026",
+  decisionRequired: false,
+  status: "Open" as const,
   assumptions: [
     `ASP CPO bertahan di Rp ${hargaGrup.CPO.toLocaleString("id-ID")}/kg`,
     `Marjin laba bersih YTD ${(marjinLabaBersih * 100).toLocaleString("id-ID", {

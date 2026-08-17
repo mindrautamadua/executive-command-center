@@ -17,6 +17,14 @@ export const stgDataTrust: DimensionDataTrust = {
   coverage: "94,7%",
   quality: "93,8%",
   sources: ["e-RKAP", "PMO Tracker", "OKR System", "Notulen BOD"],
+  domain: "Strategi",
+  // Timeliness terendah: progres inisiatif dilaporkan manual per bulan oleh PMO.
+  qualityBreakdown: [
+    { label: "Completeness", value: "96%" },
+    { label: "Accuracy", value: "94%" },
+    { label: "Timeliness", value: "91%" },
+    { label: "Consistency", value: "94%" },
+  ],
 };
 
 /* ── KPI strip (shape mengikuti HcKpi di hc-data.ts) ──────────────── */

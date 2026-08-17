@@ -7,6 +7,7 @@ import {
   PRODUKSI,
   PROYEKSI_FY,
   RKAP_YTD,
+  STEMPEL_DATA,
   hargaGrup,
 } from "./group-baseline";
 import { formatMetric, metricChange, metricTarget, type MetricId } from "./metrics";
@@ -18,7 +19,7 @@ export type Trend = "up" | "down";
  * Tanggal acuan tampilan dashboard (data demo). Nama hari diturunkan dari
  * tanggal ini, bukan ditulis manual, supaya keduanya tidak pernah berbeda.
  */
-const TANGGAL_DASHBOARD = new Date(2026, 7, 15);
+export const TANGGAL_DASHBOARD = new Date(2026, 7, 15);
 
 const NAMA_HARI = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
 const NAMA_BULAN = [
@@ -33,6 +34,26 @@ export const tanggalDashboard = `${TANGGAL_DASHBOARD.getDate()} ${
 export const hariDashboard = NAMA_HARI[TANGGAL_DASHBOARD.getDay()];
 
 export const jamDashboard = "09:41 WIB";
+
+/**
+ * Data trust dashboard korporat "/". Sebelumnya homepage memakai default HC
+ * (sumber SAP HCM dkk.) — salah domain: skor quality bersifat per-domain dan
+ * homepage adalah agregat korporat, bukan HC.
+ */
+export const coreDataTrust = {
+  asOf: STEMPEL_DATA.snapshot,
+  lastRefresh: STEMPEL_DATA.refresh,
+  coverage: "97,8%",
+  quality: "96,4%",
+  sources: ["SAP S/4HANA", "e-RKAP", "KPBN", "SAP HCM", "ERM System"],
+  domain: "Korporat",
+  qualityBreakdown: [
+    { label: "Completeness", value: "98%" },
+    { label: "Accuracy", value: "96%" },
+    { label: "Timeliness", value: "95%" },
+    { label: "Consistency", value: "97%" },
+  ],
+};
 
 export interface KpiStripItem {
   label: string;

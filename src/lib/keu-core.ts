@@ -15,6 +15,14 @@ export const keuDataTrust: DimensionDataTrust = {
   coverage: "96,8%",
   quality: "95,2%",
   sources: ["SAP FI/CO", "Treasury", "Konsolidasi", "e-Budgeting"],
+  domain: "Keuangan",
+  // Timeliness tertahan closing bulanan; accuracy tinggi karena rekonsiliasi GL.
+  qualityBreakdown: [
+    { label: "Completeness", value: "97%" },
+    { label: "Accuracy", value: "97%" },
+    { label: "Timeliness", value: "92%" },
+    { label: "Consistency", value: "95%" },
+  ],
 };
 
 /* ── Kinerja keuangan per segmen (subholding) ─────────────────────── */

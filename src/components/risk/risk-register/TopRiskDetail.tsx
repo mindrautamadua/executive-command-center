@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { topRiskDetail, type RiskLevel } from "@/lib/risk-data";
+import { decisionAging } from "@/lib/decision-aging";
 import { SectionHead } from "@/components/hc/SectionHead";
 import { ScopeNote } from "@/components/ui/ScopeNote";
 import { ToneBadge, type BadgeTone } from "@/components/shared/ToneBadge";
@@ -61,9 +62,18 @@ export function TopRiskDetail() {
                     {r.category} · {r.owner}
                   </span>
                 </span>
-                <span className="shrink-0 text-[8.5px] font-semibold text-ink-400">
-                  Due: {r.due}
-                </span>
+                {(() => {
+                  const aging = decisionAging(r.due);
+                  return (
+                    <span
+                      className={`shrink-0 text-[8.5px] font-semibold ${
+                        aging.overdue ? "text-[#ef4444]" : "text-ink-400"
+                      }`}
+                    >
+                      {aging.label}
+                    </span>
+                  );
+                })()}
                 <ChevronDown
                   size={12}
                   className={`shrink-0 text-ink-400 transition-transform ${expanded ? "rotate-180" : ""}`}

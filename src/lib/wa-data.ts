@@ -58,9 +58,10 @@ export const waKpi: WaKpi[] = [
   },
   {
     label: "Turnover Rate (YTD)",
-    value: "6,8%",
+    // Selaras SDM.turnoverPct group-baseline — satu angka di semua halaman.
+    value: "2,45%",
     sub: "Orang",
-    delta: "-1,3 pts",
+    delta: "-0,4 pts",
     trend: "down",
     deltaTone: "bad",
     compare: "vs Mei 2025",
@@ -238,7 +239,7 @@ export interface WaRiskItem {
 export const waRisks: WaRiskItem[] = [
   { label: "Aging Risk", value: "13.121", sub: "Karyawan > 45 tahun (18,7%)", tone: "red" },
   { label: "Critical Skill Risk", value: "830", sub: "Shortage AI & Data 2028", tone: "red" },
-  { label: "Attrition Risk", value: "6,8%", sub: "YTD; critical role +2,1 pts di atas rata-rata", tone: "amber" },
+  { label: "Attrition Risk", value: "5,0%", sub: "Prediktif 12 bln; critical role +2,1 pts di atas rata-rata", tone: "amber" },
   { label: "Succession Risk", value: "12", sub: "Posisi kritikal tanpa suksesor Ready Now", tone: "amber" },
   { label: "Productivity Risk", value: "3", sub: "Unit bisnis di bawah threshold produktivitas", tone: "yellow" },
   { label: "Workforce Cost Risk", value: "9,7%", sub: "HC cost/revenue mendekati threshold 10%", tone: "yellow" },

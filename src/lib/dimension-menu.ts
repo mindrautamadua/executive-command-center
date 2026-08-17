@@ -38,4 +38,15 @@ export interface DimensionDataTrust {
   coverage: string;
   quality: string;
   sources: string[];
+  /**
+   * Nama domain data (Korporat/Strategi/Keuangan/Risiko/Human Capital).
+   * Skor quality bersifat per-domain — label ini mencegah skor domain
+   * terbaca sebagai satu "Group Data Quality Score".
+   */
+  domain?: string;
+  /**
+   * Rincian dimensi kualitas milik domain ini. Tanpa ini strip memakai
+   * rincian default HC — yang membuat semua domain tampak identik.
+   */
+  qualityBreakdown?: { label: string; value: string }[];
 }

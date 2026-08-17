@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { AlertCircle, AlertTriangle } from "lucide-react";
 import { ermDecisions } from "@/lib/risk-data-detail";
+import { decisionAging } from "@/lib/decision-aging";
 import { SectionHead } from "@/components/hc/SectionHead";
 import { ScopeNote } from "@/components/ui/ScopeNote";
 
@@ -74,7 +75,18 @@ export function ErmDecisionCenter() {
                 <p className="mt-1 text-[9px] leading-[1.45] text-ink-700">
                   <span className="font-bold text-ink-900">Keputusan diminta:</span> {d.decision}
                 </p>
-                <div className="mt-1.5 text-[8.5px] font-semibold text-ink-400">Due: {d.due}</div>
+                {(() => {
+                  const aging = decisionAging(d.due);
+                  return (
+                    <div
+                      className={`mt-1.5 text-[8.5px] font-semibold ${
+                        aging.overdue ? "text-[#ef4444]" : "text-ink-400"
+                      }`}
+                    >
+                      {aging.label}
+                    </div>
+                  );
+                })()}
               </div>
             );
           })

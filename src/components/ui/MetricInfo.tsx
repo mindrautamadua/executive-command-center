@@ -87,7 +87,16 @@ export function MetricInfo({
           <Row label="Pemilik" value={e.owner} />
           <Row label="Update" value={e.frequency} />
           <Row label="As-of" value={asOf} />
+          {/* Certified harus bisa menjawab: siapa, kapan, atas validasi apa. */}
+          {e.certifiedBy && <Row label="Certifier" value={e.certifiedBy} />}
+          {e.certifiedAt && <Row label="Sign-off" value={e.certifiedAt} />}
         </span>
+
+        {e.validation && (
+          <span className="mt-1.5 block rounded-lg bg-ptpn-greenLight px-2 py-1.5 text-[8px] leading-[1.4] text-ptpn-greenDark">
+            Validasi: {e.validation}
+          </span>
+        )}
 
         <span className="mt-2 flex items-center justify-between border-t border-[#eef2f6] pt-2">
           <span className="flex items-baseline gap-1">

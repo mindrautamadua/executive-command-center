@@ -18,7 +18,7 @@ Pola umum yang berulang di hampir semua halaman:
 
 Urutan seksi: Data Trust → CEO Morning Brief → "Key Strategic KPI" → "Keputusan & Penciptaan Nilai" (kolom utama: Value Creation + Enterprise Risk-to-Value; rail kanan: Antrian Keputusan CEO) → "Operasi & Kinerja Regional" (konten lama, tidak berubah).
 
-- **Data Trust** — strip indikator kepercayaan data; pill navy "Data Bisnis Per <tanggal>" dibuat dominan di posisi pertama, Refresh Sistem diturunkan jadi metrik sekunder (hierarki periode bisnis vs sinkronisasi sistem).
+- **Data Trust** — strip indikator kepercayaan data berlabel domain ("Data Trust · Korporat"; halaman lain: Strategi/Keuangan/Risiko/Human Capital dengan skor & rincian quality per domain); pill navy "Data Bisnis Per <tanggal>" dominan di posisi pertama, Refresh Sistem sekunder; popover memuat 4 lapisan waktu (data bisnis as-of, sinkronisasi sistem, pasar & intelijen live, model forecast run).
 - **CEO Morning Brief** — band full-width: lampu status 5 area (Keuangan/Operasi/Strategi/SDM/Risiko) dengan micro-note, "3 Hal yang Berubah", "3 Keputusan Diperlukan" (sumber sama dengan Strategy Decision Center), dan satu hal yang dipantau.
 - **Key Strategic KPI (KPI Strip)** — 7 kartu KPI korporat (Pendapatan Konsolidasi, EBITDA, Laba Bersih, ROA, dll.) dengan sparkline + delta vs RKAP.
 - **Value Creation** — headline Rp 1,86 T / target FY Rp 4,2 T (44%), mini area chart realisasi vs jalur target, dan dekomposisi driver (hijau) vs leakage (merah) berbentuk bar list.
@@ -37,7 +37,7 @@ Urutan seksi: Data Trust → CEO Morning Brief → "Key Strategic KPI" → "Kepu
 - **Alert & Notifikasi Strategis** — rail kanan, daftar alert lintas fungsi berjenjang severitas.
 - **Inisiatif Strategis** — daftar inisiatif korporat + status progres.
 - **External Signals** — sinyal eksternal (Regulasi/Pasar/Iklim/Korporat) dengan chip kategori, angka dampak, dan baris implikasi "Artinya bagi PTPN: …" per item.
-- **AI Insight / Dasar Perhitungan** — panel insight AI naratif dengan toggle penjelasan basis perhitungan; view rincian ditambah "Jembatan Ekonomi" (volume → pendapatan → EBITDA → pajak → laba bersih) serta blok Asumsi & Bukti (AI decision copilot).
+- **AI Insight / Dasar Perhitungan** — panel insight AI naratif dengan toggle penjelasan basis perhitungan; view rincian memuat "Jembatan Ekonomi" (volume → pendapatan → EBITDA → pajak → laba bersih), blok Asumsi & Bukti, Sensitivitas & Alternatif (±10 rb ton, alternatif utilisasi PKS, reversibility), chip Owner/Tenggat/Status (masuk siklus aksi), dan keyakinan berangka (72%).
 
 ---
 
@@ -1425,7 +1425,7 @@ Semua halaman diawali Data Trust Strip dan diakhiri card Insight & Rekomendasi (
 - **Top 10 Risiko Korporat** — tabel skor inherent → residual, arah tren, pemilik risiko.
 - **Profil Risiko per Kategori** — radar skor residual vs ambang risk appetite.
 - **Early Warning Indicators (KRI)** — 6 KRI leading + ambang eskalasi dan statusnya.
-- **BOD Decision Center** — keputusan mitigasi risiko menunggu BOD.
+- **BOD Decision Center** — keputusan mitigasi risiko menunggu BOD; umur keputusan dihitung otomatis terhadap tanggal acuan dashboard (tenggat lewat tampil badge merah "Overdue X hari" via `decision-aging.ts`, berlaku juga di Top Risk detail & ERM Decision Center).
 - **Compliance Snapshot** — ringkasan kepatuhan regulasi enterprise + tautan detail.
 - **Insight & Rekomendasi (Decision-grade)**.
 
@@ -1865,7 +1865,7 @@ Semua halaman diawali Data Trust Strip dan diakhiri card Insight & Rekomendasi (
 ## `/data-dictionary`
 - **Header Data Dictionary**.
 - **Statistik Kamus Data (4 kartu)** — jumlah istilah, certified, trust index, terakhir diperbarui.
-- **Katalog Istilah & Metrik** — tabel katalog istilah/metrik dengan badge status Certified.
+- **Katalog Istilah & Metrik** — tabel katalog istilah/metrik dengan badge status Certified; entri Certified membawa mekanisme sertifikasi (certifier, tanggal sign-off, catatan validasi/rekonsiliasi) yang juga tampil di popover ⓘ MetricInfo.
 - **Kategori Metrik** — daftar kategori metrik di rail kanan + strip catatan.
 
 ## `/scenario-simulation`

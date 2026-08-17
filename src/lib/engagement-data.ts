@@ -137,7 +137,9 @@ export interface UnitScore {
   color: string;
 }
 
-// Ramp hijau satu-hue sesuai peringkat
+// Ramp hijau satu-hue sesuai peringkat. Rata-rata tertimbang headcount = 84,2
+// (indeks grup = skor survei 4,21/5 × 20); unit terbesar (PTPN IV, PalmCo)
+// berada di atas rata-rata sehingga rata-rata sederhana daftar ini lebih rendah.
 export const engagementUnit: UnitScore[] = [
   { unit: "PTPN IV", skor: "88,3", bar: 88.3, color: SEQ_GREEN[4] },
   { unit: "PTPN III (Persero)", skor: "85,7", bar: 85.7, color: SEQ_GREEN[4] },

@@ -56,6 +56,14 @@ export interface DdEntry {
   status: DdStatus;
   /** Skor keyakinan gabungan definisi, sumber, kelengkapan, dan rekonsiliasi (0-100). */
   trust: number;
+  /**
+   * Mekanisme di balik label "Certified" — tanpa tiga field ini label hanya
+   * hiasan UI. Sign-off oleh certifier pada tanggal tertentu atas hasil
+   * validasi/rekonsiliasi yang disebut eksplisit.
+   */
+  certifiedBy?: string;
+  certifiedAt?: string;
+  validation?: string;
 }
 
 export const ddEntries: DdEntry[] = [
@@ -69,6 +77,9 @@ export const ddEntries: DdEntry[] = [
     owner: "HC Operations",
     status: "Certified",
     trust: 99,
+    certifiedBy: "HC Data Governance Council",
+    certifiedAt: "30 Jun 2026",
+    validation: "Rekonsiliasi SAP HCM vs IHCMS · variance 0,18% (toleransi 0,5%) · sign-off SVP HC",
   },
   {
     term: "FTE (Full-Time Equivalent)",
@@ -91,6 +102,9 @@ export const ddEntries: DdEntry[] = [
     owner: "HC Performance & Reward",
     status: "Certified",
     trust: 97,
+    certifiedBy: "HC Data Governance Council",
+    certifiedAt: "30 Jun 2026",
+    validation: "Uji ulang sampel 3 regional vs berita acara PHK/resign · match 100%",
   },
   {
     term: "Voluntary Attrition",
@@ -113,17 +127,23 @@ export const ddEntries: DdEntry[] = [
     owner: "HC Cost Control",
     status: "Certified",
     trust: 95,
+    certifiedBy: "HC Data Governance Council",
+    certifiedAt: "30 Jun 2026",
+    validation: "Mapping GL biaya SDM direviu bersama Akuntansi · selisih klasifikasi < 0,1%",
   },
   {
     term: "Revenue per Employee",
     category: "Produktivitas",
-    definition: "Pendapatan perusahaan per karyawan setara penuh waktu",
-    formula: "Pendapatan periode / FTE rata-rata periode",
+    definition: "Pendapatan perusahaan per karyawan setara penuh waktu, disajikan dalam Rp juta",
+    formula: "Pendapatan YTD (Rp) / headcount aktif — angka grup dari group-baseline (Rp 24,6 T / 70.142)",
     source: "SAP FI-CO",
     frequency: "Bulanan",
     owner: "People Analytics",
     status: "Certified",
     trust: 95,
+    certifiedBy: "HC Data Governance Council",
+    certifiedAt: "30 Jun 2026",
+    validation: "Numerator diikat ke pendapatan konsolidasi audited; denominator = Headcount Certified",
   },
   {
     term: "Human Productivity Index (HPI)",
@@ -169,6 +189,9 @@ export const ddEntries: DdEntry[] = [
     owner: "Talent Management",
     status: "Certified",
     trust: 92,
+    certifiedBy: "Talent Council",
+    certifiedAt: "15 Jul 2026",
+    validation: "Kalibrasi talent review Q2 · status kesiapan disahkan komite per subholding",
   },
   {
     term: "Time to Fill",
@@ -185,12 +208,15 @@ export const ddEntries: DdEntry[] = [
     term: "Engagement Score",
     category: "Talenta & Suksesi",
     definition: "Skor survei keterikatan karyawan skala 0-100",
-    formula: "Rata-rata tertimbang dimensi survei tahunan/pulse",
+    formula: "Rata-rata tertimbang dimensi survei tahunan/pulse; indeks 0-100 = skor 1-5 × 20",
     source: "Survei Engagement",
     frequency: "Triwulanan",
     owner: "HC Culture & Engagement",
     status: "Certified",
     trust: 91,
+    certifiedBy: "HC Data Governance Council",
+    certifiedAt: "15 Jul 2026",
+    validation: "Response rate 87% (ambang 70%) · konversi skala diverifikasi vendor survei",
   },
   {
     term: "Compliance Score",

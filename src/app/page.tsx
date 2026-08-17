@@ -1,5 +1,6 @@
 import { AppShell } from "@/components/AppShell";
 import { DataTrustStrip } from "@/components/hc/DataTrustStrip";
+import { coreDataTrust } from "@/lib/data";
 import { KpiStrip } from "@/components/KpiStrip";
 import { OperasionalCard } from "@/components/OperasionalCard";
 import { KomoditasUtama } from "@/components/KomoditasUtama";
@@ -38,7 +39,7 @@ export default function Page() {
   return (
     <AppShell>
       <div className="px-5 pb-5">
-        <DataTrustStrip />
+        <DataTrustStrip data={coreDataTrust} />
 
         <CeoMorningBrief />
 

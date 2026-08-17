@@ -117,9 +117,43 @@ export function AiInsight() {
               ))}
             </ul>
           </div>
+
+          {/* Sensitivitas, alternatif, reversibility — rekomendasi harus bisa diadu. */}
+          <div className="mt-1.5 border-t border-[#d5ece7] pt-1">
+            <div className="text-[8px] font-extrabold uppercase tracking-[0.05em] text-[#0e8f7e]">
+              Sensitivitas &amp; Alternatif
+            </div>
+            <p className="mt-[3px] text-[8.5px] leading-[1.35] text-ink-500">
+              {aiCopilot.sensitivity}
+            </p>
+            <p className="mt-[3px] text-[8.5px] leading-[1.35] text-ink-500">
+              {aiCopilot.alternative}
+            </p>
+            <p className="mt-[3px] text-[8.5px] leading-[1.35] text-ink-500">
+              {aiCopilot.reversibility}
+            </p>
+          </div>
+
+          {/* Rekomendasi masuk siklus aksi: pemilik, tenggat, status. */}
+          <div className="mt-1.5 flex flex-wrap items-center gap-1.5 border-t border-[#d5ece7] pt-1.5 text-[8px]">
+            <span className="rounded bg-white/70 px-1.5 py-[2px] font-bold text-ink-700">
+              Owner: {aiCopilot.owner}
+            </span>
+            <span className="rounded bg-white/70 px-1.5 py-[2px] font-bold text-ink-700">
+              Tenggat: {aiCopilot.deadline}
+            </span>
+            <span className="rounded bg-white/70 px-1.5 py-[2px] font-bold text-ink-700">
+              {aiCopilot.decisionRequired ? "Butuh keputusan BOD" : "Aksi manajemen"}
+            </span>
+            <span className="rounded bg-[#0e8f7e] px-1.5 py-[2px] font-bold text-white">
+              {aiCopilot.status}
+            </span>
+          </div>
         </div>
 
-        <p className="mt-1 text-[9px] text-ink-400">Keyakinan: {aiInsight.keyakinan}</p>
+        <p className="mt-1 text-[9px] text-ink-400">
+          Keyakinan: {aiCopilot.confidencePct}% · {aiInsight.keyakinan}
+        </p>
 
         <button
           onClick={() => setBuktiTerbuka(false)}
