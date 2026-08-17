@@ -59,8 +59,8 @@ export function ExploreDisclosure({ children }: { children: React.ReactNode }) {
           onClick={toggle}
           className="flex w-full items-center justify-center rounded-xl border border-dashed border-[#dbe3ea] py-3 text-[9px] text-ink-400 transition-colors hover:bg-[#f5f8fa]"
         >
-          Operasi · Keuangan · Produksi · Forecast · Alerts · External Signals · AI Insight —
-          tersembunyi. Klik untuk membuka.
+          Impact Chain · Operasi · Keuangan · Produksi · Forecast · Posisi Pasar CPO · Alerts ·
+          External Signals · AI Insight — tersembunyi. Klik untuk membuka.
         </button>
       )}
     </>

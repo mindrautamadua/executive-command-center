@@ -21,6 +21,9 @@ import { CeoDecisionQueue } from "@/components/CeoDecisionQueue";
 import { CeoValueCreation } from "@/components/CeoValueCreation";
 import { EnterpriseRiskValue } from "@/components/EnterpriseRiskValue";
 import { ExploreDisclosure } from "@/components/ExploreDisclosure";
+import { PerformanceNarrative } from "@/components/PerformanceNarrative";
+import { CpoMarketCard } from "@/components/CpoMarketCard";
+import { ImpactChainCard } from "@/components/ImpactChainCard";
 
 /** Kepala seksi kecil bergaya HC ECC, memisahkan kelompok kartu. */
 function SectionLabel({ children }: { children: React.ReactNode }) {
@@ -92,6 +95,7 @@ export default function Page() {
         <LayerBand n={2} code="Understand" question="Mengapa angka bergerak?" />
         <SectionLabel>Key Strategic KPI</SectionLabel>
         <KpiStrip />
+        <PerformanceNarrative />
         <div
           className="anim-rise mt-3 grid grid-cols-1 items-stretch gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,58fr)_minmax(0,42fr)]"
           style={{ "--d": "60ms" } as React.CSSProperties}
@@ -104,6 +108,10 @@ export default function Page() {
         <div className="grid grid-cols-1 items-start gap-3 xl:grid-cols-[minmax(0,1fr)_330px]">
           {/* kolom utama */}
           <div className="flex min-w-0 flex-col gap-3">
+            <div className="anim-rise min-h-[92px]" style={{ "--d": "100ms" } as React.CSSProperties}>
+              <ImpactChainCard />
+            </div>
+
             <div
               className="anim-rise grid grid-cols-1 items-stretch gap-3 md:grid-cols-2 xl:grid-cols-3"
               style={{ "--d": "120ms" } as React.CSSProperties}
@@ -123,11 +131,12 @@ export default function Page() {
             </div>
 
             <div
-              className="anim-rise grid auto-rows-[150px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,58fr)_minmax(0,42fr)]"
+              className="anim-rise grid auto-rows-[150px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,40fr)_minmax(0,34fr)_minmax(0,26fr)]"
               style={{ "--d": "240ms" } as React.CSSProperties}
             >
               <KpiStrategis />
               <AnalitikPrediktif />
+              <CpoMarketCard />
             </div>
           </div>
 

@@ -278,6 +278,8 @@ export const stgDecisions: StgDecision[] = [
 /* ── 8b. Decision Outcome — closed loop ───────────────────────────── */
 
 export interface DecisionOutcome {
+  /** ID ledger permanen — keputusan adalah objek ber-ID, bukan baris teks. */
+  id: string;
   title: string;
   /** Tanggal keputusan disahkan Direksi. */
   decided: string;
@@ -301,6 +303,7 @@ export interface DecisionOutcome {
  */
 export const decisionOutcomes: DecisionOutcome[] = [
   {
+    id: "DEC-2026-004",
     title: "Sentralisasi Pengadaan Group",
     decided: "12 Jan 2026",
     expected: "Penghematan Rp 850 M FY26",
@@ -311,6 +314,7 @@ export const decisionOutcomes: DecisionOutcome[] = [
     lesson: "Kategori spend terbesar dinegosiasi lebih dulu — front-load kategori strategis.",
   },
   {
+    id: "DEC-2025-038",
     title: "Divestasi Aset Non-Core Tahap 0",
     decided: "28 Okt 2025",
     expected: "Cash release Rp 0,90 T",
@@ -321,6 +325,7 @@ export const decisionOutcomes: DecisionOutcome[] = [
     lesson: "Valuasi KJPP harus final sebelum keputusan — dua aset mundur karena penilaian ulang.",
   },
   {
+    id: "DEC-2025-007",
     title: "Percepatan Replanting Sawit 2025",
     decided: "15 Feb 2025",
     expected: "60 rb ha tertanam ulang",
@@ -341,6 +346,29 @@ export const decisionOutcomes: DecisionOutcome[] = [
 export const outcomeCoverage = {
   measured: decisionOutcomes.length,
   totalDone: STRATEGI.keputusanSelesai,
+};
+
+/**
+ * Decision Portfolio: kualitas pengambilan keputusan Direksi sebagai
+ * portofolio, bukan antrian. Hitungan status selaras sbdKpi (46 = 31 selesai
+ * + 12 berjalan + 3 overdue); nilai finansial dihitung hanya dari keputusan
+ * yang punya angka — tidak menyamaratakan yang belum diukur.
+ */
+export const decisionPortfolio = {
+  total: 46,
+  done: STRATEGI.keputusanSelesai,
+  running: 12,
+  overdue: 3,
+  /** Nilai menunggu keputusan: 3 antrian CEO (0,32 T/thn + 1,4 T + 1,1 T). */
+  valueAtStakeRpT: 2.82,
+  /**
+   * Expected vs realized dari keputusan terukur yang bernilai finansial:
+   * pengadaan (target FY Rp 0,85 T · realisasi Rp 0,386 T YTD) + divestasi
+   * tahap 0 (Rp 0,90 T · Rp 0,74 T). Replanting non-finansial, tak dihitung.
+   */
+  expectedMeasuredRpT: 1.75,
+  realizedRpT: 1.13,
+  realizationPct: Math.round((1.13 / 1.75) * 100),
 };
 
 /* ── 9. Alerts ────────────────────────────────────────────────────── */

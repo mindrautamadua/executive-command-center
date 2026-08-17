@@ -74,6 +74,8 @@ export interface KpiStripItem {
   target: {
     label: string;
     gap: string;
+    /** Selisih absolut vs RKAP (materialitas), null bila metrik berbasis ppts. */
+    gapAbs: string | null;
     onTrack: boolean;
     forecast: string | null;
   } | null;
@@ -138,6 +140,7 @@ function kartuMetrik(
     target: target && {
       label: target.targetLabel,
       gap: target.gapLabel,
+      gapAbs: target.gapAbsLabel,
       onTrack: target.onTrack,
       forecast: target.forecastLabel,
     },
@@ -173,6 +176,7 @@ export const kpiStrip: KpiStripItem[] = [
     target: {
       label: `${RKAP_YTD.roaPct.toLocaleString("id-ID", { minimumFractionDigits: 2 })}%`,
       gap: "+0,10 ppts",
+      gapAbs: null,
       onTrack: true,
       forecast: `${PROYEKSI_FY.roaPct.toLocaleString("id-ID", { minimumFractionDigits: 2 })}%`,
     },
@@ -393,7 +397,7 @@ export const alerts: Alert[] = [
         maximumFractionDigits: 0,
       })} ribu ton × ASP CPO Rp ${hargaGrup.CPO.toLocaleString("id-ID")}/kg · setara ${rpM(
         gapProduksiRpM * KEUANGAN.ebitdaMarginPct / 100,
-      )} EBITDA`,
+      )} EBITDA (basis YTD 5 bulan; jembatan ke laba disetahunkan Rp 107 M: AI Insight → Lihat dasar perhitungan)`,
     },
     aksi: "Audit rotasi panen dan utilisasi PKS Regional 4",
     owner: "Direktorat Operasional",

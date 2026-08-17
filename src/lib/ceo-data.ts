@@ -95,12 +95,120 @@ export const ceoMorningBrief = {
 /** Keputusan Direksi yang menunggu — sumber sama dengan Strategy Decision Center. */
 export const ceoDecisions = stgDecisions;
 
+/* ── 1b. Executive Performance Narrative ──────────────────────────── */
+
+const pctVsRkap = (aktual: number, rkap: number) =>
+  `${aktual >= rkap ? "+" : "−"}${(Math.abs((aktual - rkap) / rkap) * 100).toLocaleString(
+    "id-ID",
+    { maximumFractionDigits: 1 },
+  )}%`;
+
+/**
+ * Sintesis satu kalimat di bawah KPI strip: tujuh KPI terpisah tidak
+ * menceritakan hubungan "volume turun tapi profit naik" — narasi ini yang
+ * menyatukannya. Semua angka dihitung dari baseline yang sama dengan kartu
+ * KPI sehingga tidak pernah bercerita beda.
+ */
+export const performanceNarrative = {
+  story: [
+    { label: "Volume CPO", value: pctVsRkap(PRODUKSI.cpoYtdJtTon, RKAP_YTD.produksiCpoJtTon), good: false },
+    { label: "ASP CPO", value: pctVsRkap(hargaGrup.CPO, RKAP_YTD.hargaCpoRpKg), good: true },
+    { label: "EBITDA", value: pctVsRkap(KEUANGAN.ebitdaYtd, RKAP_YTD.ebitdaRpT), good: true },
+    { label: "Laba Bersih", value: pctVsRkap(KEUANGAN.labaBersihYtd, RKAP_YTD.labaBersihRpT), good: true },
+  ],
+  text: `Profitabilitas grup tetap di atas RKAP meski volume CPO ${pctVsRkap(
+    PRODUKSI.cpoYtdJtTon,
+    RKAP_YTD.produksiCpoJtTon,
+  )} di bawah rencana — ASP yang lebih kuat (${pctVsRkap(
+    hargaGrup.CPO,
+    RKAP_YTD.hargaCpoRpKg,
+  )}), efisiensi biaya, dan kontribusi hilirisasi menutup gap volume. Risiko terdekat: pemulihan produksi Regional 4 (${rpM(
+    gapProduksiRpM,
+  )} delayed revenue).`,
+};
+
+/* ── 1c. Posisi Pasar CPO: ASP vs spot → keputusan hedge ──────────── */
+
+const premiumSpotPct = ((PEMASARAN.cpoKpbnSpotRpKg - hargaGrup.CPO) / hargaGrup.CPO) * 100;
+
+/**
+ * Satu kartu decision-grade: premium spot atas ASP YTD, volume belum terjual,
+ * dan eksposurnya — informasi yang sama dengan External Signals + Risk-to-Value
+ * tetapi disatukan sampai baris keputusan (hedge), bukan tersebar di tiga kartu.
+ */
+export const cpoMarketPosition = {
+  aspYtd: `Rp ${hargaGrup.CPO.toLocaleString("id-ID")}`,
+  spot: `Rp ${PEMASARAN.cpoKpbnSpotRpKg.toLocaleString("id-ID")}`,
+  premium: `+${premiumSpotPct.toLocaleString("id-ID", { maximumFractionDigits: 1 })}%`,
+  unhedged: `${volumeCpoBelumTerjual.toLocaleString("id-ID", {
+    minimumFractionDigits: 2,
+  })} jt ton`,
+  exposure: `± ${rpM(bandVolatilitasRpM)}`,
+  decision: "Kunci harga sebagian volume Q4 selagi premium bertahan",
+  owner: "Direktorat Pemasaran",
+};
+
+/* ── 1d. Impact Chain: isu material sebagai satu rantai kausal ────── */
+
+export interface ImpactChainStep {
+  /** Tahap dalam rantai Signal → Impact → Risk → Recommendation → Decision → Outcome. */
+  stage: string;
+  label: string;
+}
+
+export interface ImpactChain {
+  issue: string;
+  tone: CeoTone;
+  steps: ImpactChainStep[];
+}
+
+/**
+ * Rantai dampak isu material: informasi yang sama dengan External Signals,
+ * Risk-to-Value, alert, dan AI Insight — tetapi disatukan menjadi satu rantai
+ * kausal per isu, sehingga Direksi membaca sebab-akibatnya sekali jalan,
+ * bukan merekonstruksinya dari empat kartu terpisah.
+ */
+export const impactChains: ImpactChain[] = [
+  {
+    issue: "Volatilitas harga CPO",
+    tone: "red",
+    steps: [
+      { stage: "Sinyal", label: `Spot KPBN Rp ${PEMASARAN.cpoKpbnSpotRpKg.toLocaleString("id-ID")} — premium atas ASP YTD` },
+      { stage: "Dampak", label: `Volume belum terjual ${volumeCpoBelumTerjual.toLocaleString("id-ID", { minimumFractionDigits: 2 })} jt ton` },
+      { stage: "Risiko", label: `Sensitivitas ± ${rpM(bandVolatilitasRpM)} (±5% harga)` },
+      { stage: "Rekomendasi", label: "Kunci harga sebagian volume Q4 selagi premium bertahan" },
+      { stage: "Keputusan", label: "Direktorat Pemasaran · tenggat 22 Agu 2026" },
+      { stage: "Outcome", label: "Belum diukur — masuk siklus outcome setelah eksekusi" },
+    ],
+  },
+  {
+    issue: "Gap produksi Regional 4",
+    tone: "amber",
+    steps: [
+      { stage: "Sinyal", label: `Produksi CPO −${(gapProduksiCpo * 1_000).toLocaleString("id-ID", { maximumFractionDigits: 0 })} rb ton vs RKAP YTD` },
+      { stage: "Dampak", label: `Pendapatan tertunda ${rpM(gapProduksiRpM)} · EBITDA ${rpM((gapProduksiRpM * KEUANGAN.ebitdaMarginPct) / 100)} (YTD)` },
+      { stage: "Risiko", label: "Delayed revenue berlanjut bila rotasi panen tidak pulih" },
+      { stage: "Rekomendasi", label: "Audit rotasi panen & utilisasi PKS — potensi laba disetahunkan Rp 107 M" },
+      { stage: "Keputusan", label: "Direktorat Operasional · tenggat 29 Agu 2026" },
+      { stage: "Outcome", label: "Monitoring bulanan gap vs RKAP" },
+    ],
+  },
+];
+
 /* ── 2. Value Creation: driver & leakage ──────────────────────────── */
+
+/**
+ * Sifat keberlanjutan value: struktural (run-rate berulang) vs market-driven
+ * (tergantung harga) vs one-off. Rp 1,86 T value creation ≠ Rp 1,86 T
+ * sustainable run-rate — tanpa pemisahan ini Board membaca keduanya sama.
+ */
+export type ValueSustainability = "Struktural" | "Market-driven" | "One-off";
 
 export interface CeoValueDriver {
   label: string;
   rpT: number;
   kind: "driver" | "leakage";
+  sifat: ValueSustainability;
 }
 
 /**
@@ -110,14 +218,31 @@ export interface CeoValueDriver {
  * = ASP CPO YTD di atas asumsi RKAP (12.482 vs 12.100).
  */
 export const ceoValueDrivers: CeoValueDriver[] = [
-  { label: "Efisiensi biaya", rpT: 0.66, kind: "driver" },
-  { label: "Yield & produktivitas", rpT: 0.44, kind: "driver" },
-  { label: "Hilirisasi", rpT: 0.72, kind: "driver" },
-  { label: "Harga & bauran penjualan", rpT: 0.36, kind: "driver" },
-  { label: "Digital & lainnya", rpT: 0.13, kind: "driver" },
-  { label: "Gap produksi Regional 4", rpT: -0.37, kind: "leakage" },
-  { label: "Eksposur harga komoditas", rpT: -0.08, kind: "leakage" },
+  { label: "Efisiensi biaya", rpT: 0.66, kind: "driver", sifat: "Struktural" },
+  { label: "Yield & produktivitas", rpT: 0.44, kind: "driver", sifat: "Struktural" },
+  { label: "Hilirisasi", rpT: 0.72, kind: "driver", sifat: "Struktural" },
+  { label: "Harga & bauran penjualan", rpT: 0.36, kind: "driver", sifat: "Market-driven" },
+  { label: "Digital & lainnya", rpT: 0.13, kind: "driver", sifat: "Struktural" },
+  { label: "Gap produksi Regional 4", rpT: -0.37, kind: "leakage", sifat: "Struktural" },
+  { label: "Eksposur harga komoditas", rpT: -0.08, kind: "leakage", sifat: "Market-driven" },
 ];
+
+/**
+ * Ringkasan keberlanjutan: berapa dari bruto driver yang struktural
+ * (sustainable run-rate) vs market-driven. Dihitung dari daftar, bukan hardcode.
+ */
+export const ceoValueSustainability = (() => {
+  const drivers = ceoValueDrivers.filter((d) => d.kind === "driver");
+  const total = drivers.reduce((s, d) => s + d.rpT, 0);
+  const struktural = drivers
+    .filter((d) => d.sifat === "Struktural")
+    .reduce((s, d) => s + d.rpT, 0);
+  return {
+    strukturalRpT: struktural,
+    marketRpT: total - struktural,
+    strukturalPct: Math.round((struktural / total) * 100),
+  };
+})();
 
 /** Jumlah bruto/leakage dihitung dari daftar — caption tidak boleh hardcode. */
 export const ceoValueBrutoRpT = ceoValueDrivers
@@ -148,11 +273,35 @@ export const ceoValueSummary = {
 
 /* ── 3. Enterprise Risk-to-Value ──────────────────────────────────── */
 
+/**
+ * Taxonomy risk Board-level: tiga dimensi dipisah, tidak dicampur dalam satu
+ * badge. "Pasti" (likelihood), "Terjadi" (status), dan "cepat" (velocity)
+ * adalah tiga hal berbeda — menggabungkannya membuat risk register tidak bisa
+ * dibandingkan antarbaris.
+ */
+export type RiskLikelihood = "Pasti" | "Sangat Mungkin" | "Mungkin" | "Jarang";
+export type RiskVelocity = "Segera" | "Cepat" | "Sedang" | "Lambat";
+export type RiskStatus = "Emerging" | "Aktif" | "Terjadi" | "Terkendali";
+/**
+ * Jenis angka rupiah yang ditampilkan: eksposur maksimum ≠ expected loss ≠
+ * sensitivitas ≠ dampak yang sudah terjadi. Tanpa label ini "Rp 4,2 T"
+ * terbaca sebagai "akan hilang Rp 4,2 T".
+ */
+export type RiskExposureType =
+  | "Eksposur maksimum"
+  | "Sensitivitas"
+  | "Dampak terjadi"
+  | "Dampak potensial"
+  | "Kebutuhan pendanaan";
+
 export interface EnterpriseRisk {
   risk: string;
   exposure: string;
-  /** Probabilitas × velocity dalam satu label pendek. */
-  likelihood: string;
+  exposureType: RiskExposureType;
+  /** Kosong bila status "Terjadi" — likelihood tak relevan untuk event yang sudah material. */
+  likelihood: RiskLikelihood | null;
+  velocity: RiskVelocity;
+  status: RiskStatus;
   owner: string;
   action: string;
   tone: CeoTone;
@@ -163,7 +312,10 @@ export const enterpriseRiskValue: EnterpriseRisk[] = [
   {
     risk: "Gap pendanaan portofolio inisiatif",
     exposure: "Rp 6,9 T",
-    likelihood: "Pasti · lambat",
+    exposureType: "Kebutuhan pendanaan",
+    likelihood: "Pasti",
+    velocity: "Lambat",
+    status: "Aktif",
     owner: "Direktorat Keuangan",
     action: "Putuskan funding mix Q3",
     tone: "red",
@@ -173,7 +325,10 @@ export const enterpriseRiskValue: EnterpriseRisk[] = [
     exposure: `Rp ${RISIKO.eksposurLegalRpT.toLocaleString("id-ID", {
       minimumFractionDigits: 1,
     })} T`,
-    likelihood: "Sedang · lambat",
+    exposureType: "Eksposur maksimum",
+    likelihood: "Mungkin",
+    velocity: "Lambat",
+    status: "Aktif",
     owner: "Direktorat Hukum",
     action: `Prioritaskan ${RISIKO.perkaraAktif} perkara aktif bernilai terbesar`,
     tone: "amber",
@@ -181,7 +336,10 @@ export const enterpriseRiskValue: EnterpriseRisk[] = [
   {
     risk: "Volatilitas harga CPO global",
     exposure: `± ${rpM(bandVolatilitasRpM)}`,
-    likelihood: "Tinggi · cepat",
+    exposureType: "Sensitivitas",
+    likelihood: "Sangat Mungkin",
+    velocity: "Cepat",
+    status: "Aktif",
     owner: "Direktorat Pemasaran",
     action: "Kunci harga sebagian volume Q4",
     tone: "red",
@@ -189,7 +347,10 @@ export const enterpriseRiskValue: EnterpriseRisk[] = [
   {
     risk: "Gap produksi Regional 4",
     exposure: rpM(gapProduksiRpM),
-    likelihood: "Terjadi · sedang",
+    exposureType: "Dampak terjadi",
+    likelihood: null,
+    velocity: "Sedang",
+    status: "Terjadi",
     owner: "Direktorat Operasional",
     action: "Audit rotasi panen & utilisasi PKS",
     tone: "amber",
@@ -197,7 +358,10 @@ export const enterpriseRiskValue: EnterpriseRisk[] = [
   {
     risk: "Pungutan ekspor CPO baru",
     exposure: `${rpM(eksposurPungutanRpM)} / USD 10 per ton`,
-    likelihood: "Sedang · cepat",
+    exposureType: "Dampak potensial",
+    likelihood: "Mungkin",
+    velocity: "Cepat",
+    status: "Emerging",
     owner: "Direktorat Pemasaran",
     action: "Hitung ulang bauran ekspor–domestik",
     tone: "amber",

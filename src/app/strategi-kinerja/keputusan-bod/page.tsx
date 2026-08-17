@@ -8,6 +8,7 @@ import { DecisionRegister } from "@/components/stg/keputusan-bod/DecisionRegiste
 import { DecisionByCategory } from "@/components/stg/keputusan-bod/DecisionByCategory";
 import { UpcomingBoardAgenda } from "@/components/stg/keputusan-bod/UpcomingBoardAgenda";
 import { DecisionOutcomeCard } from "@/components/stg/keputusan-bod/DecisionOutcomeCard";
+import { DecisionPortfolioCard } from "@/components/stg/keputusan-bod/DecisionPortfolioCard";
 import { SbdInsight } from "@/components/stg/keputusan-bod/SbdInsight";
 import { stgDataTrust } from "@/lib/stg-core";
 
@@ -38,7 +39,8 @@ export default function KeputusanBodPage() {
             <DecisionByCategory />
           </div>
 
-          <div className="grid auto-rows-[280px] grid-cols-1 gap-3 lg:grid-cols-2">
+          <div className="grid auto-rows-[280px] grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-3">
+            <DecisionPortfolioCard />
             <UpcomingBoardAgenda />
             <DecisionOutcomeCard />
           </div>

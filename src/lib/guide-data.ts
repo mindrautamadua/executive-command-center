@@ -98,7 +98,7 @@ export const readingJourney: JourneyStep[] = [
     q: "What changed?",
     desc: "Tiga perubahan terpenting sejak brief terakhir.",
     href: "/",
-    hrefLabel: "CEO Morning Brief",
+    hrefLabel: "Brief Eksekutif Terkini",
   },
   {
     q: "Why did it change?",
@@ -172,7 +172,7 @@ export const sixtySecondRead: SixtySecondStep[] = [
     num: "②",
     title: "What Changed?",
     question: "Apa tiga perubahan paling penting?",
-    where: "CEO Morning Brief · “3 Hal yang Berubah”",
+    where: "Brief Eksekutif Terkini · “3 Hal yang Berubah”",
     href: "/",
   },
   {
@@ -261,7 +261,7 @@ export interface RoutineMinute {
 }
 
 export const dailyRoutine: RoutineMinute[] = [
-  { minute: "Menit 1", focus: "CEO Morning Brief", href: "/" },
+  { minute: "Menit 1", focus: "Brief Eksekutif Terkini", href: "/" },
   { minute: "Menit 2", focus: "Key Strategic & Financial KPI", href: "/keuangan" },
   { minute: "Menit 3", focus: "Enterprise Risk-to-Value", href: "/risiko-kepatuhan" },
   { minute: "Menit 4", focus: "Antrian Keputusan (Decision Queue)", href: "/strategi-kinerja/keputusan-bod" },

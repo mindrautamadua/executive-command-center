@@ -17,14 +17,15 @@ export function CeoMorningBrief() {
   return (
     <div className="card anim-rise mb-3 px-4 pb-3 pt-2.5" style={{ "--d": "20ms" } as React.CSSProperties}>
       <div className="flex items-center justify-between gap-2">
-        <h3 className="text-[10px] font-extrabold uppercase tracking-[0.05em] text-ink-900">
-          CEO Morning Brief
-        </h3>
         {/*
-          Diberi label "Brief terakhir", bukan tanggal telanjang: tanpa itu
-          pembaca menganggap ini brief pagi hari ini, padahal brief mengikuti
-          refresh sistem terakhir.
+          "Brief Eksekutif Terkini", bukan "Morning Brief": nama menyatakan
+          state (brief termutakhir yang tersedia), bukan jenis konten — bila
+          data tidak berubah, sistem tidak berpura-pura menerbitkan brief pagi
+          yang baru.
         */}
+        <h3 className="text-[10px] font-extrabold uppercase tracking-[0.05em] text-ink-900">
+          Brief Eksekutif Terkini
+        </h3>
         <span className="text-[8.5px] font-semibold text-ink-400">
           Brief terakhir · {hariDashboard}, {tanggalDashboard}
         </span>

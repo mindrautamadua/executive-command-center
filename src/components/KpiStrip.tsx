@@ -1,7 +1,10 @@
 "use client";
 
+import { useState } from "react";
 import {
   Banknote,
+  ChevronDown,
+  ChevronUp,
   CircleDollarSign,
   Coins,
   Factory,
@@ -12,6 +15,9 @@ import {
 import { kpiStrip } from "@/lib/data";
 import { Sparkline } from "./ui/Sparkline";
 import { Delta } from "./ui/Delta";
+
+/** KPI enterprise inti yang selalu tampil; sisanya progressive disclosure. */
+const KPI_UTAMA = 5;
 
 /** Ikon + nada lencana per KPI, meniru pola kartu KPI HC ECC (HcKpiStrip). */
 const BADGES: { Icon: typeof Banknote; cls: string }[] = [
@@ -32,9 +38,22 @@ const BADGES: { Icon: typeof Banknote; cls: string }[] = [
  * atau tidak" dan "arahnya ke mana".
  */
 export function KpiStrip() {
+  /**
+   * Progressive disclosure, bukan penghapusan: 5 KPI enterprise (Pendapatan,
+   * EBITDA, Laba, ROA, Produksi) selalu tampil; KPI harga menyusul lewat
+   * toggle. Terlalu banyak KPI di first viewport menurunkan signal-to-noise.
+   */
+  const [semua, setSemua] = useState(false);
+  const tampil = semua ? kpiStrip : kpiStrip.slice(0, KPI_UTAMA);
+
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-3">
-      {kpiStrip.map((k, i) => {
+    <>
+    <div
+      className={`grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 ${
+        semua ? "xl:grid-cols-7" : "xl:grid-cols-5"
+      }`}
+    >
+      {tampil.map((k, i) => {
         const { Icon, cls } = BADGES[i % BADGES.length];
         return (
           <div
@@ -77,6 +96,13 @@ export function KpiStrip() {
                 >
                   {k.target.gap}
                 </span>
+                {/* Materialitas: % tanpa nilai absolut menyamakan +3,3% EBITDA
+                    dengan +3,3% harga karet. */}
+                {k.target.gapAbs && (
+                  <span className="shrink-0 text-[7.5px] font-semibold text-ink-400">
+                    ({k.target.gapAbs})
+                  </span>
+                )}
               </div>
             )}
 
@@ -87,5 +113,20 @@ export function KpiStrip() {
         );
       })}
     </div>
+    <button
+      onClick={() => setSemua((s) => !s)}
+      className="mt-1.5 flex items-center gap-1 text-[8.5px] font-semibold text-ink-500 transition-colors hover:text-ink-700"
+    >
+      {semua ? (
+        <>
+          Tampilkan 5 KPI utama saja <ChevronUp size={10} />
+        </>
+      ) : (
+        <>
+          Lihat {kpiStrip.length - KPI_UTAMA} KPI harga lainnya <ChevronDown size={10} />
+        </>
+      )}
+    </button>
+    </>
   );
 }

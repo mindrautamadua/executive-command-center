@@ -39,6 +39,10 @@ export function DecisionOutcomeCard() {
               <div className="flex items-center justify-between gap-2">
                 <div className="flex min-w-0 items-center gap-1.5">
                   <Icon size={13} className={`shrink-0 ${t.iconCls}`} />
+                  {/* ID ledger: keputusan sebagai objek permanen ber-ID. */}
+                  <span className="shrink-0 rounded bg-[#eef2f6] px-1 py-[1px] text-[7px] font-bold text-ink-400">
+                    {d.id}
+                  </span>
                   <span className="truncate text-[10px] font-bold text-ink-900" title={d.title}>
                     {d.title}
                   </span>

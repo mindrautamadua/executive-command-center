@@ -31,12 +31,25 @@ export function EnterpriseRiskValue() {
               <span className="min-w-0 flex-1 truncate text-[9.5px] font-semibold text-ink-900" title={r.risk}>
                 {i + 1}. {r.risk}
               </span>
+              {/* Jenis angka eksplisit: eksposur maksimum ≠ expected loss. */}
+              <span className="shrink-0 rounded bg-[#eef2f6] px-1 py-[1px] text-[7px] font-bold uppercase tracking-[0.03em] text-ink-400">
+                {r.exposureType}
+              </span>
               <span className="shrink-0 text-[9.5px] font-extrabold tabular-nums text-ink-900">
                 {r.exposure}
               </span>
             </div>
+            {/* Tiga dimensi risiko dipisah: status ≠ likelihood ≠ velocity. */}
             <div className="mt-[2px] flex items-center gap-1.5 pl-[13px] text-[8px] text-ink-400">
-              <span className="shrink-0">{r.likelihood}</span>
+              <span className="shrink-0 font-semibold text-ink-500">{r.status}</span>
+              {r.likelihood && (
+                <>
+                  <span className="shrink-0">·</span>
+                  <span className="shrink-0">{r.likelihood}</span>
+                </>
+              )}
+              <span className="shrink-0">·</span>
+              <span className="shrink-0">{r.velocity}</span>
               <span className="shrink-0">·</span>
               <span className="shrink-0 font-semibold text-ink-500">{r.owner}</span>
               <span className="shrink-0">·</span>

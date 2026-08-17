@@ -26,8 +26,12 @@ export function AnalitikPrediktif() {
               )}
             </div>
             <Delta value={a.delta} trend="up" size={9.5} className="mt-1" />
-            {/* Rentang P10–P90 + keyakinan — forecast bukan angka pasti. */}
-            <div className="mt-[3px] truncate text-[8px] text-ink-400" title={`Rentang ${a.range} · keyakinan ${a.confidencePct}%`}>
+            {/* Rentang P10–P90 + keyakinan — forecast bukan angka pasti.
+                Definisi confidence dieksplisitkan supaya bukan angka dekoratif. */}
+            <div
+              className="mt-[3px] cursor-help truncate text-[8px] text-ink-400 underline decoration-dotted decoration-[#c6cfd8] underline-offset-2"
+              title={`Rentang P10–P90 ${a.range}. Keyakinan ${a.confidencePct}% = kalibrasi historis model: probabilitas realisasi jatuh di dalam rentang ini, dihitung dari akurasi forecast periode-periode sebelumnya.`}
+            >
               {a.range} · {a.confidencePct}%
             </div>
             <div className="-mx-1 mt-auto">

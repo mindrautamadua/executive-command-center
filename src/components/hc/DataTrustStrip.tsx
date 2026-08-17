@@ -127,24 +127,41 @@ export function DataTrustStrip({ data = dataTrust }: { data?: typeof dataTrust }
       </div>
 
       {/*
-        Status diturunkan dari komponen trust terendah, bukan hardcode:
-        domain dengan lineage/certification < 85% tidak boleh berlabel
-        "Healthy" polos — itu yang membuat Trust Index bermakna.
+        Status governance diturunkan dari threshold kontrol, bukan label bebas:
+        TRUSTED bila semua komponen ≥85%, TRUSTED WITH WATCH bila ada yang di
+        bawahnya. Eligibility menjadikan Data Trust kontrol keputusan, bukan
+        sekadar informasi: skor tinggi = angka layak dipakai memutus; skor
+        sedang = analisis saja; rendah = validasi dulu.
       */}
       {(() => {
         const skorMin = Math.min(
           ...(data.qualityBreakdown ?? dataQualityBreakdown).map((d) => parseInt(d.value)),
         );
-        const sehat = skorMin >= 85;
+        const trustPct = parseFloat(data.quality.replace(",", "."));
+        const trusted = skorMin >= 85;
+        const eligibility =
+          trustPct >= 90
+            ? { label: "Decision Eligible", cls: "bg-ptpn-greenLight text-ptpn-green" }
+            : trustPct >= 80
+              ? { label: "Analysis Only", cls: "bg-[#fdf3e0] text-[#d98b06]" }
+              : { label: "Validate Before Decision", cls: "bg-[#fdecec] text-[#ef4444]" };
         return (
-          <div
-            className={`ml-auto flex shrink-0 items-center gap-1.5 ${
-              sehat ? "text-ptpn-green" : "text-[#d98b06]"
-            }`}
-          >
-            <Activity size={11} strokeWidth={1.9} />
-            <span className="text-[8.5px] font-semibold">
-              {sehat ? "Healthy" : "Governance Attention"}
+          <div className="ml-auto flex shrink-0 items-center gap-1.5">
+            <div
+              className={`flex items-center gap-1 ${
+                trusted ? "text-ptpn-green" : "text-[#d98b06]"
+              }`}
+            >
+              <Activity size={11} strokeWidth={1.9} />
+              <span className="text-[8.5px] font-semibold">
+                {trusted ? "Trusted" : "Trusted with Watch"}
+              </span>
+            </div>
+            <span
+              className={`rounded px-1.5 py-[2px] text-[7.5px] font-bold uppercase tracking-[0.03em] ${eligibility.cls}`}
+              title={`Ambang eligibility: Trust ≥90% = Decision Eligible · 80–90% = Analysis Only · <80% = Validate Before Decision. Trust saat ini ${data.quality}${trusted ? "" : `; komponen terendah ${skorMin}% (<85%) memicu status Watch`}.`}
+            >
+              {eligibility.label}
             </span>
           </div>
         );

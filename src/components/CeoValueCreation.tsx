@@ -7,6 +7,7 @@ import {
   ceoValueDrivers,
   ceoValueLeakageRpT,
   ceoValueSummary,
+  ceoValueSustainability,
 } from "@/lib/ceo-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
@@ -85,8 +86,24 @@ export function CeoValueCreation() {
           const color = leak ? "#ef4444" : "#22a45d";
           return (
             <div key={d.label} className="flex items-center gap-2">
-              <span className="w-[128px] shrink-0 truncate text-[8.5px] text-ink-700" title={d.label}>
+              <span
+                className="w-[128px] shrink-0 truncate text-[8.5px] text-ink-700"
+                title={`${d.label} — ${d.sifat}`}
+              >
                 {d.label}
+              </span>
+              {/* Sifat value: struktural (run-rate) vs market-driven — Rp 1,86 T
+                  netto bukan seluruhnya sustainable run-rate. */}
+              <span
+                className={`shrink-0 rounded px-1 py-[1px] text-[6.5px] font-bold uppercase tracking-[0.02em] ${
+                  d.sifat === "Struktural"
+                    ? "bg-ptpn-greenLight text-ptpn-green"
+                    : d.sifat === "Market-driven"
+                      ? "bg-[#fdf3e0] text-[#d98b06]"
+                      : "bg-[#eef2f6] text-ink-500"
+                }`}
+              >
+                {d.sifat === "Struktural" ? "STR" : d.sifat === "Market-driven" ? "MKT" : "1X"}
               </span>
               <div className="h-[6px] min-w-0 flex-1 overflow-hidden rounded-full bg-[#eef2f6]">
                 <div
@@ -116,7 +133,9 @@ export function CeoValueCreation() {
         Bruto Rp {ceoValueBrutoRpT.toLocaleString("id-ID", { minimumFractionDigits: 2 })} T −
         leakage Rp {Math.abs(ceoValueLeakageRpT).toLocaleString("id-ID", { minimumFractionDigits: 2 })} T
         = netto Rp {ceoValueSummary.ytdRpT.toLocaleString("id-ID", { minimumFractionDigits: 2 })} T;
-        efisiensi &amp; yield 59% netto.
+        struktural {ceoValueSustainability.strukturalPct}% bruto (Rp{" "}
+        {ceoValueSustainability.strukturalRpT.toLocaleString("id-ID", { minimumFractionDigits: 2 })} T),
+        market-driven Rp {ceoValueSustainability.marketRpT.toLocaleString("id-ID", { minimumFractionDigits: 2 })} T.
       </p>
     </div>
   );

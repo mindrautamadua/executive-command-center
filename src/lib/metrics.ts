@@ -342,6 +342,13 @@ export interface PencapaianTarget {
    * tertukar dan membuat pencapaian terlihat jauh lebih besar dari kenyataan.
    */
   gapLabel: string;
+  /**
+   * Selisih absolut terhadap RKAP YTD, sudah diformat (mis. "+Rp 0,69 T").
+   * Persentase saja menyembunyikan materialitas — +3,3% EBITDA dan +3,3%
+   * harga karet bukan besaran ekonomi yang sama. `null` untuk metrik
+   * bersatuan persen (gap-nya sudah dalam ppts).
+   */
+  gapAbsLabel: string | null;
   onTrack: boolean;
   /** Proyeksi tutup tahun, sudah diformat. Kosong bila belum ada proyeksi. */
   forecastLabel: string | null;
@@ -364,9 +371,15 @@ export function metricTarget(id: MetricId): PencapaianTarget | null {
   const tanda = selisih >= 0 ? "+" : "−";
   const besaran = angkaId(Math.abs(selisih), persenSatuan ? 2 : 1);
 
+  const selisihAbs = m.value - target;
   return {
     targetLabel: formatNilai(target, m.unit),
     gapLabel: `${tanda}${besaran}${persenSatuan ? " ppts" : "%"}`,
+    gapAbsLabel: persenSatuan
+      ? null
+      : `${selisihAbs >= 0 ? "+" : "−"}${formatNilai(Math.abs(selisihAbs), m.unit)}${
+          m.unit === "Juta Ton" ? " jt ton" : m.unit === "Rp/kg" ? "/kg" : ""
+        }`,
     onTrack: selisih >= 0,
     forecastLabel: m.forecastFy === undefined ? null : formatNilai(m.forecastFy, m.unit),
   };
