@@ -47,7 +47,8 @@ export const jabatanSaatIni = [
   { label: "Departemen", value: "Operasional - Tanaman", icon: "building" },
   { label: "Atasan Langsung", value: "Ahmad Fauzi", sub: "Afdeling Manager", icon: "user" },
   { label: "Lokasi Kerja", value: "Kebun Tanah Jawa", icon: "mapPin" },
-  { label: "Grade", value: "G7", icon: "award" },
+  { label: "Person Grade", value: "G7", icon: "award" },
+  { label: "Job Grade", value: "G7", icon: "award" },
   { label: "Tenure di Jabatan Ini", value: "3 tahun 4 bulan", icon: "clock" },
 ];
 
@@ -205,7 +206,8 @@ export const kepegawaian = [
   { label: "Status Karyawan", value: "Karyawan Tetap" },
   { label: "TMT Masuk", value: "12 Jan 2018" },
   { label: "Masa Kerja", value: "7 tahun 7 bulan" },
-  { label: "Grade / Golongan", value: "G7 / III-B" },
+  { label: "Person Grade / Golongan", value: "G7 / III-B" },
+  { label: "Job Grade", value: "G7" },
   { label: "Kelompok Jabatan", value: "Operasional - Tanaman" },
   { label: "Jenis Jabatan", value: "Struktural" },
 ];
@@ -241,7 +243,8 @@ export const pekerjaanSaatIni = [
   { label: "Tipe Karyawan", value: "Karyawan Tetap", icon: "idCard" },
   { label: "Tanggal Mulai Jabatan", value: "1 Jan 2023", icon: "calendar" },
   { label: "Masa Kerja di Jabatan", value: "3 tahun 4 bulan", icon: "clock" },
-  { label: "Grade", value: "G7", icon: "award" },
+  { label: "Person Grade", value: "G7", icon: "award" },
+  { label: "Job Grade", value: "G7", icon: "award" },
   { label: "Level Jabatan", value: "Officer", icon: "layers" },
   { label: "Status Probation", value: "Selesai (1 Jan 2023 - 30 Jun 2023)", icon: "checkCircle" },
   { label: "Shift Kerja", value: "Shift Pagi", icon: "sun" },
@@ -262,9 +265,9 @@ export const riwayatJabatanLengkap = [
 ];
 
 export const kompensasiBenefit = [
-  { label: "Grade", value: "G7", icon: "award" },
+  { label: "Person Grade", value: "G7", icon: "award" },
   { label: "Level Jabatan", value: "Officer", icon: "layers" },
-  { label: "Skala Gaji", value: "G7 - Officer", icon: "wallet" },
+  { label: "Skala Gaji", value: "Person Grade G7 - Officer", icon: "wallet" },
   { label: "Tunjangan Jabatan", value: "Asisten Afdeling", icon: "badgeCheck" },
   { label: "Tunjangan Lokasi", value: "Wilayah 1", icon: "mapPin" },
   { label: "BPJS Kesehatan", value: "Aktif - 0001 •••• 6789", icon: "heartPulse" },
@@ -649,10 +652,10 @@ export const riwayatPerubahanData = [
     oleh: "HR Regional 1",
   },
   {
-    perubahan: "Grade",
+    perubahan: "Person Grade",
     dari: "G6",
     menjadi: "G7",
-    tipe: "Kenaikan Grade",
+    tipe: "Kenaikan Person Grade",
     tanggal: "01 Jan 2023",
     oleh: "HR Regional 1",
   },
@@ -721,7 +724,7 @@ export const dokumenTerbaru = [
     oleh: "Rizky Putra",
   },
   {
-    nama: "SK Kenaikan Grade G7",
+    nama: "SK Kenaikan Person Grade G7",
     jenis: "Surat Keputusan",
     kategori: "Kepegawaian",
     tanggal: "01 Jan 2023",
@@ -1202,8 +1205,8 @@ export const talentSignal = [
 export const executiveAssessment =
   "Eksekutor operasional yang kuat dengan potensi kepemimpinan tinggi. Direkomendasikan masuk pipeline suksesi Afdeling Manager dalam 12–24 bulan; area pengembangan utama: kepemimpinan strategis.";
 
-/** Ringkas identitas di bawah nama: grade · usia · tenure · pendidikan. */
-export const heroRingkas = "G7 · 31 tahun · Tenure 8 thn 4 bln · S1 Agronomi";
+/** Ringkas identitas di bawah nama: person grade · usia · tenure · pendidikan. */
+export const heroRingkas = "Person Grade G7 · 31 tahun · Tenure 8 thn 4 bln · S1 Agronomi";
 
 /* ── Talent Risk ─────────────────────────────────────────── */
 
@@ -1306,7 +1309,7 @@ export const jobProfile = {
     { label: "Perencanaan anggaran afdeling (RKAP)", status: "Berkembang" },
   ],
   syarat: [
-    { label: "Kompetensi teknis ≥ 4,0 (standar grade G7)", terpenuhi: true },
+    { label: "Kompetensi teknis ≥ 4,0 (standar Job Grade G7)", terpenuhi: true },
     { label: "Sertifikasi Ahli K3 Umum (AK3U)", terpenuhi: true },
     { label: "Sertifikasi BNSP Manajer Kebun Madya", terpenuhi: true },
     { label: "Pengalaman lapangan ≥ 3 tahun", terpenuhi: true },
@@ -1383,7 +1386,7 @@ export const engagementWellbeing = {
 
 export const kompensasiPosisi = {
   compaRatio: "0,95",
-  posisiRange: "Kuartil 2 dalam range grade G7",
+  posisiRange: "Kuartil 2 dalam range Person Grade G7",
   vsPasar: "-4% vs median pasar perkebunan nasional",
   kenaikanTerakhir: "Jan 2026 — siklus merit tahunan",
   implikasi:
@@ -1474,7 +1477,7 @@ export const decisionScenarios = [
     dampak: [
       "Backfill aman — Dedi Kurniawan Ready Now",
       "Seluruh syarat tuntas: RKAP Sep 2026, kompetensi Q4 2026",
-      "Kenaikan masih dalam range grade (compa-ratio 0,95)",
+      "Kenaikan masih dalam range person grade (compa-ratio 0,95)",
     ],
   },
   {

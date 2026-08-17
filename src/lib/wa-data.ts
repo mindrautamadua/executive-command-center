@@ -300,10 +300,10 @@ export interface DonutRow {
 export const headcountByOrg: DonutRow[] = [
   { name: "PTPN IV", value: 23512, pct: "33,5%", color: PALETTE.green },
   { name: "PTPN III", value: 17642, pct: "25,1%", color: PALETTE.blue },
-  { name: "PTPN II", value: 11982, pct: "17,1%", color: PALETTE.amber },
+  { name: "PTPN I Regional 1", value: 11982, pct: "17,1%", color: PALETTE.amber },
   { name: "PTPN I", value: 7654, pct: "10,9%", color: PALETTE.purple },
-  { name: "PTPN V", value: 4231, pct: "6,0%", color: PALETTE.slate },
-  { name: "PTPN VI", value: 2201, pct: "3,1%", color: "#c3ced9" },
+  { name: "PTPN IV Regional 3", value: 4231, pct: "6,0%", color: PALETTE.slate },
+  { name: "PTPN IV Regional 4", value: 2201, pct: "3,1%", color: "#c3ced9" },
   { name: "Lainnya", value: 920, pct: "1,3%", color: "#dde5ec" },
 ];
 

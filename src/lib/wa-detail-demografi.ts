@@ -190,10 +190,10 @@ export interface DiversityOrgRow {
 export const diversityByOrg: DiversityOrgRow[] = [
   { name: "PTPN IV", perempuan: 28.4, manajerial: 21.2, disabilitas: 1.34, usia45: 17.8, headcount: 23512 },
   { name: "PTPN III", perempuan: 26.8, manajerial: 19.6, disabilitas: 1.28, usia45: 18.4, headcount: 17642 },
-  { name: "PTPN II", perempuan: 25.6, manajerial: 17.4, disabilitas: 1.12, usia45: 20.1, headcount: 11982 },
+  { name: "PTPN I Regional 1", perempuan: 25.6, manajerial: 17.4, disabilitas: 1.12, usia45: 20.1, headcount: 11982 },
   { name: "PTPN I", perempuan: 26.2, manajerial: 18.2, disabilitas: 1.18, usia45: 19.4, headcount: 7654 },
-  { name: "PTPN V", perempuan: 28.9, manajerial: 22.4, disabilitas: 1.42, usia45: 16.2, headcount: 4231 },
-  { name: "PTPN VI", perempuan: 24.1, manajerial: 15.8, disabilitas: 0.98, usia45: 21.6, headcount: 2201 },
+  { name: "PTPN IV Regional 3", perempuan: 28.9, manajerial: 22.4, disabilitas: 1.42, usia45: 16.2, headcount: 4231 },
+  { name: "PTPN IV Regional 4", perempuan: 24.1, manajerial: 15.8, disabilitas: 0.98, usia45: 21.6, headcount: 2201 },
   { name: "Lainnya", perempuan: 38.6, manajerial: 29.4, disabilitas: 1.62, usia45: 15.4, headcount: 920 },
 ];
 
@@ -219,7 +219,7 @@ export const diversityNotes: DetailNote[] = [
   },
   {
     title: "Sebaran antar entitas timpang",
-    detail: "PTPN V 28,9% perempuan berbanding PTPN VI 24,1%. Praktik rekrutmen PTPN V layak dijadikan rujukan grup.",
+    detail: "PTPN IV Regional 3 28,9% perempuan berbanding PTPN IV Regional 4 24,1%. Praktik rekrutmen PTPN IV Regional 3 layak dijadikan rujukan grup.",
     tone: "blue",
   },
 ];

@@ -60,7 +60,7 @@ export default function CriticalRolePage() {
                 note: o.note,
                 color: o.value >= 70 ? "#1a9c5b" : o.value >= 64 ? "#f5a524" : "#ef4444",
               }))}
-              footer="PTPN II terendah (58%) dengan 24 posisi kritikal — prioritas penguatan pipeline."
+              footer="PTPN I Regional 1 terendah (58%) dengan 24 posisi kritikal — prioritas penguatan pipeline."
             />
           </div>
 

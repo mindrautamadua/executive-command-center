@@ -45,7 +45,7 @@ export default function HeatmapOrganisasiPage() {
                 { key: "ptpn4", label: "PTPN IV", color: PALETTE.red },
                 { key: "ptpn3", label: "PTPN III", color: PALETTE.amber },
                 { key: "ptpn1", label: "PTPN I", color: PALETTE.blue },
-                { key: "ptpn6", label: "PTPN VI", color: PALETTE.green },
+                { key: "ptpn6", label: "Sinergi Gula Nusantara", color: PALETTE.green },
               ]}
               footer="Garis putus-putus = risk appetite 50. Tidak ada entitas yang menyentuhnya sepanjang Jan–Jun 2026."
             />

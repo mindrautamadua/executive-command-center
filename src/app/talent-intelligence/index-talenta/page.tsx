@@ -68,7 +68,7 @@ export default function TalentIndexPage() {
                 note: o.note,
                 color: o.value >= 76 ? "#1a9c5b" : o.value >= 71 ? "#f5a524" : "#ef4444",
               }))}
-              footer="Sebaran 12 poin antara Holding & SBU (79) dan PTPN II (67)."
+              footer="Sebaran 12 poin antara Holding & SBU (79) dan PTPN I Regional 1 (67)."
             />
           </div>
 

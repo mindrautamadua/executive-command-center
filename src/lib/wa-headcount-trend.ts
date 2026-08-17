@@ -180,10 +180,10 @@ export interface ContributionRow {
 const CONTRIB: [string, number, number][] = [
   ["PTPN IV", 22900, 23512],
   ["PTPN III", 17253, 17642],
-  ["PTPN II", 11758, 11982],
+  ["PTPN I Regional 1", 11758, 11982],
   ["PTPN I", 7476, 7654],
-  ["PTPN V", 4089, 4231],
-  ["PTPN VI", 2137, 2201],
+  ["PTPN IV Regional 3", 4089, 4231],
+  ["PTPN IV Regional 4", 2137, 2201],
   ["Lainnya", 888, 920],
 ];
 

@@ -970,6 +970,20 @@ body {
   background-color: var(--text-navy);
 }
 
+/* Badge "Data Bisnis Per" (Data Trust strip): override umum di atas membuat
+   latarnya jadi biru terang sehingga label pucat & tanggal putih tenggelam.
+   Kunci ke tint navy gelap dengan teks terang. */
+[data-theme="dark"] .asof-badge {
+  background-color: rgba(111, 164, 247, 0.16);
+}
+[data-theme="dark"] .asof-badge .asof-label {
+  color: var(--text-navy);
+}
+[data-theme="dark"] .asof-badge .asof-value {
+  color: var(--text-1);
+  text-decoration-color: var(--text-blue);
+}
+
 /* --- tint merah ----------------------------------------------------------- */
 [data-theme="dark"] .bg-\[\#fdf3f3\],
 [data-theme="dark"] .bg-\[\#fef7f7\] {

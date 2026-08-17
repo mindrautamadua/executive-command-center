@@ -90,7 +90,7 @@ Urutan seksi: Data Trust → CEO Morning Brief → "Key Strategic KPI" → "Kepu
 
 - **Header Direktori Karyawan** — judul + ringkasan.
 - **Statistik Direktori (5 kartu)** — Total Karyawan, Karyawan Tetap, Karyawan Perempuan, Rising Star, Rata-rata Kinerja.
-- **Pencarian & Tabel Karyawan** — panel pencarian + filter (Unit, Lokasi, Fungsi, Grade, Status, Kategori Talenta), pengurutan, dan tabel karyawan (Nama, NIK, Jabatan, Fungsi, Unit, Lokasi Kerja, Grade, dst.).
+- **Pencarian & Tabel Karyawan** — panel pencarian + filter (Unit, Lokasi, Fungsi, Person Grade, Job Grade, Status, Kategori Talenta), pengurutan, dan tabel karyawan (Nama, NIK, Jabatan, Fungsi, Unit, Lokasi Kerja, Person Grade, Job Grade, dst.).
 
 ## `/sdm-talenta/profil-karyawan` — Talent Intelligence Profile
 
@@ -106,7 +106,7 @@ Hero **Executive Talent Card**: identitas + badge taxonomy 3 dimensi (Segmen Ris
 Halaman detail drill-down profil (semua pola SdmDetailHeader + Detail KPI Strip + tabel + Catatan Analitik/Definisi):
 
 - `/sdm-talenta/profil-karyawan/kinerja` — rincian 9 KPI berbobot FY 2025 + tren skor.
-- `/sdm-talenta/profil-karyawan/kompetensi` — peta 12 kompetensi vs standar grade G7.
+- `/sdm-talenta/profil-karyawan/kompetensi` — peta 12 kompetensi vs standar Job Grade G7.
 - `/sdm-talenta/profil-karyawan/pelatihan-sertifikasi` — riwayat pelatihan + registri sertifikasi & masa berlaku.
 - `/sdm-talenta/profil-karyawan/penghargaan` — registri penghargaan + tingkat + dasar prestasi.
 - `/sdm-talenta/profil-karyawan/riwayat-pendidikan` — pendidikan formal & non-gelar.
@@ -1846,7 +1846,43 @@ Semua halaman diawali Data Trust Strip dan diakhiri card Insight & Rekomendasi (
 
 ---
 
-# 21. Halaman Pendukung
+# 21. Executive Guide (`/executive-guide`)
+
+Menu khusus di sidebar utama (kedua mode navigasi, tepat di bawah Overview). Bukan user manual aplikasi — panduan membaca perusahaan melalui Executive Command Center ("Read the Enterprise. Understand the Signals. Make the Decision."). Semua halaman memakai kerangka `GuideShell` (Sidebar utama + ModuleHeader Tipe A + pill navigasi antar bab); tombol aksi header menaut ke Data Dictionary. Angka contoh diimpor dari lib data yang sama dengan dashboard (group-baseline, ceo-data, stg-data, hc-data) — tidak ada angka hardcoded yang bisa basi.
+
+## `/executive-guide` (Start Here)
+- **Hero** — tagline + intro filosofi guide (gradient navy).
+- **Empat kartu pintu masuk** — 01 Start Here (Baca 60 Detik), 02 Understand (Warna & Trust), 03 Decide (Cara Memutuskan), 04 AI & Literacy (Literasi AI).
+- **Executive Reading Journey** — alur vertikal 9 pertanyaan (What changed → What was the outcome), tiap langkah menaut ke bagian dashboard terkait.
+- **Strip catatan** — definisi metrik tidak diulang; menaut ke Data Dictionary sebagai satu-satunya sumber definisi.
+
+## `/executive-guide/baca-60-detik`
+- **Enam Langkah, 60 Detik** — urutan baca homepage: Data Trust → What Changed → What Matters → What Is at Risk → What Needs My Decision → What Happens Next, tiap langkah menaut ke bagiannya.
+- **Pola Baca Universal** — NUMBER → DELTA → DRIVER → IMPACT → ACTION dengan contoh EBITDA hidup (delta vs prorata RKAP dihitung dari group-baseline).
+- **Empat Pertanyaan KPI** — Actual/Target/Delta/Trend.
+- **Ritual Harian 5 Menit** — menit 1–5 dengan tautan per menit; filosofi Scan → Identify → Drill → Decide.
+- **What Not to Do** — 8 kebiasaan salah baca yang harus dihindari.
+
+## `/executive-guide/warna-dan-trust`
+- **Arti Warna — Sebagai Aturan Keputusan** — GREEN/AMBER/RED/EXTREME dengan makna + implikasi intervensi Direksi.
+- **Red Bukan Berarti Rugi** — 3 contoh kontras dari data berjalan (EBITDA green, serapan capex amber, eksposur CPO red).
+- **Membaca Data Trust Index** — composite 7 komponen (Completeness…Lineage, selaras popover Data Trust) + aturan keputusan Trust 95+/90–95/<90.
+- **Enam Lapisan Waktu** — Business As-of, System Refresh, Market As-of, Forecast Run, Decision Due Date, Actual Event Date + peringatan salah baca as-of.
+
+## `/executive-guide/cara-memutuskan`
+- **Delapan Pertanyaan untuk Setiap Keputusan** — ISSUE → EVIDENCE → IMPACT → OPTIONS → RECOMMENDATION → DECISION → OWNER → DEADLINE, kolom contoh diambil dari keputusan nyata pertama di BOD Decision Center (stgDecisions).
+- **Membaca Umur Keputusan (Decision Aging)** — due bulan berjalan / overdue / overdue + eksposur besar.
+- **Mana yang Didahulukan?** — prinsip prioritas eksposur finansial × urgensi.
+
+## `/executive-guide/literasi-ai`
+- **Tangga dari Informasi ke Keputusan** — INFORMATION → SIGNAL → INSIGHT → RISK → RECOMMENDATION → DECISION dengan contoh harga CPO (spot KPBN vs ASP YTD vs asumsi RKAP).
+- **AI adalah Decision Assistant, bukan Decision Maker** — 4 pertanyaan wajib (Evidence/Assumption/Confidence/Consequence).
+- **Empat Ketidaksamaan** — AI Insight ≠ Fact, Prediction ≠ Actual, Correlation ≠ Causation, Recommendation ≠ Decision.
+- **Membaca Badge Klaim Analitik (AiMeta)** — replika badge AiMeta hidup per jenis klaim (Korelasi/Kausal/Prediksi/Rekomendasi) + cara membacanya.
+
+---
+
+# 22. Halaman Pendukung
 
 ## `/data-analytics`
 - **Header** + **Data KPI Strip**.

@@ -86,11 +86,11 @@ type Row = [
 ];
 
 const ROWS: Row[] = [
-  [1, 11, "Critical Position Vacancy", "24 posisi kritis kosong > 3 bulan", "Talent Management", "Critical", 92, 6, "up", 48.2, 1245, 2, "PTPN IV, PTPN V", "Cepat", 6, 42, 5, 9, "Group CHRO", "Dir. SDM PTPN IV", "30 Jun 2026", "At Risk", "BOD", "13 Mei 2026"],
-  [2, 3, "Turnover Risk", "Turnover karyawan kunci meningkat 18% YoY", "People & Culture", "Critical", 88, 5, "up", 32.6, 3678, 3, "PTPN III, PTPN IV, PTPN V", "Cepat", 8, 38, 6, 10, "Group CHRO", "SVP Talent Management", "31 Jul 2026", "At Risk", "BOD", "12 Mei 2026"],
+  [1, 11, "Critical Position Vacancy", "24 posisi kritis kosong > 3 bulan", "Talent Management", "Critical", 92, 6, "up", 48.2, 1245, 2, "PTPN IV, PTPN IV Regional 3", "Cepat", 6, 42, 5, 9, "Group CHRO", "Dir. SDM PTPN IV", "30 Jun 2026", "At Risk", "BOD", "13 Mei 2026"],
+  [2, 3, "Turnover Risk", "Turnover karyawan kunci meningkat 18% YoY", "People & Culture", "Critical", 88, 5, "up", 32.6, 3678, 3, "PTPN III, PTPN IV, PTPN IV Regional 3", "Cepat", 8, 38, 6, 10, "Group CHRO", "SVP Talent Management", "31 Jul 2026", "At Risk", "BOD", "12 Mei 2026"],
   [3, 4, "Critical Skill Gap", "Kesenjangan skill kritis area digital & agronomi", "Talent Management", "High", 84, 0, "flat", 23.1, 2341, 12, "Seluruh Holding", "Sedang", 16, 51, 4, 9, "Group CIO", "SVP Learning & Capability", "30 Sep 2026", "On Track", "Komite Risiko", "11 Mei 2026"],
-  [4, 1, "Succession Risk", "65 posisi kepemimpinan tanpa suksesor siap", "People & Culture", "Critical", 81, 4, "up", 14.5, 892, 3, "PTPN II, PTPN III, PTPN IV", "Sedang", 12, 46, 5, 11, "Group CHRO", "SVP Talent Management", "31 Agu 2026", "At Risk", "BOD", "13 Mei 2026"],
-  [5, 12, "Leadership Gap", "Gap kompetensi leadership level manajerial", "People & Culture", "Medium", 76, -3, "down", 6.2, 1156, 2, "PTPN II, PTPN VI", "Sedang", 20, 55, 3, 8, "Group CHRO", "SVP Leadership Development", "31 Okt 2026", "On Track", "Direktorat", "12 Mei 2026"],
+  [4, 1, "Succession Risk", "65 posisi kepemimpinan tanpa suksesor siap", "People & Culture", "Critical", 81, 4, "up", 14.5, 892, 3, "PTPN I Regional 1, PTPN III, PTPN IV", "Sedang", 12, 46, 5, 11, "Group CHRO", "SVP Talent Management", "31 Agu 2026", "At Risk", "BOD", "13 Mei 2026"],
+  [5, 12, "Leadership Gap", "Gap kompetensi leadership level manajerial", "People & Culture", "Medium", 76, -3, "down", 6.2, 1156, 2, "PTPN I Regional 1, PTPN IV Regional 4", "Sedang", 20, 55, 3, 8, "Group CHRO", "SVP Leadership Development", "31 Okt 2026", "On Track", "Direktorat", "12 Mei 2026"],
   [6, 15, "Mill Engineering Capability Shortage", "Rasio engineer bersertifikat 0,6 per pabrik", "Operational", "Critical", 79, 5, "up", 18.4, 610, 6, "6 unit pengolahan", "Cepat", 9, 35, 6, 9, "Dir. Operasi", "VP Engineering", "31 Jul 2026", "At Risk", "BOD", "11 Mei 2026"],
   [7, 16, "Pay Equity Gap", "Spread gaji jabatan setara 18,6% antar regional", "Financial", "Critical", 77, 3, "up", 21.8, 2870, 8, "8 regional", "Sedang", 14, 40, 4, 8, "Group CHRO", "SVP Reward", "30 Jun 2026", "At Risk", "Komite Risiko", "10 Mei 2026"],
   [8, 17, "Safety Incident Recurrence", "Insiden berulang di 5 unit risiko tinggi", "Operational", "Critical", 75, 0, "flat", 12.9, 1840, 5, "5 unit risiko tinggi", "Cepat", 4, 61, 3, 10, "Dir. K3", "VP HSE", "31 Mei 2026", "Overdue", "BOD", "10 Mei 2026"],
@@ -314,7 +314,7 @@ export const slaAging = [
 export const priorityDecisions = [
   {
     title: "Persetujuan retensi 24 posisi kritis",
-    detail: "Paket retensi Rp 12,4 M untuk PTPN IV & V, berlaku Juli 2026",
+    detail: "Paket retensi Rp 12,4 M untuk PTPN IV Regional 1 & 3, berlaku Juli 2026",
     forum: "Rapat Direksi",
     due: "20 Mei 2026",
     risk: "Critical Position Vacancy",

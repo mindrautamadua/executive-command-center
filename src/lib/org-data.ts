@@ -101,9 +101,9 @@ export const strukturDivisi: OrgNode[] = [
 ];
 
 export const strukturSubHolding: OrgNode[] = [
-  { label: "Sub Holding Perkebunan", tone: "pink" },
-  { label: "Sub Holding PalmCo", tone: "blue" },
-  { label: "Sub Holding Supporting Co", tone: "green" },
+  { label: "Sub Holding PalmCo (PTPN IV)", tone: "blue" },
+  { label: "Sub Holding SugarCo (SGN)", tone: "pink" },
+  { label: "Sub Holding SupportingCo (PTPN I)", tone: "green" },
 ];
 
 export interface OrgLeaf {
@@ -114,12 +114,12 @@ export interface OrgLeaf {
 }
 
 export const strukturAnakPerusahaan: OrgLeaf[] = [
-  { label: "PTPN I", value: "4.812", caption: "Karyawan" },
-  { label: "PTPN II", value: "5.623", caption: "Karyawan" },
-  { label: "PTPN IV", value: "6.125", caption: "Karyawan" },
-  { label: "PTPN V", value: "4.910", caption: "Karyawan" },
-  { label: "PTPN VI", value: "5.342", caption: "Karyawan" },
-  { label: "+ 10", caption: "Anak Perusahaan Lainnya", muted: true },
+  { label: "PTPN I (SupportingCo)", value: "4.812", caption: "Karyawan" },
+  { label: "PTPN IV (PalmCo)", value: "6.125", caption: "Karyawan" },
+  { label: "Sinergi Gula Nusantara", value: "5.623", caption: "Karyawan" },
+  { label: "KPBN", value: "4.910", caption: "Karyawan" },
+  { label: "LPP Agro Nusantara", value: "5.342", caption: "Karyawan" },
+  { label: "+ 8", caption: "Anak Perusahaan Lainnya", muted: true },
 ];
 
 /** Kelas chip pastel dark-mode-safe untuk tiap tone node. */
@@ -141,15 +141,15 @@ export interface UnitDist {
 }
 
 export const distribusiUnit: UnitDist[] = [
-  { unit: "Sub Holding Perkebunan", value: 25842 },
+  { unit: "Sub Holding SugarCo (SGN)", value: 25842 },
   { unit: "Sub Holding PalmCo", value: 18765 },
   { unit: "Divisi Operasional", value: 8142 },
   { unit: "Divisi SDM & Umum", value: 4523 },
   { unit: "PTPN IV", value: 3845 },
   { unit: "PTPN I", value: 3210 },
-  { unit: "PTPN V", value: 2987 },
-  { unit: "PTPN II", value: 2765 },
-  { unit: "PTPN VI", value: 2498 },
+  { unit: "PTPN IV Regional 3", value: 2987 },
+  { unit: "PTPN I Regional 1", value: 2765 },
+  { unit: "PTPN IV Regional 4", value: 2498 },
   { unit: "Supporting Co", value: 1563 },
 ];
 
@@ -181,7 +181,7 @@ export const jabatanKosongKritis: JabatanKosong[] = [
   { jabatan: "IT Security Specialist", unit: "PTPN Holding", jumlah: 5, severity: "Kritis" },
   { jabatan: "Regional Controller", unit: "Sub Holding PalmCo", jumlah: 4, severity: "Tinggi" },
   { jabatan: "Mill Manager", unit: "PTPN III", jumlah: 3, severity: "Tinggi" },
-  { jabatan: "Quality Assurance Manager", unit: "PTPN V", jumlah: 3, severity: "Sedang" },
+  { jabatan: "Quality Assurance Manager", unit: "PTPN IV Regional 3", jumlah: 3, severity: "Sedang" },
 ];
 
 export const SEVERITY_TONE: Record<KosongSeverity, string> = {
@@ -412,7 +412,7 @@ export const mappingJabatanKritis: MappingRow[] = [
   },
   {
     jabatan: "GM Perkebunan",
-    unit: "Sub Holding Perkebunan",
+    unit: "Sub Holding SugarCo (SGN)",
     level: "GM",
     karyawan: "Dewi Lestari",
     risiko: "Sedang",

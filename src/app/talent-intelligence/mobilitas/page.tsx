@@ -71,7 +71,7 @@ export default function TalentMobilityPage() {
                 note: `net ${o.net > 0 ? "+" : ""}${o.net}`,
                 color: o.pengisianInternal >= 75 ? "#1a9c5b" : o.pengisianInternal >= 70 ? "#f5a524" : "#ef4444",
               }))}
-              footer="Rata-rata grup 74%; PTPN II terendah (64%) dengan net arus talenta −7 orang."
+              footer="Rata-rata grup 74%; PTPN I Regional 1 terendah (64%) dengan net arus talenta −7 orang."
             />
           </div>
 

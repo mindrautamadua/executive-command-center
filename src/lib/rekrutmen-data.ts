@@ -304,8 +304,8 @@ export const rekrutmenUnit: UnitRow[] = [
   { unit: "PTPN III (Persero)", requisition: 64, hire: 99, ttf: "24,5" },
   { unit: "PTPN IV", requisition: 28, hire: 44, ttf: "26,1" },
   { unit: "PTPN I", requisition: 24, hire: 36, ttf: "29,7" },
-  { unit: "PTPN V", requisition: 18, hire: 27, ttf: "31,2" },
-  { unit: "PTPN II", requisition: 12, hire: 17, ttf: "32,8" },
+  { unit: "PTPN IV Regional 3", requisition: 18, hire: 27, ttf: "31,2" },
+  { unit: "PTPN I Regional 1", requisition: 12, hire: 17, ttf: "32,8" },
   { unit: "PalmCo", requisition: 8, hire: 13, ttf: "22,3" },
   { unit: "Supporting Co", requisition: 2, hire: 4, ttf: "19,5" },
 ];
@@ -575,7 +575,7 @@ export const rekrutmenDecisions: RekrutmenDecision[] = [
   {
     title: "Critical Role Hiring Gap",
     situation:
-      "Critical role fulfillment baru 7,1% (3 dari 42); 24 posisi kosong > 3 bulan, terkonsentrasi di PTPN IV & V.",
+      "Critical role fulfillment baru 7,1% (3 dari 42); 24 posisi kosong > 3 bulan, terkonsentrasi di PTPN IV Regional 1 & 3.",
     decision:
       "Setujui fast-track hiring critical role: pre-approved comp band, dedicated recruiter pod, dan external search.",
     dampak: "Eksposur Rp 48,2 M",

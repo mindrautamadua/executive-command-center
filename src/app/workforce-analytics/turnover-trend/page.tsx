@@ -111,7 +111,7 @@ export default function TurnoverTrendPage() {
                 cost: dec(Number(turnoverByOrg.reduce((s, o) => s + o.cost, 0).toFixed(1))),
                 trend: "Turun",
               }}
-              note="Ambang toleransi grup 7,5%; PTPN VI dan PTPN I berada di atas ambang dengan arah memburuk."
+              note="Ambang toleransi grup 7,5%; PTPN IV Regional 4 dan PTPN I berada di atas ambang dengan arah memburuk."
             />
             <NotesPanel notes={turnoverNotes} definitions={dinamikaDefinitions} />
           </div>

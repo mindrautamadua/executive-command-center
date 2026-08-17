@@ -24,7 +24,7 @@ export default function ProfilRiwayatJabatanPage() {
         <SdmDetailHeader
           icon={<Briefcase size={19} strokeWidth={1.9} />}
           title="Riwayat Jabatan — Rizky Putra"
-          subtitle="Kronologi lengkap jabatan, grade, jenis perubahan, dan perbandingan tenure dengan kohort"
+          subtitle="Kronologi lengkap jabatan, job grade, jenis perubahan, dan perbandingan tenure dengan kohort"
           stat="8 thn 4 bln masa kerja · 4 jabatan · 3 promosi"
           breadcrumb="Profil Karyawan / Riwayat Jabatan"
           backHref="/sdm-talenta/profil-karyawan"
@@ -41,7 +41,7 @@ export default function ProfilRiwayatJabatanPage() {
               columns={[
                 { key: "jabatan", label: "Jabatan", cellClass: "font-bold" },
                 { key: "unit", label: "Unit Kerja" },
-                { key: "grade", label: "Grade", align: "center" },
+                { key: "grade", label: "Job Grade", align: "center" },
                 { key: "periode", label: "Periode", align: "right" },
                 { key: "durasi", label: "Durasi", align: "right" },
                 { key: "jenisPill", label: "Perubahan", align: "center" },

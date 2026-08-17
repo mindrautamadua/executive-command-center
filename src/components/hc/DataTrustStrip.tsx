@@ -33,11 +33,11 @@ export function DataTrustStrip({ data = dataTrust }: { data?: typeof dataTrust }
         pembaca menganggap "refresh Agustus" berarti "data Agustus" — padahal
         angka mewakili periode s.d. tanggal efektif. Hover menjelaskan bedanya.
       */}
-      <div className="group relative flex cursor-help items-center gap-1.5 rounded bg-[#1b3a6b] px-2 py-[3px]">
-        <span className="text-[8px] font-bold uppercase tracking-[0.05em] text-[#b9c7dd]">
+      <div className="asof-badge group relative flex cursor-help items-center gap-1.5 rounded bg-[#1b3a6b] px-2 py-[3px]">
+        <span className="asof-label text-[8px] font-bold uppercase tracking-[0.05em] text-[#b9c7dd]">
           Data Bisnis Per
         </span>
-        <span className="text-[10px] font-extrabold uppercase tracking-[0.02em] text-white underline decoration-dotted decoration-[#5f7396] underline-offset-2">
+        <span className="asof-value text-[10px] font-extrabold uppercase tracking-[0.02em] text-white underline decoration-dotted decoration-[#5f7396] underline-offset-2">
           {data.asOf}
         </span>
         <div className="invisible absolute left-0 top-full z-30 mt-1.5 w-[248px] rounded-xl border border-[#e3e9ef] bg-white p-3 opacity-0 shadow-cardHover transition-opacity duration-150 group-hover:visible group-hover:opacity-100">

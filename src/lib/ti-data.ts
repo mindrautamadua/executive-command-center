@@ -180,12 +180,12 @@ export const tiTopTalent: TopTalent[] = [
   { nama: "Rizky Putra", jabatan: "Asisten Afdeling", unit: "PTPN IV", score: "9,4", readiness: "Ready in 1-2 Yrs" },
   { nama: "Agung Setiawan", jabatan: "Kepala Kebun", unit: "PTPN III", score: "9,2", readiness: "Ready Now" },
   { nama: "Dewi Kartika", jabatan: "Manajer Keuangan", unit: "PTPN I", score: "9,1", readiness: "Ready in 1-2 Yrs" },
-  { nama: "Fajar Nugroho", jabatan: "Manajer Pabrik", unit: "PTPN V", score: "8,9", readiness: "Ready Now" },
-  { nama: "Yudi Prasetyo", jabatan: "Manajer HR", unit: "PTPN II", score: "8,8", readiness: "Ready in 1-2 Yrs" },
-  { nama: "Nadia Arifah", jabatan: "Manajer Sustainability", unit: "PTPN VI", score: "8,7", readiness: "Ready in 3-5 Yrs" },
+  { nama: "Fajar Nugroho", jabatan: "Manajer Pabrik", unit: "PTPN IV Regional 3", score: "8,9", readiness: "Ready Now" },
+  { nama: "Yudi Prasetyo", jabatan: "Manajer HR", unit: "PTPN I Regional 1", score: "8,8", readiness: "Ready in 1-2 Yrs" },
+  { nama: "Nadia Arifah", jabatan: "Manajer Sustainability", unit: "PTPN IV Regional 4", score: "8,7", readiness: "Ready in 3-5 Yrs" },
   { nama: "Budi Santoso", jabatan: "Kepala Engineering", unit: "PTPN IV", score: "8,6", readiness: "Ready Now" },
   { nama: "Maya Sari", jabatan: "Manajer Komersial", unit: "PTPN III", score: "8,6", readiness: "Ready in 3-5 Yrs" },
-  { nama: "Andi Kurniawan", jabatan: "Kepala Tanaman", unit: "PTPN V", score: "8,5", readiness: "Ready in 3-5 Yrs" },
+  { nama: "Andi Kurniawan", jabatan: "Kepala Tanaman", unit: "PTPN IV Regional 3", score: "8,5", readiness: "Ready in 3-5 Yrs" },
   { nama: "Rina Ekawati", jabatan: "Manajer QA/QC", unit: "PTPN I", score: "8,5", readiness: "Ready in 1-2 Yrs" },
 ];
 
@@ -211,7 +211,7 @@ export interface FlightRisk {
 export const tiTopFlightRisk: FlightRisk[] = [
   {
     nama: "Andi Wijaya",
-    jabatan: "Manajer Pabrik – PTPN V",
+    jabatan: "Manajer Pabrik – PTPN IV Regional 3",
     score: 85,
     factors: [
       { label: "Engagement", arah: "down" },
@@ -248,7 +248,7 @@ export const tiTopFlightRisk: FlightRisk[] = [
   },
   {
     nama: "Hendra Saputra",
-    jabatan: "Asisten Teknik – PTPN II",
+    jabatan: "Asisten Teknik – PTPN I Regional 1",
     score: 78,
     factors: [
       { label: "Career mobility", arah: "down" },
@@ -472,7 +472,7 @@ export const tiRoleMatch: RoleMatch[] = [
   },
   {
     posisi: "Manajer Pabrik",
-    unit: "PTPN V",
+    unit: "PTPN IV Regional 3",
     requiredSkills: [
       { label: "Operations", level: "4,4" },
       { label: "Leadership", level: "4,1" },
@@ -544,7 +544,7 @@ export const tiDecisions: TalentDecision[] = [
     tone: "amber",
     kicker: "Action Required",
     title: "86 talenta high flight risk",
-    text: "5 di antaranya pada posisi kritikal — termasuk Manajer Pabrik PTPN V (risk 85) dan Kepala Kebun PTPN IV (risk 82).",
+    text: "5 di antaranya pada posisi kritikal — termasuk Manajer Pabrik PTPN IV Regional 3 (risk 85) dan Kepala Kebun PTPN IV (risk 82).",
     rekomendasi: "Program retensi targeted + siapkan backup suksesi paralel.",
     pill: "Retensi",
   },

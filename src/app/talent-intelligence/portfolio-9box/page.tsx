@@ -67,7 +67,7 @@ export default function TalentPortfolioDetailPage() {
                 note: `${o.star} orang`,
                 color: o.starPct >= 29 ? "#1a9c5b" : o.starPct >= 27 ? "#f5a524" : "#ef4444",
               }))}
-              footer="Selisih 6,8 ppts antara Holding & SBU (32,0%) dan PTPN II (25,2%)."
+              footer="Selisih 6,8 ppts antara Holding & SBU (32,0%) dan PTPN I Regional 1 (25,2%)."
             />
             <BarListCard
               title="Zona Perbaikan per Entitas"

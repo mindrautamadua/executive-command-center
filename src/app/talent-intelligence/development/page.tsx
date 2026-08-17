@@ -76,7 +76,7 @@ export default function TalentDevelopmentPage() {
                 note: o.note,
                 color: o.value >= 4 ? "#1a9c5b" : o.value >= 3 ? "#f5a524" : "#ef4444",
               }))}
-              footer="Selisih 2,9x antara PTPN IV (Rp 5,2 M) dan PTPN II (Rp 1,8 M)."
+              footer="Selisih 2,9x antara PTPN IV (Rp 5,2 M) dan PTPN I Regional 1 (Rp 1,8 M)."
             />
           </div>
 

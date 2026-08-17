@@ -17,7 +17,10 @@ export interface Karyawan {
   fungsi: string;
   unit: string;
   lokasi: string;
-  grade: string;
+  /** Grade yang melekat pada individu karyawan (kompetensi/senioritas orangnya). */
+  personGrade: string;
+  /** Grade yang melekat pada jabatan/posisi yang diduduki. */
+  jobGrade: string;
   status: StatusKaryawan;
   gender: "Laki-laki" | "Perempuan";
   pendidikan: string;
@@ -123,7 +126,10 @@ function buatKaryawan(i: number): Karyawan {
     fungsi: jab.fungsi,
     unit,
     lokasi,
-    grade: jab.grade,
+    // Job grade mengikuti jabatan; person grade milik individu dan bisa
+    // selisih ±1 dari job grade (deterministik dari indeks).
+    jobGrade: jab.grade,
+    personGrade: `G${Math.min(9, Math.max(4, Number(jab.grade.slice(1)) + [0, 0, 1, 0, -1][(i * 7) % 5]))}`,
     status,
     // Gender diturunkan dari nama, bukan modulo indeks — supaya "Siti"
     // tidak pernah tercatat Laki-laki dan foto selalu selaras nama.
@@ -148,7 +154,8 @@ const SPOTLIGHT: Karyawan = {
   fungsi: "Operasional - Tanaman",
   unit: "PTPN IV Regional 1",
   lokasi: "Kebun Tanah Jawa",
-  grade: "G7",
+  personGrade: "G7",
+  jobGrade: "G7",
   status: "Karyawan Tetap",
   gender: "Laki-laki",
   pendidikan: "S1 - Agronomi",
@@ -173,7 +180,8 @@ const uniq = (v: string[]) => [...new Set(v)].sort();
 export const UNIT_OPTIONS = uniq(karyawanList.map((k) => k.unit));
 export const LOKASI_OPTIONS = uniq(karyawanList.map((k) => k.lokasi));
 export const FUNGSI_OPTIONS = uniq(karyawanList.map((k) => k.fungsi));
-export const GRADE_OPTIONS = uniq(karyawanList.map((k) => k.grade));
+export const PERSON_GRADE_OPTIONS = uniq(karyawanList.map((k) => k.personGrade));
+export const JOB_GRADE_OPTIONS = uniq(karyawanList.map((k) => k.jobGrade));
 export const STATUS_OPTIONS = uniq(karyawanList.map((k) => k.status));
 export const TALENT_OPTIONS: TalentBadge[] = [
   "Rising Star",

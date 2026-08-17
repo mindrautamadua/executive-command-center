@@ -14,11 +14,11 @@ import type { DetailKpi, DetailNote } from "@/components/wa/detail/parts";
 /** Tujuh entitas grup, dipakai sebagai sumbu perbandingan lintas halaman. */
 export const tiEntitas = [
   "PTPN I",
-  "PTPN II",
+  "PTPN I Regional 1",
   "PTPN III",
   "PTPN IV",
-  "PTPN V",
-  "PTPN VI",
+  "PTPN IV Regional 3",
+  "PTPN IV Regional 4",
   "Holding & SBU",
 ] as const;
 
@@ -142,11 +142,11 @@ export interface NineBoxOrgRow {
 
 export const nineBoxByOrg: NineBoxOrgRow[] = [
   { name: "PTPN I", talenta: 486, star: 132, kuadranAtas: 292, core: 98, zonaPerbaikan: 52, starPct: 27.2, naikKelas: 34 },
-  { name: "PTPN II", talenta: 412, star: 104, kuadranAtas: 238, core: 92, zonaPerbaikan: 48, starPct: 25.2, naikKelas: 26 },
+  { name: "PTPN I Regional 1", talenta: 412, star: 104, kuadranAtas: 238, core: 92, zonaPerbaikan: 48, starPct: 25.2, naikKelas: 26 },
   { name: "PTPN III", talenta: 664, star: 198, kuadranAtas: 412, core: 132, zonaPerbaikan: 62, starPct: 29.8, naikKelas: 54 },
   { name: "PTPN IV", talenta: 742, star: 226, kuadranAtas: 462, core: 148, zonaPerbaikan: 68, starPct: 30.5, naikKelas: 62 },
-  { name: "PTPN V", talenta: 548, star: 148, kuadranAtas: 328, core: 118, zonaPerbaikan: 58, starPct: 27.0, naikKelas: 38 },
-  { name: "PTPN VI", talenta: 428, star: 112, kuadranAtas: 254, core: 96, zonaPerbaikan: 44, starPct: 26.2, naikKelas: 28 },
+  { name: "PTPN IV Regional 3", talenta: 548, star: 148, kuadranAtas: 328, core: 118, zonaPerbaikan: 58, starPct: 27.0, naikKelas: 38 },
+  { name: "PTPN IV Regional 4", talenta: 428, star: 112, kuadranAtas: 254, core: 96, zonaPerbaikan: 44, starPct: 26.2, naikKelas: 28 },
   { name: "Holding & SBU", talenta: 462, star: 148, kuadranAtas: 275, core: 78, zonaPerbaikan: 37, starPct: 32.0, naikKelas: 42 },
 ];
 
@@ -176,7 +176,7 @@ export const nineBoxNotes: DetailNote[] = [
   {
     title: "Konsentrasi Star tidak merata",
     detail:
-      "Holding & SBU 32,0% versus PTPN II 25,2%. Selisih 6,8 ppts membuka peluang rotasi silang entitas untuk pemerataan kualitas pipeline.",
+      "Holding & SBU 32,0% versus PTPN I Regional 1 25,2%. Selisih 6,8 ppts membuka peluang rotasi silang entitas untuk pemerataan kualitas pipeline.",
     tone: "blue",
   },
   {
@@ -459,31 +459,31 @@ export const topTalentRows: TopTalentRow[] = [
   { rank: 1, nama: "Rizky Putra", jabatan: "Asisten Afdeling", unit: "PTPN IV", score: "9,4", performance: "4,6", potential: "4,8", readiness: "Ready in 1-2 Yrs", posisiTarget: "Kepala Kebun", flightRisk: "Low" },
   { rank: 2, nama: "Agung Setiawan", jabatan: "Kepala Kebun", unit: "PTPN III", score: "9,2", performance: "4,7", potential: "4,5", readiness: "Ready Now", posisiTarget: "General Manager", flightRisk: "Low" },
   { rank: 3, nama: "Dewi Kartika", jabatan: "Manajer Keuangan", unit: "PTPN I", score: "9,1", performance: "4,5", potential: "4,6", readiness: "Ready in 1-2 Yrs", posisiTarget: "SVP Keuangan", flightRisk: "Medium" },
-  { rank: 4, nama: "Fajar Nugroho", jabatan: "Manajer Pabrik", unit: "PTPN V", score: "8,9", performance: "4,5", potential: "4,4", readiness: "Ready Now", posisiTarget: "General Manager", flightRisk: "Low" },
-  { rank: 5, nama: "Yudi Prasetyo", jabatan: "Manajer HR", unit: "PTPN II", score: "8,8", performance: "4,4", potential: "4,4", readiness: "Ready in 1-2 Yrs", posisiTarget: "SVP Human Capital", flightRisk: "Low" },
-  { rank: 6, nama: "Nadia Arifah", jabatan: "Manajer Sustainability", unit: "PTPN VI", score: "8,7", performance: "4,3", potential: "4,4", readiness: "Ready in 3-5 Yrs", posisiTarget: "Head of ESG", flightRisk: "Low" },
+  { rank: 4, nama: "Fajar Nugroho", jabatan: "Manajer Pabrik", unit: "PTPN IV Regional 3", score: "8,9", performance: "4,5", potential: "4,4", readiness: "Ready Now", posisiTarget: "General Manager", flightRisk: "Low" },
+  { rank: 5, nama: "Yudi Prasetyo", jabatan: "Manajer HR", unit: "PTPN I Regional 1", score: "8,8", performance: "4,4", potential: "4,4", readiness: "Ready in 1-2 Yrs", posisiTarget: "SVP Human Capital", flightRisk: "Low" },
+  { rank: 6, nama: "Nadia Arifah", jabatan: "Manajer Sustainability", unit: "PTPN IV Regional 4", score: "8,7", performance: "4,3", potential: "4,4", readiness: "Ready in 3-5 Yrs", posisiTarget: "Head of ESG", flightRisk: "Low" },
   { rank: 7, nama: "Budi Santoso", jabatan: "Kepala Engineering", unit: "PTPN IV", score: "8,6", performance: "4,4", potential: "4,2", readiness: "Ready Now", posisiTarget: "Manajer Pabrik", flightRisk: "Medium" },
   { rank: 8, nama: "Maya Sari", jabatan: "Manajer Komersial", unit: "PTPN III", score: "8,6", performance: "4,2", potential: "4,4", readiness: "Ready in 3-5 Yrs", posisiTarget: "SVP Komersial", flightRisk: "Low" },
-  { rank: 9, nama: "Andi Kurniawan", jabatan: "Kepala Tanaman", unit: "PTPN V", score: "8,5", performance: "4,3", potential: "4,2", readiness: "Ready in 3-5 Yrs", posisiTarget: "Kepala Kebun", flightRisk: "Low" },
+  { rank: 9, nama: "Andi Kurniawan", jabatan: "Kepala Tanaman", unit: "PTPN IV Regional 3", score: "8,5", performance: "4,3", potential: "4,2", readiness: "Ready in 3-5 Yrs", posisiTarget: "Kepala Kebun", flightRisk: "Low" },
   { rank: 10, nama: "Rina Ekawati", jabatan: "Manajer QA/QC", unit: "PTPN I", score: "8,5", performance: "4,2", potential: "4,3", readiness: "Ready in 1-2 Yrs", posisiTarget: "Manajer Pabrik", flightRisk: "Low" },
   { rank: 11, nama: "Hendra Gunawan", jabatan: "Asisten Kepala", unit: "PTPN III", score: "8,4", performance: "4,2", potential: "4,2", readiness: "Ready in 1-2 Yrs", posisiTarget: "Kepala Kebun", flightRisk: "Medium" },
   { rank: 12, nama: "Sari Wulandari", jabatan: "Manajer Akuntansi", unit: "Holding & SBU", score: "8,4", performance: "4,1", potential: "4,3", readiness: "Ready in 1-2 Yrs", posisiTarget: "Manajer Keuangan", flightRisk: "Low" },
-  { rank: 13, nama: "Teguh Wibowo", jabatan: "Manajer Teknik", unit: "PTPN II", score: "8,3", performance: "4,2", potential: "4,1", readiness: "Ready Now", posisiTarget: "Manajer Pabrik", flightRisk: "Low" },
-  { rank: 14, nama: "Lestari Ningsih", jabatan: "Manajer SDM", unit: "PTPN VI", score: "8,3", performance: "4,1", potential: "4,2", readiness: "Ready in 1-2 Yrs", posisiTarget: "Manajer HR Regional", flightRisk: "Low" },
+  { rank: 13, nama: "Teguh Wibowo", jabatan: "Manajer Teknik", unit: "PTPN I Regional 1", score: "8,3", performance: "4,2", potential: "4,1", readiness: "Ready Now", posisiTarget: "Manajer Pabrik", flightRisk: "Low" },
+  { rank: 14, nama: "Lestari Ningsih", jabatan: "Manajer SDM", unit: "PTPN IV Regional 4", score: "8,3", performance: "4,1", potential: "4,2", readiness: "Ready in 1-2 Yrs", posisiTarget: "Manajer HR Regional", flightRisk: "Low" },
   { rank: 15, nama: "Bayu Anggara", jabatan: "Kepala Pengolahan", unit: "PTPN IV", score: "8,2", performance: "4,2", potential: "4,0", readiness: "Ready Now", posisiTarget: "Manajer Pabrik", flightRisk: "Medium" },
   { rank: 16, nama: "Putri Amelia", jabatan: "Analis Strategi", unit: "Holding & SBU", score: "8,2", performance: "4,0", potential: "4,2", readiness: "Ready in 3-5 Yrs", posisiTarget: "Manajer Komersial", flightRisk: "Low" },
-  { rank: 17, nama: "Rahmat Hidayat", jabatan: "Asisten Afdeling", unit: "PTPN V", score: "8,1", performance: "4,1", potential: "4,0", readiness: "Ready in 3-5 Yrs", posisiTarget: "Asisten Kepala", flightRisk: "Low" },
+  { rank: 17, nama: "Rahmat Hidayat", jabatan: "Asisten Afdeling", unit: "PTPN IV Regional 3", score: "8,1", performance: "4,1", potential: "4,0", readiness: "Ready in 3-5 Yrs", posisiTarget: "Asisten Kepala", flightRisk: "Low" },
   { rank: 18, nama: "Intan Permata", jabatan: "Manajer QHSE", unit: "PTPN I", score: "8,1", performance: "4,0", potential: "4,1", readiness: "Ready in 1-2 Yrs", posisiTarget: "Manajer Sustainability", flightRisk: "Low" },
 ];
 
 export const topTalentByOrg = [
   { label: "PTPN IV", value: 226, note: "30,5% talenta" },
   { label: "PTPN III", value: 198, note: "29,8% talenta" },
-  { label: "PTPN V", value: 148, note: "27,0% talenta" },
+  { label: "PTPN IV Regional 3", value: 148, note: "27,0% talenta" },
   { label: "Holding & SBU", value: 148, note: "32,0% talenta" },
   { label: "PTPN I", value: 132, note: "27,2% talenta" },
-  { label: "PTPN VI", value: 112, note: "26,2% talenta" },
-  { label: "PTPN II", value: 104, note: "25,2% talenta" },
+  { label: "PTPN IV Regional 4", value: 112, note: "26,2% talenta" },
+  { label: "PTPN I Regional 1", value: 104, note: "25,2% talenta" },
 ];
 
 export const topTalentScoreBands = [
@@ -624,18 +624,18 @@ export interface RiskRegisterRow {
 }
 
 export const riskRegister: RiskRegisterRow[] = [
-  { nama: "Andi Wijaya", jabatan: "Manajer Pabrik", unit: "PTPN V", score: 85, kategori: "High", kritikal: true, backup: "Fajar Nugroho (87%)", leadTime: "8–12 bulan", faktor: "Engagement, kompensasi, mobilitas", aksi: "Retensi intervensi + aktifkan backup suksesi" },
+  { nama: "Andi Wijaya", jabatan: "Manajer Pabrik", unit: "PTPN IV Regional 3", score: 85, kategori: "High", kritikal: true, backup: "Fajar Nugroho (87%)", leadTime: "8–12 bulan", faktor: "Engagement, kompensasi, mobilitas", aksi: "Retensi intervensi + aktifkan backup suksesi" },
   { nama: "Dimas Pratama", jabatan: "Kepala Kebun", unit: "PTPN IV", score: 82, kategori: "High", kritikal: true, backup: "Belum ada", leadTime: "6–9 bulan", faktor: "Efektivitas atasan, mobilitas", aksi: "Retensi targeted + percepat 2 kandidat pool 1–2 tahun" },
   { nama: "Siti Rahmawati", jabatan: "Manajer Keuangan", unit: "PTPN III", score: 80, kategori: "High", kritikal: true, backup: "Belum ada", leadTime: "8–12 bulan", faktor: "Kompensasi, engagement", aksi: "Prioritas retensi tertinggi — coverage posisi 58%" },
-  { nama: "Hendra Saputra", jabatan: "Asisten Teknik", unit: "PTPN II", score: 78, kategori: "High", kritikal: false, backup: "Teguh Wibowo (81%)", leadTime: "3–6 bulan", faktor: "Mobilitas, beban kerja", aksi: "Career path review + rotasi penugasan proyek" },
+  { nama: "Hendra Saputra", jabatan: "Asisten Teknik", unit: "PTPN I Regional 1", score: 78, kategori: "High", kritikal: false, backup: "Teguh Wibowo (81%)", leadTime: "3–6 bulan", faktor: "Mobilitas, beban kerja", aksi: "Career path review + rotasi penugasan proyek" },
   { nama: "Ratna Dewi", jabatan: "Supervisor QC", unit: "PTPN I", score: 76, kategori: "High", kritikal: false, backup: "Rina Ekawati (84%)", leadTime: "3–6 bulan", faktor: "Kompensasi, permintaan eksternal", aksi: "Penyesuaian kompensasi + development targeted" },
-  { nama: "Gilang Ramadhan", jabatan: "Manajer Komersial", unit: "PTPN VI", score: 75, kategori: "High", kritikal: true, backup: "Belum ada", leadTime: "8–12 bulan", faktor: "Kompensasi, permintaan eksternal", aksi: "Retensi + buka kandidat lintas entitas" },
+  { nama: "Gilang Ramadhan", jabatan: "Manajer Komersial", unit: "PTPN IV Regional 4", score: 75, kategori: "High", kritikal: true, backup: "Belum ada", leadTime: "8–12 bulan", faktor: "Kompensasi, permintaan eksternal", aksi: "Retensi + buka kandidat lintas entitas" },
   { nama: "Wahyu Saputro", jabatan: "Kepala Pengolahan", unit: "PTPN III", score: 74, kategori: "High", kritikal: true, backup: "Bayu Anggara (82%)", leadTime: "6–9 bulan", faktor: "Mobilitas, beban kerja", aksi: "Rencana suksesi paralel + penyeimbangan beban" },
-  { nama: "Anisa Fitriani", jabatan: "Manajer Akuntansi", unit: "PTPN V", score: 72, kategori: "High", kritikal: false, backup: "Sari Wulandari (85%)", leadTime: "3–6 bulan", faktor: "Kompensasi, engagement", aksi: "Review paket + jalur karier spesialis" },
+  { nama: "Anisa Fitriani", jabatan: "Manajer Akuntansi", unit: "PTPN IV Regional 3", score: 72, kategori: "High", kritikal: false, backup: "Sari Wulandari (85%)", leadTime: "3–6 bulan", faktor: "Kompensasi, engagement", aksi: "Review paket + jalur karier spesialis" },
   { nama: "Firman Maulana", jabatan: "Asisten Afdeling", unit: "PTPN IV", score: 68, kategori: "Medium", kritikal: false, backup: "Rahmat Hidayat (79%)", leadTime: "3 bulan", faktor: "Mobilitas", aksi: "Rotasi antar afdeling" },
   { nama: "Citra Larasati", jabatan: "Analis SDM", unit: "Holding & SBU", score: 66, kategori: "Medium", kritikal: false, backup: "Lestari Ningsih (80%)", leadTime: "3 bulan", faktor: "Permintaan eksternal", aksi: "Penugasan proyek strategis" },
   { nama: "Reza Fahlevi", jabatan: "Manajer Teknik", unit: "PTPN I", score: 64, kategori: "Medium", kritikal: true, backup: "Teguh Wibowo (78%)", leadTime: "6 bulan", faktor: "Beban kerja", aksi: "Tambah kapasitas tim + coaching" },
-  { nama: "Nurul Hasanah", jabatan: "Supervisor Sustainability", unit: "PTPN VI", score: 62, kategori: "Medium", kritikal: false, backup: "Intan Permata (83%)", leadTime: "3 bulan", faktor: "Engagement", aksi: "Program keterlibatan + mentoring" },
+  { nama: "Nurul Hasanah", jabatan: "Supervisor Sustainability", unit: "PTPN IV Regional 4", score: 62, kategori: "Medium", kritikal: false, backup: "Intan Permata (83%)", leadTime: "3 bulan", faktor: "Engagement", aksi: "Program keterlibatan + mentoring" },
 ];
 
 /** Jumlah talenta berisiko tinggi per bulan, 12 bulan terakhir. */
@@ -658,7 +658,7 @@ export const riskNotes: DetailNote[] = [
   {
     title: "32 high risk di posisi kritikal",
     detail:
-      "Lima di antaranya tanpa suksesor aktif — Kepala Kebun PTPN IV, Manajer Keuangan PTPN III, Manajer Komersial PTPN VI, dan dua posisi Manajer Pabrik.",
+      "Lima di antaranya tanpa suksesor aktif — Kepala Kebun PTPN IV, Manajer Keuangan PTPN III, Manajer Komersial PTPN IV Regional 4, dan dua posisi Manajer Pabrik.",
     tone: "red",
   },
   {
@@ -777,10 +777,10 @@ export const attributeByOrg = [
   { name: "Holding & SBU", leadership: 4.4, technical: 3.8, digital: 4.1, business: 4.3, rata: 4.15 },
   { name: "PTPN IV", leadership: 4.3, technical: 4.1, digital: 3.9, business: 4.0, rata: 4.08 },
   { name: "PTPN III", leadership: 4.2, technical: 4.0, digital: 3.8, business: 4.0, rata: 4.0 },
-  { name: "PTPN V", leadership: 4.2, technical: 3.9, digital: 3.8, business: 3.9, rata: 3.95 },
+  { name: "PTPN IV Regional 3", leadership: 4.2, technical: 3.9, digital: 3.8, business: 3.9, rata: 3.95 },
   { name: "PTPN I", leadership: 4.1, technical: 3.9, digital: 3.7, business: 3.9, rata: 3.9 },
-  { name: "PTPN VI", leadership: 4.1, technical: 3.8, digital: 3.7, business: 3.9, rata: 3.88 },
-  { name: "PTPN II", leadership: 4.0, technical: 3.8, digital: 3.6, business: 3.8, rata: 3.8 },
+  { name: "PTPN IV Regional 4", leadership: 4.1, technical: 3.8, digital: 3.7, business: 3.9, rata: 3.88 },
+  { name: "PTPN I Regional 1", leadership: 4.0, technical: 3.8, digital: 3.6, business: 3.8, rata: 3.8 },
 ];
 
 export const attributeNotes: DetailNote[] = [
@@ -908,10 +908,10 @@ export const coverageByOrg = [
   { label: "PTPN IV", value: 74, note: "38 posisi" },
   { label: "PTPN III", value: 72, note: "36 posisi" },
   { label: "Holding & SBU", value: 70, note: "24 posisi" },
-  { label: "PTPN V", value: 68, note: "32 posisi" },
+  { label: "PTPN IV Regional 3", value: 68, note: "32 posisi" },
   { label: "PTPN I", value: 66, note: "28 posisi" },
-  { label: "PTPN VI", value: 62, note: "26 posisi" },
-  { label: "PTPN II", value: 58, note: "24 posisi" },
+  { label: "PTPN IV Regional 4", value: 62, note: "26 posisi" },
+  { label: "PTPN I Regional 1", value: 58, note: "24 posisi" },
 ];
 
 /** Coverage keseluruhan versus Ready Now coverage, enam semester. */
@@ -1038,17 +1038,17 @@ export interface MatchRow {
 
 export const matchRows: MatchRow[] = [
   { posisi: "Kepala Kebun", unit: "PTPN III", skills: "Agronomy 4,3 · Leadership 4,2 · Digital Agriculture 4,0", kandidat: "Agung Setiawan", score: "9,2", match: 91, gap: "Digital Agriculture −0,4", readiness: "Ready Now", flightRisk: "Low", rekomendasi: "Siap suksesi" },
-  { posisi: "Manajer Pabrik", unit: "PTPN V", skills: "Operations 4,4 · Leadership 4,1 · Financial Acumen 4,0", kandidat: "Fajar Nugroho", score: "8,9", match: 87, gap: "Financial Acumen −0,3", readiness: "Ready Now", flightRisk: "Low", rekomendasi: "Siap suksesi" },
+  { posisi: "Manajer Pabrik", unit: "PTPN IV Regional 3", skills: "Operations 4,4 · Leadership 4,1 · Financial Acumen 4,0", kandidat: "Fajar Nugroho", score: "8,9", match: 87, gap: "Financial Acumen −0,3", readiness: "Ready Now", flightRisk: "Low", rekomendasi: "Siap suksesi" },
   { posisi: "General Manager", unit: "PTPN IV", skills: "Strategic Leadership 4,5 · Business Acumen 4,3 · Stakeholder 4,2", kandidat: "Budi Santoso", score: "8,6", match: 86, gap: "Business Acumen −0,4", readiness: "Ready Now", flightRisk: "Medium", rekomendasi: "Siap suksesi dengan mentoring" },
   { posisi: "Manajer Keuangan", unit: "PTPN I", skills: "Finance 4,5 · Leadership 4,2 · Digital Finance 4,0", kandidat: "Dewi Kartika", score: "9,1", match: 84, gap: "Leadership −0,5", readiness: "Ready in 1-2 Yrs", flightRisk: "Medium", rekomendasi: "Akselerasi development" },
-  { posisi: "Manajer HR", unit: "PTPN II", skills: "People Strategy 4,3 · Leadership 4,2 · HR Analytics 3,9", kandidat: "Yudi Prasetyo", score: "8,8", match: 83, gap: "HR Analytics −0,5", readiness: "Ready in 1-2 Yrs", flightRisk: "Low", rekomendasi: "Akselerasi development" },
-  { posisi: "Manajer Pabrik", unit: "PTPN II", skills: "Operations 4,4 · Maintenance 4,2 · Leadership 4,1", kandidat: "Teguh Wibowo", score: "8,3", match: 82, gap: "Leadership −0,5", readiness: "Ready Now", flightRisk: "Low", rekomendasi: "Siap suksesi dengan coaching" },
-  { posisi: "Manajer Sustainability", unit: "PTPN VI", skills: "ESG Reporting 4,2 · Certification 4,1 · Stakeholder 4,0", kandidat: "Nadia Arifah", score: "8,7", match: 81, gap: "Certification −0,5", readiness: "Ready in 3-5 Yrs", flightRisk: "Low", rekomendasi: "Development jangka menengah" },
+  { posisi: "Manajer HR", unit: "PTPN I Regional 1", skills: "People Strategy 4,3 · Leadership 4,2 · HR Analytics 3,9", kandidat: "Yudi Prasetyo", score: "8,8", match: 83, gap: "HR Analytics −0,5", readiness: "Ready in 1-2 Yrs", flightRisk: "Low", rekomendasi: "Akselerasi development" },
+  { posisi: "Manajer Pabrik", unit: "PTPN I Regional 1", skills: "Operations 4,4 · Maintenance 4,2 · Leadership 4,1", kandidat: "Teguh Wibowo", score: "8,3", match: 82, gap: "Leadership −0,5", readiness: "Ready Now", flightRisk: "Low", rekomendasi: "Siap suksesi dengan coaching" },
+  { posisi: "Manajer Sustainability", unit: "PTPN IV Regional 4", skills: "ESG Reporting 4,2 · Certification 4,1 · Stakeholder 4,0", kandidat: "Nadia Arifah", score: "8,7", match: 81, gap: "Certification −0,5", readiness: "Ready in 3-5 Yrs", flightRisk: "Low", rekomendasi: "Development jangka menengah" },
   { posisi: "Manajer QA/QC", unit: "PTPN I", skills: "Quality Systems 4,2 · Analytics 4,0 · Leadership 3,9", kandidat: "Rina Ekawati", score: "8,5", match: 80, gap: "Analytics −0,5", readiness: "Ready in 1-2 Yrs", flightRisk: "Low", rekomendasi: "Akselerasi development" },
   { posisi: "Manajer Komersial", unit: "PTPN III", skills: "Commercial 4,3 · Business Acumen 4,2 · Negotiation 4,0", kandidat: "Maya Sari", score: "8,6", match: 78, gap: "Business Acumen −0,6", readiness: "Ready in 3-5 Yrs", flightRisk: "Low", rekomendasi: "Development jangka menengah" },
   { posisi: "Manajer Keuangan", unit: "PTPN III", skills: "Finance 4,5 · Controllership 4,3 · Digital Finance 4,0", kandidat: "Sari Wulandari", score: "8,4", match: 76, gap: "Controllership −0,7", readiness: "Ready in 1-2 Yrs", flightRisk: "Low", rekomendasi: "Development terarah + rotasi" },
   { posisi: "Kepala Kebun", unit: "PTPN IV", skills: "Agronomy 4,3 · Leadership 4,2 · Cost Control 4,0", kandidat: "Hendra Gunawan", score: "8,4", match: 74, gap: "Cost Control −0,8", readiness: "Ready in 1-2 Yrs", flightRisk: "Medium", rekomendasi: "Development terarah + retensi" },
-  { posisi: "Manajer Komersial", unit: "PTPN VI", skills: "Commercial 4,3 · Market Analytics 4,1 · Negotiation 4,0", kandidat: "Putri Amelia", score: "8,2", match: 68, gap: "Negotiation −1,0", readiness: "Ready in 3-5 Yrs", flightRisk: "Low", rekomendasi: "Belum layak shortlist — perlu penugasan komersial" },
+  { posisi: "Manajer Komersial", unit: "PTPN IV Regional 4", skills: "Commercial 4,3 · Market Analytics 4,1 · Negotiation 4,0", kandidat: "Putri Amelia", score: "8,2", match: 68, gap: "Negotiation −1,0", readiness: "Ready in 3-5 Yrs", flightRisk: "Low", rekomendasi: "Belum layak shortlist — perlu penugasan komersial" },
 ];
 
 export const matchBands = [
@@ -1197,11 +1197,11 @@ export interface MobilityOrgRow {
 
 export const mobilityByOrg: MobilityOrgRow[] = [
   { name: "PTPN I", masuk: 42, keluar: 38, promosi: 16, rotasi: 12, net: 4, pengisianInternal: 72 },
-  { name: "PTPN II", masuk: 34, keluar: 41, promosi: 12, rotasi: 10, net: -7, pengisianInternal: 64 },
+  { name: "PTPN I Regional 1", masuk: 34, keluar: 41, promosi: 12, rotasi: 10, net: -7, pengisianInternal: 64 },
   { name: "PTPN III", masuk: 62, keluar: 54, promosi: 26, rotasi: 18, net: 8, pengisianInternal: 78 },
   { name: "PTPN IV", masuk: 68, keluar: 58, promosi: 28, rotasi: 20, net: 10, pengisianInternal: 80 },
-  { name: "PTPN V", masuk: 48, keluar: 46, promosi: 20, rotasi: 14, net: 2, pengisianInternal: 73 },
-  { name: "PTPN VI", masuk: 36, keluar: 42, promosi: 12, rotasi: 10, net: -6, pengisianInternal: 66 },
+  { name: "PTPN IV Regional 3", masuk: 48, keluar: 46, promosi: 20, rotasi: 14, net: 2, pengisianInternal: 73 },
+  { name: "PTPN IV Regional 4", masuk: 36, keluar: 42, promosi: 12, rotasi: 10, net: -6, pengisianInternal: 66 },
   { name: "Holding & SBU", masuk: 46, keluar: 57, promosi: 14, rotasi: 12, net: -11, pengisianInternal: 76 },
 ];
 
@@ -1234,7 +1234,7 @@ export const mobilityNotes: DetailNote[] = [
     tone: "amber",
   },
   {
-    title: "PTPN II & VI kehilangan talenta",
+    title: "PTPN I Regional 1 & PTPN IV Regional 4 kehilangan talenta",
     detail:
       "Net −7 dan −6 dengan pengisian internal terendah (64% dan 66%). Dua entitas ini juga berporsi Star terendah.",
     tone: "red",
@@ -1355,10 +1355,10 @@ export const devByOrg = [
   { label: "PTPN IV", value: 5.2, note: "684 peserta" },
   { label: "PTPN III", value: 4.8, note: "612 peserta" },
   { label: "Holding & SBU", value: 4.1, note: "428 peserta" },
-  { label: "PTPN V", value: 3.6, note: "486 peserta" },
+  { label: "PTPN IV Regional 3", value: 3.6, note: "486 peserta" },
   { label: "PTPN I", value: 3.1, note: "414 peserta" },
-  { label: "PTPN VI", value: 2.2, note: "324 peserta" },
-  { label: "PTPN II", value: 1.8, note: "280 peserta" },
+  { label: "PTPN IV Regional 4", value: 2.2, note: "324 peserta" },
+  { label: "PTPN I Regional 1", value: 1.8, note: "280 peserta" },
 ];
 
 export const devNotes: DetailNote[] = [
@@ -1383,7 +1383,7 @@ export const devNotes: DetailNote[] = [
   {
     title: "Alokasi timpang antar entitas",
     detail:
-      "PTPN IV menyerap Rp 5,2 M sementara PTPN II hanya Rp 1,8 M — padahal PTPN II berporsi Star terendah (25,2%) dan paling butuh penguatan.",
+      "PTPN IV menyerap Rp 5,2 M sementara PTPN I Regional 1 hanya Rp 1,8 M — padahal PTPN I Regional 1 berporsi Star terendah (25,2%) dan paling butuh penguatan.",
     tone: "red",
   },
 ];
@@ -1690,11 +1690,11 @@ export interface TrenOrgRow {
 
 export const trenByOrg: TrenOrgRow[] = [
   { name: "PTPN I", mei25: 456, mei26: 486, growth: 6.6, masuk: 52, keluar: 22 },
-  { name: "PTPN II", mei25: 398, mei26: 412, growth: 3.5, masuk: 38, keluar: 24 },
+  { name: "PTPN I Regional 1", mei25: 398, mei26: 412, growth: 3.5, masuk: 38, keluar: 24 },
   { name: "PTPN III", mei25: 618, mei26: 664, growth: 7.4, masuk: 76, keluar: 30 },
   { name: "PTPN IV", mei25: 686, mei26: 742, growth: 8.2, masuk: 88, keluar: 32 },
-  { name: "PTPN V", mei25: 514, mei26: 548, growth: 6.6, masuk: 58, keluar: 24 },
-  { name: "PTPN VI", mei25: 410, mei26: 428, growth: 4.4, masuk: 42, keluar: 24 },
+  { name: "PTPN IV Regional 3", mei25: 514, mei26: 548, growth: 6.6, masuk: 58, keluar: 24 },
+  { name: "PTPN IV Regional 4", mei25: 410, mei26: 428, growth: 4.4, masuk: 42, keluar: 24 },
   { name: "Holding & SBU", mei25: 422, mei26: 462, growth: 9.5, masuk: 58, keluar: 18 },
 ];
 
@@ -1718,7 +1718,7 @@ export const trenNotes: DetailNote[] = [
     tone: "green",
   },
   {
-    title: "PTPN II tertinggal",
+    title: "PTPN I Regional 1 tertinggal",
     detail:
       "Tumbuh 3,5% dengan keluar pool 24 orang. Entitas ini juga terendah pada porsi Star, coverage, dan investasi development.",
     tone: "red",
@@ -1832,10 +1832,10 @@ export const indexByOrg = [
   { label: "Holding & SBU", value: 79, note: "+7 pts YoY" },
   { label: "PTPN IV", value: 77, note: "+6 pts YoY" },
   { label: "PTPN III", value: 76, note: "+6 pts YoY" },
-  { label: "PTPN V", value: 73, note: "+5 pts YoY" },
+  { label: "PTPN IV Regional 3", value: 73, note: "+5 pts YoY" },
   { label: "PTPN I", value: 72, note: "+6 pts YoY" },
-  { label: "PTPN VI", value: 70, note: "+4 pts YoY" },
-  { label: "PTPN II", value: 67, note: "+3 pts YoY" },
+  { label: "PTPN IV Regional 4", value: 70, note: "+4 pts YoY" },
+  { label: "PTPN I Regional 1", value: 67, note: "+3 pts YoY" },
 ];
 
 export const indexNotes: DetailNote[] = [
@@ -1860,7 +1860,7 @@ export const indexNotes: DetailNote[] = [
   {
     title: "Sebaran antar entitas 12 poin",
     detail:
-      "Holding & SBU 79 versus PTPN II 67. Pemerataan lewat rotasi silang berdampak ganda: menaikkan entitas lemah tanpa menurunkan yang kuat.",
+      "Holding & SBU 79 versus PTPN I Regional 1 67. Pemerataan lewat rotasi silang berdampak ganda: menaikkan entitas lemah tanpa menurunkan yang kuat.",
     tone: "green",
   },
 ];
@@ -2097,7 +2097,7 @@ export const decisionRows: DecisionRow[] = [
     tone: "amber",
     kicker: "Action Required",
     judul: "Program retensi 86 talenta high flight risk",
-    konteks: "32 di antaranya pada posisi kritikal, termasuk Manajer Pabrik PTPN V (risk 85) dan Kepala Kebun PTPN IV (risk 82).",
+    konteks: "32 di antaranya pada posisi kritikal, termasuk Manajer Pabrik PTPN IV Regional 3 (risk 85) dan Kepala Kebun PTPN IV (risk 82).",
     rekomendasi: "Retensi targeted per individu plus penyiapan backup suksesi paralel.",
     dampak: "Menahan estimasi 66 talenta (77% tingkat keberhasilan intervensi)",
     talenta: 86,
@@ -2142,8 +2142,8 @@ export const decisionRows: DecisionRow[] = [
     tone: "amber",
     kicker: "Action Required",
     judul: "Realokasi investasi development ke entitas defisit",
-    konteks: "PTPN II menyerap Rp 1,8 M dengan porsi Star terendah (25,2%), sementara PTPN IV menyerap Rp 5,2 M.",
-    rekomendasi: "Geser Rp 0,8 M pagu semester dua ke PTPN II dan PTPN VI.",
+    konteks: "PTPN I Regional 1 menyerap Rp 1,8 M dengan porsi Star terendah (25,2%), sementara PTPN IV menyerap Rp 5,2 M.",
+    rekomendasi: "Geser Rp 0,8 M pagu semester dua ke PTPN I Regional 1 dan PTPN IV Regional 4.",
     dampak: "Pemerataan Talent Intelligence Index antar entitas",
     talenta: 312,
     anggaran: "Rp 0,8 M",

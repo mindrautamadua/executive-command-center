@@ -141,9 +141,9 @@ export const posisiKritisByUnit = [
   { label: "PTPN III (Persero)", value: 41, coverage: 78.0, tanpaKandidat: 9 },
   { label: "PTPN IV", value: 38, coverage: 81.6, tanpaKandidat: 7 },
   { label: "PTPN I", value: 29, coverage: 72.4, tanpaKandidat: 8 },
-  { label: "PTPN V", value: 24, coverage: 79.2, tanpaKandidat: 5 },
+  { label: "PTPN IV Regional 3", value: 24, coverage: 79.2, tanpaKandidat: 5 },
   { label: "PalmCo", value: 23, coverage: 69.6, tanpaKandidat: 7 },
-  { label: "PTPN II", value: 21, coverage: 71.4, tanpaKandidat: 6 },
+  { label: "PTPN I Regional 1", value: 21, coverage: 71.4, tanpaKandidat: 6 },
   { label: "Holding & Supporting Co", value: 36, coverage: 69.4, tanpaKandidat: 11 },
 ];
 
@@ -174,8 +174,8 @@ export const posisiKritisRows: PosisiKritisDetailRow[] = [
   { posisi: "Direktur Operasional", unit: "PTPN III (Persero)", level: "Direktur", risk: "Tinggi", bench: "0,5", kandidat: 0, readyNow: 0, estSiap: "9 bln", pemicu: "Pensiun 8 bln", darurat: "Interim Ready" },
   { posisi: "VP Agronomi", unit: "PTPN IV", level: "VP", risk: "Tinggi", bench: "0,7", kandidat: 1, readyNow: 1, estSiap: "Siap", pemicu: "Pensiun 14 bln", darurat: "Emergency Ready" },
   { posisi: "VP Keuangan", unit: "Holding & Supporting Co", level: "VP", risk: "Tinggi", bench: "0,8", kandidat: 0, readyNow: 0, estSiap: "12 bln", pemicu: "Rotasi terencana", darurat: "Tidak Ada" },
-  { posisi: "Kepala Kebun", unit: "PTPN V", level: "Manager", risk: "Tinggi", bench: "0,9", kandidat: 2, readyNow: 2, estSiap: "Siap", pemicu: "Promosi est. Q4 2026", darurat: "Emergency Ready" },
-  { posisi: "VP Supply Chain", unit: "PTPN II", level: "VP", risk: "Sedang", bench: "1,0", kandidat: 1, readyNow: 1, estSiap: "Siap", pemicu: "Belum terjadwal", darurat: "Emergency Ready" },
+  { posisi: "Kepala Kebun", unit: "PTPN IV Regional 3", level: "Manager", risk: "Tinggi", bench: "0,9", kandidat: 2, readyNow: 2, estSiap: "Siap", pemicu: "Promosi est. Q4 2026", darurat: "Emergency Ready" },
+  { posisi: "VP Supply Chain", unit: "PTPN I Regional 1", level: "VP", risk: "Sedang", bench: "1,0", kandidat: 1, readyNow: 1, estSiap: "Siap", pemicu: "Belum terjadwal", darurat: "Emergency Ready" },
   { posisi: "VP Human Capital", unit: "PTPN III (Persero)", level: "VP", risk: "Sedang", bench: "1,2", kandidat: 2, readyNow: 2, estSiap: "Siap", pemicu: "Belum terjadwal", darurat: "Emergency Ready" },
   { posisi: "VP Engineering", unit: "PalmCo", level: "VP", risk: "Sedang", bench: "1,3", kandidat: 1, readyNow: 1, estSiap: "Siap", pemicu: "Rotasi terencana", darurat: "Interim Ready" },
   { posisi: "Kepala Pabrik", unit: "PTPN IV", level: "Manager", risk: "Sedang", bench: "1,4", kandidat: 2, readyNow: 2, estSiap: "Siap", pemicu: "Pensiun 16 bln", darurat: "Emergency Ready" },
@@ -412,10 +412,10 @@ export const benchByLevel = [
 
 export const benchByUnit = [
   { label: "PTPN IV", value: 1.9, note: "38 posisi kritis" },
-  { label: "PTPN V", value: 1.8, note: "24 posisi kritis" },
+  { label: "PTPN IV Regional 3", value: 1.8, note: "24 posisi kritis" },
   { label: "PTPN III (Persero)", value: 1.7, note: "41 posisi kritis" },
   { label: "PTPN I", value: 1.5, note: "29 posisi kritis" },
-  { label: "PTPN II", value: 1.4, note: "21 posisi kritis" },
+  { label: "PTPN I Regional 1", value: 1.4, note: "21 posisi kritis" },
   { label: "PalmCo", value: 1.3, note: "23 posisi kritis" },
   { label: "Holding & Supporting Co", value: 1.2, note: "36 posisi kritis" },
 ];
@@ -651,8 +651,8 @@ export interface KandidatDetailRow {
 }
 
 export const kandidatRows: KandidatDetailRow[] = [
-  { nama: "Hendra Gunawan", jabatan: "Asisten Kepala — PTPN V", posisiTarget: "Kepala Kebun", unit: "PTPN V", readiness: 95, skillMatch: 93, performance: "4,4", potential: "8,2", flightRisk: "Rendah", rencana: "Penempatan Q3 2026, menunggu validasi akhir" },
-  { nama: "Yusuf Maulana", jabatan: "Asisten Kepala — PTPN V", posisiTarget: "Kepala Kebun", unit: "PTPN V", readiness: 91, skillMatch: 90, performance: "4,2", potential: "8,0", flightRisk: "Rendah", rencana: "Menunggu sertifikasi ISPO tuntas" },
+  { nama: "Hendra Gunawan", jabatan: "Asisten Kepala — PTPN IV Regional 3", posisiTarget: "Kepala Kebun", unit: "PTPN IV Regional 3", readiness: 95, skillMatch: 93, performance: "4,4", potential: "8,2", flightRisk: "Rendah", rencana: "Penempatan Q3 2026, menunggu validasi akhir" },
+  { nama: "Yusuf Maulana", jabatan: "Asisten Kepala — PTPN IV Regional 3", posisiTarget: "Kepala Kebun", unit: "PTPN IV Regional 3", readiness: 91, skillMatch: 90, performance: "4,2", potential: "8,0", flightRisk: "Rendah", rencana: "Menunggu sertifikasi ISPO tuntas" },
   { nama: "Agung Prasetyo", jabatan: "Kepala Kebun Senior — PTPN IV", posisiTarget: "VP Agronomi", unit: "PTPN IV", readiness: 88, skillMatch: 91, performance: "4,5", potential: "9,1", flightRisk: "Rendah", rencana: "Pengembangan terarah gap digital agriculture" },
   { nama: "Fajar Ramadhan", jabatan: "Senior Manager IT — Holding", posisiTarget: "VP IT & Digital", unit: "Holding & Supporting Co", readiness: 90, skillMatch: 92, performance: "4,3", potential: "8,8", flightRisk: "Tinggi", rencana: "Retensi prioritas — tawaran pasar aktif" },
   { nama: "Laras Kusuma", jabatan: "Manager Data & Analytics — Holding", posisiTarget: "VP IT & Digital", unit: "Holding & Supporting Co", readiness: 86, skillMatch: 88, performance: "4,1", potential: "8,5", flightRisk: "Sedang", rencana: "Eksposur proyek transformasi grup" },
@@ -660,7 +660,7 @@ export const kandidatRows: KandidatDetailRow[] = [
   { nama: "Ratna Dewi", jabatan: "Manager Teknik — PTPN IV", posisiTarget: "Kepala Pabrik", unit: "PTPN IV", readiness: 87, skillMatch: 89, performance: "4,2", potential: "8,1", flightRisk: "Rendah", rencana: "Shadowing incumbent selama 6 bulan" },
   { nama: "Sigit Prabowo", jabatan: "Manager HC — PTPN III", posisiTarget: "VP Human Capital", unit: "PTPN III (Persero)", readiness: 89, skillMatch: 90, performance: "4,3", potential: "8,4", flightRisk: "Rendah", rencana: "Siap penempatan, menunggu keputusan forum" },
   { nama: "Maya Hartati", jabatan: "Senior Manager HCBP — Holding", posisiTarget: "VP Human Capital", unit: "PTPN III (Persero)", readiness: 86, skillMatch: 87, performance: "4,1", potential: "8,2", flightRisk: "Sedang", rencana: "Mobilitas lintas PTPN perlu persetujuan" },
-  { nama: "Irfan Maulana", jabatan: "Manager Logistik — PTPN II", posisiTarget: "VP Supply Chain", unit: "PTPN II", readiness: 88, skillMatch: 90, performance: "4,2", potential: "8,0", flightRisk: "Rendah", rencana: "Penempatan menunggu penetapan pemicu transisi" },
+  { nama: "Irfan Maulana", jabatan: "Manager Logistik — PTPN I Regional 1", posisiTarget: "VP Supply Chain", unit: "PTPN I Regional 1", readiness: 88, skillMatch: 90, performance: "4,2", potential: "8,0", flightRisk: "Rendah", rencana: "Penempatan menunggu penetapan pemicu transisi" },
   { nama: "Dimas Anggara", jabatan: "Manager Engineering — PalmCo", posisiTarget: "VP Engineering", unit: "PalmCo", readiness: 87, skillMatch: 88, performance: "4,1", potential: "7,9", flightRisk: "Sedang", rencana: "Perkuat eksposur proyek investasi besar" },
   { nama: "Nur Aisyah", jabatan: "Manager Unit Usaha — PTPN I", posisiTarget: "Kepala Unit Usaha", unit: "PTPN I", readiness: 90, skillMatch: 91, performance: "4,3", potential: "8,3", flightRisk: "Rendah", rencana: "Penempatan Q1 2027 sesuai rencana promosi" },
 ];

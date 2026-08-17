@@ -316,14 +316,14 @@ export const unitKualitas: UnitKualitas[] = [
     konsistensi: "92,9",
   },
   {
-    unit: "PTPN II",
+    unit: "PTPN I Regional 1",
     dq: "93,1",
     kelengkapan: "93,5",
     akurasi: "92,8",
     konsistensi: "92,2",
   },
   {
-    unit: "PTPN V",
+    unit: "PTPN IV Regional 3",
     dq: "92,4",
     kelengkapan: "92,8",
     akurasi: "92,1",

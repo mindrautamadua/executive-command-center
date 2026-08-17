@@ -26,10 +26,10 @@ export interface TurnoverOrgRow {
 export const turnoverByOrg: TurnoverOrgRow[] = [
   { name: "PTPN IV", headcount: 23512, exits: 1458, rate: 6.2, voluntary: 4.9, involuntary: 1.3, criticalExits: 42, cost: 48.6, trend: "down" },
   { name: "PTPN III", headcount: 17642, exits: 1200, rate: 6.8, voluntary: 5.4, involuntary: 1.4, criticalExits: 36, cost: 38.2, trend: "down" },
-  { name: "PTPN II", headcount: 11982, exits: 887, rate: 7.4, voluntary: 6.1, involuntary: 1.3, criticalExits: 28, cost: 26.4, trend: "flat" },
+  { name: "PTPN I Regional 1", headcount: 11982, exits: 887, rate: 7.4, voluntary: 6.1, involuntary: 1.3, criticalExits: 28, cost: 26.4, trend: "flat" },
   { name: "PTPN I", headcount: 7654, exits: 605, rate: 7.9, voluntary: 6.4, involuntary: 1.5, criticalExits: 21, cost: 18.1, trend: "up" },
-  { name: "PTPN V", headcount: 4231, exits: 258, rate: 6.1, voluntary: 4.8, involuntary: 1.3, criticalExits: 9, cost: 8.4, trend: "down" },
-  { name: "PTPN VI", headcount: 2201, exits: 185, rate: 8.4, voluntary: 7.0, involuntary: 1.4, criticalExits: 8, cost: 6.2, trend: "up" },
+  { name: "PTPN IV Regional 3", headcount: 4231, exits: 258, rate: 6.1, voluntary: 4.8, involuntary: 1.3, criticalExits: 9, cost: 8.4, trend: "down" },
+  { name: "PTPN IV Regional 4", headcount: 2201, exits: 185, rate: 8.4, voluntary: 7.0, involuntary: 1.4, criticalExits: 8, cost: 6.2, trend: "up" },
   { name: "Lainnya", headcount: 920, exits: 50, rate: 5.4, voluntary: 4.2, involuntary: 1.2, criticalExits: 2, cost: 2.7, trend: "flat" },
 ];
 
@@ -98,10 +98,10 @@ export interface MovementOrgRow {
 const MOVE: [string, number, number, number, number, number, number, number, number][] = [
   ["PTPN IV", 22900, 986, 428, 118, 782, 92, 46, 23512],
   ["PTPN III", 17253, 742, 318, 86, 668, 61, 28, 17642],
-  ["PTPN II", 11758, 498, 214, 54, 462, 44, 36, 11982],
+  ["PTPN I Regional 1", 11758, 498, 214, 54, 462, 44, 36, 11982],
   ["PTPN I", 7476, 342, 136, 42, 288, 36, 18, 7654],
-  ["PTPN V", 4089, 186, 78, 24, 118, 18, 10, 4231],
-  ["PTPN VI", 2137, 96, 42, 12, 68, 24, 4, 2201],
+  ["PTPN IV Regional 3", 4089, 186, 78, 24, 118, 18, 10, 4231],
+  ["PTPN IV Regional 4", 2137, 96, 42, 12, 68, 24, 4, 2201],
   ["Lainnya", 888, 46, 15, 6, 26, 12, 3, 920],
 ];
 

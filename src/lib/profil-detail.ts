@@ -190,7 +190,7 @@ export const riwayatJabatanKpi: DetailKpi[] = [
   { label: "Total Masa Kerja", value: "8", suffix: "thn 4 bln", delta: "sejak Jan 2018", trend: "flat", tone: "neutral", compare: "seluruhnya di PTPN IV" },
   { label: "Jumlah Jabatan", value: "4", delta: "1 unit kerja", trend: "flat", tone: "neutral", compare: "seluruhnya Kebun Tanah Jawa" },
   { label: "Promosi", value: "3", delta: "terakhir Jan 2023", trend: "flat", tone: "green", compare: "rata-rata 20 bulan/promosi" },
-  { label: "Tenure Jabatan Ini", value: "3", suffix: "thn 4 bln", delta: "Asisten Afdeling", trend: "flat", tone: "neutral", compare: "median promosi grade G7: 3 thn" },
+  { label: "Tenure Jabatan Ini", value: "3", suffix: "thn 4 bln", delta: "Asisten Afdeling", trend: "flat", tone: "neutral", compare: "median promosi Job Grade G7: 3 thn" },
   { label: "Mobilitas Lintas Unit", value: "0", delta: "area pengembangan", trend: "flat", tone: "amber", compare: "syarat lunak jabatan manajer" },
 ];
 
@@ -215,8 +215,9 @@ export const riwayatJabatanNotes: DetailNote[] = [
 ];
 
 export const riwayatJabatanDefs = [
-  { term: "Jenis Perubahan", text: "Promosi (naik grade), mutasi (pindah unit level sama), atau rekrutmen." },
-  { term: "Tenure", text: "Lama menjabat pada satu posisi; pembanding = median grade yang sama." },
+  { term: "Jenis Perubahan", text: "Promosi (naik job grade), mutasi (pindah unit level sama), atau rekrutmen." },
+  { term: "Tenure", text: "Lama menjabat pada satu posisi; pembanding = median job grade yang sama." },
+  { term: "Person vs Job Grade", text: "Person grade melekat pada individu; job grade melekat pada jabatan. Kolom Grade di kronologi = job grade posisi tersebut." },
   { term: "Sumber", text: "Riwayat SK kepegawaian HRIS, per 31 Mei 2026." },
 ];
 
@@ -255,19 +256,19 @@ export const mutasiDefs = [
 
 export const perubahanKpi: DetailKpi[] = [
   { label: "Total Perubahan", value: "9", delta: "2 di 2023", trend: "flat", tone: "neutral", compare: "sejak bergabung 2018" },
-  { label: "Perubahan Struktural", value: "6", delta: "grade, jabatan, unit", trend: "flat", tone: "neutral", compare: "3 sisanya administratif" },
-  { label: "Kenaikan Grade", value: "3", delta: "terakhir Jan 2023", trend: "flat", tone: "green", compare: "G4 → G7" },
+  { label: "Perubahan Struktural", value: "6", delta: "person grade, jabatan, unit", trend: "flat", tone: "neutral", compare: "3 sisanya administratif" },
+  { label: "Kenaikan Person Grade", value: "3", delta: "terakhir Jan 2023", trend: "flat", tone: "green", compare: "G4 → G7" },
   { label: "Menunggu Persetujuan", value: "0", delta: "tidak ada antrean", trend: "flat", tone: "green", compare: "seluruh pengajuan tuntas" },
   { label: "Terverifikasi Berkas", value: "100", suffix: "%", delta: "tetap", trend: "flat", tone: "green", compare: "audit dokumen Mar 2026" },
 ];
 
 export const perubahanRows = [
-  { perubahan: "Grade", dari: "G6", menjadi: "G7", tipe: "Kenaikan Grade", tanggal: "01 Jan 2023", oleh: "HR Regional 1", dasar: "SK-002/R1/2023" },
+  { perubahan: "Person Grade", dari: "G6", menjadi: "G7", tipe: "Kenaikan Person Grade", tanggal: "01 Jan 2023", oleh: "HR Regional 1", dasar: "SK-002/R1/2023" },
   { perubahan: "Jabatan", dari: "Asisten Mandor", menjadi: "Asisten Afdeling", tipe: "Promosi Jabatan", tanggal: "01 Jan 2023", oleh: "HR Regional 1", dasar: "SK-002/R1/2023" },
   { perubahan: "Unit Kerja", dari: "Kebun Tanah Jawa", menjadi: "Afdeling I — Kebun Tanah Jawa", tipe: "Perubahan Unit", tanggal: "01 Jan 2023", oleh: "HR Regional 1", dasar: "SK-002/R1/2023" },
-  { perubahan: "Grade", dari: "G5", menjadi: "G6", tipe: "Kenaikan Grade", tanggal: "01 Jan 2021", oleh: "HR Regional 1", dasar: "SK-004/KTJ/2021" },
+  { perubahan: "Person Grade", dari: "G5", menjadi: "G6", tipe: "Kenaikan Person Grade", tanggal: "01 Jan 2021", oleh: "HR Regional 1", dasar: "SK-004/KTJ/2021" },
   { perubahan: "Jabatan", dari: "Mandor Panen", menjadi: "Asisten Mandor", tipe: "Promosi Jabatan", tanggal: "01 Jan 2021", oleh: "HR Regional 1", dasar: "SK-004/KTJ/2021" },
-  { perubahan: "Grade", dari: "G4", menjadi: "G5", tipe: "Kenaikan Grade", tanggal: "01 Jul 2019", oleh: "HR Kebun Tanah Jawa", dasar: "SK-089/KTJ/2019" },
+  { perubahan: "Person Grade", dari: "G4", menjadi: "G5", tipe: "Kenaikan Person Grade", tanggal: "01 Jul 2019", oleh: "HR Kebun Tanah Jawa", dasar: "SK-089/KTJ/2019" },
   { perubahan: "Status Pernikahan", dari: "Belum Menikah", menjadi: "Menikah", tipe: "Data Pribadi", tanggal: "20 Mei 2019", oleh: "Self-service (verifikasi HR)", dasar: "Akta nikah" },
   { perubahan: "Status Kepegawaian", dari: "Management Trainee", menjadi: "Karyawan Tetap", tipe: "Perubahan Status", tanggal: "12 Jan 2018", oleh: "HR Regional 1", dasar: "SK-011/R1/2018" },
   { perubahan: "Domisili", dari: "Medan", menjadi: "Pematang Siantar", tipe: "Data Pribadi", tanggal: "05 Feb 2018", oleh: "Self-service (verifikasi HR)", dasar: "KTP terbaru" },
@@ -279,7 +280,7 @@ export const perubahanNotes: DetailNote[] = [
 ];
 
 export const perubahanDefs = [
-  { term: "Perubahan Struktural", text: "Grade, jabatan, unit kerja, status kepegawaian — wajib berbasis SK." },
+  { term: "Perubahan Struktural", text: "Person grade, jabatan, unit kerja, status kepegawaian — wajib berbasis SK." },
   { term: "Data Pribadi", text: "Perubahan administratif (alamat, status keluarga) via self-service HRIS." },
   { term: "Sumber", text: "Audit trail HRIS modul kepegawaian, per 31 Mei 2026." },
 ];

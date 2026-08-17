@@ -136,9 +136,9 @@ export const unitProduktivitas: UnitProduktivitas[] = [
   { unit: "PTPN III (Persero)", revenue: "1,42 M", produksi: "86,1", index: 118 },
   { unit: "PTPN IV", revenue: "1,28 M", produksi: "79,3", index: 115 },
   { unit: "PTPN I Regional 7", revenue: "1,11 M", produksi: "72,4", index: 110 },
-  { unit: "PTPN V", revenue: "0,98 M", produksi: "63,2", index: 104 },
-  { unit: "PTPN II", revenue: "0,86 M", produksi: "56,7", index: 97 },
-  { unit: "PTPN VI", revenue: "0,77 M", produksi: "52,1", index: 92 },
+  { unit: "PTPN IV Regional 3", revenue: "0,98 M", produksi: "63,2", index: 104 },
+  { unit: "PTPN I Regional 1", revenue: "0,86 M", produksi: "56,7", index: 97 },
+  { unit: "PTPN IV Regional 4", revenue: "0,77 M", produksi: "52,1", index: 92 },
   { unit: "PTPN Group (Total)", revenue: "1,18 M", produksi: "74,8", index: 112, total: true },
 ];
 
@@ -173,9 +173,9 @@ export const biayaVsIndex: BiayaVsIndex[] = [
   { unit: "PTPN III", laborCostPerTon: 2180, index: 118, headcount: 16400 },
   { unit: "PTPN IV", laborCostPerTon: 2355, index: 115, headcount: 14800 },
   { unit: "PTPN I Reg 7", laborCostPerTon: 2450, index: 110, headcount: 9600 },
-  { unit: "PTPN V", laborCostPerTon: 2720, index: 104, headcount: 11200 },
-  { unit: "PTPN II", laborCostPerTon: 2980, index: 97, headcount: 8900 },
-  { unit: "PTPN VI", laborCostPerTon: 3150, index: 92, headcount: 7100 },
+  { unit: "PTPN IV Regional 3", laborCostPerTon: 2720, index: 104, headcount: 11200 },
+  { unit: "PTPN I Regional 1", laborCostPerTon: 2980, index: 97, headcount: 8900 },
+  { unit: "PTPN IV Regional 4", laborCostPerTon: 3150, index: 92, headcount: 7100 },
 ];
 
 /* ── 6. Breakdown Produktivitas (drill down PTPN IV) ──────────────── */
@@ -240,7 +240,7 @@ export const insightProduktivitas: InsightProduktivitas[] = [
   },
   {
     judul: "Peluang Ekonomi dari Gap",
-    isi: "Gap 26 poin (PTPN III 118 vs PTPN VI 92). Menutup 50% gap PTPN II & VI ke rata-rata Group ≈ potensi +Rp 2,9 T revenue per tahun.",
+    isi: "Gap 26 poin (PTPN III 118 vs PTPN IV Regional 4 92). Menutup 50% gap PTPN I Regional 1 & PTPN IV Regional 4 ke rata-rata Group ≈ potensi +Rp 2,9 T revenue per tahun.",
     tone: "blue",
   },
   {
@@ -310,10 +310,10 @@ export const produktivitasIntel = {
     {
       label: "Economic Opportunity",
       value: "≈ Rp 2,9 T / tahun",
-      sub: "Menutup 50% gap PTPN II & VI ke rata-rata Group (~Rp 0,8 T EBITDA).",
+      sub: "Menutup 50% gap PTPN I Regional 1 & PTPN IV Regional 4 ke rata-rata Group (~Rp 0,8 T EBITDA).",
       tone: "purple",
     },
   ] satisfies IntelTile[],
   rekomendasi:
-    "Luncurkan program cross-unit productivity transfer — replikasi operating model PTPN III ke PTPN VI & II, target Productivity Index PTPN VI 92 → 105 dalam 12 bulan.",
+    "Luncurkan program cross-unit productivity transfer — replikasi operating model PTPN III ke PTPN IV Regional 4 & PTPN I Regional 1, target Productivity Index PTPN IV Regional 4 92 → 105 dalam 12 bulan.",
 };

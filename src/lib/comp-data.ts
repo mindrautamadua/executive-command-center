@@ -266,7 +266,7 @@ export const unitKompensasi: UnitKompensasi[] = [
     payEquityNum: 0.97,
   },
   {
-    unit: "PTPN II",
+    unit: "PTPN I Regional 1",
     totalBiaya: "389 M",
     rataGaji: "12,12 Jt",
     kenaikan: "5,6%",
@@ -296,7 +296,7 @@ export const unitKompensasi: UnitKompensasi[] = [
     payEquityNum: 0.95,
   },
   {
-    unit: "PTPN V",
+    unit: "PTPN IV Regional 3",
     totalBiaya: "333 M",
     rataGaji: "11,91 Jt",
     kenaikan: "5,7%",

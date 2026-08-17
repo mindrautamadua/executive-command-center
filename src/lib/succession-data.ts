@@ -122,8 +122,8 @@ export const posisiKritis: PosisiKritis[] = [
   { posisi: "Direktur Operasional", unit: "PTPN III (Persero)", risk: "Tinggi", bench: "0,5", benchVal: 0.5, kandidat: 0, estSiap: "9 bln" },
   { posisi: "VP Agronomi", unit: "PTPN IV", risk: "Tinggi", bench: "0,7", benchVal: 0.7, kandidat: 1, estSiap: "Siap" },
   { posisi: "VP Keuangan", unit: "Holding & Supporting Co", risk: "Tinggi", bench: "0,8", benchVal: 0.8, kandidat: 0, estSiap: "12 bln" },
-  { posisi: "Kepala Kebun", unit: "PTPN V", risk: "Tinggi", bench: "0,9", benchVal: 0.9, kandidat: 2, estSiap: "Siap" },
-  { posisi: "VP Supply Chain", unit: "PTPN II", risk: "Sedang", bench: "1,0", benchVal: 1.0, kandidat: 1, estSiap: "Siap" },
+  { posisi: "Kepala Kebun", unit: "PTPN IV Regional 3", risk: "Tinggi", bench: "0,9", benchVal: 0.9, kandidat: 2, estSiap: "Siap" },
+  { posisi: "VP Supply Chain", unit: "PTPN I Regional 1", risk: "Sedang", bench: "1,0", benchVal: 1.0, kandidat: 1, estSiap: "Siap" },
   { posisi: "VP Human Capital", unit: "PTPN III (Persero)", risk: "Sedang", bench: "1,2", benchVal: 1.2, kandidat: 2, estSiap: "Siap" },
   { posisi: "VP Engineering", unit: "PalmCo", risk: "Sedang", bench: "1,3", benchVal: 1.3, kandidat: 1, estSiap: "Siap" },
   { posisi: "Kepala Pabrik", unit: "PTPN IV", risk: "Sedang", bench: "1,4", benchVal: 1.4, kandidat: 2, estSiap: "Siap" },
@@ -347,7 +347,7 @@ export interface KandidatSiap {
  * posisi ber-kandidat 0 (Direktur Operasional, VP Keuangan) tidak boleh muncul.
  */
 export const kandidatSiap: KandidatSiap[] = [
-  { posisi: "Kepala Kebun", unit: "PTPN V", jumlah: 2, seed: 2 },
+  { posisi: "Kepala Kebun", unit: "PTPN IV Regional 3", jumlah: 2, seed: 2 },
   { posisi: "VP Human Capital", unit: "PTPN III (Persero)", jumlah: 2, seed: 9 },
   { posisi: "Kepala Pabrik", unit: "PTPN IV", jumlah: 2, seed: 4 },
   { posisi: "VP IT & Digital", unit: "Holding & Supporting Co", jumlah: 2, seed: 7 },
@@ -518,7 +518,7 @@ export const successorFit: Record<string, SuccessorFit[]> = {
     },
     {
       nama: "Sari Wulandari",
-      jabatan: "Manajer Agronomi — PTPN V",
+      jabatan: "Manajer Agronomi — PTPN IV Regional 3",
       status: "Dalam Pengembangan",
       performance: "4,1",
       potential: "8,4",
@@ -550,7 +550,7 @@ export const successorFit: Record<string, SuccessorFit[]> = {
   "Kepala Kebun": [
     {
       nama: "Hendra Gunawan",
-      jabatan: "Asisten Kepala — PTPN V",
+      jabatan: "Asisten Kepala — PTPN IV Regional 3",
       status: "Siap Sekarang",
       performance: "4,4",
       potential: "8,2",
@@ -564,7 +564,7 @@ export const successorFit: Record<string, SuccessorFit[]> = {
     },
     {
       nama: "Yusuf Maulana",
-      jabatan: "Asisten Kepala — PTPN V",
+      jabatan: "Asisten Kepala — PTPN IV Regional 3",
       status: "Siap Sekarang",
       performance: "4,2",
       potential: "8,0",
@@ -617,7 +617,7 @@ export const knowledgeTransfer: KnowledgeTransferRow[] = [
   },
   {
     posisi: "Kepala Kebun",
-    unit: "PTPN V",
+    unit: "PTPN IV Regional 3",
     pemicu: "Promosi est. Q4 2026",
     dimensi: [91, 84, 76, 80],
     transisi: 83,

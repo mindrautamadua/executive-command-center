@@ -365,10 +365,10 @@ export const unitEffCols = ["Partisipasi", "Skill Gain", "Transfer", "Impact"];
 
 export const unitEffectiveness: UnitEffRow[] = [
   { unit: "PTPN I", nilai: [85, 78, 71, 65], index: 74.8, karyawan: 9820 },
-  { unit: "PTPN II", nilai: [82, 74, 69, 61], index: 71.5, karyawan: 8460 },
+  { unit: "PTPN I Regional 1", nilai: [82, 74, 69, 61], index: 71.5, karyawan: 8460 },
   { unit: "PTPN III (Persero)", nilai: [87, 82, 78, 70], index: 79.3, karyawan: 12340 },
   { unit: "PTPN IV", nilai: [79, 71, 62, 55], index: 66.8, karyawan: 10150 },
-  { unit: "PTPN V", nilai: [75, 68, 59, 51], index: 63.3, karyawan: 7630 },
+  { unit: "PTPN IV Regional 3", nilai: [75, 68, 59, 51], index: 63.3, karyawan: 7630 },
   { unit: "Holding & Support Co", nilai: [87, 80, 74, 68], index: 77.3, karyawan: 3210 },
 ];
 
@@ -419,7 +419,7 @@ export const lndInsight: LndInsight[] = [
     tone: "warning",
   },
   {
-    isi: "PTPN V terendah di partisipasi (75%) sekaligus effectiveness index (63,3) — akar masalahnya kualitas transfer, bukan sekadar awareness.",
+    isi: "PTPN IV Regional 3 terendah di partisipasi (75%) sekaligus effectiveness index (63,3) — akar masalahnya kualitas transfer, bukan sekadar awareness.",
     tone: "info",
   },
   {

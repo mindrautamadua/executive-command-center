@@ -141,7 +141,7 @@ export default function TalentAttributesPage() {
                   business: "4,0",
                   rata: "4,00",
                 }}
-                note="PTPN II terendah pada seluruh atribut kunci — konsisten dengan porsi Star terendah (25,2%)."
+                note="PTPN I Regional 1 terendah pada seluruh atribut kunci — konsisten dengan porsi Star terendah (25,2%)."
               />
             </div>
             <NotesPanel notes={attributeNotes} definitions={attributeDefinitions} />

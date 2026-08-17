@@ -1,5 +1,6 @@
 import {
   Home,
+  BookOpen,
   LineChart,
   CircleDollarSign,
   Users,
@@ -38,7 +39,10 @@ export interface NavSection {
  */
 export const NAV_SECTIONS: NavSection[] = [
   {
-    items: [{ label: "Overview", href: "/", icon: Home, ready: true }],
+    items: [
+      { label: "Overview", href: "/", icon: Home, ready: true },
+      { label: "Executive Guide", href: "/executive-guide", icon: BookOpen, ready: true },
+    ],
   },
   {
     title: "Kinerja Korporat",
@@ -92,7 +96,10 @@ export const NAV_SECTIONS: NavSection[] = [
  */
 export const CEO_NAV_SECTIONS: NavSection[] = [
   {
-    items: [{ label: "Overview", href: "/", icon: Home, ready: true }],
+    items: [
+      { label: "Overview", href: "/", icon: Home, ready: true },
+      { label: "Executive Guide", href: "/executive-guide", icon: BookOpen, ready: true },
+    ],
   },
   {
     title: "Mode CEO",

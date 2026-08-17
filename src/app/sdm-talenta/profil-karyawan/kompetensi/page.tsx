@@ -22,7 +22,7 @@ export default function ProfilKompetensiPage() {
         <SdmDetailHeader
           icon={<Puzzle size={19} strokeWidth={1.9} />}
           title="Semua Kompetensi — Rizky Putra"
-          subtitle="Peta 12 kompetensi hasil asesmen 2025 dibandingkan standar grade G7 dan profil jabatan target"
+          subtitle="Peta 12 kompetensi hasil asesmen 2025 dibandingkan standar Job Grade G7 dan profil jabatan target"
           stat="Rata-rata 4,5 / 5,0 · 9 dari 12 di atas standar · 0 gap kritis"
           breadcrumb="Profil Karyawan / Semua Kompetensi"
           backHref="/sdm-talenta/profil-karyawan"

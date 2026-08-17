@@ -30,10 +30,10 @@ export interface OrgRow {
 export const orgRows: OrgRow[] = [
   { name: "PTPN IV", headcount: 23512, pct: 33.5, netYtd: 612, units: 24, tetap: 17420, pkwt: 3180, bhl: 2412, laborCost: 1842.6, productivity: 18.4, turnover: 6.2, span: 7.4, color: PALETTE.green },
   { name: "PTPN III", headcount: 17642, pct: 25.1, netYtd: 389, units: 19, tetap: 13260, pkwt: 2210, bhl: 1810, laborCost: 1394.2, productivity: 17.1, turnover: 6.8, span: 7.1, color: PALETTE.blue },
-  { name: "PTPN II", headcount: 11982, pct: 17.1, netYtd: 224, units: 13, tetap: 8940, pkwt: 1560, bhl: 1224, laborCost: 918.4, productivity: 15.8, turnover: 7.4, span: 6.6, color: PALETTE.amber },
+  { name: "PTPN I Regional 1", headcount: 11982, pct: 17.1, netYtd: 224, units: 13, tetap: 8940, pkwt: 1560, bhl: 1224, laborCost: 918.4, productivity: 15.8, turnover: 7.4, span: 6.6, color: PALETTE.amber },
   { name: "PTPN I", headcount: 7654, pct: 10.9, netYtd: 178, units: 9, tetap: 5710, pkwt: 984, bhl: 812, laborCost: 601.3, productivity: 16.2, turnover: 7.9, span: 6.8, color: PALETTE.purple },
-  { name: "PTPN V", headcount: 4231, pct: 6.0, netYtd: 142, units: 6, tetap: 3180, pkwt: 542, bhl: 401, laborCost: 342.8, productivity: 19.2, turnover: 6.1, span: 7.9, color: PALETTE.slate },
-  { name: "PTPN VI", headcount: 2201, pct: 3.1, netYtd: 64, units: 4, tetap: 1684, pkwt: 214, bhl: 198, laborCost: 178.1, productivity: 14.6, turnover: 8.4, span: 6.2, color: "#c3ced9" },
+  { name: "PTPN IV Regional 3", headcount: 4231, pct: 6.0, netYtd: 142, units: 6, tetap: 3180, pkwt: 542, bhl: 401, laborCost: 342.8, productivity: 19.2, turnover: 6.1, span: 7.9, color: PALETTE.slate },
+  { name: "PTPN IV Regional 4", headcount: 2201, pct: 3.1, netYtd: 64, units: 4, tetap: 1684, pkwt: 214, bhl: 198, laborCost: 178.1, productivity: 14.6, turnover: 8.4, span: 6.2, color: "#c3ced9" },
   { name: "Lainnya", headcount: 920, pct: 1.3, netYtd: 32, units: 1, tetap: 752, pkwt: 108, bhl: 34, laborCost: 92.4, productivity: 0, turnover: 5.4, span: 5.8, color: "#dde5ec" },
 ];
 
@@ -49,24 +49,24 @@ export const orgTotals = orgRows.reduce(
 
 /** Tren headcount 12 bulan untuk 4 subholding terbesar. */
 export const orgTrend12 = [
-  { name: "Jun 25", "PTPN IV": 21180, "PTPN III": 16020, "PTPN II": 10940, "PTPN I": 6910 },
-  { name: "Jul 25", "PTPN IV": 21390, "PTPN III": 16180, "PTPN II": 11020, "PTPN I": 6960 },
-  { name: "Agu 25", "PTPN IV": 21560, "PTPN III": 16290, "PTPN II": 11080, "PTPN I": 7010 },
-  { name: "Sep 25", "PTPN IV": 21810, "PTPN III": 16420, "PTPN II": 11180, "PTPN I": 7080 },
-  { name: "Okt 25", "PTPN IV": 21980, "PTPN III": 16540, "PTPN II": 11240, "PTPN I": 7130 },
-  { name: "Nov 25", "PTPN IV": 22280, "PTPN III": 16780, "PTPN II": 11380, "PTPN I": 7210 },
-  { name: "Des 25", "PTPN IV": 22900, "PTPN III": 17253, "PTPN II": 11758, "PTPN I": 7476 },
-  { name: "Jan 26", "PTPN IV": 23010, "PTPN III": 17320, "PTPN II": 11810, "PTPN I": 7520 },
-  { name: "Feb 26", "PTPN IV": 23180, "PTPN III": 17420, "PTPN II": 11860, "PTPN I": 7560 },
-  { name: "Mar 26", "PTPN IV": 23280, "PTPN III": 17490, "PTPN II": 11900, "PTPN I": 7590 },
-  { name: "Apr 26", "PTPN IV": 23410, "PTPN III": 17570, "PTPN II": 11940, "PTPN I": 7620 },
-  { name: "Mei 26", "PTPN IV": 23512, "PTPN III": 17642, "PTPN II": 11982, "PTPN I": 7654 },
+  { name: "Jun 25", "PTPN IV": 21180, "PTPN III": 16020, "PTPN I Regional 1": 10940, "PTPN I": 6910 },
+  { name: "Jul 25", "PTPN IV": 21390, "PTPN III": 16180, "PTPN I Regional 1": 11020, "PTPN I": 6960 },
+  { name: "Agu 25", "PTPN IV": 21560, "PTPN III": 16290, "PTPN I Regional 1": 11080, "PTPN I": 7010 },
+  { name: "Sep 25", "PTPN IV": 21810, "PTPN III": 16420, "PTPN I Regional 1": 11180, "PTPN I": 7080 },
+  { name: "Okt 25", "PTPN IV": 21980, "PTPN III": 16540, "PTPN I Regional 1": 11240, "PTPN I": 7130 },
+  { name: "Nov 25", "PTPN IV": 22280, "PTPN III": 16780, "PTPN I Regional 1": 11380, "PTPN I": 7210 },
+  { name: "Des 25", "PTPN IV": 22900, "PTPN III": 17253, "PTPN I Regional 1": 11758, "PTPN I": 7476 },
+  { name: "Jan 26", "PTPN IV": 23010, "PTPN III": 17320, "PTPN I Regional 1": 11810, "PTPN I": 7520 },
+  { name: "Feb 26", "PTPN IV": 23180, "PTPN III": 17420, "PTPN I Regional 1": 11860, "PTPN I": 7560 },
+  { name: "Mar 26", "PTPN IV": 23280, "PTPN III": 17490, "PTPN I Regional 1": 11900, "PTPN I": 7590 },
+  { name: "Apr 26", "PTPN IV": 23410, "PTPN III": 17570, "PTPN I Regional 1": 11940, "PTPN I": 7620 },
+  { name: "Mei 26", "PTPN IV": 23512, "PTPN III": 17642, "PTPN I Regional 1": 11982, "PTPN I": 7654 },
 ];
 
 export const ORG_TREND_SERIES = [
   { key: "PTPN IV", color: PALETTE.green },
   { key: "PTPN III", color: PALETTE.blue },
-  { key: "PTPN II", color: PALETTE.amber },
+  { key: "PTPN I Regional 1", color: PALETTE.amber },
   { key: "PTPN I", color: PALETTE.purple },
 ];
 
@@ -91,7 +91,7 @@ export const orgNotes: DetailNote[] = [
     tone: "red",
   },
   {
-    title: "PTPN V paling produktif",
+    title: "PTPN IV Regional 3 paling produktif",
     detail: "19,2 ton TBS per pekerja per bulan dengan turnover terendah kedua (6,1%) — jadikan rujukan model operasi.",
     tone: "green",
   },

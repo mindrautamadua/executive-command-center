@@ -13,7 +13,8 @@ import {
 import { PersonAvatar } from "@/components/ui/PersonAvatar";
 import {
   FUNGSI_OPTIONS,
-  GRADE_OPTIONS,
+  JOB_GRADE_OPTIONS,
+  PERSON_GRADE_OPTIONS,
   LOKASI_OPTIONS,
   STATUS_OPTIONS,
   TALENT_OPTIONS,
@@ -28,7 +29,7 @@ const PAGE_SIZE = 10;
 /** Semua profil masih mengarah ke halaman spotlight (data profil tunggal). */
 const PROFIL_HREF = "/sdm-talenta/profil-karyawan";
 
-type SortKey = "nama" | "kinerja" | "masaKerja" | "grade";
+type SortKey = "nama" | "kinerja" | "masaKerja" | "personGrade" | "jobGrade";
 
 function Select({
   value,
@@ -63,7 +64,8 @@ export function DirektoriSearch() {
   const [unit, setUnit] = useState("");
   const [lokasi, setLokasi] = useState("");
   const [fungsi, setFungsi] = useState("");
-  const [grade, setGrade] = useState("");
+  const [personGrade, setPersonGrade] = useState("");
+  const [jobGrade, setJobGrade] = useState("");
   const [status, setStatus] = useState("");
   const [talent, setTalent] = useState("");
   const [sort, setSort] = useState<SortKey>("nama");
@@ -82,7 +84,8 @@ export function DirektoriSearch() {
       if (unit && k.unit !== unit) return false;
       if (lokasi && k.lokasi !== lokasi) return false;
       if (fungsi && k.fungsi !== fungsi) return false;
-      if (grade && k.grade !== grade) return false;
+      if (personGrade && k.personGrade !== personGrade) return false;
+      if (jobGrade && k.jobGrade !== jobGrade) return false;
       if (status && k.status !== status) return false;
       if (talent && k.talent !== talent) return false;
       return true;
@@ -91,10 +94,13 @@ export function DirektoriSearch() {
     return [...hasil].sort((a, b) => {
       if (sort === "kinerja") return b.kinerja - a.kinerja;
       if (sort === "masaKerja") return b.masaKerja - a.masaKerja;
-      if (sort === "grade") return b.grade.localeCompare(a.grade) || a.nama.localeCompare(b.nama);
+      if (sort === "personGrade")
+        return b.personGrade.localeCompare(a.personGrade) || a.nama.localeCompare(b.nama);
+      if (sort === "jobGrade")
+        return b.jobGrade.localeCompare(a.jobGrade) || a.nama.localeCompare(b.nama);
       return a.nama.localeCompare(b.nama);
     });
-  }, [query, unit, lokasi, fungsi, grade, status, talent, sort]);
+  }, [query, unit, lokasi, fungsi, personGrade, jobGrade, status, talent, sort]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const current = Math.min(page, totalPages);
@@ -113,7 +119,8 @@ export function DirektoriSearch() {
     setUnit("");
     setLokasi("");
     setFungsi("");
-    setGrade("");
+    setPersonGrade("");
+    setJobGrade("");
     setStatus("");
     setTalent("");
     setSort("nama");
@@ -155,7 +162,7 @@ export function DirektoriSearch() {
       </div>
 
       {/* filter lanjutan */}
-      <div className="mt-2 grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)] gap-2">
+      <div className="mt-2 grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)] gap-2">
         <Select
           value={fungsi}
           onChange={ubah(setFungsi)}
@@ -163,10 +170,16 @@ export function DirektoriSearch() {
           allLabel="Semua Fungsi"
         />
         <Select
-          value={grade}
-          onChange={ubah(setGrade)}
-          options={GRADE_OPTIONS}
-          allLabel="Semua Grade"
+          value={personGrade}
+          onChange={ubah(setPersonGrade)}
+          options={PERSON_GRADE_OPTIONS}
+          allLabel="Semua Person Grade"
+        />
+        <Select
+          value={jobGrade}
+          onChange={ubah(setJobGrade)}
+          options={JOB_GRADE_OPTIONS}
+          allLabel="Semua Job Grade"
         />
         <Select
           value={status}
@@ -188,13 +201,14 @@ export function DirektoriSearch() {
           <option value="nama">Urut: Nama (A–Z)</option>
           <option value="kinerja">Urut: Kinerja Tertinggi</option>
           <option value="masaKerja">Urut: Masa Kerja Terlama</option>
-          <option value="grade">Urut: Grade Tertinggi</option>
+          <option value="personGrade">Urut: Person Grade Tertinggi</option>
+          <option value="jobGrade">Urut: Job Grade Tertinggi</option>
         </select>
       </div>
 
       {/* tabel hasil */}
       <div className="scroll-thin mt-2.5 min-w-0 overflow-x-auto">
-        <table className="w-full min-w-[1080px] border-collapse">
+        <table className="w-full min-w-[1160px] border-collapse">
           <thead>
             <tr className="border-b border-[#eef2f6] text-ink-500">
               {[
@@ -204,7 +218,8 @@ export function DirektoriSearch() {
                 ["Fungsi", "left"],
                 ["Unit", "left"],
                 ["Lokasi Kerja", "left"],
-                ["Grade", "center"],
+                ["Person Grade", "center"],
+                ["Job Grade", "center"],
                 ["Status", "left"],
                 ["Masa Kerja", "right"],
                 ["Kinerja", "center"],
@@ -248,7 +263,10 @@ export function DirektoriSearch() {
                 <td className="whitespace-nowrap px-2 py-[7px] text-[9px] text-ink-500">{k.unit}</td>
                 <td className="whitespace-nowrap px-2 py-[7px] text-[9px] text-ink-500">{k.lokasi}</td>
                 <td className="px-2 py-[7px] text-center text-[9.5px] font-bold text-ink-900">
-                  {k.grade}
+                  {k.personGrade}
+                </td>
+                <td className="px-2 py-[7px] text-center text-[9.5px] font-bold text-ink-700">
+                  {k.jobGrade}
                 </td>
                 <td className="whitespace-nowrap px-2 py-[7px] text-[9px] text-ink-500">{k.status}</td>
                 <td className="whitespace-nowrap px-2 py-[7px] text-right text-[9px] text-ink-700">
@@ -278,7 +296,7 @@ export function DirektoriSearch() {
 
             {rows.length === 0 && (
               <tr>
-                <td colSpan={12} className="px-2 py-8 text-center">
+                <td colSpan={13} className="px-2 py-8 text-center">
                   <Users size={20} className="mx-auto text-ink-300" />
                   <div className="mt-2 text-[10px] font-semibold text-ink-700">
                     Tidak ada karyawan yang cocok

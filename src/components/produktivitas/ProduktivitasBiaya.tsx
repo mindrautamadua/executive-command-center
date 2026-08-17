@@ -140,7 +140,7 @@ export function ProduktivitasBiaya() {
         <Lightbulb size={13} className="mt-[1px] shrink-0 text-ptpn-green" />
         <p className="text-[9px] leading-[1.45] text-ink-700">
           STAR = produktif &amp; efisien (best practice) · COST WATCH = produktif tapi mahal ·
-          TURNAROUND = prioritas intervensi (PTPN II &amp; VI).
+          TURNAROUND = prioritas intervensi (PTPN I Regional 1 &amp; PTPN IV Regional 4).
         </p>
       </div>
     </div>

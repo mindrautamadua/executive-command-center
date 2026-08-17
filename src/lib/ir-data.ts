@@ -197,8 +197,8 @@ export interface StrikeRisk {
 export const strikeRisks: StrikeRisk[] = [
   { lokasi: "PTPN IV - Kebun Bah Jambi", risk: "Tinggi", isu: "Upah & Tunjangan", probability: "68%", window: "30–60 hr" },
   { lokasi: "PTPN III - PKS Sei Mangkei", risk: "Tinggi", isu: "Jam Kerja & Lembur", probability: "54%", window: "30–90 hr" },
-  { lokasi: "PTPN XII - Kebun Kalirejo", risk: "Sedang", isu: "Kesejahteraan", probability: "31%", window: "60–90 hr" },
-  { lokasi: "PTPN VII - Kebun Rejosari", risk: "Sedang", isu: "PKB", probability: "26%", window: ">90 hr" },
+  { lokasi: "PTPN I Regional 5 - Kebun Kalirejo", risk: "Sedang", isu: "Kesejahteraan", probability: "31%", window: "60–90 hr" },
+  { lokasi: "PTPN I Regional 7 - Kebun Rejosari", risk: "Sedang", isu: "PKB", probability: "26%", window: ">90 hr" },
 ];
 
 /* ── Sebaran kasus berdasarkan kategori ───────────────────────────── */
@@ -267,8 +267,8 @@ export const severityCases: SeverityCase[] = [
   { id: "IR-26-014", lokasi: "PTPN IV Bah Jambi", kategori: "Upah & Tunjangan", severity: "Kritis", umur: "42 hr", risiko: "Eskalasi mogok" },
   { id: "IR-26-019", lokasi: "PTPN III Sei Mangkei", kategori: "Jam Kerja & Lembur", severity: "Kritis", umur: "28 hr", risiko: "Eskalasi mogok" },
   { id: "IR-25-092", lokasi: "PTPN I Langsa", kategori: "PHK", severity: "Tinggi", umur: "104 hr", risiko: "Litigasi PHI" },
-  { id: "IR-26-008", lokasi: "PTPN VII Rejosari", kategori: "PKB", severity: "Tinggi", umur: "51 hr", risiko: "Deadlock negosiasi" },
-  { id: "IR-26-021", lokasi: "PTPN XII Kalirejo", kategori: "Kesejahteraan", severity: "Sedang", umur: "15 hr", risiko: "Grievance meluas" },
+  { id: "IR-26-008", lokasi: "PTPN I Regional 7 Rejosari", kategori: "PKB", severity: "Tinggi", umur: "51 hr", risiko: "Deadlock negosiasi" },
+  { id: "IR-26-021", lokasi: "PTPN I Regional 5 Kalirejo", kategori: "Kesejahteraan", severity: "Sedang", umur: "15 hr", risiko: "Grievance meluas" },
 ];
 
 /* ── Case Aging & efektivitas penyelesaian ────────────────────────── */
@@ -416,7 +416,7 @@ export const unionHealth: UnionHealthRow[] = [
 ];
 
 export const unionSentimentNote =
-  "Sentimen agregat 78/100 (+4 YTD) · memburuk di 2 regional (IV & VII) — isu upah & lembur";
+  "Sentimen agregat 78/100 (+4 YTD) · memburuk di 2 regional (PTPN IV Regional 2 & PTPN I Regional 7) — isu upah & lembur";
 
 /* ── Indeks & risk heatmap per region ─────────────────────────────── */
 
@@ -480,8 +480,8 @@ export interface BusinessImpactRow {
 export const businessImpact: BusinessImpactRow[] = [
   { lokasi: "PTPN IV - Kebun Bah Jambi", karyawan: "1.860", disrupsi: "3–4 hari", produksi: "2.900 ton TBS", eksposur: "Rp 21,4 M", risk: "Tinggi" },
   { lokasi: "PTPN III - PKS Sei Mangkei", karyawan: "1.240", disrupsi: "2–4 hari", produksi: "4.100 ton olah CPO", eksposur: "Rp 18,6 M", risk: "Tinggi" },
-  { lokasi: "PTPN XII - Kebun Kalirejo", karyawan: "640", disrupsi: "1–2 hari", produksi: "850 ton TBS", eksposur: "Rp 5,2 M", risk: "Sedang" },
-  { lokasi: "PTPN VII - Kebun Rejosari", karyawan: "478", disrupsi: "1 hari", produksi: "620 ton TBS", eksposur: "Rp 3,0 M", risk: "Sedang" },
+  { lokasi: "PTPN I Regional 5 - Kebun Kalirejo", karyawan: "640", disrupsi: "1–2 hari", produksi: "850 ton TBS", eksposur: "Rp 5,2 M", risk: "Sedang" },
+  { lokasi: "PTPN I Regional 7 - Kebun Rejosari", karyawan: "478", disrupsi: "1 hari", produksi: "620 ton TBS", eksposur: "Rp 3,0 M", risk: "Sedang" },
 ];
 
 export const businessImpactTotal = {

@@ -290,7 +290,7 @@ export const complianceIssues: ComplianceIssue[] = [
     name: "Kasus Fraud Pengadaan",
     status: "Kritis",
     desc: "3 kasus fraud aktif dalam investigasi internal",
-    units: "Unit terdampak: PTPN IV, PTPN V",
+    units: "Unit terdampak: PTPN IV, PTPN IV Regional 3",
     exposure: "Rp 2,6 M",
     due: "Due: Jul 2026",
     owner: "SPI / Komite Audit",
@@ -303,7 +303,7 @@ export const complianceIssues: ComplianceIssue[] = [
     name: "Kepatuhan Jam Kerja & Lembur",
     status: "Parsial",
     desc: "Pelanggaran batas jam lembur pada masa panen puncak",
-    units: "Unit terdampak: PTPN V, PTPN VI",
+    units: "Unit terdampak: PTPN IV Regional 3, PTPN IV Regional 4",
     exposure: "Rp 1,2 M",
     due: "Due: Okt 2026",
     owner: "Direktur SDM",
@@ -316,7 +316,7 @@ export const complianceIssues: ComplianceIssue[] = [
     name: "Refreshment Training Kode Etik",
     status: "Parsial",
     desc: "15,4% karyawan belum menyelesaikan training tahunan",
-    units: "Unit terdampak: PTPN I, PTPN II",
+    units: "Unit terdampak: PTPN I, PTPN I Regional 1",
     exposure: "Rp 0,6 M",
     due: "Due: Nov 2026",
     owner: "Head of Compliance",
@@ -366,11 +366,11 @@ export interface OrgComplianceRow {
 /** Eksposur per organisasi menjumlah ke total Rp 12,4 M. */
 export const orgComplianceHeatmap: OrgComplianceRow[] = [
   { name: "PTPN I", findings: 2, cases: 3, training: 86, score: 88, exposure: "0,9", trend: "flat", trendTone: "neutral", priority: "Rendah" },
-  { name: "PTPN II", findings: 3, cases: 4, training: 82, score: 84, exposure: "1,3", trend: "up", trendTone: "good", priority: "Sedang" },
+  { name: "PTPN I Regional 1", findings: 3, cases: 4, training: 82, score: 84, exposure: "1,3", trend: "up", trendTone: "good", priority: "Sedang" },
   { name: "PTPN III", findings: 4, cases: 3, training: 88, score: 86, exposure: "1,9", trend: "up", trendTone: "good", priority: "Sedang" },
   { name: "PTPN IV", findings: 5, cases: 7, training: 79, score: 76, exposure: "4,3", trend: "down", trendTone: "bad", priority: "Tinggi" },
-  { name: "PTPN V", findings: 3, cases: 5, training: 81, score: 82, exposure: "3,1", trend: "down", trendTone: "bad", priority: "Tinggi" },
-  { name: "PTPN VI", findings: 1, cases: 2, training: 90, score: 91, exposure: "0,9", trend: "up", trendTone: "good", priority: "Rendah" },
+  { name: "PTPN IV Regional 3", findings: 3, cases: 5, training: 81, score: 82, exposure: "3,1", trend: "down", trendTone: "bad", priority: "Tinggi" },
+  { name: "PTPN IV Regional 4", findings: 1, cases: 2, training: 90, score: 91, exposure: "0,9", trend: "up", trendTone: "good", priority: "Rendah" },
 ];
 
 /* ── 6. Breakdown Kasus Pelanggaran ───────────────────────────────── */

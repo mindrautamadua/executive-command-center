@@ -18,10 +18,10 @@ export const orgLowTotal = orgRiskHeatmap.reduce((a, o) => a + o.low, 0); // 5
 
 export const heatmapKpi: DetailKpi[] = [
   { label: "Overall Risk Score", value: "68", suffix: "/100", delta: "-4 pts", trend: "down", tone: "green", compare: "Risk appetite ≤ 50" },
-  { label: "Organisasi di Atas Appetite", value: "6", suffix: "/6", delta: "Tetap", trend: "flat", tone: "red", compare: "Skor terendah 54 (PTPN VI)" },
+  { label: "Organisasi di Atas Appetite", value: "6", suffix: "/6", delta: "Tetap", trend: "flat", tone: "red", compare: "Skor terendah 54 (PTPN IV Regional 4)" },
   { label: "Instans Risiko Tinggi", value: "11", share: "39,3%", delta: "-2", trend: "down", tone: "red", compare: "dari 28 instans risiko" },
   { label: "Skor Tertinggi", value: "76", delta: "+8 pts", trend: "up", tone: "red", compare: "PTPN IV — memburuk tercepat" },
-  { label: "Skor Terendah", value: "54", delta: "-3 pts", trend: "down", tone: "green", compare: "PTPN VI" },
+  { label: "Skor Terendah", value: "54", delta: "-3 pts", trend: "down", tone: "green", compare: "PTPN IV Regional 4" },
   { label: "Organisasi Memburuk", value: "3", suffix: "/6", delta: "+1", trend: "up", tone: "amber", compare: "Δ 3 bulan bertanda positif" },
 ];
 
@@ -58,10 +58,10 @@ export interface HeatmapDetailRow {
 export const heatmapRows: HeatmapDetailRow[] = [
   { org: "PTPN IV", high: 3, medium: 2, low: 0, total: 5, score: 76, trajectory: 8, drivers: "Turnover, Vacancy, Succession", karyawan: "3.184", exposure: "Rp 34,2 M", status: "Kritis" },
   { org: "PTPN III", high: 2, medium: 2, low: 1, total: 5, score: 71, trajectory: 5, drivers: "Turnover, Skill Gap", karyawan: "2.746", exposure: "Rp 28,7 M", status: "Kritis" },
-  { org: "PTPN V", high: 2, medium: 1, low: 1, total: 4, score: 65, trajectory: -4, drivers: "Vacancy, Beban Kerja", karyawan: "1.892", exposure: "Rp 18,4 M", status: "Waspada" },
+  { org: "PTPN IV Regional 3", high: 2, medium: 1, low: 1, total: 4, score: 65, trajectory: -4, drivers: "Vacancy, Beban Kerja", karyawan: "1.892", exposure: "Rp 18,4 M", status: "Waspada" },
   { org: "PTPN I", high: 2, medium: 2, low: 1, total: 5, score: 62, trajectory: 3, drivers: "Succession, Skill Gap", karyawan: "2.104", exposure: "Rp 21,6 M", status: "Waspada" },
-  { org: "PTPN II", high: 1, medium: 3, low: 1, total: 5, score: 58, trajectory: -2, drivers: "Leadership, Succession", karyawan: "1.638", exposure: "Rp 15,1 M", status: "Waspada" },
-  { org: "PTPN VI", high: 1, medium: 2, low: 1, total: 4, score: 54, trajectory: -3, drivers: "Engagement, Aging", karyawan: "1.278", exposure: "Rp 10,6 M", status: "Terkendali" },
+  { org: "PTPN I Regional 1", high: 1, medium: 3, low: 1, total: 5, score: 58, trajectory: -2, drivers: "Leadership, Succession", karyawan: "1.638", exposure: "Rp 15,1 M", status: "Waspada" },
+  { org: "PTPN IV Regional 4", high: 1, medium: 2, low: 1, total: 4, score: 54, trajectory: -3, drivers: "Engagement, Aging", karyawan: "1.278", exposure: "Rp 10,6 M", status: "Terkendali" },
 ];
 
 /** Komposisi instans risiko per organisasi untuk bar bertumpuk. */
@@ -76,7 +76,7 @@ export const heatmapNotes: DetailNote[] = [
   {
     title: "Tidak ada entitas di dalam appetite",
     detail:
-      "Seluruh enam organisasi berada di atas risk appetite 50, dengan skor terendah 54 pada PTPN VI. Toleransi grup perlu ditinjau atau mitigasi dipercepat.",
+      "Seluruh enam organisasi berada di atas risk appetite 50, dengan skor terendah 54 pada PTPN IV Regional 4. Toleransi grup perlu ditinjau atau mitigasi dipercepat.",
     tone: "red",
   },
   {
@@ -87,7 +87,7 @@ export const heatmapNotes: DetailNote[] = [
   },
   {
     title: "Tiga entitas mulai membaik",
-    detail: "PTPN V, PTPN VI, dan PTPN II mencatat trajektori negatif; keduanya menjalankan retention program lebih dulu sejak Q1 2026.",
+    detail: "PTPN IV Regional 3, PTPN IV Regional 4, dan PTPN I Regional 1 mencatat trajektori negatif; keduanya menjalankan retention program lebih dulu sejak Q1 2026.",
     tone: "green",
   },
 ];

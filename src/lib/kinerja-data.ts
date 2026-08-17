@@ -138,8 +138,8 @@ export const unitOrganisasi = [
   { nama: "PTPN IV Regional 1", score: "91,2", pct: 91.2 },
   { nama: "PTPN III (Persero)", score: "89,1", pct: 89.1 },
   { nama: "PTPN I Regional 3", score: "87,8", pct: 87.8 },
-  { nama: "PTPN V", score: "85,6", pct: 85.6 },
-  { nama: "PTPN II", score: "84,3", pct: 84.3 },
+  { nama: "PTPN IV Regional 3", score: "85,6", pct: 85.6 },
+  { nama: "PTPN I Regional 1", score: "84,3", pct: 84.3 },
   { nama: "PTPN IV Regional 2", score: "83,7", pct: 83.7 },
   { nama: "PTPN Holding", score: "82,1", pct: 82.1 },
   { nama: "PalmCo", score: "80,5", pct: 80.5 },
@@ -223,7 +223,7 @@ export const kinerjaTim = [
   },
   {
     tim: "Pengembangan Bisnis",
-    unit: "PTPN V",
+    unit: "PTPN IV Regional 3",
     score: "83,9",
     onTarget: "64%",
     high: "13%",
@@ -285,7 +285,7 @@ export interface KalibrasiRow {
 export const kalibrasiUnit: KalibrasiRow[] = [
   { unit: "PTPN IV Regional 1", pre: "92,7", post: "91,2", adj: "-1,5", arah: "turun" },
   { unit: "PTPN III (Persero)", pre: "89,4", post: "89,1", adj: "-0,3", arah: "turun" },
-  { unit: "PTPN V", pre: "85,0", post: "85,6", adj: "+0,6", arah: "naik" },
+  { unit: "PTPN IV Regional 3", pre: "85,0", post: "85,6", adj: "+0,6", arah: "naik" },
   { unit: "PTPN IV Regional 2", pre: "83,3", post: "83,7", adj: "+0,4", arah: "naik" },
   { unit: "Supporting Co", pre: "77,8", post: "78,6", adj: "+0,8", arah: "naik" },
 ];

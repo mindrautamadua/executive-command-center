@@ -10,7 +10,7 @@ export const metadata = {
 };
 
 const TIPE_TONE: Record<string, "green" | "amber" | "slate"> = {
-  "Kenaikan Grade": "green",
+  "Kenaikan Person Grade": "green",
   "Promosi Jabatan": "green",
   "Perubahan Status": "amber",
   "Perubahan Unit": "amber",

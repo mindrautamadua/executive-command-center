@@ -67,7 +67,7 @@ export default function ProfilRekomendasiPage() {
                   />
                 ),
               }))}
-              note="Gap dari asesmen skills gap 2025 (level saat ini vs level yang diharapkan grade target); IDP disetujui atasan langsung dan HR Regional 1."
+              note="Gap dari asesmen skills gap 2025 (level saat ini vs level yang diharapkan job grade target); IDP disetujui atasan langsung dan HR Regional 1."
             />
             <div className="flex flex-col gap-3">
               <BarListCard

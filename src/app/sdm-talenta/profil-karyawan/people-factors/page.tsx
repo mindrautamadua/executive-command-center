@@ -42,7 +42,7 @@ export default function PeopleFactorsPage() {
         <SdmDetailHeader
           icon={<Sigma size={19} strokeWidth={1.9} />}
           title="People Factors — Rizky Putra"
-          subtitle="Rincian seluruh derivative score People Math per dimensi, dibandingkan rata-rata kohort grade G7"
+          subtitle="Rincian seluruh derivative score People Math per dimensi, dibandingkan rata-rata kohort Person Grade G7"
           stat="People Math Score 87/100 · 7 faktor kekuatan · persentil P90"
           breadcrumb="Profil Karyawan / People Factors"
           backHref="/sdm-talenta/profil-karyawan"
