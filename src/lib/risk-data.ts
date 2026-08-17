@@ -96,6 +96,7 @@ export const riskDataTrust = {
     { label: "Consistency", value: "91%" },
     { label: "Reconciliation", value: "90%" },
     { label: "Certification", value: "85%" },
+    { label: "Lineage", value: "82%" },
   ],
 };
 

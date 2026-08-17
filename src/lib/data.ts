@@ -54,6 +54,7 @@ export const coreDataTrust = {
     { label: "Consistency", value: "97%" },
     { label: "Reconciliation", value: "97%" },
     { label: "Certification", value: "94%" },
+    { label: "Lineage", value: "93%" },
   ],
 };
 
@@ -431,7 +432,10 @@ const potensiLabaRpM = potensiPendapatanRpM * marjinLabaBersih;
 
 export const aiInsight = {
   judul: "Menutup gap produksi Regional 4 menambah laba bersih",
-  dampakLabel: "Potensi laba bersih",
+  /** "Disetahunkan" eksplisit: alert Regional 4 memakai basis YTD 5 bulan
+   *  (Rp 374 M revenue · Rp 104 M EBITDA), angka ini proyeksi 12 bulan —
+   *  tanpa label ini keduanya terbaca saling bertentangan. */
+  dampakLabel: "Potensi laba bersih (disetahunkan)",
   dampak: rpM(potensiLabaRpM),
   /**
    * Keyakinan masih ditetapkan manual — belum ada skor dari model. Ditampilkan

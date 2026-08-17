@@ -104,18 +104,39 @@ export interface CeoValueDriver {
 }
 
 /**
- * Dekomposisi value creation YTD Rp 1,86 T. Bruto driver Rp 2,31 T dikurangi
- * leakage Rp 0,45 T = netto baseline. Efisiensi biaya + yield = 59% netto,
- * selaras stgInsights; benefit digital Rp 0,13 T selaras strategyIntelligence.
+ * Dekomposisi value creation YTD: bruto driver Rp 2,31 T − leakage Rp 0,45 T
+ * = netto Rp 1,86 T (baseline). Efisiensi biaya + yield = 59% netto, selaras
+ * stgInsights; digital Rp 0,13 T selaras strategyIntelligence; harga & bauran
+ * = ASP CPO YTD di atas asumsi RKAP (12.482 vs 12.100).
  */
 export const ceoValueDrivers: CeoValueDriver[] = [
   { label: "Efisiensi biaya", rpT: 0.66, kind: "driver" },
   { label: "Yield & produktivitas", rpT: 0.44, kind: "driver" },
   { label: "Hilirisasi", rpT: 0.72, kind: "driver" },
+  { label: "Harga & bauran penjualan", rpT: 0.36, kind: "driver" },
   { label: "Digital & lainnya", rpT: 0.13, kind: "driver" },
   { label: "Gap produksi Regional 4", rpT: -0.37, kind: "leakage" },
   { label: "Eksposur harga komoditas", rpT: -0.08, kind: "leakage" },
 ];
+
+/** Jumlah bruto/leakage dihitung dari daftar — caption tidak boleh hardcode. */
+export const ceoValueBrutoRpT = ceoValueDrivers
+  .filter((d) => d.kind === "driver")
+  .reduce((s, d) => s + d.rpT, 0);
+export const ceoValueLeakageRpT = ceoValueDrivers
+  .filter((d) => d.kind === "leakage")
+  .reduce((s, d) => s + d.rpT, 0);
+const ceoValueNettoRpT = ceoValueBrutoRpT + ceoValueLeakageRpT;
+
+/**
+ * Guard rekonsiliasi: netto dekomposisi wajib sama dengan angka baseline yang
+ * jadi headline. Selisih > pembulatan = build gagal, bukan angka bohong tampil.
+ */
+if (Math.abs(ceoValueNettoRpT - STRATEGI.valueCreationYtdRpT) > 0.005) {
+  throw new Error(
+    `Dekomposisi value creation tidak reconcile: netto ${ceoValueNettoRpT.toFixed(2)} vs baseline ${STRATEGI.valueCreationYtdRpT}`,
+  );
+}
 
 export const ceoValueSummary = {
   ytdRpT: STRATEGI.valueCreationYtdRpT,

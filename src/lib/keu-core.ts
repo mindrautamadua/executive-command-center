@@ -24,6 +24,7 @@ export const keuDataTrust: DimensionDataTrust = {
     { label: "Consistency", value: "95%" },
     { label: "Reconciliation", value: "98%" },
     { label: "Certification", value: "93%" },
+    { label: "Lineage", value: "94%" },
   ],
 };
 

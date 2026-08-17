@@ -10,7 +10,8 @@
 
 /** Rekapitulasi sertifikasi seluruh katalog; total harus sama dengan jumlah ketiganya. */
 export const ddGovernance = {
-  certified: 118,
+  // +4 metrik korporat (Value Creation, Pendapatan, EBITDA, ASP CPO).
+  certified: 122,
   provisional: 7,
   deprecated: 3,
 } as const;
@@ -30,6 +31,7 @@ export interface DdCategory {
 }
 
 export const ddCategories: DdCategory[] = [
+  { name: "Korporat & Nilai", count: 4, color: "#1b3a6b" },
   { name: "Demografi & Headcount", count: 24, color: "#1a9c5b" },
   { name: "Produktivitas", count: 19, color: "#3b7ded" },
   { name: "Biaya SDM", count: 16, color: "#f5a524" },
@@ -240,6 +242,68 @@ export const ddEntries: DdEntry[] = [
     owner: "Industrial Relations",
     status: "Provisional",
     trust: 88,
+  },
+  /* — Metrik korporat lintas dimensi: setiap angka yang mengendalikan
+       keputusan Direksi wajib punya definisi + formula + rekonsiliasi. — */
+  {
+    term: "Value Creation YTD",
+    category: "Korporat & Nilai",
+    definition:
+      "Nilai tambah kumulatif inisiatif strategis + kinerja operasional YTD, netto setelah leakage",
+    formula:
+      "Σ driver (efisiensi, yield, hilirisasi, harga & bauran, digital) − Σ leakage (gap produksi, eksposur harga) = Rp 1,86 T; guard rekonsiliasi otomatis di ceo-data",
+    source: "PMO Tracker + SAP FI-CO",
+    frequency: "Bulanan",
+    owner: "PMO Holding",
+    status: "Certified",
+    trust: 92,
+    certifiedBy: "Komite Value Creation",
+    certifiedAt: "30 Jun 2026",
+    validation: "Dekomposisi driver−leakage rekonsil ke headline; selisih >Rp 5 M memblok rilis",
+  },
+  {
+    term: "Pendapatan Konsolidasi",
+    category: "Korporat & Nilai",
+    definition: "Pendapatan konsolidasi grup YTD setelah eliminasi antar-entitas",
+    formula: "Σ pendapatan subholding − eliminasi intercompany (group-baseline: Rp 24,6 T)",
+    source: "SAP S/4HANA Konsolidasi",
+    frequency: "Bulanan",
+    owner: "Direktorat Keuangan",
+    status: "Certified",
+    trust: 98,
+    certifiedBy: "Komite Audit",
+    certifiedAt: "30 Jun 2026",
+    validation: "Rekonsiliasi GL vs laporan konsolidasi reviu KAP · selisih nihil",
+  },
+  {
+    term: "EBITDA",
+    category: "Korporat & Nilai",
+    definition: "Laba sebelum bunga, pajak, depresiasi & amortisasi, YTD konsolidasi",
+    formula: "Laba usaha + depresiasi + amortisasi (group-baseline: Rp 6,82 T · marjin 27,7%)",
+    source: "SAP FI-CO",
+    frequency: "Bulanan",
+    owner: "Direktorat Keuangan",
+    status: "Certified",
+    trust: 97,
+    certifiedBy: "Komite Audit",
+    certifiedAt: "30 Jun 2026",
+    validation: "Marjin blended = rata-rata tertimbang marjin segmen (KOMPOSISI_SEGMEN)",
+  },
+  {
+    term: "ASP CPO",
+    category: "Korporat & Nilai",
+    definition:
+      "Harga jual rata-rata CPO YTD tertimbang 5 regional — BUKAN harga spot pasar",
+    formula:
+      "Rata-rata HARGA_REGIONAL_RP_KG lintas regional penghasil CPO = Rp 12.482/kg; spot KPBN dilaporkan terpisah (Rp 13.680)",
+    source: "SAP SD + KPBN",
+    frequency: "Harian",
+    owner: "Direktorat Pemasaran",
+    status: "Certified",
+    trust: 96,
+    certifiedBy: "Komite Pemasaran",
+    certifiedAt: "30 Jun 2026",
+    validation: "ASP grup dihitung dari registri harga regional — regional tak bisa melebihi rata-ratanya sendiri",
   },
 ];
 

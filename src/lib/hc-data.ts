@@ -59,6 +59,7 @@ export const dataTrust: DimensionDataTrust = {
     { label: "Consistency", value: "97%" },
     { label: "Reconciliation", value: "98%" },
     { label: "Certification", value: "95%" },
+    { label: "Lineage", value: "96%" },
   ],
 };
 

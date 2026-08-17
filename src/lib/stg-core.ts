@@ -26,6 +26,7 @@ export const stgDataTrust: DimensionDataTrust = {
     { label: "Consistency", value: "94%" },
     { label: "Reconciliation", value: "92%" },
     { label: "Certification", value: "88%" },
+    { label: "Lineage", value: "86%" },
   ],
 };
 

@@ -84,8 +84,12 @@ export function AiInsight() {
           {/* Jembatan ekonomi: dari volume sampai laba bersih, baris per baris. */}
           <div className="mt-1.5 border-t border-[#d5ece7] pt-1">
             <div className="text-[8px] font-extrabold uppercase tracking-[0.05em] text-[#0e8f7e]">
-              Jembatan Ekonomi
+              Jembatan Ekonomi (Basis Disetahunkan)
             </div>
+            <p className="mt-[2px] text-[8px] leading-[1.35] text-ink-400">
+              Alert Regional 4 memakai basis YTD 5 bulan (Rp 374 M revenue · Rp 104 M EBITDA);
+              jembatan ini menyetahunkan gap yang sama.
+            </p>
             <div className="mt-[3px] space-y-[2px]">
               {aiInsightBridge.map((b) => (
                 <div key={b.label} className="flex items-center justify-between gap-2">

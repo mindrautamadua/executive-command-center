@@ -86,7 +86,7 @@ export function DataTrustStrip({ data = dataTrust }: { data?: typeof dataTrust }
       {/* Quality bisa di-hover untuk rincian dimensi kualitas data. */}
       <div className="group relative flex cursor-help items-center gap-1.5">
         <ShieldCheck size={12} strokeWidth={1.9} className="shrink-0 text-ink-400" />
-        <span className="text-[8.5px] text-ink-500">Quality</span>
+        <span className="text-[8.5px] text-ink-500">Trust</span>
         <span className="text-[9.5px] font-bold text-ink-900 underline decoration-dotted decoration-[#c6cfd8] underline-offset-2">
           {data.quality}
         </span>

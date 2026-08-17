@@ -18,10 +18,10 @@ Pola umum yang berulang di hampir semua halaman:
 
 Urutan seksi: Data Trust → CEO Morning Brief → "Key Strategic KPI" → "Keputusan & Penciptaan Nilai" (kolom utama: Value Creation + Enterprise Risk-to-Value; rail kanan: Antrian Keputusan CEO) → "Operasi & Kinerja Regional" (konten lama, tidak berubah).
 
-- **Data Trust** — strip indikator kepercayaan data berlabel domain ("Data Trust · Korporat"; halaman lain: Strategi/Keuangan/Risiko/Human Capital dengan skor & rincian quality per domain); pill navy "Data Bisnis Per <tanggal>" dominan di posisi pertama, Refresh Sistem sekunder; popover memuat 4 lapisan waktu (data bisnis as-of, sinkronisasi sistem, pasar & intelijen live, model forecast run); rincian quality bergelar "Data Trust Index — <domain>" dengan 6 komponen (Completeness/Accuracy/Timeliness/Consistency/Reconciliation/Certification) per domain.
+- **Data Trust** — strip indikator kepercayaan data berlabel domain ("Data Trust · Korporat"; halaman lain: Strategi/Keuangan/Risiko/Human Capital dengan skor & rincian quality per domain); pill navy "Data Bisnis Per <tanggal>" dominan di posisi pertama, Refresh Sistem sekunder; popover memuat 4 lapisan waktu (data bisnis as-of, sinkronisasi sistem, pasar & intelijen live, model forecast run); rincian quality bergelar "Data Trust Index — <domain>" dengan 7 komponen (Completeness/Accuracy/Timeliness/Consistency/Reconciliation/Certification/Lineage) per domain; label strip "Trust".
 - **CEO Morning Brief** — band full-width: lampu status 5 area (Keuangan/Operasi/Strategi/SDM/Risiko) dengan micro-note, "3 Hal yang Berubah", "3 Keputusan Diperlukan" (sumber sama dengan Strategy Decision Center), dan satu hal yang dipantau; tanggal berlabel "Brief terakhir · <hari, tanggal>" agar tidak terbaca sebagai brief hari ini.
 - **Key Strategic KPI (KPI Strip)** — 7 kartu KPI korporat (Pendapatan Konsolidasi, EBITDA, Laba Bersih, ROA, dll.) dengan sparkline + delta vs RKAP.
-- **Value Creation** — headline Rp 1,86 T / target FY Rp 4,2 T (44%), mini area chart realisasi vs jalur target, dan dekomposisi driver (hijau) vs leakage (merah) berbentuk bar list.
+- **Value Creation** — headline Rp 1,86 T / target FY Rp 4,2 T (44%), mini area chart realisasi vs jalur target, dan dekomposisi 5 driver (hijau, termasuk Harga & bauran penjualan) vs 2 leakage (merah); caption "Bruto − leakage = netto" dihitung dari daftar driver dan guard rekonsiliasi di ceo-data memblok build bila netto ≠ headline baseline.
 - **Enterprise Risk-to-Value** — top 5 risiko enterprise dikonversi ke eksposur rupiah; tiap baris membawa likelihood, pemilik, dan tindakan.
 - **Antrian Keputusan CEO** — rail kanan seksi Keputusan & Penciptaan Nilai; versi ringkas Strategy Decision Center (judul + pill eksposur + badge overdue + satu baris keputusan) dengan tautan ke `/strategi-kinerja/keputusan-bod`; tiap keputusan punya baris aksi lifecycle (Approve/Reject/Delegasi/Analisis/Tunda) yang tercatat ke decision log lokal dengan stempel waktu (komponen shared `DecisionActions`, juga terpasang di Strategy & Risk BOD Decision Center).
 - **Sebaran Operasi Grup** — peta Indonesia interaktif dengan pewarnaan choropleth Pendapatan YTD per regional.
@@ -37,7 +37,7 @@ Urutan seksi: Data Trust → CEO Morning Brief → "Key Strategic KPI" → "Kepu
 - **Alert & Notifikasi Strategis** — rail kanan, daftar alert lintas fungsi berjenjang severitas.
 - **Inisiatif Strategis** — daftar inisiatif korporat + status progres.
 - **External Signals** — sinyal eksternal (Regulasi/Pasar/Iklim/Korporat) dengan chip kategori, angka dampak, dan baris implikasi "Artinya bagi PTPN: …" per item.
-- **AI Insight / Dasar Perhitungan** — panel insight AI naratif dengan toggle penjelasan basis perhitungan; view rincian memuat "Jembatan Ekonomi" (volume → pendapatan → EBITDA → pajak → laba bersih), blok Asumsi & Bukti, Sensitivitas & Alternatif (±10 rb ton, alternatif utilisasi PKS, reversibility), chip Owner/Tenggat/Status (masuk siklus aksi), blok Skenario (penuh/50%/tanpa intervensi), dan keyakinan berangka (72%).
+- **AI Insight / Dasar Perhitungan** — panel insight AI naratif dengan toggle penjelasan basis perhitungan; view rincian memuat "Jembatan Ekonomi (Basis Disetahunkan)" dengan catatan pembeda vs alert YTD 5 bulan (volume → pendapatan → EBITDA → pajak → laba bersih; label dampak "disetahunkan"), blok Asumsi & Bukti, Sensitivitas & Alternatif (±10 rb ton, alternatif utilisasi PKS, reversibility), chip Owner/Tenggat/Status (masuk siklus aksi), blok Skenario (penuh/50%/tanpa intervensi), dan keyakinan berangka (72%).
 
 ---
 
@@ -1866,6 +1866,7 @@ Semua halaman diawali Data Trust Strip dan diakhiri card Insight & Rekomendasi (
 ## `/data-dictionary`
 - **Header Data Dictionary**.
 - **Statistik Kamus Data (4 kartu)** — jumlah istilah, certified, trust index, terakhir diperbarui.
+- **Kategori "Korporat & Nilai"** — 4 metrik korporat lintas dimensi masuk kamus: Value Creation YTD (formula driver−leakage + guard rekonsiliasi), Pendapatan Konsolidasi, EBITDA, ASP CPO (eksplisit "bukan harga spot"; spot KPBN dilaporkan terpisah) — semuanya dengan certifier, sign-off, dan catatan validasi.
 - **Katalog Istilah & Metrik** — tabel katalog istilah/metrik dengan badge status Certified; entri Certified membawa mekanisme sertifikasi (certifier, tanggal sign-off, catatan validasi/rekonsiliasi) yang juga tampil di popover ⓘ MetricInfo.
 - **Kategori Metrik** — daftar kategori metrik di rail kanan + strip catatan.
 

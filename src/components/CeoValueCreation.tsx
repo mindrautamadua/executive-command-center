@@ -2,7 +2,12 @@
 
 import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis } from "recharts";
 import { valueCreationTrend } from "@/lib/stg-data";
-import { ceoValueDrivers, ceoValueSummary } from "@/lib/ceo-data";
+import {
+  ceoValueBrutoRpT,
+  ceoValueDrivers,
+  ceoValueLeakageRpT,
+  ceoValueSummary,
+} from "@/lib/ceo-data";
 import { CHART_AXIS, CHART_TOOLTIP_STYLE, PALETTE } from "@/lib/chart-palette";
 import { SectionHead } from "@/components/hc/SectionHead";
 
@@ -106,8 +111,12 @@ export function CeoValueCreation() {
         })}
       </div>
 
+      {/* Caption dihitung dari daftar driver — tidak mungkin beda dengan barnya. */}
       <p className="mt-1.5 truncate text-[8px] text-ink-400">
-        Driver bruto − leakage = netto YTD; efisiensi biaya &amp; yield menyumbang 59% netto.
+        Bruto Rp {ceoValueBrutoRpT.toLocaleString("id-ID", { minimumFractionDigits: 2 })} T −
+        leakage Rp {Math.abs(ceoValueLeakageRpT).toLocaleString("id-ID", { minimumFractionDigits: 2 })} T
+        = netto Rp {ceoValueSummary.ytdRpT.toLocaleString("id-ID", { minimumFractionDigits: 2 })} T;
+        efisiensi &amp; yield 59% netto.
       </p>
     </div>
   );
