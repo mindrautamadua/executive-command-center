@@ -31,9 +31,39 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 }
 
 /**
+ * Pita layer kognitif: menjawab "apa yang harus saya lihat dalam 30 detik
+ * pertama?" secara eksplisit. Tiga layer — ACT (butuh keputusan/perhatian),
+ * UNDERSTAND (mengapa angka bergerak), EXPLORE (intelijen mendalam) — supaya
+ * kekayaan informasi homepage tidak berubah menjadi cognitive load.
+ */
+function LayerBand({
+  n,
+  code,
+  question,
+}: {
+  n: number;
+  code: string;
+  question: string;
+}) {
+  return (
+    <div className="mb-2 mt-4 flex items-center gap-2">
+      <span className="rounded bg-[#1b3a6b] px-1.5 py-[2px] text-[8px] font-extrabold tracking-[0.06em] text-white">
+        LAYER {n}
+      </span>
+      <h2 className="text-[10px] font-extrabold uppercase tracking-[0.05em] text-ink-900">
+        {code}
+      </h2>
+      <span className="text-[9px] italic text-ink-400">{question}</span>
+      <span className="h-px flex-1 bg-[#e3e9ef]" />
+    </div>
+  );
+}
+
+/**
  * Dashboard utama, mengikuti kerangka halaman SDM & Talenta (HC ECC):
  * DataTrustStrip di atas, kepala seksi kecil, kolom utama + rail kanan 330px,
- * dan entrance anim-rise berjenjang per kartu.
+ * dan entrance anim-rise berjenjang per kartu. Konten disusun dalam tiga layer
+ * kognitif (ACT → UNDERSTAND → EXPLORE) via LayerBand.
  */
 export default function Page() {
   return (
@@ -41,10 +71,8 @@ export default function Page() {
       <div className="px-5 pb-5">
         <DataTrustStrip data={coreDataTrust} />
 
+        <LayerBand n={1} code="Act" question="Apa yang butuh perhatian & keputusan saya sekarang?" />
         <CeoMorningBrief />
-
-        <SectionLabel>Key Strategic KPI</SectionLabel>
-        <KpiStrip />
 
         <SectionLabel>Keputusan &amp; Penciptaan Nilai</SectionLabel>
         <div className="grid grid-cols-1 items-stretch gap-3 xl:grid-cols-[minmax(0,1fr)_330px]">
@@ -60,18 +88,21 @@ export default function Page() {
           </div>
         </div>
 
-        <SectionLabel>Operasi &amp; Kinerja Regional</SectionLabel>
+        <LayerBand n={2} code="Understand" question="Mengapa angka bergerak?" />
+        <SectionLabel>Key Strategic KPI</SectionLabel>
+        <KpiStrip />
+        <div
+          className="anim-rise mt-3 grid grid-cols-1 items-stretch gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,58fr)_minmax(0,42fr)]"
+          style={{ "--d": "60ms" } as React.CSSProperties}
+        >
+          <IndonesiaMap />
+          <KinerjaRegional />
+        </div>
+
+        <LayerBand n={3} code="Explore" question="Intelijen mendalam per domain." />
         <div className="grid grid-cols-1 items-start gap-3 xl:grid-cols-[minmax(0,1fr)_330px]">
           {/* kolom utama */}
           <div className="flex min-w-0 flex-col gap-3">
-            <div
-              className="anim-rise grid grid-cols-1 items-stretch gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,58fr)_minmax(0,42fr)]"
-              style={{ "--d": "60ms" } as React.CSSProperties}
-            >
-              <IndonesiaMap />
-              <KinerjaRegional />
-            </div>
-
             <div
               className="anim-rise grid grid-cols-1 items-stretch gap-3 md:grid-cols-2 xl:grid-cols-3"
               style={{ "--d": "120ms" } as React.CSSProperties}

@@ -1,5 +1,6 @@
 import { Activity, Database, Gauge, ShieldCheck } from "lucide-react";
 import { dataTrust } from "@/lib/hc-data";
+import { STEMPEL_DATA } from "@/lib/group-baseline";
 import { dataQualityBreakdown } from "@/lib/profil-data";
 
 function Metric({
@@ -41,7 +42,7 @@ export function DataTrustStrip({ data = dataTrust }: { data?: typeof dataTrust }
           {data.asOf}
         </span>
         <div className="invisible absolute left-0 top-full z-30 mt-1.5 w-[248px] rounded-xl border border-[#e3e9ef] bg-white p-3 opacity-0 shadow-cardHover transition-opacity duration-150 group-hover:visible group-hover:opacity-100">
-          {/* Empat lapisan waktu: historis, sistem, pasar live, dan model forecast. */}
+          {/* Lapisan waktu: historis, sistem, pasar tersinkron, sinyal eksternal, model forecast. */}
           <div className="space-y-1.5 text-[9px]">
             <div className="flex justify-between gap-2">
               <span className="text-ink-500">Data bisnis (as-of)</span>
@@ -52,12 +53,16 @@ export function DataTrustStrip({ data = dataTrust }: { data?: typeof dataTrust }
               <span className="font-bold text-ink-900">{data.lastRefresh}</span>
             </div>
             <div className="flex justify-between gap-2">
-              <span className="text-ink-500">Pasar &amp; intelijen (live)</span>
-              <span className="font-bold text-ink-900">s.d. 15 Agu 2026</span>
+              <span className="text-ink-500">Pasar tersinkron (Market Pulse)</span>
+              <span className="font-bold text-ink-900">{STEMPEL_DATA.pasarSinkron}</span>
+            </div>
+            <div className="flex justify-between gap-2">
+              <span className="text-ink-500">Sinyal eksternal terbaru</span>
+              <span className="font-bold text-ink-900">{STEMPEL_DATA.sinyalTerbaru}</span>
             </div>
             <div className="flex justify-between gap-2">
               <span className="text-ink-500">Model forecast (run)</span>
-              <span className="font-bold text-ink-900">13 Agu 2026</span>
+              <span className="font-bold text-ink-900">{STEMPEL_DATA.forecastRun}</span>
             </div>
             <div className="flex justify-between gap-2">
               <span className="text-ink-500">Source</span>

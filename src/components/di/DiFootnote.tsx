@@ -22,7 +22,7 @@ export function DiFootnote() {
         <span className="mx-1.5 text-ink-300">•</span>
         Survei Inklusi: <span className="font-bold text-ink-700">41.238 responden (Mei 2026)</span>
         <span className="mx-1.5 text-ink-300">•</span>
-        Data Quality: <span className="font-bold text-ink-700">96,1%</span>
+        Data Trust: <span className="font-bold text-ink-700">96,1%</span>
       </p>
     </div>
   );

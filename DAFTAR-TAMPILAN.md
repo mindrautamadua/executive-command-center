@@ -16,9 +16,9 @@ Pola umum yang berulang di hampir semua halaman:
 
 # 1. Dashboard Utama (`/`)
 
-Urutan seksi: Data Trust → CEO Morning Brief → "Key Strategic KPI" → "Keputusan & Penciptaan Nilai" (kolom utama: Value Creation + Enterprise Risk-to-Value; rail kanan: Antrian Keputusan CEO) → "Operasi & Kinerja Regional" (konten lama, tidak berubah).
+Urutan seksi (tiga layer kognitif via pita **LayerBand** — badge navy "LAYER n" + nama + pertanyaan pemandu): Data Trust → **LAYER 1 · ACT** ("Apa yang butuh perhatian & keputusan saya sekarang?"): CEO Morning Brief + "Keputusan & Penciptaan Nilai" (kolom utama: Value Creation + Enterprise Risk-to-Value; rail kanan: Antrian Keputusan CEO) → **LAYER 2 · UNDERSTAND** ("Mengapa angka bergerak?"): Key Strategic KPI + Sebaran Operasi Grup + Kinerja Regional (full-width) → **LAYER 3 · EXPLORE** (intelijen mendalam per domain): kartu operasi/keuangan/produksi/forecast + rail kanan (Alert, Inisiatif, External Signals, AI Insight).
 
-- **Data Trust** — strip indikator kepercayaan data berlabel domain ("Data Trust · Korporat"; halaman lain: Strategi/Keuangan/Risiko/Human Capital dengan skor & rincian quality per domain); pill navy "Data Bisnis Per <tanggal>" dominan di posisi pertama, Refresh Sistem sekunder; popover memuat 4 lapisan waktu (data bisnis as-of, sinkronisasi sistem, pasar & intelijen live, model forecast run); rincian quality bergelar "Data Trust Index — <domain>" dengan 7 komponen (Completeness/Accuracy/Timeliness/Consistency/Reconciliation/Certification/Lineage) per domain; label strip "Trust"; status kanan diturunkan dari komponen terendah — min ≥85% = "Healthy" (hijau), di bawahnya = "Governance Attention" (amber, mis. domain Risiko dengan Lineage 82%).
+- **Data Trust** — strip indikator kepercayaan data berlabel domain ("Data Trust · Korporat"; halaman lain: Strategi/Keuangan/Risiko/Human Capital dengan skor & rincian quality per domain); pill navy "Data Bisnis Per <tanggal>" dominan di posisi pertama, Refresh Sistem sekunder; popover memuat 5 lapisan waktu (data bisnis as-of, sinkronisasi sistem, pasar tersinkron/Market Pulse, sinyal eksternal terbaru, model forecast run — stempel terpusat di `STEMPEL_DATA`); rincian quality bergelar "Data Trust Index — <domain>" dengan 7 komponen (Completeness/Accuracy/Timeliness/Consistency/Reconciliation/Certification/Lineage) per domain; label strip "Trust"; status kanan diturunkan dari komponen terendah — min ≥85% = "Healthy" (hijau), di bawahnya = "Governance Attention" (amber, mis. domain Risiko dengan Lineage 82%).
 - **CEO Morning Brief** — band full-width: lampu status 5 area (Keuangan/Operasi/Strategi/SDM/Risiko) dengan micro-note, "3 Hal yang Berubah", "3 Keputusan Diperlukan" (sumber sama dengan Strategy Decision Center), dan satu hal yang dipantau; tanggal berlabel "Brief terakhir · <hari, tanggal>" agar tidak terbaca sebagai brief hari ini.
 - **Key Strategic KPI (KPI Strip)** — 7 kartu KPI korporat (Pendapatan Konsolidasi, EBITDA, Laba Bersih, ROA, dll.) dengan sparkline + delta vs RKAP.
 - **Value Creation** — headline Rp 1,86 T / target FY Rp 4,2 T (44%), mini area chart realisasi vs jalur target, dan dekomposisi 5 driver (hijau, termasuk Harga & bauran penjualan) vs 2 leakage (merah); caption "Bruto − leakage = netto" dihitung dari daftar driver dan guard rekonsiliasi di ceo-data memblok build bila netto ≠ headline baseline.
@@ -37,7 +37,7 @@ Urutan seksi: Data Trust → CEO Morning Brief → "Key Strategic KPI" → "Kepu
 - **Alert & Notifikasi Strategis** — rail kanan, daftar alert lintas fungsi berjenjang severitas.
 - **Inisiatif Strategis** — daftar inisiatif korporat + status progres.
 - **External Signals** — sinyal eksternal (Regulasi/Pasar/Iklim/Korporat) dengan chip kategori, angka dampak, dan baris implikasi "Artinya bagi PTPN: …" per item.
-- **AI Insight / Dasar Perhitungan** — panel insight AI naratif dengan toggle penjelasan basis perhitungan; view rincian memuat "Jembatan Ekonomi (Basis Disetahunkan)" dengan catatan pembeda vs alert YTD 5 bulan (volume → pendapatan → EBITDA → pajak → laba bersih; label dampak "disetahunkan"), blok Asumsi & Bukti, Sensitivitas & Alternatif (±10 rb ton, alternatif utilisasi PKS, reversibility), chip Owner/Tenggat/Status (masuk siklus aksi), blok Skenario (penuh/50%/tanpa intervensi), dan keyakinan berangka (72%).
+- **AI Insight / Dasar Perhitungan** — panel insight AI naratif dengan toggle penjelasan basis perhitungan; view rincian memuat "Jembatan Ekonomi (Basis Disetahunkan)" dengan catatan pembeda vs alert YTD 5 bulan (waterfall eksplisit: volume → ASP → pendapatan → biaya variabel & kas operasi → EBITDA inkremental → depresiasi & bunga → pajak badan 22% → laba bersih; label dampak "disetahunkan"), blok Asumsi & Bukti, Sensitivitas & Alternatif (±10 rb ton, alternatif utilisasi PKS, reversibility), chip Owner/Tenggat/Status (masuk siklus aksi), blok Skenario (penuh/50%/tanpa intervensi), dan keyakinan berangka (72%).
 
 ---
 
@@ -1367,7 +1367,7 @@ Semua halaman diawali Data Trust Strip dan diakhiri card Insight & Rekomendasi (
 - **Register Keputusan** — tabel 14 keputusan terkini (PIC, batas waktu, status).
 - **Keputusan per Klasifikasi** — komposisi 46 keputusan YTD.
 - **Agenda Rapat Mendatang** — agenda rapat Direksi & Komisaris + kesiapan materi.
-- **Decision Outcome** — closed loop keputusan yang sudah dieksekusi: tanggal diputus, expected vs actual impact, pill variance, dan lesson learned (3 sampel dari 31 keputusan selesai; penghematan pengadaan selaras group-baseline).
+- **Decision Outcome** — closed loop keputusan yang sudah dieksekusi: tanggal diputus, expected vs actual impact, pill variance, baris **Why** (akar penyebab variance), dan lesson learned; badge cakupan "3 dari 31 keputusan selesai terukur" membuat gap pengukuran outcome eksplisit (penghematan pengadaan selaras group-baseline).
 - **Insight & Rekomendasi (Decision-grade)**.
 
 ## `/strategi-kinerja/kpi-korporat`

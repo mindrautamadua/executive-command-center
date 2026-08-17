@@ -41,7 +41,7 @@ export interface DimensionDataTrust {
   /**
    * Nama domain data (Korporat/Strategi/Keuangan/Risiko/Human Capital).
    * Skor quality bersifat per-domain — label ini mencegah skor domain
-   * terbaca sebagai satu "Group Data Quality Score".
+   * terbaca sebagai satu "Group Data Trust Index".
    */
   domain?: string;
   /**

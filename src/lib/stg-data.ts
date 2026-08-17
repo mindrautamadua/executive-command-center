@@ -288,6 +288,8 @@ export interface DecisionOutcome {
   /** Selisih realisasi vs janji (label siap tampil, mis. "-18%"). */
   variance: string;
   tone: "good" | "warn" | "bad";
+  /** Akar penyebab variance — menjawab "mengapa meleset/tercapai?". */
+  why: string;
   lesson: string;
 }
 
@@ -305,6 +307,7 @@ export const decisionOutcomes: DecisionOutcome[] = [
     actual: "Rp 386 M YTD Mei (45% target, run-rate on-track)",
     variance: "+2% vs prorata",
     tone: "good",
+    why: "Konsolidasi volume 4 kategori spend terbesar tercapai lebih cepat dari rencana.",
     lesson: "Kategori spend terbesar dinegosiasi lebih dulu — front-load kategori strategis.",
   },
   {
@@ -314,6 +317,7 @@ export const decisionOutcomes: DecisionOutcome[] = [
     actual: "Rp 0,74 T terealisasi",
     variance: "-18%",
     tone: "warn",
+    why: "Dua aset ditarik dari batch karena penilaian ulang KJPP setelah keputusan disahkan.",
     lesson: "Valuasi KJPP harus final sebelum keputusan — dua aset mundur karena penilaian ulang.",
   },
   {
@@ -323,9 +327,21 @@ export const decisionOutcomes: DecisionOutcome[] = [
     actual: "52 rb ha (87%)",
     variance: "-13%",
     tone: "warn",
+    why: "Pasokan bibit tersertifikasi terlambat 2 bulan dan jendela tanam basah lebih pendek.",
     lesson: "Kesiapan bibit & jendela cuaca jadi critical path — amankan kontrak bibit H-6 bulan.",
   },
 ];
+
+/**
+ * Cakupan pengukuran outcome vs keputusan selesai. Dibuat eksplisit supaya
+ * "3 kartu outcome" tidak terbaca sebagai "hanya 3 keputusan yang dieksekusi"
+ * — dan supaya gap pengukuran (28 keputusan belum diukur ulang) terlihat
+ * sebagai pekerjaan governance, bukan disembunyikan.
+ */
+export const outcomeCoverage = {
+  measured: decisionOutcomes.length,
+  totalDone: STRATEGI.keputusanSelesai,
+};
 
 /* ── 9. Alerts ────────────────────────────────────────────────────── */
 

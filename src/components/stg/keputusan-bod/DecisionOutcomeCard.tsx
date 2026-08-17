@@ -1,5 +1,5 @@
-import { CircleCheck, CircleAlert, TriangleAlert, GraduationCap } from "lucide-react";
-import { decisionOutcomes, type DecisionOutcome } from "@/lib/stg-data";
+import { CircleCheck, CircleAlert, TriangleAlert, GraduationCap, HelpCircle } from "lucide-react";
+import { decisionOutcomes, outcomeCoverage, type DecisionOutcome } from "@/lib/stg-data";
 import { SectionHead } from "@/components/hc/SectionHead";
 
 const TONE: Record<
@@ -19,9 +19,15 @@ const TONE: Record<
 export function DecisionOutcomeCard() {
   return (
     <div className="card anim-rise flex h-full flex-col px-4 pb-3 pt-3" style={{ "--d": "180ms" } as React.CSSProperties}>
-      <SectionHead title="Decision Outcome" />
+      <div className="flex items-center justify-between gap-2">
+        <SectionHead title="Decision Outcome" />
+        {/* Cakupan diukur eksplisit: gap pengukuran adalah kerja governance. */}
+        <span className="shrink-0 rounded bg-[#eef2f6] px-1.5 py-[2px] text-[8px] font-bold text-ink-500">
+          {outcomeCoverage.measured} dari {outcomeCoverage.totalDone} keputusan selesai terukur
+        </span>
+      </div>
       <p className="mt-[3px] text-[9px] text-ink-500">
-        Expected vs actual dari keputusan yang sudah dieksekusi — Sense → Decide → Execute → Measure → Learn
+        Expected → Actual → Variance → Why → Lesson dari keputusan yang sudah dieksekusi
       </p>
 
       <div className="scroll-thin mt-2 flex min-h-0 flex-1 flex-col gap-2 overflow-y-auto pr-1">
@@ -50,6 +56,13 @@ export function DecisionOutcomeCard() {
                 <span className="font-semibold text-ink-900">{d.actual}</span>
               </div>
               <p className="mt-1 flex items-start gap-1 text-[8px] leading-[1.4] text-ink-500">
+                <HelpCircle size={10} className="mt-[1px] shrink-0 text-[#2f7de1]" />
+                <span>
+                  <span className="font-bold text-ink-700">Why: </span>
+                  {d.why}
+                </span>
+              </p>
+              <p className="mt-[3px] flex items-start gap-1 text-[8px] leading-[1.4] text-ink-500">
                 <GraduationCap size={10} className="mt-[1px] shrink-0 text-ptpn-green" />
                 <span>
                   <span className="font-bold text-ink-700">Lesson: </span>

@@ -230,6 +230,16 @@ const potensiEbitdaRpM = (potensiPendapatanRpM * KEUANGAN.ebitdaMarginPct) / 100
 const potensiLabaRpM = potensiPendapatanRpM * marjinLabaBersih;
 
 /**
+ * Pemecah baris EBITDA → laba bersih. Tarif pajak badan 22% (UU HPP);
+ * pajak dihitung dari laba sebelum pajak yang di-gross-up dari laba bersih,
+ * sisanya depresiasi & bunga — agar total tetap identik dengan potensiLabaRpM.
+ */
+const TARIF_PAJAK_BADAN_PCT = 22;
+const potensiPajakRpM =
+  (potensiLabaRpM / (1 - TARIF_PAJAK_BADAN_PCT / 100)) * (TARIF_PAJAK_BADAN_PCT / 100);
+const potensiDepresiasiBungaRpM = potensiEbitdaRpM - potensiPajakRpM - potensiLabaRpM;
+
+/**
  * Jembatan ekonomi rekomendasi AI: dari volume sampai laba bersih.
  * Angka akhirnya identik dengan `aiInsight.dampak` di data.ts karena
  * formulanya sama — jembatan ini hanya memecah langkah antaranya.
@@ -244,14 +254,19 @@ export const aiInsightBridge: { label: string; value: string }[] = [
   { label: "Asumsi ASP CPO", value: `Rp ${hargaGrup.CPO.toLocaleString("id-ID")}/kg` },
   { label: "Dampak pendapatan", value: `+${rpM(potensiPendapatanRpM)}` },
   {
-    label: `Konversi EBITDA (${KEUANGAN.ebitdaMarginPct.toLocaleString("id-ID", {
+    label: "Biaya variabel & kas operasi",
+    value: `−${rpM(potensiPendapatanRpM - potensiEbitdaRpM)}`,
+  },
+  {
+    label: `EBITDA inkremental (marjin ${KEUANGAN.ebitdaMarginPct.toLocaleString("id-ID", {
       minimumFractionDigits: 1,
     })}%)`,
     value: `+${rpM(potensiEbitdaRpM)}`,
   },
+  { label: "Depresiasi & bunga", value: `−${rpM(potensiDepresiasiBungaRpM)}` },
   {
-    label: "Depresiasi, bunga & pajak",
-    value: `−${rpM(potensiEbitdaRpM - potensiLabaRpM)}`,
+    label: `Pajak badan (${TARIF_PAJAK_BADAN_PCT}%)`,
+    value: `−${rpM(potensiPajakRpM)}`,
   },
   { label: "Laba bersih", value: `+${rpM(potensiLabaRpM)}` },
 ];
@@ -347,7 +362,7 @@ export interface ExternalSignal {
  */
 export const externalSignals: ExternalSignal[] = [
   {
-    date: "13 Agu 2026",
+    date: "15 Agu 2026",
     kategori: "Regulasi",
     title: "Pemerintah mengkaji pungutan ekspor CPO tambahan USD 10/ton",
     dampak: `Eksposur ${rpM(eksposurPungutanRpM)}`,

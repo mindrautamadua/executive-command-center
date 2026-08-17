@@ -1,4 +1,5 @@
 import { liveFeed } from "@/lib/data";
+import { STEMPEL_DATA } from "@/lib/group-baseline";
 import { Delta } from "./ui/Delta";
 import { DataStamp } from "./shared/DataStamp";
 
@@ -26,9 +27,10 @@ export function LiveFeed() {
       <div className="relative flex h-full shrink-0 items-center gap-1.5 bg-gradient-to-r from-[#7ed957] to-[#1a9c5b] pl-5 pr-7 text-[10px] font-bold tracking-[0.05em] text-white">
         MARKET PULSE
         {/* Bukan "LIVE": harga komoditas di feed adalah rata-rata YTD; tiap
-            instrumen membawa label basis harganya sendiri. */}
+            instrumen membawa label basis harganya sendiri. "Tersinkron" juga
+            menjelaskan mengapa External Signals bisa lebih baru dari feed ini. */}
         <span className="rounded bg-white/20 px-1 py-[1px] text-[7.5px] font-bold tracking-[0.06em]">
-          PER 14 AGU
+          TERSINKRON {STEMPEL_DATA.pasarSinkron.replace(" 2026", "").toUpperCase()}
         </span>
         <span className="absolute -right-[10px] top-0 h-full w-[20px] skew-x-[-14deg] bg-[#1a9c5b]" />
       </div>

@@ -670,4 +670,4 @@ export const RC_DECISION_STYLE: Record<
 };
 
 export const rcFootnote =
-  "Risk & Compliance memantau kepatuhan regulasi ketenagakerjaan, temuan audit, dan kasus pelanggaran secara terpusat sehingga eksposur hukum dan finansial dapat dimitigasi lebih dini. Overall Compliance Score (87/100) adalah komposit tertimbang dari kepatuhan regulasi, efektivitas kontrol, penutupan audit, severitas pelanggaran, training compliance, dan indikator conduct — berbeda dari Kepatuhan Regulasi (92,4%) yang murni persentase kewajiban regulasi terpenuhi. Data as-of 31 Mei 2026 · Data Quality Score 96,4%.";
+  "Risk & Compliance memantau kepatuhan regulasi ketenagakerjaan, temuan audit, dan kasus pelanggaran secara terpusat sehingga eksposur hukum dan finansial dapat dimitigasi lebih dini. Overall Compliance Score (87/100) adalah komposit tertimbang dari kepatuhan regulasi, efektivitas kontrol, penutupan audit, severitas pelanggaran, training compliance, dan indikator conduct — berbeda dari Kepatuhan Regulasi (92,4%) yang murni persentase kewajiban regulasi terpenuhi. Data as-of 31 Mei 2026 · Data Trust Index 96,4%.";

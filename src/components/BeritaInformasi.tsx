@@ -1,4 +1,5 @@
 import { externalSignals } from "@/lib/ceo-data";
+import { STEMPEL_DATA } from "@/lib/group-baseline";
 
 /**
  * Kartu ini dulu memuat judul rilis pers korporat. Sekarang berisi sinyal
@@ -16,7 +17,14 @@ export function BeritaInformasi() {
   return (
     <div className="card flex min-h-0 flex-1 flex-col px-4 pb-2 pt-2">
       <div className="flex items-center justify-between">
-        <h3 className="card-title">EXTERNAL SIGNALS</h3>
+        <div className="flex items-center gap-1.5">
+          <h3 className="card-title">EXTERNAL SIGNALS</h3>
+          {/* Sinyal intelijen berjalan lebih sering dari sinkronisasi feed pasar;
+              label ini menjawab "mengapa signal lebih baru dari Market Pulse?". */}
+          <span className="rounded bg-[#eef2f6] px-1 py-[1px] text-[7.5px] font-bold uppercase tracking-[0.05em] text-ink-400">
+            Sinyal terbaru {STEMPEL_DATA.sinyalTerbaru.replace(" 2026", "")}
+          </span>
+        </div>
         <button className="link-more">Lihat semua</button>
       </div>
 

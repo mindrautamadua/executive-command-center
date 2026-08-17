@@ -1286,7 +1286,7 @@ export const peopleIntelligence = {
   recommendation: "Direkomendasikan sebagai suksesor Afdeling Manager — siap 1–2 tahun.",
 };
 
-/** Rincian Data Quality Score untuk popover Data Trust. */
+/** Rincian Data Trust Index untuk popover Data Trust. */
 export const dataQualityBreakdown = [
   { label: "Completeness", value: "98%" },
   { label: "Accuracy", value: "96%" },

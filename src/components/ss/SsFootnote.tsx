@@ -20,7 +20,7 @@ export function SsFootnote() {
       <p className="shrink-0 text-[8.5px] text-ink-500">
         <DataStamp />
         <span className="mx-1.5 text-ink-300">•</span>
-        Data Quality: <span className="font-bold text-ink-700">96,4%</span>
+        Data Trust: <span className="font-bold text-ink-700">96,4%</span>
         <span className="mx-1.5 text-ink-300">•</span>
         Methodology: <span className="font-bold text-ink-700">Workforce Planning 2.0</span>
       </p>

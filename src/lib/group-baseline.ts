@@ -24,6 +24,12 @@ export const STEMPEL_DATA = {
   periode: "YTD Jan–Mei 2026",
   snapshot: "31 Mei 2026",
   refresh: "14 Agu 2026 · 22:14 WIB",
+  /** Tanggal sinkronisasi terakhir feed harga pasar (Market Pulse). */
+  pasarSinkron: "14 Agu 2026",
+  /** Tanggal sinyal eksternal terbaru (External Signals). */
+  sinyalTerbaru: "15 Agu 2026",
+  /** Tanggal run terakhir model forecast. */
+  forecastRun: "13 Agu 2026",
 } as const;
 
 export const BASELINE_TRUST = {

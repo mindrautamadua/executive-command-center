@@ -203,7 +203,7 @@ export function DimensionSidebar({ sections, dataTrust, active, dimensionLabel }
             </span>
           </div>
           <div className="mt-2 flex items-center justify-between">
-            <span className="text-[9px] text-ink-500">Data Quality Score</span>
+            <span className="text-[9px] text-ink-500">Data Trust Index</span>
             <span className="rounded-md bg-ptpn-green px-1.5 py-[2px] text-[9px] font-bold text-white">
               {dataTrust.quality}
             </span>

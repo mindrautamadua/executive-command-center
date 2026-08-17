@@ -26,7 +26,7 @@ export function CompFootnote() {
         <span className="mx-1.5 text-ink-300">•</span>
         Data as-of: <span className="font-bold text-ink-700">{marketGovernance.asOf}</span>
         <span className="mx-1.5 text-ink-300">•</span>
-        Data Quality: <span className="font-bold text-ink-700">96,4%</span>
+        Data Trust: <span className="font-bold text-ink-700">96,4%</span>
       </p>
     </div>
   );
