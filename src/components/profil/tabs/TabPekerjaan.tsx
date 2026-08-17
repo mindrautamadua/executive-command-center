@@ -289,6 +289,19 @@ function RingkasanMasaKerja() {
           <span className="text-[9px] text-ink-500">Masa Kerja di Perusahaan</span>
           <span className="text-[9.5px] font-bold text-ink-900">{d.masaPerusahaan}</span>
         </div>
+        {/* Horizon pensiun: perencanaan suksesi butuh tahu kapan, bukan hanya berapa lama. */}
+        <div className="flex items-center justify-between">
+          <span className="text-[9px] text-ink-500">Usia Pensiun Normal</span>
+          <span className="text-[9.5px] font-bold text-ink-900">{d.usiaPensiun}</span>
+        </div>
+        <div className="flex items-center justify-between">
+          <span className="text-[9px] text-ink-500">TMT Pensiun (perkiraan)</span>
+          <span className="text-[9.5px] font-bold text-ink-900">{d.tmtPensiun}</span>
+        </div>
+        <div className="flex items-center justify-between">
+          <span className="text-[9px] text-ink-500">Sisa Masa Kerja</span>
+          <span className="text-[9.5px] font-bold text-ptpn-green">{d.sisaMasaKerja}</span>
+        </div>
       </div>
     </div>
   );

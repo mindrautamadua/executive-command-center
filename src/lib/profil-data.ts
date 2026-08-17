@@ -210,6 +210,14 @@ export const kepegawaian = [
   { label: "Job Grade", value: "G7" },
   { label: "Kelompok Jabatan", value: "Operasional - Tanaman" },
   { label: "Jenis Jabatan", value: "Struktural" },
+  /*
+   * Pensiun: usia pensiun normal 56 tahun (kebijakan grup). Lahir Maret 1994
+   * → TMT pensiun 1 April 2050 (awal bulan setelah usia 56 tercapai);
+   * sisa masa kerja dihitung dari tanggal potong data 31 Mei 2026.
+   */
+  { label: "Usia Pensiun Normal", value: "56 tahun" },
+  { label: "TMT Pensiun (perkiraan)", value: "1 April 2050" },
+  { label: "Sisa Masa Kerja", value: "23 tahun 10 bulan" },
 ];
 
 export const penempatan = [
@@ -286,6 +294,14 @@ export const ringkasanMasaKerja = {
   totalSub: "7 bln",
   tanggalMasuk: "12 Jan 2018",
   masaPerusahaan: "7 tahun 7 bulan",
+  /*
+   * Pensiun: usia pensiun normal 56 tahun (kebijakan grup). Lahir Maret 1994
+   * → TMT pensiun 1 April 2050 (awal bulan setelah usia 56); sisa masa kerja
+   * dihitung dari tanggal potong data 31 Mei 2026.
+   */
+  usiaPensiun: "56 tahun",
+  tmtPensiun: "1 April 2050",
+  sisaMasaKerja: "23 tahun 10 bulan",
   segmen: [
     { label: "Masa Kerja di Perusahaan", value: "7 thn 7 bln", bulan: 91, warna: "#1a9c5b" },
     { label: "Masa Kerja di Jabatan", value: "3 thn 4 bln", bulan: 40, warna: "#3b7ded" },

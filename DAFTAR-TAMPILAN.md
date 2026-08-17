@@ -105,7 +105,7 @@ Hero **Executive Talent Card**: identitas + badge taxonomy 3 dimensi (Segmen Ris
 - **03 People Intelligence** — People Math (Score Overall, CORE + People Math Positioning, People Factors radar + dimensi, Insight, Talent Decision) dan HPI BEM (Ringkasan Performance Gap, Diagnostic 6 sel BEM, Root Cause Analysis, Intervensi & Action Plan, Performance Projection).
 - **04 Career & Succession** — Riwayat Jabatan, Career Velocity, Aspirasi & Mobilitas, Job Profile (akuntabilitas + syarat jabatan + Role Fit 94%), Riwayat Keputusan Komite Talenta (+ link perbandingan kandidat), Backfill Coverage, Kepatuhan & Disiplin (termasuk Fit-to-Work/MCU), Engagement & Wellbeing, Posisi Kompensasi (compa-ratio, tanpa nominal).
 - **05 Development** — Pelatihan & Sertifikasi (dengan blok Dampak ke Kompetensi), Mentor & Sponsor, rencana & riwayat pengembangan (IDP, skills gap, jalur karier, catatan).
-- **06 Records** — Riwayat Pendidikan, Penghargaan (dengan baris impact), Informasi Pribadi, Pekerjaan, Riwayat Kepegawaian, Dokumen.
+- **06 Records** — Riwayat Pendidikan, Penghargaan (dengan baris impact), Informasi Pribadi, Pekerjaan, Riwayat Kepegawaian, Dokumen. Kartu Ringkasan Masa Kerja (tab Pekerjaan) memuat horizon pensiun: Usia Pensiun Normal (56 tahun), TMT Pensiun perkiraan (1 April 2050, awal bulan setelah usia 56), dan Sisa Masa Kerja (23 tahun 10 bulan, dihitung dari tanggal potong 31 Mei 2026).
 
 Halaman detail drill-down profil (semua pola SdmDetailHeader + Detail KPI Strip + tabel + Catatan Analitik/Definisi):
 
